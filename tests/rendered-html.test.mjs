@@ -66,7 +66,7 @@ test("ships the benchmark-informed responsive EduTest design system", async () =
   const html = await readFile(new URL("public/app.html", root), "utf8");
   assert.match(html, /EDUTEST DESIGN SYSTEM 2026/);
   assert.match(html, /class="landing-v2"/);
-  assert.match(html, /შემდეგი საუკეთესო ნაბიჯი/);
+  assert.match(html, /რეკომენდებული შემდეგი ნაბიჯი/);
   assert.match(html, /#p-landing>div:not\(\.landing-v2\)/);
   assert.match(html, /lp_beta_title/);
   for (const id of ["lp-question-count", "lp-test-count", "lp-subject-count", "lp-today-tests", "lp-excellent", "lp-average-score"]) {
@@ -76,8 +76,11 @@ test("ships the benchmark-informed responsive EduTest design system", async () =
 
 test("uses a cheerful calm backdrop and robust multilingual question speech", async () => {
   const html = await readFile(new URL("public/app.html", root), "utf8");
-  assert.match(html, /--canvas:#f5f1ff/);
-  assert.match(html, /radial-gradient\(circle at 7% 2%/);
+  assert.match(html, /--canvas:#ece7f4/);
+  assert.match(html, /rgba\(77,61,171,.23\)/);
+  assert.match(html, /background:linear-gradient\(155deg,#1d2745,#121a31\)/);
+  assert.match(html, /lp_demo_title/);
+  assert.doesNotMatch(html, /მოგესალმები, მარიამ/);
   assert.match(html, /const TTS_LANGS=\{ka:'ka-GE',en:'en-US',ru:'ru-RU'\}/);
   assert.match(html, /speechSynthesis\.getVoices\(\)/);
   assert.match(html, /window\.toggleQuestionSpeech=function/);
