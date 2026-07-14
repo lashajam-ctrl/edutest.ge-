@@ -74,6 +74,18 @@ test("ships the benchmark-informed responsive EduTest design system", async () =
   }
 });
 
+test("uses a cheerful calm backdrop and robust multilingual question speech", async () => {
+  const html = await readFile(new URL("public/app.html", root), "utf8");
+  assert.match(html, /--canvas:#f5f1ff/);
+  assert.match(html, /radial-gradient\(circle at 7% 2%/);
+  assert.match(html, /const TTS_LANGS=\{ka:'ka-GE',en:'en-US',ru:'ru-RU'\}/);
+  assert.match(html, /speechSynthesis\.getVoices\(\)/);
+  assert.match(html, /window\.toggleQuestionSpeech=function/);
+  assert.match(html, /id='q-read-aloud'/);
+  assert.match(html, /Manual playback is always available/);
+  assert.doesNotMatch(html, /if\(window\.isTTSOn&&isTTSOn\(\)\)/);
+});
+
 test("uses curriculum gating, composite history identities, and adaptive skills", async () => {
   const html = await readFile(new URL("public/app.html", root), "utf8");
   assert.match(html, /function isCurriculumEligible\(test\)/);
