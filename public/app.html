@@ -590,7 +590,8 @@ body.acc-dyslexia{font-family:'Comic Sans MS','OpenDyslexic',sans-serif!importan
         <div class="card" style="padding:16px">
           <div style="font-weight:600;margin-bottom:12px" data-i18n="profile_settings">⚙️ პარამეტრები</div>
           <div class="fg"><div class="label" data-i18n="name">სახელი</div><input id="s-prof-name-input" value="მარიამ კვირიკაშვილი"/></div>
-          <div class="fg"><div class="label" data-i18n="email">ელ-ფოსტა</div><input id="s-prof-email-input" value="mariam@student.ge"/></div>
+          <div class="fg"><div class="label" data-i18n="email">ელ-ფოსტა</div><input id="s-prof-email-input" value="mariam@student.ge" readonly aria-readonly="true"/></div>
+          <div class="fg"><div class="label" data-i18n="grade">კლასი</div><select id="s-prof-grade-input"><option>1A</option><option>1B</option><option>2A</option><option>2B</option><option>3A</option><option>3B</option><option>4A</option><option>4B</option><option>5A</option><option>5B</option><option>6A</option><option>6B</option><option>7A</option><option>7B</option><option>8A</option><option>8B</option><option>9A</option><option>9B</option><option>10A</option><option>10B</option><option>11A</option><option>11B</option><option>12A</option><option>12B</option></select></div>
           <div class="fg"><div class="label" data-i18n="new_password">ახალი პაროლი</div><input type="password" data-i18n-placeholder="change_pass_ph" placeholder="შეცვალეთ პაროლი"/></div>
           <button class="btn btn-primary btn-sm" onclick="saveProfile()" data-i18n="save_profile">💾 შენახვა</button>
           <div style="border-top:1px solid var(--border);margin-top:16px;padding-top:14px">
@@ -12690,12 +12691,8 @@ function isAdminAuthenticated(){
   if(!t)return false;
   try{const p=JSON.parse(atob(t.split('.')[1]));return p.isAdmin&&p.exp*1000>Date.now();}catch{return false;}
 }
-const DEFAULT_USERS=[
-  {email:'mariam@student.ge',password:'student123',role:'student',name:'მარიამ კვირიკაშვილი',grade:'3A',school:'სკოლა №1',premium:false,joinDate:'2026-09-01'},
-  {email:'giorgi@student.ge',password:'student123',role:'student',name:'გიორგი ნინიძე',grade:'3A',school:'სკოლა №1',premium:false,joinDate:'2026-09-01'},
-  {email:'nino@edutest.ge',password:'teacher123',role:'teacher',name:'ნინო გელაშვილი',grade:'',premium:false},
-  {email:'admin@edutest.ge',password:'admin123',role:'admin',name:'ადმინი',grade:''},
-];
+// მომხმარებლების წყარო არის დაცული სერვერული ბაზა; პაროლები კლიენტის კოდში არ ინახება.
+const DEFAULT_USERS=[];
 
 // ── Persistence helpers ───────────────────────────────────────────────────────
 function _ls(k){try{const v=localStorage.getItem(k);return v?JSON.parse(v):null;}catch(e){return null;}}
@@ -12750,14 +12747,11 @@ function adminDeleteResults(email){
 }
 
 // Admin: delete a registered (non-default) user entirely
-function adminDeleteUser(email){
-  if(DEFAULT_USERS.find(d=>d.email===email)){alert('სისტემური მომხმარებელი ვერ წაიშლება.');return;}
+async function adminDeleteUser(email){
   if(!confirm('წაიშალოს მომხმარებელი '+email+'?'))return;
-  const i=USER_DB.findIndex(u=>u.email===email);
-  if(i>=0)USER_DB.splice(i,1);
-  for(let j=SESSION_RESULTS.length-1;j>=0;j--){if(SESSION_RESULTS[j].userId===email)SESSION_RESULTS.splice(j,1);}
-  saveUsers(); saveResults();
-  renderAdminUsers();
+  const response=await fetch('/api/admin/users?email='+encodeURIComponent(email),{method:'DELETE'});
+  if(!response.ok){alert('მომხმარებელი ვერ წაიშალა.');return;}
+  await loadAdminUsers();
 }
 
 
@@ -13560,7 +13554,7 @@ function go(p){
   if(p==='landing'){setTimeout(()=>{renderLandingPrices();if(typeof loadPublicStats==='function')loadPublicStats();},50);}
   if(p==='student'){updateStudentUI();renderStudentProfile();renderSubjectMastery('s-mastery-home');renderClassChallenge();setTimeout(()=>renderDailyChallenge(),50);setTimeout(()=>renderOnboardingIfNeeded(),100);setTimeout(()=>renderAssignedTests(),80);}
   if(p==='teacher'){updateTeacherUI();renderTeacherHome();renderTeacherTests();}
-  if(p==='admin'){if(typeof updateAdminUI==='function')updateAdminUI();if(typeof renderAdminHome==='function')renderAdminHome();if(typeof renderAdminUsers==='function')renderAdminUsers();}
+  if(p==='admin'){if(typeof updateAdminUI==='function')updateAdminUI();loadAdminUsers();}
 }
 
 // ── Sidebar (mobile) ─────────────────────────────────────────────────────────
@@ -13690,7 +13684,9 @@ function hasUsedFreeTrial(email, subject){
   return SESSION_RESULTS.some(r=>r.userId===email&&r.subject===subject);
 }
 // Returns: 'premium' | 'paid' | 'free' | 'locked'
+const PAYMENTS_ENABLED=false;
 function getTestAccess(email, testId){
+  if(!PAYMENTS_ENABLED)return 'free';
   if(isPremium(email))return 'premium';
   const tx=ALL_TESTS.find(t=>t.id===testId);
   if(!tx)return 'locked';
@@ -13736,6 +13732,17 @@ function loadAdaptive(email){
 }
 function saveAdaptive(email, data){
   try{ localStorage.setItem(_adaptKey(email), JSON.stringify(data)); }catch(e){}
+}
+
+async function loadAdminUsers(){
+  try{
+    const response=await fetch('/api/admin/users');
+    if(!response.ok)return;
+    const data=await response.json();
+    USER_DB.length=0;
+    (data.users||[]).forEach(user=>USER_DB.push({...user,premium:false,joinDate:user.createdAt?new Date(user.createdAt).toLocaleDateString('ka-GE'):''}));
+    renderAdminHome();renderAdminUsers();renderPendingTeachers();
+  }catch(e){}
 }
 
 function rebuildAdaptiveFromResults(email){
@@ -14197,45 +14204,42 @@ function renderStudentProfile(){
   if(gr)gr.textContent=(CUR_USER.grade?t('class_label')+' '+CUR_USER.grade:'—');
   const prem=isPremium(CUR_USER.email);
   if(premBadge)premBadge.style.display=prem?'':'none';
-  if(premBtn)premBtn.style.display=prem?'none':'';
+  if(premBtn)premBtn.style.display=PAYMENTS_ENABLED&&!prem?'':'none';
   const ni=document.getElementById('s-prof-name-input');if(ni)ni.value=CUR_USER.name||'';
   const ei=document.getElementById('s-prof-email-input');if(ei)ei.value=CUR_USER.email||'';
+  const gi=document.getElementById('s-prof-grade-input');if(gi&&CUR_USER.grade)gi.value=CUR_USER.grade;
 }
 
 
-function saveProfile(){
+async function saveProfile(){
   if(!CUR_USER)return;
   const nameInput=document.getElementById('s-prof-name-input');
   const passInput=document.querySelector('#s-profile input[type="password"]');
   const newName=(nameInput?.value||'').trim();
   const newPass=(passInput?.value||'').trim();
-  if(newName)CUR_USER.name=newName;
-  if(newPass&&newPass.length>=4)CUR_USER.password=newPass;
-  // Update in USER_DB
-  const idx=USER_DB.findIndex(u=>u.email===CUR_USER.email);
-  if(idx>=0)USER_DB[idx]={...USER_DB[idx],...CUR_USER};
-  saveUsers();
+  const grade=document.getElementById('s-prof-grade-input')?.value||CUR_USER.grade||'';
+  const response=await fetch('/api/auth/profile',{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:newName,password:newPass||undefined,grade})});
+  const data=await response.json();
+  if(!response.ok){alert(data.error||'პროფილი ვერ განახლდა.');return;}
+  CUR_USER={...CUR_USER,...data.user};
+  const idx=USER_DB.findIndex(u=>u.email===CUR_USER.email);if(idx>=0)USER_DB[idx]={...USER_DB[idx],...CUR_USER};
   renderStudentProfile();
   if(passInput)passInput.value='';
   const btn=document.querySelector('#s-profile button[onclick="saveProfile()"]');
   if(btn){const orig=btn.textContent;btn.textContent='✓ '+t('saved_ok')||'✓ შენახულია';setTimeout(()=>{btn.textContent=orig;},1800);}
 }
 
-function approveTeacher(email){
-  const u=USER_DB.find(u=>u.email===email);
-  if(!u)return;
-  u.role='teacher';
-  saveUsers();
-  renderAdminHome();
-  renderAdminUsers&&renderAdminUsers();
+async function approveTeacher(email){
+  const response=await fetch('/api/admin/users',{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,role:'teacher'})});
+  if(!response.ok){alert('მასწავლებლის დამტკიცება ვერ შესრულდა.');return;}
+  await loadAdminUsers();
 }
 
-function rejectTeacher(email){
+async function rejectTeacher(email){
   if(!confirm('უარყოფა: '+email+'?'))return;
-  const idx=USER_DB.findIndex(u=>u.email===email);
-  if(idx>=0)USER_DB.splice(idx,1);
-  saveUsers();
-  renderAdminHome();
+  const response=await fetch('/api/admin/users?email='+encodeURIComponent(email),{method:'DELETE'});
+  if(!response.ok){alert('მასწავლებლის უარყოფა ვერ შესრულდა.');return;}
+  await loadAdminUsers();
 }
 
 

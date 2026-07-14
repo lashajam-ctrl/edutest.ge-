@@ -34,6 +34,22 @@ test("uses a hardened OAuth authorization-code flow", async () => {
   assert.match(envExample, /^APP_ORIGIN=/m);
 });
 
+test("keeps test access open while payments are disabled and uses server-side admin accounts", async () => {
+  const [html, bootstrapRoute, adminUsersRoute, profileRoute] = await Promise.all([
+    readFile(new URL("public/app.html", root), "utf8"),
+    readFile(new URL("app/api/admin/bootstrap/route.ts", root), "utf8"),
+    readFile(new URL("app/api/admin/users/route.ts", root), "utf8"),
+    readFile(new URL("app/api/auth/profile/route.ts", root), "utf8"),
+  ]);
+  assert.match(html, /const PAYMENTS_ENABLED=false/);
+  assert.match(html, /if\(!PAYMENTS_ENABLED\)return 'free'/);
+  assert.doesNotMatch(html, /password:'(?:student|teacher|admin)123'/);
+  assert.match(html, /\/api\/admin\/users/);
+  assert.match(bootstrapRoute, /ADMIN_BOOTSTRAP_TOKEN/);
+  assert.match(adminUsersRoute, /current\?\.user\.role === "admin"/);
+  assert.match(profileRoute, /hashPassword/);
+});
+
 test("uses curriculum gating, composite history identities, and adaptive skills", async () => {
   const html = await readFile(new URL("public/app.html", root), "utf8");
   assert.match(html, /function isCurriculumEligible\(test\)/);
