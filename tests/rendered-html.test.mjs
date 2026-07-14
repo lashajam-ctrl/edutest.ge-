@@ -62,6 +62,18 @@ test("validates reported scores and restricts assignment deletion to its owner",
   assert.match(assignmentsRoute, /assignments\.createdBy, current\.user\.id/);
 });
 
+test("ships the benchmark-informed responsive EduTest design system", async () => {
+  const html = await readFile(new URL("public/app.html", root), "utf8");
+  assert.match(html, /EDUTEST DESIGN SYSTEM 2026/);
+  assert.match(html, /class="landing-v2"/);
+  assert.match(html, /შემდეგი საუკეთესო ნაბიჯი/);
+  assert.match(html, /#p-landing>div:not\(\.landing-v2\)/);
+  assert.match(html, /lp_beta_title/);
+  for (const id of ["lp-question-count", "lp-test-count", "lp-subject-count", "lp-today-tests", "lp-excellent", "lp-average-score"]) {
+    assert.equal([...html.matchAll(new RegExp(`id="${id}"`, "g"))].length, 1, `${id} must be unique`);
+  }
+});
+
 test("uses curriculum gating, composite history identities, and adaptive skills", async () => {
   const html = await readFile(new URL("public/app.html", root), "utf8");
   assert.match(html, /function isCurriculumEligible\(test\)/);

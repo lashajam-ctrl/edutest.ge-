@@ -6,7 +6,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;600;700;800&display=swap" rel="stylesheet"/>
 <title>EduTest.ge — სკოლის ონლაინ ტესტების პლატფორმა I–XII კლასი</title>
-<meta name="description" content="EduTest.ge — საქართველოს სასკოლო ონლაინ სატესტო პლატფორმა. 420 ტესტი, 4,400+ მოსწავლისთვის ხელმისაწვდომი უნიკალური კითხვა, 12 საგანი, I–XII კლასი."/>
+<meta name="description" content="EduTest.ge — საქართველოს სასკოლო ონლაინ სატესტო პლატფორმა. 420 ტესტი, 6,604 კითხვა, 12 საგანი, I–XII კლასი."/>
 <meta name="keywords" content="ედუტესტი, სკოლა, ტესტი, ქართული, მათემატიკა, ისტორია, ბიოლოგია, ონლაინ სწავლება, edutest, georgia school test"/>
 <meta name="author" content="EduTest.ge"/>
 <meta name="robots" content="index, follow"/>
@@ -14,17 +14,14 @@
 <!-- Open Graph -->
 <meta property="og:type" content="website"/>
 <meta property="og:title" content="EduTest.ge — სკოლის ონლაინ ტესტების პლატფორმა"/>
-<meta property="og:description" content="420 ტესტი · 4,400+ ხელმისაწვდომი უნიკალური კითხვა · 12 საგანი · I–XII კლასი. შეამოწმე ცოდნა!"/>
+<meta property="og:description" content="420 ტესტი · 6,604 კითხვა · 12 საგანი · I–XII კლასი. გაიგე, რა იცი და რა ისწავლო შემდეგ."/>
 <meta property="og:url" content="https://edutest.ge/"/>
-<meta property="og:image" content="https://edutest.ge/thumbnail.png"/>
-<meta property="og:image:alt" content="EduTest.ge ონლაინ სასკოლო ტესტების პლატფორმა"/>
 <meta property="og:locale" content="ka_GE"/>
 <meta property="og:site_name" content="EduTest.ge"/>
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="EduTest.ge — სკოლის ონლაინ ტესტების პლატფორმა"/>
-<meta name="twitter:description" content="420 ტესტი · 4,400+ ხელმისაწვდომი უნიკალური კითხვა · I–XII კლასი. ქართული სკოლებისთვის."/>
-<meta name="twitter:image" content="https://edutest.ge/thumbnail.png"/>
+<meta name="twitter:description" content="420 ტესტი · 6,604 კითხვა · I–XII კლასი. ქართული სკოლებისთვის."/>
 <!-- Schema.org JSON-LD -->
 <script type="application/ld+json">
 {
@@ -311,6 +308,113 @@ body.acc-dyslexia{font-family:'Comic Sans MS','OpenDyslexic',sans-serif!importan
 /* Progress bar animation */
 @keyframes growBar{from{width:0}to{width:var(--target-w)}}
 .animated-bar{animation:growBar .6s ease both;}
+
+/* ══════════════════════════════════════════
+   EDUTEST DESIGN SYSTEM 2026
+   Calm learning focus + visible next action
+   ══════════════════════════════════════════ */
+:root{
+  --ink:#172033;--muted:#657089;--brand:#4f46e5;--brand-d:#3730a3;
+  --brand-soft:#eef2ff;--mint:#0f9f82;--mint-soft:#e7f8f4;
+  --sun:#f4a62a;--coral:#ef6a70;--canvas:#f6f7fb;--line:#e6e9f2;
+  --blue:var(--brand);--blue-d:var(--brand-d);--blue-l:var(--brand-soft);
+  --border:var(--line);--bg:var(--canvas);--r:12px;--rl:18px;
+  --shadow:0 8px 28px rgba(29,38,72,.07);--shadow-md:0 18px 45px rgba(29,38,72,.12)
+}
+body{background:var(--canvas);color:var(--ink);font-size:15px;letter-spacing:-.005em}
+.btn{border-radius:12px;font-size:14px;font-weight:700;padding:9px 17px;transition:transform .18s ease,box-shadow .18s ease,background .18s ease}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{background:linear-gradient(135deg,var(--brand),#6157ee);box-shadow:0 8px 18px rgba(79,70,229,.2)}
+.btn-primary:hover{background:linear-gradient(135deg,#4338ca,var(--brand))}
+.btn-outline{border-color:#cfd4e4;color:var(--ink)}
+.btn-outline:hover{background:#f8f9fd;border-color:var(--brand);color:var(--brand)}
+.card{border-color:var(--line);box-shadow:var(--shadow);border-radius:var(--rl)}
+.card:hover{transform:none;box-shadow:0 12px 34px rgba(29,38,72,.09)}
+input,select,textarea{border-color:#d9deea;border-radius:12px;font-size:14px;min-height:44px;background:#fff}
+input:focus,select:focus,textarea:focus{border-color:var(--brand);box-shadow:0 0 0 4px rgba(79,70,229,.09)}
+.label{font-size:11px;color:#59647b;letter-spacing:.07em}
+.badge{padding:5px 10px;font-size:11px}
+.sidebar{width:244px;background:linear-gradient(180deg,#16213e 0%,#111a31 100%);border-right:1px solid rgba(255,255,255,.06)}
+.slogo{padding:22px 18px;border-color:rgba(255,255,255,.08)}
+.slogo-icon{width:38px;height:38px;border-radius:13px!important;background:linear-gradient(135deg,#7168f5,#4f46e5)!important;box-shadow:0 8px 22px rgba(79,70,229,.34);font-size:0!important}
+.slogo-icon::after{content:'ე';font-size:19px;font-weight:800}
+.snav{padding:13px 0}
+.ni{margin:3px 10px;padding:11px 13px;border:0;border-radius:11px;color:rgba(255,255,255,.66);font-size:13px;font-weight:600}
+.ni:hover{background:rgba(255,255,255,.07)}
+.ni.act{background:rgba(108,99,255,.19);color:#fff;border:0;box-shadow:inset 0 0 0 1px rgba(164,158,255,.12)}
+.ni.act::before{display:none}
+.susr{border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.045);border-radius:13px;padding:11px}
+.topbar{height:66px;padding:0 28px;border-color:var(--line);background:rgba(255,255,255,.94);backdrop-filter:blur(14px)}
+.main{padding:28px;background:var(--canvas)}
+.stat-g{gap:14px;margin-bottom:22px}
+.stat{padding:18px;border:1px solid var(--line);border-radius:17px;box-shadow:0 5px 20px rgba(29,38,72,.045);position:relative;overflow:hidden}
+.stat::after{content:'';position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,var(--brand),#8b83ff);opacity:.7}
+.stat-ic{width:44px;height:44px;border-radius:14px;margin-bottom:12px}
+.stat-v{font-size:24px;letter-spacing:-.03em}.stat-l{font-size:12px!important;color:var(--muted)!important}
+.pbar{height:9px;background:#edf0f6}
+.qopt{padding:14px 16px;border-color:#dde2ed;border-radius:14px;font-size:15px;margin-bottom:9px}
+.qopt:hover{background:#f4f5ff;border-color:#9e98ff}
+.qopt.sel{background:var(--brand-soft);border-color:var(--brand);box-shadow:0 0 0 3px rgba(79,70,229,.08)}
+#p-student .ni.act{background:rgba(108,99,255,.2)}#p-teacher .ni.act{background:rgba(15,159,130,.18)}#p-admin .ni.act{background:rgba(172,120,255,.17)}
+#s-home>div:first-child{background:linear-gradient(135deg,#342f84,#5550d9)!important;border-radius:22px!important;padding:24px!important;box-shadow:0 16px 35px rgba(65,58,160,.2)}
+#s-daily-card{background:linear-gradient(135deg,#fff,#faf7ff)!important;border:1px solid #e7ddf7!important;border-radius:18px!important;box-shadow:var(--shadow)}
+#s-class-challenge{border-width:1px!important;border-radius:18px!important}
+#s-weak-panel{padding:18px!important}.tbl th{background:#f8f9fc!important;border-color:var(--line);padding:12px 14px}.tbl td{padding:12px 14px;border-color:#edf0f5}
+.modal{border-radius:22px;padding:27px;box-shadow:0 30px 80px rgba(21,28,53,.22)}
+.timer{border-color:var(--brand);color:var(--brand);background:#fff;box-shadow:0 8px 22px rgba(79,70,229,.12)}
+#p-login{background:radial-gradient(circle at 20% 20%,#eef2ff 0,transparent 36%),radial-gradient(circle at 85% 80%,#e7f8f4 0,transparent 34%),#f7f8fc!important}
+#p-login>.card{border:1px solid rgba(255,255,255,.9);box-shadow:0 28px 75px rgba(31,38,74,.14);border-radius:24px!important}
+#p-login>.card>div:first-child>div:first-child{font-size:0!important;background:linear-gradient(135deg,#7168f5,#4f46e5)!important;border-radius:16px!important;box-shadow:0 10px 26px rgba(79,70,229,.25)}
+#p-login>.card>div:first-child>div:first-child::after{content:'ე';font-size:23px;color:#fff;font-weight:800}
+#p-take-test,#p-results{background:radial-gradient(circle at 10% 10%,#eef2ff,transparent 32%),var(--canvas)!important}
+#q-card{border-radius:22px!important;box-shadow:0 18px 48px rgba(29,38,72,.09)!important}
+
+/* Landing page */
+#p-landing{background:#f8f9fd!important;color:var(--ink);overflow-y:auto;overflow-x:hidden}
+#p-landing>div:not(.landing-v2),#p-landing>footer{display:none!important}
+#p-landing>nav{position:sticky;top:0;z-index:30;padding:14px max(20px,calc((100% - 1180px)/2))!important;background:rgba(249,250,253,.88);backdrop-filter:blur(18px);border-bottom:1px solid rgba(222,226,238,.85);flex-wrap:nowrap!important}
+#p-landing>nav>div:first-child>div:first-child{font-size:0!important;background:linear-gradient(135deg,#7168f5,#4f46e5)!important;border-radius:12px!important;box-shadow:0 7px 18px rgba(79,70,229,.22)}
+#p-landing>nav>div:first-child>div:first-child::after{content:'ე';font-size:18px;color:#fff;font-weight:800}
+#p-landing>nav>div:first-child>span{color:var(--ink)!important;font-size:17px!important;letter-spacing:-.025em}
+#p-landing .lang-btn{color:#69748a;border-color:#dfe3ec;background:#fff}
+#p-landing .lang-btn.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+#p-landing #landing-nav-btns>.btn-ghost{color:var(--ink)!important;border-color:#d9deea!important;background:#fff!important}
+#p-landing #landing-nav-btns>.btn:not(.btn-ghost){background:var(--brand)!important;color:#fff!important;box-shadow:0 7px 18px rgba(79,70,229,.2)}
+.landing-v2{display:block;width:100%}
+.lp-shell{width:min(1180px,calc(100% - 40px));margin:0 auto}
+.lp-hero-v2{min-height:660px;display:grid;grid-template-columns:minmax(0,1.02fr) minmax(420px,.98fr);gap:64px;align-items:center;padding:72px 0 64px;position:relative}
+.lp-hero-v2::before{content:'';position:absolute;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(106,98,246,.14),rgba(106,98,246,0) 68%);right:-170px;top:-120px;pointer-events:none}
+.lp-eyebrow{display:inline-flex;align-items:center;gap:9px;padding:8px 12px;border:1px solid #dfe2f5;border-radius:999px;background:rgba(255,255,255,.85);color:#4239a8;font-size:12px;font-weight:800;box-shadow:0 7px 22px rgba(79,70,229,.06);margin-bottom:22px}
+.lp-eyebrow::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--mint);box-shadow:0 0 0 5px rgba(15,159,130,.1)}
+.lp-copy h1{font-size:clamp(42px,5.2vw,68px);line-height:1.05;letter-spacing:-.055em;font-weight:800;max-width:670px;margin:0 0 22px;color:#151d31}
+.lp-copy h1 span:last-child{display:block;color:var(--brand);margin-top:7px}
+.lp-copy>p{font-size:17px;line-height:1.75;color:var(--muted);max-width:610px;margin-bottom:28px}
+.lp-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px}
+.lp-actions .btn{min-height:52px;padding:12px 22px;font-size:15px}
+.lp-proof-line{display:flex;gap:18px;align-items:center;flex-wrap:wrap;color:#5d687e;font-size:12px;font-weight:600}
+.lp-proof-item{display:flex;align-items:center;gap:7px}.lp-proof-item::before{content:'✓';display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--mint-soft);color:var(--mint);font-weight:900}
+.lp-visual{position:relative;z-index:2}
+.lp-window{background:#fff;border:1px solid #e2e5ef;border-radius:28px;padding:18px;box-shadow:0 32px 80px rgba(32,39,75,.16);transform:rotate(1deg)}
+.lp-window-head{display:flex;align-items:center;justify-content:space-between;padding:2px 4px 16px}
+.lp-window-user{display:flex;align-items:center;gap:10px}.lp-avatar{width:38px;height:38px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,#4f46e5,#8b83ff);color:#fff;font-weight:800}
+.lp-window-title{font-weight:800;font-size:13px}.lp-window-sub{font-size:10px;color:var(--muted);margin-top:2px}
+.lp-window-chip{padding:6px 9px;border-radius:999px;background:var(--mint-soft);color:#087c68;font-size:10px;font-weight:800}
+.lp-focus-card{display:grid;grid-template-columns:1fr auto;align-items:center;gap:20px;padding:22px;border-radius:21px;background:linear-gradient(135deg,#4f46e5,#6f65f2);color:#fff;margin-bottom:13px;box-shadow:0 15px 30px rgba(79,70,229,.25)}
+.lp-focus-label{font-size:10px;text-transform:uppercase;letter-spacing:.1em;opacity:.72;font-weight:800}.lp-focus-title{font-size:19px;font-weight:800;line-height:1.35;margin:6px 0}.lp-focus-meta{font-size:11px;opacity:.8}
+.lp-ring{width:78px;height:78px;border-radius:50%;background:conic-gradient(#fff 0 72%,rgba(255,255,255,.2) 72%);display:grid;place-items:center;position:relative}.lp-ring::after{content:'';position:absolute;inset:9px;border-radius:50%;background:#6258eb}.lp-ring span{position:relative;z-index:1;font-size:14px;font-weight:900}
+.lp-queue{display:grid;gap:10px}.lp-queue-item{display:grid;grid-template-columns:42px 1fr auto;align-items:center;gap:11px;padding:12px 13px;border:1px solid #e7eaf2;border-radius:16px;background:#fff}
+.lp-subject-mark{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;font-size:12px;font-weight:900}.lp-subject-mark.math{background:#fff0da;color:#a66100}.lp-subject-mark.geo{background:#e7f8f4;color:#087c68}.lp-subject-mark.lang{background:#eef2ff;color:#4338ca}
+.lp-queue-name{font-size:12px;font-weight:800}.lp-queue-meta{font-size:10px;color:var(--muted);margin-top:3px}.lp-queue-arrow{color:#929bb0;font-size:18px}
+.lp-float{position:absolute;right:-22px;bottom:-28px;background:#fff;border:1px solid #e7e9f1;border-radius:17px;padding:12px 15px;box-shadow:0 18px 35px rgba(29,38,72,.13);font-size:11px;font-weight:800;color:#3a4356;transform:rotate(-2deg)}.lp-float strong{display:block;color:var(--mint);font-size:18px;margin-bottom:2px}
+.lp-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:0 0 70px}.lp-metric{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 8px 28px rgba(29,38,72,.045)}.lp-metric strong{display:block;font-size:26px;letter-spacing:-.04em;color:var(--ink);margin-bottom:4px}.lp-metric span{font-size:12px;color:var(--muted)}
+.lp-section{padding:82px 0}.lp-section-soft{background:#f0f2f8;border-top:1px solid #e6e9f1;border-bottom:1px solid #e6e9f1}.lp-section-head{max-width:680px;margin:0 auto 38px;text-align:center}.lp-kicker{color:var(--brand);font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px}.lp-section-head h2{font-size:clamp(28px,4vw,42px);line-height:1.18;letter-spacing:-.04em;margin-bottom:12px}.lp-section-head p{color:var(--muted);font-size:15px;line-height:1.7}
+.lp-feature-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.lp-feature{background:#fff;border:1px solid var(--line);border-radius:20px;padding:23px;min-height:210px;box-shadow:0 9px 28px rgba(29,38,72,.045)}.lp-feature-num{display:grid;place-items:center;width:42px;height:42px;border-radius:13px;background:var(--brand-soft);color:var(--brand);font-size:12px;font-weight:900;margin-bottom:26px}.lp-feature:nth-child(2) .lp-feature-num{background:var(--mint-soft);color:var(--mint)}.lp-feature:nth-child(3) .lp-feature-num{background:#fff3df;color:#b66d00}.lp-feature:nth-child(4) .lp-feature-num{background:#ffecef;color:#c74450}.lp-feature h3{font-size:16px;margin-bottom:9px}.lp-feature p{font-size:12px;color:var(--muted);line-height:1.7}
+.lp-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.lp-step{position:relative;padding:25px;background:#fff;border:1px solid var(--line);border-radius:20px}.lp-step-no{font-size:11px;font-weight:900;color:var(--brand);margin-bottom:28px}.lp-step h3{font-size:17px;margin-bottom:8px}.lp-step p{font-size:12px;line-height:1.65;color:var(--muted)}
+.lp-live{display:grid;grid-template-columns:1fr auto;gap:35px;align-items:center;padding:34px;border-radius:25px;background:#172033;color:#fff}.lp-live h2{font-size:24px;letter-spacing:-.03em;margin-bottom:8px}.lp-live>div:first-child p{font-size:12px;color:rgba(255,255,255,.64);line-height:1.6;max-width:450px}.lp-live-stats{display:flex;gap:8px}.lp-live-stat{min-width:125px;padding:15px 17px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.09);border-radius:16px}.lp-live-stat strong{display:block;font-size:22px;margin-bottom:4px}.lp-live-stat span{font-size:10px;color:rgba(255,255,255,.62)}
+.lp-beta{padding:76px 0}.lp-beta-card{display:flex;align-items:center;justify-content:space-between;gap:30px;padding:38px 42px;border-radius:26px;background:linear-gradient(135deg,#eef2ff,#e7f8f4);border:1px solid #dfe4f1}.lp-beta-card h2{font-size:27px;letter-spacing:-.035em;margin-bottom:8px}.lp-beta-card p{font-size:13px;color:var(--muted);line-height:1.6}.lp-beta-card .btn{min-width:190px;justify-content:center}
+.lp-footer{padding:28px 0 38px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;color:var(--muted);font-size:11px}.lp-footer a{color:var(--muted);text-decoration:none;margin-left:18px}.lp-footer a:hover{color:var(--brand)}
+@media(max-width:960px){.lp-hero-v2{grid-template-columns:1fr;gap:46px;padding-top:52px}.lp-copy{text-align:center}.lp-copy h1,.lp-copy>p{margin-left:auto;margin-right:auto}.lp-actions,.lp-proof-line{justify-content:center}.lp-visual{max-width:600px;margin:0 auto;width:100%}.lp-feature-grid{grid-template-columns:1fr 1fr}.lp-live{grid-template-columns:1fr}.lp-live-stats{flex-wrap:wrap}.lp-live-stat{flex:1}.lp-metrics{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){#p-landing>nav{padding:10px 12px!important}.lp-shell{width:min(100% - 24px,1180px)}.lp-hero-v2{min-height:auto;padding:42px 0}.lp-copy h1{font-size:38px}.lp-copy>p{font-size:15px}.lp-visual{padding:0 3px}.lp-window{padding:12px;border-radius:21px;transform:none}.lp-focus-card{padding:17px}.lp-ring{width:64px;height:64px}.lp-float{display:none}.lp-metrics{gap:8px;padding-bottom:46px}.lp-metric{padding:15px}.lp-metric strong{font-size:21px}.lp-section{padding:56px 0}.lp-feature-grid,.lp-steps{grid-template-columns:1fr}.lp-feature{min-height:auto}.lp-live{padding:25px}.lp-live-stats{display:grid;grid-template-columns:1fr 1fr;width:100%}.lp-live-stat{min-width:0}.lp-beta{padding:50px 0}.lp-beta-card{padding:28px 23px;flex-direction:column;align-items:flex-start}.lp-beta-card .btn{width:100%}.lp-footer{flex-direction:column}.lp-footer a{margin:0 16px 0 0}.lang-switcher{display:none}.sidebar.open{width:270px}.main{padding:16px}.topbar{padding:0 14px}}
 </style>
 </head>
 <body>
@@ -337,6 +441,93 @@ body.acc-dyslexia{font-family:'Comic Sans MS','OpenDyslexic',sans-serif!importan
     </div>
   </nav>
 
+  <div class="landing-v2">
+    <div class="lp-shell">
+      <section class="lp-hero-v2">
+        <div class="lp-copy">
+          <div class="lp-eyebrow" data-i18n="hero_badge">ქართული სკოლებისთვის შექმნილი</div>
+          <h1><span data-i18n="hero_h1">გაიგე, რა იცი.</span><span data-i18n="hero_h1b">იცოდე, რა ისწავლო შემდეგ.</span></h1>
+          <p data-i18n="hero_desc">I–XII კლასის სასწავლო ტესტები, მყისიერი უკუკავშირი და პერსონალური შემდეგი ნაბიჯი — ერთ მშვიდ და გასაგებ სივრცეში.</p>
+          <div class="lp-actions">
+            <button class="btn btn-primary" onclick="go('login')" data-i18n="hero_cta">დაიწყე უფასოდ →</button>
+            <button class="btn btn-outline" onclick="go('login')" data-i18n="login">სისტემაში შესვლა</button>
+          </div>
+          <div class="lp-proof-line">
+            <span class="lp-proof-item" data-i18n="lp_proof1">საქართველოს სასწავლო საფეხურები</span>
+            <span class="lp-proof-item" data-i18n="lp_proof2">ყოველთვის ცოცხალი პროგრესი</span>
+            <span class="lp-proof-item" data-i18n="lp_proof3">ტესტირების რეჟიმში უფასო</span>
+          </div>
+        </div>
+
+        <div class="lp-visual" aria-label="EduTest-ის მოსწავლის სივრცის ვიზუალური მაგალითი">
+          <div class="lp-window">
+            <div class="lp-window-head">
+              <div class="lp-window-user"><div class="lp-avatar">მ</div><div><div class="lp-window-title">მოგესალმები, მარიამ</div><div class="lp-window-sub">III კლასი · დღევანდელი გეგმა</div></div></div>
+              <span class="lp-window-chip">● ონლაინ</span>
+            </div>
+            <div class="lp-focus-card">
+              <div><div class="lp-focus-label">შემდეგი საუკეთესო ნაბიჯი</div><div class="lp-focus-title">მათემატიკა · გამრავლება</div><div class="lp-focus-meta">8 კითხვა · დაახლოებით 6 წუთი</div></div>
+              <div class="lp-ring"><span>72%</span></div>
+            </div>
+            <div class="lp-queue">
+              <div class="lp-queue-item"><div class="lp-subject-mark math">123</div><div><div class="lp-queue-name">დღის მოკლე ტესტი</div><div class="lp-queue-meta">შეინარჩუნე 4-დღიანი სერია</div></div><span class="lp-queue-arrow">›</span></div>
+              <div class="lp-queue-item"><div class="lp-subject-mark geo">აბგ</div><div><div class="lp-queue-name">ქართული ენა</div><div class="lp-queue-meta">გასამეორებელი: არსებითი სახელი</div></div><span class="lp-queue-arrow">›</span></div>
+              <div class="lp-queue-item"><div class="lp-subject-mark lang">EN</div><div><div class="lp-queue-name">ინგლისური</div><div class="lp-queue-meta">ბოლო შედეგი 86% · კარგი პროგრესი</div></div><span class="lp-queue-arrow">›</span></div>
+            </div>
+          </div>
+          <div class="lp-float"><strong>+12%</strong>ზრდა ბოლო 7 დღეში</div>
+        </div>
+      </section>
+
+      <section class="lp-metrics" aria-label="პლატფორმის რეალური მოცულობა">
+        <div class="lp-metric"><strong id="lp-question-count">—</strong><span data-i18n="stat_question">კითხვა</span></div>
+        <div class="lp-metric"><strong id="lp-test-count">—</strong><span data-i18n="tests">ტესტი</span></div>
+        <div class="lp-metric"><strong id="lp-subject-count">—</strong><span data-i18n="stat_subject">საგანი</span></div>
+        <div class="lp-metric"><strong>I–XII</strong><span data-i18n="stat_grade">კლასი</span></div>
+      </section>
+    </div>
+
+    <section class="lp-section lp-section-soft">
+      <div class="lp-shell">
+        <div class="lp-section-head"><div class="lp-kicker" data-i18n="lp_feature_kicker">სწავლა, რომელიც მიმართულებას გაძლევს</div><h2 data-i18n="lp_feature_title">ერთ სივრცეში — ტესტი, ახსნა და შემდეგი ნაბიჯი</h2><p data-i18n="lp_feature_desc">ინტერფეისი მოსწავლეს არ ტოვებს კითხვასთან: „ახლა რა გავაკეთო?“ მასწავლებელი კი სწრაფად ხედავს, სად არის საჭირო დახმარება.</p></div>
+        <div class="lp-feature-grid">
+          <article class="lp-feature"><div class="lp-feature-num">01</div><h3 data-i18n="feat1_title">შენი შემდეგი ნაბიჯი</h3><p data-i18n="feat1_desc">რეკომენდაცია ეფუძნება კლასს, შედეგებსა და გასამეორებელ უნარებს.</p></article>
+          <article class="lp-feature"><div class="lp-feature-num">02</div><h3 data-i18n="feat2_title">მყისიერი უკუკავშირი</h3><p data-i18n="feat2_desc">შედეგთან ერთად მიიღებ გასაგებ განმარტებას და თემის გამეორების რჩევას.</p></article>
+          <article class="lp-feature"><div class="lp-feature-num">03</div><h3 data-i18n="feat3_title">გასაგები ანალიტიკა</h3><p data-i18n="feat3_desc">პროგრესი ჩანს საგნის, უნარისა და დროის მიხედვით — ზედმეტი ცხრილების გარეშე.</p></article>
+          <article class="lp-feature"><div class="lp-feature-num">04</div><h3 data-i18n="feat4_title">ჯანსაღი მოტივაცია</h3><p data-i18n="feat4_desc">დღიური მიზნები და მიღწევები ზრდაზეა ორიენტირებული, არა მხოლოდ შეჯიბრებაზე.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="lp-section">
+      <div class="lp-shell">
+        <div class="lp-section-head"><div class="lp-kicker" data-i18n="lp_steps_kicker">სამი მარტივი ეტაპი</div><h2 data-i18n="how_title">როგორ მუშაობს EduTest?</h2><p data-i18n="lp_steps_desc">დაწყებიდან შედეგამდე გზა მოკლე, პროგნოზირებადი და ყველა ასაკისთვის გასაგებია.</p></div>
+        <div class="lp-steps">
+          <article class="lp-step"><div class="lp-step-no"><span data-i18n="lp_step_label">ნაბიჯი</span> 01</div><h3 data-i18n="step1_title">შექმენი ანგარიში</h3><p data-i18n="step1_desc">აირჩიე მოსწავლის ან მასწავლებლის როლი და შეავსე აუცილებელი ინფორმაცია.</p></article>
+          <article class="lp-step"><div class="lp-step-no"><span data-i18n="lp_step_label">ნაბიჯი</span> 02</div><h3 data-i18n="step2_title">აირჩიე სწორი ტესტი</h3><p data-i18n="step2_desc">კლასისა და საგნის მიხედვით მიიღე მხოლოდ შენთვის შესაბამისი მასალა.</p></article>
+          <article class="lp-step"><div class="lp-step-no"><span data-i18n="lp_step_label">ნაბიჯი</span> 03</div><h3 data-i18n="step3_title">ნახე შედეგი და გააგრძელე</h3><p data-i18n="step3_desc">მიიღე განმარტება, ნახე პროგრესი და გადადი რეკომენდებულ შემდეგ ნაბიჯზე.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="lp-shell">
+      <div class="lp-live">
+        <div><h2 data-i18n="lp_live_title">პლატფორმა ახლა</h2><p data-i18n="lp_live_desc">ეს მაჩვენებლები პირდაპირ რეალური აქტივობიდან განახლდება და დემო ციფრები არ არის.</p></div>
+        <div class="lp-live-stats">
+          <div class="lp-live-stat"><strong id="lp-today-tests">0</strong><span data-i18n="stat_today">დღეს გავლილი ტესტი</span></div>
+          <div class="lp-live-stat"><strong id="lp-excellent">0</strong><span data-i18n="lp_excellent_label">Excellent შედეგი</span></div>
+          <div class="lp-live-stat"><strong><span id="lp-average-score">0</span>%</strong><span data-i18n="lp_average_label">საშუალო შედეგი</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="lp-shell lp-beta">
+      <div class="lp-beta-card"><div><h2 data-i18n="lp_beta_title">ტესტირების ეტაპზე ყველა ტესტი ღიაა</h2><p data-i18n="lp_beta_desc">გამოსცადე მოსწავლისა და მასწავლებლის გამოცდილება. გადახდის ფუნქცია მეორე ეტაპზე დაემატება.</p></div><button class="btn btn-primary" onclick="go('login')" data-i18n="hero_cta">დაიწყე უფასოდ →</button></div>
+    </section>
+
+    <footer class="lp-shell lp-footer"><span data-i18n="footer">© 2026 EduTest.ge · ყველა უფლება დაცულია</span><span><a href="/terms.html" target="_blank">პირობები</a><a href="/privacy.html" target="_blank">კონფიდენციალურობა</a></span></footer>
+  </div>
+
   <!-- HERO -->
   <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;text-align:center;color:#fff">
     <div class="badge b-blue" style="background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.75);margin-bottom:18px" data-i18n="hero_badge">🇬🇪 ქართული სკოლებისთვის</div>
@@ -349,24 +540,24 @@ body.acc-dyslexia{font-family:'Comic Sans MS','OpenDyslexic',sans-serif!importan
     <!-- SOCIAL PROOF STRIP -->
     <div id="lp-social-proof" style="display:flex;gap:0;margin-top:36px;flex-wrap:wrap;justify-content:center;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:0;overflow:hidden;max-width:660px;width:100%">
       <div style="flex:1;min-width:160px;padding:18px 20px;text-align:center;border-right:1px solid rgba(255,255,255,.15)">
-        <div style="font-size:24px;font-weight:800;color:#fff;line-height:1"><span class="lp-counter" id="lp-today-tests" data-target="0">0</span></div>
+        <div style="font-size:24px;font-weight:800;color:#fff;line-height:1"><span class="lp-counter" id="lp-today-tests-legacy" data-target="0">0</span></div>
         <div style="opacity:.75;font-size:12px;margin-top:4px">🔥 <span data-i18n="stat_today">დღეს გავლილი ტესტი</span></div>
       </div>
       <div style="flex:1;min-width:160px;padding:18px 20px;text-align:center;border-right:1px solid rgba(255,255,255,.15)">
-        <div style="font-size:24px;font-weight:800;color:#fbbf24;line-height:1"><span class="lp-counter" id="lp-excellent" data-target="0">0</span></div>
+        <div style="font-size:24px;font-weight:800;color:#fbbf24;line-height:1"><span class="lp-counter" id="lp-excellent-legacy" data-target="0">0</span></div>
         <div style="opacity:.75;font-size:12px;margin-top:4px">🏆 Excellent ბეიჯი</div>
       </div>
       <div style="flex:1;min-width:160px;padding:18px 20px;text-align:center">
-        <div style="font-size:24px;font-weight:800;color:#4ade80;line-height:1"><span class="lp-counter" id="lp-average-score" data-target="0">0</span>%</div>
+        <div style="font-size:24px;font-weight:800;color:#4ade80;line-height:1"><span class="lp-counter" id="lp-average-score-legacy" data-target="0">0</span>%</div>
         <div style="opacity:.75;font-size:12px;margin-top:4px">⭐ საშუალო შედეგი</div>
       </div>
     </div>
     <!-- CLASSIC MINI STATS -->
     <div style="display:flex;gap:32px;margin-top:24px;flex-wrap:wrap;justify-content:center;opacity:.7">
-      <div style="text-align:center"><div style="font-size:20px;font-weight:700" id="lp-subject-count">—</div><div style="font-size:11px" data-i18n="stat_subject">საგანი</div></div>
+      <div style="text-align:center"><div style="font-size:20px;font-weight:700" id="lp-subject-count-legacy">—</div><div style="font-size:11px" data-i18n="stat_subject">საგანი</div></div>
       <div style="text-align:center"><div style="font-size:20px;font-weight:700">I–XII</div><div style="font-size:11px" data-i18n="stat_grade">კლასი</div></div>
-      <div style="text-align:center"><div style="font-size:20px;font-weight:700" id="lp-question-count">—</div><div style="font-size:11px" data-i18n="stat_question">კითხვა</div></div>
-      <div style="text-align:center"><div style="font-size:20px;font-weight:700" id="lp-test-count">—</div><div style="font-size:11px">ტესტი</div></div>
+      <div style="text-align:center"><div style="font-size:20px;font-weight:700" id="lp-question-count-legacy">—</div><div style="font-size:11px" data-i18n="stat_question">კითხვა</div></div>
+      <div style="text-align:center"><div style="font-size:20px;font-weight:700" id="lp-test-count-legacy">—</div><div style="font-size:11px">ტესტი</div></div>
     </div>
   </div>
 
@@ -1375,12 +1566,17 @@ const I18N={
     grade_1:'I კლ.',grade_2:'II კლ.',grade_3:'III კლ.',grade_4:'IV კლ.',
     grade_5:'V კლ.',grade_6:'VI კლ.',grade_7:'VII კლ.',grade_8:'VIII კლ.',
     grade_9:'IX კლ.',grade_10:'X კლ.',grade_11:'XI კლ.',grade_12:'XII კლ.',
-    hero_badge:'🇬🇪 ქართული სკოლებისთვის',
+    hero_badge:'ქართული სკოლებისთვის შექმნილი',
     platform_stats:'პლატფორმის სტატისტიკა',
-    hero_h1:'სატესტო პლატფორმა',
-    hero_h1b:'ახალი თაობისთვის',
-    hero_desc:'შეამოწმე ცოდნა, მოიპოვე 🏆 Excellent ბეიჯი და გახდი კლასის საუკეთესო! I–XII კლასი · 12 საგანი · ავტომატური შეფასება.',
-    hero_cta:'▶ დაწყება — უფასოდ',
+    hero_h1:'გაიგე, რა იცი.',
+    hero_h1b:'იცოდე, რა ისწავლო შემდეგ.',
+    hero_desc:'I–XII კლასის სასწავლო ტესტები, მყისიერი უკუკავშირი და პერსონალური შემდეგი ნაბიჯი — ერთ მშვიდ და გასაგებ სივრცეში.',
+    hero_cta:'დაიწყე უფასოდ →',
+    lp_proof1:'საქართველოს სასწავლო საფეხურები',lp_proof2:'ყოველთვის ცოცხალი პროგრესი',lp_proof3:'ტესტირების რეჟიმში უფასო',
+    lp_feature_kicker:'სწავლა, რომელიც მიმართულებას გაძლევს',lp_feature_title:'ერთ სივრცეში — ტესტი, ახსნა და შემდეგი ნაბიჯი',lp_feature_desc:'ინტერფეისი მოსწავლეს არ ტოვებს კითხვასთან: „ახლა რა გავაკეთო?“ მასწავლებელი კი სწრაფად ხედავს, სად არის საჭირო დახმარება.',
+    lp_steps_kicker:'სამი მარტივი ეტაპი',lp_steps_desc:'დაწყებიდან შედეგამდე გზა მოკლე, პროგნოზირებადი და ყველა ასაკისთვის გასაგებია.',lp_step_label:'ნაბიჯი',
+    lp_live_title:'პლატფორმა ახლა',lp_live_desc:'ეს მაჩვენებლები პირდაპირ რეალური აქტივობიდან განახლდება და დემო ციფრები არ არის.',lp_excellent_label:'Excellent შედეგი',lp_average_label:'საშუალო შედეგი',
+    lp_beta_title:'ტესტირების ეტაპზე ყველა ტესტი ღიაა',lp_beta_desc:'გამოსცადე მოსწავლისა და მასწავლებლის გამოცდილება. გადახდის ფუნქცია მეორე ეტაპზე დაემატება.',
     leaderboard:'ლიდერბორდი',rank:'ადგილი',class_lb:'კლასი',national_lb:'ეროვნული',
     streak_label:'Streak',daily_challenge:'დღის გამოწვევა',daily_bonus:'2× XP ბონუსი',
     daily_done:'დღეს დასრულებული ✓',prizes_title:'🎁 ჯილდოები',prize_period:'პერიოდი',
@@ -1403,7 +1599,7 @@ const I18N={
     password_ph:'პაროლი',
     name_ph:'სახელი',
     surname_ph:'გვარი',
-    adm_dashboard:'🏠 Dashboard',
+    adm_dashboard:'მთავარი',
     adm_schools:'🏫 სკოლები',
     adm_users:'👥 მომხმარებლები',
     adm_pending:'⚠️ დამტკიცება',
@@ -1440,21 +1636,21 @@ const I18N={
     adm_search:'🔍 ძებნა...',
     adm_status:'სტატუსი',
     adm_awaiting:'⏳ დამტკიცების მოლოდინში',
-    how_title:'📋 როგორ მუშაობს?',
-    step1_title:'დარეგისტრირდი',
-    step1_desc:'შექმენი ანგარიში — უფასოდ',
-    step2_title:'აირჩიე ტესტი',
-    step2_desc:'ასაკის მიხედვით ტესტები',
-    step3_title:'მიიღე შედეგი',
-    step3_desc:'ავტომატური შეფასება',
-    feat1_title:'ონლაინ ტესტები',
-    feat1_desc:'მასწავლებლები ქმნიან ტესტებს, მოსწავლეები ასრულებენ ბრაუზერში',
-    feat2_title:'ავტო-შეფასება',
-    feat2_desc:'MCQ და True/False ავტომატურად ფასდება, შედეგი — დაუყოვნებლივ',
-    feat3_title:'ანალიტიკა',
-    feat3_desc:'კლასის, მოსწავლის და საგნის მიხედვით დეტალური სტატისტიკა',
-    feat4_title:'ბეიჯები',
-    feat4_desc:'Excellent, Good, Pass — მოტივაციისთვის',
+    how_title:'როგორ მუშაობს EduTest?',
+    step1_title:'შექმენი ანგარიში',
+    step1_desc:'აირჩიე მოსწავლის ან მასწავლებლის როლი და შეავსე აუცილებელი ინფორმაცია.',
+    step2_title:'აირჩიე სწორი ტესტი',
+    step2_desc:'კლასისა და საგნის მიხედვით მიიღე მხოლოდ შენთვის შესაბამისი მასალა.',
+    step3_title:'ნახე შედეგი და გააგრძელე',
+    step3_desc:'მიიღე განმარტება, ნახე პროგრესი და გადადი რეკომენდებულ შემდეგ ნაბიჯზე.',
+    feat1_title:'შენი შემდეგი ნაბიჯი',
+    feat1_desc:'რეკომენდაცია ეფუძნება კლასს, შედეგებსა და გასამეორებელ უნარებს.',
+    feat2_title:'მყისიერი უკუკავშირი',
+    feat2_desc:'შედეგთან ერთად მიიღებ გასაგებ განმარტებას და თემის გამეორების რჩევას.',
+    feat3_title:'გასაგები ანალიტიკა',
+    feat3_desc:'პროგრესი ჩანს საგნის, უნარისა და დროის მიხედვით — ზედმეტი ცხრილების გარეშე.',
+    feat4_title:'ჯანსაღი მოტივაცია',
+    feat4_desc:'დღიური მიზნები და მიღწევები ზრდაზეა ორიენტირებული, არა მხოლოდ შეჯიბრებაზე.',
     plans_title:'გეგმები',
     plans_sub:'BOG Pay / TBC Pay-ით — ლარით',
     plan_free:'უფასო',
@@ -1529,11 +1725,16 @@ const I18N={
     grade_1:'Gr.1',grade_2:'Gr.2',grade_3:'Gr.3',grade_4:'Gr.4',
     grade_5:'Gr.5',grade_6:'Gr.6',grade_7:'Gr.7',grade_8:'Gr.8',
     grade_9:'Gr.9',grade_10:'Gr.10',grade_11:'Gr.11',grade_12:'Gr.12',
-    hero_badge:'🇬🇧 For Georgian Schools',
-    hero_h1:'Testing Platform',
-    hero_h1b:'for the New Generation',
-    hero_desc:'Test your knowledge, earn the 🏆 Excellent badge and become the best in class! Grades 1–12 · 10 subjects · instant results.',
-    hero_cta:'▶ Start — Free',
+    hero_badge:'Built for Georgian schools',
+    hero_h1:'Know what you know.',
+    hero_h1b:'Know what to learn next.',
+    hero_desc:'Grades 1–12 learning tests, immediate feedback, and a personal next step — in one calm, clear space.',
+    hero_cta:'Start for free →',
+    lp_proof1:'Aligned to Georgian school levels',lp_proof2:'Always-live progress',lp_proof3:'Free during testing',
+    lp_feature_kicker:'Learning with a clear direction',lp_feature_title:'One space for testing, explanation, and the next step',lp_feature_desc:'Students always know what to do next, while teachers can quickly see where support is needed.',
+    lp_steps_kicker:'Three simple steps',lp_steps_desc:'The path from sign-up to result is short, predictable, and clear for every age.',lp_step_label:'Step',
+    lp_live_title:'Live platform activity',lp_live_desc:'These figures update from real activity and are not demo counters.',lp_excellent_label:'Excellent results',lp_average_label:'Average result',
+    lp_beta_title:'Every test is open during beta',lp_beta_desc:'Try the student and teacher experience now. Payments will be introduced in the second phase.',
     leaderboard:'Leaderboard',rank:'Rank',class_lb:'Class',national_lb:'National',
     streak_label:'Streak',daily_challenge:'Daily Challenge',daily_bonus:'2× XP Bonus',
     daily_done:'Done today ✓',prizes_title:'🎁 Prizes',prize_period:'Period',
@@ -1556,7 +1757,7 @@ const I18N={
     password_ph:'Password',
     name_ph:'First name',
     surname_ph:'Last name',
-    adm_dashboard:'🏠 Dashboard',
+    adm_dashboard:'Overview',
     adm_schools:'🏫 Schools',
     adm_users:'👥 Users',
     adm_pending:'⚠️ Pending',
@@ -1593,21 +1794,21 @@ const I18N={
     adm_search:'🔍 Search...',
     adm_status:'Status',
     adm_awaiting:'⏳ Awaiting Approval',
-    how_title:'📋 How does it work?',
-    step1_title:'Register',
-    step1_desc:'Create an account — for free',
-    step2_title:'Choose a test',
-    step2_desc:'Tests filtered by your grade',
-    step3_title:'Get your result',
-    step3_desc:'Automatic grading',
-    feat1_title:'Online Tests',
-    feat1_desc:'Teachers create tests, students complete them in the browser',
-    feat2_title:'Auto-grading',
-    feat2_desc:'MCQ and True/False are graded automatically — instant results',
-    feat3_title:'Analytics',
-    feat3_desc:'Detailed statistics by class, student and subject',
-    feat4_title:'Badges',
-    feat4_desc:'Excellent, Good, Pass — for motivation',
+    how_title:'How does EduTest work?',
+    step1_title:'Create an account',
+    step1_desc:'Choose a student or teacher role and provide the essential details.',
+    step2_title:'Choose the right test',
+    step2_desc:'See only the material relevant to your grade and subject.',
+    step3_title:'Review and keep moving',
+    step3_desc:'Get an explanation, see progress, and move to your recommended next step.',
+    feat1_title:'Your next step',
+    feat1_desc:'Recommendations use your grade, results, and the skills that need review.',
+    feat2_title:'Immediate feedback',
+    feat2_desc:'See a clear explanation and a focused review tip with every result.',
+    feat3_title:'Actionable analytics',
+    feat3_desc:'Understand progress by subject, skill, and time without dashboard overload.',
+    feat4_title:'Healthy motivation',
+    feat4_desc:'Daily goals and achievements celebrate growth, not only competition.',
     plans_title:'Plans',
     plans_sub:'BOG Pay / TBC Pay — in GEL',
     plan_free:'Free',
@@ -1682,11 +1883,16 @@ const I18N={
     grade_1:'1 кл.',grade_2:'2 кл.',grade_3:'3 кл.',grade_4:'4 кл.',
     grade_5:'5 кл.',grade_6:'6 кл.',grade_7:'7 кл.',grade_8:'8 кл.',
     grade_9:'9 кл.',grade_10:'10 кл.',grade_11:'11 кл.',grade_12:'12 кл.',
-    hero_badge:'🇷🇺 Для грузинских школ',
-    hero_h1:'Тестовая платформа',
-    hero_h1b:'для нового поколения',
-    hero_desc:'Проверь знания, получи значок 🏆 Excellent и стань лучшим в классе! 1–12 класс · 10 предметов · мгновенная оценка.',
-    hero_cta:'▶ Начать — бесплатно',
+    hero_badge:'Создано для школ Грузии',
+    hero_h1:'Пойми, что ты знаешь.',
+    hero_h1b:'Узнай, что учить дальше.',
+    hero_desc:'Учебные тесты для 1–12 классов, мгновенная обратная связь и персональный следующий шаг — в одном спокойном и понятном пространстве.',
+    hero_cta:'Начать бесплатно →',
+    lp_proof1:'Для школьных ступеней Грузии',lp_proof2:'Всегда актуальный прогресс',lp_proof3:'Бесплатно во время тестирования',
+    lp_feature_kicker:'Обучение с понятным направлением',lp_feature_title:'Тест, объяснение и следующий шаг — в одном месте',lp_feature_desc:'Ученик всегда понимает, что делать дальше, а учитель быстро видит, где нужна помощь.',
+    lp_steps_kicker:'Три простых шага',lp_steps_desc:'Путь от регистрации до результата короткий, предсказуемый и понятный для любого возраста.',lp_step_label:'Шаг',
+    lp_live_title:'Платформа сейчас',lp_live_desc:'Эти показатели обновляются из реальной активности и не являются демо-цифрами.',lp_excellent_label:'Результаты Excellent',lp_average_label:'Средний результат',
+    lp_beta_title:'На этапе тестирования все тесты открыты',lp_beta_desc:'Попробуйте опыт ученика и учителя. Оплата будет добавлена на втором этапе.',
     leaderboard:'Рейтинг',rank:'Место',class_lb:'Класс',national_lb:'Нац. рейтинг',
     streak_label:'Стрик',daily_challenge:'Задание дня',daily_bonus:'Бонус 2× XP',
     daily_done:'Выполнено сегодня ✓',prizes_title:'🎁 Призы',prize_period:'Период',
@@ -1709,7 +1915,7 @@ const I18N={
     password_ph:'Пароль',
     name_ph:'Имя',
     surname_ph:'Фамилия',
-    adm_dashboard:'🏠 Дашборд',
+    adm_dashboard:'Обзор',
     adm_schools:'🏫 Школы',
     adm_users:'👥 Пользователи',
     adm_pending:'⚠️ На утверждении',
@@ -1746,21 +1952,21 @@ const I18N={
     adm_search:'🔍 Поиск...',
     adm_status:'Статус',
     adm_awaiting:'⏳ Ожидают утверждения',
-    how_title:'📋 Как это работает?',
-    step1_title:'Зарегистрируйтесь',
-    step1_desc:'Создайте аккаунт — бесплатно',
-    step2_title:'Выберите тест',
-    step2_desc:'Тесты по возрасту',
-    step3_title:'Получите результат',
-    step3_desc:'Автоматическая оценка',
-    feat1_title:'Онлайн-тесты',
-    feat1_desc:'Учителя создают тесты, ученики проходят в браузере',
-    feat2_title:'Автооценка',
-    feat2_desc:'MCQ и True/False оцениваются автоматически — результат мгновенно',
-    feat3_title:'Аналитика',
-    feat3_desc:'Подробная статистика по классу, ученику и предмету',
-    feat4_title:'Значки',
-    feat4_desc:'Excellent, Good, Pass — для мотивации',
+    how_title:'Как работает EduTest?',
+    step1_title:'Создайте аккаунт',
+    step1_desc:'Выберите роль ученика или учителя и укажите основные данные.',
+    step2_title:'Выберите подходящий тест',
+    step2_desc:'Получайте материал, соответствующий вашему классу и предмету.',
+    step3_title:'Посмотрите результат и продолжайте',
+    step3_desc:'Получите объяснение, увидьте прогресс и перейдите к рекомендованному шагу.',
+    feat1_title:'Ваш следующий шаг',
+    feat1_desc:'Рекомендации учитывают класс, результаты и навыки для повторения.',
+    feat2_title:'Мгновенная обратная связь',
+    feat2_desc:'Вместе с результатом вы получите понятное объяснение и совет для повторения.',
+    feat3_title:'Понятная аналитика',
+    feat3_desc:'Прогресс по предмету, навыку и времени — без перегруженных таблиц.',
+    feat4_title:'Здоровая мотивация',
+    feat4_desc:'Ежедневные цели и достижения отмечают рост, а не только соревнование.',
     plans_title:'Тарифы',
     plans_sub:'BOG Pay / TBC Pay — в лари',
     plan_free:'Бесплатно',
