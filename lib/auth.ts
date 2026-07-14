@@ -22,10 +22,16 @@ export async function sha256(value: string) {
   return bytesToBase64(new Uint8Array(await crypto.subtle.digest("SHA-256", encoder.encode(value))));
 }
 
-export async function hashPassword(password: string, salt = randomToken(18)) {
+const passwordIterations = 100_000;
+const legacyPasswordIterations = 210_000;
+
+export async function hashPassword(password: string, storedSalt?: string) {
+  const versioned = storedSalt?.match(/^pbkdf2\$(\d+)\$(.+)$/);
+  const iterations = versioned ? Number(versioned[1]) : storedSalt ? legacyPasswordIterations : passwordIterations;
+  const rawSalt = versioned?.[2] ?? storedSalt ?? randomToken(18);
   const material = await crypto.subtle.importKey("raw", encoder.encode(password), "PBKDF2", false, ["deriveBits"]);
-  const bits = await crypto.subtle.deriveBits({ name: "PBKDF2", hash: "SHA-256", salt: encoder.encode(salt), iterations: 210000 }, material, 256);
-  return { salt, hash: bytesToBase64(new Uint8Array(bits)) };
+  const bits = await crypto.subtle.deriveBits({ name: "PBKDF2", hash: "SHA-256", salt: encoder.encode(rawSalt), iterations }, material, 256);
+  return { salt: storedSalt ?? `pbkdf2$${iterations}$${rawSalt}`, hash: bytesToBase64(new Uint8Array(bits)) };
 }
 
 export async function verifyPassword(password: string, salt: string, expected: string) {

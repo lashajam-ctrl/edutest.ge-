@@ -31,6 +31,8 @@ test("uses a hardened OAuth authorization-code flow", async () => {
   assert.match(callbackRoute, /"registration-details-required"/);
   assert.match(callbackRoute, /headers\.append\("Set-Cookie"/);
   assert.match(authLibrary, /APP_ORIGIN/);
+  assert.match(authLibrary, /legacyPasswordIterations/);
+  assert.match(authLibrary, /storedSalt\?\.match/);
   assert.match(envExample, /^APP_ORIGIN=/m);
 });
 
