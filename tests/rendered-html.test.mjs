@@ -50,6 +50,16 @@ test("keeps test access open while payments are disabled and uses server-side ad
   assert.match(profileRoute, /hashPassword/);
 });
 
+test("validates reported scores and restricts assignment deletion to its owner", async () => {
+  const [attemptsRoute, assignmentsRoute] = await Promise.all([
+    readFile(new URL("app/api/attempts/route.ts", root), "utf8"),
+    readFile(new URL("app/api/assignments/route.ts", root), "utf8"),
+  ]);
+  assert.match(attemptsRoute, /expectedPct/);
+  assert.match(attemptsRoute, /users\.email/);
+  assert.match(assignmentsRoute, /assignments\.createdBy, current\.user\.id/);
+});
+
 test("uses curriculum gating, composite history identities, and adaptive skills", async () => {
   const html = await readFile(new URL("public/app.html", root), "utf8");
   assert.match(html, /function isCurriculumEligible\(test\)/);

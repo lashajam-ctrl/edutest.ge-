@@ -1,4 +1,4 @@
-import { desc, eq } from "drizzle-orm";
+import { and, desc, eq } from "drizzle-orm";
 import { getDb } from "@/db";
 import { assignments } from "@/db/schema";
 import { getSessionUser } from "@/lib/auth";
@@ -28,6 +28,11 @@ export async function DELETE(request: Request) {
   if (current.user.role !== "teacher" && current.user.role !== "admin") return Response.json({ error: "წვდომა აკრძალულია" }, { status: 403 });
   const id = new URL(request.url).searchParams.get("id");
   if (!id) return Response.json({ error: "id აუცილებელია" }, { status: 400 });
-  await getDb().delete(assignments).where(eq(assignments.id, id));
+  const condition = current.user.role === "admin"
+    ? eq(assignments.id, id)
+    : and(eq(assignments.id, id), eq(assignments.createdBy, current.user.id));
+  const [owned] = await getDb().select({ id: assignments.id }).from(assignments).where(condition).limit(1);
+  if (!owned) return Response.json({ error: "დავალება ვერ მოიძებნა" }, { status: 404 });
+  await getDb().delete(assignments).where(condition);
   return Response.json({ ok: true });
 }
