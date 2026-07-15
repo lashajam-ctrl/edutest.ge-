@@ -1,0 +1,17 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "edutest-ge",
+  "compatibility_date": "2026-07-15",
+  "assets": {
+    "binding": "ASSETS",
+    "run_worker_first": true
+  },
+  "vars": {
+    "APP_ORIGIN": "https://edutest.ge",
+    "AI_FEEDBACK_ENABLED": "false",
+    "AI_UNDER18_SAFEGUARDS_ACKNOWLEDGED": "false"
+  },
+  "observability": {
+    "enabled": true
+  }
+}
