@@ -154,16 +154,18 @@
     const stageMismatch=clean.startsWith('hist-')&&band[1]<7;
     const unpublishedPool=!!(context&&context.hasPublishedTest===false);
     const outcomeId=question.outcome||`NCP.${area.toUpperCase()}.${band[0]}-${band[1]}.${domain.toUpperCase()}`;
-    let reviewStatus='approved_domain_alignment';
+    let reviewStatus='candidate_domain_alignment';
     if(unpublishedPool)reviewStatus='blocked_unpublished_pool';
     else if(stageMismatch)reviewStatus='blocked_curriculum_stage';
     else if(KNOWN_REVIEW[question.id]||flags.includes('weak_or_nonacademic_distractor'))reviewStatus='review_required';
     else if(question.outcome&&question.skill&&question.explain)reviewStatus='approved_explicit_alignment';
     return{
       frameworkVersion:VERSION,source:'საქართველოს ეროვნული სასწავლო გეგმის საგნობრივი სფეროები',
+      sourceUrl:'https://mes.gov.ge/content.php?id=12552',
       area,domain,gradeMin:band[0],gradeMax:band[1],outcomeId,
       outcomeLabel:OUTCOMES[area][domain],alignmentType:question.outcome?'explicit_result_code':'domain_level_candidate',
       confidence,reviewStatus,cognitiveLevel:cognitiveLevel(question),qualityFlags:flags,
+      exactGradeVerified:Number(question.gradeMin)===Number(question.gradeMax)&&Number.isFinite(Number(question.gradeMin)),
       reviewNote:unpublishedPool?'კითხვების აუზი არც ერთ მოქმედ ტესტზე არ არის მიბმული':stageMismatch?'საგანი/კლასი სამინისტროს მიმდინარე თანმიმდევრობას არ ემთხვევა':KNOWN_REVIEW[question.id]||null
     };
   }

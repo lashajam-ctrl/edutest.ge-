@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-17T12:42:24.751Z",
+  "generatedAt": "2026-07-17T13:05:52.381Z",
   "summary": {
     "pools": 313,
     "tests": 420,
@@ -10,7 +10,8 @@
     "questionsWithSkillTag": 32,
     "questionsWithOutcomeTag": 32,
     "questionsMappedToCurriculumDomain": 6604,
-    "approvedDomainAlignments": 4595,
+    "approvedDomainAlignments": 32,
+    "candidateDomainAlignments": 4563,
     "alignmentsRequiringReview": 0,
     "blockedCurriculumStageQuestions": 316,
     "blockedUnpublishedPoolQuestions": 1693
@@ -159,7 +160,7 @@
     },
     "ქართული ენა · 7": {
       "tests": 4,
-      "requestedQuestions": 36,
+      "requestedQuestions": 32,
       "pools": [
         "gg-78"
       ]
@@ -173,7 +174,7 @@
     },
     "ქართული ენა · 8": {
       "tests": 4,
-      "requestedQuestions": 36,
+      "requestedQuestions": 32,
       "pools": [
         "gg-78"
       ]
@@ -187,7 +188,7 @@
     },
     "ქართული ენა · 9": {
       "tests": 4,
-      "requestedQuestions": 36,
+      "requestedQuestions": 32,
       "pools": [
         "gg-910"
       ]
@@ -201,7 +202,7 @@
     },
     "ქართული ენა · 10": {
       "tests": 4,
-      "requestedQuestions": 36,
+      "requestedQuestions": 32,
       "pools": [
         "gg-910"
       ]
@@ -215,7 +216,7 @@
     },
     "ქართული ენა · 11": {
       "tests": 4,
-      "requestedQuestions": 36,
+      "requestedQuestions": 32,
       "pools": [
         "gg-1112"
       ]
@@ -229,7 +230,7 @@
     },
     "ქართული ენა · 12": {
       "tests": 4,
-      "requestedQuestions": 36,
+      "requestedQuestions": 32,
       "pools": [
         "gg-1112"
       ]
@@ -285,7 +286,7 @@
     },
     "ინგლ. გრამ. · 7": {
       "tests": 4,
-      "requestedQuestions": 36,
+      "requestedQuestions": 32,
       "pools": [
         "eg-78"
       ]
@@ -299,7 +300,7 @@
     },
     "ინგლ. გრამ. · 8": {
       "tests": 4,
-      "requestedQuestions": 36,
+      "requestedQuestions": 32,
       "pools": [
         "eg-78"
       ]
@@ -313,7 +314,7 @@
     },
     "ინგლ. გრამ. · 9": {
       "tests": 4,
-      "requestedQuestions": 36,
+      "requestedQuestions": 32,
       "pools": [
         "eg-910"
       ]
@@ -327,7 +328,7 @@
     },
     "ინგლ. გრამ. · 10": {
       "tests": 4,
-      "requestedQuestions": 36,
+      "requestedQuestions": 32,
       "pools": [
         "eg-910"
       ]
@@ -341,7 +342,7 @@
     },
     "ინგლ. გრამ. · 11": {
       "tests": 4,
-      "requestedQuestions": 36,
+      "requestedQuestions": 32,
       "pools": [
         "eg-1112"
       ]
@@ -355,7 +356,7 @@
     },
     "ინგლ. გრამ. · 12": {
       "tests": 4,
-      "requestedQuestions": 36,
+      "requestedQuestions": 32,
       "pools": [
         "eg-1112"
       ]
@@ -369,7 +370,7 @@
     },
     "რუს. გრამ. · 5": {
       "tests": 4,
-      "requestedQuestions": 36,
+      "requestedQuestions": 32,
       "pools": [
         "rg-56"
       ]
@@ -383,7 +384,7 @@
     },
     "რუს. გრამ. · 6": {
       "tests": 4,
-      "requestedQuestions": 36,
+      "requestedQuestions": 32,
       "pools": [
         "rg-56"
       ]
@@ -397,7 +398,7 @@
     },
     "რუს. გრამ. · 7": {
       "tests": 4,
-      "requestedQuestions": 36,
+      "requestedQuestions": 32,
       "pools": [
         "rg-78"
       ]
@@ -411,7 +412,7 @@
     },
     "რუს. გრამ. · 8": {
       "tests": 4,
-      "requestedQuestions": 36,
+      "requestedQuestions": 32,
       "pools": [
         "rg-78"
       ]
@@ -425,7 +426,7 @@
     },
     "რუს. გრამ. · 9": {
       "tests": 4,
-      "requestedQuestions": 36,
+      "requestedQuestions": 32,
       "pools": [
         "rg-910"
       ]
@@ -439,7 +440,7 @@
     },
     "რუს. გრამ. · 10": {
       "tests": 4,
-      "requestedQuestions": 36,
+      "requestedQuestions": 32,
       "pools": [
         "rg-910"
       ]
@@ -453,7 +454,7 @@
     },
     "რუს. გრამ. · 11": {
       "tests": 4,
-      "requestedQuestions": 36,
+      "requestedQuestions": 32,
       "pools": [
         "rg-1112"
       ]
@@ -467,7 +468,7 @@
     },
     "რუს. გრამ. · 12": {
       "tests": 4,
-      "requestedQuestions": 36,
+      "requestedQuestions": 32,
       "pools": [
         "rg-1112"
       ]
@@ -586,56 +587,56 @@
     },
     "ისტორია · 11": {
       "tests": 4,
-      "requestedQuestions": 60,
+      "requestedQuestions": 57,
       "pools": [
         "hist-1112"
       ]
     },
     "ისტორია · 12": {
       "tests": 4,
-      "requestedQuestions": 60,
+      "requestedQuestions": 57,
       "pools": [
         "hist-1112"
       ]
     },
     "გეოგრაფია · 7": {
       "tests": 4,
-      "requestedQuestions": 60,
+      "requestedQuestions": 55,
       "pools": [
         "geog-78"
       ]
     },
     "გეოგრაფია · 8": {
       "tests": 4,
-      "requestedQuestions": 60,
+      "requestedQuestions": 55,
       "pools": [
         "geog-78"
       ]
     },
     "გეოგრაფია · 9": {
       "tests": 4,
-      "requestedQuestions": 60,
+      "requestedQuestions": 53,
       "pools": [
         "geog-910"
       ]
     },
     "გეოგრაფია · 10": {
       "tests": 4,
-      "requestedQuestions": 60,
+      "requestedQuestions": 53,
       "pools": [
         "geog-910"
       ]
     },
     "გეოგრაფია · 11": {
       "tests": 4,
-      "requestedQuestions": 60,
+      "requestedQuestions": 53,
       "pools": [
         "geog-1112"
       ]
     },
     "გეოგრაფია · 12": {
       "tests": 4,
-      "requestedQuestions": 60,
+      "requestedQuestions": 53,
       "pools": [
         "geog-1112"
       ]
@@ -2518,9 +2519,9 @@
   "malformed": [],
   "curriculumAlignment": {
     "frameworkVersion": "ncp-domain-alignment-2026.07",
-    "mappingLevel": "NCP subject-domain and observable outcome candidate",
+    "mappingLevel": "automated National Curriculum subject-domain candidate",
     "statusCounts": {
-      "approved_domain_alignment": 4563,
+      "candidate_domain_alignment": 4563,
       "blocked_unpublished_pool": 1693,
       "approved_explicit_alignment": 32,
       "blocked_curriculum_stage": 316
@@ -2572,11 +2573,12 @@
       "history.sources_interpretation": 5,
       "georgian.visual_comprehension": 8
     },
-    "note": "Domain-level approval is an expert alignment review, not a Ministry endorsement or textbook-edition page certification."
+    "note": "Automatic domain inference is a review candidate only. Only explicit, individually tagged outcomes count as reviewed; neither status is a Ministry endorsement or textbook-edition page certification."
   },
   "readiness": {
     "technicalIntegrity": "pass_with_identity_warnings",
-    "curriculumTraceability": "pass_domain_level",
+    "curriculumTraceability": "candidate_domain_level",
+    "exactGradeTraceability": "incomplete",
     "explicitOutcomeTagCoverage": "incomplete",
     "explanationCoverage": "incomplete",
     "visualCoverage": "started"

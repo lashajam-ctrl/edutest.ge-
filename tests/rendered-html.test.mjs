@@ -149,6 +149,8 @@ test("uses curriculum gating, composite history identities, and adaptive skills"
   assert.match(html, /_contentHistoryId:questionContentFingerprint\(q\)/);
   assert.match(html, /content:media:/);
   assert.match(html, /function isStructurallyValidQuestion/);
+  assert.match(html, /function hasQuestionEncodingCorruption/);
+  assert.match(html, /სასწავლო მიმართულების კანდიდატი/);
   assert.match(html, /curTestQs\.flatMap\(q=>\[q\._historyId\|\|q\.id,q\._contentHistoryId\]/);
   assert.match(html, /skillPerf/);
   assert.match(html, /AI_REMEDIATION_BANK/);
@@ -180,14 +182,24 @@ test("includes accessible visual questions and honest AI feedback labels", async
 });
 
 test("question bank has no malformed records and publishes its audit", async () => {
-  const report = JSON.parse(await readFile(new URL("reports/question-bank-audit.json", root), "utf8"));
+  const [report, quality] = await Promise.all([
+    readFile(new URL("reports/question-bank-audit.json", root), "utf8").then(JSON.parse),
+    readFile(new URL("reports/question-content-quality.json", root), "utf8").then(JSON.parse),
+  ]);
   assert.equal(report.malformed.length, 0);
   assert.ok(report.summary.questions >= 5_000);
   assert.ok(report.summary.visualQuestions >= 16);
   assert.equal(report.summary.questionsMappedToCurriculumDomain, report.summary.questions);
-  assert.ok(report.summary.approvedDomainAlignments >= 4_000);
+  assert.equal(report.summary.approvedDomainAlignments, 32);
+  assert.ok(report.summary.candidateDomainAlignments >= 4_000);
   assert.ok(report.summary.blockedCurriculumStageQuestions > 0);
   assert.ok(report.summary.blockedUnpublishedPoolQuestions > 0);
   await access(new URL("reports/question-curriculum-alignment.json", root));
   assert.equal(report.readiness.technicalIntegrity, "pass_with_identity_warnings");
+  assert.equal(report.readiness.curriculumTraceability, "candidate_domain_level");
+  assert.equal(report.readiness.exactGradeTraceability, "incomplete");
+  assert.equal(quality.summary.encodingCorruptedQuestions, 0);
+  assert.ok(quality.summary.duplicateOptionQuestions > 0);
+  assert.equal(quality.summary.testsWithInsufficientSafeQuestions, 0);
+  assert.equal(quality.summary.testsWithoutExactGradeVerification, 420);
 });

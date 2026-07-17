@@ -76,6 +76,7 @@ const report = {
     questionsWithOutcomeTag: questions.filter(q => q.outcome).length,
     questionsMappedToCurriculumDomain: questions.filter(q => q.alignment?.outcomeId).length,
     approvedDomainAlignments: questions.filter(q => q.alignment?.reviewStatus?.startsWith("approved_")).length,
+    candidateDomainAlignments: questions.filter(q => q.alignment?.reviewStatus === "candidate_domain_alignment").length,
     alignmentsRequiringReview: questions.filter(q => q.alignment?.reviewStatus === "review_required").length,
     blockedCurriculumStageQuestions: questions.filter(q => q.alignment?.reviewStatus === "blocked_curriculum_stage").length,
     blockedUnpublishedPoolQuestions: questions.filter(q => q.alignment?.reviewStatus === "blocked_unpublished_pool").length,
@@ -89,11 +90,11 @@ const report = {
   malformed,
   curriculumAlignment: {
     frameworkVersion: alignmentEngine.version,
-    mappingLevel: "NCP subject-domain and observable outcome candidate",
+    mappingLevel: "automated National Curriculum subject-domain candidate",
     statusCounts: Object.fromEntries(Object.entries(Object.groupBy(questions, q => q.alignment.reviewStatus)).map(([status, rows]) => [status, rows.length])),
     areaCounts: Object.fromEntries(Object.entries(Object.groupBy(questions, q => q.alignment.area)).map(([area, rows]) => [area, rows.length])),
     domainCounts: Object.fromEntries(Object.entries(Object.groupBy(questions, q => `${q.alignment.area}.${q.alignment.domain}`)).map(([domain, rows]) => [domain, rows.length])),
-    note: "Domain-level approval is an expert alignment review, not a Ministry endorsement or textbook-edition page certification.",
+    note: "Automatic domain inference is a review candidate only. Only explicit, individually tagged outcomes count as reviewed; neither status is a Ministry endorsement or textbook-edition page certification.",
   },
   readiness: {
     technicalIntegrity: malformed.length
@@ -101,7 +102,8 @@ const report = {
       : duplicateIds.length
         ? "pass_with_identity_warnings"
         : "pass",
-    curriculumTraceability: questions.every(q => q.alignment?.outcomeId) ? "pass_domain_level" : "incomplete",
+    curriculumTraceability: questions.every(q => q.alignment?.outcomeId) ? "candidate_domain_level" : "incomplete",
+    exactGradeTraceability: questions.every(q => q.alignment?.exactGradeVerified) ? "pass" : "incomplete",
     explicitOutcomeTagCoverage: questions.every(q => q.outcome) ? "pass" : "incomplete",
     explanationCoverage: questions.every(q => q.explain) ? "pass" : "incomplete",
     visualCoverage: questions.some(q => q.media?.src) ? "started" : "missing",
@@ -119,7 +121,7 @@ const alignmentRows = questions.map(q => ({
 fs.writeFileSync(new URL("../reports/question-curriculum-alignment.json", import.meta.url), `${JSON.stringify({
   generatedAt: report.generatedAt,
   frameworkVersion: alignmentEngine.version,
-  disclaimer: "Expert domain alignment; not a Ministry endorsement or a replacement for edition-specific textbook review.",
+  disclaimer: "Automated domain candidates plus explicit tags; not a Ministry endorsement, subject-expert certification, or a replacement for edition-specific textbook review.",
   rows: alignmentRows,
 }, null, 2)}\n`);
 console.log(JSON.stringify(report.summary));
