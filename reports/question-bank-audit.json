@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-14T12:11:10.940Z",
+  "generatedAt": "2026-07-17T12:42:24.751Z",
   "summary": {
     "pools": 313,
     "tests": 420,
@@ -2537,14 +2537,14 @@
       "physics": 726
     },
     "domainCounts": {
-      "georgian.language_system": 127,
+      "georgian.language_system": 129,
       "foreign_language.language_system": 186,
       "math.numbers_operations": 617,
       "math.geometry_space": 91,
       "math.patterns_algebra": 17,
       "math.data_probability": 19,
       "math.measurement": 15,
-      "georgian.reading": 502,
+      "georgian.reading": 500,
       "georgian.literature_culture": 109,
       "foreign_language.reading": 1262,
       "foreign_language.culture": 40,

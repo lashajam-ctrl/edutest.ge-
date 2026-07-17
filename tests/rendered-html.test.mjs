@@ -61,6 +61,15 @@ test("keeps the embedded application full-screen without relying on external CSS
   assert.match(worker, /Cache-Control", "no-store"/);
 });
 
+test("centers the results page and keeps its actions clear on narrow screens", async () => {
+  const html = await readFile(new URL("public/app.html", root), "utf8");
+  assert.match(html, /#p-results\{align-items:center!important;justify-content:flex-start!important/);
+  assert.match(html, /class="results-shell"/);
+  assert.match(html, /#results-btns\{justify-content:center/);
+  assert.match(html, /#p-results\{padding:12px 12px 104px!important\}/);
+  assert.match(html, /#results-btns \.btn\{width:100%;max-width:none/);
+});
+
 test("keeps test access open while payments are disabled and uses server-side admin accounts", async () => {
   const [html, bootstrapRoute, adminUsersRoute, profileRoute] = await Promise.all([
     readFile(new URL("public/app.html", root), "utf8"),
@@ -100,7 +109,11 @@ test("ships the benchmark-informed responsive EduTest design system", async () =
 });
 
 test("uses a cheerful calm backdrop and robust multilingual question speech", async () => {
-  const html = await readFile(new URL("public/app.html", root), "utf8");
+  const [html, ttsRoute, envExample] = await Promise.all([
+    readFile(new URL("public/app.html", root), "utf8"),
+    readFile(new URL("app/api/tts/route.ts", root), "utf8"),
+    readFile(new URL(".env.example", root), "utf8"),
+  ]);
   assert.match(html, /--canvas:#ece7f4/);
   assert.match(html, /rgba\(77,61,171,.23\)/);
   assert.match(html, /background:linear-gradient\(155deg,#1d2745,#121a31\)/);
@@ -110,8 +123,18 @@ test("uses a cheerful calm backdrop and robust multilingual question speech", as
   assert.match(html, /speechSynthesis\.getVoices\(\)/);
   assert.match(html, /window\.toggleQuestionSpeech=function/);
   assert.match(html, /id='q-read-aloud'/);
+  assert.match(html, /id="res-read-aloud"/);
+  assert.match(html, /function detectSpeechCode/);
+  assert.match(html, /function questionSpeechPayload/);
+  assert.match(html, /function effectiveCorrectAnswer/);
+  assert.match(html, /fetch\('\/api\/tts'/);
   assert.match(html, /Manual playback is always available/);
   assert.doesNotMatch(html, /if\(window\.isTTSOn&&isTTSOn\(\)\)/);
+  assert.match(ttsRoute, /ka-GE-EkaNeural/);
+  assert.match(ttsRoute, /getSessionUser/);
+  assert.match(ttsRoute, /MAX_REQUESTS_PER_MINUTE/);
+  assert.match(envExample, /^AZURE_SPEECH_KEY=/m);
+  assert.match(envExample, /^AZURE_SPEECH_REGION=/m);
 });
 
 test("uses curriculum gating, composite history identities, and adaptive skills", async () => {
@@ -121,8 +144,16 @@ test("uses curriculum gating, composite history identities, and adaptive skills"
   assert.match(html, /CURRICULUM_ALIGNMENT\.infer/);
   assert.match(html, /Number\(test\.grade\)<7/);
   assert.match(html, /_historyId:\(q\._sourcePoolKey\|\|poolKey\)\+'\|'\+q\.id/);
+  assert.match(html, /function questionContentFingerprint/);
+  assert.match(html, /function dedupeQuestionCandidates/);
+  assert.match(html, /_contentHistoryId:questionContentFingerprint\(q\)/);
+  assert.match(html, /content:media:/);
+  assert.match(html, /function isStructurallyValidQuestion/);
+  assert.match(html, /curTestQs\.flatMap\(q=>\[q\._historyId\|\|q\.id,q\._contentHistoryId\]/);
   assert.match(html, /skillPerf/);
   assert.match(html, /AI_REMEDIATION_BANK/);
+  assert.doesNotMatch(html, /ჩვენ ___ ვართ ბედნიერი/);
+  assert.doesNotMatch(html, /"ყველაე"/);
 });
 
 test("includes accessible visual questions and honest AI feedback labels", async () => {
