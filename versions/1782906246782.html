@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Edutest Platform",
+  "schemaVersion": 1,
+  "description": "EduTest.ge — სრული ონლაინ სატესტო პლატფორმა ქართული სკოლებისთვის. Landing page, login, student/teacher/admin dashboards, test-taking UI with timer, results, payment modal."
+}
+</script>
+<html lang="ka">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>EduTest.ge</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.development.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.development.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=FiraGO:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'FiraGO','Segoe UI',sans-serif;background:#f0f4f8;color:#1a202c;min-height:100vh}
+  :root{
+    --blue:#2563eb;--blue-dark:#1d4ed8;--blue-light:#dbeafe;
+    --green:#16a34a;--green-light:#dcfce7;
+    --amber:#d97706;--amber-light:#fef3c7;
+    --red:#dc2626;--red-light:#fee2e2;
+    --gray:#6b7280;--gray-light:#f9fafb;--gray-border:#e5e7eb;
+    --white:#ffffff;--shadow:0 1px 3px rgba(0,0,0,.1),0 1px 2px rgba(0,0,0,.06);
+    --shadow-md:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -1px rgba(0,0,0,.06);
+    --shadow-lg:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -2px rgba(0,0,0,.05);
+    --radius:0.5rem;--radius-lg:0.75rem
+  }
+  .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.625rem 1.25rem;border-radius:var(--radius);font-size:.9rem;font-weight:500;cursor:pointer;border:none;transition:all .15s;font-family:inherit}
+  .btn-primary{background:var(--blue);color:#fff}.btn-primary:hover{background:var(--blue-dark)}
+  .btn-outline{background:#fff;color:var(--blue);border:1.5px solid var(--blue)}.btn-outline:hover{background:var(--blue-light)}
+  .btn-ghost{background:transparent;color:var(--gray)}.btn-ghost:hover{background:var(--gray-border)}
+  .btn-danger{background:var(--red);color:#fff}.btn-danger:hover{background:#b91c1c}
+  .btn-green{background:var(--green);color:#fff}.btn-green:hover{background:#15803d}
+  .btn-sm{padding:.4rem .8rem;font-size:.8rem}
+  .card{background:#fff;border-radius:var(--radius-lg);box-shadow:var(--shadow);border:1px solid var(--gray-border)}
+  .badge{display:inline-flex;align-items:center;padding:.2rem .6rem;border-radius:999px;font-size:.75rem;font-weight:600}
+  .badge-blue{background:var(--blue-light);color:var(--blue-dark)}
+  .badge-green{background:var(--green-light);color:var(--green)}
+  .badge-amber{background:var(--amber-light);color:var(--amber)}
+  .badge-red{background:var(--red-light);color:var(--red)}
+  .badge-gray{background:var(--gray-border);color:var(--gray)}
+  input,select,textarea{width:100%;padding:.65rem .9rem;border:1.5px solid var(--gray-border);border-radius:var(--radius);font-size:.9rem;font-family:inherit;outline:none;transition:border-color .15s}
+  input:focus,select:focus,textarea:focus{border-color:var(--blue)}
+  label{display:block;font-size:.85rem;font-weight:500;color:#374151;margin-bottom:.35rem}
+  .form-group{margin-bottom:1rem}
+  .table{width:100%;border-collapse:collapse}
+  .table th{background:#f8fafc;padding:.75rem 1rem;text-align:left;font-size:.8rem;font-weight:600;color:var(--gray);border-bottom:1.5px solid var(--gray-border);text-transform:uppercase;letter-spacing:.04em}
+  .table td{padding:.75rem 1rem;border-bottom:1px solid var(--gray-border);font-size:.875rem}
+  .table tr:last-child td{border-bottom:none}
+  .table tr:hover td{background:#fafbfc}
+  .progress-bar{height:8px;background:var(--gray-border);border-radius:999px;overflow:hidden}
+  .progress-fill{height:100%;border-radius:999px;transition:width .5s ease}
+  .sidebar{width:240px;background:#1e293b;min-height:100vh;flex-shrink:0}
+  .sidebar-logo{padding:1.5rem 1rem;border-bottom:1px solid rgba(255,255,255,.1)}
+  .sidebar-nav{padding:.75rem 0}
+  .nav-item{display:flex;align-items:center;gap:.75rem;padding:.7rem 1.25rem;color:rgba(255,255,255,.7);cursor:pointer;font-size:.9rem;transition:all .15s;border-left:3px solid transparent}
+  .nav-item:hover{background:rgba(255,255,255,.05);color:#fff}
+  .nav-item.active{background:rgba(37,99,235,.2);color:#93c5fd;border-left-color:#3b82f6}
+  .nav-item svg{flex-shrink:0}
+  .topbar{background:#fff;border-bottom:1px solid var(--gray-border);padding:0 1.5rem;height:60px;display:flex;align-items:center;justify-content:space-between}
+  .stat-card{background:#fff;border-radius:var(--radius-lg);padding:1.25rem;border:1px solid var(--gray-border);box-shadow:var(--shadow)}
+  .stat-icon{width:44px;height:44px;border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:.75rem}
+  .timer-circle{display:flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:50%;border:4px solid var(--blue);font-size:1.1rem;font-weight:700;color:var(--blue);flex-shrink:0}
+  .timer-amber{border-color:var(--amber);color:var(--amber)}
+  .timer-red{border-color:var(--red);color:var(--red);animation:pulse 1s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+  .question-opt{display:flex;align-items:center;gap:.75rem;padding:.75rem 1rem;border:1.5px solid var(--gray-border);border-radius:var(--radius);cursor:pointer;transition:all .15s;margin-bottom:.5rem;font-size:.9rem}
+  .question-opt:hover{border-color:var(--blue);background:var(--blue-light)}
+  .question-opt.selected{border-color:var(--blue);background:var(--blue-light);color:var(--blue-dark)}
+  .question-opt.correct{border-color:var(--green);background:var(--green-light)}
+  .question-opt.wrong{border-color:var(--red);background:var(--red-light)}
+  .overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;z-index:100;padding:1rem}
+  .modal{background:#fff;border-radius:var(--radius-lg);padding:2rem;width:100%;max-width:500px;box-shadow:var(--shadow-lg);max-height:90vh;overflow-y:auto}
+  .step-indicator{display:flex;gap:.5rem;align-items:center}
+  .step{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;border:2px solid var(--gray-border);color:var(--gray)}
+  .step.active{background:var(--blue);border-color:var(--blue);color:#fff}
+  .step.done{background:var(--green);border-color:var(--green);color:#fff}
+  .step-line{flex:1;height:2px;background:var(--gray-border)}
+  .step-line.done{background:var(--green)}
+  .grade-tag{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;font-weight:700;font-size:.85rem}
+  ::-webkit-scrollbar{width:6px;height:6px}
+  ::-webkit-scrollbar-track{background:transparent}
+  ::-webkit-scrollbar-thumb{background:var(--gray-border);border-radius:3px}
+  .animate-in{animation:fadeIn .25s ease}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+  .chip{display:inline-flex;align-items:center;gap:.35rem;padding:.25rem .65rem;border-radius:999px;font-size:.75rem;background:var(--gray-border);color:#374151}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const {useState,useEffect,useRef,useCallback}=React;
+
+// ─── Icons (SVG) ────────────────────────────────────────────────────────────
+const Icon=({n,s=18,c})=>{
+  const icons={
+    home:<><rect x="3" y="9" width="18" height="11" rx="1"/><polyline points="3 9 12 2 21 9"/></>,
+    test:<><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="m9 12 2 2 4-4"/></>,
+    chart:<><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></>,
+    users:<><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 1-3 3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></>,
+    school:<><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></>,
+    check:<><polyline points="20 6 9 17 4 12"/></>,
+    x:<><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></>,
+    clock:<><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></>,
+    plus:<><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></>,
+    arrow:<><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></>,
+    logout:<><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></>,
+    star:<><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></>,
+    alert:<><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></>,
+    edit:<><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></>,
+    trash:<><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></>,
+    send:<><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></>,
+    award:<><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></>,
+    eye:<><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></>,
+    grid:<><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></>,
+    settings:<><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></>,
+  };
+  return <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke={c||'currentColor'} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">{icons[n]}</svg>
+};
+
+// ─── Mock Data ───────────────────────────────────────────────────────────────
+const MOCK = {
+  users: {
+    admin: {id:'u0',name:'ადმინ',email:'admin@edutest.ge',role:'admin'},
+    teacher: {id:'u1',name:'ნინო გელაშვილი',email:'nino@edutest.ge',role:'teacher',class:'3A'},
+    teacher2: {id:'u2',name:'გიორგი ბერიძე',email:'giorgi@edutest.ge',role:'teacher',class:'8B'},
+    student: {id:'u3',name:'მარიამ კვირიკაშვილი',email:'mariam@student.ge',role:'student',grade:3,class:'3A'},
+    student2: {id:'u4',name:'ანა ლომიძე',email:'ana@student.ge',role:'student',grade:8,class:'8B'},
+  },
+  tests: [
+    {id:'t1',title:'მათემატიკა — კლ. 3',subject:'მათემატიკა',grade:'3',time:20,attempts:2,questions:3,published:true,isPaid:false,status:'active'},
+    {id:'t2',title:'ქართული ლიტერატურა — კლ. 8',subject:'ქართული',grade:'8',time:30,attempts:1,questions:2,published:true,isPaid:true,status:'active'},
+    {id:'t3',title:'ბუნება — კლ. 3',subject:'ბუნება',grade:'3',time:15,attempts:3,questions:4,published:false,isPaid:false,status:'draft'},
+    {id:'t4',title:'ისტორია — კლ. 5',subject:'ისტორია',grade:'5',time:25,attempts:2,questions:5,published:true,isPaid:true,status:'active'},
+  ],
+  questions: [
+    {id:'q1',text:'რამდენია 12 × 4?',type:'multiple_choice',options:['36','48','52','60'],correct:1,points:2},
+    {id:'q2',text:'დედამიწა მზის გარშემო ბრუნავს.',type:'true_false',options:['სწორია','მცდარია'],correct:0,points:1},
+    {id:'q3',text:'გამოთვალეთ: 5² + 3²',type:'multiple_choice',options:['25','34','64','58'],correct:1,points:3},
+    {id:'q4',text:'დაასახელეთ ორი ქართული მდინარე.',type:'short_answer',correct:null,points:4},
+    {id:'q5',text:'ვინ დაწერა "ვეფხისტყაოსანი"?',type:'multiple_choice',options:['შოთა რუსთაველი','ილია ჭავჭავაძე','ნიკო ფიროსმანი','ვაჟა-ფშაველა'],correct:0,points:2},
+  ],
+  submissions: [
+    {id:'s1',testTitle:'მათემატიკა — კლ. 3',score:5,total:6,pct:83,badge:'good',date:'2026-06-28',status:'graded'},
+    {id:'s2',testTitle:'ქართული ლიტერატურა',score:null,total:6,pct:null,badge:null,date:'2026-06-30',status:'pending_grading'},
+    {id:'s3',testTitle:'ბუნება — კლ. 3',score:8,total:8,pct:100,badge:'excellent',date:'2026-06-25',status:'graded'},
+  ],
+  students: [
+    {id:'u3',name:'მარიამ კვირიკაშვილი',grade:3,tests:3,avg:91,last:'2026-06-30'},
+    {id:'u5',name:'გიორგი ნინიძე',grade:3,tests:2,avg:75,last:'2026-06-28'},
+    {id:'u6',name:'სოფო მამულაძე',grade:3,tests:3,avg:88,last:'2026-06-29'},
+    {id:'u7',name:'ლუკა კახიანი',grade:3,tests:1,avg:60,last:'2026-06-27'},
+  ],
+  pendingTeachers: [
+    {id:'t10',name:'ეკა ჯაფარიძე',email:'eka@school.ge',school:'სკ. #5',date:'2026-06-30'},
+    {id:'t11',name:'ზვიად ბეგიაშვილი',email:'zviad@school.ge',school:'სკ. #12',date:'2026-06-29'},
+  ],
+  schools: [
+    {id:'sc1',name:'თბილისის სკოლა #1',teachers:12,students:340,tests:28},
+    {id:'sc2',name:'თბილისის სკოლა #5',teachers:8,students:210,tests:14},
+    {id:'sc3',name:'ქუთაისის სკოლა #3',teachers:6,students:180,tests:9},
+  ]
+};
+
+// ─── App Root ────────────────────────────────────────────────────────────────
+export default function App() {
+  const [screen, setScreen] = useState('landing');
+  const [user, setUser] = useState(null);
+  const [testSession, setTestSession] = useState(null);
+
+  const login = (role) => {
+    const u = MOCK.users[role];
+    setUser(u);
+    setScreen(role === 'admin' ? 'admin' : role === 'teacher' || role === 'teacher2' ? 'teacher' : 'student');
+  };
+  const logout = () => { setUser(null); setScreen('landing'); setTestSession(null); };
+  const startTest = (test) => { setTestSession(test); setScreen('take-test'); };
+  const finishTest = () => { setTestSession(null); setScreen('results'); };
+
+  return (
+    <div className="animate-in">
+      {screen === 'landing' && <LandingPage onLogin={() => setScreen('login')} />}
+      {screen === 'login' && <LoginPage onLogin={login} onBack={() => setScreen('landing')} />}
+      {screen === 'student' && <StudentDashboard user={user} onLogout={logout} onStartTest={startTest} />}
+      {screen === 'teacher' && <TeacherDashboard user={user} onLogout={logout} />}
+      {screen === 'admin' && <AdminDashboard user={user} onLogout={logout} />}
+      {screen === 'take-test' && <TestTaking test={testSession} onFinish={finishTest} />}
+      {screen === 'results' && <ResultsPage user={user} onBack={() => setScreen('student')} />}
+    </div>
+  );
+}
+
+// ─── Landing Page ────────────────────────────────────────────────────────────
+function LandingPage({onLogin}) {
+  const features = [
+    {icon:'test',title:'ონლაინ ტესტები',desc:'მასწავლებლები ქმნიან ტესტებს, მოსწავლეები ასრულებენ ბრაუზერში'},
+    {icon:'check',title:'ავტო-შეფასება',desc:'MCQ და true/false ავტომატურად ფასდება, შედეგი — დაუყოვნებლივ'},
+    {icon:'chart',title:'ანალიტიკა',desc:'კლასის, მოსწავლის და საგნის მიხედვით დეტალური სტატისტიკა'},
+    {icon:'award',title:'ბეიჯები',desc:'Excellent, Good, Pass — მოტივაციისთვის'},
+  ];
+  return (
+    <div style={{minHeight:'100vh',background:'linear-gradient(135deg,#1e3a8a 0%,#1d4ed8 50%,#2563eb 100%)'}}>
+      {/* Nav */}
+      <nav style={{padding:'1rem 2rem',display:'flex',alignItems:'center',justifyContent:'space-between'}}>
+        <div style={{display:'flex',alignItems:'center',gap:'.75rem'}}>
+          <div style={{width:36,height:36,background:'#fff',borderRadius:8,display:'flex',alignItems:'center',justifyContent:'center',fontWeight:700,color:'#1d4ed8',fontSize:'1rem'}}>E</div>
+          <span style={{color:'#fff',fontWeight:700,fontSize:'1.1rem'}}>EduTest.ge</span>
+        </div>
+        <div style={{display:'flex',gap:'1rem'}}>
+          <button className="btn btn-ghost" style={{color:'rgba(255,255,255,.8)'}} onClick={onLogin}>შესვლა</button>
+          <button className="btn btn-primary" style={{background:'#fff',color:'#1d4ed8'}} onClick={onLogin}>დარეგისტრირება</button>
+        </div>
+      </nav>
+      {/* Hero */}
+      <div style={{textAlign:'center',padding:'5rem 2rem 3rem',color:'#fff'}}>
+        <div className="badge badge-blue" style={{marginBottom:'1.5rem',background:'rgba(255,255,255,.15)',color:'#fff',border:'1px solid rgba(255,255,255,.3)'}}>
+          🇬🇪 ქართული სკოლებისთვის
+        </div>
+        <h1 style={{fontSize:'clamp(2rem,5vw,3.5rem)',fontWeight:700,lineHeight:1.1,marginBottom:'1.25rem'}}>
+          სატესტო პლატფორმა<br/>
+          <span style={{color:'#93c5fd'}}>ახალი თაობისთვის</span>
+        </h1>
+        <p style={{fontSize:'1.15rem',opacity:.85,maxWidth:520,margin:'0 auto 2.5rem'}}>
+          მასწავლებლები ქმნიან ტესტებს, მოსწავლეები ასრულებენ — შედეგი დაუყოვნებლივ. ორენოვანი, ასაკ-ადაპტირებული.
+        </p>
+        <div style={{display:'flex',gap:'1rem',justifyContent:'center',flexWrap:'wrap'}}>
+          <button className="btn" style={{background:'#fff',color:'#1d4ed8',fontWeight:600,fontSize:'1rem',padding:'.8rem 2rem'}} onClick={onLogin}>
+            <Icon n="arrow"/> დაწყება — უფასოდ
+          </button>
+          <button className="btn btn-ghost" style={{color:'rgba(255,255,255,.85)',border:'1.5px solid rgba(255,255,255,.3)',fontSize:'1rem',padding:'.8rem 2rem'}} onClick={onLogin}>
+            <Icon n="eye"/> Demo ნახვა
+          </button>
+        </div>
+      </div>
+      {/* Stats */}
+      <div style={{display:'flex',justifyContent:'center',gap:'3rem',padding:'1.5rem 2rem 3rem',flexWrap:'wrap'}}>
+        {[['3+','სკოლა'],['500+','მოსწავლე'],['50+','ტესტი'],['95%','კმაყოფილება']].map(([n,l])=>(
+          <div key={l} style={{textAlign:'center',color:'#fff'}}>
+            <div style={{fontSize:'2rem',fontWeight:700}}>{n}</div>
+            <div style={{opacity:.7,fontSize:'.9rem'}}>{l}</div>
+          </div>
+        ))}
+      </div>
+      {/* Features */}
+      <div style={{background:'rgba(255,255,255,.05)',padding:'3rem 2rem'}}>
+        <h2 style={{textAlign:'center',color:'#fff',marginBottom:'2rem',fontSize:'1.5rem',fontWeight:600}}>რატომ EduTest.ge?</h2>
+        <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(220px,1fr))',gap:'1.25rem',maxWidth:900,margin:'0 auto'}}>
+          {features.map(f=>(
+            <div key={f.title} style={{background:'rgba(255,255,255,.1)',border:'1px solid rgba(255,255,255,.15)',borderRadius:12,padding:'1.5rem',backdropFilter:'blur(10px)'}}>
+              <div style={{background:'rgba(255,255,255,.15)',width:44,height:44,borderRadius:10,display:'flex',alignItems:'center',justifyContent:'center',marginBottom:'.75rem',color:'#93c5fd'}}>
+                <Icon n={f.icon} s={22}/>
+              </div>
+              <h3 style={{color:'#fff',fontWeight:600,marginBottom:'.4rem'}}>{f.title}</h3>
+              <p style={{color:'rgba(255,255,255,.7)',fontSize:'.85rem',lineHeight:1.5}}>{f.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+      {/* Pricing */}
+      <div style={{padding:'3rem 2rem',maxWidth:800,margin:'0 auto',textAlign:'center'}}>
+        <h2 style={{color:'#fff',marginBottom:'.5rem',fontSize:'1.4rem',fontWeight:600}}>გეგმები</h2>
+        <p style={{color:'rgba(255,255,255,.6)',marginBottom:'2rem',fontSize:'.9rem'}}>BOG Pay / TBC Pay-ით — ლარით</p>
+        <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(200px,1fr))',gap:'1rem'}}>
+          {[
+            {name:'Basic',price:'უფასო',features:['5 ტესტი/თვე','30 მოსწავლე','MCQ & True/False'],color:'rgba(255,255,255,.1)'},
+            {name:'Premium',price:'29₾/თვე',features:['შეუზღუდავი ტესტი','200 მოსწავლე','ყველა ტიპი + ანალიტიკა'],color:'rgba(255,255,255,.2)',popular:true},
+            {name:'School',price:'99₾/თვე',features:['მთელი სკოლა','შეუზღუდავი ყველაფერი','API + ინტეგრაცია'],color:'rgba(255,255,255,.1)'},
+          ].map(p=>(
+            <div key={p.name} style={{background:p.color,border:p.popular?'2px solid #93c5fd':'1px solid rgba(255,255,255,.15)',borderRadius:12,padding:'1.5rem',position:'relative'}}>
+              {p.popular && <div style={{position:'absolute',top:-12,left:'50%',transform:'translateX(-50%)',background:'#93c5fd',color:'#1e3a8a',padding:'.2rem .8rem',borderRadius:999,fontSize:'.7rem',fontWeight:700}}>პოპულარული</div>}
+              <div style={{color:'#fff',fontWeight:700,fontSize:'1.1rem',marginBottom:'.25rem'}}>{p.name}</div>
+              <div style={{color:'#93c5fd',fontWeight:700,fontSize:'1.5rem',marginBottom:'1rem'}}>{p.price}</div>
+              {p.features.map(f=><div key={f} style={{color:'rgba(255,255,255,.75)',fontSize:'.82rem',marginBottom:'.3rem',textAlign:'left'}}>✓ {f}</div>)}
+              <button className="btn" style={{marginTop:'1rem',width:'100%',background:p.popular?'#93c5fd':'rgba(255,255,255,.15)',color:p.popular?'#1e3a8a':'#fff',justifyContent:'center'}} onClick={onLogin}>
+                {p.price==='უფასო'?'დაწყება':'გამოწერა'}
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+      <footer style={{textAlign:'center',color:'rgba(255,255,255,.4)',padding:'1.5rem',fontSize:'.8rem'}}>
+        © 2026 EduTest.ge · ყველა უფლება დაცულია
+      </footer>
+    </div>
+  );
+}
+
+// ─── Login Page ──────────────────────────────────────────────────────────────
+function LoginPage({onLogin,onBack}) {
+  const [tab,setTab]=useState('login');
+  const [role,setRole]=useState('student');
+  const roles=[{k:'student',l:'მოსწავლე',c:'#2563eb'},{k:'teacher',l:'მასწავლებელი',c:'#16a34a'},{k:'admin',l:'ადმინ',c:'#7c3aed'}];
+  return (
+    <div style={{minHeight:'100vh',background:'linear-gradient(135deg,#f0f4ff,#e0e7ff)',display:'flex',alignItems:'center',justifyContent:'center',padding:'2rem'}}>
+      <div className="card" style={{width:'100%',maxWidth:440,padding:'2.5rem'}}>
+        <div style={{textAlign:'center',marginBottom:'2rem'}}>
+          <div style={{width:52,height:52,background:'#1d4ed8',borderRadius:12,display:'flex',alignItems:'center',justifyContent:'center',fontWeight:700,color:'#fff',fontSize:'1.3rem',margin:'0 auto .75rem'}}>E</div>
+          <h2 style={{fontWeight:700,fontSize:'1.4rem'}}>EduTest.ge</h2>
+          <p style={{color:'var(--gray)',fontSize:'.875rem'}}>სკოლის სატესტო პლატფორმა</p>
+        </div>
+        <div style={{display:'flex',marginBottom:'1.5rem',background:'var(--gray-light)',borderRadius:'var(--radius)',padding:'.2rem'}}>
+          {['login','register'].map(t=>(
+            <button key={t} onClick={()=>setTab(t)} style={{flex:1,padding:'.5rem',border:'none',borderRadius:6,cursor:'pointer',fontFamily:'inherit',fontSize:'.85rem',fontWeight:500,background:tab===t?'#fff':'transparent',color:tab===t?'#111':'var(--gray)',boxShadow:tab===t?'var(--shadow)':'none',transition:'all .15s'}}>
+              {t==='login'?'შესვლა':'რეგისტრაცია'}
+            </button>
+          ))}
+        </div>
+        <div className="form-group">
+          <label>როლი</label>
+          <div style={{display:'flex',gap:'.5rem'}}>
+            {roles.map(r=>(
+              <button key={r.k} onClick={()=>setRole(r.k)} style={{flex:1,padding:'.5rem',border:`2px solid ${role===r.k?r.c:'var(--gray-border)'}`,borderRadius:8,cursor:'pointer',fontFamily:'inherit',fontSize:'.78rem',fontWeight:500,background:role===r.k?r.c+'15':'#fff',color:role===r.k?r.c:'var(--gray)',transition:'all .15s'}}>
+                {r.l}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="form-group"><label>ელ-ფოსტა</label>
+          <input type="email" defaultValue={role==='admin'?'admin@edutest.ge':role==='teacher'?'nino@edutest.ge':'mariam@student.ge'} readOnly style={{background:'var(--gray-light)'}}/>
+        </div>
+        <div className="form-group"><label>პაროლი</label>
+          <input type="password" defaultValue={role==='admin'?'admin123':role==='teacher'?'teacher123':'student123'} readOnly style={{background:'var(--gray-light)'}}/>
+        </div>
+        {tab==='register' && role==='student' && <>
+          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'.75rem'}}>
+            <div className="form-group"><label>სახელი</label><input placeholder="სახელი"/></div>
+            <div className="form-group"><label>გვარი</label><input placeholder="გვარი"/></div>
+          </div>
+          <div className="form-group"><label>კლასი</label>
+            <select><option>3A</option><option>3B</option><option>8A</option><option>8B</option></select>
+          </div>
+        </>}
+        {tab==='register' && role==='teacher' && <>
+          <div className="form-group"><label>სახელი გვარი</label><input placeholder="მაგ. ნინო გელაშვილი"/></div>
+          <div className="form-group"><label>სკოლა</label>
+            <select><option>თბილისის სკოლა #1</option><option>თბილისის სკოლა #5</option></select>
+          </div>
+          <div style={{padding:'.75rem',background:'var(--amber-light)',borderRadius:8,fontSize:'.82rem',color:'#92400e',marginBottom:'1rem'}}>
+            <Icon n="alert" s={14}/> მასწავლებლის ანგარიში ადმინის დამტკიცებას საჭიროებს.
+          </div>
+        </>}
+        <button className="btn btn-primary" style={{width:'100%',justifyContent:'center',padding:'.75rem'}} onClick={()=>onLogin(role)}>
+          {tab==='login'?'შესვლა':'რეგისტრაცია'}
+        </button>
+        <button className="btn btn-ghost" style={{width:'100%',justifyContent:'center',marginTop:'.5rem'}} onClick={onBack}>
+          ← მთავარ გვერდზე დაბრუნება
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// ─── Layout ──────────────────────────────────────────────────────────────────
+function Layout({user,onLogout,navItems,activeNav,setNav,children}) {
+  const roleColors={admin:'#7c3aed',teacher:'#16a34a',student:'#2563eb'};
+  const color=roleColors[user?.role]||'#2563eb';
+  return (
+    <div style={{display:'flex',minHeight:'100vh'}}>
+      <div className="sidebar">
+        <div className="sidebar-logo">
+          <div style={{display:'flex',alignItems:'center',gap:'.6rem'}}>
+            <div style={{width:32,height:32,background:color,borderRadius:7,display:'flex',alignItems:'center',justifyContent:'center',color:'#fff',fontWeight:700,fontSize:'.9rem'}}>E</div>
+            <div><div style={{color:'#fff',fontWeight:700,fontSize:'.95rem'}}>EduTest.ge</div>
+              <div style={{fontSize:'.7rem',color:'rgba(255,255,255,.4)',textTransform:'uppercase',letterSpacing:'.05em'}}>{user?.role}</div>
+            </div>
+          </div>
+        </div>
+        <div className="sidebar-nav">
+          {navItems.map(item=>(
+            <div key={item.id} className={`nav-item${activeNav===item.id?' active':''}`} onClick={()=>setNav(item.id)}>
+              <Icon n={item.icon} s={17}/> {item.label}
+            </div>
+          ))}
+        </div>
+        <div style={{position:'absolute',bottom:0,padding:'1rem',width:240}}>
+          <div style={{display:'flex',alignItems:'center',gap:'.6rem',padding:'.75rem',background:'rgba(255,255,255,.05)',borderRadius:8,marginBottom:'.5rem'}}>
+            <div style={{width:32,height:32,background:color,borderRadius:50,display:'flex',alignItems:'center',justifyContent:'center',color:'#fff',fontWeight:700,fontSize:'.8rem',flexShrink:0}}>{user?.name?.[0]}</div>
+            <div style={{overflow:'hidden'}}>
+              <div style={{color:'#fff',fontSize:'.8rem',fontWeight:500,whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{user?.name}</div>
+              <div style={{color:'rgba(255,255,255,.4)',fontSize:'.7rem',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{user?.email}</div>
+            </div>
+          </div>
+          <button className="nav-item" style={{width:'100%'}} onClick={onLogout}><Icon n="logout" s={16}/>გასვლა</button>
+        </div>
+      </div>
+      <div style={{flex:1,display:'flex',flexDirection:'column',overflow:'auto'}}>
+        {children}
+      </div>
+    </div>
+  );
+}
+
+// ─── Student Dashboard ───────────────────────────────────────────────────────
+function StudentDashboard({user,onLogout,onStartTest}) {
+  const [nav,setNav]=useState('home');
+  const navItems=[
+    {id:'home',icon:'home',label:'Dashboard'},
+    {id:'tests',icon:'test',label:'ჩემი ტესტები'},
+    {id:'results',icon:'chart',label:'შედეგები'},
+    {id:'profile',icon:'settings',label:'პროფილი'},
+  ];
+  const isYoung=user?.grade<=4;
+
+  return (
+    <Layout user={user} onLogout={onLogout} navItems={navItems} activeNav={nav} setNav={setNav}>
+      <div className="topbar">
+        <div>
+          <h1 style={{fontSize:'1rem',fontWeight:600}}>{
+            nav==='home'?'Dashboard':nav==='tests'?'ჩემი ტესტები':nav==='results'?'შედეგები':'პროფილი'
+          }</h1>
+          <p style={{fontSize:'.78rem',color:'var(--gray)'}}>{user?.name} · კლასი {user?.class}</p>
+        </div>
+        <div style={{display:'flex',alignItems:'center',gap:'.75rem'}}>
+          {isYoung && <span className="badge badge-blue">🎨 Junior UI</span>}
+          <span className="badge badge-green">✓ Online</span>
+        </div>
+      </div>
+      <div style={{padding:'1.5rem',flex:1}} className="animate-in">
+        {nav==='home' && <StudentHome user={user} isYoung={isYoung} setNav={setNav}/>}
+        {nav==='tests' && <StudentTests user={user} isYoung={isYoung} onStart={onStartTest}/>}
+        {nav==='results' && <StudentResults/>}
+        {nav==='profile' && <StudentProfile user={user}/>}
+      </div>
+    </Layout>
+  );
+}
+
+function StudentHome({user,isYoung,setNav}) {
+  const stats=[
+    {label:'დასრულებული ტესტი',value:3,icon:'test',color:'#2563eb',bg:'#dbeafe'},
+    {label:'საშუალო ქულა',value:'84%',icon:'chart',color:'#16a34a',bg:'#dcfce7'},
+    {label:'სულ ქულა',value:21,icon:'star',color:'#d97706',bg:'#fef3c7'},
+    {label:'Excellent ბეიჯი',value:1,icon:'award',color:'#7c3aed',bg:'#ede9fe'},
+  ];
+  return (
+    <div>
+      {isYoung && (
+        <div style={{background:'linear-gradient(135deg,#6366f1,#8b5cf6)',borderRadius:16,padding:'1.5rem',marginBottom:'1.5rem',color:'#fff'}}>
+          <div style={{fontSize:'1.5rem',marginBottom:'.25rem'}}>👋 გამარჯობა, {user.name.split(' ')[0]}!</div>
+          <p style={{opacity:.85,fontSize:'.9rem'}}>დღეს 1 ტესტი გელოდება. წარმატებები! 🌟</p>
+          <button className="btn" style={{marginTop:'.75rem',background:'rgba(255,255,255,.2)',color:'#fff',border:'1px solid rgba(255,255,255,.3)'}} onClick={()=>setNav('tests')}>
+            ტესტების ნახვა →
+          </button>
+        </div>
+      )}
+      <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(160px,1fr))',gap:'1rem',marginBottom:'1.5rem'}}>
+        {stats.map(s=>(
+          <div key={s.label} className="stat-card">
+            <div className="stat-icon" style={{background:s.bg}}><Icon n={s.icon} s={20} c={s.color}/></div>
+            <div style={{fontSize:'1.6rem',fontWeight:700,color:s.color}}>{s.value}</div>
+            <div style={{fontSize:'.78rem',color:'var(--gray)',marginTop:'.15rem'}}>{s.label}</div>
+          </div>
+        ))}
+      </div>
+      <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'1rem'}}>
+        <div className="card" style={{padding:'1.25rem'}}>
+          <h3 style={{fontWeight:600,marginBottom:'1rem',fontSize:'.95rem'}}>📊 საგნების პროგრესი</h3>
+          {[['მათემატიკა',83,'#2563eb'],['ქართული',60,'#16a34a'],['ბუნება',100,'#7c3aed']].map(([s,v,c])=>(
+            <div key={s} style={{marginBottom:'.75rem'}}>
+              <div style={{display:'flex',justifyContent:'space-between',fontSize:'.82rem',marginBottom:'.3rem'}}>
+                <span>{s}</span><span style={{fontWeight:600,color:c}}>{v}%</span>
+              </div>
+              <div className="progress-bar"><div className="progress-fill" style={{width:v+'%',background:c}}/></div>
+            </div>
+          ))}
+        </div>
+        <div className="card" style={{padding:'1.25rem'}}>
+          <h3 style={{fontWeight:600,marginBottom:'1rem',fontSize:'.95rem'}}>🏆 ბოლო შედეგები</h3>
+          {MOCK.submissions.map(s=>(
+            <div key={s.id} style={{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'.5rem 0',borderBottom:'1px solid var(--gray-border)'}}>
+              <div>
+                <div style={{fontSize:'.82rem',fontWeight:500}}>{s.testTitle}</div>
+                <div style={{fontSize:'.72rem',color:'var(--gray)'}}>{s.date}</div>
+              </div>
+              {s.badge ? <span className={`badge badge-${s.badge==='excellent'?'blue':s.badge==='good'?'green':'amber'}`}>{s.badge}</span>
+                : <span className="badge badge-amber">pending</span>}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function StudentTests({user,isYoung,onStart}) {
+  const [payModal,setPayModal]=useState(null);
+  const assignments=[
+    {id:'a1',test:MOCK.tests[0],due:'2026-07-05',status:'not_started'},
+    {id:'a2',test:MOCK.tests[1],due:'2026-07-03',status:'not_started'},
+    {id:'a3',test:MOCK.tests[2],due:null,status:'completed',score:8,total:8},
+  ];
+  return (
+    <div>
+      <h2 style={{fontWeight:600,marginBottom:'1rem',fontSize:'1rem'}}>გავრცელებული ტესტები</h2>
+      <div style={{display:'grid',gap:'1rem'}}>
+        {assignments.map(a=>(
+          <div key={a.id} className="card" style={{padding:'1.25rem',display:'flex',alignItems:'center',gap:'1rem',flexWrap:'wrap'}}>
+            <div style={{width:48,height:48,borderRadius:10,background:isYoung?'linear-gradient(135deg,#6366f1,#8b5cf6)':'var(--blue-light)',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0}}>
+              <Icon n="test" s={22} c={isYoung?'#fff':'#2563eb'}/>
+            </div>
+            <div style={{flex:1}}>
+              <div style={{fontWeight:600,marginBottom:'.25rem'}}>{a.test.title}</div>
+              <div style={{display:'flex',gap:'.5rem',flexWrap:'wrap'}}>
+                <span className="chip"><Icon n="clock" s={12}/>{a.test.time} წთ</span>
+                <span className="chip">🔁 {a.test.attempts} მცდელობა</span>
+                <span className="chip">❓ {a.test.questions} კითხვა</span>
+                {a.due && <span className="chip">📅 {a.due}</span>}
+                {a.test.isPaid && <span className="chip" style={{background:'#fef3c7',color:'#92400e'}}>💳 ფასიანი</span>}
+              </div>
+            </div>
+            <div style={{display:'flex',alignItems:'center',gap:'.75rem'}}>
+              {a.status==='completed' ? (
+                <span className="badge badge-green">✓ {a.score}/{a.total}</span>
+              ) : a.test.isPaid ? (
+                <button className="btn btn-primary btn-sm" onClick={()=>setPayModal(a.test)}>💳 გადახდა</button>
+              ) : (
+                <button className="btn btn-primary btn-sm" onClick={()=>onStart(a.test)}>
+                  {isYoung?'🚀 დაწყება':'დაწყება'} <Icon n="arrow" s={14}/>
+                </button>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+      {payModal && <PaymentModal test={payModal} onClose={()=>setPayModal(null)} onPay={()=>{setPayModal(null);onStart(payModal);}}/>}
+    </div>
+  );
+}
+
+function PaymentModal({test,onClose,onPay}) {
+  const [step,setStep]=useState(1);
+  return (
+    <div className="overlay" onClick={onClose}>
+      <div className="modal" onClick={e=>e.stopPropagation()}>
+        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'1.5rem'}}>
+          <h3 style={{fontWeight:700}}>💳 ტესტის შეძენა</h3>
+          <button className="btn btn-ghost btn-sm" onClick={onClose}><Icon n="x" s={16}/></button>
+        </div>
+        {step===1 && <>
+          <div style={{background:'var(--blue-light)',borderRadius:10,padding:'1rem',marginBottom:'1.5rem'}}>
+            <div style={{fontWeight:600}}>{test.title}</div>
+            <div style={{fontSize:'.82rem',color:'var(--gray)',marginTop:'.25rem'}}>{test.questions} კითხვა · {test.time} წუთი</div>
+          </div>
+          <div style={{fontWeight:600,marginBottom:'1rem'}}>გადახდის მეთოდი</div>
+          <div style={{display:'grid',gap:'.75rem',marginBottom:'1.5rem'}}>
+            {[['🏦 BOG Pay','Bank of Georgia-ს გადახდა'],['💳 TBC Pay','TBC Bank-ის გადახდა']].map(([n,d])=>(
+              <button key={n} onClick={()=>setStep(2)} style={{padding:'1rem',border:'2px solid var(--gray-border)',borderRadius:10,cursor:'pointer',background:'#fff',fontFamily:'inherit',textAlign:'left',display:'flex',alignItems:'center',gap:'.75rem',transition:'border-color .15s'}}
+                onMouseEnter={e=>e.target.style.borderColor='#2563eb'} onMouseLeave={e=>e.target.style.borderColor='var(--gray-border)'}>
+                <span style={{fontSize:'1.3rem'}}>{n.split(' ')[0]}</span>
+                <div><div style={{fontWeight:600,fontSize:'.9rem'}}>{n.substring(2)}</div>
+                  <div style={{fontSize:'.78rem',color:'var(--gray)'}}>{d}</div></div>
+              </button>
+            ))}
+          </div>
+          <div style={{fontSize:'.8rem',color:'var(--gray)'}}>ფასი: <strong>9.99₾</strong></div>
+        </>}
+        {step===2 && <>
+          <div style={{textAlign:'center',padding:'2rem 0'}}>
+            <div style={{fontSize:'3rem',marginBottom:'1rem'}}>🏦</div>
+            <div style={{fontWeight:600,marginBottom:'.5rem'}}>BOG Pay</div>
+            <p style={{color:'var(--gray)',fontSize:'.85rem',marginBottom:'1.5rem'}}>Demo: გადახდა წარმატებით დასრულდა</p>
+            <button className="btn btn-green" style={{justifyContent:'center'}} onClick={onPay}>
+              <Icon n="check"/> ტესტის დაწყება
+            </button>
+          </div>
+        </>}
+      </div>
+    </div>
+  );
+}
+
+function StudentResults() {
+  return (
+    <div>
+      <h2 style={{fontWeight:600,marginBottom:'1rem',fontSize:'1rem'}}>ჩემი შედეგები</h2>
+      <div style={{display:'grid',gap:'1rem'}}>
+        {MOCK.submissions.map(s=>(
+          <div key={s.id} className="card" style={{padding:'1.25rem'}}>
+            <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:'1rem'}}>
+              <div>
+                <div style={{fontWeight:600}}>{s.testTitle}</div>
+                <div style={{fontSize:'.78rem',color:'var(--gray)'}}>{s.date}</div>
+              </div>
+              <span className={`badge badge-${s.status==='graded'?(s.pct>=90?'blue':s.pct>=70?'green':'amber'):'gray'}`}>
+                {s.status==='graded'?(s.pct>=90?'🏆 Excellent':s.pct>=70?'✅ Good':'📘 Pass'):'⏳ Pending'}
+              </span>
+            </div>
+            {s.status==='graded' && <>
+              <div style={{display:'flex',justifyContent:'space-between',fontSize:'.82rem',marginBottom:'.4rem'}}>
+                <span>ქულა: {s.score}/{s.total}</span><span style={{fontWeight:600,color:s.pct>=90?'#1d4ed8':s.pct>=70?'#16a34a':'#d97706'}}>{s.pct}%</span>
+              </div>
+              <div className="progress-bar"><div className="progress-fill" style={{width:s.pct+'%',background:s.pct>=90?'#2563eb':s.pct>=70?'#16a34a':'#d97706'}}/></div>
+            </>}
+            {s.status==='pending_grading' && <div style={{fontSize:'.82rem',color:'var(--amber)',fontStyle:'italic'}}>⏳ მასწავლებელი ამოწმებს მოკლე პასუხებს...</div>}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function StudentProfile({user}) {
+  return (
+    <div style={{maxWidth:500}}>
+      <div className="card" style={{padding:'2rem',textAlign:'center',marginBottom:'1rem'}}>
+        <div style={{width:72,height:72,background:'var(--blue)',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',color:'#fff',fontWeight:700,fontSize:'1.5rem',margin:'0 auto 1rem'}}>{user?.name?.[0]}</div>
+        <h2 style={{fontWeight:700,fontSize:'1.2rem'}}>{user?.name}</h2>
+        <p style={{color:'var(--gray)',fontSize:'.85rem'}}>{user?.email}</p>
+        <div style={{display:'flex',justifyContent:'center',gap:'.5rem',marginTop:'.75rem'}}>
+          <span className="badge badge-blue">კლასი {user?.class}</span>
+          <span className="badge badge-green">{user?.grade} კლასი</span>
+        </div>
+      </div>
+      <div className="card" style={{padding:'1.25rem'}}>
+        <h3 style={{fontWeight:600,marginBottom:'1rem'}}>პარამეტრები</h3>
+        <div className="form-group"><label>სახელი</label><input defaultValue={user?.name}/></div>
+        <div className="form-group"><label>ელ-ფოსტა</label><input defaultValue={user?.email}/></div>
+        <div className="form-group"><label>ახალი პაროლი</label><input type="password" placeholder="შეცვალეთ პაროლი"/></div>
+        <button className="btn btn-primary btn-sm">შენახვა</button>
+      </div>
+    </div>
+  );
+}
+
+// ─── Test Taking ─────────────────────────────────────────────────────────────
+function TestTaking({test,onFinish}) {
+  const [qIdx,setQIdx]=useState(0);
+  const [answers,setAnswers]=useState({});
+  const [seconds,setSeconds]=useState((test?.time||20)*60);
+  const [showSubmit,setShowSubmit]=useState(false);
+  const isYoung=true;
+
+  useEffect(()=>{
+    const t=setInterval(()=>setSeconds(s=>{if(s<=1){clearInterval(t);onFinish();return 0;}return s-1;}),1000);
+    return ()=>clearInterval(t);
+  },[]);
+
+  const mm=Math.floor(seconds/60),ss=seconds%60;
+  const timerClass=seconds<30?'timer-red':seconds<60?'timer-amber':'';
+  const q=MOCK.questions[qIdx];
+  const progress=((qIdx+1)/MOCK.questions.length)*100;
+
+  return (
+    <div style={{minHeight:'100vh',background:isYoung?'linear-gradient(135deg,#f0f4ff,#faf5ff)':'var(--gray-light)',padding:'1.5rem',display:'flex',flexDirection:'column',alignItems:'center'}}>
+      {/* Header */}
+      <div style={{width:'100%',maxWidth:720,marginBottom:'1.5rem'}}>
+        <div className="card" style={{padding:'1rem 1.5rem',display:'flex',alignItems:'center',justifyContent:'space-between',flexWrap:'wrap',gap:'1rem'}}>
+          <div>
+            <div style={{fontWeight:700,fontSize:'1rem'}}>{test?.title}</div>
+            <div style={{fontSize:'.78rem',color:'var(--gray)'}}>კითხვა {qIdx+1}/{MOCK.questions.length}</div>
+          </div>
+          <div style={{display:'flex',alignItems:'center',gap:'1rem'}}>
+            <div style={{fontSize:'.82rem',color:'var(--gray)'}}>პროგრესი:</div>
+            <div style={{width:120}}>
+              <div className="progress-bar"><div className="progress-fill" style={{width:progress+'%',background:'#2563eb'}}/></div>
+            </div>
+            <div className={`timer-circle ${timerClass}`}>
+              {mm}:{ss.toString().padStart(2,'0')}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Question */}
+      <div className="card" style={{width:'100%',maxWidth:720,padding:'2rem',flex:1}} key={qIdx}>
+        <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:'1.5rem'}}>
+          <div style={{display:'flex',alignItems:'center',gap:'.75rem'}}>
+            <div style={{width:36,height:36,background:'#1d4ed8',borderRadius:8,display:'flex',alignItems:'center',justifyContent:'center',color:'#fff',fontWeight:700,fontSize:'.9rem'}}>{qIdx+1}</div>
+            <div>
+              <span className="badge badge-blue" style={{marginRight:'.5rem'}}>{q.type==='multiple_choice'?'MCQ':q.type==='true_false'?'True/False':'მოკლე პასუხი'}</span>
+              <span className="badge badge-amber">{q.points} ქ.</span>
+            </div>
+          </div>
+        </div>
+        <h3 style={{fontSize:'1.05rem',fontWeight:600,marginBottom:'1.5rem',lineHeight:1.5,color:'#1a202c'}}>{q.text}</h3>
+        {q.type==='multiple_choice' && q.options.map((opt,i)=>(
+          <div key={i} className={`question-opt${answers[q.id]===i?' selected':''}`} onClick={()=>setAnswers({...answers,[q.id]:i})}>
+            <div style={{width:24,height:24,borderRadius:'50%',border:`2px solid ${answers[q.id]===i?'#2563eb':'#d1d5db'}`,display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0,background:answers[q.id]===i?'#2563eb':'#fff'}}>
+              {answers[q.id]===i && <Icon n="check" s={12} c="#fff"/>}
+            </div>
+            <span>{opt}</span>
+          </div>
+        ))}
+        {q.type==='true_false' && q.options.map((opt,i)=>(
+          <div key={i} className={`question-opt${answers[q.id]===i?' selected':''}`} onClick={()=>setAnswers({...answers,[q.id]:i})}>
+            <div style={{width:24,height:24,borderRadius:'50%',border:`2px solid ${answers[q.id]===i?'#2563eb':'#d1d5db'}`,display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0,background:answers[q.id]===i?'#2563eb':'#fff'}}>
+              {answers[q.id]===i && <Icon n="check" s={12} c="#fff"/>}
+            </div>
+            <span style={{fontSize:'1rem',fontWeight:500}}>{i===0?'✅':''} {opt}</span>
+          </div>
+        ))}
+        {q.type==='short_answer' && <textarea placeholder="შეიყვანეთ პასუხი..." rows={4} value={answers[q.id]||''} onChange={e=>setAnswers({...answers,[q.id]:e.target.value})} style={{resize:'vertical'}}/>}
+
+        <div style={{display:'flex',justifyContent:'space-between',marginTop:'2rem'}}>
+          <button className="btn btn-ghost" onClick={()=>setQIdx(i=>Math.max(0,i-1))} disabled={qIdx===0}>
+            ← წინა
+          </button>
+          {qIdx<MOCK.questions.length-1 ? (
+            <button className="btn btn-primary" onClick={()=>setQIdx(i=>i+1)}>
+              შემდეგი <Icon n="arrow" s={15}/>
+            </button>
+          ) : (
+            <button className="btn btn-green" onClick={()=>setShowSubmit(true)}>
+              <Icon n="send" s={15}/> გაგზავნა
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* Nav dots */}
+      <div style={{display:'flex',gap:'.4rem',marginTop:'1rem'}}>
+        {MOCK.questions.map((_,i)=>(
+          <div key={i} onClick={()=>setQIdx(i)} style={{width:10,height:10,borderRadius:'50%',cursor:'pointer',background:i===qIdx?'#2563eb':answers[MOCK.questions[i].id]!==undefined?'#16a34a':'#d1d5db',transition:'background .2s'}}/>
+        ))}
+      </div>
+
+      {showSubmit && (
+        <div className="overlay">
+          <div className="modal" style={{maxWidth:380,textAlign:'center'}}>
+            <div style={{fontSize:'3rem',marginBottom:'1rem'}}>📝</div>
+            <h3 style={{fontWeight:700,marginBottom:'.5rem'}}>ტესტის გაგზავნა?</h3>
+            <p style={{color:'var(--gray)',fontSize:'.875rem',marginBottom:'1.5rem'}}>
+              პასუხი გაცემულია {Object.keys(answers).length}/{MOCK.questions.length} კითხვაზე.
+            </p>
+            <div style={{display:'flex',gap:'.75rem',justifyContent:'center'}}>
+              <button className="btn btn-ghost" onClick={()=>setShowSubmit(false)}>გაგრძელება</button>
+              <button className="btn btn-green" onClick={onFinish}><Icon n="send" s={15}/> გაგზავნა</button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─── Results Page ─────────────────────────────────────────────────────────────
+function ResultsPage({user,onBack}) {
+  const score=5,total=6,pct=83;
+  const badge=pct>=90?'Excellent':pct>=70?'Good':'Pass';
+  const badgeColor=pct>=90?'#2563eb':pct>=70?'#16a34a':'#d97706';
+  const results=[
+    {q:'რამდენია 12 × 4?',your:'48',correct:'48',ok:true,pts:2,max:2},
+    {q:'დედამიწა მზის გარშემო ბრუნავს.',your:'სწორია',correct:'სწორია',ok:true,pts:1,max:1},
+    {q:'გამოთვალეთ: 5² + 3²',your:'64',correct:'34',ok:false,pts:0,max:3},
+    {q:'დაასახელეთ ორი ქართული მდინარე.',your:'მტკვარი, არაგვი',correct:null,ok:null,pts:null,max:4},
+    {q:'ვინ დაწერა "ვეფხისტყაოსანი"?',your:'შოთა რუსთაველი',correct:'შოთა რუსთაველი',ok:true,pts:2,max:2},
+  ];
+  return (
+    <div style={{minHeight:'100vh',background:'linear-gradient(135deg,#f0f4ff,#faf5ff)',padding:'2rem',display:'flex',justifyContent:'center'}}>
+      <div style={{width:'100%',maxWidth:680}}>
+        <div className="card" style={{padding:'2.5rem',textAlign:'center',marginBottom:'1.5rem'}}>
+          <div style={{fontSize:'4rem',marginBottom:'1rem'}}>{pct>=90?'🏆':pct>=70?'🎉':'📘'}</div>
+          <h2 style={{fontWeight:700,fontSize:'1.5rem',marginBottom:'.5rem'}}>ტესტი დასრულდა!</h2>
+          <p style={{color:'var(--gray)',marginBottom:'1.5rem'}}>მათემატიკა — კლასი 3A</p>
+          <div style={{display:'inline-flex',alignItems:'center',gap:'.5rem',background:badgeColor+'20',color:badgeColor,padding:'.5rem 1.5rem',borderRadius:999,fontWeight:700,fontSize:'1rem',marginBottom:'1.5rem'}}>
+            {badge}
+          </div>
+          <div style={{display:'flex',justifyContent:'center',gap:'2rem'}}>
+            <div><div style={{fontSize:'2.5rem',fontWeight:700,color:badgeColor}}>{pct}%</div><div style={{fontSize:'.8rem',color:'var(--gray)'}}>პროცენტი</div></div>
+            <div style={{width:1,background:'var(--gray-border)'}}/>
+            <div><div style={{fontSize:'2.5rem',fontWeight:700}}>{score}</div><div style={{fontSize:'.8rem',color:'var(--gray)'}}>ქულა {total}-დან</div></div>
+            <div style={{width:1,background:'var(--gray-border)'}}/>
+            <div><div style={{fontSize:'2.5rem',fontWeight:700}}>3/5</div><div style={{fontSize:'.8rem',color:'var(--gray)'}}>სწორი</div></div>
+          </div>
+        </div>
+        <div className="card" style={{padding:'1.5rem',marginBottom:'1.5rem'}}>
+          <h3 style={{fontWeight:600,marginBottom:'1rem'}}>📋 კითხვების განხილვა</h3>
+          {results.map((r,i)=>(
+            <div key={i} style={{padding:'.75rem',borderRadius:8,marginBottom:'.5rem',background:r.ok===true?'#f0fdf4':r.ok===false?'#fff1f2':r.ok===null?'#fffbeb':'#f9fafb',border:`1px solid ${r.ok===true?'#bbf7d0':r.ok===false?'#fecaca':r.ok===null?'#fde68a':'#e5e7eb'}`}}>
+              <div style={{display:'flex',justifyContent:'space-between',marginBottom:'.3rem'}}>
+                <span style={{fontSize:'.82rem',fontWeight:600,color:'#374151'}}>კითხვა {i+1}:</span>
+                <span style={{fontSize:'.78rem'}}>{r.ok===null?<span style={{color:'#d97706'}}>⏳ pending</span>:r.ok?<span style={{color:'#16a34a'}}>✓ {r.pts}/{r.max} ქ.</span>:<span style={{color:'#dc2626'}}>✗ 0/{r.max} ქ.</span>}</span>
+              </div>
+              <p style={{fontSize:'.82rem',color:'#374151',marginBottom:'.3rem'}}>{r.q}</p>
+              <div style={{fontSize:'.78rem',color:'var(--gray)'}}>
+                <span>თქვენი: <strong>{r.your}</strong></span>
+                {r.correct && r.ok===false && <span style={{marginLeft:'1rem',color:'#16a34a'}}>სწორი: <strong>{r.correct}</strong></span>}
+                {r.ok===null && <span style={{marginLeft:'1rem',color:'#d97706'}}>მასწავლებელი ამოწმებს...</span>}
+              </div>
+            </div>
+          ))}
+        </div>
+        <button className="btn btn-primary" onClick={onBack}><Icon n="home" s={16}/> Dashboard-ზე დაბრუნება</button>
+      </div>
+    </div>
+  );
+}
+
+// ─── Teacher Dashboard ───────────────────────────────────────────────────────
+function TeacherDashboard({user,onLogout}) {
+  const [nav,setNav]=useState('home');
+  const [showBuilder,setShowBuilder]=useState(false);
+  const navItems=[
+    {id:'home',icon:'home',label:'Dashboard'},
+    {id:'tests',icon:'test',label:'ტესტები'},
+    {id:'students',icon:'users',label:'მოსწავლეები'},
+    {id:'analytics',icon:'chart',label:'ანალიტიკა'},
+  ];
+  return (
+    <Layout user={user} onLogout={onLogout} navItems={navItems} activeNav={nav} setNav={setNav}>
+      <div className="topbar">
+        <div>
+          <h1 style={{fontSize:'1rem',fontWeight:600}}>{nav==='home'?'Dashboard':nav==='tests'?'ჩემი ტესტები':nav==='students'?'მოსწავლეები':'ანალიტიკა'}</h1>
+          <p style={{fontSize:'.78rem',color:'var(--gray)'}}>{user?.name} · კლასი {user?.class}</p>
+        </div>
+        {nav==='tests' && <button className="btn btn-primary btn-sm" onClick={()=>setShowBuilder(true)}><Icon n="plus" s={15}/> ახალი ტესტი</button>}
+      </div>
+      <div style={{padding:'1.5rem',flex:1}} className="animate-in">
+        {nav==='home' && <TeacherHome setNav={setNav}/>}
+        {nav==='tests' && <TeacherTests onNew={()=>setShowBuilder(true)}/>}
+        {nav==='students' && <TeacherStudents/>}
+        {nav==='analytics' && <TeacherAnalytics/>}
+      </div>
+      {showBuilder && <TestBuilderModal onClose={()=>setShowBuilder(false)}/>}
+    </Layout>
+  );
+}
+
+function TeacherHome({setNav}) {
+  const stats=[
+    {label:'ჩემი ტესტები',value:4,icon:'test',color:'#2563eb',bg:'#dbeafe'},
+    {label:'კლასი 3A მოსწავლე',value:28,icon:'users',color:'#16a34a',bg:'#dcfce7'},
+    {label:'გასაფასებელი',value:3,icon:'alert',color:'#d97706',bg:'#fef3c7'},
+    {label:'საშ. ქულა',value:'78%',icon:'chart',color:'#7c3aed',bg:'#ede9fe'},
+  ];
+  return (
+    <div>
+      <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(160px,1fr))',gap:'1rem',marginBottom:'1.5rem'}}>
+        {stats.map(s=>(
+          <div key={s.label} className="stat-card" style={{cursor:'pointer'}} onClick={()=>setNav(s.label.includes('ტესტ')?'tests':s.label.includes('მოსწავლ')?'students':'analytics')}>
+            <div className="stat-icon" style={{background:s.bg}}><Icon n={s.icon} s={20} c={s.color}/></div>
+            <div style={{fontSize:'1.6rem',fontWeight:700,color:s.color}}>{s.value}</div>
+            <div style={{fontSize:'.78rem',color:'var(--gray)',marginTop:'.15rem'}}>{s.label}</div>
+          </div>
+        ))}
+      </div>
+      <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'1rem'}}>
+        <div className="card" style={{padding:'1.25rem'}}>
+          <h3 style={{fontWeight:600,marginBottom:'1rem',fontSize:'.95rem'}}>⏳ გასაფასებელი submission-ები</h3>
+          {[{name:'მარიამ კ.',test:'ქართული',date:'დღეს'},{name:'გიორგი ნ.',test:'ქართული',date:'გუშინ'},{name:'სოფო მ.',test:'ქართული',date:'გუშინ'}].map((s,i)=>(
+            <div key={i} style={{display:'flex',justifyContent:'space-between',alignItems:'center',padding:'.5rem 0',borderBottom:'1px solid var(--gray-border)'}}>
+              <div><div style={{fontSize:'.85rem',fontWeight:500}}>{s.name}</div>
+                <div style={{fontSize:'.75rem',color:'var(--gray)'}}>{s.test} · {s.date}</div></div>
+              <button className="btn btn-outline btn-sm">შეფასება</button>
+            </div>
+          ))}
+        </div>
+        <div className="card" style={{padding:'1.25rem'}}>
+          <h3 style={{fontWeight:600,marginBottom:'1rem',fontSize:'.95rem'}}>📊 კლასის 3A სტატისტიკა</h3>
+          {[['მათემატიკა',78],['ქართული',65],['ბუნება',91]].map(([s,v])=>(
+            <div key={s} style={{marginBottom:'.75rem'}}>
+              <div style={{display:'flex',justifyContent:'space-between',fontSize:'.82rem',marginBottom:'.3rem'}}>
+                <span>{s}</span><span style={{fontWeight:600}}>{v}%</span>
+              </div>
+              <div className="progress-bar"><div className="progress-fill" style={{width:v+'%',background:v>=80?'#16a34a':v>=60?'#d97706':'#dc2626'}}/></div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function TeacherTests({onNew}) {
+  return (
+    <div>
+      <table className="table" style={{background:'#fff',borderRadius:12,overflow:'hidden',boxShadow:'var(--shadow)'}}>
+        <thead><tr>
+          <th>ტიტული</th><th>საგანი</th><th>კლასი</th><th>კითხვა</th><th>სტატუსი</th><th>ფასიანი</th><th>ქმედება</th>
+        </tr></thead>
+        <tbody>
+          {MOCK.tests.map(t=>(
+            <tr key={t.id}>
+              <td style={{fontWeight:500}}>{t.title}</td>
+              <td><span className="chip">{t.subject}</span></td>
+              <td><span className="grade-tag" style={{background:'#dbeafe',color:'#1d4ed8'}}>{t.grade}</span></td>
+              <td>{t.questions}</td>
+              <td><span className={`badge badge-${t.status==='active'?'green':'gray'}`}>{t.status==='active'?'✓ გამოქვეყნებული':'✎ draft'}</span></td>
+              <td>{t.isPaid?<span className="badge badge-amber">💳 ფასიანი</span>:<span className="badge badge-green">უფასო</span>}</td>
+              <td style={{display:'flex',gap:'.4rem'}}>
+                <button className="btn btn-ghost btn-sm"><Icon n="edit" s={14}/></button>
+                <button className="btn btn-ghost btn-sm" style={{color:'var(--red)'}}><Icon n="trash" s={14}/></button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function TeacherStudents() {
+  return (
+    <div>
+      <table className="table" style={{background:'#fff',borderRadius:12,overflow:'hidden',boxShadow:'var(--shadow)'}}>
+        <thead><tr><th>მოსწავლე</th><th>კლასი</th><th>ტესტები</th><th>საშ. ქულა</th><th>ბოლო</th><th>სტატუსი</th></tr></thead>
+        <tbody>
+          {MOCK.students.map(s=>(
+            <tr key={s.id}>
+              <td style={{fontWeight:500}}>{s.name}</td>
+              <td>{s.grade}A</td>
+              <td>{s.tests}</td>
+              <td>
+                <span style={{fontWeight:600,color:s.avg>=90?'#2563eb':s.avg>=70?'#16a34a':'#d97706'}}>{s.avg}%</span>
+              </td>
+              <td style={{fontSize:'.8rem',color:'var(--gray)'}}>{s.last}</td>
+              <td><span className={`badge badge-${s.avg>=90?'blue':s.avg>=70?'green':'amber'}`}>{s.avg>=90?'Excellent':s.avg>=70?'Good':'Pass'}</span></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function TeacherAnalytics() {
+  return (
+    <div>
+      <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'1rem'}}>
+        <div className="card" style={{padding:'1.5rem'}}>
+          <h3 style={{fontWeight:600,marginBottom:'1.25rem'}}>📈 კლასის 3A — ყველა ტესტი</h3>
+          {MOCK.tests.slice(0,3).map(t=>(
+            <div key={t.id} style={{marginBottom:'1rem'}}>
+              <div style={{display:'flex',justifyContent:'space-between',fontSize:'.82rem',marginBottom:'.3rem'}}>
+                <span style={{fontWeight:500}}>{t.title}</span><span>78%</span>
+              </div>
+              <div className="progress-bar"><div className="progress-fill" style={{width:'78%',background:'#2563eb'}}/></div>
+            </div>
+          ))}
+        </div>
+        <div className="card" style={{padding:'1.5rem'}}>
+          <h3 style={{fontWeight:600,marginBottom:'1.25rem'}}>👥 მოსწავლეების განაწილება</h3>
+          {[['Excellent (≥90%)',1,'#2563eb','25%'],['Good (≥70%)',2,'#16a34a','50%'],['Pass (≥50%)',1,'#d97706','25%']].map(([l,n,c,w])=>(
+            <div key={l} style={{marginBottom:'.75rem'}}>
+              <div style={{display:'flex',justifyContent:'space-between',fontSize:'.82rem',marginBottom:'.3rem'}}>
+                <span>{l}</span><span style={{color:c,fontWeight:600}}>{n} მოსწავლე</span>
+              </div>
+              <div className="progress-bar"><div className="progress-fill" style={{width:w,background:c}}/></div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function TestBuilderModal({onClose}) {
+  const [step,setStep]=useState(1);
+  const [form,setForm]=useState({title:'',subject:'მათემატიკა',grade:'3',time:20,attempts:2,isPaid:false,published:false});
+  const [selectedQs,setSelectedQs]=useState([]);
+  const steps=['ინფო','კითხვები','გავრცელება'];
+  return (
+    <div className="overlay" onClick={onClose}>
+      <div className="modal" style={{maxWidth:580}} onClick={e=>e.stopPropagation()}>
+        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'1.5rem'}}>
+          <h3 style={{fontWeight:700}}>✨ ახალი ტესტი</h3>
+          <button className="btn btn-ghost btn-sm" onClick={onClose}><Icon n="x" s={16}/></button>
+        </div>
+        <div className="step-indicator" style={{marginBottom:'1.5rem'}}>
+          {steps.map((s,i)=><React.Fragment key={s}>
+            <div className={`step${step===i+1?' active':step>i+1?' done':''}`}>{step>i+1?'✓':i+1}</div>
+            <div style={{fontSize:'.78rem',color:step>=i+1?'#1a202c':'var(--gray)',flex:'0 0 auto'}}>{s}</div>
+            {i<steps.length-1 && <div className={`step-line${step>i+1?' done':''}`}/>}
+          </React.Fragment>)}
+        </div>
+        {step===1 && <>
+          <div className="form-group"><label>ტიტული</label><input placeholder="მაგ. მათემატიკა — 3 კლასი" value={form.title} onChange={e=>setForm({...form,title:e.target.value})}/></div>
+          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'.75rem'}}>
+            <div className="form-group"><label>საგანი</label>
+              <select value={form.subject} onChange={e=>setForm({...form,subject:e.target.value})}>
+                {['მათემატიკა','ქართული','ბუნება','ისტორია','ინგლისური','ფიზიკა'].map(s=><option key={s}>{s}</option>)}
+              </select>
+            </div>
+            <div className="form-group"><label>კლასი</label>
+              <select value={form.grade} onChange={e=>setForm({...form,grade:e.target.value})}>
+                {[1,2,3,4,5,6,7,8,9,10,11,12].map(g=><option key={g}>{g}</option>)}
+              </select>
+            </div>
+          </div>
+          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'.75rem'}}>
+            <div className="form-group"><label>დრო (წთ)</label><input type="number" value={form.time} onChange={e=>setForm({...form,time:e.target.value})}/></div>
+            <div className="form-group"><label>მცდელობები</label><input type="number" value={form.attempts} onChange={e=>setForm({...form,attempts:e.target.value})}/></div>
+          </div>
+          <div style={{display:'flex',gap:'1rem',marginBottom:'1rem'}}>
+            <label style={{display:'flex',alignItems:'center',gap:'.4rem',cursor:'pointer',margin:0}}>
+              <input type="checkbox" checked={form.isPaid} onChange={e=>setForm({...form,isPaid:e.target.checked})} style={{width:'auto'}}/> ფასიანი ტესტი
+            </label>
+            <label style={{display:'flex',alignItems:'center',gap:'.4rem',cursor:'pointer',margin:0}}>
+              <input type="checkbox" checked={form.published} onChange={e=>setForm({...form,published:e.target.checked})} style={{width:'auto'}}/> გამოქვეყნება
+            </label>
+          </div>
+        </>}
+        {step===2 && <>
+          <p style={{fontSize:'.85rem',color:'var(--gray)',marginBottom:'1rem'}}>კითხვის ბაზიდან შეარჩიეთ:</p>
+          {MOCK.questions.map(q=>(
+            <div key={q.id} onClick={()=>setSelectedQs(s=>s.includes(q.id)?s.filter(x=>x!==q.id):[...s,q.id])} style={{padding:'.75rem',border:`2px solid ${selectedQs.includes(q.id)?'#2563eb':'var(--gray-border)'}`,borderRadius:8,cursor:'pointer',marginBottom:'.5rem',background:selectedQs.includes(q.id)?'var(--blue-light)':'#fff',transition:'all .15s'}}>
+              <div style={{display:'flex',justifyContent:'space-between'}}>
+                <span style={{fontSize:'.85rem',fontWeight:500}}>{q.text}</span>
+                <div style={{display:'flex',gap:'.4rem'}}>
+                  <span className="badge badge-gray">{q.type==='multiple_choice'?'MCQ':q.type==='true_false'?'T/F':'Short'}</span>
+                  <span className="badge badge-amber">{q.points}ქ</span>
+                </div>
+              </div>
+            </div>
+          ))}
+          <div style={{fontSize:'.82rem',color:'var(--gray)',marginTop:'.5rem'}}>შერჩეულია: {selectedQs.length} კითხვა</div>
+        </>}
+        {step===3 && <>
+          <div className="form-group"><label>გაავრცელე კლასზე</label>
+            <select><option>კლასი 3A</option><option>კლასი 3B</option><option>ინდივიდუალური</option></select>
+          </div>
+          <div className="form-group"><label>Due Date (სურვილისამებრ)</label><input type="date"/></div>
+          <div style={{background:'var(--blue-light)',borderRadius:8,padding:'1rem',fontSize:'.85rem',color:'#1e40af'}}>
+            <strong>შეჯამება:</strong><br/>
+            ტიტული: {form.title||'—'} · საგანი: {form.subject} · {form.time} წთ · {selectedQs.length} კითხვა
+            {form.isPaid && ' · 💳 ფასიანი'}
+          </div>
+        </>}
+        <div style={{display:'flex',justifyContent:'space-between',marginTop:'1.5rem'}}>
+          <button className="btn btn-ghost" onClick={step===1?onClose:()=>setStep(s=>s-1)}>{step===1?'გაუქმება':'← უკან'}</button>
+          {step<3?<button className="btn btn-primary" onClick={()=>setStep(s=>s+1)}>შემდეგი →</button>
+            :<button className="btn btn-green" onClick={onClose}><Icon n="check"/> შენახვა</button>}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── Admin Dashboard ─────────────────────────────────────────────────────────
+function AdminDashboard({user,onLogout}) {
+  const [nav,setNav]=useState('home');
+  const navItems=[
+    {id:'home',icon:'home',label:'Dashboard'},
+    {id:'schools',icon:'school',label:'სკოლები'},
+    {id:'users',icon:'users',label:'მომხმარებლები'},
+    {id:'pending',icon:'alert',label:'დამტკიცება'},
+    {id:'settings',icon:'settings',label:'პარამეტრები'},
+  ];
+  return (
+    <Layout user={user} onLogout={onLogout} navItems={navItems} activeNav={nav} setNav={setNav}>
+      <div className="topbar">
+        <div>
+          <h1 style={{fontSize:'1rem',fontWeight:600}}>Admin Dashboard</h1>
+          <p style={{fontSize:'.78rem',color:'var(--gray)'}}>{user?.name} · პლატფორმის ადმინისტრატორი</p>
+        </div>
+        <span className="badge badge-red">⚠ 2 Pending</span>
+      </div>
+      <div style={{padding:'1.5rem',flex:1}} className="animate-in">
+        {nav==='home' && <AdminHome setNav={setNav}/>}
+        {nav==='schools' && <AdminSchools/>}
+        {nav==='users' && <AdminUsers/>}
+        {nav==='pending' && <AdminPending/>}
+        {nav==='settings' && <AdminSettings/>}
+      </div>
+    </Layout>
+  );
+}
+
+function AdminHome({setNav}) {
+  const stats=[
+    {label:'სკოლა',value:3,icon:'school',color:'#7c3aed',bg:'#ede9fe'},
+    {label:'მომხმარებელი',value:286,icon:'users',color:'#2563eb',bg:'#dbeafe'},
+    {label:'სულ ტესტი',value:51,icon:'test',color:'#16a34a',bg:'#dcfce7'},
+    {label:'Pending',value:2,icon:'alert',color:'#dc2626',bg:'#fee2e2'},
+  ];
+  return (
+    <div>
+      <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(160px,1fr))',gap:'1rem',marginBottom:'1.5rem'}}>
+        {stats.map(s=>(
+          <div key={s.label} className="stat-card" style={{cursor:'pointer'}} onClick={()=>setNav(s.label==='Pending'?'pending':s.label==='სკოლა'?'schools':'users')}>
+            <div className="stat-icon" style={{background:s.bg}}><Icon n={s.icon} s={20} c={s.color}/></div>
+            <div style={{fontSize:'1.6rem',fontWeight:700,color:s.color}}>{s.value}</div>
+            <div style={{fontSize:'.78rem',color:'var(--gray)',marginTop:'.15rem'}}>{s.label}</div>
+          </div>
+        ))}
+      </div>
+      <div className="card" style={{padding:'1.5rem',marginBottom:'1rem'}}>
+        <h3 style={{fontWeight:600,marginBottom:'1rem',display:'flex',alignItems:'center',gap:'.5rem'}}>
+          <span style={{color:'#dc2626'}}>🔴</span> დასამტკიცებელი მასწავლებლები
+        </h3>
+        {MOCK.pendingTeachers.map(t=>(
+          <div key={t.id} style={{display:'flex',justifyContent:'space-between',alignItems:'center',padding:'.75rem',background:'var(--amber-light)',borderRadius:8,marginBottom:'.5rem'}}>
+            <div>
+              <div style={{fontWeight:600,fontSize:'.9rem'}}>{t.name}</div>
+              <div style={{fontSize:'.78rem',color:'var(--gray)'}}>{t.email} · {t.school} · {t.date}</div>
+            </div>
+            <div style={{display:'flex',gap:'.5rem'}}>
+              <button className="btn btn-green btn-sm"><Icon n="check" s={14}/> დამტკიცება</button>
+              <button className="btn btn-danger btn-sm"><Icon n="x" s={14}/> უარი</button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function AdminSchools() {
+  return (
+    <div>
+      <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'1rem'}}>
+        <h2 style={{fontWeight:600,fontSize:'1rem'}}>სკოლები</h2>
+        <button className="btn btn-primary btn-sm"><Icon n="plus" s={14}/> სკოლის დამატება</button>
+      </div>
+      <table className="table" style={{background:'#fff',borderRadius:12,overflow:'hidden',boxShadow:'var(--shadow)'}}>
+        <thead><tr><th>სკოლა</th><th>მასწავლებელი</th><th>მოსწავლე</th><th>ტესტი</th><th>ქმედება</th></tr></thead>
+        <tbody>
+          {MOCK.schools.map(s=>(
+            <tr key={s.id}>
+              <td style={{fontWeight:500}}>{s.name}</td>
+              <td>{s.teachers}</td>
+              <td>{s.students}</td>
+              <td>{s.tests}</td>
+              <td><button className="btn btn-ghost btn-sm"><Icon n="edit" s={14}/></button></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function AdminUsers() {
+  const users=[
+    {name:'ნინო გელაშვილი',email:'nino@edutest.ge',role:'teacher',school:'სკ. #1',status:'active'},
+    {name:'გიორგი ბერიძე',email:'giorgi@edutest.ge',role:'teacher',school:'სკ. #1',status:'active'},
+    {name:'მარიამ კვირიკაშვილი',email:'mariam@student.ge',role:'student',school:'სკ. #1',status:'active'},
+    {name:'ანა ლომიძე',email:'ana@student.ge',role:'student',school:'სკ. #1',status:'active'},
+    {name:'ეკა ჯაფარიძე',email:'eka@school.ge',role:'teacher',school:'სკ. #5',status:'pending'},
+  ];
+  return (
+    <div>
+      <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'1rem'}}>
+        <h2 style={{fontWeight:600,fontSize:'1rem'}}>მომხმარებლები</h2>
+        <input placeholder="🔍 ძებნა..." style={{width:220,padding:'.4rem .75rem',fontSize:'.85rem'}}/>
+      </div>
+      <table className="table" style={{background:'#fff',borderRadius:12,overflow:'hidden',boxShadow:'var(--shadow)'}}>
+        <thead><tr><th>სახელი</th><th>ელ-ფოსტა</th><th>როლი</th><th>სკოლა</th><th>სტატუსი</th><th>ქმედება</th></tr></thead>
+        <tbody>
+          {users.map((u,i)=>(
+            <tr key={i}>
+              <td style={{fontWeight:500}}>{u.name}</td>
+              <td style={{color:'var(--gray)',fontSize:'.82rem'}}>{u.email}</td>
+              <td><span className={`badge badge-${u.role==='teacher'?'blue':'green'}`}>{u.role}</span></td>
+              <td style={{fontSize:'.82rem'}}>{u.school}</td>
+              <td><span className={`badge badge-${u.status==='active'?'green':'amber'}`}>{u.status==='active'?'✓ active':'⏳ pending'}</span></td>
+              <td style={{display:'flex',gap:'.4rem'}}>
+                {u.status==='pending'&&<button className="btn btn-green btn-sm"><Icon n="check" s={13}/></button>}
+                <button className="btn btn-ghost btn-sm"><Icon n="edit" s={13}/></button>
+                <button className="btn btn-ghost btn-sm" style={{color:'var(--red)'}}><Icon n="trash" s={13}/></button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function AdminPending() {
+  return (
+    <div style={{maxWidth:600}}>
+      <h2 style={{fontWeight:600,marginBottom:'1rem',fontSize:'1rem'}}>⏳ დამტკიცების მოლოდინში</h2>
+      {MOCK.pendingTeachers.map(t=>(
+        <div key={t.id} className="card" style={{padding:'1.5rem',marginBottom:'1rem'}}>
+          <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start'}}>
+            <div>
+              <div style={{fontWeight:700,fontSize:'1rem',marginBottom:'.25rem'}}>{t.name}</div>
+              <div style={{fontSize:'.85rem',color:'var(--gray)',marginBottom:'.5rem'}}>{t.email}</div>
+              <div style={{display:'flex',gap:'.5rem'}}>
+                <span className="chip">🏫 {t.school}</span>
+                <span className="chip">📅 {t.date}</span>
+                <span className="badge badge-amber">მასწავლებელი</span>
+              </div>
+            </div>
+            <div style={{display:'flex',gap:'.5rem',flexDirection:'column'}}>
+              <button className="btn btn-green btn-sm"><Icon n="check" s={14}/> დამტკიცება</button>
+              <button className="btn btn-danger btn-sm"><Icon n="x" s={14}/> უარი</button>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function AdminSettings() {
+  return (
+    <div style={{maxWidth:500}}>
+      <div className="card" style={{padding:'1.5rem',marginBottom:'1rem'}}>
+        <h3 style={{fontWeight:600,marginBottom:'1rem'}}>⚙️ პლატფორმის პარამეტრები</h3>
+        <div className="form-group"><label>პლატფორმის სახელი</label><input defaultValue="EduTest.ge"/></div>
+        <div className="form-group"><label>კონტაქტ ელ-ფოსტა</label><input defaultValue="admin@edutest.ge"/></div>
+        <div className="form-group"><label>JWT ვადა (დღე)</label><input type="number" defaultValue={7}/></div>
+        <button className="btn btn-primary btn-sm">შენახვა</button>
+      </div>
+      <div className="card" style={{padding:'1.5rem'}}>
+        <h3 style={{fontWeight:600,marginBottom:'1rem'}}>💳 გადახდის პარამეტრები</h3>
+        <div className="form-group"><label>BOG Pay Merchant ID</label><input placeholder="bog_merchant_xxx"/></div>
+        <div className="form-group"><label>TBC Pay API Key</label><input placeholder="tbc_key_xxx"/></div>
+        <div style={{padding:'.75rem',background:'var(--amber-light)',borderRadius:8,fontSize:'.82rem',color:'#92400e',marginBottom:'1rem'}}>
+          <Icon n="alert" s={14}/> Webhook URL: <code>https://edutest.ge/api/payments/webhook</code>
+        </div>
+        <button className="btn btn-primary btn-sm">შენახვა</button>
+      </div>
+    </div>
+  );
+}
+
+// ─── Mount ───────────────────────────────────────────────────────────────────
+const root=ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App/>);
+</script>
+</body>
+</html>

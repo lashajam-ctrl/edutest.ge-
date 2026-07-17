@@ -1,0 +1,2584 @@
+{
+  "generatedAt": "2026-07-14T12:11:10.940Z",
+  "summary": {
+    "pools": 313,
+    "tests": 420,
+    "questions": 6604,
+    "uniqueQuestionIds": 6454,
+    "visualQuestions": 32,
+    "questionsWithExplanation": 32,
+    "questionsWithSkillTag": 32,
+    "questionsWithOutcomeTag": 32,
+    "questionsMappedToCurriculumDomain": 6604,
+    "approvedDomainAlignments": 4595,
+    "alignmentsRequiringReview": 0,
+    "blockedCurriculumStageQuestions": 316,
+    "blockedUnpublishedPoolQuestions": 1693
+  },
+  "typeCounts": {
+    "multiple_choice": 4542,
+    "true_false": 2018,
+    "calc": 21,
+    "match": 7,
+    "fill": 14,
+    "order": 2
+  },
+  "testsBySubjectGrade": {
+    "მათემატიკა · 1": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "math-12"
+      ]
+    },
+    "მათემატიკა · 2": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "math-12"
+      ]
+    },
+    "მათემატიკა · 3": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "math-34"
+      ]
+    },
+    "მათემატიკა · 4": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "math-34"
+      ]
+    },
+    "მათემატიკა · 5": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "math-56"
+      ]
+    },
+    "მათემატიკა · 6": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "math-56"
+      ]
+    },
+    "მათემატიკა · 7": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "math-78"
+      ]
+    },
+    "მათემატიკა · 8": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "math-78"
+      ]
+    },
+    "მათემატიკა · 9": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "math-910"
+      ]
+    },
+    "მათემატიკა · 10": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "math-910"
+      ]
+    },
+    "მათემატიკა · 11": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "math-1112"
+      ]
+    },
+    "მათემატიკა · 12": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "math-1112"
+      ]
+    },
+    "ქართული · 1": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "geo-12"
+      ]
+    },
+    "ქართული · 2": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "geo-12"
+      ]
+    },
+    "ქართული · 3": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "geo-34"
+      ]
+    },
+    "ქართული · 4": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "geo-34"
+      ]
+    },
+    "ქართული · 5": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "geo-56"
+      ]
+    },
+    "ქართული · 6": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "geo-56"
+      ]
+    },
+    "ქართული ლიტ. · 7": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "geo-78"
+      ]
+    },
+    "ქართული ენა · 7": {
+      "tests": 4,
+      "requestedQuestions": 36,
+      "pools": [
+        "gg-78"
+      ]
+    },
+    "ქართული ლიტ. · 8": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "geo-78"
+      ]
+    },
+    "ქართული ენა · 8": {
+      "tests": 4,
+      "requestedQuestions": 36,
+      "pools": [
+        "gg-78"
+      ]
+    },
+    "ქართული ლიტ. · 9": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "geo-910"
+      ]
+    },
+    "ქართული ენა · 9": {
+      "tests": 4,
+      "requestedQuestions": 36,
+      "pools": [
+        "gg-910"
+      ]
+    },
+    "ქართული ლიტ. · 10": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "geo-910"
+      ]
+    },
+    "ქართული ენა · 10": {
+      "tests": 4,
+      "requestedQuestions": 36,
+      "pools": [
+        "gg-910"
+      ]
+    },
+    "ქართული ლიტ. · 11": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "geo-1112"
+      ]
+    },
+    "ქართული ენა · 11": {
+      "tests": 4,
+      "requestedQuestions": 36,
+      "pools": [
+        "gg-1112"
+      ]
+    },
+    "ქართული ლიტ. · 12": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "geo-1112"
+      ]
+    },
+    "ქართული ენა · 12": {
+      "tests": 4,
+      "requestedQuestions": 36,
+      "pools": [
+        "gg-1112"
+      ]
+    },
+    "ინგლისური · 1": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "eng-12"
+      ]
+    },
+    "ინგლისური · 2": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "eng-12"
+      ]
+    },
+    "ინგლისური · 3": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "eng-34"
+      ]
+    },
+    "ინგლისური · 4": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "eng-34"
+      ]
+    },
+    "ინგლისური · 5": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "eng-56"
+      ]
+    },
+    "ინგლისური · 6": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "eng-56"
+      ]
+    },
+    "ინგლ. ლიტ. · 7": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "eng-78"
+      ]
+    },
+    "ინგლ. გრამ. · 7": {
+      "tests": 4,
+      "requestedQuestions": 36,
+      "pools": [
+        "eg-78"
+      ]
+    },
+    "ინგლ. ლიტ. · 8": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "eng-78"
+      ]
+    },
+    "ინგლ. გრამ. · 8": {
+      "tests": 4,
+      "requestedQuestions": 36,
+      "pools": [
+        "eg-78"
+      ]
+    },
+    "ინგლ. ლიტ. · 9": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "eng-910"
+      ]
+    },
+    "ინგლ. გრამ. · 9": {
+      "tests": 4,
+      "requestedQuestions": 36,
+      "pools": [
+        "eg-910"
+      ]
+    },
+    "ინგლ. ლიტ. · 10": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "eng-910"
+      ]
+    },
+    "ინგლ. გრამ. · 10": {
+      "tests": 4,
+      "requestedQuestions": 36,
+      "pools": [
+        "eg-910"
+      ]
+    },
+    "ინგლ. ლიტ. · 11": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "eng-1112"
+      ]
+    },
+    "ინგლ. გრამ. · 11": {
+      "tests": 4,
+      "requestedQuestions": 36,
+      "pools": [
+        "eg-1112"
+      ]
+    },
+    "ინგლ. ლიტ. · 12": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "eng-1112"
+      ]
+    },
+    "ინგლ. გრამ. · 12": {
+      "tests": 4,
+      "requestedQuestions": 36,
+      "pools": [
+        "eg-1112"
+      ]
+    },
+    "რუსული · 5": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "rus-56"
+      ]
+    },
+    "რუს. გრამ. · 5": {
+      "tests": 4,
+      "requestedQuestions": 36,
+      "pools": [
+        "rg-56"
+      ]
+    },
+    "რუსული · 6": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "rus-56"
+      ]
+    },
+    "რუს. გრამ. · 6": {
+      "tests": 4,
+      "requestedQuestions": 36,
+      "pools": [
+        "rg-56"
+      ]
+    },
+    "რუსული · 7": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "rus-78"
+      ]
+    },
+    "რუს. გრამ. · 7": {
+      "tests": 4,
+      "requestedQuestions": 36,
+      "pools": [
+        "rg-78"
+      ]
+    },
+    "რუსული · 8": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "rus-78"
+      ]
+    },
+    "რუს. გრამ. · 8": {
+      "tests": 4,
+      "requestedQuestions": 36,
+      "pools": [
+        "rg-78"
+      ]
+    },
+    "რუსული · 9": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "rus-910"
+      ]
+    },
+    "რუს. გრამ. · 9": {
+      "tests": 4,
+      "requestedQuestions": 36,
+      "pools": [
+        "rg-910"
+      ]
+    },
+    "რუსული · 10": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "rus-910"
+      ]
+    },
+    "რუს. გრამ. · 10": {
+      "tests": 4,
+      "requestedQuestions": 36,
+      "pools": [
+        "rg-910"
+      ]
+    },
+    "რუსული · 11": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "rus-1112"
+      ]
+    },
+    "რუს. გრამ. · 11": {
+      "tests": 4,
+      "requestedQuestions": 36,
+      "pools": [
+        "rg-1112"
+      ]
+    },
+    "რუსული · 12": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "rus-1112"
+      ]
+    },
+    "რუს. გრამ. · 12": {
+      "tests": 4,
+      "requestedQuestions": 36,
+      "pools": [
+        "rg-1112"
+      ]
+    },
+    "ბუნება · 1": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "nat-12"
+      ]
+    },
+    "ბუნება · 2": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "nat-12"
+      ]
+    },
+    "ბუნება · 3": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "nat-34"
+      ]
+    },
+    "ბუნება · 4": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "nat-34"
+      ]
+    },
+    "ბუნება · 5": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "nat-56"
+      ]
+    },
+    "ბუნება · 6": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "nat-56"
+      ]
+    },
+    "ჩვენი ქვეყანა · 1": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "hist-12"
+      ]
+    },
+    "ჩვენი ქვეყანა · 2": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "hist-12"
+      ]
+    },
+    "ისტორია · 3": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "hist-34"
+      ]
+    },
+    "ისტორია · 4": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "hist-34"
+      ]
+    },
+    "ისტორია · 5": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "hist-56"
+      ]
+    },
+    "ისტორია · 6": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "hist-56"
+      ]
+    },
+    "ისტორია · 7": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "hist-78"
+      ]
+    },
+    "ისტორია · 8": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "hist-78"
+      ]
+    },
+    "ისტორია · 9": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "hist-910"
+      ]
+    },
+    "ისტორია · 10": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "hist-910"
+      ]
+    },
+    "ისტორია · 11": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "hist-1112"
+      ]
+    },
+    "ისტორია · 12": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "hist-1112"
+      ]
+    },
+    "გეოგრაფია · 7": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "geog-78"
+      ]
+    },
+    "გეოგრაფია · 8": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "geog-78"
+      ]
+    },
+    "გეოგრაფია · 9": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "geog-910"
+      ]
+    },
+    "გეოგრაფია · 10": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "geog-910"
+      ]
+    },
+    "გეოგრაფია · 11": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "geog-1112"
+      ]
+    },
+    "გეოგრაფია · 12": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "geog-1112"
+      ]
+    },
+    "ბიოლოგია · 7": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "bio-78"
+      ]
+    },
+    "ბიოლოგია · 8": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "bio-78"
+      ]
+    },
+    "ბიოლოგია · 9": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "bio-910"
+      ]
+    },
+    "ბიოლოგია · 10": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "bio-910"
+      ]
+    },
+    "ბიოლოგია · 11": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "bio-1112"
+      ]
+    },
+    "ბიოლოგია · 12": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "bio-1112"
+      ]
+    },
+    "ქიმია · 8": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "chem-78"
+      ]
+    },
+    "ქიმია · 9": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "chem-910"
+      ]
+    },
+    "ქიმია · 10": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "chem-910"
+      ]
+    },
+    "ქიმია · 11": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "chem-1112"
+      ]
+    },
+    "ქიმია · 12": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "chem-1112"
+      ]
+    },
+    "ფიზიკა · 7": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "phys-78"
+      ]
+    },
+    "ფიზიკა · 8": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "phys-78"
+      ]
+    },
+    "ფიზიკა · 9": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "phys-910"
+      ]
+    },
+    "ფიზიკა · 10": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "phys-910"
+      ]
+    },
+    "ფიზიკა · 11": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "phys-1112"
+      ]
+    },
+    "ფიზიკა · 12": {
+      "tests": 4,
+      "requestedQuestions": 60,
+      "pools": [
+        "phys-1112"
+      ]
+    }
+  },
+  "duplicateIds": [
+    {
+      "id": "gg78_1",
+      "pools": [
+        "gg-78-1",
+        "geo-78-1"
+      ]
+    },
+    {
+      "id": "gg78_2",
+      "pools": [
+        "gg-78-1",
+        "geo-78-1"
+      ]
+    },
+    {
+      "id": "gg78_3",
+      "pools": [
+        "gg-78-1",
+        "geo-78-1"
+      ]
+    },
+    {
+      "id": "gg78_4",
+      "pools": [
+        "gg-78-1",
+        "geo-78-1"
+      ]
+    },
+    {
+      "id": "gg78_5",
+      "pools": [
+        "gg-78-1",
+        "geo-78-1"
+      ]
+    },
+    {
+      "id": "gg78_6",
+      "pools": [
+        "gg-78-1",
+        "geo-78-1"
+      ]
+    },
+    {
+      "id": "gg78_7",
+      "pools": [
+        "gg-78-1",
+        "geo-78-1"
+      ]
+    },
+    {
+      "id": "gg78_8",
+      "pools": [
+        "gg-78-1",
+        "geo-78-1"
+      ]
+    },
+    {
+      "id": "gg78_9",
+      "pools": [
+        "gg-78-1",
+        "geo-78-1"
+      ]
+    },
+    {
+      "id": "gg78_10",
+      "pools": [
+        "gg-78-1",
+        "geo-78-1"
+      ]
+    },
+    {
+      "id": "gg78_11",
+      "pools": [
+        "gg-78-1",
+        "geo-78-1"
+      ]
+    },
+    {
+      "id": "gg78_12",
+      "pools": [
+        "gg-78-1",
+        "geo-78-1"
+      ]
+    },
+    {
+      "id": "gg78_13",
+      "pools": [
+        "gg-78-1",
+        "geo-78-1"
+      ]
+    },
+    {
+      "id": "gg78_14",
+      "pools": [
+        "gg-78-1",
+        "geo-78-1"
+      ]
+    },
+    {
+      "id": "gg78_15",
+      "pools": [
+        "gg-78-1",
+        "geo-78-1"
+      ]
+    },
+    {
+      "id": "gg910_1",
+      "pools": [
+        "gg-910-1",
+        "geo-910-1"
+      ]
+    },
+    {
+      "id": "gg910_2",
+      "pools": [
+        "gg-910-1",
+        "geo-910-1"
+      ]
+    },
+    {
+      "id": "gg910_3",
+      "pools": [
+        "gg-910-1",
+        "geo-910-1"
+      ]
+    },
+    {
+      "id": "gg910_4",
+      "pools": [
+        "gg-910-1",
+        "geo-910-1"
+      ]
+    },
+    {
+      "id": "gg910_5",
+      "pools": [
+        "gg-910-1",
+        "geo-910-1"
+      ]
+    },
+    {
+      "id": "gg910_6",
+      "pools": [
+        "gg-910-1",
+        "geo-910-1"
+      ]
+    },
+    {
+      "id": "gg910_7",
+      "pools": [
+        "gg-910-1",
+        "geo-910-1"
+      ]
+    },
+    {
+      "id": "gg910_8",
+      "pools": [
+        "gg-910-1",
+        "geo-910-1"
+      ]
+    },
+    {
+      "id": "gg910_9",
+      "pools": [
+        "gg-910-1",
+        "geo-910-1"
+      ]
+    },
+    {
+      "id": "gg910_10",
+      "pools": [
+        "gg-910-1",
+        "geo-910-1"
+      ]
+    },
+    {
+      "id": "gg910_11",
+      "pools": [
+        "gg-910-1",
+        "geo-910-1"
+      ]
+    },
+    {
+      "id": "gg910_12",
+      "pools": [
+        "gg-910-1",
+        "geo-910-1"
+      ]
+    },
+    {
+      "id": "gg910_13",
+      "pools": [
+        "gg-910-1",
+        "geo-910-1"
+      ]
+    },
+    {
+      "id": "gg910_14",
+      "pools": [
+        "gg-910-1",
+        "geo-910-1"
+      ]
+    },
+    {
+      "id": "gg910_15",
+      "pools": [
+        "gg-910-1",
+        "geo-910-1"
+      ]
+    },
+    {
+      "id": "gg1112_1",
+      "pools": [
+        "gg-1112-1",
+        "geo-1112-1"
+      ]
+    },
+    {
+      "id": "gg1112_2",
+      "pools": [
+        "gg-1112-1",
+        "geo-1112-1"
+      ]
+    },
+    {
+      "id": "gg1112_3",
+      "pools": [
+        "gg-1112-1",
+        "geo-1112-1"
+      ]
+    },
+    {
+      "id": "gg1112_4",
+      "pools": [
+        "gg-1112-1",
+        "geo-1112-1"
+      ]
+    },
+    {
+      "id": "gg1112_5",
+      "pools": [
+        "gg-1112-1",
+        "geo-1112-1"
+      ]
+    },
+    {
+      "id": "gg1112_6",
+      "pools": [
+        "gg-1112-1",
+        "geo-1112-1"
+      ]
+    },
+    {
+      "id": "gg1112_7",
+      "pools": [
+        "gg-1112-1",
+        "geo-1112-1"
+      ]
+    },
+    {
+      "id": "gg1112_8",
+      "pools": [
+        "gg-1112-1",
+        "geo-1112-1"
+      ]
+    },
+    {
+      "id": "gg1112_9",
+      "pools": [
+        "gg-1112-1",
+        "geo-1112-1"
+      ]
+    },
+    {
+      "id": "gg1112_10",
+      "pools": [
+        "gg-1112-1",
+        "geo-1112-1"
+      ]
+    },
+    {
+      "id": "gg1112_11",
+      "pools": [
+        "gg-1112-1",
+        "geo-1112-1"
+      ]
+    },
+    {
+      "id": "gg1112_12",
+      "pools": [
+        "gg-1112-1",
+        "geo-1112-1"
+      ]
+    },
+    {
+      "id": "gg1112_13",
+      "pools": [
+        "gg-1112-1",
+        "geo-1112-1"
+      ]
+    },
+    {
+      "id": "gg1112_14",
+      "pools": [
+        "gg-1112-1",
+        "geo-1112-1"
+      ]
+    },
+    {
+      "id": "gg1112_15",
+      "pools": [
+        "gg-1112-1",
+        "geo-1112-1"
+      ]
+    },
+    {
+      "id": "eg78_g1",
+      "pools": [
+        "eg-78-1",
+        "eng-78-1"
+      ]
+    },
+    {
+      "id": "eg78_g2",
+      "pools": [
+        "eg-78-1",
+        "eng-78-1"
+      ]
+    },
+    {
+      "id": "eg78_g3",
+      "pools": [
+        "eg-78-1",
+        "eng-78-1"
+      ]
+    },
+    {
+      "id": "eg78_g4",
+      "pools": [
+        "eg-78-1",
+        "eng-78-1"
+      ]
+    },
+    {
+      "id": "eg78_g5",
+      "pools": [
+        "eg-78-1",
+        "eng-78-1"
+      ]
+    },
+    {
+      "id": "eg78_g6",
+      "pools": [
+        "eg-78-1",
+        "eng-78-1"
+      ]
+    },
+    {
+      "id": "eg78_g7",
+      "pools": [
+        "eg-78-1",
+        "eng-78-1"
+      ]
+    },
+    {
+      "id": "eg78_g8",
+      "pools": [
+        "eg-78-1",
+        "eng-78-1"
+      ]
+    },
+    {
+      "id": "eg78_g9",
+      "pools": [
+        "eg-78-1",
+        "eng-78-1"
+      ]
+    },
+    {
+      "id": "eg78_g10",
+      "pools": [
+        "eg-78-1",
+        "eng-78-1"
+      ]
+    },
+    {
+      "id": "eg78_g11",
+      "pools": [
+        "eg-78-1",
+        "eng-78-1"
+      ]
+    },
+    {
+      "id": "eg78_g12",
+      "pools": [
+        "eg-78-1",
+        "eng-78-1"
+      ]
+    },
+    {
+      "id": "eg78_g13",
+      "pools": [
+        "eg-78-1",
+        "eng-78-1"
+      ]
+    },
+    {
+      "id": "eg78_g14",
+      "pools": [
+        "eg-78-1",
+        "eng-78-1"
+      ]
+    },
+    {
+      "id": "eg78_g15",
+      "pools": [
+        "eg-78-1",
+        "eng-78-1"
+      ]
+    },
+    {
+      "id": "eg910_g1",
+      "pools": [
+        "eg-910-1",
+        "eng-910-1"
+      ]
+    },
+    {
+      "id": "eg910_g2",
+      "pools": [
+        "eg-910-1",
+        "eng-910-1"
+      ]
+    },
+    {
+      "id": "eg910_g3",
+      "pools": [
+        "eg-910-1",
+        "eng-910-1"
+      ]
+    },
+    {
+      "id": "eg910_g4",
+      "pools": [
+        "eg-910-1",
+        "eng-910-1"
+      ]
+    },
+    {
+      "id": "eg910_g5",
+      "pools": [
+        "eg-910-1",
+        "eng-910-1"
+      ]
+    },
+    {
+      "id": "eg910_g6",
+      "pools": [
+        "eg-910-1",
+        "eng-910-1"
+      ]
+    },
+    {
+      "id": "eg910_g7",
+      "pools": [
+        "eg-910-1",
+        "eng-910-1"
+      ]
+    },
+    {
+      "id": "eg910_g8",
+      "pools": [
+        "eg-910-1",
+        "eng-910-1"
+      ]
+    },
+    {
+      "id": "eg910_g9",
+      "pools": [
+        "eg-910-1",
+        "eng-910-1"
+      ]
+    },
+    {
+      "id": "eg910_g10",
+      "pools": [
+        "eg-910-1",
+        "eng-910-1"
+      ]
+    },
+    {
+      "id": "eg910_g11",
+      "pools": [
+        "eg-910-1",
+        "eng-910-1"
+      ]
+    },
+    {
+      "id": "eg910_g12",
+      "pools": [
+        "eg-910-1",
+        "eng-910-1"
+      ]
+    },
+    {
+      "id": "eg910_g13",
+      "pools": [
+        "eg-910-1",
+        "eng-910-1"
+      ]
+    },
+    {
+      "id": "eg910_g14",
+      "pools": [
+        "eg-910-1",
+        "eng-910-1"
+      ]
+    },
+    {
+      "id": "eg910_g15",
+      "pools": [
+        "eg-910-1",
+        "eng-910-1"
+      ]
+    },
+    {
+      "id": "eg1112_g1",
+      "pools": [
+        "eg-1112-1",
+        "eng-1112-1"
+      ]
+    },
+    {
+      "id": "eg1112_g2",
+      "pools": [
+        "eg-1112-1",
+        "eng-1112-1"
+      ]
+    },
+    {
+      "id": "eg1112_g3",
+      "pools": [
+        "eg-1112-1",
+        "eng-1112-1"
+      ]
+    },
+    {
+      "id": "eg1112_g4",
+      "pools": [
+        "eg-1112-1",
+        "eng-1112-1"
+      ]
+    },
+    {
+      "id": "eg1112_g5",
+      "pools": [
+        "eg-1112-1",
+        "eng-1112-1"
+      ]
+    },
+    {
+      "id": "eg1112_g6",
+      "pools": [
+        "eg-1112-1",
+        "eng-1112-1"
+      ]
+    },
+    {
+      "id": "eg1112_g7",
+      "pools": [
+        "eg-1112-1",
+        "eng-1112-1"
+      ]
+    },
+    {
+      "id": "eg1112_g8",
+      "pools": [
+        "eg-1112-1",
+        "eng-1112-1"
+      ]
+    },
+    {
+      "id": "eg1112_g9",
+      "pools": [
+        "eg-1112-1",
+        "eng-1112-1"
+      ]
+    },
+    {
+      "id": "eg1112_g10",
+      "pools": [
+        "eg-1112-1",
+        "eng-1112-1"
+      ]
+    },
+    {
+      "id": "eg1112_g11",
+      "pools": [
+        "eg-1112-1",
+        "eng-1112-1"
+      ]
+    },
+    {
+      "id": "eg1112_g12",
+      "pools": [
+        "eg-1112-1",
+        "eng-1112-1"
+      ]
+    },
+    {
+      "id": "eg1112_g13",
+      "pools": [
+        "eg-1112-1",
+        "eng-1112-1"
+      ]
+    },
+    {
+      "id": "eg1112_g14",
+      "pools": [
+        "eg-1112-1",
+        "eng-1112-1"
+      ]
+    },
+    {
+      "id": "eg1112_g15",
+      "pools": [
+        "eg-1112-1",
+        "eng-1112-1"
+      ]
+    },
+    {
+      "id": "rg56_1",
+      "pools": [
+        "rg-56-1",
+        "rus-56-1"
+      ]
+    },
+    {
+      "id": "rg56_2",
+      "pools": [
+        "rg-56-1",
+        "rus-56-1"
+      ]
+    },
+    {
+      "id": "rg56_3",
+      "pools": [
+        "rg-56-1",
+        "rus-56-1"
+      ]
+    },
+    {
+      "id": "rg56_4",
+      "pools": [
+        "rg-56-1",
+        "rus-56-1"
+      ]
+    },
+    {
+      "id": "rg56_5",
+      "pools": [
+        "rg-56-1",
+        "rus-56-1"
+      ]
+    },
+    {
+      "id": "rg56_6",
+      "pools": [
+        "rg-56-1",
+        "rus-56-1"
+      ]
+    },
+    {
+      "id": "rg56_7",
+      "pools": [
+        "rg-56-1",
+        "rus-56-1"
+      ]
+    },
+    {
+      "id": "rg56_8",
+      "pools": [
+        "rg-56-1",
+        "rus-56-1"
+      ]
+    },
+    {
+      "id": "rg56_9",
+      "pools": [
+        "rg-56-1",
+        "rus-56-1"
+      ]
+    },
+    {
+      "id": "rg56_10",
+      "pools": [
+        "rg-56-1",
+        "rus-56-1"
+      ]
+    },
+    {
+      "id": "rg56_11",
+      "pools": [
+        "rg-56-1",
+        "rus-56-1"
+      ]
+    },
+    {
+      "id": "rg56_12",
+      "pools": [
+        "rg-56-1",
+        "rus-56-1"
+      ]
+    },
+    {
+      "id": "rg56_13",
+      "pools": [
+        "rg-56-1",
+        "rus-56-1"
+      ]
+    },
+    {
+      "id": "rg56_14",
+      "pools": [
+        "rg-56-1",
+        "rus-56-1"
+      ]
+    },
+    {
+      "id": "rg56_15",
+      "pools": [
+        "rg-56-1",
+        "rus-56-1"
+      ]
+    },
+    {
+      "id": "rg78_1",
+      "pools": [
+        "rg-78-1",
+        "rus-78-1"
+      ]
+    },
+    {
+      "id": "rg78_2",
+      "pools": [
+        "rg-78-1",
+        "rus-78-1"
+      ]
+    },
+    {
+      "id": "rg78_3",
+      "pools": [
+        "rg-78-1",
+        "rus-78-1"
+      ]
+    },
+    {
+      "id": "rg78_4",
+      "pools": [
+        "rg-78-1",
+        "rus-78-1"
+      ]
+    },
+    {
+      "id": "rg78_5",
+      "pools": [
+        "rg-78-1",
+        "rus-78-1"
+      ]
+    },
+    {
+      "id": "rg78_6",
+      "pools": [
+        "rg-78-1",
+        "rus-78-1"
+      ]
+    },
+    {
+      "id": "rg78_7",
+      "pools": [
+        "rg-78-1",
+        "rus-78-1"
+      ]
+    },
+    {
+      "id": "rg78_8",
+      "pools": [
+        "rg-78-1",
+        "rus-78-1"
+      ]
+    },
+    {
+      "id": "rg78_9",
+      "pools": [
+        "rg-78-1",
+        "rus-78-1"
+      ]
+    },
+    {
+      "id": "rg78_10",
+      "pools": [
+        "rg-78-1",
+        "rus-78-1"
+      ]
+    },
+    {
+      "id": "rg78_11",
+      "pools": [
+        "rg-78-1",
+        "rus-78-1"
+      ]
+    },
+    {
+      "id": "rg78_12",
+      "pools": [
+        "rg-78-1",
+        "rus-78-1"
+      ]
+    },
+    {
+      "id": "rg78_13",
+      "pools": [
+        "rg-78-1",
+        "rus-78-1"
+      ]
+    },
+    {
+      "id": "rg78_14",
+      "pools": [
+        "rg-78-1",
+        "rus-78-1"
+      ]
+    },
+    {
+      "id": "rg78_15",
+      "pools": [
+        "rg-78-1",
+        "rus-78-1"
+      ]
+    },
+    {
+      "id": "rg910_1",
+      "pools": [
+        "rg-910-1",
+        "rus-910-1"
+      ]
+    },
+    {
+      "id": "rg910_2",
+      "pools": [
+        "rg-910-1",
+        "rus-910-1"
+      ]
+    },
+    {
+      "id": "rg910_3",
+      "pools": [
+        "rg-910-1",
+        "rus-910-1"
+      ]
+    },
+    {
+      "id": "rg910_4",
+      "pools": [
+        "rg-910-1",
+        "rus-910-1"
+      ]
+    },
+    {
+      "id": "rg910_5",
+      "pools": [
+        "rg-910-1",
+        "rus-910-1"
+      ]
+    },
+    {
+      "id": "rg910_6",
+      "pools": [
+        "rg-910-1",
+        "rus-910-1"
+      ]
+    },
+    {
+      "id": "rg910_7",
+      "pools": [
+        "rg-910-1",
+        "rus-910-1"
+      ]
+    },
+    {
+      "id": "rg910_8",
+      "pools": [
+        "rg-910-1",
+        "rus-910-1"
+      ]
+    },
+    {
+      "id": "rg910_9",
+      "pools": [
+        "rg-910-1",
+        "rus-910-1"
+      ]
+    },
+    {
+      "id": "rg910_10",
+      "pools": [
+        "rg-910-1",
+        "rus-910-1"
+      ]
+    },
+    {
+      "id": "rg910_11",
+      "pools": [
+        "rg-910-1",
+        "rus-910-1"
+      ]
+    },
+    {
+      "id": "rg910_12",
+      "pools": [
+        "rg-910-1",
+        "rus-910-1"
+      ]
+    },
+    {
+      "id": "rg910_13",
+      "pools": [
+        "rg-910-1",
+        "rus-910-1"
+      ]
+    },
+    {
+      "id": "rg910_14",
+      "pools": [
+        "rg-910-1",
+        "rus-910-1"
+      ]
+    },
+    {
+      "id": "rg910_15",
+      "pools": [
+        "rg-910-1",
+        "rus-910-1"
+      ]
+    },
+    {
+      "id": "rg1112_1",
+      "pools": [
+        "rg-1112-1",
+        "rus-1112-1"
+      ]
+    },
+    {
+      "id": "rg1112_2",
+      "pools": [
+        "rg-1112-1",
+        "rus-1112-1"
+      ]
+    },
+    {
+      "id": "rg1112_3",
+      "pools": [
+        "rg-1112-1",
+        "rus-1112-1"
+      ]
+    },
+    {
+      "id": "rg1112_4",
+      "pools": [
+        "rg-1112-1",
+        "rus-1112-1"
+      ]
+    },
+    {
+      "id": "rg1112_5",
+      "pools": [
+        "rg-1112-1",
+        "rus-1112-1"
+      ]
+    },
+    {
+      "id": "rg1112_6",
+      "pools": [
+        "rg-1112-1",
+        "rus-1112-1"
+      ]
+    },
+    {
+      "id": "rg1112_7",
+      "pools": [
+        "rg-1112-1",
+        "rus-1112-1"
+      ]
+    },
+    {
+      "id": "rg1112_8",
+      "pools": [
+        "rg-1112-1",
+        "rus-1112-1"
+      ]
+    },
+    {
+      "id": "rg1112_9",
+      "pools": [
+        "rg-1112-1",
+        "rus-1112-1"
+      ]
+    },
+    {
+      "id": "rg1112_10",
+      "pools": [
+        "rg-1112-1",
+        "rus-1112-1"
+      ]
+    },
+    {
+      "id": "rg1112_11",
+      "pools": [
+        "rg-1112-1",
+        "rus-1112-1"
+      ]
+    },
+    {
+      "id": "rg1112_12",
+      "pools": [
+        "rg-1112-1",
+        "rus-1112-1"
+      ]
+    },
+    {
+      "id": "rg1112_13",
+      "pools": [
+        "rg-1112-1",
+        "rus-1112-1"
+      ]
+    },
+    {
+      "id": "rg1112_14",
+      "pools": [
+        "rg-1112-1",
+        "rus-1112-1"
+      ]
+    },
+    {
+      "id": "rg1112_15",
+      "pools": [
+        "rg-1112-1",
+        "rus-1112-1"
+      ]
+    }
+  ],
+  "duplicateTextCount": 166,
+  "duplicateTextExamples": [
+    {
+      "text": "сов. вид \"читать\"?",
+      "ids": [
+        "rus56_20",
+        "rus78_4"
+      ]
+    },
+    {
+      "text": "несов. вид — действие в процессе.",
+      "ids": [
+        "rus56_10",
+        "rus78_5"
+      ]
+    },
+    {
+      "text": "4 × 5 = ?",
+      "ids": [
+        "m12v2_7",
+        "m12v3_2"
+      ]
+    },
+    {
+      "text": "17 - 8 = ?",
+      "ids": [
+        "m12v2_5",
+        "m12v4_2"
+      ]
+    },
+    {
+      "text": "2 × 9 = ?",
+      "ids": [
+        "m12v3_8",
+        "m12v4_3"
+      ]
+    },
+    {
+      "text": "6 + 7 = ?",
+      "ids": [
+        "m12v4_8",
+        "m12v5_1"
+      ]
+    },
+    {
+      "text": "5 × 3 = ?",
+      "ids": [
+        "m12v2_12",
+        "m12v5_3"
+      ]
+    },
+    {
+      "text": "5/6 - 1/3 = ?",
+      "ids": [
+        "m56v3_6",
+        "m56v4_1"
+      ]
+    },
+    {
+      "text": "7/8 - 3/8 = ?",
+      "ids": [
+        "m56v4_11",
+        "m56v5_1"
+      ]
+    },
+    {
+      "text": "cos(120°) = ?",
+      "ids": [
+        "m910v3_8",
+        "m910v4_1"
+      ]
+    },
+    {
+      "text": "sin(270°) = ?",
+      "ids": [
+        "m910v3_13",
+        "m910v5_1"
+      ]
+    },
+    {
+      "text": "lim(x→1) (x² - 1)/(x - 1) = ?",
+      "ids": [
+        "m1112v4_8",
+        "m1112v5_4"
+      ]
+    },
+    {
+      "text": "d/dx(sin x) = cos x",
+      "ids": [
+        "m1112v2_17",
+        "m1112v5_15"
+      ]
+    },
+    {
+      "text": "what does \"tone\" mean in literary analysis?",
+      "ids": [
+        "e910v5_17",
+        "e1112v5_2"
+      ]
+    },
+    {
+      "text": "ассонанс — повторение гласных звуков.",
+      "ids": [
+        "rg1112_11",
+        "r1112v4_18"
+      ]
+    },
+    {
+      "text": "მზე ამოდის:",
+      "ids": [
+        "nat12_3",
+        "g12v3_6"
+      ]
+    },
+    {
+      "text": "ქართულ ანბანში 33 ასოა.",
+      "ids": [
+        "g12v2_15",
+        "g12v4_18"
+      ]
+    },
+    {
+      "text": "ქართულ ანბანში 33 ასოა.",
+      "ids": [
+        "g12v2_15",
+        "g34v3_11"
+      ]
+    },
+    {
+      "text": "ქართულ ენაში 7 ბრუნვაა.",
+      "ids": [
+        "gg34_6",
+        "g34v4_11"
+      ]
+    },
+    {
+      "text": "ილია ჭავჭავაძის ცნობილი ნაწარმოებია:",
+      "ids": [
+        "geo56_1",
+        "g56v2_2"
+      ]
+    },
+    {
+      "text": "ქართულ ენაში 5 ხმოვანია.",
+      "ids": [
+        "g12v4_12",
+        "g78v2_11"
+      ]
+    },
+    {
+      "text": "გალაკტიონ ტაბიძის ცნობილი ლექსია:",
+      "ids": [
+        "geo910_3",
+        "g910v2_16"
+      ]
+    },
+    {
+      "text": "ფოტოსინთეზი ხდება:",
+      "ids": [
+        "n12v3_9",
+        "n34v2_5"
+      ]
+    },
+    {
+      "text": "ილია ჭავჭავაძე მოკლეს:",
+      "ids": [
+        "geo910_1",
+        "h910_15"
+      ]
+    },
+    {
+      "text": "მზე ამოდის:",
+      "ids": [
+        "nat12_3",
+        "geog12_1"
+      ]
+    },
+    {
+      "text": "დედამიწა ბრუნავს:",
+      "ids": [
+        "n12v2_8",
+        "geog12_13"
+      ]
+    },
+    {
+      "text": "მზე ამოდის აღმოსავლეთით.",
+      "ids": [
+        "g12v3_11",
+        "geog12_21"
+      ]
+    },
+    {
+      "text": "ურბანიზაცია ნიშნავს:",
+      "ids": [
+        "geog78_R3",
+        "geog1112_6"
+      ]
+    },
+    {
+      "text": "სოკო მცენარეა.",
+      "ids": [
+        "nat12_18",
+        "bio12v2_18"
+      ]
+    },
+    {
+      "text": "ეკოლოგია შეისწავლის:",
+      "ids": [
+        "n12v4_5",
+        "bio34_12"
+      ]
+    },
+    {
+      "text": "ფოტოსინთეზი ხდება:",
+      "ids": [
+        "n12v3_9",
+        "bio56v4_11"
+      ]
+    },
+    {
+      "text": "უჯრედის ბირთვი შეიცავს:",
+      "ids": [
+        "n56v2_5",
+        "bio78_1"
+      ]
+    },
+    {
+      "text": "ადამიანის გული:",
+      "ids": [
+        "n12v3_8",
+        "bio78v5_3"
+      ]
+    },
+    {
+      "text": "ნახშირბადის ციკლი:",
+      "ids": [
+        "n34v2_16",
+        "bio910_8"
+      ]
+    },
+    {
+      "text": "ვაქცინა:",
+      "ids": [
+        "n34v5_8",
+        "bio910v3_10"
+      ]
+    },
+    {
+      "text": "მჟავა ph 7-ზე მეტია.",
+      "ids": [
+        "n56v4_14",
+        "chem34v2_14"
+      ]
+    },
+    {
+      "text": "გლობალური დათბობა ძირითადად გამოწვეულია:",
+      "ids": [
+        "nat1112_18",
+        "chem1112v3_4"
+      ]
+    },
+    {
+      "text": "ოჰმის კანონი: u=i×r.",
+      "ids": [
+        "phys56v4_14",
+        "phys78_16"
+      ]
+    },
+    {
+      "text": "ტემპერატურა იზომება:",
+      "ids": [
+        "n34v4_10",
+        "phys34v4_3"
+      ]
+    },
+    {
+      "text": "მცენარის ყვავილის მთავარი ფუნქციაა:",
+      "ids": [
+        "n34_18",
+        "bio34v6_5"
+      ]
+    },
+    {
+      "text": "მცენარის ღეროს ფუნქციაა:",
+      "ids": [
+        "bio34v3_5",
+        "bio34v6_9"
+      ]
+    },
+    {
+      "text": "ნნ. ო. xx ს.:",
+      "ids": [
+        "h1112v2_2",
+        "h1112v2_3"
+      ]
+    },
+    {
+      "text": "ც. ო.:",
+      "ids": [
+        "h1112v2_4",
+        "h1112v3_1"
+      ]
+    },
+    {
+      "text": "1991 ნნ.:",
+      "ids": [
+        "h1112v2_5",
+        "h1112v3_2"
+      ]
+    },
+    {
+      "text": "2003 ვ. რ.:",
+      "ids": [
+        "h1112v2_6",
+        "h1112v3_3"
+      ]
+    },
+    {
+      "text": "2008 ო.:",
+      "ids": [
+        "h1112v2_7",
+        "h1112v3_4"
+      ]
+    },
+    {
+      "text": "გ. xxi:",
+      "ids": [
+        "h1112v2_8",
+        "h1112v3_5"
+      ]
+    },
+    {
+      "text": "ა. ა. xxi:",
+      "ids": [
+        "h1112v2_9",
+        "h1112v3_6"
+      ]
+    },
+    {
+      "text": "კ. ც. ა.:",
+      "ids": [
+        "h1112v2_10",
+        "h1112v3_7"
+      ]
+    },
+    {
+      "text": "ე. ი. ა.:",
+      "ids": [
+        "h1112v2_11",
+        "h1112v3_8"
+      ]
+    },
+    {
+      "text": "2022 ა. ბ.:",
+      "ids": [
+        "h1112v2_12",
+        "h1112v3_9"
+      ]
+    },
+    {
+      "text": "ი. ა.-ფ. 2023:",
+      "ids": [
+        "h1112v2_13",
+        "h1112v3_10"
+      ]
+    },
+    {
+      "text": "ნნ. ი. 2024:",
+      "ids": [
+        "h1112v2_14",
+        "h1112v3_11"
+      ]
+    },
+    {
+      "text": "xix ი. ე.:",
+      "ids": [
+        "h1112v2_15",
+        "h1112v3_12"
+      ]
+    },
+    {
+      "text": "ა.-ა. 1989:",
+      "ids": [
+        "h1112v2_16",
+        "h1112v3_13"
+      ]
+    },
+    {
+      "text": "ნნ. კ. 1991:",
+      "ids": [
+        "h1112v2_17",
+        "h1112v3_14"
+      ]
+    },
+    {
+      "text": "საქ. 1991:",
+      "ids": [
+        "h1112v2_18",
+        "h1112v3_15"
+      ]
+    },
+    {
+      "text": "ა. უ. ო.:",
+      "ids": [
+        "h1112v2_19",
+        "h1112v3_16"
+      ]
+    },
+    {
+      "text": "ი. xxi:",
+      "ids": [
+        "h1112v2_20",
+        "h1112v3_17"
+      ]
+    },
+    {
+      "text": "i მ. ო. (1914) შ. მ.:",
+      "ids": [
+        "h1112v2_1",
+        "h1112v3_18"
+      ]
+    },
+    {
+      "text": "ნნ. ო. xx ს.:",
+      "ids": [
+        "h1112v2_2",
+        "h1112v3_19"
+      ]
+    },
+    {
+      "text": "ნნ. ო. xx ს.:",
+      "ids": [
+        "h1112v2_2",
+        "h1112v3_20"
+      ]
+    },
+    {
+      "text": "2008 ო.:",
+      "ids": [
+        "h1112v2_7",
+        "h1112v4_1"
+      ]
+    },
+    {
+      "text": "გ. xxi:",
+      "ids": [
+        "h1112v2_8",
+        "h1112v4_2"
+      ]
+    },
+    {
+      "text": "ა. ა. xxi:",
+      "ids": [
+        "h1112v2_9",
+        "h1112v4_3"
+      ]
+    },
+    {
+      "text": "კ. ც. ა.:",
+      "ids": [
+        "h1112v2_10",
+        "h1112v4_4"
+      ]
+    },
+    {
+      "text": "ე. ი. ა.:",
+      "ids": [
+        "h1112v2_11",
+        "h1112v4_5"
+      ]
+    },
+    {
+      "text": "2022 ა. ბ.:",
+      "ids": [
+        "h1112v2_12",
+        "h1112v4_6"
+      ]
+    },
+    {
+      "text": "ი. ა.-ფ. 2023:",
+      "ids": [
+        "h1112v2_13",
+        "h1112v4_7"
+      ]
+    },
+    {
+      "text": "ნნ. ი. 2024:",
+      "ids": [
+        "h1112v2_14",
+        "h1112v4_8"
+      ]
+    },
+    {
+      "text": "xix ი. ე.:",
+      "ids": [
+        "h1112v2_15",
+        "h1112v4_9"
+      ]
+    },
+    {
+      "text": "ა.-ა. 1989:",
+      "ids": [
+        "h1112v2_16",
+        "h1112v4_10"
+      ]
+    },
+    {
+      "text": "ნნ. კ. 1991:",
+      "ids": [
+        "h1112v2_17",
+        "h1112v4_11"
+      ]
+    },
+    {
+      "text": "საქ. 1991:",
+      "ids": [
+        "h1112v2_18",
+        "h1112v4_12"
+      ]
+    },
+    {
+      "text": "ა. უ. ო.:",
+      "ids": [
+        "h1112v2_19",
+        "h1112v4_13"
+      ]
+    },
+    {
+      "text": "ი. xxi:",
+      "ids": [
+        "h1112v2_20",
+        "h1112v4_14"
+      ]
+    },
+    {
+      "text": "i მ. ო. (1914) შ. მ.:",
+      "ids": [
+        "h1112v2_1",
+        "h1112v4_15"
+      ]
+    },
+    {
+      "text": "ნნ. ო. xx ს.:",
+      "ids": [
+        "h1112v2_2",
+        "h1112v4_16"
+      ]
+    },
+    {
+      "text": "ნნ. ო. xx ს.:",
+      "ids": [
+        "h1112v2_2",
+        "h1112v4_17"
+      ]
+    },
+    {
+      "text": "ც. ო.:",
+      "ids": [
+        "h1112v2_4",
+        "h1112v4_18"
+      ]
+    },
+    {
+      "text": "1991 ნნ.:",
+      "ids": [
+        "h1112v2_5",
+        "h1112v4_19"
+      ]
+    },
+    {
+      "text": "2003 ვ. რ.:",
+      "ids": [
+        "h1112v2_6",
+        "h1112v4_20"
+      ]
+    },
+    {
+      "text": "კ. ც. ა.:",
+      "ids": [
+        "h1112v2_10",
+        "h1112v5_1"
+      ]
+    },
+    {
+      "text": "ე. ი. ა.:",
+      "ids": [
+        "h1112v2_11",
+        "h1112v5_2"
+      ]
+    },
+    {
+      "text": "2022 ა. ბ.:",
+      "ids": [
+        "h1112v2_12",
+        "h1112v5_3"
+      ]
+    },
+    {
+      "text": "ი. ა.-ფ. 2023:",
+      "ids": [
+        "h1112v2_13",
+        "h1112v5_4"
+      ]
+    },
+    {
+      "text": "ნნ. ი. 2024:",
+      "ids": [
+        "h1112v2_14",
+        "h1112v5_5"
+      ]
+    },
+    {
+      "text": "xix ი. ე.:",
+      "ids": [
+        "h1112v2_15",
+        "h1112v5_6"
+      ]
+    },
+    {
+      "text": "ა.-ა. 1989:",
+      "ids": [
+        "h1112v2_16",
+        "h1112v5_7"
+      ]
+    },
+    {
+      "text": "ნნ. კ. 1991:",
+      "ids": [
+        "h1112v2_17",
+        "h1112v5_8"
+      ]
+    },
+    {
+      "text": "საქ. 1991:",
+      "ids": [
+        "h1112v2_18",
+        "h1112v5_9"
+      ]
+    },
+    {
+      "text": "ა. უ. ო.:",
+      "ids": [
+        "h1112v2_19",
+        "h1112v5_10"
+      ]
+    },
+    {
+      "text": "ი. xxi:",
+      "ids": [
+        "h1112v2_20",
+        "h1112v5_11"
+      ]
+    },
+    {
+      "text": "i მ. ო. (1914) შ. მ.:",
+      "ids": [
+        "h1112v2_1",
+        "h1112v5_12"
+      ]
+    },
+    {
+      "text": "ნნ. ო. xx ს.:",
+      "ids": [
+        "h1112v2_2",
+        "h1112v5_13"
+      ]
+    },
+    {
+      "text": "ნნ. ო. xx ს.:",
+      "ids": [
+        "h1112v2_2",
+        "h1112v5_14"
+      ]
+    },
+    {
+      "text": "ც. ო.:",
+      "ids": [
+        "h1112v2_4",
+        "h1112v5_15"
+      ]
+    },
+    {
+      "text": "1991 ნნ.:",
+      "ids": [
+        "h1112v2_5",
+        "h1112v5_16"
+      ]
+    },
+    {
+      "text": "2003 ვ. რ.:",
+      "ids": [
+        "h1112v2_6",
+        "h1112v5_17"
+      ]
+    },
+    {
+      "text": "2008 ო.:",
+      "ids": [
+        "h1112v2_7",
+        "h1112v5_18"
+      ]
+    }
+  ],
+  "malformed": [],
+  "curriculumAlignment": {
+    "frameworkVersion": "ncp-domain-alignment-2026.07",
+    "mappingLevel": "NCP subject-domain and observable outcome candidate",
+    "statusCounts": {
+      "approved_domain_alignment": 4563,
+      "blocked_unpublished_pool": 1693,
+      "approved_explicit_alignment": 32,
+      "blocked_curriculum_stage": 316
+    },
+    "areaCounts": {
+      "georgian": 746,
+      "foreign_language": 1488,
+      "math": 759,
+      "nature": 629,
+      "history": 659,
+      "geography": 154,
+      "biology": 720,
+      "chemistry": 723,
+      "physics": 726
+    },
+    "domainCounts": {
+      "georgian.language_system": 127,
+      "foreign_language.language_system": 186,
+      "math.numbers_operations": 617,
+      "math.geometry_space": 91,
+      "math.patterns_algebra": 17,
+      "math.data_probability": 19,
+      "math.measurement": 15,
+      "georgian.reading": 502,
+      "georgian.literature_culture": 109,
+      "foreign_language.reading": 1262,
+      "foreign_language.culture": 40,
+      "nature.inquiry": 386,
+      "nature.earth_environment": 32,
+      "nature.living_world": 154,
+      "nature.matter_phenomena": 57,
+      "history.society_state": 558,
+      "history.time_space": 67,
+      "history.culture_religion": 29,
+      "geography.map_space": 118,
+      "geography.natural_processes": 19,
+      "geography.population_economy": 15,
+      "geography.sustainability": 2,
+      "biology.organization_processes": 561,
+      "biology.heredity_evolution": 113,
+      "biology.ecology_biodiversity": 46,
+      "chemistry.substances_structure": 593,
+      "chemistry.reactions_quantities": 126,
+      "chemistry.inquiry_safety": 4,
+      "physics.motion_forces": 161,
+      "physics.inquiry_data": 344,
+      "physics.waves_fields": 125,
+      "physics.energy": 96,
+      "history.sources_interpretation": 5,
+      "georgian.visual_comprehension": 8
+    },
+    "note": "Domain-level approval is an expert alignment review, not a Ministry endorsement or textbook-edition page certification."
+  },
+  "readiness": {
+    "technicalIntegrity": "pass_with_identity_warnings",
+    "curriculumTraceability": "pass_domain_level",
+    "explicitOutcomeTagCoverage": "incomplete",
+    "explanationCoverage": "incomplete",
+    "visualCoverage": "started"
+  }
+}

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 360" role="img" aria-labelledby="title desc">
+  <title id="title">საათის ციფერბლატი</title>
+  <desc id="desc">ანალოგური საათი, რომლის წუთების ისარი თორმეტზეა, საათების ისარი კი სამზე</desc>
+  <circle cx="180" cy="180" r="158" fill="#eff6ff" stroke="#1d4ed8" stroke-width="10"/>
+  <g fill="#1e3a8a" font-family="Arial, sans-serif" font-size="34" text-anchor="middle">
+    <text x="180" y="62">12</text><text x="302" y="191">3</text><text x="180" y="320">6</text><text x="55" y="191">9</text>
+  </g>
+  <g stroke="#0f172a" stroke-width="12" stroke-linecap="round">
+    <path d="M180 180V78"/><path d="M180 180H275"/>
+  </g>
+  <circle cx="180" cy="180" r="14" fill="#ef4444"/>
+</svg>

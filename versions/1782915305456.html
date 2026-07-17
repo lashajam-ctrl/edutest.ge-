@@ -1,0 +1,1843 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Edutest Platform",
+  "schemaVersion": 1,
+  "description": "EduTest.ge — სრული ონლაინ სატესტო პლატფორმა ქართული სკოლებისთვის. Landing page, login, student/teacher/admin dashboards, test-taking UI with timer, results, payment modal."
+}
+</script>
+<html lang="ka">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>EduTest.ge</title>
+<style>
+:root{color-scheme:light;--blue:#2563eb;--blue-d:#1d4ed8;--blue-l:#dbeafe;--green:#16a34a;--green-l:#dcfce7;--amber:#d97706;--amber-l:#fef3c7;--red:#dc2626;--red-l:#fee2e2;--gray:#6b7280;--gray-l:#f9fafb;--border:#e5e7eb;--white:#fff;--shadow:0 1px 3px rgba(0,0,0,.1);--shadow-md:0 4px 6px rgba(0,0,0,.1);--r:8px;--rl:12px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:#f0f4f8;color:#1a202c;min-height:100vh;font-size:14px}
+.page{display:none;min-height:100vh}.page.active{display:flex;flex-direction:column}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:var(--r);font-size:13px;font-weight:500;cursor:pointer;border:none;transition:all .15s;font-family:inherit;text-decoration:none}
+.btn-primary{background:var(--blue);color:#fff}.btn-primary:hover{background:var(--blue-d)}
+.btn-outline{background:#fff;color:var(--blue);border:1.5px solid var(--blue)}.btn-outline:hover{background:var(--blue-l)}
+.btn-ghost{background:transparent;color:var(--gray)}.btn-ghost:hover{background:var(--border)}
+.btn-green{background:var(--green);color:#fff}.btn-green:hover{background:#15803d}
+.btn-danger{background:var(--red);color:#fff}.btn-danger:hover{background:#b91c1c}
+.btn-sm{padding:5px 10px;font-size:12px}
+.btn-lg{padding:12px 28px;font-size:15px;font-weight:600}
+.card{background:#fff;border-radius:var(--rl);box-shadow:var(--shadow);border:1px solid var(--border)}
+.badge{display:inline-flex;align-items:center;padding:3px 8px;border-radius:999px;font-size:11px;font-weight:600}
+.b-blue{background:var(--blue-l);color:var(--blue-d)}.b-green{background:var(--green-l);color:var(--green)}
+.b-amber{background:var(--amber-l);color:var(--amber)}.b-red{background:var(--red-l);color:var(--red)}
+.b-gray{background:var(--border);color:var(--gray)}
+input,select,textarea{width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:var(--r);font-size:13px;font-family:inherit;outline:none;transition:border-color .15s;background:#fff}
+input:focus,select:focus,textarea:focus{border-color:var(--blue)}
+.label{display:block;font-size:12px;font-weight:600;color:#374151;margin-bottom:4px;text-transform:uppercase;letter-spacing:.03em}
+.fg{margin-bottom:12px}
+.tbl{width:100%;border-collapse:collapse}
+.tbl th{background:#f8fafc;padding:10px 14px;text-align:left;font-size:11px;font-weight:700;color:var(--gray);border-bottom:1.5px solid var(--border);text-transform:uppercase;letter-spacing:.05em}
+.tbl td{padding:10px 14px;border-bottom:1px solid var(--border);font-size:13px}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tr:hover td{background:#fafbfc}
+.pbar{height:8px;background:var(--border);border-radius:999px;overflow:hidden}
+.pfill{height:100%;border-radius:999px;transition:width .5s}
+.sidebar{width:220px;background:#1e293b;min-height:100vh;flex-shrink:0;display:flex;flex-direction:column}
+.slogo{padding:18px 14px;border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;gap:10px}
+.slogo-icon{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:15px;flex-shrink:0}
+.snav{padding:10px 0;flex:1}
+.ni{display:flex;align-items:center;gap:10px;padding:10px 16px;color:rgba(255,255,255,.65);cursor:pointer;font-size:13px;transition:all .15s;border-left:3px solid transparent}
+.ni:hover{background:rgba(255,255,255,.05);color:#fff}
+.ni.act{background:rgba(37,99,235,.2);color:#93c5fd;border-left-color:#3b82f6}
+.sfoot{padding:12px}
+.susr{display:flex;align-items:center;gap:8px;padding:10px;background:rgba(255,255,255,.05);border-radius:8px;margin-bottom:6px}
+.sav{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:12px;flex-shrink:0}
+.topbar{background:#fff;border-bottom:1px solid var(--border);padding:0 20px;height:56px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.main{flex:1;padding:20px;overflow:auto}
+.stat-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:18px}
+.stat{background:#fff;border-radius:var(--rl);padding:16px;border:1px solid var(--border)}
+.stat-ic{width:40px;height:40px;border-radius:var(--r);display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:8px}
+.stat-v{font-size:22px;font-weight:700;margin-bottom:2px}
+.stat-l{font-size:11px;color:var(--gray)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.qopt{display:flex;align-items:center;gap:10px;padding:10px 14px;border:1.5px solid var(--border);border-radius:var(--r);cursor:pointer;transition:all .15s;margin-bottom:6px}
+.qopt:hover{border-color:var(--blue);background:var(--blue-l)}
+.qopt.sel{border-color:var(--blue);background:var(--blue-l);color:var(--blue-d)}
+.qopt.cor{border-color:var(--green);background:var(--green-l)}
+.qopt.wrg{border-color:var(--red);background:var(--red-l)}
+.radio{width:20px;height:20px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s}
+.radio.sel{background:var(--blue);border-color:var(--blue)}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;z-index:100;padding:16px}
+.modal{background:#fff;border-radius:var(--rl);padding:24px;width:100%;max-width:480px;max-height:90vh;overflow-y:auto}
+.steps{display:flex;align-items:center;gap:6px;margin-bottom:20px}
+.step{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;border:2px solid var(--border);color:var(--gray);flex-shrink:0}
+.step.act{background:var(--blue);border-color:var(--blue);color:#fff}
+.step.done{background:var(--green);border-color:var(--green);color:#fff}
+.sline{flex:1;height:2px;background:var(--border)}
+.sline.done{background:var(--green)}
+.chip{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:999px;font-size:11px;background:var(--border);color:#374151}
+.timer{width:60px;height:60px;border-radius:50%;border:4px solid var(--blue);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--blue);flex-shrink:0}
+.timer.amb{border-color:var(--amber);color:var(--amber)}
+.timer.red{border-color:var(--red);color:var(--red);animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+.dot-nav{display:flex;gap:5px;justify-content:center;margin-top:12px}
+.dot{width:10px;height:10px;border-radius:50%;cursor:pointer;transition:background .2s}
+.hero-grad{background:linear-gradient(135deg,#1e3a8a,#2563eb)}
+.fade{animation:fadeIn .2s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.tab-row{display:flex;background:var(--gray-l);border-radius:var(--r);padding:3px;margin-bottom:16px}
+.tab{flex:1;padding:7px;border:none;border-radius:6px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:500;transition:all .15s;background:transparent;color:var(--gray)}
+.tab.act{background:#fff;color:#111;box-shadow:var(--shadow)}
+.role-btn{flex:1;padding:7px 4px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:12px;font-weight:500;transition:all .15s;text-align:center}
+.hidden{display:none!important}
+code{font-family:monospace;font-size:12px;background:var(--gray-l);padding:2px 6px;border-radius:4px}
+</style>
+</head>
+<body>
+
+<!-- LANDING -->
+<div id="p-landing" class="page active fade" style="background:linear-gradient(135deg,#1e3a8a,#2563eb);flex-direction:column">
+  <nav style="padding:14px 24px;display:flex;align-items:center;justify-content:space-between">
+    <div style="display:flex;align-items:center;gap:10px">
+      <div style="width:34px;height:34px;background:rgba(255,255,255,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:16px">E</div>
+      <span style="color:#fff;font-weight:700;font-size:16px">EduTest.ge</span>
+    </div>
+    <div style="display:flex;gap:10px">
+      <button class="btn btn-ghost" style="color:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.25)" onclick="go('login')">შესვლა</button>
+      <button class="btn" style="background:#fff;color:#1d4ed8;font-weight:600" onclick="go('login')">რეგისტრაცია</button>
+    </div>
+  </nav>
+  <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;text-align:center;color:#fff">
+    <div class="badge b-blue" style="background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3);margin-bottom:18px">🇬🇪 ქართული სკოლებისთვის</div>
+    <h1 style="font-size:clamp(1.8rem,5vw,3rem);font-weight:800;line-height:1.1;margin-bottom:16px">სატესტო პლატფორმა<br><span style="color:#93c5fd">ახალი თაობისთვის</span></h1>
+    <p style="font-size:15px;opacity:.85;max-width:480px;margin-bottom:28px;line-height:1.6">მასწავლებლები ქმნიან ტესტებს, მოსწავლეები ასრულებენ — შედეგი დაუყოვნებლივ. ორენოვანი, ასაკ-ადაპტირებული.</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center">
+      <button class="btn btn-lg" style="background:#fff;color:#1d4ed8" onclick="go('login')">▶ დაწყება — უფასოდ</button>
+      <button class="btn btn-lg" style="background:rgba(255,255,255,.1);color:#fff;border:1.5px solid rgba(255,255,255,.3)" onclick="go('login')">👁 Demo ნახვა</button>
+    </div>
+    <div style="display:flex;gap:40px;margin-top:40px;flex-wrap:wrap;justify-content:center">
+      <div><div style="font-size:28px;font-weight:800">3+</div><div style="opacity:.65;font-size:12px">სკოლა</div></div>
+      <div><div style="font-size:28px;font-weight:800">500+</div><div style="opacity:.65;font-size:12px">მოსწავლე</div></div>
+      <div><div style="font-size:28px;font-weight:800">60+</div><div style="opacity:.65;font-size:12px">ტესტი</div></div>
+      <div><div style="font-size:28px;font-weight:800">95%</div><div style="opacity:.65;font-size:12px">კმაყოფილება</div></div>
+    </div>
+  </div>
+  <div style="background:rgba(255,255,255,.06);padding:28px 20px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;max-width:860px;margin:0 auto">
+      <div style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:18px"><div style="font-size:24px;margin-bottom:8px">📝</div><h3 style="color:#fff;font-weight:600;margin-bottom:6px">ონლაინ ტესტები</h3><p style="color:rgba(255,255,255,.7);font-size:12px;line-height:1.5">მასწავლებლები ქმნიან ტესტებს, მოსწავლეები ასრულებენ ბრაუზერში</p></div>
+      <div style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:18px"><div style="font-size:24px;margin-bottom:8px">✅</div><h3 style="color:#fff;font-weight:600;margin-bottom:6px">ავტო-შეფასება</h3><p style="color:rgba(255,255,255,.7);font-size:12px;line-height:1.5">MCQ და True/False ავტომატურად ფასდება, შედეგი — დაუყოვნებლივ</p></div>
+      <div style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:18px"><div style="font-size:24px;margin-bottom:8px">📊</div><h3 style="color:#fff;font-weight:600;margin-bottom:6px">ანალიტიკა</h3><p style="color:rgba(255,255,255,.7);font-size:12px;line-height:1.5">კლასის, მოსწავლის და საგნის მიხედვით დეტალური სტატისტიკა</p></div>
+      <div style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:18px"><div style="font-size:24px;margin-bottom:8px">🏆</div><h3 style="color:#fff;font-weight:600;margin-bottom:6px">ბეიჯები</h3><p style="color:rgba(255,255,255,.7);font-size:12px;line-height:1.5">Excellent, Good, Pass — მოტივაციისთვის</p></div>
+    </div>
+  </div>
+  <div style="padding:28px 20px;max-width:760px;margin:0 auto;width:100%;text-align:center">
+    <h2 style="color:#fff;margin-bottom:8px;font-size:20px">გეგმები</h2>
+    <p style="color:rgba(255,255,255,.55);font-size:12px;margin-bottom:18px">BOG Pay / TBC Pay-ით — ლარით</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px">
+      <div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:18px;text-align:left"><div style="color:#fff;font-weight:700;margin-bottom:4px">Basic</div><div style="color:#93c5fd;font-weight:800;font-size:20px;margin-bottom:12px">უფასო</div><div style="color:rgba(255,255,255,.7);font-size:12px;margin-bottom:5px">✓ 5 ტესტი/თვე</div><div style="color:rgba(255,255,255,.7);font-size:12px;margin-bottom:5px">✓ 30 მოსწავლე</div><div style="color:rgba(255,255,255,.7);font-size:12px;margin-bottom:14px">✓ MCQ & True/False</div><button class="btn" style="width:100%;justify-content:center;background:rgba(255,255,255,.15);color:#fff" onclick="go('login')">დაწყება</button></div>
+      <div style="background:rgba(255,255,255,.15);border:2px solid #93c5fd;border-radius:12px;padding:18px;text-align:left;position:relative"><div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:#93c5fd;color:#1e3a8a;padding:2px 12px;border-radius:999px;font-size:11px;font-weight:700">პოპულარული</div><div style="color:#fff;font-weight:700;margin-bottom:4px">Premium</div><div style="color:#93c5fd;font-weight:800;font-size:20px;margin-bottom:12px">29₾/თვე</div><div style="color:rgba(255,255,255,.7);font-size:12px;margin-bottom:5px">✓ შეუზღუდავი ტესტი</div><div style="color:rgba(255,255,255,.7);font-size:12px;margin-bottom:5px">✓ 200 მოსწავლე</div><div style="color:rgba(255,255,255,.7);font-size:12px;margin-bottom:14px">✓ ყველა ტიპი + ანალიტიკა</div><button class="btn" style="width:100%;justify-content:center;background:#93c5fd;color:#1e3a8a;font-weight:700" onclick="go('login')">გამოწერა</button></div>
+      <div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:18px;text-align:left"><div style="color:#fff;font-weight:700;margin-bottom:4px">School</div><div style="color:#93c5fd;font-weight:800;font-size:20px;margin-bottom:12px">99₾/თვე</div><div style="color:rgba(255,255,255,.7);font-size:12px;margin-bottom:5px">✓ მთელი სკოლა</div><div style="color:rgba(255,255,255,.7);font-size:12px;margin-bottom:5px">✓ შეუზღუდავი ყველაფერი</div><div style="color:rgba(255,255,255,.7);font-size:12px;margin-bottom:14px">✓ API + ინტეგრაცია</div><button class="btn" style="width:100%;justify-content:center;background:rgba(255,255,255,.15);color:#fff" onclick="go('login')">გამოწერა</button></div>
+    </div>
+  </div>
+  <footer style="text-align:center;color:rgba(255,255,255,.3);padding:16px;font-size:11px">© 2026 EduTest.ge · ყველა უფლება დაცულია</footer>
+</div>
+
+<!-- LOGIN -->
+<div id="p-login" class="page fade" style="background:linear-gradient(135deg,#f0f4ff,#e0e7ff);align-items:center;justify-content:center;padding:20px">
+  <div class="card" style="width:100%;max-width:420px;padding:28px">
+    <div style="text-align:center;margin-bottom:22px">
+      <div style="width:48px;height:48px;background:#1d4ed8;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;font-size:18px;margin:0 auto 10px">E</div>
+      <h2 style="font-weight:800;font-size:18px">EduTest.ge</h2>
+      <p style="color:var(--gray);font-size:12px">სკოლის სატესტო პლატფორმა</p>
+    </div>
+    <div class="tab-row">
+      <button class="tab act" id="ltab-login" onclick="loginTab('login')">შესვლა</button>
+      <button class="tab" id="ltab-reg" onclick="loginTab('reg')">რეგისტრაცია</button>
+    </div>
+    <div class="fg">
+      <div class="label">როლი</div>
+      <div style="display:flex;gap:6px">
+        <button class="role-btn" id="rb-student" style="border:2px solid #2563eb;background:#dbeafe;color:#1d4ed8" onclick="setRole('student')">მოსწავლე</button>
+        <button class="role-btn" id="rb-teacher" style="border:2px solid var(--border);background:#fff;color:var(--gray)" onclick="setRole('teacher')">მასწავლებელი</button>
+        <button class="role-btn" id="rb-admin" style="border:2px solid var(--border);background:#fff;color:var(--gray)" onclick="setRole('admin')">ადმინი</button>
+      </div>
+    </div>
+    <div class="fg"><div class="label">ელ-ფოსტა</div><input id="l-email" type="email" placeholder="თქვენი ელ-ფოსტა" value="mariam@student.ge"/></div>
+    <div class="fg"><div class="label">პაროლი</div><input id="l-pass" type="password" placeholder="პაროლი" value="student123"/></div>
+    <div id="reg-fields" class="hidden">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <div class="fg"><div class="label">სახელი</div><input id="r-name" placeholder="სახელი"/></div>
+        <div class="fg"><div class="label">გვარი</div><input id="r-surname" placeholder="გვარი"/></div>
+      </div>
+      <div class="fg"><div class="label">კლასი</div><select id="r-grade"><option>1A</option><option>2A</option><option>3A</option><option>3B</option><option>4A</option><option>5A</option><option>6A</option><option>7A</option><option>8A</option><option>9A</option><option>10A</option><option>11A</option><option>12A</option></select></div>
+    </div>
+    <div id="teacher-note" class="hidden" style="padding:10px;background:var(--amber-l);border-radius:var(--r);font-size:12px;color:#92400e;margin-bottom:12px">
+      ⚠️ მასწავლებლის ანგარიში ადმინის დამტკიცებას საჭიროებს.
+    </div>
+    <button class="btn btn-primary" style="width:100%;justify-content:center;padding:11px" id="l-btn" onclick="doLogin()">შესვლა</button>
+    <div id="demo-hint" style="margin-top:10px;padding:10px;background:#f0f9ff;border:1px solid #bae6fd;border-radius:var(--r);font-size:11px;color:#0369a1">
+      <strong>Demo რეჟიმი:</strong> მოსწავლე — mariam@student.ge / student123 &nbsp;|&nbsp; მასწ. — nino@edutest.ge / teacher123 &nbsp;|&nbsp; ადმინი — admin@edutest.ge / admin123
+    </div>
+    <div id="login-error" class="hidden" style="margin-top:8px;padding:8px;background:var(--red-l);border-radius:var(--r);font-size:12px;color:var(--red);text-align:center"></div>
+    <button class="btn btn-ghost" style="width:100%;justify-content:center;margin-top:6px" onclick="go('landing')">← მთავარ გვერდზე</button>
+  </div>
+</div>
+
+<!-- STUDENT -->
+<div id="p-student" class="page fade" style="flex-direction:row">
+  <div class="sidebar">
+    <div class="slogo">
+      <div class="slogo-icon" style="background:#2563eb">E</div>
+      <div><div style="color:#fff;font-weight:700;font-size:14px">EduTest.ge</div><div style="font-size:10px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.05em">student</div></div>
+    </div>
+    <div class="snav">
+      <div class="ni act" onclick="sNav('s-home',this)">🏠 Dashboard</div>
+      <div class="ni" onclick="sNav('s-tests',this)">📝 ჩემი ტესტები</div>
+      <div class="ni" onclick="sNav('s-results',this);renderStudentResults()">📊 შედეგები</div>
+      <div class="ni" onclick="sNav('s-profile',this)">⚙️ პროფილი</div>
+    </div>
+    <div class="sfoot">
+      <div class="susr"><div class="sav" style="background:#2563eb" id="s-sidebar-av">მ</div><div style="overflow:hidden"><div style="color:#fff;font-size:12px;font-weight:500" id="s-sidebar-name">მარიამ კვირიკაშვილი</div><div style="color:rgba(255,255,255,.35);font-size:11px" id="s-sidebar-email">mariam@student.ge</div></div></div>
+      <div class="ni" onclick="doLogout()" style="border-radius:var(--r)">🚪 გასვლა</div>
+    </div>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;overflow:auto">
+    <div class="topbar"><div><div style="font-weight:600" id="s-topbar-title">Dashboard</div><div style="font-size:11px;color:var(--gray)" id="s-topbar-sub">მოსწავლე</div></div><div style="display:flex;gap:8px"><span class="badge b-blue" id="s-topbar-badge">Student</span><span class="badge b-green">✓ Online</span></div></div>
+    <div class="main">
+      <div id="s-home" class="fade">
+        <div style="background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:14px;padding:18px;margin-bottom:16px;color:#fff">
+          <div style="font-size:20px;margin-bottom:4px" id="s-home-greeting">👋 გამარჯობა!</div>
+          <p style="opacity:.85;font-size:13px">ტესტები გელოდება. წარმატებები! 🌟</p>
+          <button class="btn" style="margin-top:10px;background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.3)" onclick="sNav('s-tests',document.querySelectorAll('#p-student .ni')[1])">ტესტების ნახვა →</button>
+        </div>
+        <div class="stat-g" id="s-home-stats">
+          <div class="stat"><div class="stat-ic" style="background:#dbeafe">📝</div><div class="stat-v" style="color:#2563eb" id="sh-tests">0</div><div class="stat-l">დასრულებული ტესტი</div></div>
+          <div class="stat"><div class="stat-ic" style="background:#dcfce7">📊</div><div class="stat-v" style="color:#16a34a" id="sh-avg">—</div><div class="stat-l">საშუალო ქულა</div></div>
+          <div class="stat"><div class="stat-ic" style="background:#fef3c7">⭐</div><div class="stat-v" style="color:#d97706" id="sh-pts">0</div><div class="stat-l">სულ ქულა</div></div>
+          <div class="stat"><div class="stat-ic" style="background:#ede9fe">🏆</div><div class="stat-v" style="color:#7c3aed" id="sh-exc">0</div><div class="stat-l">Excellent ბეიჯი</div></div>
+        </div>
+        <div class="card" style="padding:16px">
+          <div style="font-weight:600;margin-bottom:14px;font-size:13px">🏆 ბოლო შედეგები</div>
+          <div id="s-home-recent"><div style="color:var(--gray);font-size:13px;text-align:center;padding:20px">ჯერ ტესტი არ გაქვს გავლილი</div></div>
+        </div>
+      </div>
+      <div id="s-tests" class="hidden fade">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+          <div style="font-weight:600">ტესტები (I–XII კლასი)</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <select id="s-filter-subject" onchange="renderStudentTests()" style="width:auto;padding:6px 10px">
+              <option value="">ყველა საგანი</option>
+              <option>მათემატიკა</option><option>ქართული</option><option>ინგლისური</option><option>რუსული</option><option>ბუნება</option>
+            </select>
+            <select id="s-filter-grade" onchange="renderStudentTests()" style="width:auto;padding:6px 10px">
+              <option value="">ყველა კლასი</option>
+              <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option>
+              <option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option>
+            </select>
+          </div>
+        </div>
+        <div id="s-test-list"></div>
+      </div>
+      <div id="s-results" class="hidden fade">
+        <div style="font-weight:600;margin-bottom:14px">ჩემი შედეგები</div>
+        <div id="s-results-list"></div>
+      </div>
+      <div id="s-profile" class="hidden fade" style="max-width:480px">
+        <div class="card" style="padding:24px;text-align:center;margin-bottom:12px">
+          <div style="width:64px;height:64px;background:#2563eb;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:22px;margin:0 auto 12px" id="s-prof-av">მ</div>
+          <h2 style="font-weight:700;font-size:16px" id="s-prof-name">მარიამ კვირიკაშვილი</h2>
+          <p style="color:var(--gray);font-size:12px;margin-bottom:10px" id="s-prof-email">mariam@student.ge</p>
+          <div style="display:flex;gap:6px;justify-content:center"><span class="badge b-blue" id="s-prof-grade">კლასი 3A</span><span class="badge b-green">Student</span></div>
+        </div>
+        <div class="card" style="padding:16px">
+          <div style="font-weight:600;margin-bottom:12px">⚙️ პარამეტრები</div>
+          <div class="fg"><div class="label">სახელი</div><input id="s-prof-name-input" value="მარიამ კვირიკაშვილი"/></div>
+          <div class="fg"><div class="label">ელ-ფოსტა</div><input id="s-prof-email-input" value="mariam@student.ge"/></div>
+          <div class="fg"><div class="label">ახალი პაროლი</div><input type="password" placeholder="შეცვალეთ პაროლი"/></div>
+          <button class="btn btn-primary btn-sm">💾 შენახვა</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TEST TAKING -->
+<div id="p-take-test" class="page fade" style="background:linear-gradient(135deg,#f0f4ff,#faf5ff);align-items:center;padding:20px;flex-direction:column">
+  <div style="width:100%;max-width:680px;margin-bottom:14px">
+    <div class="card" style="padding:14px 18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
+      <div><div style="font-weight:700" id="tt-title">ტესტი</div><div style="font-size:11px;color:var(--gray)" id="q-counter">კითხვა 1/20</div></div>
+      <div style="display:flex;align-items:center;gap:14px">
+        <div style="font-size:12px;color:var(--gray)">პროგრესი:</div>
+        <div style="width:100px"><div class="pbar"><div class="pfill" id="q-prog" style="width:5%;background:#2563eb"></div></div></div>
+        <div class="timer" id="timer">20:00</div>
+      </div>
+    </div>
+  </div>
+  <div class="card" style="width:100%;max-width:680px;padding:24px;flex:1" id="q-card">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="width:34px;height:34px;background:#1d4ed8;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:13px" id="q-num">1</div>
+        <span class="badge b-blue" id="q-type-badge">MCQ</span>
+        <span class="badge b-amber" id="q-pts-badge">2 ქ.</span>
+      </div>
+    </div>
+    <h3 style="font-size:16px;font-weight:600;margin-bottom:18px;line-height:1.5;color:#1a202c" id="q-text">კითხვა...</h3>
+    <div id="q-opts"></div>
+    <div style="display:flex;justify-content:space-between;margin-top:22px">
+      <button class="btn btn-ghost" id="q-prev" onclick="qNav(-1)">← წინა</button>
+      <button class="btn btn-primary" id="q-next" onclick="qNav(1)">შემდეგი →</button>
+    </div>
+  </div>
+  <div class="dot-nav" id="q-dots"></div>
+</div>
+
+<!-- RESULTS -->
+<div id="p-results" class="page fade" style="background:linear-gradient(135deg,#f0f4ff,#faf5ff);justify-content:center;padding:20px">
+  <div style="width:100%;max-width:640px">
+    <div class="card" style="padding:28px;text-align:center;margin-bottom:14px" id="res-summary"></div>
+    <div class="card" style="padding:16px;margin-bottom:14px" id="res-review"></div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button class="btn btn-primary" onclick="go(curRole==='teacher'?'teacher':'student')">🏠 Dashboard</button>
+      <button class="btn btn-outline" onclick="startTestById(curTest&&curTest.id)">🔄 კიდევ ერთხელ</button>
+    </div>
+  </div>
+</div>
+
+<!-- TEACHER -->
+<div id="p-teacher" class="page fade" style="flex-direction:row">
+  <div class="sidebar">
+    <div class="slogo">
+      <div class="slogo-icon" style="background:#16a34a">E</div>
+      <div><div style="color:#fff;font-weight:700;font-size:14px">EduTest.ge</div><div style="font-size:10px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.05em">teacher</div></div>
+    </div>
+    <div class="snav">
+      <div class="ni act" onclick="tNav('t-home',this)">🏠 Dashboard</div>
+      <div class="ni" onclick="tNav('t-tests',this)">📝 ჩემი ტესტები</div>
+      <div class="ni" onclick="tNav('t-students',this)">👥 მოსწავლეები</div>
+      <div class="ni" onclick="tNav('t-analytics',this)">📊 ანალიტიკა</div>
+    </div>
+    <div class="sfoot">
+      <div class="susr"><div class="sav" style="background:#16a34a" id="t-sidebar-av">ნ</div><div><div style="color:#fff;font-size:12px;font-weight:500" id="t-sidebar-name">ნინო გელაშვილი</div><div style="color:rgba(255,255,255,.35);font-size:11px" id="t-sidebar-email">nino@edutest.ge</div></div></div>
+      <div class="ni" onclick="doLogout()" style="border-radius:var(--r)">🚪 გასვლა</div>
+    </div>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;overflow:auto">
+    <div class="topbar"><div><div style="font-weight:600" id="t-topbar-title">Dashboard</div><div style="font-size:11px;color:var(--gray)" id="t-topbar-sub">მასწავლებელი</div></div><button class="btn btn-primary btn-sm" id="t-new-btn" onclick="showBuilder()" style="display:none">+ ახალი ტესტი</button></div>
+    <div class="main">
+      <div id="t-home" class="fade">
+        <div class="stat-g">
+          <div class="stat"><div class="stat-ic" style="background:#dbeafe">📝</div><div class="stat-v" style="color:#2563eb">30</div><div class="stat-l">ტესტი სისტემაში</div></div>
+          <div class="stat"><div class="stat-ic" style="background:#dcfce7">👥</div><div class="stat-v" style="color:#16a34a">28</div><div class="stat-l">კლ. 3A მოსწავლე</div></div>
+          <div class="stat"><div class="stat-ic" style="background:#fef3c7">⚠️</div><div class="stat-v" style="color:#d97706">3</div><div class="stat-l">გასაფასებელი</div></div>
+          <div class="stat"><div class="stat-ic" style="background:#ede9fe">📈</div><div class="stat-v" style="color:#7c3aed">78%</div><div class="stat-l">საშ. ქულა</div></div>
+        </div>
+        <div class="g2">
+          <div class="card" style="padding:16px">
+            <div style="font-weight:600;margin-bottom:12px;font-size:13px">⏳ გასაფასებელი submission-ები</div>
+            <div style="padding:8px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:12px;font-weight:500">მარიამ კ.</div><div style="font-size:11px;color:var(--gray)">ქართული · დღეს</div></div><button class="btn btn-outline btn-sm">შეფასება</button></div>
+            <div style="padding:8px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:12px;font-weight:500">გიორგი ნ.</div><div style="font-size:11px;color:var(--gray)">ქართული · გუშინ</div></div><button class="btn btn-outline btn-sm">შეფასება</button></div>
+            <div style="padding:8px 0;display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:12px;font-weight:500">სოფო მ.</div><div style="font-size:11px;color:var(--gray)">ქართული · გუშინ</div></div><button class="btn btn-outline btn-sm">შეფასება</button></div>
+          </div>
+          <div class="card" style="padding:16px">
+            <div style="font-weight:600;margin-bottom:12px;font-size:13px">📊 კლასი 3A სტატისტიკა</div>
+            <div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>მათემატიკა</span><span style="font-weight:600">78%</span></div><div class="pbar"><div class="pfill" style="width:78%;background:#2563eb"></div></div></div>
+            <div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>ქართული</span><span style="font-weight:600">65%</span></div><div class="pbar"><div class="pfill" style="width:65%;background:#d97706"></div></div></div>
+            <div><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>ბუნება</span><span style="font-weight:600">91%</span></div><div class="pbar"><div class="pfill" style="width:91%;background:#16a34a"></div></div></div>
+          </div>
+        </div>
+      </div>
+      <div id="t-tests" class="hidden fade">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+          <div style="font-weight:600">ყველა ტესტი</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <select id="t-filter-subject" onchange="renderTeacherTests()" style="width:auto;padding:6px 10px">
+              <option value="">ყველა საგანი</option>
+              <option>მათემატიკა</option><option>ქართული</option><option>ინგლისური</option><option>რუსული</option><option>ბუნება</option>
+            </select>
+            <select id="t-filter-grade" onchange="renderTeacherTests()" style="width:auto;padding:6px 10px">
+              <option value="">ყველა კლასი</option>
+              <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option>
+              <option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option>
+            </select>
+            <button class="btn btn-primary btn-sm" onclick="showBuilder()">+ ახალი ტესტი</button>
+          </div>
+        </div>
+        <div class="card" style="overflow:hidden">
+          <table class="tbl" id="t-test-table">
+            <thead><tr><th>ტიტული</th><th>საგანი</th><th>კლ.</th><th>კ.</th><th>ფასი</th><th>ქმ.</th></tr></thead>
+            <tbody id="t-test-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+      <div id="t-students" class="hidden fade">
+        <div style="font-weight:600;margin-bottom:14px">მოსწავლეები — კლასი 3A</div>
+        <div class="card" style="overflow:hidden">
+          <table class="tbl"><thead><tr><th>მოსწავლე</th><th>კლ.</th><th>ტესტები</th><th>საშ. ქულა</th><th>ბოლო</th><th>სტატუსი</th></tr></thead><tbody>
+            <tr><td style="font-weight:500">მარიამ კვირიკაშვილი</td><td>3A</td><td>3</td><td><span style="font-weight:600;color:#2563eb">91%</span></td><td style="font-size:11px;color:var(--gray)">2026-06-30</td><td><span class="badge b-blue">🏆 Excellent</span></td></tr>
+            <tr><td style="font-weight:500">გიორგი ნინიძე</td><td>3A</td><td>2</td><td><span style="font-weight:600;color:#16a34a">75%</span></td><td style="font-size:11px;color:var(--gray)">2026-06-28</td><td><span class="badge b-green">✅ Good</span></td></tr>
+            <tr><td style="font-weight:500">სოფო მამულაძე</td><td>3A</td><td>3</td><td><span style="font-weight:600;color:#16a34a">88%</span></td><td style="font-size:11px;color:var(--gray)">2026-06-29</td><td><span class="badge b-green">✅ Good</span></td></tr>
+            <tr><td style="font-weight:500">ლუკა კახიანი</td><td>3A</td><td>1</td><td><span style="font-weight:600;color:#d97706">60%</span></td><td style="font-size:11px;color:var(--gray)">2026-06-27</td><td><span class="badge b-amber">📘 Pass</span></td></tr>
+          </tbody></table>
+        </div>
+      </div>
+      <div id="t-analytics" class="hidden fade">
+        <div style="font-weight:600;margin-bottom:14px">ანალიტიკა</div>
+        <div class="g2">
+          <div class="card" style="padding:16px"><div style="font-weight:600;margin-bottom:14px;font-size:13px">📈 კლ. 3A — ტესტები</div>
+            <div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>მათ. — კლ.3</span><span style="font-weight:600">78%</span></div><div class="pbar"><div class="pfill" style="width:78%;background:#2563eb"></div></div></div>
+            <div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>ბუნება — კლ.3</span><span style="font-weight:600">91%</span></div><div class="pbar"><div class="pfill" style="width:91%;background:#16a34a"></div></div></div>
+            <div><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>ქართ. — კლ.5</span><span style="font-weight:600">65%</span></div><div class="pbar"><div class="pfill" style="width:65%;background:#d97706"></div></div></div>
+          </div>
+          <div class="card" style="padding:16px"><div style="font-weight:600;margin-bottom:14px;font-size:13px">👥 მოსწავლეების განაწილება</div>
+            <div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>🏆 Excellent (≥90%)</span><span style="color:#2563eb;font-weight:600">1 მოსწ.</span></div><div class="pbar"><div class="pfill" style="width:25%;background:#2563eb"></div></div></div>
+            <div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>✅ Good (≥70%)</span><span style="color:#16a34a;font-weight:600">2 მოსწ.</span></div><div class="pbar"><div class="pfill" style="width:50%;background:#16a34a"></div></div></div>
+            <div><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>📘 Pass (≥50%)</span><span style="color:#d97706;font-weight:600">1 მოსწ.</span></div><div class="pbar"><div class="pfill" style="width:25%;background:#d97706"></div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div id="p-admin" class="page fade" style="flex-direction:row">
+  <div class="sidebar">
+    <div class="slogo"><div class="slogo-icon" style="background:#7c3aed">E</div><div><div style="color:#fff;font-weight:700;font-size:14px">EduTest.ge</div><div style="font-size:10px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.05em">admin</div></div></div>
+    <div class="snav">
+      <div class="ni act" onclick="aNav('a-home',this)">🏠 Dashboard</div>
+      <div class="ni" onclick="aNav('a-schools',this)">🏫 სკოლები</div>
+      <div class="ni" onclick="aNav('a-users',this)">👥 მომხმარებლები</div>
+      <div class="ni" onclick="aNav('a-pending',this)">⚠️ დამტკიცება <span class="badge b-red" style="margin-left:4px">2</span></div>
+      <div class="ni" onclick="aNav('a-settings',this)">⚙️ პარამეტრები</div>
+    </div>
+    <div class="sfoot">
+      <div class="susr"><div class="sav" style="background:#7c3aed">ა</div><div><div style="color:#fff;font-size:12px;font-weight:500">ადმინ</div><div style="color:rgba(255,255,255,.35);font-size:11px">admin@edutest.ge</div></div></div>
+      <div class="ni" onclick="doLogout()" style="border-radius:var(--r)">🚪 გასვლა</div>
+    </div>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;overflow:auto">
+    <div class="topbar"><div><div style="font-weight:600">Admin Dashboard</div><div style="font-size:11px;color:var(--gray)">ადმინ · პლატფორმის ადმინისტრატორი</div></div><span class="badge b-red">⚠ 2 Pending</span></div>
+    <div class="main">
+      <div id="a-home" class="fade">
+        <div class="stat-g">
+          <div class="stat"><div class="stat-ic" style="background:#ede9fe">🏫</div><div class="stat-v" style="color:#7c3aed">3</div><div class="stat-l">სკოლა</div></div>
+          <div class="stat"><div class="stat-ic" style="background:#dbeafe">👥</div><div class="stat-v" style="color:#2563eb">286</div><div class="stat-l">მომხმარებელი</div></div>
+          <div class="stat"><div class="stat-ic" style="background:#dcfce7">📝</div><div class="stat-v" style="color:#16a34a">30</div><div class="stat-l">სულ ტესტი</div></div>
+          <div class="stat"><div class="stat-ic" style="background:#fee2e2">⚠️</div><div class="stat-v" style="color:#dc2626">2</div><div class="stat-l">Pending</div></div>
+        </div>
+        <div class="card" style="padding:16px">
+          <div style="font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:6px;font-size:13px"><span style="color:#dc2626">🔴</span>დასამტკიცებელი მასწავლებლები</div>
+          <div style="padding:12px;background:var(--amber-l);border-radius:var(--r);margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px"><div><div style="font-weight:600;font-size:13px">ეკა ჯაფარიძე</div><div style="font-size:11px;color:var(--gray)">eka@school.ge · სკ. #5 · 2026-06-30</div></div><div style="display:flex;gap:6px"><button class="btn btn-green btn-sm">✓ დამტკიცება</button><button class="btn btn-danger btn-sm">✗ უარი</button></div></div>
+          <div style="padding:12px;background:var(--amber-l);border-radius:var(--r);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px"><div><div style="font-weight:600;font-size:13px">ზვიად ბეგიაშვილი</div><div style="font-size:11px;color:var(--gray)">zviad@school.ge · სკ. #12 · 2026-06-29</div></div><div style="display:flex;gap:6px"><button class="btn btn-green btn-sm">✓ დამტკიცება</button><button class="btn btn-danger btn-sm">✗ უარი</button></div></div>
+        </div>
+      </div>
+      <div id="a-schools" class="hidden fade">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"><div style="font-weight:600">სკოლები</div><button class="btn btn-primary btn-sm">+ სკოლის დამატება</button></div>
+        <div class="card" style="overflow:hidden"><table class="tbl"><thead><tr><th>სკოლა</th><th>მასწ.</th><th>მოსწ.</th><th>ტესტი</th><th>ქმ.</th></tr></thead><tbody>
+          <tr><td style="font-weight:500">თბილისის სკოლა #1</td><td>12</td><td>340</td><td>28</td><td><button class="btn btn-ghost btn-sm">✏️</button></td></tr>
+          <tr><td style="font-weight:500">თბილისის სკოლა #5</td><td>8</td><td>210</td><td>14</td><td><button class="btn btn-ghost btn-sm">✏️</button></td></tr>
+          <tr><td style="font-weight:500">ქუთაისის სკოლა #3</td><td>6</td><td>180</td><td>9</td><td><button class="btn btn-ghost btn-sm">✏️</button></td></tr>
+        </tbody></table></div>
+      </div>
+      <div id="a-users" class="hidden fade">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"><div style="font-weight:600">მომხმარებლები</div><input placeholder="🔍 ძებნა..." style="width:180px;padding:6px 10px"/></div>
+        <div class="card" style="overflow:hidden"><table class="tbl"><thead><tr><th>სახელი</th><th>ელ-ფოსტა</th><th>როლი</th><th>სტატუსი</th><th>ქმ.</th></tr></thead><tbody>
+          <tr><td style="font-weight:500">ნინო გელაშვილი</td><td style="color:var(--gray);font-size:12px">nino@edutest.ge</td><td><span class="badge b-blue">teacher</span></td><td><span class="badge b-green">✓ active</span></td><td style="display:flex;gap:4px"><button class="btn btn-ghost btn-sm">✏️</button><button class="btn btn-ghost btn-sm" style="color:var(--red)">🗑</button></td></tr>
+          <tr><td style="font-weight:500">მარიამ კვირიკაშვილი</td><td style="color:var(--gray);font-size:12px">mariam@student.ge</td><td><span class="badge b-green">student</span></td><td><span class="badge b-green">✓ active</span></td><td style="display:flex;gap:4px"><button class="btn btn-ghost btn-sm">✏️</button><button class="btn btn-ghost btn-sm" style="color:var(--red)">🗑</button></td></tr>
+        </tbody></table></div>
+      </div>
+      <div id="a-pending" class="hidden fade" style="max-width:560px">
+        <div style="font-weight:600;margin-bottom:14px">⏳ დამტკიცების მოლოდინში</div>
+        <div class="card" style="padding:18px;margin-bottom:10px"><div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px"><div><div style="font-weight:700;font-size:14px;margin-bottom:4px">ეკა ჯაფარიძე</div><div style="font-size:12px;color:var(--gray);margin-bottom:8px">eka@school.ge</div><div style="display:flex;gap:6px"><span class="chip">🏫 სკ. #5</span><span class="chip">📅 2026-06-30</span><span class="badge b-amber">მასწავლებელი</span></div></div><div style="display:flex;flex-direction:column;gap:6px"><button class="btn btn-green btn-sm">✓ დამტკიცება</button><button class="btn btn-danger btn-sm">✗ უარი</button></div></div></div>
+        <div class="card" style="padding:18px"><div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px"><div><div style="font-weight:700;font-size:14px;margin-bottom:4px">ზვიად ბეგიაშვილი</div><div style="font-size:12px;color:var(--gray);margin-bottom:8px">zviad@school.ge</div><div style="display:flex;gap:6px"><span class="chip">🏫 სკ. #12</span><span class="chip">📅 2026-06-29</span><span class="badge b-amber">მასწავლებელი</span></div></div><div style="display:flex;flex-direction:column;gap:6px"><button class="btn btn-green btn-sm">✓ დამტკიცება</button><button class="btn btn-danger btn-sm">✗ უარი</button></div></div></div>
+      </div>
+      <div id="a-settings" class="hidden fade" style="max-width:480px">
+        <div class="card" style="padding:18px;margin-bottom:12px"><div style="font-weight:600;margin-bottom:14px">⚙️ პლატფორმის პარამეტრები</div>
+          <div class="fg"><div class="label">პლატფ. სახელი</div><input value="EduTest.ge"/></div>
+          <div class="fg"><div class="label">კონტაქტ ელ-ფოსტა</div><input value="admin@edutest.ge"/></div>
+          <div class="fg"><div class="label">JWT ვადა (დღე)</div><input type="number" value="7"/></div>
+          <button class="btn btn-primary btn-sm">💾 შენახვა</button>
+        </div>
+        <div class="card" style="padding:18px"><div style="font-weight:600;margin-bottom:14px">💳 გადახდის პარამეტრები</div>
+          <div class="fg"><div class="label">BOG Pay Merchant ID</div><input placeholder="bog_merchant_xxx"/></div>
+          <div class="fg"><div class="label">TBC Pay API Key</div><input placeholder="tbc_key_xxx"/></div>
+          <div style="padding:10px;background:var(--amber-l);border-radius:var(--r);font-size:12px;color:#92400e;margin-bottom:12px">⚠️ Webhook URL: <code>https://edutest.ge/api/payments/webhook</code></div>
+          <button class="btn btn-primary btn-sm">💾 შენახვა</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODALS -->
+<div id="pay-modal" class="overlay hidden">
+  <div class="modal">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px"><h3 style="font-weight:700">💳 ტესტის შეძენა</h3><button class="btn btn-ghost btn-sm" onclick="hidePayModal()">✕</button></div>
+    <div id="pay-step-1">
+      <div style="background:var(--blue-l);border-radius:var(--r);padding:14px;margin-bottom:16px"><div style="font-weight:600">ფასიანი ტესტი</div><div style="font-size:12px;color:var(--gray);margin-top:4px">20 კითხვა · 30 წუთი</div></div>
+      <div style="font-weight:600;margin-bottom:10px">გადახდის მეთოდი</div>
+      <button onclick="payStep2()" style="width:100%;padding:12px;border:2px solid var(--border);border-radius:var(--r);cursor:pointer;background:#fff;font-family:inherit;text-align:left;display:flex;align-items:center;gap:10px;margin-bottom:8px"><span style="font-size:22px">🏦</span><div><div style="font-weight:600;font-size:13px">BOG Pay</div><div style="font-size:11px;color:var(--gray)">Bank of Georgia-ს გადახდა</div></div></button>
+      <button onclick="payStep2()" style="width:100%;padding:12px;border:2px solid var(--border);border-radius:var(--r);cursor:pointer;background:#fff;font-family:inherit;text-align:left;display:flex;align-items:center;gap:10px"><span style="font-size:22px">💳</span><div><div style="font-weight:600;font-size:13px">TBC Pay</div><div style="font-size:11px;color:var(--gray)">TBC Bank-ის გადახდა</div></div></button>
+      <div style="font-size:12px;color:var(--gray);margin-top:12px">ფასი: <strong>9.99₾</strong></div>
+    </div>
+    <div id="pay-step-2" class="hidden" style="text-align:center;padding:20px 0">
+      <div style="font-size:52px;margin-bottom:12px">🏦</div>
+      <div style="font-weight:700;font-size:16px;margin-bottom:8px">BOG Pay</div>
+      <p style="color:var(--gray);font-size:13px;margin-bottom:18px">Demo: გადახდა წარმატებით დასრულდა ✓</p>
+      <button class="btn btn-green" onclick="hidePayModal();startTestById(curTest&&curTest.id)">✓ ტესტის დაწყება</button>
+    </div>
+  </div>
+</div>
+
+<div id="builder-modal" class="overlay hidden">
+  <div class="modal" style="max-width:540px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px"><h3 style="font-weight:700">✨ ახალი ტესტი</h3><button class="btn btn-ghost btn-sm" onclick="hideBuilder()">✕</button></div>
+    <div class="steps">
+      <div class="step act" id="bstep-1">1</div><div style="font-size:11px;color:#1a202c">ინფო</div>
+      <div class="sline" id="bline-1"></div>
+      <div class="step" id="bstep-2">2</div><div style="font-size:11px;color:var(--gray)">კითხვები</div>
+      <div class="sline" id="bline-2"></div>
+      <div class="step" id="bstep-3">3</div><div style="font-size:11px;color:var(--gray)">გავრცელება</div>
+    </div>
+    <div id="bstep-content-1">
+      <div class="fg"><div class="label">ტიტული</div><input placeholder="მაგ. მათემატიკა — 3 კლასი" id="b-title"/></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <div class="fg"><div class="label">საგანი</div><select id="b-subj"><option>მათემატიკა</option><option>ქართული</option><option>ინგლისური</option><option>რუსული</option><option>ბუნება</option></select></div>
+        <div class="fg"><div class="label">კლასი</div><select id="b-grade"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option></select></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <div class="fg"><div class="label">დრო (წთ)</div><input type="number" value="20" id="b-time"/></div>
+        <div class="fg"><div class="label">მცდელობები</div><input type="number" value="2" id="b-att"/></div>
+      </div>
+      <div style="display:flex;gap:16px;margin-bottom:14px">
+        <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px"><input type="checkbox" id="b-paid" style="width:auto"/>ფასიანი ტესტი</label>
+        <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px"><input type="checkbox" id="b-pub" style="width:auto"/>გამოქვეყნება</label>
+      </div>
+    </div>
+    <div id="bstep-content-2" class="hidden"><p style="font-size:12px;color:var(--gray);margin-bottom:10px">კითხვის ბაზიდან შეარჩიეთ:</p><div id="q-picker"></div><div style="font-size:12px;color:var(--gray);margin-top:8px">შერჩეულია: <strong id="sel-count">0</strong> კითხვა</div></div>
+    <div id="bstep-content-3" class="hidden">
+      <div class="fg"><div class="label">გაავრცელე კლასზე</div><select><option>კლასი 3A</option><option>კლასი 3B</option><option>ინდივიდუალური</option></select></div>
+      <div class="fg"><div class="label">Due Date</div><input type="date"/></div>
+      <div style="padding:12px;background:var(--blue-l);border-radius:var(--r);font-size:12px;color:#1e40af" id="b-summary">შეჯამება...</div>
+    </div>
+    <div style="display:flex;justify-content:space-between;margin-top:18px">
+      <button class="btn btn-ghost" id="b-prev" onclick="bNav(-1)">← უკან</button>
+      <button class="btn btn-primary" id="b-next" onclick="bNav(1)">შემდეგი →</button>
+    </div>
+  </div>
+</div>
+
+<div id="submit-modal" class="overlay hidden">
+  <div class="modal" style="max-width:360px;text-align:center">
+    <div style="font-size:48px;margin-bottom:12px">📝</div>
+    <h3 style="font-weight:700;margin-bottom:8px">ტესტის გაგზავნა?</h3>
+    <p style="color:var(--gray);font-size:13px;margin-bottom:18px" id="submit-msg">პასუხი გაცემულია... კითხვაზე.</p>
+    <div style="display:flex;gap:10px;justify-content:center">
+      <button class="btn btn-ghost" onclick="hideSubmitModal()">გაგრძელება</button>
+      <button class="btn btn-green" onclick="finishTest()">✉ გაგზავნა</button>
+    </div>
+  </div>
+</div>
+
+
+<script>
+const mc=(id,t,o,c,p=2)=>({id,text:t,type:'multiple_choice',opts:o,correct:c,pts:p});
+const tf=(id,t,c,p=1)=>({id,text:t,type:'true_false',opts:['\u2705 სწორია','\u274c მცდარია'],correct:c,pts:p});
+const tfe=(id,t,c,p=1)=>({id,text:t,type:'true_false',opts:['\u2705 True','\u274c False'],correct:c,pts:p});
+const tfr=(id,t,c,p=1)=>({id,text:t,type:'true_false',opts:['\u2705 Верно','\u274c Неверно'],correct:c,pts:p});
+
+const Q_POOL={
+'math-12':[
+  mc('m12_1','3+4=?',['5','6','7','8'],2),
+  mc('m12_2','10-6=?',['3','4','5','6'],1),
+  mc('m12_3','5×2=?',['8','10','12','15'],1),
+  mc('m12_4','8+7=?',['13','14','15','16'],2),
+  mc('m12_5','20-8=?',['10','11','12','13'],2),
+  mc('m12_6','4×3=?',['9','10','12','15'],2),
+  mc('m12_7','15+6=?',['19','20','21','22'],2),
+  mc('m12_8','18-9=?',['7','8','9','10'],2),
+  mc('m12_9','6×3=?',['15','16','17','18'],3),
+  mc('m12_10','2×8=?',['14','16','18','20'],1),
+  mc('m12_11','9+9=?',['16','17','18','19'],2),
+  mc('m12_12','14-7=?',['5','6','7','8'],2),
+  mc('m12_13','7×2=?',['12','13','14','15'],2),
+  mc('m12_14','100-45=?',['45','55','65','75'],1),
+  mc('m12_15','25+35=?',['55','60','65','70'],1),
+  tf('m12_16','8+2=10. სწ.?',0),
+  tf('m12_17','5×3=16. სწ.?',1),
+  tf('m12_18','20>15. სწ.?',0),
+  tf('m12_19','9-4=6. სწ.?',1),
+  tf('m12_20','3+3+3=9. სწ.?',0),
+  tf('m12_21','7×1=7. სწ.?',0),
+  tf('m12_22','12-5=8. სწ.?',1),
+  tf('m12_23','4+4=8. სწ.?',0),
+  tf('m12_24','10÷2=5. სწ.?',0),
+  tf('m12_25','6×2=13. სწ.?',1),
+],
+'math-34':[
+  mc('m34_1','12×4=?',['36','48','52','60'],1),
+  mc('m34_2','100÷5=?',['15','20','25','30'],1),
+  mc('m34_3','7×8=?',['54','56','58','60'],1),
+  mc('m34_4','250+175=?',['415','425','435','445'],1),
+  mc('m34_5','48÷6=?',['6','7','8','9'],2),
+  mc('m34_6','9×9=?',['72','81','90','99'],1),
+  mc('m34_7','144÷12=?',['10','11','12','13'],2),
+  mc('m34_8','კვ. პერ. გვ.=5?',['15','20','25','30'],1),
+  mc('m34_9','მ. ფ. 6×4=?',['20','22','24','26'],2),
+  mc('m34_10','6×7=?',['36','40','42','48'],2),
+  mc('m34_11','350-128=?',['212','222','232','242'],1),
+  mc('m34_12','8×6=?',['42','46','48','54'],2),
+  mc('m34_13','72÷8=?',['7','8','9','10'],2),
+  mc('m34_14','სამ. პ. 3,4,5=?',['10','11','12','13'],2),
+  mc('m34_15','11×11=?',['111','121','131','141'],1),
+  tf('m34_16','მ. ფ.=სიგ.×სიგ.',0),
+  tf('m34_17','კვ. პ.=4×გვ.',0),
+  tf('m34_18','7×8=54. სწ.?',1),
+  tf('m34_19','100÷4=25. სწ.?',0),
+  tf('m34_20','9×6=54. სწ.?',0),
+  tf('m34_21','სამ. კ. ჯ.=180°.',0),
+  tf('m34_22','12×12=144. სწ.?',0),
+  tf('m34_23','კვ. ფ.=გვ.×გვ.',0),
+  tf('m34_24','50×2=110. სწ.?',1),
+  tf('m34_25','36÷6=6. სწ.?',0),
+],
+'math-56':[
+  mc('m56_1','1/2+1/4=?',['1/6','2/6','3/4','5/8'],2),
+  mc('m56_2','25 — 100-ის %?',['20%','25%','30%','35%'],1),
+  mc('m56_3','3/4-1/4=?',['1/4','1/2','2/3','3/8'],1),
+  mc('m56_4','3:4; 9→?',['10','11','12','13'],2),
+  mc('m56_5','-5+8=?',['-3','2','3','5'],2),
+  mc('m56_6','0.75=?',['1/2','2/3','3/4','4/5'],2),
+  mc('m56_7','50%-ი 80-ისგ?',['30','35','40','45'],2),
+  mc('m56_8','2/3×3/4=?',['1/2','5/7','6/12','2/4'],0),
+  mc('m56_9','-3×(-4)=?',['-12','-7','7','12'],3),
+  mc('m56_10','20%-ი 150-ისგ?',['25','30','35','40'],1),
+  mc('m56_11','1/3+1/6=?',['1/2','2/9','2/6','1/4'],0),
+  mc('m56_12','2:5=10:?',['20','25','30','35'],1),
+  mc('m56_13','-10+(-5)=?',['-15','-5','5','15'],0),
+  mc('m56_14','0.5×0.5=?',['0.1','0.25','0.5','1'],1),
+  mc('m56_15','75%=?',['1/4','1/2','2/3','3/4'],3),
+  tf('m56_16','0.5=1/2. სწ.?',0),
+  tf('m56_17','(-)×(-)=(+).',0),
+  tf('m56_18','1/4+1/4=1/2. სწ.?',0),
+  tf('m56_19','3/3=1. სწ.?',0),
+  tf('m56_20','-7>-3. სწ.?',1),
+  tf('m56_21','25%=0.25. სწ.?',0),
+  tf('m56_22','2/5=0.4. სწ.?',0),
+  tf('m56_23','100-ის 10%=11. სწ.?',1),
+  tf('m56_24','0.1=1/10. სწ.?',0),
+  tf('m56_25','(-5)+5=0. სწ.?',0),
+],
+'math-78':[
+  mc('m78_1','2x+5=13→x=?',['3','4','5','6'],1),
+  mc('m78_2','x²-5x+6=0 ფ.?',['1&6','2&3','3&4','2&4'],1),
+  mc('m78_3','სამ. კ. ჯ.?',['90°','180°','270°','360°'],1),
+  mc('m78_4','წ. ფ. r=5?',['62','75.4','78.5','80'],2),
+  mc('m78_5','3x-7=8→x=?',['4','5','6','7'],1),
+  mc('m78_6','a=3,b=4→c=?',['5','6','7','8'],0),
+  mc('m78_7','x²=49→x=?',['±5','±6','±7','±8'],2),
+  mc('m78_8','წ. გ. r=7?',['40','43.96','44','45'],1),
+  mc('m78_9','5(x+2)=35→x=?',['3','4','5','6'],2),
+  mc('m78_10','ჰ=13,კ=5→კ2=?',['10','11','12','13'],2),
+  mc('m78_11','x²+3x=0→x=?',['0&3','0&-3','1&-3','0&2'],1),
+  mc('m78_12','წ. ფ. r=3?',['27.0','28.0','28.26','29.0'],2),
+  mc('m78_13','4x=20→x=?',['4','5','6','7'],1),
+  mc('m78_14','a=6,b=8→c=?',['9','10','11','12'],1),
+  mc('m78_15','x²-9=0→x=?',['±2','±3','±4','±5'],1),
+  tf('m78_16','a²+b²=c². სწ.?',0),
+  tf('m78_17','კვ. გ. ყ. ო. ფ.',1),
+  tf('m78_18','წ. ფ.=πr². სწ.?',0),
+  tf('m78_19','x=3→2x+1=7. სწ.?',0),
+  tf('m78_20','სამ. კ.=360°. სწ.?',1),
+  tf('m78_21','წ. გ.=2πr. სწ.?',0),
+  tf('m78_22','4²=16. სწ.?',0),
+  tf('m78_23','x²=25→x=5 მხ. სწ.?',1),
+  tf('m78_24','5x=25→x=5. სწ.?',0),
+  tf('m78_25','სამკ. კ.=180°. სწ.?',0),
+],
+'math-910':[
+  mc('m910_1','sin(30°)=?',['0','0.5','√2/2','1'],1),
+  mc('m910_2','log₁₀(100)=?',['1','2','3','10'],1),
+  mc('m910_3','cos(60°)=?',['0','0.5','√3/2','1'],1),
+  mc('m910_4','tan(45°)=?',['0','0.5','1','√3'],2),
+  mc('m910_5','log₂(8)=?',['2','3','4','5'],1),
+  mc('m910_6','sin(90°)=?',['0','0.5','√2/2','1'],3),
+  mc('m910_7','cos(0°)=?',['0','0.5','√2/2','1'],3),
+  mc('m910_8','log₁₀(1000)=?',['2','3','4','5'],1),
+  mc('m910_9','sin²x+cos²x=?',['0','0.5','1','2'],2),
+  mc('m910_10','tan(0°)=?',['0','1','∞','-1'],0),
+  mc('m910_11','log₂(16)=?',['3','4','5','6'],1),
+  mc('m910_12','cos(90°)=?',['-1','0','0.5','1'],1),
+  mc('m910_13','sin(60°)=?',['0','0.5','√3/2','1'],2),
+  mc('m910_14','log₁₀(10)=?',['0','1','2','10'],1),
+  mc('m910_15','cos(180°)=?',['-1','0','0.5','1'],0),
+  tf('m910_16','cos(0°)=1. სწ.?',0),
+  tf('m910_17','sin²x+cos²x=1. სწ.?',0),
+  tf('m910_18','log₁₀(10)=2. სწ.?',1),
+  tf('m910_19','tan(90°) განს. სწ.?',0),
+  tf('m910_20','e≈2.718. სწ.?',0),
+  tf('m910_21','sin(0°)=0. სწ.?',0),
+  tf('m910_22','cos(180°)=1. სწ.?',1),
+  tf('m910_23','log(ab)=log(a)+log(b). სწ.?',0),
+  tf('m910_24','sin(30°)=0.5. სწ.?',0),
+  tf('m910_25','tan(45°)=1. სწ.?',0),
+],
+'math-1112':[
+  mc('m1112_1','f(x)=x²→f\'(x)=?',['x','2x','x²','2'],1),
+  mc('m1112_2','∫x dx=?',['x²','x²/2+C','2x+C','x+C'],1),
+  mc('m1112_3','(sin x)\'=?',['-cos x','cos x','-sin x','sin x'],1),
+  mc('m1112_4','lim(1/x),x→∞=?',['0','1','∞','-1'],0),
+  mc('m1112_5','f(x)=eˣ→f\'(x)=?',['xeˣ','eˣ','eˣ⁻¹','1'],1),
+  mc('m1112_6','∫₀¹ x dx=?',['0','0.5','1','2'],1),
+  mc('m1112_7','(x³)\'=?',['3x','3x²','x²','2x'],1),
+  mc('m1112_8','∫eˣ dx=?',['eˣ','eˣ+C','xeˣ+C','?'],1),
+  mc('m1112_9','(ln x)\'=?',['ln x','1/x','x','1'],1),
+  mc('m1112_10','(2x³+x)\'=?',['6x+1','6x²+1','6x²+x','2x²+1'],1),
+  mc('m1112_11','lim sin(x)/x,x→0=?',['0','1','∞','-1'],1),
+  mc('m1112_12','∫cos x dx=?',['sin x+C','-sin x+C','cos x+C','-cos x+C'],0),
+  mc('m1112_13','∫₀² 2x dx=?',['2','4','6','8'],1),
+  mc('m1112_14','f\'(x)=0 ნიშ.?',['გ. ეკ.','ფ. სადმე','ეკ. წ.','სწ. ზ.'],2),
+  mc('m1112_15','(cos x)\'=?',['sin x','-sin x','cos x','-cos x'],1),
+  tf('m1112_16','f(c)=const→f\'(x)=0.',0),
+  tf('m1112_17','(sin x)\'=cos x. სწ.?',0),
+  tf('m1112_18','∫x² dx=x³/3+C. სწ.?',0),
+  tf('m1112_19','lim(1/x)=∞,x→0⁺. სწ.?',0),
+  tf('m1112_20','(eˣ)\'=eˣ. სწ.?',0),
+  tf('m1112_21','f\'(x)>0→ფ. მცირ.',1),
+  tf('m1112_22','∫₀¹ 1 dx=1. სწ.?',0),
+  tf('m1112_23','(x⁻¹)\'=-x⁻². სწ.?',0),
+  tf('m1112_24','lim(x),x→5=5. სწ.?',0),
+  tf('m1112_25','(cos x)\'=-sin x. სწ.?',0),
+],
+
+'geo-12':[
+  mc('geo12_1','ქ. ა. პირვ. ასო?',['ა','ბ','გ','დ'],0,1),
+  mc('geo12_2','ქ. ა. რამდ. ასო?',['30','33','36','38'],1,1),
+  mc('geo12_3','"მზე" — ასო?',['2','3','4','5'],0,1),
+  mc('geo12_4','"გამარჯობა" ნ.?',['Hello','Goodbye','Thanks','Yes'],0,1),
+  mc('geo12_5','"კატა" — ასო?',['3','4','5','6'],1,1),
+  mc('geo12_6','ქ. ა. ბოლო ასო?',['ჰ','ყ','ჯ','ჲ'],0,1),
+  mc('geo12_7','"სახლი" — ასო?',['3','4','5','6'],2,1),
+  mc('geo12_8','"დედა" — ასო?',['3','4','5','6'],1,1),
+  mc('geo12_9','"მამა" — ასო?',['3','4','5','6'],1,1),
+  mc('geo12_10','"ბავშვი" — ასო?',['5','6','7','8'],1,1),
+  mc('geo12_11','"მასწავლებელი" ნ.?',['student','teacher','parent','friend'],1,1),
+  mc('geo12_12','"წიგნი" ნ.?',['book','pen','paper','bag'],0,1),
+  mc('geo12_13','"სკოლა" ნ.?',['home','school','park','store'],1,1),
+  mc('geo12_14','"ბ" — ა. მე-?',['1','2','3','4'],1,1),
+  mc('geo12_15','ქ. ა. UNESCO-ს ს.?',['დიახ','არა','ეჭ.','ვ.'],0,1),
+  tf('geo12_16','"მზე" — 2 ასო.',0),
+  tf('geo12_17','ქ. ა. 33 ასო.',0),
+  tf('geo12_18','"კატა" — 5 ასო.',1),
+  tf('geo12_19','"სახლი" — 5 ასო.',0),
+  tf('geo12_20','ქ. ა. UNESCO-ს.',0),
+  tf('geo12_21','"ბ" — ა. მე-2.',0),
+  tf('geo12_22','"ა" — ა. პირვ.',0),
+  tf('geo12_23','"ჰ" — ა. ბოლო.',0),
+  tf('geo12_24','"მამა" — 3 ასო.',1),
+  tf('geo12_25','"დედა" — 4 ასო.',0),
+],
+'geo-34':[
+  mc('geo34_1','"ნ. ქ." — ქ. ხ. ზ.?',['კი','არა','ეჭ.','ვ.'],0,1),
+  mc('geo34_2','ნ. ეწ. ვის?',['დრ.','ეშმ.','ძმ.','ყ.'],1,2),
+  mc('geo34_3','არს. სახ. კ.?',['ვინ/რა','სად','როდ','ვის'],0,1),
+  mc('geo34_4','ილ. ჭ. ვინ?',['პ.','მხ.','მ.','ყ.'],0,2),
+  mc('geo34_5','ამ. ჰგ.?',['ჰ.','პ.','ო.','ა.'],1,2),
+  mc('geo34_6','ზმ. ასახ.?',['ქმ./მდ.','ნ.','ზ.','ფ.'],0,1),
+  mc('geo34_7','ზ. სახ. ასახ.?',['ქმ.','ნ. ნ.','ზ.','ფ. ნ.'],3,1),
+  mc('geo34_8','ხ. ზ. ძ. ნ.?',['ი.','გ.','ე.','ყ.'],1,1),
+  mc('geo34_9','ი. ჭ. XIX ს.?',['კი','XVIII','XX','ვ.'],0,1),
+  mc('geo34_10','ქ. ე. — ვინ?',['ბ.','ი. ე.','სემ.','ქ.'],3,2),
+  mc('geo34_11','ი. ჭ. — ეროვ. მ.?',['კი','ეჭ.','არა','ვ.'],0,1),
+  mc('geo34_12','ი. ჭ. — 1907?',['კი','ეჭ.','1890','1915'],0,1),
+  mc('geo34_13','"ნ. ქ." — ა. ს.?',['ა.','ს.','ომ.','ს.'],1,2),
+  mc('geo34_14','ა. — ქ. მ. გ.?',['კი','ეჭ.','არა','ვ.'],0,2),
+  mc('geo34_15','ა. სახ. ასახ.?',['ნ.','ქ.','ზ.','ყ.'],0,1),
+  tf('geo34_16','"ნ. ქ." — ქ. ხ. ზ.',0),
+  tf('geo34_17','ი. ჭ. — XIX ს.',0),
+  tf('geo34_18','ამ. — ქ. მ. გ.',0),
+  tf('geo34_19','ა. სახ. — ვინ/რა.',0),
+  tf('geo34_20','ქ. ა. UNESCO-ს.',0),
+  tf('geo34_21','"ნ. ქ." — ი. ჭ-ის.',1),
+  tf('geo34_22','ი. ჭ. — ილია.',0),
+  tf('geo34_23','ი. ჭ. — ეროვ. მ.',0),
+  tf('geo34_24','ამ. — პრ.-ს ჰგ.',0),
+  tf('geo34_25','ნ. ქ. — ეშმ.-ს ეწ.',0),
+],
+'geo-56':[
+  mc('geo56_1','ი. ჭ. ნ.?',['მგ. წ.','ვ.','ბ.','ო.'],0,2),
+  mc('geo56_2','"კ.-ა.?!" — ვინ?',['ი. ჭ.','ვ.-ფ.','ა. წ.','შ. რ.'],0,2),
+  mc('geo56_3','ქ. ე. დ.?',['14 აპ.','26 მ.','9 აპ.','1 ივ.'],0,2),
+  mc('geo56_4','"ვ." — XII ს.?',['X','XI','XII','XIII'],2,2),
+  mc('geo56_5','"ვ." — მ. გ.?',['ტ.','ა.','ფ.','ნ.'],0,2),
+  mc('geo56_6','ი. ჭ. — ეროვ.?',['კი','ეჭ.','არა','ვ.'],0,1),
+  mc('geo56_7','"მგ. წ." — ჟ.?',['ე.','ნ.','პ.','ა.'],0,2),
+  mc('geo56_8','14 აპ. — ქ. ე.?',['კი','ეჭ.','არა','ვ.'],0,1),
+  mc('geo56_9','"ვ." — ა. ავ.?',['შ.','ი.','ვ.','ნ.'],0,2),
+  mc('geo56_10','ი. ჭ. — 1837?',['კი','ეჭ.','არა','ვ.'],0,1),
+  mc('geo56_11','"ვ." — 3 მ.?',['კი','2','4','ვ.'],0,1),
+  mc('geo56_12','ქ. ლ. "ო. ხ." — XIX ს.?',['კი','XVIII','XX','ვ.'],0,1),
+  mc('geo56_13','ი. ჭ. — პ. + პ.?',['კი','მ. პ.','მ. მ.','ვ.'],0,2),
+  mc('geo56_14','"ვ." ა. — შ. რ.?',['კი','ეჭ.','არა','ვ.'],0,2),
+  mc('geo56_15','ქ. ე. დ. 14 აპ. — სწ.?',['კი','ეჭ.','არა','ვ.'],0,1),
+  tf('geo56_16','"კ.-ა.?!" — ი. ჭ.',0),
+  tf('geo56_17','ქ. ე. დ. — 14 აპ.',0),
+  tf('geo56_18','"ვ." — XIII ს.',1),
+  tf('geo56_19','ი. ჭ. — XIX ს.',0),
+  tf('geo56_20','"მგ. წ." — ი. ჭ.',0),
+  tf('geo56_21','"ვ." — 3 მ. გ.',0),
+  tf('geo56_22','ი. ჭ. — ეროვ. მ.',0),
+  tf('geo56_23','"ვ." — XII ს.',0),
+  tf('geo56_24','"კ.-ა.?!" — ნ.',1),
+  tf('geo56_25','ქ. ე. — 26 მ.',1),
+],
+'geo-78':[
+  mc('geo78_1','"ვ." — ვინ?',['შ. რ.','ი. ჭ.','ვ.-ფ.','ა. წ.'],0,3),
+  mc('geo78_2','"გვ. მჭ." — ვინ?',['ვ.-ფ.','ი. ჭ.','ნ. ბ.','გ. ლ.'],0,3),
+  mc('geo78_3','ვ.-ფ. XIX-XX სს.?',['კი','XVIII','XVII','ვ.'],0,1),
+  mc('geo78_4','"ბ." — ვ.-ფ.?',['კი','ი. ჭ.','შ. რ.','ვ.'],0,2),
+  mc('geo78_5','"ა. ქ." — ვ.-ფ.?',['კი','ი. ჭ.','ნ. ბ.','ვ.'],0,2),
+  mc('geo78_6','ვ.-ფ. ნ. ს.?',['ლ. რ.','ი. ყ.','ნ. ნ.','გ. ბ.'],0,3),
+  mc('geo78_7','XIX ს. ლ. ძ. თ.?',['ეროვ.','ომ.','სიყ.','ბ.'],0,2),
+  mc('geo78_8','შ. რ. XII ს.?',['კი','XI','XIII','ვ.'],0,2),
+  mc('geo78_9','"ვ." — ეპ. ჟ.?',['კი','ლ.','ს.','ვ.'],0,2),
+  mc('geo78_10','ვ.-ფ. — ტ. ან. ბ.?',['ტ.','ბ.','ორ.','ვ.'],0,3),
+  mc('geo78_11','XIX ს. "ტ."?',['ი., ა., ვ.','ი., ნ., ვ.','შ., ი., ვ.','გ., ა., ნ.'],0,3),
+  mc('geo78_12','"ვ." — ქ. ლ. ბ.?',['კი','ინ.','ბ.','ვ.'],0,2),
+  mc('geo78_13','ი. ჭ. — "ო. ი."?',['ნ.','პ.','ს.','ვ.'],0,2),
+  mc('geo78_14','"ა. ქ." — ვ.-ფ. პ.?',['კი','ი. ჭ.','შ. რ.','ვ.'],0,2),
+  mc('geo78_15','ი. ჭ. — 1907 — სწ.?',['კი','ეჭ.','1890','1915'],0,2),
+  tf('geo78_16','"გვ. მჭ." — ვ.-ფ.',0),
+  tf('geo78_17','ვ.-ფ. — XIX-XX სს.',0),
+  tf('geo78_18','"ბ." — ი. ჭ.',1),
+  tf('geo78_19','"ვ." — შ. რ.',0),
+  tf('geo78_20','ვ.-ფ. ნ. ს. — ლ. რ.',0),
+  tf('geo78_21','"ვ." — XII ს.',0),
+  tf('geo78_22','"ა. ქ." — ვ.-ფ.',0),
+  tf('geo78_23','შ. რ. — XIII ს.',1),
+  tf('geo78_24','"ვ." — 3 მ. გ.',0),
+  tf('geo78_25','ვ.-ფ. — "ბ." ა.',0),
+],
+'geo-910':[
+  mc('geo910_1','XIX ს. "ტ."?',['ი., ა., ვ.','ი., ნ., ვ.','შ., ი., ვ.','გ., ა., ნ.'],0,3),
+  mc('geo910_2','ი. ჭ. მ. 1907?',['კი','1890','1915','ვ.'],0,2),
+  mc('geo910_3','გ. ტ. ც. ლ.?',['მე და ღ.','მ. წ.','კ.-ა.?!','ბ.'],0,2),
+  mc('geo910_4','გ. ტ. — XX ს.?',['პ.','მ.','დ.','კ.'],0,3),
+  mc('geo910_5','კ. გ. ნ. — ქ. ლ.?',['კი','ეჭ.','არა','ვ.'],0,2),
+  mc('geo910_6','გ. ტ. — სიმ.?',['კი','ეჭ.','არა','ვ.'],0,2),
+  mc('geo910_7','XX ს. ქ. ლ. ძ.?',['მ.','კლ.','რ.','ვ.'],0,2),
+  mc('geo910_8','ი. ჭ. — "ქ. ლ."?',['კი','ეჭ.','არა','ვ.'],0,1),
+  mc('geo910_9','გ. ტ. — 1891–1959?',['კი','ეჭ.','არა','ვ.'],0,2),
+  mc('geo910_10','ვ.-ფ. — XIX-XX სს.?',['კი','ეჭ.','არა','ვ.'],0,1),
+  mc('geo910_11','"ვ." — XII ს.?',['კი','XI','XIII','ვ.'],0,2),
+  mc('geo910_12','გ. ტ. — ლ.?',['კი','პ.','პ.','ვ.'],0,2),
+  mc('geo910_13','ი. ჭ. — ილია?',['კი','ეჭ.','არა','ვ.'],0,1),
+  mc('geo910_14','კ. გ. — XX ს. ქ. მ.?',['კი','ეჭ.','არა','ვ.'],0,2),
+  mc('geo910_15','გ. ტ. — XIX ს.?',['კი','ეჭ.','XX','ვ.'],1,2),
+  tf('geo910_16','ი. ჭ. მ. 1907.',0),
+  tf('geo910_17','გ. ტ. — "მე და ღ."',0),
+  tf('geo910_18','XX ს. ქ. ლ. — მ.',0),
+  tf('geo910_19','ი. ჭ. — XIX ს.',0),
+  tf('geo910_20','გ. ტ. — XIX ს.',1),
+  tf('geo910_21','ვ.-ფ. — XIX-XX სს.',0),
+  tf('geo910_22','კ. გ. — ქ. ლ.',0),
+  tf('geo910_23','"ვ." — XII ს.',0),
+  tf('geo910_24','ი. ჭ. — ილია.',0),
+  tf('geo910_25','გ. ტ. — სიმ.',0),
+],
+'geo-1112':[
+  mc('geo1112_1','ნ. ძ. ნ.?',['სიმ.','სიგ.','ავ.','ყ.'],0,3),
+  mc('geo1112_2','ეპ. — ლ. ქვ.ჟ.?',['კი','ეჭ.','არა','ვ.'],2,2),
+  mc('geo1112_3','ლ. ლ. ძ. ელ.?',['გ.','ა. ხ.','სიუ.','ყ.'],1,3),
+  mc('geo1112_4','ე. ძ. ნ.?',['სუბ.','ობ.','ფ.','ყ.'],0,3),
+  mc('geo1112_5','ე. კ.: შ.→მ.→დ.?',['კი','ეჭ.','არა','ვ.'],0,2),
+  mc('geo1112_6','ე. — XX ს.?',['კ. გ.','ა. ყ.','ო. ი.','ყ.'],0,3),
+  mc('geo1112_7','ლ. ტ. — "ს.", "ლ.", "ეპ."?',['კი','ეჭ.','არა','ვ.'],0,2),
+  mc('geo1112_8','ნ. — მ. ფ. ს.?',['კი','ეჭ.','არა','ვ.'],0,2),
+  mc('geo1112_9','ე. ა. — მ. პ.?',['კი','ეჭ.','არა','ვ.'],0,2),
+  mc('geo1112_10','ლ. ა. ძ.?',['ა. ხ.','გ.','ა.+გ.','ვ.'],0,3),
+  mc('geo1112_11','ეპ. — გ. ტ.?',['კი','ლ.','ს.','ვ.'],1,2),
+  mc('geo1112_12','ნ. ა. — ს.?',['კი','ეჭ.','ა.','ვ.'],0,2),
+  mc('geo1112_13','ე. — სუბ.?',['კი','ეჭ.','ა.','ვ.'],0,2),
+  mc('geo1112_14','ლ. ტ. ძ. ჟ.?',['ლ.','ეპ.','ს.','ყ.'],0,3),
+  mc('geo1112_15','ე. — ა. ა. პ.?',['კი','ეჭ.','ა.','ვ.'],2,2),
+  tf('geo1112_16','ეპ. — ლ. ქვ.',1),
+  tf('geo1112_17','ნ. — მ. ფ.',0),
+  tf('geo1112_18','ე. — სუბ. ა.',0),
+  tf('geo1112_19','ლ. — ა. ხ.',0),
+  tf('geo1112_20','ე. — ა. ა.',1),
+  tf('geo1112_21','ნ. — სიმ.',0),
+  tf('geo1112_22','ეპ. — გ.',0),
+  tf('geo1112_23','ე. კ.: შ.→მ.→დ.',0),
+  tf('geo1112_24','ლ. ლ. ძ. — ა. ხ.',0),
+  tf('geo1112_25','ნ. — მ. ა.',1),
+],
+
+'eng-12':[
+  tfe('eng12_1','"Apple" starts with letter A.',0),
+  mc('eng12_2','What is this? 🐱',['dog','cat','bird','fish'],1,1),
+  mc('eng12_3','A,B,C... next?',['D','E','F','G'],0,1),
+  mc('eng12_4','Sky color?',['Red','Blue','Green','Yellow'],1,1),
+  mc('eng12_5','Days in a week?',['5','6','7','8'],2,1),
+  mc('eng12_6','This? 🐶',['dog','cat','bird','fish'],0,1),
+  mc('eng12_7','Color of grass?',['Blue','Red','Green','Yellow'],2,1),
+  mc('eng12_8','1,2,3 next?',['4','5','6','7'],0,1),
+  mc('eng12_9','This? 🍎',['banana','apple','orange','grape'],1,1),
+  mc('eng12_10','Fingers on hand?',['4','5','6','7'],1,1),
+  mc('eng12_11','Color of snow?',['Black','Blue','White','Red'],2,1),
+  mc('eng12_12','This? 🏠',['school','home','park','store'],1,1),
+  mc('eng12_13','Animal that says meow?',['dog','cat','cow','bird'],1,1),
+  mc('eng12_14','Number after 9?',['8','10','11','12'],1,1),
+  mc('eng12_15','Color of the sun?',['Blue','Green','Yellow','White'],2,1),
+  tfe('eng12_16','"Red" is a color.',0),
+  tfe('eng12_17','A cat says "woof".',1),
+  tfe('eng12_18','The sky is blue.',0),
+  tfe('eng12_19','5 comes after 4.',0),
+  tfe('eng12_20','A dog has 6 legs.',1),
+  tfe('eng12_21','B is the first letter.',1),
+  tfe('eng12_22','"Hello" is a greeting.',0),
+  tfe('eng12_23','Monday is a weekday.',0),
+  tfe('eng12_24','8 days in a week.',1),
+  tfe('eng12_25','An apple is a fruit.',0),
+],
+'eng-34':[
+  mc('eng34_1','She ___ a student.',['am','is','are','be'],1,2),
+  tfe('eng34_2','"They is students" is correct.',1),
+  mc('eng34_3','Plural of child?',['childs','childes','children','child'],2,2),
+  mc('eng34_4','She ___ to school every day.',['go','goes','going','gone'],1,2),
+  tfe('eng34_5','Simple present uses do/does.',0),
+  tfe('eng34_6','"He don\'t like it" is correct.',1),
+  mc('eng34_7','Plural of mouse?',['mouses','mice','mouse','mooses'],1,2),
+  mc('eng34_8','I ___ happy.',['am','is','are','be'],0,1),
+  mc('eng34_9','They ___ students.',['am','is','are','be'],2,1),
+  mc('eng34_10','He ___ a book.',['have','has','had','is'],1,2),
+  tfe('eng34_11','Plural of foot is feets.',1),
+  tfe('eng34_12','"She is" is correct.',0),
+  mc('eng34_13','Plural of tooth?',['tooths','teeth','tooth','teethes'],1,2),
+  mc('eng34_14','We ___ at home.',['am','is','are','be'],2,1),
+  tfe('eng34_15','"He have a cat" is correct.',1),
+  tfe('eng34_16','"She goes" is correct.',0),
+  tfe('eng34_17','"I am" is correct.',0),
+  mc('eng34_18','Plural of man?',['mans','men','manes','manses'],1,2),
+  tfe('eng34_19','"They are" is correct.',0),
+  tfe('eng34_20','"Do you?" is a question.',0),
+  mc('eng34_21','Negative: I ___ have a dog.',['do not','does not','am not','is not'],0,2),
+  tfe('eng34_22','"Childs" is plural of child.',1),
+  tfe('eng34_23','"We is" is correct.',1),
+  mc('eng34_24','She ___ not like coffee.',['do','does','is','be'],1,2),
+  tfe('eng34_24b','"Does she?" is a question.',0),
+],
+'eng-56':[
+  mc('eng56_1','I ___ homework yesterday.',['do','did','does','done'],1,2),
+  tfe('eng56_2','Past simple of go is went.',0),
+  tfe('eng56_3','"She goed home" is correct.',1),
+  mc('eng56_4','I ___ never been to Paris.',['have','has','had','did'],0,2),
+  tfe('eng56_5','Present perfect = have/has + past participle.',0),
+  tfe('eng56_6','"She has went" is correct.',1),
+  mc('eng56_7','Past simple of see?',['seed','saw','seen','sawed'],1,2),
+  mc('eng56_8','Past simple of eat?',['eated','ate','eaten','eat'],1,2),
+  tfe('eng56_9','"She has eaten" is correct.',0),
+  mc('eng56_10','Past simple of write?',['writed','wrote','written','writeed'],1,2),
+  mc('eng56_11','We ___ a movie last night.',['watch','watched','have watched','watches'],1,2),
+  tfe('eng56_12','"They have gone" is correct.',0),
+  mc('eng56_13','Past simple of run?',['runned','ran','run','runed'],1,2),
+  tfe('eng56_14','"Did she went?" is correct.',1),
+  mc('eng56_15','___ you ever been to London?',['Did','Do','Have','Has'],2,2),
+  tfe('eng56_16','"Has" is used with he/she/it.',0),
+  mc('eng56_17','She ___ already finished.',['have','has','had','did'],1,2),
+  tfe('eng56_18','Past simple of buy is bought.',0),
+  mc('eng56_19','Past simple of come?',['comed','came','come','comes'],1,2),
+  tfe('eng56_20','"I have saw" is correct.',1),
+  tfe('eng56_21','"They watched TV" is past simple.',0),
+  mc('eng56_22','Past simple of take?',['taked','took','taken','takes'],1,2),
+  tfe('eng56_23','"She has taken" is correct.',0),
+  tfe('eng56_24','Past simple of drink is drank.',0),
+  tfe('eng56_25','"We have finish" is correct.',1),
+],
+'eng-78':[
+  mc('eng78_1','If I ___ rich, I would travel.',['am','was','were','be'],2,3),
+  tfe('eng78_2','2nd conditional = unreal situation.',0),
+  mc('eng78_3','If she studied, she ___ pass.',['will','would','can','should'],1,2),
+  mc('eng78_4','The book ___ written by Tolkien.',['is','was','were','been'],1,3),
+  tfe('eng78_5','Passive = to be + past participle.',0),
+  tfe('eng78_6','"The cake was ate" is correct.',1),
+  mc('eng78_7','If I had known, I ___ come.',['will','would','would have','had'],2,3),
+  mc('eng78_8','You ___ wear seatbelt (obligation).',['can','might','must','would'],2,2),
+  tfe('eng78_9','Modal verbs use infinitive without to.',0),
+  mc('eng78_10','Books ___ read by students.',['is','are','were','be'],1,2),
+  tfe('eng78_11','"If I were you" is 2nd conditional.',0),
+  mc('eng78_12','The letter ___ sent yesterday.',['is','are','was','were'],2,2),
+  tfe('eng78_13','"Must" expresses obligation.',0),
+  mc('eng78_14','If it rains, I ___ stay home.',['would','will','should','might'],1,2),
+  tfe('eng78_15','"Might" expresses possibility.',0),
+  mc('eng78_16','Houses ___ built every year.',['is','am','are','were'],2,2),
+  tfe('eng78_17','"Could" is past of can.',0),
+  mc('eng78_18','If he ___ harder, he would succeed.',['work','works','worked','working'],2,2),
+  tfe('eng78_19','"Was written" is passive.',0),
+  tfe('eng78_20','"Should" gives advice.',0),
+  mc('eng78_21','She ___ be at home (possibility).',['must','might','will','shall'],1,2),
+  tfe('eng78_22','Passive voice focuses on action not doer.',0),
+  tfe('eng78_23','"If I would have" is correct 3rd conditional.',1),
+  mc('eng78_24','Pizza ___ delivered to our door.',['is','am','are','was'],0,2),
+  tfe('eng78_25','3rd conditional = impossible past.',0),
+],
+'eng-910':[
+  mc('eng910_1','She said she ___ tired.',['is','was','were','be'],1,3),
+  tfe('eng910_2','Reported speech shifts tenses back.',0),
+  mc('eng910_3','"To Kill a Mockingbird" author?',['Orwell','Harper Lee','Hemingway','Dickens'],1,2),
+  mc('eng910_4','"Ubiquitous" means?',['rare','present everywhere','hidden','fast'],1,3),
+  tfe('eng910_5','"Hamlet" was written by Shakespeare.',0),
+  mc('eng910_6','Protagonist is?',['villain','main character','narrator','author'],1,2),
+  tfe('eng910_7','George Orwell wrote 1984.',0),
+  mc('eng910_8','He said he ___ come.',['will','would','can','shall'],1,2),
+  tfe('eng910_9','Antagonist opposes the protagonist.',0),
+  mc('eng910_10','"Benevolent" means?',['cruel','kind','smart','lazy'],1,3),
+  tfe('eng910_11','Reported: I am → he was.',0),
+  mc('eng910_12','"Eloquent" means?',['quiet','well-spoken','shy','boring'],1,3),
+  tfe('eng910_13','"1984" is a dystopian novel.',0),
+  mc('eng910_14','Reported: She is busy.',['She said she is busy.','She said she was busy.','She says she was.','She told she is.'],1,2),
+  tfe('eng910_15','The climax is the turning point.',0),
+  mc('eng910_16','"Meticulous" means?',['careless','very careful','lazy','brave'],1,3),
+  tfe('eng910_17','Foreshadowing hints at future events.',0),
+  mc('eng910_18','He asked where ___ going.',['I am','am I','I was','was I'],2,2),
+  tfe('eng910_19','Irony means said is not what is meant.',0),
+  mc('eng910_20','"Ambiguous" means?',['clear','having two meanings','boring','smart'],1,2),
+  tfe('eng910_21','"Animal Farm" is by Orwell.',0),
+  mc('eng910_22','"Romeo and Juliet" is by?',['Dickens','Orwell','Shakespeare','Hemingway'],2,2),
+  tfe('eng910_23','Metaphor compares without like or as.',0),
+  tfe('eng910_24','A simile uses like or as.',0),
+  mc('eng910_25','"Antagonist" means?',['main character','opposing character','narrator','author'],1,2),
+],
+'eng-1112':[
+  mc('eng1112_1','Argumentative essay must have?',['only facts','thesis+evidence+conclusion','just opinion','summary only'],1,4),
+  tfe('eng1112_2','A conclusion introduces new arguments.',1),
+  tfe('eng1112_3','"Therefore" is a transition word.',0),
+  mc('eng1112_4','"Soliloquy" — character speaks to?',['audience','another char','themselves','narrator'],2,3),
+  tfe('eng1112_5','Protagonist is the main character.',0),
+  mc('eng1112_6','"Denouement" means?',['introduction','conflict','resolution','climax'],2,3),
+  tfe('eng1112_7','Thesis statement presents the main argument.',0),
+  mc('eng1112_8','"Catharsis" in drama?',['conflict','emotional release','comedy','irony'],1,3),
+  tfe('eng1112_9','Body paragraphs support the thesis.',0),
+  mc('eng1112_10','"In medias res" means?',['beginning','middle of action','at the end','conclusion'],1,3),
+  tfe('eng1112_11','"However" is a contrast connector.',0),
+  mc('eng1112_12','Essay: intro → ___ → conclusion.',['summary','body paragraphs','appendix','preface'],1,3),
+  tfe('eng1112_13','"Furthermore" adds an argument.',0),
+  mc('eng1112_14','"Allegory" is?',['a poem','extended metaphor story','short story','rhyme'],1,3),
+  tfe('eng1112_15','A counterargument weakens the thesis.',1),
+  mc('eng1112_16','"Hubris" means?',['humility','excessive pride','courage','wisdom'],1,3),
+  tfe('eng1112_17','Literary analysis requires textual evidence.',0),
+  mc('eng1112_18','"Stream of consciousness"?',['dialogue','internal thoughts flow','action','exposition'],1,3),
+  tfe('eng1112_19','Introduction should state the thesis.',0),
+  mc('eng1112_20','"Tragic flaw" = ?',['hamartia','nemesis','catharsis','logos'],0,3),
+  tfe('eng1112_21','"To conclude" signals conclusion.',0),
+  mc('eng1112_22','"Paradox" is?',['simple truth','self-contradictory statement','rhyme','metaphor'],1,3),
+  tfe('eng1112_23','A conclusion restates the thesis.',0),
+  mc('eng1112_24','Persuasive writing aims to?',['entertain','describe','convince','inform only'],2,3),
+  tfe('eng1112_25','Evidence must support every claim.',0),
+],
+'rus-12':[
+  mc('rus12_1','Первая буква алф.?',['А','Б','В','Г'],0,1),
+  tfr('rus12_2','"Мама" — мать.',0),
+  mc('rus12_3','В "кот" — букв?',['2','3','4','5'],1,1),
+  mc('rus12_4','"Папа" значит?',['father','mother','sister','brother'],0,1),
+  mc('rus12_5','"Дом" значит?',['school','home','park','car'],1,1),
+  tfr('rus12_6','"А" — первая буква.',0),
+  mc('rus12_7','"Кошка" — это?',['собака','птица','кошка (cat)','рыба'],2,1),
+  mc('rus12_8','Букв в "мама"?',['3','4','5','6'],1,1),
+  tfr('rus12_9','"Кот" — 4 буквы.',1),
+  mc('rus12_10','"Школа" значит?',['home','school','park','store'],1,1),
+  tfr('rus12_11','"Б" — вторая буква.',0),
+  mc('rus12_12','"Рыба" значит?',['cat','dog','fish','bird'],2,1),
+  mc('rus12_13','Букв в "папа"?',['3','4','5','6'],1,1),
+  tfr('rus12_14','"Дом" значит home.',0),
+  mc('rus12_15','"Привет" значит?',['Hello','Bye','Thanks','Please'],0,1),
+  tfr('rus12_16','"Кошка" — женский род.',0),
+  mc('rus12_17','"Книга" значит?',['pen','book','bag','table'],1,1),
+  tfr('rus12_18','"Я" — I (первое лицо).',0),
+  mc('rus12_19','Букв в русском алф.?',['30','33','36','38'],1,1),
+  tfr('rus12_20','"Собака" — dog.',0),
+  mc('rus12_21','"Стол" значит?',['chair','table','bed','door'],1,1),
+  tfr('rus12_22','"Ты" — you (singular).',0),
+  mc('rus12_23','"Кот" значит?',['dog','cat','bird','fish'],1,1),
+  tfr('rus12_24','"Мама" — 4 буквы.',0),
+  mc('rus12_25','Гласные: А,Е,И,О,У?',['да','нет','частично','?'],0,1),
+],
+'rus-34':[
+  mc('rus34_1','"Как тебя зовут?" = ?',['Как дела?','Whats your name?','Где ты?','Что это?'],1,2),
+  tfr('rus34_2','В рус. языке 6 падежей.',0),
+  tfr('rus34_3','"Стол,дом" — мужской род.',0),
+  mc('rus34_4','"Здравствуйте" = ?',['Hello','Bye','Thanks','Please'],0,1),
+  mc('rus34_5','"Пять" — это?',['3','4','5','6'],2,1),
+  mc('rus34_6','Один,два,три... дальше?',['четыре','пять','шесть','семь'],0,1),
+  tfr('rus34_7','"Яблоко" — среднего рода.',0),
+  mc('rus34_8','"Десять" = ?',['7','8','9','10'],3,1),
+  mc('rus34_9','"Спасибо" = ?',['Hello','Please','Thank you','Sorry'],2,1),
+  tfr('rus34_10','"Ты" — второе лицо.',0),
+  mc('rus34_11','"Пожалуйста" = ?',['Thanks','Please/Welcome','Sorry','Bye'],1,1),
+  mc('rus34_12','"Двадцать" = ?',['10','15','20','25'],2,1),
+  tfr('rus34_13','"Стол" — мужской род.',0),
+  mc('rus34_14','"Кто?" — падеж?',['Им.','Род.','Вин.','Дат.'],0,2),
+  tfr('rus34_15','"Он" — третье лицо.',0),
+  mc('rus34_16','"Семь" = ?',['5','6','7','8'],2,1),
+  tfr('rus34_17','"Мы" — первое лицо множ.',0),
+  mc('rus34_18','"До свидания" = ?',['Hello','Goodbye','Thanks','Please'],1,1),
+  tfr('rus34_19','"Окно" — среднего рода.',0),
+  mc('rus34_20','"Три" = ?',['1','2','3','4'],2,1),
+  tfr('rus34_21','"Она" — женского рода.',0),
+  mc('rus34_22','"Что?" — падеж?',['Им.','Вин.','Род.','Дат.'],0,2),
+  tfr('rus34_23','Именительный — падеж субъекта.',0),
+  mc('rus34_24','"Извините" = ?',['Hello','Please','Sorry','Thanks'],2,1),
+  tfr('rus34_25','"Мама" — женский род.',0),
+],
+'rus-56':[
+  mc('rus56_1','Я ___ книгу. (читать)',['читаю','читаешь','читает','читаем'],0,2),
+  tfr('rus56_2','"Идти" — несов. вид.',0),
+  tfr('rus56_3','"Пойти" — совершенный вид.',0),
+  mc('rus56_4','Я иду — "школу" падеж?',['Им.','Род.','Вин.','Дат.'],2,2),
+  tfr('rus56_5','Именительный — субъект.',0),
+  mc('rus56_6','Ты ___ газету. (читать)',['читаю','читаешь','читает','читаем'],1,2),
+  mc('rus56_7','Он ___ книгу. (читать)',['читаю','читаешь','читает','читаем'],2,2),
+  tfr('rus56_8','Родительный — кого/чего?.',0),
+  mc('rus56_9','Сов. вид "писать"?',['написать','писать','пишет','пишу'],0,2),
+  tfr('rus56_10','Несов. вид — действие в процессе.',0),
+  mc('rus56_11','Дательный — кому?',['да','нет','иногда','?'],0,2),
+  mc('rus56_12','Вы ___ по-рус.? (говорить)',['говорю','говоришь','говорит','говорите'],3,2),
+  tfr('rus56_13','"Написать" — сов. вид.',0),
+  mc('rus56_14','Они ___ домой. (идти)',['иду','идёшь','идёт','идут'],3,2),
+  tfr('rus56_15','Родит. падеж — нет кого?.',0),
+  mc('rus56_16','Предложный — о чём?',['да','нет','иногда','?'],0,2),
+  tfr('rus56_17','"Читать" — несов. вид.',0),
+  mc('rus56_18','Я ___ задание. (делать)',['делаю','делаешь','делает','делаем'],0,2),
+  tfr('rus56_19','Вин. падеж — прямой объект.',0),
+  mc('rus56_20','Сов. вид "читать"?',['прочитать','читать','читаю','читает'],0,2),
+  tfr('rus56_21','"Они читают" — несов. вид.',0),
+  mc('rus56_22','Он ___ письмо. (писать)',['пишу','пишешь','пишет','пишем'],2,2),
+  tfr('rus56_23','Тв. падеж — кем/чем?.',0),
+  mc('rus56_24','Ты ___ музыку? (слушать)',['слушаю','слушаешь','слушает','слушают'],1,2),
+  tfr('rus56_25','"Читать" несов., "прочитать" сов.',0),
+],
+'rus-78':[
+  mc('rus78_1','Кто написал "Евгений Онегин"?',['Толстой','Пушкин','Достоевский','Чехов'],1,3),
+  tfr('rus78_2','"Евгений Онегин" — роман в стихах.',0),
+  tfr('rus78_3','Пушкин жил в XVIII веке.',1),
+  mc('rus78_4','Сов. вид "писать"?',['написать','писать','пишет','пишу'],0,3),
+  tfr('rus78_5','Несов. вид — действие в процессе.',0),
+  mc('rus78_6','"Метафора" — это?',['прямое сравн.','скрытое сравн.','эпитет','?'],1,3),
+  tfr('rus78_7','"Война и мир" — Толстого.',0),
+  mc('rus78_8','Чехов известен?',['романами','рассказами и пьесами','поэзией','?'],1,2),
+  tfr('rus78_9','Пушкин — XIX в.',0),
+  mc('rus78_10','Ямб — это?',['стихотворный размер','рифма','строфа','?'],0,3),
+  mc('rus78_11','Пушкин родился в?',['1799','1800','1801','1798'],0,3),
+  tfr('rus78_12','"Онегин" — проза.',1),
+  mc('rus78_13','Антонимы — это?',['одно значение','противоположные слова','синонимы','?'],1,2),
+  mc('rus78_14','Синонимы — это?',['противоп.','близкие по смыслу','анонимы','?'],1,2),
+  tfr('rus78_15','Рифма — повторение звуков в конце строк.',0),
+  mc('rus78_16','Гоголь написал?',['Войну и мир','Мёртвые души','Онегина','?'],1,3),
+  tfr('rus78_17','"Мёртвые души" — поэма.',0),
+  mc('rus78_18','Лермонтов написал?',['Онегина','Героя нашего времени','Войну','?'],1,3),
+  tfr('rus78_19','Лермонтов погиб на дуэли.',0),
+  mc('rus78_20','Трагедия — жанр?',['комедии','драмы','лирики','?'],1,2),
+  tfr('rus78_21','"Эпитет" — образное определение.',0),
+  mc('rus78_22','Рифмовка АБАБ — это?',['смежная','перекрёстная','кольцевая','?'],1,2),
+  tfr('rus78_23','Сравнение использует "как" или "словно".',0),
+  mc('rus78_24','Литер. герой в "Онегине"?',['Онегин','Пушкин','Лермонтов','?'],0,2),
+  tfr('rus78_25','Ямб — ударение на чётном слоге.',0),
+],
+'rus-910':[
+  mc('rus910_1','Кто написал "Война и мир"?',['Пушкин','Чехов','Толстой','Достоевский'],2,3),
+  tfr('rus910_2','"Преступление и наказание" — Достоевского.',0),
+  tfr('rus910_3','Чехов известен рассказами.',0),
+  mc('rus910_4','"Хотя он устал" — тип?',['простое','сложносоч.','сложноподч.','бессоюз.'],2,3),
+  tfr('rus910_5','Придаточное зависит от главного.',0),
+  tfr('rus910_6','"Потому что" — союз причины.',0),
+  mc('rus910_7','Достоевский написал?',['Войну','Онегина','Идиота','?'],2,3),
+  mc('rus910_8','Толстой написал?',['Онегина','Войну и мир','Идиота','?'],1,3),
+  tfr('rus910_9','"Анна Каренина" — Толстого.',0),
+  mc('rus910_10','"Хотя" — союз?',['причины','уступки','следствия','?'],1,2),
+  tfr('rus910_11','Достоевский жил в XIX веке.',0),
+  mc('rus910_12','Сложноподч. — соединяют?',['сочин. союзы','подчин. союзы','?','?'],1,3),
+  mc('rus910_13','"Так как" — союз?',['следствия','причины','уступки','?'],1,2),
+  tfr('rus910_14','"Братья Карамазовы" — Достоевского.',0),
+  mc('rus910_15','Чехов написал?',['Войну','Вишнёвый сад','Онегина','?'],1,3),
+  tfr('rus910_16','"Вишнёвый сад" — Чехова.',0),
+  mc('rus910_17','"Если" — союз?',['уступки','условия','причины','?'],1,2),
+  tfr('rus910_18','"Война и мир" — 4 тома.',0),
+  mc('rus910_19','"Чтобы" — союз?',['причины','цели','уступки','?'],1,2),
+  tfr('rus910_20','Достоевский — психол. реализм.',0),
+  mc('rus910_21','Союз условия?',['хотя','если','потому что','?'],1,2),
+  tfr('rus910_22','"Преступление" написано в 1866.',0),
+  mc('rus910_23','Главное предложение — ?',['зависит','независимое','?','?'],1,2),
+  tfr('rus910_24','Толстой жил в XIX-нач. XX в.',0),
+  mc('rus910_25','"Поскольку" — союз?',['условия','причины','уступки','?'],1,2),
+],
+'rus-1112':[
+  mc('rus1112_1','Главная черта эссе?',['объективность','субъективность','научность','точность'],1,4),
+  tfr('rus1112_2','В эссе допускается авторская позиция.',0),
+  tfr('rus1112_3','Эссе — строго научный жанр.',1),
+  mc('rus1112_4','Рус. символизм — начало?',['1-я пол. XIX','кон. XIX','1-я пол. XX','2-я пол. XX'],1,3),
+  tfr('rus1112_5','Блок — представитель символизма.',0),
+  tfr('rus1112_6','Акмеизм возник ПОСЛЕ символизма.',0),
+  mc('rus1112_7','Ахматова — представитель?',['символизма','акмеизма','футуризма','?'],1,3),
+  mc('rus1112_8','Блок написал?',['Незнакомку','Онегина','Войну','?'],0,3),
+  tfr('rus1112_9','Футуризм отверг классику.',0),
+  mc('rus1112_10','Маяковский — представитель?',['симв.','акм.','футуризма','?'],2,3),
+  tfr('rus1112_11','Серебряный век — нач. XX в.',0),
+  mc('rus1112_12','Эссе структура?',['введ.+осн.+закл.','только мнение','только факты','?'],0,3),
+  tfr('rus1112_13','Акмеизм — Ахматова, Гумилёв.',0),
+  mc('rus1112_14','Символизм отличается?',['конкретностью','символами и образами','научностью','?'],1,3),
+  tfr('rus1112_15','В эссе можно выражать личное мнение.',0),
+  mc('rus1112_16','Футуризм появился в?',['XIX в.','нач. XX в.','сер. XX в.','?'],1,3),
+  tfr('rus1112_17','Блок написал "Двенадцать".',0),
+  mc('rus1112_18','Жанр "ода" — это?',['торжественное стих.','рассказ','роман','?'],0,2),
+  tfr('rus1112_19','Эссе — публицистический жанр.',0),
+  mc('rus1112_20','Ахматова написала?',['Реквием','Онегина','Войну','?'],0,3),
+  tfr('rus1112_21','Символисты использовали символы.',0),
+  mc('rus1112_22','Пастернак — ?',['символист','акмеист','модернист','?'],2,3),
+  tfr('rus1112_23','Маяковский — футурист.',0),
+  mc('rus1112_24','Эссе vs научная статья?',['объективностью','субъективностью','точностью','?'],1,3),
+  tfr('rus1112_25','Акмеизм — "серебряный век".',0),
+],
+'nat-12':[
+  mc('nat12_1','წელ. სეზ.?',['2','3','4','5'],2,1),
+  tf('nat12_2','დათვი ზამთ. ძ. ეძ.',0),
+  mc('nat12_3','მზე ამ. — ?',['დ.','ჩ.','აღ.','სამ.'],2,1),
+  mc('nat12_4','ვეშაპი — ძ.?',['კი','არა','ეჭ.','ვ.'],0,1),
+  tf('nat12_5','ადამ. 5 გრ. ო.',0),
+  mc('nat12_6','მც. ჟ. გ. ფ.?',['ფ.','ღ.','ფოთ.','ყვ.'],2,1),
+  mc('nat12_7','ლომი — ძ.?',['კი','ეჭ.','არა','ვ.'],0,1),
+  mc('nat12_8','ც. — ბ. ნ.?',['ც.','ს.','ა.','ყ.'],0,1),
+  tf('nat12_9','ი. — 4 სეზ.',0),
+  mc('nat12_10','ადამ. — ძ.?',['კი','ეჭ.','არა','ვ.'],0,1),
+  tf('nat12_11','მც. CO₂ შ.',0),
+  mc('nat12_12','ყ. — ბ.?',['ბ.','ფ.','ყ.','ა.'],0,1),
+  tf('nat12_13','ვ. — ჩ.',0),
+  mc('nat12_14','ბ. — ძ.?',['კი','ეჭ.','არა','ვ.'],1,1),
+  mc('nat12_15','ც. — ბ.?',['კი','ეჭ.','არა','ვ.'],1,1),
+  tf('nat12_16','მ. — ძ.',0),
+  tf('nat12_17','გ. — ბ.',1),
+  tf('nat12_18','ს. — ბ.',1),
+  tf('nat12_19','ლ. — ა.',0),
+  tf('nat12_20','ბ. — 4 ბ.',0),
+  mc('nat12_21','ს. — ბ.?',['ბ.','ც.','ს. ბ.','ყ.'],0,1),
+  tf('nat12_22','ი. — 5 ი.',0),
+  mc('nat12_23','ა. — ბ.?',['ა.','ა. ე.','ა. ბ.','ყ.'],0,1),
+  tf('nat12_24','ბ. — 4 ბ.',0),
+  tf('nat12_25','ც. — 4 ც.',0),
+],
+'nat-34':[
+  tf('nat34_1','მ. — სისტ. ც.',0),
+  mc('nat34_2','მ. სის. პლ.?',['6','7','8','9'],2,2),
+  mc('nat34_3','სამ. ჯ. იწ.?',['მტ.','მც.','ბ.','ა.'],1,2),
+  tf('nat34_4','წ. ც.: აორთ.→ ღ.→ ნ.',0),
+  mc('nat34_5','ნ. ნ. ზ. ფ.?',['ქ.','ჰ.','თ.','ქვ.'],1,2),
+  tf('nat34_6','დ. მ. 1 წ. ერ.',0),
+  mc('nat34_7','მ. — ყ. დ. ც.?',['ე.','ო.','ვ.','ი.'],0,2),
+  mc('nat34_8','ს. ც. — ვ. ბ.?',['8','9','4','2'],0,2),
+  tf('nat34_9','სა. — მ. ს. ც.',0),
+  mc('nat34_10','ყ. — ჩ. ა.?',['მც.','ბ.','ა.','ყ.'],0,2),
+  tf('nat34_11','ბ. — ც. ბ.',0),
+  mc('nat34_12','ვ. — პლ.?',['ვ.','ს.','ა.','ყ.'],0,2),
+  tf('nat34_13','მ. — ყ. ს.',0),
+  mc('nat34_14','ც. ცხ. — ვ.?',['ვ.','ბ.','ა.','ყ.'],0,2),
+  mc('nat34_15','ნ. — ც.?',['ქვ.','ქ.','ნ.','ყ.'],2,2),
+  tf('nat34_16','ჰ. — ნ. ზ. ფ.',0),
+  tf('nat34_17','ც. — 8 პ.',0),
+  mc('nat34_18','ა. — ყ. ბ.?',['მც.','ბ.','ა.','ყ.'],1,2),
+  tf('nat34_19','ს. — ვ. ც.',0),
+  mc('nat34_20','ყ. მ. ბ.?',['ბ.','ქ.','მ.','ყ.'],0,2),
+  tf('nat34_21','წ. — 3 ა.',1),
+  mc('nat34_22','ა. — ყ. ც.?',['ა.','ვ.','ბ.','ყ.'],0,2),
+  tf('nat34_23','ვ. — ყ. გ.',0),
+  mc('nat34_24','წ. — ყ. ბ.?',['წ.','ო.','ბ.','ყ.'],0,2),
+  tf('nat34_25','დ. — მ. გ.',0),
+],
+'nat-56':[
+  mc('nat56_1','ფ. სჭ.?',['O₂+N₂','CO₂+H₂O+სინ.','მხ. წ.','მ. სინ.'],1,2),
+  tf('nat56_2','ფ. ათ. ჟ.',0),
+  mc('nat56_3','ც. ო. ძ. ს.?',['ა.','მ.','უ.','ქ.'],2,2),
+  mc('nat56_4','ადამ. გ. კ.?',['2','3','4','6'],2,2),
+  tf('nat56_5','ფ. — CO₂ შ.',0),
+  mc('nat56_6','ბ. ნ. ნ.?',['სახ. სიმ.','ე. სახ.','ატ. შ.','ნ. ი.'],0,2),
+  tf('nat56_7','გ. — CO₂+H₂O→O₂.',0),
+  mc('nat56_8','ც. — ბ. ნ.?',['ბ. ნ.','ს. ე.','ყ.','ა.'],0,2),
+  tf('nat56_9','ადამ. — ს. სა.',0),
+  mc('nat56_10','ქ. ვ. — ყ.?',['O₂','CO₂','N₂','H₂O'],1,2),
+  tf('nat56_11','ც. — ყ. ც. ს.',0),
+  mc('nat56_12','ს. — ყ. ბ.?',['ს.','ბ.','ც.','ყ.'],0,2),
+  tf('nat56_13','H₂O — წ. ფ.',0),
+  mc('nat56_14','ა. — ყ.?',['ა.','ბ.','ვ.','ყ.'],0,2),
+  mc('nat56_15','გ. — ყ. ნ.?',['გ.','გ. ფ.','გ.+ნ.','ყ.'],0,2),
+  tf('nat56_16','ც. — ა. ბ.',1),
+  mc('nat56_17','ნ. — ყ. ბ.?',['ნ.','ბ.','ც.','ყ.'],0,2),
+  tf('nat56_18','ადამ. — 11 სი.',0),
+  mc('nat56_19','გ. — ყ. ი.?',['გ.','ბ.','ა.','ყ.'],0,2),
+  tf('nat56_20','ც. — ყ. ო. ს.',0),
+  mc('nat56_21','სა. — ყ.?',['სა.','ბ.','გ.','ყ.'],0,2),
+  tf('nat56_22','ბ. — ი. ა.',0),
+  mc('nat56_23','ბ. — ყ. ი.?',['ბ.','ც.','ა.','ყ.'],0,2),
+  tf('nat56_24','O₂ — ჟ.',0),
+  mc('nat56_24b','CO₂ — ყ.?',['CO₂','O₂','H₂O','N₂'],0,2),
+],
+'nat-78':[
+  mc('nat78_1','უ. ე. ც.?',['ბ.','მ.','ქ.','ER'],1,3),
+  tf('nat78_2','DNA — გ. ი.',0),
+  tf('nat78_3','ქ. — მ. უ.',0),
+  mc('nat78_4','ა. ბ. შ.?',['ე.+ნ.','პ.+ნ.','პ.+ე.','მ. ნ.'],1,3),
+  tf('nat78_5','Au — ო.',0),
+  mc('nat78_6','წ. ქ. ფ.?',['H₂O₂','HO','H₂O','H₃O'],2,2),
+  mc('nat78_7','ქ. — ყ. ო.?',['ბ.','მ.','ქ.','ა.'],2,3),
+  tf('nat78_8','DNA — ბ. შ.',0),
+  mc('nat78_9','მ. — ყ. ბ.?',['ბ.','მ.','ც.','ყ.'],1,3),
+  tf('nat78_10','H₂O — 2H+O.',0),
+  tf('nat78_11','ქ. — O₂-ს ა.',0),
+  mc('nat78_12','ა. — ყ.?',['ა.','ა. ნ.','ა. ბ.','ყ.'],0,2),
+  tf('nat78_13','ბ. — ა. შ.',0),
+  mc('nat78_14','DNA — ყ.?',['D.','R.','P.','A.'],0,3),
+  tf('nat78_15','ც. — ა. ბ.',0),
+  mc('nat78_16','ო. — ყ. ბ.?',['ო.','მ.','ბ.','ყ.'],0,2),
+  tf('nat78_17','ა. — (+) და (-).',0),
+  mc('nat78_18','N — ყ. ე.?',['N','C','O','H'],0,2),
+  tf('nat78_19','მ. — ე. ც.',0),
+  mc('nat78_20','ბ. — ყ. ო.?',['ბ.','ც.','ა.','ყ.'],0,3),
+  tf('nat78_21','ქ. — ს. ო.',0),
+  mc('nat78_22','O — ყ. ე.?',['O','N','C','H'],0,2),
+  tf('nat78_23','DNA → RNA → ც.',0),
+  tf('nat78_24','ATP — ე. ვ.',0),
+  mc('nat78_25','ც. — ყ. ო.?',['ა.','ბ.','ც.','ყ.'],2,2),
+],
+'nat-910':[
+  tf('nat910_1','ნ. I: გ. ძ. ი. მდ.',0),
+  mc('nat910_2','სი. ე. SI?',['km/h','m/s','cm/s','mph'],1,2),
+  mc('nat910_3','g≈?',['9.8','10.8','8.9','11'],0,3),
+  mc('nat910_4','ო. ე. (ო. ქ.)?',['H','O','C','N'],2,3),
+  tf('nat910_5','CH₄ — მ.',0),
+  mc('nat910_6','pH=7?',['მ.','ნ.','ტ.','?'],1,2),
+  tf('nat910_7','F=ma — ნ. II.',0),
+  mc('nat910_8','სი. F=?',['ma','mv','mt','?'],0,2),
+  tf('nat910_9','ნ. III — ყ. მ. შ.',0),
+  mc('nat910_10','C₂H₅OH?',['ა.','ე.','მ.','?'],1,3),
+  tf('nat910_11','pH<7 — მ.',0),
+  mc('nat910_12','ე. F×d?',['ე.','გ.','სი.','?'],0,3),
+  tf('nat910_13','pH>7 — ტ.',0),
+  mc('nat910_14','N₂ — ყ.?',['ა.','ბ.','ნ.','?'],2,2),
+  mc('nat910_15','NaOH — ყ.?',['მ.','ტ.','ნ.','?'],1,2),
+  tf('nat910_16','CO₂ — ს. ე.',0),
+  mc('nat910_17','W = ?',['F×d','m×a','m×v','?'],0,3),
+  tf('nat910_18','CH₄ — ბ. ა.',0),
+  mc('nat910_19','O₂ — ყ.?',['ჟ.','ნ.','ა.','?'],0,2),
+  tf('nat910_20','g=9.8 m/s².',0),
+  mc('nat910_21','HCl — ყ.?',['მ.','ტ.','ნ.','?'],0,2),
+  tf('nat910_22','ნ. I — ი.',0),
+  mc('nat910_23','კ. = m×g×h?',['ე.','გ.','კ.','?'],2,3),
+  tf('nat910_24','F=ma — ნ. II.',0),
+  mc('nat910_25','H₂SO₄ — ყ.?',['მ.','ტ.','ნ.','?'],0,2),
+],
+'nat-1112':[
+  tf('nat1112_1','მ. I: F2 3:1.',0),
+  mc('nat1112_2','ბ. გ. ვ.?',['მ.','ლ.','დ.','ლ.'],2,3),
+  tf('nat1112_3','მ. — გ. ც.',0),
+  mc('nat1112_4','სათ. ე. ძ.?',['O₂','CO₂+CH₄','N₂','H₂O'],1,4),
+  tf('nat1112_5','კ. ცვ. ა. ს.',0),
+  mc('nat1112_6','ბ. — ყ.?',['ბ.','ბ. ც.','ბ.+ც.','ყ.'],0,3),
+  tf('nat1112_7','დ. — ბ. გ.',0),
+  mc('nat1112_8','ა. — ყ.?',['ა.','ბ.','ც.','ყ.'],0,3),
+  tf('nat1112_9','მ. II — დ.',0),
+  mc('nat1112_10','ე. — ყ.?',['ე.','ბ.','ა.','ყ.'],0,3),
+  tf('nat1112_11','ი. ც. — DNA.',0),
+  mc('nat1112_12','ო. — ყ.?',['ო.','ა.','ბ.','ყ.'],0,3),
+  tf('nat1112_13','ს. ა. — ბ. გ.',0),
+  mc('nat1112_14','CO₂ — ს. ე.?',['კი','ეჭ.','არა','ვ.'],0,3),
+  tf('nat1112_15','CH₄ — ს. ე.',0),
+  mc('nat1112_16','ბ. — ყ. ი.?',['ბ.','ბ. ც.','ა.','ყ.'],0,3),
+  tf('nat1112_17','მ. — ბ. ა.',0),
+  mc('nat1112_18','ი. — ყ.?',['ი.','ბ.','ა.','ყ.'],0,3),
+  tf('nat1112_19','ბ. — ე. ი.',0),
+  mc('nat1112_20','ა. — ყ.?',['ა.','ბ.','ც.','ყ.'],0,3),
+  tf('nat1112_21','ო. ბ. — ყ.',0),
+  mc('nat1112_22','ე. — ყ.?',['ე.','ბ.','ა.','ყ.'],0,3),
+  tf('nat1112_23','ს. ა. — კ. ც.',0),
+  mc('nat1112_24','ო. ბ. — ყ.?',['ო. ბ.','ბ.','ა.','ყ.'],0,3),
+  tf('nat1112_25','ბ. ს. — დ. ა.',0),
+],
+};
+
+const ALL_TESTS=[
+{id:'math-g1',title:'მათემატიკა — I კლასი',subject:'მათემატიკა',grade:1,pool:'math-12',count:20,time:15,attempts:3,paid:false},
+{id:'math-g2',title:'მათემატიკა — II კლასი',subject:'მათემატიკა',grade:2,pool:'math-12',count:20,time:15,attempts:3,paid:false},
+{id:'math-g3',title:'მათემატიკა — III კლასი',subject:'მათემატიკა',grade:3,pool:'math-34',count:20,time:20,attempts:2,paid:false},
+{id:'math-g4',title:'მათემატიკა — IV კლასი',subject:'მათემატიკა',grade:4,pool:'math-34',count:20,time:20,attempts:2,paid:false},
+{id:'math-g5',title:'მათემატიკა — V კლასი',subject:'მათემატიკა',grade:5,pool:'math-56',count:20,time:25,attempts:2,paid:false},
+{id:'math-g6',title:'მათემატიკა — VI კლასი',subject:'მათემატიკა',grade:6,pool:'math-56',count:20,time:25,attempts:2,paid:false},
+{id:'math-g7',title:'მათემატიკა — VII კლასი',subject:'მათემატიკა',grade:7,pool:'math-78',count:20,time:30,attempts:2,paid:true},
+{id:'math-g8',title:'მათემატიკა — VIII კლასი',subject:'მათემატიკა',grade:8,pool:'math-78',count:20,time:30,attempts:2,paid:true},
+{id:'math-g9',title:'მათემატიკა — IX კლასი',subject:'მათემატიკა',grade:9,pool:'math-910',count:20,time:35,attempts:2,paid:true},
+{id:'math-g10',title:'მათემატიკა — X კლასი',subject:'მათემატიკა',grade:10,pool:'math-910',count:20,time:35,attempts:2,paid:true},
+{id:'math-g11',title:'მათემატიკა — XI კლასი',subject:'მათემატიკა',grade:11,pool:'math-1112',count:20,time:40,attempts:2,paid:true},
+{id:'math-g12',title:'მათემატიკა — XII კლასი',subject:'მათემატიკა',grade:12,pool:'math-1112',count:20,time:40,attempts:2,paid:true},
+{id:'geo-g1',title:'ქართული — I კლასი',subject:'ქართული',grade:1,pool:'geo-12',count:20,time:15,attempts:3,paid:false},
+{id:'geo-g2',title:'ქართული — II კლასი',subject:'ქართული',grade:2,pool:'geo-12',count:20,time:15,attempts:3,paid:false},
+{id:'geo-g3',title:'ქართული — III კლასი',subject:'ქართული',grade:3,pool:'geo-34',count:20,time:20,attempts:2,paid:false},
+{id:'geo-g4',title:'ქართული — IV კლასი',subject:'ქართული',grade:4,pool:'geo-34',count:20,time:20,attempts:2,paid:false},
+{id:'geo-g5',title:'ქართული — V კლასი',subject:'ქართული',grade:5,pool:'geo-56',count:20,time:25,attempts:2,paid:false},
+{id:'geo-g6',title:'ქართული — VI კლასი',subject:'ქართული',grade:6,pool:'geo-56',count:20,time:25,attempts:2,paid:false},
+{id:'geo-g7',title:'ქართული — VII კლასი',subject:'ქართული',grade:7,pool:'geo-78',count:20,time:30,attempts:2,paid:true},
+{id:'geo-g8',title:'ქართული — VIII კლასი',subject:'ქართული',grade:8,pool:'geo-78',count:20,time:30,attempts:2,paid:true},
+{id:'geo-g9',title:'ქართული — IX კლასი',subject:'ქართული',grade:9,pool:'geo-910',count:20,time:35,attempts:2,paid:true},
+{id:'geo-g10',title:'ქართული — X კლასი',subject:'ქართული',grade:10,pool:'geo-910',count:20,time:35,attempts:2,paid:true},
+{id:'geo-g11',title:'ქართული — XI კლასი',subject:'ქართული',grade:11,pool:'geo-1112',count:20,time:40,attempts:2,paid:true},
+{id:'geo-g12',title:'ქართული — XII კლასი',subject:'ქართული',grade:12,pool:'geo-1112',count:20,time:40,attempts:2,paid:true},
+{id:'eng-g1',title:'ინგლისური — I კლასი',subject:'ინგლისური',grade:1,pool:'eng-12',count:20,time:15,attempts:3,paid:false},
+{id:'eng-g2',title:'ინგლისური — II კლასი',subject:'ინგლისური',grade:2,pool:'eng-12',count:20,time:15,attempts:3,paid:false},
+{id:'eng-g3',title:'ინგლისური — III კლასი',subject:'ინგლისური',grade:3,pool:'eng-34',count:20,time:20,attempts:2,paid:false},
+{id:'eng-g4',title:'ინგლისური — IV კლასი',subject:'ინგლისური',grade:4,pool:'eng-34',count:20,time:20,attempts:2,paid:false},
+{id:'eng-g5',title:'ინგლისური — V კლასი',subject:'ინგლისური',grade:5,pool:'eng-56',count:20,time:25,attempts:2,paid:false},
+{id:'eng-g6',title:'ინგლისური — VI კლასი',subject:'ინგლისური',grade:6,pool:'eng-56',count:20,time:25,attempts:2,paid:false},
+{id:'eng-g7',title:'ინგლისური — VII კლასი',subject:'ინგლისური',grade:7,pool:'eng-78',count:20,time:30,attempts:2,paid:true},
+{id:'eng-g8',title:'ინგლისური — VIII კლასი',subject:'ინგლისური',grade:8,pool:'eng-78',count:20,time:30,attempts:2,paid:true},
+{id:'eng-g9',title:'ინგლისური — IX კლასი',subject:'ინგლისური',grade:9,pool:'eng-910',count:20,time:35,attempts:2,paid:true},
+{id:'eng-g10',title:'ინგლისური — X კლასი',subject:'ინგლისური',grade:10,pool:'eng-910',count:20,time:35,attempts:2,paid:true},
+{id:'eng-g11',title:'ინგლისური — XI კლასი',subject:'ინგლისური',grade:11,pool:'eng-1112',count:20,time:40,attempts:2,paid:true},
+{id:'eng-g12',title:'ინგლისური — XII კლასი',subject:'ინგლისური',grade:12,pool:'eng-1112',count:20,time:40,attempts:2,paid:true},
+{id:'rus-g1',title:'რუსული — I კლასი',subject:'რუსული',grade:1,pool:'rus-12',count:20,time:15,attempts:3,paid:false},
+{id:'rus-g2',title:'რუსული — II კლასი',subject:'რუსული',grade:2,pool:'rus-12',count:20,time:15,attempts:3,paid:false},
+{id:'rus-g3',title:'რუსული — III კლასი',subject:'რუსული',grade:3,pool:'rus-34',count:20,time:20,attempts:2,paid:false},
+{id:'rus-g4',title:'რუსული — IV კლასი',subject:'რუსული',grade:4,pool:'rus-34',count:20,time:20,attempts:2,paid:false},
+{id:'rus-g5',title:'რუსული — V კლასი',subject:'რუსული',grade:5,pool:'rus-56',count:20,time:25,attempts:2,paid:false},
+{id:'rus-g6',title:'რუსული — VI კლასი',subject:'რუსული',grade:6,pool:'rus-56',count:20,time:25,attempts:2,paid:false},
+{id:'rus-g7',title:'რუსული — VII კლასი',subject:'რუსული',grade:7,pool:'rus-78',count:20,time:30,attempts:2,paid:true},
+{id:'rus-g8',title:'რუსული — VIII კლასი',subject:'რუსული',grade:8,pool:'rus-78',count:20,time:30,attempts:2,paid:true},
+{id:'rus-g9',title:'რუსული — IX კლასი',subject:'რუსული',grade:9,pool:'rus-910',count:20,time:35,attempts:2,paid:true},
+{id:'rus-g10',title:'რუსული — X კლასი',subject:'რუსული',grade:10,pool:'rus-910',count:20,time:35,attempts:2,paid:true},
+{id:'rus-g11',title:'რუსული — XI კლასი',subject:'რუსული',grade:11,pool:'rus-1112',count:20,time:40,attempts:2,paid:true},
+{id:'rus-g12',title:'რუსული — XII კლასი',subject:'რუსული',grade:12,pool:'rus-1112',count:20,time:40,attempts:2,paid:true},
+{id:'nat-g1',title:'ბუნება — I კლასი',subject:'ბუნება',grade:1,pool:'nat-12',count:20,time:15,attempts:3,paid:false},
+{id:'nat-g2',title:'ბუნება — II კლასი',subject:'ბუნება',grade:2,pool:'nat-12',count:20,time:15,attempts:3,paid:false},
+{id:'nat-g3',title:'ბუნება — III კლასი',subject:'ბუნება',grade:3,pool:'nat-34',count:20,time:20,attempts:2,paid:false},
+{id:'nat-g4',title:'ბუნება — IV კლასი',subject:'ბუნება',grade:4,pool:'nat-34',count:20,time:20,attempts:2,paid:false},
+{id:'nat-g5',title:'ბუნება — V კლასი',subject:'ბუნება',grade:5,pool:'nat-56',count:20,time:25,attempts:2,paid:false},
+{id:'nat-g6',title:'ბუნება — VI კლასი',subject:'ბუნება',grade:6,pool:'nat-56',count:20,time:25,attempts:2,paid:false},
+{id:'nat-g7',title:'ბიოლოგია — VII კლასი',subject:'ბუნება',grade:7,pool:'nat-78',count:20,time:30,attempts:2,paid:true},
+{id:'nat-g8',title:'ქიმია — VIII კლასი',subject:'ბუნება',grade:8,pool:'nat-78',count:20,time:30,attempts:2,paid:true},
+{id:'nat-g9',title:'ფიზიკა — IX კლასი',subject:'ბუნება',grade:9,pool:'nat-910',count:20,time:35,attempts:2,paid:true},
+{id:'nat-g10',title:'ქიმია — X კლასი',subject:'ბუნება',grade:10,pool:'nat-910',count:20,time:35,attempts:2,paid:true},
+{id:'nat-g11',title:'ბიოლოგია — XI კლასი',subject:'ბუნება',grade:11,pool:'nat-1112',count:20,time:40,attempts:2,paid:true},
+{id:'nat-g12',title:'ეკოლოგია — XII კლასი',subject:'ბუნება',grade:12,pool:'nat-1112',count:20,time:40,attempts:2,paid:true},
+];
+
+
+
+// ── User DB & State ───────────────────────────────────────────────────────────
+const USER_DB=[
+  {email:'mariam@student.ge',password:'student123',role:'student',name:'მარიამ კვირიკაშვილი',grade:'3A'},
+  {email:'giorgi@student.ge',password:'student123',role:'student',name:'გიორგი ნინიძე',grade:'3A'},
+  {email:'nino@edutest.ge',password:'teacher123',role:'teacher',name:'ნინო გელაშვილი',grade:''},
+  {email:'admin@edutest.ge',password:'admin123',role:'admin',name:'ადმინი','grade':''},
+];
+
+const SESSION_RESULTS=[];
+const SHOWN_Q={};
+
+let CUR_USER=null;
+let curRole='student';
+let builderStep=1;
+let selQs=new Set();
+let qIdx=0;
+let qAnswers={};
+let timerSec=1200;
+let timerInt=null;
+let curTest=null;
+let curTestQs=[];
+
+// ── Helpers ──────────────────────────────────────────────────────────────────
+const SUBJ_COLORS={'მათემატიკა':'linear-gradient(135deg,#6366f1,#8b5cf6)','ქართული':'linear-gradient(135deg,#f59e0b,#d97706)','ინგლისური':'linear-gradient(135deg,#10b981,#059669)','რუსული':'linear-gradient(135deg,#ef4444,#dc2626)','ბუნება':'linear-gradient(135deg,#0ea5e9,#0284c7)'};
+const SUBJ_ICONS={'მათემატიკა':'📐','ქართული':'📚','ინგლისური':'🇬🇧','რუსული':'🇷🇺','ბუნება':'🌿'};
+
+function shuffleArr(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+function prepareQ(q){
+  if(q.type!=='multiple_choice')return{...q};
+  const pairs=q.opts.map((o,i)=>({o,c:i===q.correct}));
+  const sp=shuffleArr(pairs);
+  return{...q,opts:sp.map(p=>p.o),correct:sp.findIndex(p=>p.c)};
+}
+
+function getTestQs(test){
+  const pool=Q_POOL[test.pool]||[];
+  const uid=(CUR_USER?.email||'guest')+'_'+test.id;
+  if(!SHOWN_Q[uid])SHOWN_Q[uid]=new Set();
+  let unseen=pool.filter(q=>!SHOWN_Q[uid].has(q.id));
+  if(unseen.length<test.count){SHOWN_Q[uid].clear();unseen=[...pool];}
+  const sel=shuffleArr(unseen).slice(0,test.count);
+  sel.forEach(q=>SHOWN_Q[uid].add(q.id));
+  return sel.map(prepareQ);
+}
+
+// ── Navigation ───────────────────────────────────────────────────────────────
+function go(p){
+  document.querySelectorAll('.page').forEach(x=>{x.classList.remove('active');});
+  const el=document.getElementById('p-'+p);
+  if(el){el.classList.add('active');el.classList.add('fade');}
+  if(p==='take-test')startTest();
+  if(p==='student')updateStudentUI();
+  if(p==='teacher')updateTeacherUI();
+}
+
+function sNav(id,el){
+  ['s-home','s-tests','s-results','s-profile'].forEach(x=>{
+    const e=document.getElementById(x);if(e){e.classList.add('hidden');e.classList.remove('fade');}
+  });
+  const tgt=document.getElementById(id);
+  if(tgt){tgt.classList.remove('hidden');setTimeout(()=>tgt.classList.add('fade'),10);}
+  document.querySelectorAll('#p-student .ni').forEach(x=>x.classList.remove('act'));
+  if(el)el.classList.add('act');
+  const titles={'s-home':'Dashboard','s-tests':'ტესტები','s-results':'შედეგები','s-profile':'პროფილი'};
+  const tb=document.getElementById('s-topbar-title');if(tb)tb.textContent=titles[id]||'';
+  if(id==='s-tests')renderStudentTests();
+  if(id==='s-results')renderStudentResults();
+  if(id==='s-home')updateStudentHomeStats();
+}
+
+function tNav(id,el){
+  ['t-home','t-tests','t-students','t-analytics'].forEach(x=>{
+    const e=document.getElementById(x);if(e){e.classList.add('hidden');e.classList.remove('fade');}
+  });
+  const tgt=document.getElementById(id);
+  if(tgt){tgt.classList.remove('hidden');setTimeout(()=>tgt.classList.add('fade'),10);}
+  document.querySelectorAll('#p-teacher .ni').forEach(x=>x.classList.remove('act'));
+  if(el)el.classList.add('act');
+  const nb=document.getElementById('t-new-btn');
+  if(nb)nb.style.display=id==='t-tests'?'':'none';
+  if(id==='t-tests')renderTeacherTests();
+}
+
+function aNav(id,el){
+  ['a-home','a-schools','a-users','a-pending','a-settings'].forEach(x=>{
+    const e=document.getElementById(x);if(e){e.classList.add('hidden');e.classList.remove('fade');}
+  });
+  const tgt=document.getElementById(id);
+  if(tgt){tgt.classList.remove('hidden');setTimeout(()=>tgt.classList.add('fade'),10);}
+  document.querySelectorAll('#p-admin .ni').forEach(x=>x.classList.remove('act'));
+  if(el)el.classList.add('act');
+}
+
+// ── Login ────────────────────────────────────────────────────────────────────
+let loginMode='login';
+function loginTab(t){
+  loginMode=t;
+  document.getElementById('ltab-login').classList.toggle('act',t==='login');
+  document.getElementById('ltab-reg').classList.toggle('act',t==='reg');
+  document.getElementById('reg-fields').classList.toggle('hidden',t!=='reg'||curRole!=='student');
+  const btn=document.getElementById('l-btn');
+  if(btn)btn.textContent=t==='login'?'შესვლა':'რეგისტრაცია';
+}
+
+function setRole(r){
+  curRole=r;
+  ['student','teacher','admin'].forEach(x=>{
+    const b=document.getElementById('rb-'+x);if(!b)return;
+    if(x===r){b.style.borderColor=r==='teacher'?'#16a34a':r==='admin'?'#7c3aed':'#2563eb';b.style.background=r==='teacher'?'#dcfce7':r==='admin'?'#ede9fe':'#dbeafe';b.style.color=r==='teacher'?'#16a34a':r==='admin'?'#7c3aed':'#1d4ed8';}
+    else{b.style.borderColor='var(--border)';b.style.background='#fff';b.style.color='var(--gray)';}
+  });
+  const emails={student:'mariam@student.ge',teacher:'nino@edutest.ge',admin:'admin@edutest.ge'};
+  const passes={student:'student123',teacher:'teacher123',admin:'admin123'};
+  const em=document.getElementById('l-email');const ps=document.getElementById('l-pass');
+  if(em)em.value=emails[r];if(ps)ps.value=passes[r];
+  const rf=document.getElementById('reg-fields');if(rf)rf.classList.toggle('hidden',loginMode!=='reg'||r!=='student');
+  const tn=document.getElementById('teacher-note');if(tn)tn.classList.toggle('hidden',r!=='teacher'||loginMode!=='reg');
+}
+
+function doLogin(){
+  const email=(document.getElementById('l-email')?.value||'').trim();
+  const pass=(document.getElementById('l-pass')?.value||'').trim();
+  const errEl=document.getElementById('login-error');
+  if(loginMode==='login'){
+    const found=USER_DB.find(u=>u.email===email&&u.password===pass);
+    if(!found){if(errEl){errEl.textContent='ელ-ფოსტა ან პაროლი არასწორია.';errEl.classList.remove('hidden');}return;}
+    CUR_USER=found;curRole=found.role;
+    if(errEl)errEl.classList.add('hidden');
+    go(curRole);
+  } else {
+    if(!email||!pass){if(errEl){errEl.textContent='შეავსეთ ყველა ველი.';errEl.classList.remove('hidden');}return;}
+    if(USER_DB.find(u=>u.email===email)){if(errEl){errEl.textContent='ეს ელ-ფოსტა უკვე რეგისტრირებულია.';errEl.classList.remove('hidden');}return;}
+    const name=(document.getElementById('r-name')?.value||'')+(document.getElementById('r-surname')?' '+document.getElementById('r-surname').value:'');
+    const grade=document.getElementById('r-grade')?.value||'';
+    const newUser={email,password:pass,role:'student',name:name.trim()||email,grade};
+    USER_DB.push(newUser);CUR_USER=newUser;curRole='student';
+    if(errEl)errEl.classList.add('hidden');
+    go('student');
+  }
+}
+
+function doLogout(){CUR_USER=null;go('landing');}
+
+// ── Update UI after login ─────────────────────────────────────────────────────
+function updateStudentUI(){
+  if(!CUR_USER)return;
+  const initials=(CUR_USER.name||'?').split(' ').map(w=>w[0]).join('').slice(0,2);
+  const av=document.getElementById('s-sidebar-av');if(av)av.textContent=initials;
+  const sn=document.getElementById('s-sidebar-name');if(sn)sn.textContent=CUR_USER.name||'';
+  const se=document.getElementById('s-sidebar-email');if(se)se.textContent=CUR_USER.email||'';
+  const sub=document.getElementById('s-topbar-sub');if(sub)sub.textContent=(CUR_USER.grade?'კლასი '+CUR_USER.grade+' · ':'')+'მოსწავლე';
+  const badge=document.getElementById('s-topbar-badge');if(badge)badge.textContent=CUR_USER.grade?'კლ. '+CUR_USER.grade:'Student';
+  const greet=document.getElementById('s-home-greeting');if(greet)greet.textContent='👋 გამარჯობა, '+(CUR_USER.name.split(' ')[0]||'')+'!';
+  const pn=document.getElementById('s-prof-name');if(pn)pn.textContent=CUR_USER.name||'';
+  const pe=document.getElementById('s-prof-email');if(pe)pe.textContent=CUR_USER.email||'';
+  const pg=document.getElementById('s-prof-grade');if(pg)pg.textContent=CUR_USER.grade?'კლასი '+CUR_USER.grade:'Student';
+  const pi=document.getElementById('s-prof-av');if(pi)pi.textContent=initials;
+  const pni=document.getElementById('s-prof-name-input');if(pni)pni.value=CUR_USER.name||'';
+  const pei=document.getElementById('s-prof-email-input');if(pei)pei.value=CUR_USER.email||'';
+  updateStudentHomeStats();
+}
+
+function updateTeacherUI(){
+  if(!CUR_USER)return;
+  const initials=(CUR_USER.name||'?').split(' ').map(w=>w[0]).join('').slice(0,2);
+  const av=document.getElementById('t-sidebar-av');if(av)av.textContent=initials;
+  const sn=document.getElementById('t-sidebar-name');if(sn)sn.textContent=CUR_USER.name||'';
+  const se=document.getElementById('t-sidebar-email');if(se)se.textContent=CUR_USER.email||'';
+  const sub=document.getElementById('t-topbar-sub');if(sub)sub.textContent='მასწავლებელი';
+}
+
+function updateStudentHomeStats(){
+  const uid=CUR_USER?.email||'';
+  const mine=SESSION_RESULTS.filter(r=>r.userId===uid);
+  const el_t=document.getElementById('sh-tests');if(el_t)el_t.textContent=mine.length;
+  const el_p=document.getElementById('sh-pts');if(el_p)el_p.textContent=mine.reduce((s,r)=>s+r.earned,0);
+  const el_e=document.getElementById('sh-exc');if(el_e)el_e.textContent=mine.filter(r=>r.pct>=90).length;
+  const avg=mine.length?Math.round(mine.reduce((s,r)=>s+r.pct,0)/mine.length):null;
+  const el_a=document.getElementById('sh-avg');if(el_a)el_a.textContent=avg!==null?avg+'%':'—';
+  const rec=document.getElementById('s-home-recent');
+  if(rec){
+    if(!mine.length){rec.innerHTML='<div style="color:var(--gray);font-size:13px;text-align:center;padding:20px">ჯერ ტესტი არ გაქვს გავლილი</div>';}
+    else{rec.innerHTML=mine.slice(0,3).map(r=>`<div style="padding:8px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:12px;font-weight:500">${r.title}</div><div style="font-size:11px;color:var(--gray)">${r.date}</div></div><span class="badge ${r.bc}">${r.badge}</span></div>`).join('');}
+  }
+}
+
+// ── Student Tests List ────────────────────────────────────────────────────────
+function renderStudentTests(){
+  const subj=document.getElementById('s-filter-subject')?.value||'';
+  const grade=document.getElementById('s-filter-grade')?.value||'';
+  const list=document.getElementById('s-test-list');if(!list)return;
+  let tests=ALL_TESTS;
+  if(subj)tests=tests.filter(t=>t.subject===subj);
+  if(grade)tests=tests.filter(t=>t.grade===parseInt(grade));
+  if(!tests.length){list.innerHTML='<div style="text-align:center;color:var(--gray);padding:40px 20px">ტესტი ვერ მოიძებნა</div>';return;}
+  list.innerHTML=tests.map(t=>`
+    <div class="card" style="padding:16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:10px">
+      <div style="width:44px;height:44px;border-radius:10px;background:${SUBJ_COLORS[t.subject]||'#6366f1'};display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">${SUBJ_ICONS[t.subject]||'📝'}</div>
+      <div style="flex:1"><div style="font-weight:600;margin-bottom:6px">${t.title}</div><div style="display:flex;gap:6px;flex-wrap:wrap"><span class="chip">⏱ ${t.time} წთ</span><span class="chip">🔁 ${t.attempts} მცდ.</span><span class="chip">❓ ${t.count} კ.</span>${t.paid?'<span class="chip" style="background:#fef3c7;color:#92400e">💳 ფასიანი</span>':''}</div></div>
+      ${t.paid?`<button class="btn btn-primary btn-sm" onclick="showPayModal('${t.id}')">💳 გადახდა</button>`:`<button class="btn btn-primary btn-sm" onclick="startTestById('${t.id}')">🚀 დაწყება</button>`}
+    </div>`).join('');
+}
+
+// ── Teacher Tests Table ───────────────────────────────────────────────────────
+function renderTeacherTests(){
+  const subj=document.getElementById('t-filter-subject')?.value||'';
+  const grade=document.getElementById('t-filter-grade')?.value||'';
+  const tbody=document.getElementById('t-test-tbody');if(!tbody)return;
+  let tests=ALL_TESTS;
+  if(subj)tests=tests.filter(t=>t.subject===subj);
+  if(grade)tests=tests.filter(t=>t.grade===parseInt(grade));
+  if(!tests.length){tbody.innerHTML='<tr><td colspan="6" style="text-align:center;color:var(--gray);padding:24px">ტესტი ვერ მოიძებნა</td></tr>';return;}
+  tbody.innerHTML=tests.map(t=>`
+    <tr>
+      <td style="font-weight:500">${t.title}</td>
+      <td><span class="chip">${SUBJ_ICONS[t.subject]||''} ${t.subject.slice(0,4)}.</span></td>
+      <td><span style="display:inline-flex;width:26px;height:26px;border-radius:50%;background:#dbeafe;color:#1d4ed8;align-items:center;justify-content:center;font-weight:700;font-size:11px">${t.grade}</span></td>
+      <td>${t.count}</td>
+      <td>${t.paid?'<span class="badge b-amber">💳 ფასიანი</span>':'<span class="badge b-green">უფასო</span>'}</td>
+      <td style="display:flex;gap:4px"><button class="btn btn-ghost btn-sm" onclick="startTestById('${t.id}')">▶</button><button class="btn btn-ghost btn-sm">✏️</button><button class="btn btn-ghost btn-sm" style="color:var(--red)">🗑</button></td>
+    </tr>`).join('');
+}
+
+// ── Student Results ───────────────────────────────────────────────────────────
+function renderStudentResults(){
+  const el=document.getElementById('s-results-list');if(!el)return;
+  const uid=CUR_USER?.email||'';
+  const mine=SESSION_RESULTS.filter(r=>r.userId===uid);
+  if(!mine.length){el.innerHTML='<div style="text-align:center;color:var(--gray);padding:40px">ჯერ ტესტი არ გაქვს გავლილი</div>';return;}
+  el.innerHTML=mine.map(r=>`
+    <div class="card" style="padding:16px;margin-bottom:10px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+        <div><div style="font-weight:600">${r.title}</div><div style="font-size:11px;color:var(--gray)">${r.date}</div></div>
+        <span class="badge ${r.bc}">${r.badge}</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>${r.earned}/${r.totalPts} ქ. · ${r.correct}/${r.total} სწ.</span><span style="font-weight:600;color:var(--blue)">${r.pct}%</span></div>
+      <div class="pbar"><div class="pfill" style="width:${r.pct}%;background:${r.pct>=90?'#2563eb':r.pct>=70?'#16a34a':r.pct>=50?'#d97706':'#dc2626'}"></div></div>
+    </div>`).join('');
+}
+
+// ── Test Taking ──────────────────────────────────────────────────────────────
+function startTestById(id){
+  if(!id)return;
+  curTest=ALL_TESTS.find(t=>t.id===id)||null;
+  if(curTest)go('take-test');
+}
+
+function startTest(){
+  if(!curTest)curTest=ALL_TESTS[2];
+  curTestQs=getTestQs(curTest);
+  qIdx=0;qAnswers={};timerSec=curTest.time*60;
+  if(timerInt)clearInterval(timerInt);
+  const ttl=document.getElementById('tt-title');if(ttl)ttl.textContent=curTest.title;
+  renderQ();buildDots();
+  timerInt=setInterval(()=>{timerSec--;updateTimer();if(timerSec<=0){clearInterval(timerInt);finishTest();}},1000);
+}
+
+function updateTimer(){
+  const m=Math.floor(timerSec/60),s=timerSec%60;
+  const el=document.getElementById('timer');if(!el)return;
+  el.textContent=m+':'+(s<10?'0':'')+s;
+  el.className='timer'+(timerSec<30?' red':timerSec<60?' amb':'');
+}
+
+function renderQ(){
+  const qs=curTestQs;const q=qs[qIdx];if(!q)return;
+  document.getElementById('q-num').textContent=qIdx+1;
+  document.getElementById('q-counter').textContent='კითხვა '+(qIdx+1)+'/'+qs.length;
+  document.getElementById('q-prog').style.width=(((qIdx+1)/qs.length)*100)+'%';
+  document.getElementById('q-type-badge').textContent=q.type==='multiple_choice'?'MCQ':q.type==='true_false'?'True/False':'მოკლე პასუხი';
+  document.getElementById('q-pts-badge').textContent=q.pts+' ქ.';
+  document.getElementById('q-text').textContent=q.text;
+  const opts=document.getElementById('q-opts');opts.innerHTML='';
+  if(q.type==='short_answer'){
+    const ta=document.createElement('textarea');ta.rows=4;ta.placeholder='შეიყვანეთ პასუხი...';ta.style.cssText='width:100%;padding:10px;border:1.5px solid var(--border);border-radius:var(--r);font-family:inherit;font-size:13px;resize:vertical';
+    ta.value=qAnswers[q.id]||'';ta.oninput=e=>qAnswers[q.id]=e.target.value;opts.appendChild(ta);
+  }else{
+    q.opts.forEach((o,i)=>{
+      const d=document.createElement('div');d.className='qopt'+(qAnswers[q.id]===i?' sel':'');
+      d.innerHTML='<div class="radio'+(qAnswers[q.id]===i?' sel':'')+'">'+( qAnswers[q.id]===i?'<span style="color:#fff;font-size:9px">✓</span>':'')+'</div><span>'+o+'</span>';
+      d.onclick=()=>{qAnswers[q.id]=i;renderQ();updateDots();};opts.appendChild(d);
+    });
+  }
+  document.getElementById('q-prev').disabled=qIdx===0;
+  const nxt=document.getElementById('q-next');
+  if(qIdx===qs.length-1){nxt.textContent='✉ გაგზავნა';nxt.className='btn btn-green';nxt.onclick=()=>{document.getElementById('submit-msg').textContent='პასუხი გაცემულია '+Object.keys(qAnswers).length+'/'+qs.length+' კითხვაზე.';document.getElementById('submit-modal').classList.remove('hidden');};}
+  else{nxt.textContent='შემდეგი →';nxt.className='btn btn-primary';nxt.onclick=()=>qNav(1);}
+}
+
+function qNav(d){qIdx=Math.max(0,Math.min(curTestQs.length-1,qIdx+d));renderQ();updateDots();}
+
+function buildDots(){
+  const c=document.getElementById('q-dots');c.innerHTML='';
+  curTestQs.forEach((_,i)=>{const d=document.createElement('div');d.className='dot';d.onclick=()=>{qIdx=i;renderQ();updateDots();};c.appendChild(d);});
+  updateDots();
+}
+
+function updateDots(){
+  const dots=document.querySelectorAll('.dot');
+  dots.forEach((d,i)=>d.style.background=i===qIdx?'#2563eb':qAnswers[curTestQs[i]?.id]!==undefined?'#16a34a':'#d1d5db');
+}
+
+function hideSubmitModal(){document.getElementById('submit-modal').classList.add('hidden');}
+
+function finishTest(){
+  if(timerInt)clearInterval(timerInt);
+  hideSubmitModal();
+  let earned=0,totalPts=0,correctCount=0;
+  const reviewed=curTestQs.map(q=>{
+    totalPts+=q.pts;
+    const ua=qAnswers[q.id];
+    let ok=false;
+    if(q.type!=='short_answer'){ok=(ua===q.correct);if(ok){earned+=q.pts;correctCount++;}}
+    return{...q,ua,ok};
+  });
+  const pct=totalPts>0?Math.round(earned/totalPts*100):0;
+  const badge=pct>=90?'🏆 Excellent':pct>=70?'✅ Good':pct>=50?'📘 Pass':'❌ ვერ ჩავაბარე';
+  const bc=pct>=90?'b-blue':pct>=70?'b-green':pct>=50?'b-amber':'b-red';
+  const result={userId:CUR_USER?.email||'guest',testId:curTest.id,title:curTest.title,subject:curTest.subject,grade:curTest.grade,earned,totalPts,correct:correctCount,total:curTestQs.length,pct,badge,bc,date:new Date().toLocaleDateString('ka-GE'),reviewed};
+  SESSION_RESULTS.unshift(result);
+  renderResultsPage(result);
+  go('results');
+}
+
+function renderResultsPage(r){
+  const sumEl=document.getElementById('res-summary');
+  if(sumEl)sumEl.innerHTML=`
+    <div style="font-size:52px;margin-bottom:10px">${r.pct>=90?'🌟':r.pct>=70?'🎉':r.pct>=50?'👍':'💪'}</div>
+    <h2 style="font-weight:800;font-size:20px;margin-bottom:6px">ტესტი დასრულდა!</h2>
+    <p style="color:var(--gray);margin-bottom:16px;font-size:13px">${r.title}</p>
+    <div style="display:inline-flex;align-items:center;gap:6px;padding:6px 20px;border-radius:999px;font-weight:700;font-size:15px;margin-bottom:18px" class="badge ${r.bc}">${r.badge} — ${r.pct}%</div>
+    <div style="display:flex;justify-content:center;gap:28px">
+      <div><div style="font-size:28px;font-weight:800;color:var(--blue)">${r.pct}%</div><div style="font-size:11px;color:var(--gray)">პროცენტი</div></div>
+      <div style="width:1px;background:var(--border)"></div>
+      <div><div style="font-size:28px;font-weight:800">${r.earned}/${r.totalPts}</div><div style="font-size:11px;color:var(--gray)">ქულა</div></div>
+      <div style="width:1px;background:var(--border)"></div>
+      <div><div style="font-size:28px;font-weight:800">${r.correct}/${r.total}</div><div style="font-size:11px;color:var(--gray)">სწორი</div></div>
+    </div>`;
+  const revEl=document.getElementById('res-review');
+  if(revEl)revEl.innerHTML='<div style="font-weight:600;margin-bottom:12px;font-size:13px">📋 კითხვების განხილვა</div>'+r.reviewed.map((q,i)=>{
+    const col=q.type==='short_answer'?'fffbeb':q.ok?'f0fdf4':'fff1f2';
+    const bc2=q.type==='short_answer'?'fde68a':q.ok?'bbf7d0':'fecaca';
+    const pts=q.type==='short_answer'?'⏳ pending':q.ok?`✓ ${q.pts}/${q.pts} ქ.`:`✗ 0/${q.pts} ქ.`;
+    const ptsCol=q.type==='short_answer'?'#d97706':q.ok?'#16a34a':'#dc2626';
+    const userAnsText=q.ua!==undefined?(q.type==='short_answer'?q.ua:q.opts[q.ua]):'— (გამოტ.)';
+    const corrText=q.type==='short_answer'?'მასწ. ამოწმებს':(q.ok?'':` · სწ: <strong style="color:#16a34a">${q.opts[q.correct]}</strong>`);
+    return `<div style="padding:10px;background:#${col};border:1px solid #${bc2};border-radius:8px;margin-bottom:6px">
+      <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+        <span style="font-size:12px;font-weight:600">კ.${i+1}: ${q.text}</span>
+        <span style="font-size:11px;color:${ptsCol};flex-shrink:0;margin-left:8px">${pts}</span>
+      </div>
+      <div style="font-size:11px;color:var(--gray)">თქვ.: <strong>${userAnsText}</strong>${corrText}</div>
+    </div>`;
+  }).join('');
+}
+
+// ── Payment modal ─────────────────────────────────────────────────────────────
+function showPayModal(tid){
+  if(tid)curTest=ALL_TESTS.find(t=>t.id===tid)||curTest;
+  document.getElementById('pay-modal').classList.remove('hidden');
+  document.getElementById('pay-step-1').classList.remove('hidden');
+  document.getElementById('pay-step-2').classList.add('hidden');
+}
+function hidePayModal(){document.getElementById('pay-modal').classList.add('hidden');}
+function payStep2(){document.getElementById('pay-step-1').classList.add('hidden');document.getElementById('pay-step-2').classList.remove('hidden');}
+
+// ── Builder modal ─────────────────────────────────────────────────────────────
+function showBuilder(){builderStep=1;selQs.clear();document.getElementById('builder-modal').classList.remove('hidden');renderBuilderStep();}
+function hideBuilder(){document.getElementById('builder-modal').classList.add('hidden');}
+
+function renderBuilderStep(){
+  [1,2,3].forEach(n=>{
+    document.getElementById('bstep-content-'+n).classList.toggle('hidden',n!==builderStep);
+    const s=document.getElementById('bstep-'+n);
+    s.className='step'+(n===builderStep?' act':n<builderStep?' done':'');
+    if(n<builderStep)s.textContent='✓';else s.textContent=n;
+    if(n<3){const l=document.getElementById('bline-'+n);if(l)l.className='sline'+(n<builderStep?' done':'');}
+  });
+  const prev=document.getElementById('b-prev');const nxt=document.getElementById('b-next');
+  if(prev)prev.textContent=builderStep===1?'გაუქმება':'← უკან';
+  if(nxt){nxt.textContent=builderStep===3?'✓ შენახვა':'შემდეგი →';nxt.className=builderStep===3?'btn btn-green':'btn btn-primary';}
+  if(builderStep===2)renderQPicker();
+  if(builderStep===3){
+    const title=document.getElementById('b-title')?.value||'—';
+    const subj=document.getElementById('b-subj')?.value||'';
+    const t=document.getElementById('b-time')?.value||'';
+    const paid=document.getElementById('b-paid')?.checked;
+    const s=document.getElementById('b-summary');
+    if(s)s.innerHTML='<strong>შეჯამება:</strong> '+title+' · '+subj+' · '+t+' წთ · '+selQs.size+' კ.'+(paid?' · 💳':'');
+  }
+}
+
+function renderQPicker(){
+  const c=document.getElementById('q-picker');c.innerHTML='';
+  const pool=[];const seen=new Set();
+  Object.values(Q_POOL).forEach(arr=>arr.forEach(q=>{if(!seen.has(q.id)){seen.add(q.id);pool.push(q);}}));
+  pool.slice(0,20).forEach(q=>{
+    const d=document.createElement('div');
+    d.style.cssText='padding:10px;border:2px solid '+(selQs.has(q.id)?'#2563eb':'var(--border)')+';border-radius:var(--r);cursor:pointer;margin-bottom:6px;background:'+(selQs.has(q.id)?'var(--blue-l)':'#fff')+';transition:all .15s';
+    d.innerHTML='<div style="display:flex;justify-content:space-between;gap:8px"><span style="font-size:12px;font-weight:500">'+q.text+'</span><div style="display:flex;gap:4px;flex-shrink:0"><span class="badge b-gray">'+(q.type==='multiple_choice'?'MCQ':'T/F')+'</span><span class="badge b-amber">'+q.pts+'ქ</span></div></div>';
+    d.onclick=()=>{selQs.has(q.id)?selQs.delete(q.id):selQs.add(q.id);renderQPicker();const sc=document.getElementById('sel-count');if(sc)sc.textContent=selQs.size;};
+    c.appendChild(d);
+  });
+}
+
+function bNav(d){
+  if(d===-1&&builderStep===1){hideBuilder();return;}
+  if(d===1&&builderStep===3){hideBuilder();return;}
+  builderStep=Math.max(1,Math.min(3,builderStep+d));renderBuilderStep();
+}
+
+// ── Overlay close ─────────────────────────────────────────────────────────────
+document.querySelectorAll('.overlay').forEach(o=>o.addEventListener('click',function(e){if(e.target===this){this.classList.add('hidden');document.getElementById('pay-step-1')?.classList.remove('hidden');document.getElementById('pay-step-2')?.classList.add('hidden');}}));
+</script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 390" role="img" aria-labelledby="title desc">
+  <title id="title">ბავშვი პარკში კითხულობს</title>
+  <desc id="desc">ხის ქვეშ მჯდომი ბავშვი გახსნილ წიგნს კითხულობს; გვერდით სკამი და ბურთია</desc>
+  <rect width="720" height="390" rx="28" fill="#dbeafe"/>
+  <path d="M0 290Q170 240 340 286T720 272V390H0z" fill="#86efac"/>
+  <rect x="100" y="95" width="46" height="210" rx="12" fill="#92400e"/>
+  <circle cx="125" cy="85" r="72" fill="#22c55e"/><circle cx="78" cy="115" r="54" fill="#16a34a"/><circle cx="172" cy="120" r="58" fill="#4ade80"/>
+  <circle cx="405" cy="162" r="42" fill="#f5c7a9"/><path d="M365 155q40-65 80 0" fill="#422006"/>
+  <path d="M365 205q40-28 80 0v92h-80z" fill="#f59e0b"/>
+  <path d="M400 230l-72-20v75l72 24zM405 230l72-20v75l-72 24z" fill="#fff" stroke="#2563eb" stroke-width="5"/>
+  <path d="M385 296l-40 62M425 296l44 62" stroke="#1e3a8a" stroke-width="18" stroke-linecap="round"/>
+  <circle cx="600" cy="315" r="34" fill="#ef4444" stroke="#fff" stroke-width="8"/>
+</svg>
