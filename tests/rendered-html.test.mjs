@@ -57,6 +57,7 @@ test("keeps the embedded application full-screen without relying on external CSS
   assert.match(layout, /margin: 0/);
   assert.match(worker, /url\.pathname === "\/"/);
   assert.match(worker, /appUrl\.pathname = "\/app\.html"/);
+  assert.match(worker, /handler\.fetch\(new Request\(appUrl, request\), env, ctx\)/);
   assert.match(worker, /Cache-Control", "no-store"/);
 });
 

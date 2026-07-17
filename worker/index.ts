@@ -44,7 +44,7 @@ const worker = {
     if (url.pathname === "/" && (request.method === "GET" || request.method === "HEAD")) {
       const appUrl = new URL(request.url);
       appUrl.pathname = "/app.html";
-      return secureResponse(await env.ASSETS.fetch(new Request(appUrl, request)));
+      return secureResponse(await handler.fetch(new Request(appUrl, request), env, ctx));
     }
 
     if (url.pathname === "/_vinext/image") {
