@@ -13743,8 +13743,7 @@ function questionContentFingerprint(q){
   if(mediaSrc)return 'content:media:'+stableQuestionHash(mediaSrc);
   // The prompt defines the content identity. Different distractors or answer
   // order must not make the same question eligible twice.
-  const content=[q&&q.type,normalizedQuestionContent(q&&q.text)].join('|');
-  return 'content:text:'+stableQuestionHash(content);
+  return 'content:text:'+stableQuestionHash(normalizedQuestionContent(q&&q.text));
 }
 
 function isStructurallyValidQuestion(q){
