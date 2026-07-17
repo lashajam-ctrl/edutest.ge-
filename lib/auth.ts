@@ -71,10 +71,13 @@ export function publicUser(user: typeof users.$inferSelect) {
   return { id: user.id, email: user.email, name: user.name, role: user.role, grade: user.grade ?? "", school: user.school ?? "" };
 }
 
-export function oauthConfig(provider: "google" | "microsoft") {
+export type OAuthProvider = "google" | "microsoft" | "facebook";
+
+export function oauthConfig(provider: OAuthProvider) {
   const runtime = env as unknown as Record<string, string>;
   if (provider === "google") return { clientId: runtime.GOOGLE_CLIENT_ID, clientSecret: runtime.GOOGLE_CLIENT_SECRET };
-  return { clientId: runtime.MICROSOFT_CLIENT_ID, clientSecret: runtime.MICROSOFT_CLIENT_SECRET };
+  if (provider === "microsoft") return { clientId: runtime.MICROSOFT_CLIENT_ID, clientSecret: runtime.MICROSOFT_CLIENT_SECRET };
+  return { clientId: runtime.FACEBOOK_APP_ID, clientSecret: runtime.FACEBOOK_APP_SECRET };
 }
 
 export function appOrigin(request: Request) {
@@ -90,7 +93,7 @@ export function appOrigin(request: Request) {
   return url.origin;
 }
 
-export function oauthCallbackUrl(request: Request, provider: "google" | "microsoft") {
+export function oauthCallbackUrl(request: Request, provider: OAuthProvider) {
   return `${appOrigin(request)}/api/auth/oauth/${provider}/callback`;
 }
 

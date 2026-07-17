@@ -8,7 +8,8 @@ test("ships the public authentication and durable learning APIs", async () => {
   const html = await readFile(new URL("public/app.html", root), "utf8");
   assert.match(html, /'\/api\/auth\/login':'\/api\/auth\/register'/);
   assert.match(html, /\/api\/auth\/oauth\/['"]?\+provider/);
-  assert.match(html, /\['google','microsoft'\]/);
+  assert.match(html, /\['google','microsoft','facebook'\]/);
+  assert.match(html, /id="oauth-facebook"/);
   assert.match(html, /\/api\/question-history/);
   assert.match(html, /syncAttemptToServer/);
 });
@@ -20,12 +21,16 @@ test("uses a hardened OAuth authorization-code flow", async () => {
     readFile(new URL("lib/auth.ts", root), "utf8"),
     readFile(new URL(".env.example", root), "utf8"),
   ]);
-  assert.match(startRoute, /code_challenge_method: "S256"/);
-  assert.match(startRoute, /scope: "openid email profile"/);
+  assert.match(startRoute, /code_challenge_method", "S256"/);
+  assert.match(startRoute, /scope", "openid email profile"/);
+  assert.match(startRoute, /https:\/\/www\.facebook\.com\/dialog\/oauth/);
+  assert.match(startRoute, /scope", "email,public_profile"/);
   assert.match(startRoute, /requestedRole/);
   assert.match(startRoute, /mode === "link"/);
   assert.doesNotMatch(startRoute, /User\.Read/);
   assert.match(callbackRoute, /profile\.email_verified !== true/);
+  assert.match(callbackRoute, /https:\/\/graph\.facebook\.com\/oauth\/access_token/);
+  assert.match(callbackRoute, /fields=id,name,email/);
   assert.match(callbackRoute, /"account-exists"/);
   assert.match(callbackRoute, /"provider-in-use"/);
   assert.match(callbackRoute, /"registration-details-required"/);
@@ -34,6 +39,21 @@ test("uses a hardened OAuth authorization-code flow", async () => {
   assert.match(authLibrary, /legacyPasswordIterations/);
   assert.match(authLibrary, /storedSalt\?\.match/);
   assert.match(envExample, /^APP_ORIGIN=/m);
+  assert.match(envExample, /^FACEBOOK_APP_ID=/m);
+  assert.match(envExample, /^FACEBOOK_APP_SECRET=/m);
+});
+
+test("keeps the embedded application full-screen without relying on external CSS", async () => {
+  const [page, layout] = await Promise.all([
+    readFile(new URL("app/page.tsx", root), "utf8"),
+    readFile(new URL("app/layout.tsx", root), "utf8"),
+  ]);
+  assert.match(page, /position: "fixed"/);
+  assert.match(page, /width: "100vw"/);
+  assert.match(page, /height: "100dvh"/);
+  assert.match(page, /border: 0/);
+  assert.match(layout, /overflow: "hidden"/);
+  assert.match(layout, /margin: 0/);
 });
 
 test("keeps test access open while payments are disabled and uses server-side admin accounts", async () => {

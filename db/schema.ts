@@ -17,7 +17,7 @@ export const users = sqliteTable("users", {
 export const identities = sqliteTable("identities", {
   id: text("id").primaryKey(),
   userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
-  provider: text("provider", { enum: ["google", "microsoft"] }).notNull(),
+  provider: text("provider", { enum: ["google", "microsoft", "facebook"] }).notNull(),
   providerSubject: text("provider_subject").notNull(),
   createdAt: integer("created_at", { mode: "timestamp_ms" }).notNull(),
 }, (table) => [uniqueIndex("identity_provider_subject_unique").on(table.provider, table.providerSubject)]);

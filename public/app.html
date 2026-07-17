@@ -637,10 +637,12 @@ input:focus,select:focus,textarea:focus{border-color:var(--brand);box-shadow:0 0
     </div>
     <button class="btn btn-primary" style="width:100%;justify-content:center;padding:11px" id="l-btn" onclick="doLogin()" data-i18n="login">შესვლა</button>
     <div style="display:flex;align-items:center;gap:10px;margin:14px 0;color:var(--gray);font-size:11px"><span style="height:1px;background:var(--border);flex:1"></span>ან<span style="height:1px;background:var(--border);flex:1"></span></div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-      <button class="btn btn-outline" id="oauth-google" style="justify-content:center" onclick="startOAuth('google')" aria-label="Google-ით შესვლა">G&nbsp; Google</button>
-      <button class="btn btn-outline" id="oauth-microsoft" style="justify-content:center" onclick="startOAuth('microsoft')" aria-label="Microsoft-ით შესვლა">▦&nbsp; Microsoft</button>
+    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px">
+      <button class="btn btn-outline" id="oauth-google" style="justify-content:center" onclick="startOAuth('google')" aria-label="Google-ით შესვლა" disabled>G&nbsp; Google</button>
+      <button class="btn btn-outline" id="oauth-microsoft" style="justify-content:center" onclick="startOAuth('microsoft')" aria-label="Microsoft-ით შესვლა" disabled>▦&nbsp; Microsoft</button>
+      <button class="btn btn-outline" id="oauth-facebook" style="justify-content:center" onclick="startOAuth('facebook')" aria-label="Facebook-ით შესვლა" disabled>f&nbsp; Facebook</button>
     </div>
+    <p id="oauth-status" role="status" style="font-size:10px;color:#92400e;text-align:center;margin:8px 0 0"></p>
     <p style="font-size:10px;color:var(--gray);text-align:center;margin-top:10px">შესვლით ეთანხმებით <a href="/terms.html" target="_blank">მომსახურების პირობებსა</a> და <a href="/privacy.html" target="_blank">კონფიდენციალურობის პოლიტიკას</a>.</p>
 
     <div id="login-error" class="hidden" style="margin-top:8px;padding:8px;background:var(--red-l);border-radius:var(--r);font-size:12px;color:var(--red);text-align:center"></div>
@@ -790,7 +792,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--brand);box-shadow:0 0
           <button class="btn btn-primary btn-sm" onclick="saveProfile()" data-i18n="save_profile">💾 შენახვა</button>
           <div style="border-top:1px solid var(--border);margin-top:16px;padding-top:14px">
             <div style="font-weight:600;font-size:12px;margin-bottom:8px">შესვლის დამატებითი მეთოდის მიბმა</div>
-            <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-outline btn-sm" onclick="linkOAuth('google')">G&nbsp; Google</button><button class="btn btn-outline btn-sm" onclick="linkOAuth('microsoft')">▦&nbsp; Microsoft</button></div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-outline btn-sm" onclick="linkOAuth('google')">G&nbsp; Google</button><button class="btn btn-outline btn-sm" onclick="linkOAuth('microsoft')">▦&nbsp; Microsoft</button><button class="btn btn-outline btn-sm" onclick="linkOAuth('facebook')">f&nbsp; Facebook</button></div>
           </div>
         </div>
       </div>
@@ -952,7 +954,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--brand);box-shadow:0 0
     <div class="topbar"><div style="display:flex;align-items:center;gap:8px"><button class="hamburger" onclick="toggleSidebar('teacher')">☰</button><div><div style="display:flex;align-items:center;gap:8px"><button class="btn btn-ghost btn-sm" id="t-back-btn" onclick="tNav('t-home',document.querySelector('#p-teacher .ni'))" style="display:none;padding:4px 8px;font-size:12px">←</button><div style="font-weight:600" id="t-topbar-title">Dashboard</div></div><div style="font-size:11px;color:var(--gray)" id="t-topbar-sub">მასწავლებელი</div></div></div><button class="btn btn-primary btn-sm" id="t-new-btn" onclick="showBuilder()" style="display:none">+ ახალი ტესტი</button></div>
     <div class="main">
       <div id="t-home" class="fade">
-        <div class="card" style="padding:12px 16px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap"><div><div style="font-weight:600;font-size:12px">ანგარიშის უსაფრთხოება</div><div style="font-size:11px;color:var(--gray)">მიაბით Google ან Microsoft დამატებით შესასვლელად</div></div><div style="display:flex;gap:6px"><button class="btn btn-outline btn-sm" onclick="linkOAuth('google')">G&nbsp; Google</button><button class="btn btn-outline btn-sm" onclick="linkOAuth('microsoft')">▦&nbsp; Microsoft</button></div></div>
+        <div class="card" style="padding:12px 16px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap"><div><div style="font-weight:600;font-size:12px">ანგარიშის უსაფრთხოება</div><div style="font-size:11px;color:var(--gray)">მიაბით Google, Microsoft ან Facebook დამატებით შესასვლელად</div></div><div style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn btn-outline btn-sm" onclick="linkOAuth('google')">G&nbsp; Google</button><button class="btn btn-outline btn-sm" onclick="linkOAuth('microsoft')">▦&nbsp; Microsoft</button><button class="btn btn-outline btn-sm" onclick="linkOAuth('facebook')">f&nbsp; Facebook</button></div></div>
         <div class="stat-g">
           <div class="stat"><div class="stat-ic" style="background:#dbeafe">📝</div><div class="stat-v" style="color:#2563eb" id="t-stat-tests">—</div><div class="stat-l">ტესტი სისტემაში</div></div>
           <div class="stat"><div class="stat-ic" style="background:#dcfce7">👥</div><div class="stat-v" style="color:#16a34a" id="t-stat-students">—</div><div class="stat-l">მოსწავლე</div></div>
@@ -15733,20 +15735,27 @@ async function restoreServerLearningData(){
 }
 restoreServerSession();
 
-const OAUTH_AVAILABLE={google:false,microsoft:false};
+const OAUTH_PROVIDERS=['google','microsoft','facebook'];
+const OAUTH_AVAILABLE={google:false,microsoft:false,facebook:false};
+const OAUTH_LABELS={google:'Google',microsoft:'Microsoft',facebook:'Facebook'};
+function oauthLabel(provider){return OAUTH_LABELS[provider]||provider;}
 async function loadAuthProviders(){
   try{
     const response=await fetch('/api/auth/providers');
     if(!response.ok)throw new Error();
     const data=await response.json();
-    OAUTH_AVAILABLE.google=!!data.google;OAUTH_AVAILABLE.microsoft=!!data.microsoft;
+    OAUTH_PROVIDERS.forEach(provider=>{OAUTH_AVAILABLE[provider]=!!data[provider];});
   }catch(e){}
-  ['google','microsoft'].forEach(provider=>{
+  OAUTH_PROVIDERS.forEach(provider=>{
     const button=document.getElementById('oauth-'+provider);if(!button)return;
     button.dataset.configured=OAUTH_AVAILABLE[provider]?'1':'0';
-    button.title=OAUTH_AVAILABLE[provider]?'':provider.charAt(0).toUpperCase()+provider.slice(1)+' შესვლა ჯერ არ არის კონფიგურირებული';
-    if(!OAUTH_AVAILABLE[provider])button.style.opacity='.65';
+    button.title=OAUTH_AVAILABLE[provider]?'':oauthLabel(provider)+' შესვლა ჯერ არ არის კონფიგურირებული';
+    button.disabled=!OAUTH_AVAILABLE[provider];
+    button.style.opacity=OAUTH_AVAILABLE[provider]?'1':'.55';
   });
+  const status=document.getElementById('oauth-status');
+  const missing=OAUTH_PROVIDERS.filter(provider=>!OAUTH_AVAILABLE[provider]).map(oauthLabel);
+  if(status)status.textContent=missing.length?'სოციალური შესვლა ჩაირთვება პროვაიდერის უსაფრთხო მონაცემების დამატების შემდეგ: '+missing.join(', ')+'.':'';
 }
 function startOAuth(provider){
   const err=document.getElementById('login-error');
@@ -15760,17 +15769,17 @@ function startOAuth(provider){
     location.href='/api/auth/oauth/'+provider+'?'+params.toString();
     return;
   }
-  if(err){err.textContent='⚙️ '+(provider==='google'?'Google':'Microsoft')+' შესვლა ჯერ სატესტო გარემოში არ არის კონფიგურირებული. გამოიყენეთ ელფოსტით რეგისტრაცია.';err.style.color='#92400e';err.classList.remove('hidden');}
+  if(err){err.textContent='⚙️ '+oauthLabel(provider)+' შესვლა ჯერ არ არის კონფიგურირებული. გამოიყენეთ ელფოსტით რეგისტრაცია.';err.style.color='#92400e';err.classList.remove('hidden');}
 }
 function linkOAuth(provider){
-  if(!OAUTH_AVAILABLE[provider]){const label=provider==='google'?'Google':'Microsoft';alert(label+' შესვლა ჯერ არ არის გააქტიურებული.');return;}
+  if(!OAUTH_AVAILABLE[provider]){alert(oauthLabel(provider)+' შესვლა ჯერ არ არის გააქტიურებული.');return;}
   location.href='/api/auth/oauth/'+provider+'?mode=link';
 }
 loadAuthProviders();
 const authStatus=new URLSearchParams(location.search).get('auth');
 if(authStatus&&authStatus!=='success'&&authStatus!=='linked')setTimeout(()=>{const err=document.getElementById('login-error');if(err){
-  const messages={cancelled:'შესვლა გაუქმდა — შეგიძლიათ თავიდან სცადოთ.',invalid:'უსაფრთხოების შემოწმება ვერ დასრულდა. გთხოვთ, თავიდან სცადოთ.',unconfigured:'ეს შესვლის მეთოდი ჯერ არ არის გააქტიურებული.',failed:'Google/Microsoft-თან კავშირი ვერ დასრულდა. გთხოვთ, თავიდან სცადოთ.',
-    'no-email':'პროვაიდერმა ელფოსტა არ მოგვაწოდა. ანგარიშში ელფოსტის გაზიარება უნდა დაუშვათ.','email-unverified':'Google-ის ელფოსტა ჯერ დადასტურებული არ არის.','account-exists':'ამ ელფოსტით ანგარიში უკვე არსებობს. უსაფრთხოებისთვის ჯერ შედით არსებული მეთოდით; შემდეგ Google/Microsoft ანგარიშის მიბმას შეძლებთ პროფილიდან.','provider-in-use':'არჩეული Google/Microsoft ანგარიში უკვე სხვა მომხმარებელთან არის მიბმული.','registration-details-required':'ახალი მოსწავლის ანგარიშისთვის აირჩიეთ „რეგისტრაცია“, მონიშნეთ კლასი და შემდეგ ისევ დააჭირეთ Google/Microsoft ღილაკს.'};
+  const messages={cancelled:'შესვლა გაუქმდა — შეგიძლიათ თავიდან სცადოთ.',invalid:'უსაფრთხოების შემოწმება ვერ დასრულდა. გთხოვთ, თავიდან სცადოთ.',unconfigured:'ეს შესვლის მეთოდი ჯერ არ არის გააქტიურებული.',failed:'სოციალური ავტორიზაციის პროვაიდერთან კავშირი ვერ დასრულდა. გთხოვთ, თავიდან სცადოთ.',
+    'no-email':'პროვაიდერმა ელფოსტა არ მოგვაწოდა. ანგარიშში ელფოსტის გაზიარება უნდა დაუშვათ.','email-unverified':'Google-ის ელფოსტა ჯერ დადასტურებული არ არის.','account-exists':'ამ ელფოსტით ანგარიში უკვე არსებობს. უსაფრთხოებისთვის ჯერ შედით არსებული მეთოდით; შემდეგ სოციალური ანგარიშის მიბმას შეძლებთ პროფილიდან.','provider-in-use':'არჩეული სოციალური ანგარიში უკვე სხვა მომხმარებელთან არის მიბმული.','registration-details-required':'ახალი მოსწავლის ანგარიშისთვის აირჩიეთ „რეგისტრაცია“, მონიშნეთ კლასი და შემდეგ ისევ დააჭირეთ სოციალური შესვლის ღილაკს.'};
   go('login');err.textContent=messages[authStatus]||'ავტორიზაცია ვერ დასრულდა. სცადეთ ელფოსტით შესვლა ან მოგვიანებით გაიმეორეთ.';err.classList.remove('hidden');
 }},0);
 if(authStatus==='linked')setTimeout(()=>showXpToast('✓ შესვლის დამატებითი მეთოდი წარმატებით მიება',null),800);

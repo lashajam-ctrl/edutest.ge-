@@ -8,5 +8,11 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return <html lang="ka"><body>{children}</body></html>;
+  return (
+    <html lang="ka" style={{ width: "100%", height: "100%" }}>
+      <body style={{ margin: 0, width: "100%", height: "100%", overflow: "hidden", background: "#f0f4f8" }}>
+        {children}
+      </body>
+    </html>
+  );
 }

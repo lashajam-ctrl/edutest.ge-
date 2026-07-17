@@ -46,6 +46,9 @@ const worker = {
     secured.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
     secured.headers.set("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
     secured.headers.set("X-Frame-Options", "SAMEORIGIN");
+    if ((secured.headers.get("Content-Type") ?? "").includes("text/html")) {
+      secured.headers.set("Cache-Control", "no-store");
+    }
     return secured;
   },
 };

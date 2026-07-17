@@ -21,7 +21,7 @@ npm test
 
 ## ავტორიზაციის კონფიგურაცია
 
-ელფოსტით რეგისტრაცია დამატებითი გარე კონფიგურაციის გარეშე მუშაობს. Google/Microsoft შესვლისთვის გარემოში უნდა დაემატოს:
+ელფოსტით რეგისტრაცია დამატებითი გარე კონფიგურაციის გარეშე მუშაობს. Google/Microsoft/Facebook შესვლისთვის გარემოში უნდა დაემატოს:
 
 ```env
 APP_ORIGIN=
@@ -29,9 +29,15 @@ GOOGLE_CLIENT_ID=
 GOOGLE_CLIENT_SECRET=
 MICROSOFT_CLIENT_ID=
 MICROSOFT_CLIENT_SECRET=
+FACEBOOK_APP_ID=
+FACEBOOK_APP_SECRET=
 ```
 
 OAuth პროვაიდერში callback URL უნდა ემთხვეოდეს საიტის რეალურ დომენსა და `/api/auth/oauth/{provider}/callback` მისამართს.
+
+- Google: `https://edutest.ge/api/auth/oauth/google/callback`
+- Microsoft: `https://edutest.ge/api/auth/oauth/microsoft/callback`
+- Facebook: `https://edutest.ge/api/auth/oauth/facebook/callback`
 
 ## AI უკუკავშირი
 
