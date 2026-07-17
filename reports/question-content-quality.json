@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-17T13:05:53.239Z",
+  "generatedAt": "2026-07-17T13:09:37.403Z",
   "intendedUse": "Production test-bank release gate for EduTest.ge",
   "grain": "One question record; viability also evaluated at one published-test definition",
   "officialReferences": [
@@ -43,6 +43,7 @@
     "questionsMissingSkillTag": 6572,
     "trueFalseQuestions": 2018,
     "answerEchoQuestions": 20,
+    "publishedSafeUniqueQuestions": 4103,
     "testsWithInsufficientSafeQuestions": 0,
     "testsWithoutExactGradeVerification": 420
   },

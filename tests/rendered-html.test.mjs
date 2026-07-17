@@ -200,6 +200,7 @@ test("question bank has no malformed records and publishes its audit", async () 
   assert.equal(report.readiness.exactGradeTraceability, "incomplete");
   assert.equal(quality.summary.encodingCorruptedQuestions, 0);
   assert.ok(quality.summary.duplicateOptionQuestions > 0);
+  assert.ok(quality.summary.publishedSafeUniqueQuestions > 3_000);
   assert.equal(quality.summary.testsWithInsufficientSafeQuestions, 0);
   assert.equal(quality.summary.testsWithoutExactGradeVerification, 420);
 });

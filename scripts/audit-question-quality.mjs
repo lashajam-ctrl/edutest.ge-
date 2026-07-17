@@ -160,6 +160,12 @@ const contentKey = question => question.media?.src
   ? `media:${String(question.media.src).trim().toLocaleLowerCase("en-US")}`
   : `text:${normalize(question.text)}`;
 const isBlocking = question => structuralFlags(question).some(flag => blockingFlags.has(flag));
+const publishedBasePools = new Set(ALL_TESTS
+  .filter(test => !(String(test.pool ?? "").startsWith("hist-") && Number(test.grade) < 7))
+  .map(test => test.pool));
+const publishedSafeUniqueQuestions = new Map(questionRows
+  .filter(question => publishedBasePools.has(question.basePool) && !isBlocking(question))
+  .map(question => [contentKey(question), question])).size;
 
 const testChecks = ALL_TESTS.map(test => {
   const versions = Object.entries(questionByPool)
@@ -231,6 +237,7 @@ const report = {
     questionsMissingSkillTag: issueCounts.missing_skill_tag ?? 0,
     trueFalseQuestions: issueCounts.low_depth_binary_format ?? 0,
     answerEchoQuestions: issueCounts.answer_echoes_prompt ?? 0,
+    publishedSafeUniqueQuestions,
     testsWithInsufficientSafeQuestions: testChecks.filter(row => row.risks.includes("insufficient_safe_questions")).length,
     testsWithoutExactGradeVerification: testChecks.filter(row => row.risks.includes("exact_grade_not_verified")).length,
   },
@@ -280,6 +287,7 @@ const markdown = `# EduTest.ge — კითხვების ხარის�
 | განმარტების გარეშე | ${report.summary.questionsMissingExplanation.toLocaleString("en-US")} |
 | ზუსტი შედეგის კოდის გარეშე | ${report.summary.questionsMissingExplicitOutcome.toLocaleString("en-US")} |
 | მხოლოდ ჭეშმარიტი/მცდარი ფორმატი | ${report.summary.trueFalseQuestions.toLocaleString("en-US")} |
+| გამოქვეყნებული უსაფრთხო უნიკალური კითხვა | ${report.summary.publishedSafeUniqueQuestions.toLocaleString("en-US")} |
 | უსაფრთხო კითხვების ნაკლებობის მქონე ტესტი | ${report.summary.testsWithInsufficientSafeQuestions} |
 
 ## წარმოებაში მიღებული გადაწყვეტილება

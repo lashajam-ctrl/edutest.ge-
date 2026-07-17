@@ -16088,7 +16088,14 @@ function runLpCounters(){
 }
 async function loadPublicStats(){
   const subjects=document.getElementById('lp-subject-count');if(subjects)subjects.textContent=new Set(ALL_TESTS.map(test=>test.subject)).size.toLocaleString('ka-GE');
-  const questions=document.getElementById('lp-question-count');if(questions)questions.textContent=Object.values(Q_POOL).reduce((sum,pool)=>sum+pool.length,0).toLocaleString('ka-GE');
+  const publishedPools=new Set(ALL_TESTS.filter(isCurriculumEligible).map(test=>test.pool));
+  const safeQuestionKeys=new Set();
+  Object.entries(Q_POOL).forEach(([poolKey,pool])=>{
+    const basePool=window.CURRICULUM_ALIGNMENT?CURRICULUM_ALIGNMENT.basePool(poolKey):poolKey.replace(/-\d+$/,'');
+    if(!publishedPools.has(basePool))return;
+    pool.filter(isStructurallyValidQuestion).forEach(q=>safeQuestionKeys.add(questionContentFingerprint(q)));
+  });
+  const questions=document.getElementById('lp-question-count');if(questions){questions.textContent=safeQuestionKeys.size.toLocaleString('ka-GE');questions.title='გამოქვეყნებული, სტრუქტურულად უსაფრთხო და შინაარსობრივად უნიკალური კითხვები';}
   const tests=document.getElementById('lp-test-count');if(tests)tests.textContent=ALL_TESTS.filter(isCurriculumEligible).length.toLocaleString('ka-GE');
   try{
     const response=await fetch('/api/public/stats');
