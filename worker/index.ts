@@ -19,6 +19,18 @@ interface ExecutionContext {
   passThroughOnException(): void;
 }
 
+function secureResponse(response: Response): Response {
+  const secured = new Response(response.body, response);
+  secured.headers.set("X-Content-Type-Options", "nosniff");
+  secured.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
+  secured.headers.set("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
+  secured.headers.set("X-Frame-Options", "SAMEORIGIN");
+  if ((secured.headers.get("Content-Type") ?? "").includes("text/html")) {
+    secured.headers.set("Cache-Control", "no-store");
+  }
+  return secured;
+}
+
 // Image security config. SVG sources with .svg extension auto-skip the
 // optimization endpoint on the client side (served directly, no proxy).
 // To route SVGs through the optimizer (with security headers), set
@@ -28,6 +40,12 @@ interface ExecutionContext {
 const worker = {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
+
+    if (url.pathname === "/" && (request.method === "GET" || request.method === "HEAD")) {
+      const appUrl = new URL(request.url);
+      appUrl.pathname = "/app.html";
+      return secureResponse(await env.ASSETS.fetch(new Request(appUrl, request)));
+    }
 
     if (url.pathname === "/_vinext/image") {
       const allowedWidths = [...DEFAULT_DEVICE_SIZES, ...DEFAULT_IMAGE_SIZES];
@@ -40,16 +58,7 @@ const worker = {
       }, allowedWidths);
     }
 
-    const response = await handler.fetch(request, env, ctx);
-    const secured = new Response(response.body, response);
-    secured.headers.set("X-Content-Type-Options", "nosniff");
-    secured.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
-    secured.headers.set("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
-    secured.headers.set("X-Frame-Options", "SAMEORIGIN");
-    if ((secured.headers.get("Content-Type") ?? "").includes("text/html")) {
-      secured.headers.set("Cache-Control", "no-store");
-    }
-    return secured;
+    return secureResponse(await handler.fetch(request, env, ctx));
   },
 };
 

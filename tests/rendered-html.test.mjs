@@ -44,9 +44,10 @@ test("uses a hardened OAuth authorization-code flow", async () => {
 });
 
 test("keeps the embedded application full-screen without relying on external CSS", async () => {
-  const [page, layout] = await Promise.all([
+  const [page, layout, worker] = await Promise.all([
     readFile(new URL("app/page.tsx", root), "utf8"),
     readFile(new URL("app/layout.tsx", root), "utf8"),
+    readFile(new URL("worker/index.ts", root), "utf8"),
   ]);
   assert.match(page, /position: "fixed"/);
   assert.match(page, /width: "100vw"/);
@@ -54,6 +55,9 @@ test("keeps the embedded application full-screen without relying on external CSS
   assert.match(page, /border: 0/);
   assert.match(layout, /overflow: "hidden"/);
   assert.match(layout, /margin: 0/);
+  assert.match(worker, /url\.pathname === "\/"/);
+  assert.match(worker, /appUrl\.pathname = "\/app\.html"/);
+  assert.match(worker, /Cache-Control", "no-store"/);
 });
 
 test("keeps test access open while payments are disabled and uses server-side admin accounts", async () => {
