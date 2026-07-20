@@ -231,6 +231,20 @@ body.acc-dyslexia{font-family:'Comic Sans MS','OpenDyslexic',sans-serif!importan
 .read-aloud-btn:hover{transform:translateY(-1px);background:linear-gradient(135deg,#e9e5ff,#ddf8f0);box-shadow:0 10px 24px rgba(79,70,229,.14)}
 .read-aloud-btn:focus-visible{outline:3px solid rgba(79,70,229,.28);outline-offset:2px}
 .read-aloud-btn.speaking{background:linear-gradient(135deg,#4f46e5,#6258eb);border-color:#4f46e5;color:#fff;box-shadow:0 10px 24px rgba(79,70,229,.25)}
+.generated-visual{margin:16px auto 18px;max-width:560px;min-height:180px;padding:18px;background:linear-gradient(145deg,#f8fbff,#f4f0ff);border:1.5px solid #b9c9f8;border-radius:18px;display:flex;flex-direction:column;align-items:stretch;justify-content:center;gap:14px;overflow:hidden}
+.generated-visual figcaption{font-size:12px;color:#536179;text-align:center;font-weight:650}
+.gvisual-bars{height:150px;display:flex;align-items:flex-end;justify-content:center;gap:14px;padding:12px 8px 0;border-bottom:2px solid #94a3b8}
+.gvisual-bar-col{height:100%;min-width:44px;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:5px}
+.gvisual-bar{width:36px;min-height:12px;border-radius:9px 9px 2px 2px;background:linear-gradient(180deg,#4f46e5,#2f6fed);box-shadow:0 5px 12px rgba(47,111,237,.18)}
+.gvisual-label,.gvisual-value{font-size:11px;font-weight:800;color:#334155}
+.gvisual-tokens,.gvisual-cards{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+.gvisual-token,.gvisual-card{padding:11px 14px;border:1.5px solid #c7d2fe;border-radius:12px;background:#fff;color:#26324a;font-size:14px;font-weight:800;box-shadow:0 5px 14px rgba(52,64,120,.08)}
+.gvisual-token.highlight{border-color:#4f46e5;background:#eef2ff;color:#312e81;transform:translateY(-2px)}
+.gvisual-scene{font-size:72px;line-height:1.1;text-align:center;letter-spacing:12px}.gvisual-scene-label{text-align:center;font-size:14px;font-weight:850;color:#334155}
+.gvisual-timeline{display:grid;grid-template-columns:repeat(auto-fit,minmax(105px,1fr));gap:10px;align-items:stretch}
+.gvisual-step{position:relative;padding:14px 10px;border-radius:12px;background:#fff;border:1.5px solid #c7d2fe;text-align:center;color:#334155}.gvisual-step strong{display:block;color:#4338ca;margin-bottom:5px;font-size:12px}.gvisual-step span{font-size:11px;font-weight:750;line-height:1.35}
+.gvisual-element{min-width:86px;text-align:center;padding:12px;border:2px solid #7c3aed;border-radius:12px;background:#fff}.gvisual-element strong{display:block;font-size:24px;color:#4338ca}.gvisual-element span{font-size:11px;color:#64748b;font-weight:750}
+@media(max-width:620px){.generated-visual{min-height:150px;padding:14px}.gvisual-bars{gap:7px}.gvisual-bar-col{min-width:34px}.gvisual-bar{width:28px}.gvisual-timeline{grid-template-columns:1fr 1fr}}
 .speech-notice{position:fixed;left:50%;bottom:78px;z-index:10020;max-width:min(460px,calc(100vw - 28px));transform:translateX(-50%);padding:11px 16px;border:1px solid rgba(255,255,255,.28);border-radius:13px;background:#27234f;color:#fff;font-size:13px;font-weight:700;line-height:1.45;text-align:center;box-shadow:0 16px 40px rgba(28,25,62,.25)}
 
 /* Results stay centered and clear of fixed accessibility controls. */
@@ -12467,6 +12481,9 @@ Q_POOL['hist-910-5']=[
   mc('h910v5_20', 'ბ. კ. 1989:', ["1989", "1991", "1985", "1993"], 0, 5),
 ];
 // === END HIST 7-12 ===
+</script>
+<script src="/expanded-question-bank.js"></script>
+<script>
 const ALL_TESTS=[
 {id:'math-g1-s1',title:'მათემატიკა — I კლასი — I სემ.',subject:'მათემატიკა',grade:1,pool:'math-12',count:10,time:15,attempts:3,paid:false,semester:1,testType:'mid'},
 {id:'math-g1-s2',title:'მათემატიკა — I კლასი — II სემ.',subject:'მათემატიკა',grade:1,pool:'math-12',count:10,time:15,attempts:3,paid:false,semester:2,testType:'mid'},
@@ -13737,6 +13754,7 @@ function hasQuestionEncodingCorruption(value){
 }
 
 function questionContentFingerprint(q){
+  if(q&&q.visual)return 'content:visual:'+stableQuestionHash(JSON.stringify(q.visual));
   const mediaSrc=String(q&&q.media&&q.media.src||'').trim().toLocaleLowerCase('en-US');
   // Reusing the same illustration with a differently-worded prompt still feels
   // like a repeated question to a learner, so visual content is one concept.
@@ -13748,7 +13766,7 @@ function questionContentFingerprint(q){
 
 function isStructurallyValidQuestion(q){
   if(!q||!String(q.id||'').trim()||!String(q.text||'').trim())return false;
-  if(hasQuestionEncodingCorruption([q.text,...(Array.isArray(q.opts)?q.opts:[]),q.explain,q.media&&q.media.alt].filter(Boolean).join(' ')))return false;
+  if(hasQuestionEncodingCorruption([q.text,...(Array.isArray(q.opts)?q.opts:[]),q.explain,q.media&&q.media.alt,q.visual&&q.visual.alt,q.visual&&q.visual.caption].filter(Boolean).join(' ')))return false;
   if(!Number.isFinite(Number(q.pts))||Number(q.pts)<=0)return false;
   if(q.type==='multiple_choice'||q.type==='true_false'){
     if(!Array.isArray(q.opts)||q.opts.length<2)return false;
@@ -13756,6 +13774,21 @@ function isStructurallyValidQuestion(q){
     if(!Number.isInteger(correct)||correct<0||correct>=q.opts.length)return false;
     const normalized=q.opts.map(value=>normalizedQuestionContent(value)||String(value||'').trim());
     if(normalized.some(value=>!value)||new Set(normalized).size!==normalized.length)return false;
+  }
+  if(q.type==='calc'&&!Number.isFinite(Number(q.correct)))return false;
+  if(q.type==='fill'){
+    const gaps=(String(q.text||'').match(/___/g)||[]).length;
+    if(!Array.isArray(q.blanks)||!q.blanks.length||gaps!==q.blanks.length||q.blanks.some(answer=>!String(answer||'').trim()))return false;
+  }
+  if(q.type==='match'){
+    const pairs=Array.isArray(q.pairs)?q.pairs:[];
+    const left=pairs.map(pair=>normalizedQuestionContent(pair&&pair[0]));
+    const right=pairs.map(pair=>normalizedQuestionContent(pair&&pair[1]));
+    if(pairs.length<2||pairs.some(pair=>!Array.isArray(pair)||pair.length<2)||left.some(value=>!value)||right.some(value=>!value)||new Set(left).size!==left.length||new Set(right).size!==right.length)return false;
+  }
+  if(q.type==='order'){
+    const items=Array.isArray(q.items)?q.items.map(normalizedQuestionContent):[];
+    if(items.length<2||items.some(value=>!value)||new Set(items).size!==items.length)return false;
   }
   return true;
 }
@@ -13811,9 +13844,20 @@ function getTestQs(test){
   if(window._practiceMode&&AI_REMEDIATION_BANK[test.pool]?.length)versions.push(AI_REMEDIATION_BANK[test.pool]);
   // Apply the semester split inside every version so each semester benefits
   // from the full variety of generated and visual question versions.
-  const subset=versions.flatMap(version=>test.semester===1
-    ?version.slice(0,Math.ceil(version.length/2))
-    :test.semester===2?version.slice(Math.ceil(version.length/2)):version);
+  const subset=versions.flatMap(version=>{
+    const semesterTagged=version.filter(q=>Number(q.semester)===1||Number(q.semester)===2);
+    const legacy=version.filter(q=>Number(q.semester)!==1&&Number(q.semester)!==2);
+    const legacySubset=test.semester===1?legacy.slice(0,Math.ceil(legacy.length/2))
+      :test.semester===2?legacy.slice(Math.ceil(legacy.length/2)):legacy;
+    const taggedSubset=Number(test.semester)===1||Number(test.semester)===2
+      ?semesterTagged.filter(q=>Number(q.semester)===Number(test.semester)):semesterTagged;
+    return legacySubset.concat(taggedSubset);
+  }).filter(q=>{
+    const targetGrade=Number(test.grade),explicitGrade=Number(q.grade);
+    if(Number.isFinite(explicitGrade))return explicitGrade===targetGrade;
+    const min=Number(q.gradeMin),max=Number(q.gradeMax);
+    return !(Number.isFinite(min)&&Number.isFinite(max)&&min===max)||min===targetGrade;
+  });
   const poolKey=test.pool+'-'+(vIdx+1);
   const email = CUR_USER ? CUR_USER.email : 'guest';
   const tagged = subset.map((q,i)=>{
@@ -15419,12 +15463,33 @@ function updateTimer(){
   el.className='timer'+(timerSec<30?' red':timerSec<60?' amb':'');
 }
 
+function renderGeneratedVisual(q,anchor){
+  if(!q||!q.visual)return null;
+  const spec=q.visual,figure=document.createElement('figure');figure.id='q-media';figure.className='generated-visual';
+  figure.setAttribute('role','img');figure.setAttribute('aria-label',spec.alt||'საკითხის ვიზუალური მონაცემი');
+  const kind=String(spec.kind||'cards');
+  if(kind==='bars'){
+    const labels=Array.isArray(spec.labels)?spec.labels:[],values=Array.isArray(spec.values)?spec.values.map(Number):[];
+    const max=Math.max(1,...values.filter(Number.isFinite));const chart=document.createElement('div');chart.className='gvisual-bars';
+    labels.forEach((label,index)=>{const col=document.createElement('div');col.className='gvisual-bar-col';const value=document.createElement('span');value.className='gvisual-value';value.textContent=String(values[index]??0)+(spec.unit?' '+spec.unit:'');const bar=document.createElement('div');bar.className='gvisual-bar';bar.style.height=Math.max(12,Math.round((Number(values[index])||0)/max*100))+'px';const lab=document.createElement('span');lab.className='gvisual-label';lab.textContent=String(label);col.append(value,bar,lab);chart.appendChild(col);});figure.appendChild(chart);
+  }else if(kind==='scene'){
+    const scene=document.createElement('div');scene.className='gvisual-scene';scene.textContent=(spec.items||[]).join(' ');const label=document.createElement('div');label.className='gvisual-scene-label';label.textContent=spec.label||'';figure.append(scene,label);
+  }else if(kind==='timeline'){
+    const timeline=document.createElement('div');timeline.className='gvisual-timeline';(spec.items||[]).forEach((item,index)=>{const step=document.createElement('div');step.className='gvisual-step';const marker=document.createElement('strong');marker.textContent=String(item.year??index+1);const label=document.createElement('span');label.textContent=String(item.label??item);step.append(marker,label);timeline.appendChild(step);});figure.appendChild(timeline);
+  }else if(kind==='elementCards'){
+    const cards=document.createElement('div');cards.className='gvisual-cards';(spec.items||[]).forEach(item=>{const card=document.createElement('div');card.className='gvisual-element';const symbol=document.createElement('strong');symbol.textContent=String(item.label);const value=document.createElement('span');value.textContent='Ar '+String(item.value);card.append(symbol,value);cards.appendChild(card);});figure.appendChild(cards);
+  }else{
+    const cards=document.createElement('div');cards.className=kind==='tokens'?'gvisual-tokens':'gvisual-cards';(spec.items||[]).forEach((item,index)=>{const card=document.createElement('div');card.className=(kind==='tokens'?'gvisual-token':'gvisual-card')+(Number(spec.highlight)===index?' highlight':'');card.textContent=typeof item==='object'?String(item.label??item.value??''):String(item);cards.appendChild(card);});figure.appendChild(cards);
+  }
+  const caption=document.createElement('figcaption');caption.textContent=spec.caption||spec.alt||'';figure.appendChild(caption);anchor.insertAdjacentElement('afterend',figure);return figure;
+}
+
 function renderQ(){
   const qs=curTestQs;const q=qs[qIdx];if(!q)return;
   document.getElementById('q-num').textContent=qIdx+1;
   const ofSep=LANG==='ka'?' '+t('of'):' '+t('of')+' ';document.getElementById('q-counter').textContent=t('question')+' '+(qIdx+1)+ofSep+qs.length;
   document.getElementById('q-prog').style.width=(((qIdx+1)/qs.length)*100)+'%';
-  document.getElementById('q-type-badge').textContent=q.aiGenerated?'AI სავარჯიშო':q.media?'ვიზუალური':q.type==='multiple_choice'?'MCQ':q.type==='true_false'?'T/F':q.type==='calc'?'🧮':q.type==='order'?'🔀':q.type==='match'?'🔗':q.type==='fill'?'✏️':'Short';
+  document.getElementById('q-type-badge').textContent=q.aiGenerated?'AI სავარჯიშო':(q.media||q.visual)?'ვიზუალური':q.type==='multiple_choice'?'MCQ':q.type==='true_false'?'T/F':q.type==='calc'?'🧮':q.type==='order'?'🔀':q.type==='match'?'🔗':q.type==='fill'?'✏️':'Short';
   document.getElementById('q-pts-badge').textContent=q.pts+' '+t('pts_label');
   const _qtEl=document.getElementById('q-text');
   _qtEl.textContent=qTransText(q);
@@ -15438,7 +15503,9 @@ function renderQ(){
     _qtEl.insertAdjacentElement('afterend',curriculumMeta);
   }
   const oldMedia=document.getElementById('q-media');if(oldMedia)oldMedia.remove();
-  if(q.media&&q.media.src){
+  if(q.visual){
+    renderGeneratedVisual(q,document.getElementById('q-curriculum-meta')||_qtEl);
+  }else if(q.media&&q.media.src){
     const media=document.createElement('figure');media.id='q-media';
     media.style.cssText='margin:16px auto 18px;max-width:420px;min-height:190px;padding:18px;background:linear-gradient(135deg,#f8fafc,#eff6ff);border:1.5px solid #bfdbfe;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center';
     const image=document.createElement('img');image.src=q.media.src;image.alt=q.media.alt||'საკითხის საილუსტრაციო გამოსახულება';image.loading='eager';image.decoding='async';
@@ -15941,7 +16008,7 @@ if(authStatus==='linked')setTimeout(()=>showXpToast('✓ შესვლის �
     const questionText=qTransText(q);
     const code=detectSpeechCode(questionText);
     const parts=[questionText];
-    const mediaText=q.media&&(q.media.caption||q.media.alt);
+    const mediaText=q.visual?(q.visual.caption||q.visual.alt):q.media&&(q.media.caption||q.media.alt);
     if(mediaText&&detectSpeechCode(mediaText)===code)parts.push(mediaText);
     if(q.type==='multiple_choice'&&Array.isArray(q.opts))q.opts.forEach((_,i)=>parts.push((OPTION_SPEECH[code]?.[i]||String(i+1))+'. '+qTransOpt(q,i)));
     if(q.type==='true_false')parts.push(...TRUE_FALSE_SPEECH[code]);
@@ -16092,7 +16159,7 @@ async function loadPublicStats(){
   Object.entries(Q_POOL).forEach(([poolKey,pool])=>{
     const basePool=window.CURRICULUM_ALIGNMENT?CURRICULUM_ALIGNMENT.basePool(poolKey):poolKey.replace(/-\d+$/,'');
     if(!publishedPools.has(basePool))return;
-    pool.filter(isStructurallyValidQuestion).forEach(q=>safeQuestionKeys.add(questionContentFingerprint(q)));
+    pool.filter(isStructurallyValidQuestion).forEach(q=>safeQuestionKeys.add((q.generated&&Number.isFinite(Number(q.grade))?'grade:'+Number(q.grade)+'|':'')+questionContentFingerprint(q)));
   });
   const questions=document.getElementById('lp-question-count');if(questions){questions.textContent=safeQuestionKeys.size.toLocaleString('ka-GE');questions.title='გამოქვეყნებული, სტრუქტურულად უსაფრთხო და შინაარსობრივად უნიკალური კითხვები';}
   const tests=document.getElementById('lp-test-count');if(tests)tests.textContent=ALL_TESTS.filter(isCurriculumEligible).length.toLocaleString('ka-GE');

@@ -143,9 +143,13 @@
   }
   function infer(question,context){
     const pool=context&&context.pool||question._sourcePoolKey||question.poolKey||'';
-    const band=gradeBand(pool,context&&context.grades);const area=areaFor(pool);const picked=domainFor(question,pool,area);
+    const inferredBand=gradeBand(pool,context&&context.grades);
+    const exactQuestionGrade=Number.isFinite(Number(question.grade))?Number(question.grade)
+      :Number(question.gradeMin)===Number(question.gradeMax)&&Number.isFinite(Number(question.gradeMin))?Number(question.gradeMin):null;
+    const band=exactQuestionGrade?[exactQuestionGrade,exactQuestionGrade]:inferredBand;const area=areaFor(pool);const picked=domainFor(question,pool,area);
     const domain=picked[0],confidence=picked[1];const flags=[];const clean=basePool(pool);
     if(!question.explain)flags.push('missing_author_explanation');
+    if(question.generated)flags.push('machine_generated_review_required');
     if(question.type==='true_false')flags.push('low_depth_binary_format');
     const stem=String(question.text||'').trim();
     if(!question.media&&(stem.endsWith(':')||(stem.length<12&&!/[?!.]$/.test(stem))))flags.push('short_or_fragmented_stem');
@@ -154,16 +158,17 @@
     const stageMismatch=clean.startsWith('hist-')&&band[1]<7;
     const unpublishedPool=!!(context&&context.hasPublishedTest===false);
     const outcomeId=question.outcome||`NCP.${area.toUpperCase()}.${band[0]}-${band[1]}.${domain.toUpperCase()}`;
-    let reviewStatus='candidate_domain_alignment';
+    const expertApproved=question.reviewStatus==='expert_approved';
+    let reviewStatus=question.generated?'candidate_generated_alignment':question.outcome?'candidate_explicit_alignment':'candidate_domain_alignment';
     if(unpublishedPool)reviewStatus='blocked_unpublished_pool';
     else if(stageMismatch)reviewStatus='blocked_curriculum_stage';
     else if(KNOWN_REVIEW[question.id]||flags.includes('weak_or_nonacademic_distractor'))reviewStatus='review_required';
-    else if(question.outcome&&question.skill&&question.explain)reviewStatus='approved_explicit_alignment';
+    else if(expertApproved&&question.outcome&&question.skill&&question.explain)reviewStatus='approved_explicit_alignment';
     return{
       frameworkVersion:VERSION,source:'საქართველოს ეროვნული სასწავლო გეგმის საგნობრივი სფეროები',
-      sourceUrl:'https://mes.gov.ge/content.php?id=12552',
+      sourceUrl:question.curriculumSource||'https://mes.gov.ge/content.php?id=12552',
       area,domain,gradeMin:band[0],gradeMax:band[1],outcomeId,
-      outcomeLabel:OUTCOMES[area][domain],alignmentType:question.outcome?'explicit_result_code':'domain_level_candidate',
+      outcomeLabel:OUTCOMES[area][domain],alignmentType:expertApproved&&question.outcome?'explicit_result_code':question.outcome?'tagged_result_candidate':'domain_level_candidate',
       confidence,reviewStatus,cognitiveLevel:cognitiveLevel(question),qualityFlags:flags,
       exactGradeVerified:Number(question.gradeMin)===Number(question.gradeMax)&&Number.isFinite(Number(question.gradeMin)),
       reviewNote:unpublishedPool?'კითხვების აუზი არც ერთ მოქმედ ტესტზე არ არის მიბმული':stageMismatch?'საგანი/კლასი სამინისტროს მიმდინარე თანმიმდევრობას არ ემთხვევა':KNOWN_REVIEW[question.id]||null

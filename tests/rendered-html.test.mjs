@@ -182,15 +182,18 @@ test("includes accessible visual questions and honest AI feedback labels", async
 });
 
 test("question bank has no malformed records and publishes its audit", async () => {
-  const [report, quality] = await Promise.all([
+  const [report, quality, expansion] = await Promise.all([
     readFile(new URL("reports/question-bank-audit.json", root), "utf8").then(JSON.parse),
     readFile(new URL("reports/question-content-quality.json", root), "utf8").then(JSON.parse),
+    readFile(new URL("public/expanded-question-bank.js", root), "utf8"),
   ]);
   assert.equal(report.malformed.length, 0);
-  assert.ok(report.summary.questions >= 5_000);
-  assert.ok(report.summary.visualQuestions >= 16);
+  assert.ok(report.summary.questions >= 10_800);
+  assert.ok(report.summary.visualQuestions >= 900);
   assert.equal(report.summary.questionsMappedToCurriculumDomain, report.summary.questions);
-  assert.equal(report.summary.approvedDomainAlignments, 32);
+  assert.equal(report.summary.approvedDomainAlignments, 0);
+  assert.equal(report.summary.candidateExplicitAlignments, 32);
+  assert.ok(report.summary.candidateGeneratedAlignments >= 4_200);
   assert.ok(report.summary.candidateDomainAlignments >= 4_000);
   assert.ok(report.summary.blockedCurriculumStageQuestions > 0);
   assert.ok(report.summary.blockedUnpublishedPoolQuestions > 0);
@@ -200,7 +203,16 @@ test("question bank has no malformed records and publishes its audit", async () 
   assert.equal(report.readiness.exactGradeTraceability, "incomplete");
   assert.equal(quality.summary.encodingCorruptedQuestions, 0);
   assert.ok(quality.summary.duplicateOptionQuestions > 0);
-  assert.ok(quality.summary.publishedSafeUniqueQuestions > 3_000);
+  assert.ok(quality.summary.publishedSafeUniqueQuestions >= 8_206);
+  assert.ok(quality.summary.generatedExpansionQuestions >= 4_103);
+  assert.ok(quality.summary.generatedExpansionVisualQuestions >= 800);
+  assert.ok(quality.summary.generatedVisualShare >= 0.2);
+  assert.ok(quality.summary.generatedVisualShare <= 0.35);
+  assert.ok(quality.summary.generatedInteractiveShare >= 0.2);
+  assert.equal(quality.summary.duplicateQuestionTextsWithinExactGrade, 0);
+  assert.equal(quality.summary.subjectsBelowDouble, 0);
   assert.equal(quality.summary.testsWithInsufficientSafeQuestions, 0);
-  assert.equal(quality.summary.testsWithoutExactGradeVerification, 420);
+  assert.equal(quality.summary.testsWithoutExactGradeVerification, 0);
+  assert.match(expansion, /generated_review_required/);
+  assert.match(expansion, /curriculumSource/);
 });

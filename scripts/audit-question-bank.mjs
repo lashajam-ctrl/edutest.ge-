@@ -3,6 +3,7 @@ import vm from "node:vm";
 
 const html = fs.readFileSync(new URL("../public/app.html", import.meta.url), "utf8");
 const alignmentSource = fs.readFileSync(new URL("../public/curriculum-alignment.js", import.meta.url), "utf8");
+const expansionSource = fs.readFileSync(new URL("../public/expanded-question-bank.js", import.meta.url), "utf8");
 const helpersStart = html.indexOf("const mc=");
 const translationsStart = html.indexOf("const Q_TRANS=");
 const testsStart = html.indexOf("const ALL_TESTS=");
@@ -13,11 +14,11 @@ if ([helpersStart, translationsStart, testsStart].some(index => index < 0) || te
 // standalone assignments too, without loading the large translation payload.
 const appendedPools = html.slice(translationsStart, testsStart)
   .match(/Q_POOL\[['"][^'\"]+['"]\]\s*=\s*\[[\s\S]*?\n\];/g) ?? [];
-const source = `${html.slice(helpersStart, translationsStart)}\n${appendedPools.join("\n")}\n${html.slice(testsStart, testsEnd)}\nglobalThis.__audit={Q_POOL,ALL_TESTS};`;
+const source = `${html.slice(helpersStart, translationsStart)}\n${appendedPools.join("\n")}\n${expansionSource}\n${html.slice(testsStart, testsEnd)}\nglobalThis.__audit={Q_POOL,ALL_TESTS,expansionStats:globalThis.EDUTEST_EXPANSION_STATS};`;
 const sandbox = {};
-vm.runInNewContext(source, sandbox, { timeout: 5000 });
-vm.runInNewContext(alignmentSource, sandbox, { timeout: 5000 });
-const { Q_POOL, ALL_TESTS } = sandbox.__audit;
+vm.runInNewContext(source, sandbox, { timeout: 30_000 });
+vm.runInNewContext(alignmentSource, sandbox, { timeout: 30_000 });
+const { Q_POOL, ALL_TESTS, expansionStats } = sandbox.__audit;
 const alignmentEngine = sandbox.CURRICULUM_ALIGNMENT;
 if (!alignmentEngine?.infer) throw new Error("Curriculum alignment engine was not loaded");
 const poolContexts = new Map();
@@ -70,16 +71,20 @@ const report = {
     tests: ALL_TESTS.length,
     questions: questions.length,
     uniqueQuestionIds: byId.size,
-    visualQuestions: questions.filter(q => q.media?.src).length,
+    visualQuestions: questions.filter(q => q.media?.src || q.visual).length,
     questionsWithExplanation: questions.filter(q => q.explain).length,
     questionsWithSkillTag: questions.filter(q => q.skill).length,
     questionsWithOutcomeTag: questions.filter(q => q.outcome).length,
     questionsMappedToCurriculumDomain: questions.filter(q => q.alignment?.outcomeId).length,
     approvedDomainAlignments: questions.filter(q => q.alignment?.reviewStatus?.startsWith("approved_")).length,
     candidateDomainAlignments: questions.filter(q => q.alignment?.reviewStatus === "candidate_domain_alignment").length,
+    candidateExplicitAlignments: questions.filter(q => q.alignment?.reviewStatus === "candidate_explicit_alignment").length,
+    candidateGeneratedAlignments: questions.filter(q => q.alignment?.reviewStatus === "candidate_generated_alignment").length,
     alignmentsRequiringReview: questions.filter(q => q.alignment?.reviewStatus === "review_required").length,
     blockedCurriculumStageQuestions: questions.filter(q => q.alignment?.reviewStatus === "blocked_curriculum_stage").length,
     blockedUnpublishedPoolQuestions: questions.filter(q => q.alignment?.reviewStatus === "blocked_unpublished_pool").length,
+    generatedExpansionQuestions: expansionStats?.generated ?? 0,
+    generatedExpansionVisualQuestions: expansionStats?.visual ?? 0,
   },
   questionTypes: Object.groupBy(questions, q => q.type),
   typeCounts: Object.fromEntries(Object.entries(Object.groupBy(questions, q => q.type)).map(([type, rows]) => [type, rows.length])),
@@ -106,7 +111,7 @@ const report = {
     exactGradeTraceability: questions.every(q => q.alignment?.exactGradeVerified) ? "pass" : "incomplete",
     explicitOutcomeTagCoverage: questions.every(q => q.outcome) ? "pass" : "incomplete",
     explanationCoverage: questions.every(q => q.explain) ? "pass" : "incomplete",
-    visualCoverage: questions.some(q => q.media?.src) ? "started" : "missing",
+    visualCoverage: questions.some(q => q.media?.src || q.visual) ? "started" : "missing",
   },
 };
 delete report.questionTypes;
