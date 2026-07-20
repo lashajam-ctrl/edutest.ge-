@@ -812,7 +812,13 @@ input:focus,select:focus,textarea:focus{border-color:var(--brand);box-shadow:0 0
         <div class="card" style="padding:16px">
           <div style="font-weight:600;margin-bottom:12px" data-i18n="profile_settings">⚙️ პარამეტრები</div>
           <div class="fg"><div class="label" data-i18n="name">სახელი</div><input id="s-prof-name-input" value="მარიამ კვირიკაშვილი"/></div>
-          <div class="fg"><div class="label" data-i18n="email">ელ-ფოსტა</div><input id="s-prof-email-input" value="mariam@student.ge" readonly aria-readonly="true"/></div>
+          <div class="fg"><div class="label" data-i18n="email">ელ-ფოსტა</div><input id="s-prof-email-input" type="email" value="mariam@student.ge" readonly aria-readonly="true"/><div id="s-prof-email-status" style="font-size:11px;color:var(--gray);margin-top:5px"></div><button id="s-prof-email-resend" type="button" class="btn btn-outline btn-sm" onclick="resendEmailVerification('primary')" style="display:none;margin-top:7px">დადასტურების წერილის ხელახლა გაგზავნა</button></div>
+          <div class="fg"><div class="label">მშობლის ელფოსტა</div><input id="s-prof-parent-email-input" type="email" autocomplete="email" placeholder="parent@example.com"/><div id="s-prof-parent-status" style="font-size:11px;color:var(--gray);margin-top:5px">შედეგები გაიგზავნება მხოლოდ მშობლის მიერ დადასტურების შემდეგ.</div><button id="s-prof-parent-resend" type="button" class="btn btn-outline btn-sm" onclick="resendEmailVerification('parent')" style="display:none;margin-top:7px">მშობლისთვის წერილის ხელახლა გაგზავნა</button></div>
+          <div style="background:#f8fafc;border:1px solid var(--border);border-radius:10px;padding:11px;margin-bottom:12px">
+            <div style="font-weight:600;font-size:12px;margin-bottom:8px">📧 შედეგების ავტომატური გაგზავნა</div>
+            <label style="display:flex;align-items:flex-start;gap:8px;font-size:12px;margin-bottom:8px;cursor:pointer"><input id="s-prof-result-email" type="checkbox" style="width:16px;height:16px;margin-top:1px" checked/> ჩემს დადასტურებულ ელფოსტაზე</label>
+            <label style="display:flex;align-items:flex-start;gap:8px;font-size:12px;cursor:pointer"><input id="s-prof-parent-result-email" type="checkbox" style="width:16px;height:16px;margin-top:1px" checked/> დადასტურებულ მშობლის ელფოსტაზე</label>
+          </div>
           <div class="fg"><div class="label" data-i18n="grade">კლასი</div><select id="s-prof-grade-input"><option>1A</option><option>1B</option><option>2A</option><option>2B</option><option>3A</option><option>3B</option><option>4A</option><option>4B</option><option>5A</option><option>5B</option><option>6A</option><option>6B</option><option>7A</option><option>7B</option><option>8A</option><option>8B</option><option>9A</option><option>9B</option><option>10A</option><option>10B</option><option>11A</option><option>11B</option><option>12A</option><option>12B</option></select></div>
           <div class="fg"><div class="label" data-i18n="new_password">ახალი პაროლი</div><input type="password" data-i18n-placeholder="change_pass_ph" placeholder="შეცვალეთ პაროლი"/></div>
           <button class="btn btn-primary btn-sm" onclick="saveProfile()" data-i18n="save_profile">💾 შენახვა</button>
@@ -12997,8 +13003,11 @@ function saveVers(){_lsSet('edutest_vers',USER_VERS);}
 async function syncAttemptToServer(result){
   try{
     const response=await fetch('/api/attempts',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({testId:result.testId,earned:result.earned,totalPts:result.totalPts,pct:result.pct,result})});
+    const data=await response.json();
     if(!response.ok)throw new Error('sync failed');
+    result.emailNotifications=data.notifications||null;
     result.synced=true;saveResults();
+    if(data.notifications&&(data.notifications.student==='sent'||data.notifications.parent==='sent'))setTimeout(()=>showXpToast('📧 შედეგი ავტომატურად გაიგზავნა',null),4200);
   }catch(e){result.synced=false;saveResults();}
 }
 
@@ -14576,6 +14585,20 @@ function renderStudentProfile(){
   if(premBtn)premBtn.style.display=PAYMENTS_ENABLED&&!prem?'':'none';
   const ni=document.getElementById('s-prof-name-input');if(ni)ni.value=CUR_USER.name||'';
   const ei=document.getElementById('s-prof-email-input');if(ei)ei.value=CUR_USER.email||'';
+  const pei=document.getElementById('s-prof-parent-email-input');if(pei)pei.value=CUR_USER.parentEmail||'';
+  const resultEmail=document.getElementById('s-prof-result-email');if(resultEmail)resultEmail.checked=CUR_USER.resultEmailEnabled!==false;
+  const parentResultEmail=document.getElementById('s-prof-parent-result-email');if(parentResultEmail)parentResultEmail.checked=CUR_USER.parentResultEmailEnabled!==false;
+  const emailStatus=document.getElementById('s-prof-email-status');
+  const emailResend=document.getElementById('s-prof-email-resend');
+  if(emailStatus){emailStatus.textContent=CUR_USER.emailVerified?'✓ ელფოსტა დადასტურებულია':'⚠ ელფოსტა დასადასტურებელია — შედეგები ჯერ არ გაიგზავნება';emailStatus.style.color=CUR_USER.emailVerified?'#15803d':'#b45309';}
+  if(emailResend)emailResend.style.display=CUR_USER.emailVerified?'none':'inline-flex';
+  const parentStatus=document.getElementById('s-prof-parent-status');
+  const parentResend=document.getElementById('s-prof-parent-resend');
+  if(parentStatus){
+    parentStatus.textContent=!CUR_USER.parentEmail?'შედეგები გაიგზავნება მხოლოდ მშობლის მიერ დადასტურების შემდეგ.':CUR_USER.parentEmailVerified?'✓ მშობლის ელფოსტა დადასტურებულია':'⚠ მშობლის დადასტურებას ელოდება — შედეგები ჯერ არ გაიგზავნება';
+    parentStatus.style.color=CUR_USER.parentEmailVerified?'#15803d':CUR_USER.parentEmail?'#b45309':'var(--gray)';
+  }
+  if(parentResend)parentResend.style.display=CUR_USER.parentEmail&&!CUR_USER.parentEmailVerified?'inline-flex':'none';
   const gi=document.getElementById('s-prof-grade-input');if(gi&&CUR_USER.grade)gi.value=CUR_USER.grade;
 }
 
@@ -14586,16 +14609,37 @@ async function saveProfile(){
   const passInput=document.querySelector('#s-profile input[type="password"]');
   const newName=(nameInput?.value||'').trim();
   const newPass=(passInput?.value||'').trim();
+  const parentEmail=(document.getElementById('s-prof-parent-email-input')?.value||'').trim();
+  const resultEmailEnabled=!!document.getElementById('s-prof-result-email')?.checked;
+  const parentResultEmailEnabled=!!document.getElementById('s-prof-parent-result-email')?.checked;
   const grade=document.getElementById('s-prof-grade-input')?.value||CUR_USER.grade||'';
-  const response=await fetch('/api/auth/profile',{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:newName,password:newPass||undefined,grade})});
+  const response=await fetch('/api/auth/profile',{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:newName,password:newPass||undefined,grade,parentEmail,resultEmailEnabled,parentResultEmailEnabled})});
   const data=await response.json();
   if(!response.ok){alert(data.error||'პროფილი ვერ განახლდა.');return;}
   CUR_USER={...CUR_USER,...data.user};
   const idx=USER_DB.findIndex(u=>u.email===CUR_USER.email);if(idx>=0)USER_DB[idx]={...USER_DB[idx],...CUR_USER};
   renderStudentProfile();
   if(passInput)passInput.value='';
+  if(data.parentVerification==='sent')showXpToast('📧 მშობელს დადასტურების წერილი გაეგზავნა',null);
+  else if(data.parentVerification==='unconfigured')alert('მშობლის ელფოსტა შენახულია. წერილების გაგზავნა ჩაირთვება ელფოსტის სერვისის უსაფრთხო გასაღების დამატების შემდეგ.');
+  else if(data.parentVerification==='failed')alert('მშობლის ელფოსტა შენახულია, მაგრამ დადასტურების წერილი ვერ გაიგზავნა. მოგვიანებით დააჭირეთ ხელახლა გაგზავნას.');
   const btn=document.querySelector('#s-profile button[onclick="saveProfile()"]');
-  if(btn){const orig=btn.textContent;btn.textContent='✓ '+t('saved_ok')||'✓ შენახულია';setTimeout(()=>{btn.textContent=orig;},1800);}
+  if(btn){const orig=btn.textContent;btn.textContent='✓ '+(t('saved_ok')||'შენახულია');setTimeout(()=>{btn.textContent=orig;},1800);}
+}
+
+async function resendEmailVerification(purpose){
+  const button=document.getElementById(purpose==='parent'?'s-prof-parent-resend':'s-prof-email-resend');
+  if(button)button.disabled=true;
+  try{
+    const response=await fetch('/api/auth/email/verification',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({purpose})});
+    const data=await response.json();
+    if(!response.ok)throw new Error(data.error||'წერილი ვერ გაიგზავნა.');
+    if(data.state==='sent')showXpToast('📧 დადასტურების წერილი გაიგზავნა',null);
+    else if(data.state==='already_verified'){showXpToast('✓ ელფოსტა უკვე დადასტურებულია',null);await restoreServerSession();renderStudentProfile();}
+    else if(data.state==='unconfigured')alert('ელფოსტა შენახულია. ავტომატური წერილები ჩაირთვება ელფოსტის სერვისის უსაფრთხო გასაღების დამატების შემდეგ.');
+    else throw new Error('დადასტურების წერილი ვერ გაიგზავნა. მოგვიანებით სცადეთ.');
+  }catch(error){alert(error.message||'წერილი ვერ გაიგზავნა.');}
+  finally{if(button)button.disabled=false;}
 }
 
 async function approveTeacher(email){
@@ -15114,10 +15158,12 @@ async function doLogin(){
     if(existing>=0)USER_DB[existing]={...USER_DB[existing],...CUR_USER};else USER_DB.push(CUR_USER);
     if(errEl)errEl.classList.add('hidden');
     if(curRole==='pending_teacher'){
-      if(errEl){errEl.textContent='🕐 მასწავლებლის ანგარიში ადმინისტრატორის დადასტურებას ელოდება.';errEl.style.color='#16a34a';errEl.classList.remove('hidden');}
+      if(errEl){errEl.textContent='🕐 მასწავლებლის ანგარიში ადმინისტრატორის დადასტურებას ელოდება.'+(data.emailVerification==='sent'?' ელფოსტის დადასტურების წერილიც გამოგზავნილია.':'');errEl.style.color='#16a34a';errEl.classList.remove('hidden');}
       return;
     }
     go(curRole==='teacher'?'teacher':curRole==='admin'?'admin':'student');
+    if(data.emailVerification==='sent')setTimeout(()=>showXpToast('📧 ელფოსტის დადასტურების წერილი გამოგზავნილია',null),900);
+    else if(data.emailVerification==='unconfigured')setTimeout(()=>alert('ანგარიში შეიქმნა. ელფოსტის დადასტურება და შედეგების ავტომატური გაგზავნა ჩაირთვება ელფოსტის სერვისის უსაფრთხო გასაღების დამატების შემდეგ.'),500);
     return;
   }catch(error){
     if(errEl){errEl.textContent=error.message||'ავტორიზაცია ვერ შესრულდა';errEl.style.color='';errEl.classList.remove('hidden');}
@@ -15976,6 +16022,9 @@ if(authStatus&&authStatus!=='success'&&authStatus!=='linked')setTimeout(()=>{con
   go('login');err.textContent=messages[authStatus]||'ავტორიზაცია ვერ დასრულდა. სცადეთ ელფოსტით შესვლა ან მოგვიანებით გაიმეორეთ.';err.classList.remove('hidden');
 }},0);
 if(authStatus==='linked')setTimeout(()=>showXpToast('✓ შესვლის დამატებითი მეთოდი წარმატებით მიება',null),800);
+const emailVerificationStatus=new URLSearchParams(location.search).get('email-verification');
+if(emailVerificationStatus==='primary'||emailVerificationStatus==='parent')setTimeout(()=>showXpToast(emailVerificationStatus==='parent'?'✓ მშობლის ელფოსტა დადასტურდა':'✓ ელფოსტა დადასტურდა',null),1000);
+else if(emailVerificationStatus==='invalid')setTimeout(()=>alert('დადასტურების ბმული არასწორია ან ვადა გაუვიდა. პროფილიდან ახალი წერილი მოითხოვეთ.'),500);
 
 // ── Accessibility modes ─────────────────
 (function(){

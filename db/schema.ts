@@ -10,9 +10,26 @@ export const users = sqliteTable("users", {
   passwordHash: text("password_hash"),
   passwordSalt: text("password_salt"),
   emailVerified: integer("email_verified", { mode: "boolean" }).notNull().default(false),
+  parentEmail: text("parent_email"),
+  parentEmailVerified: integer("parent_email_verified", { mode: "boolean" }).notNull().default(false),
+  resultEmailEnabled: integer("result_email_enabled", { mode: "boolean" }).notNull().default(true),
+  parentResultEmailEnabled: integer("parent_result_email_enabled", { mode: "boolean" }).notNull().default(true),
   createdAt: integer("created_at", { mode: "timestamp_ms" }).notNull(),
   updatedAt: integer("updated_at", { mode: "timestamp_ms" }).notNull(),
 }, (table) => [uniqueIndex("users_email_unique").on(table.email)]);
+
+export const emailVerifications = sqliteTable("email_verifications", {
+  id: text("id").primaryKey(),
+  userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  email: text("email").notNull(),
+  purpose: text("purpose", { enum: ["primary", "parent"] }).notNull(),
+  tokenHash: text("token_hash").notNull(),
+  expiresAt: integer("expires_at", { mode: "timestamp_ms" }).notNull(),
+  createdAt: integer("created_at", { mode: "timestamp_ms" }).notNull(),
+}, (table) => [
+  uniqueIndex("email_verifications_token_unique").on(table.tokenHash),
+  uniqueIndex("email_verifications_user_purpose_unique").on(table.userId, table.purpose),
+]);
 
 export const identities = sqliteTable("identities", {
   id: text("id").primaryKey(),

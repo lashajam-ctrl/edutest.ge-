@@ -29,8 +29,21 @@ export function ensureSchema() {
       env.DB.prepare("CREATE TABLE IF NOT EXISTS assignments (id text PRIMARY KEY NOT NULL, created_by text NOT NULL REFERENCES users(id) ON DELETE cascade, test_id text NOT NULL, grade text NOT NULL, deadline text, note text, created_at integer NOT NULL)"),
       env.DB.prepare("CREATE TABLE IF NOT EXISTS question_history (id text PRIMARY KEY NOT NULL, user_id text NOT NULL REFERENCES users(id) ON DELETE cascade, question_id text NOT NULL, pool_key text NOT NULL, answered_at integer NOT NULL)"),
       env.DB.prepare("CREATE UNIQUE INDEX IF NOT EXISTS question_history_user_question_unique ON question_history (user_id, question_id)"),
-      env.DB.prepare("CREATE INDEX IF NOT EXISTS question_history_user_pool_idx ON question_history (user_id, pool_key)")
-    ]).then(() => undefined).catch(error => { schemaReady = undefined; throw error; });
+      env.DB.prepare("CREATE INDEX IF NOT EXISTS question_history_user_pool_idx ON question_history (user_id, pool_key)"),
+      env.DB.prepare("CREATE TABLE IF NOT EXISTS email_verifications (id text PRIMARY KEY NOT NULL, user_id text NOT NULL REFERENCES users(id) ON DELETE cascade, email text NOT NULL, purpose text NOT NULL, token_hash text NOT NULL, expires_at integer NOT NULL, created_at integer NOT NULL)"),
+      env.DB.prepare("CREATE UNIQUE INDEX IF NOT EXISTS email_verifications_token_unique ON email_verifications (token_hash)"),
+      env.DB.prepare("CREATE UNIQUE INDEX IF NOT EXISTS email_verifications_user_purpose_unique ON email_verifications (user_id, purpose)")
+    ]).then(async () => {
+      const result = await env.DB.prepare("PRAGMA table_info(users)").all<{ name: string }>();
+      const existing = new Set((result.results ?? []).map((column: { name: string }) => column.name));
+      const additions = [
+        ["parent_email", "ALTER TABLE users ADD COLUMN parent_email text"],
+        ["parent_email_verified", "ALTER TABLE users ADD COLUMN parent_email_verified integer DEFAULT false NOT NULL"],
+        ["result_email_enabled", "ALTER TABLE users ADD COLUMN result_email_enabled integer DEFAULT true NOT NULL"],
+        ["parent_result_email_enabled", "ALTER TABLE users ADD COLUMN parent_result_email_enabled integer DEFAULT true NOT NULL"],
+      ].filter(([name]) => !existing.has(name));
+      if (additions.length) await env.DB.batch(additions.map(([, sql]) => env.DB.prepare(sql)));
+    }).catch((error: unknown) => { schemaReady = undefined; throw error; });
   }
   return schemaReady;
 }

@@ -2,6 +2,7 @@ import { eq } from "drizzle-orm";
 import { ensureSchema, getDb } from "@/db";
 import { users } from "@/db/schema";
 import { createSession, hashPassword, publicUser } from "@/lib/auth";
+import { issueEmailVerification, notificationEmailConfigured } from "@/lib/email";
 
 export async function POST(request: Request) {
   await ensureSchema();
@@ -16,6 +17,7 @@ export async function POST(request: Request) {
   const now = new Date();
   const user = { id: crypto.randomUUID(), email, name, role: body.role === "teacher" ? "pending_teacher" as const : "student" as const, grade: body.grade || null, school: body.school || null, passwordHash: passwordData.hash, passwordSalt: passwordData.salt, emailVerified: false, createdAt: now, updatedAt: now };
   await db.insert(users).values(user);
+  const emailVerification = await issueEmailVerification({ userId: user.id, email, purpose: "primary", request });
   const session = await createSession(user.id, request);
-  return Response.json({ user: publicUser(user) }, { status: 201, headers: { "Set-Cookie": session.cookie } });
+  return Response.json({ user: publicUser({ ...user, parentEmail: null, parentEmailVerified: false, resultEmailEnabled: true, parentResultEmailEnabled: true }), emailVerification: emailVerification.state, emailDeliveryConfigured: notificationEmailConfigured() }, { status: 201, headers: { "Set-Cookie": session.cookie } });
 }

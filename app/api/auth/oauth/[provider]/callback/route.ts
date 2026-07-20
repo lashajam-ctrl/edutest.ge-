@@ -72,7 +72,7 @@ export async function GET(request: Request, context: { params: Promise<{ provide
     const role = saved[3] === "pending_teacher" ? "pending_teacher" as const : "student" as const;
     const grade = role === "student" && /^(?:[1-9]|1[0-2])[A-Za-zა-ჰ]?$/.test(saved[4] ?? "") ? saved[4] : null;
     if (role === "student" && !grade) return redirect(origin, "registration-details-required", [clearOauthCookie]);
-    user = { id: crypto.randomUUID(), email, name: profile.name || email.split("@")[0], role, grade, school: null, passwordHash: null, passwordSalt: null, emailVerified: true, createdAt: now, updatedAt: now };
+    user = { id: crypto.randomUUID(), email, name: profile.name || email.split("@")[0], role, grade, school: null, passwordHash: null, passwordSalt: null, emailVerified: true, parentEmail: null, parentEmailVerified: false, resultEmailEnabled: true, parentResultEmailEnabled: true, createdAt: now, updatedAt: now };
     await db.insert(users).values(user);
     await db.insert(identities).values({ id: crypto.randomUUID(), userId: user.id, provider, providerSubject: subject, createdAt: now }).onConflictDoNothing();
   }

@@ -2,6 +2,7 @@ import { desc, eq } from "drizzle-orm";
 import { getDb } from "@/db";
 import { attempts, users } from "@/db/schema";
 import { getSessionUser } from "@/lib/auth";
+import { sendAttemptResultEmails } from "@/lib/email";
 
 export async function GET(request: Request) {
   const current = await getSessionUser(request);
@@ -27,5 +28,13 @@ export async function POST(request: Request) {
   if (!body.testId || !Number.isFinite(earned) || !Number.isFinite(totalPts) || !Number.isFinite(pct) || totalPts <= 0 || earned < 0 || earned > totalPts || pct < 0 || pct > 100 || Math.abs(Math.round(pct) - expectedPct) > 1) return Response.json({ error: "არასწორი შედეგი" }, { status: 400 });
   const row = { id: crypto.randomUUID(), userId: current.user.id, testId: body.testId, score: Math.round(earned), maxScore: Math.round(totalPts), percentage: Math.round(pct), answersJson: JSON.stringify(body.result ?? {}), submittedAt: new Date() };
   await getDb().insert(attempts).values(row);
-  return Response.json({ attempt: row }, { status: 201 });
+  const notifications = await sendAttemptResultEmails({
+    user: current.user,
+    testId: row.testId,
+    score: row.score,
+    maxScore: row.maxScore,
+    percentage: row.percentage,
+    result: body.result,
+  });
+  return Response.json({ attempt: row, notifications }, { status: 201 });
 }

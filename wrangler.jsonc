@@ -8,6 +8,7 @@
   },
   "vars": {
     "APP_ORIGIN": "https://edutest.ge",
+    "RESULT_EMAIL_FROM": "EduTest.ge <results@edutest.ge>",
     "AI_FEEDBACK_ENABLED": "false",
     "AI_UNDER18_SAFEGUARDS_ACKNOWLEDGED": "false"
   },

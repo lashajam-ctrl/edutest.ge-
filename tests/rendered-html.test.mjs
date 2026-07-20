@@ -96,6 +96,29 @@ test("validates reported scores and restricts assignment deletion to its owner",
   assert.match(assignmentsRoute, /assignments\.createdBy, current\.user\.id/);
 });
 
+test("verifies family email addresses before sending automatic test results", async () => {
+  const [html, schema, attemptsRoute, verificationRoute, emailLibrary, envExample] = await Promise.all([
+    readFile(new URL("public/app.html", root), "utf8"),
+    readFile(new URL("db/schema.ts", root), "utf8"),
+    readFile(new URL("app/api/attempts/route.ts", root), "utf8"),
+    readFile(new URL("app/api/auth/email/verify/route.ts", root), "utf8"),
+    readFile(new URL("lib/email.ts", root), "utf8"),
+    readFile(new URL(".env.example", root), "utf8"),
+  ]);
+  assert.match(html, /id="s-prof-parent-email-input"/);
+  assert.match(html, /resendEmailVerification\('parent'\)/);
+  assert.match(html, /id="s-prof-parent-result-email"/);
+  assert.match(schema, /parentEmailVerified/);
+  assert.match(schema, /emailVerifications/);
+  assert.match(attemptsRoute, /sendAttemptResultEmails/);
+  assert.match(verificationRoute, /sha256\(token\)/);
+  assert.match(verificationRoute, /parentEmailVerified: true/);
+  assert.match(emailLibrary, /https:\/\/api\.resend\.com\/emails/);
+  assert.match(emailLibrary, /!input\.user\.parentEmailVerified/);
+  assert.match(envExample, /^RESEND_API_KEY=/m);
+  assert.match(envExample, /^RESULT_EMAIL_FROM=/m);
+});
+
 test("ships the benchmark-informed responsive EduTest design system", async () => {
   const html = await readFile(new URL("public/app.html", root), "utf8");
   assert.match(html, /EDUTEST DESIGN SYSTEM 2026/);
