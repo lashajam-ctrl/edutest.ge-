@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-17T13:49:32.654Z",
+  "generatedAt": "2026-07-20T07:22:22.672Z",
   "intendedUse": "Production test-bank release gate for EduTest.ge",
   "grain": "One question record; viability also evaluated at one published-test definition",
   "officialReferences": [
@@ -39,9 +39,9 @@
     "questionsWithBlockingIssues": 190,
     "encodingCorruptedQuestions": 0,
     "duplicateOptionQuestions": 190,
-    "questionsMissingExplanation": 6572,
-    "questionsMissingExplicitOutcome": 6572,
-    "questionsMissingSkillTag": 6572,
+    "questionsMissingExplanation": 6564,
+    "questionsMissingExplicitOutcome": 6564,
+    "questionsMissingSkillTag": 6564,
     "trueFalseQuestions": 2156,
     "answerEchoQuestions": 20,
     "publishedSafeUniqueQuestions": 8382,
@@ -59,7 +59,9 @@
     "generatedInteractiveShare": 0.224,
     "subjectsBelowDouble": 0,
     "testsWithInsufficientSafeQuestions": 0,
-    "testsWithoutExactGradeVerification": 0
+    "testsWithoutExactGradeVerification": 0,
+    "primaryTestsWithInsufficientExactGradeQuestions": 0,
+    "testsOutsideGradeSubjectMap": 24
   },
   "severity": {
     "critical": 0,
@@ -67,9 +69,9 @@
     "medium": 281
   },
   "issueCounts": {
-    "missing_explanation": 6572,
-    "missing_explicit_outcome": 6572,
-    "missing_skill_tag": 6572,
+    "missing_explanation": 6564,
+    "missing_explicit_outcome": 6564,
+    "missing_skill_tag": 6564,
     "low_depth_binary_format": 2156,
     "duplicate_options": 190,
     "fragmented_or_too_short_stem": 894,
@@ -81,693 +83,792 @@
       "grade": 1,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "მათემატიკა",
       "grade": 2,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "მათემატიკა",
       "grade": 3,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "მათემატიკა",
       "grade": 4,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "მათემატიკა",
       "grade": 5,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "მათემატიკა",
       "grade": 6,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "მათემატიკა",
       "grade": 7,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "მათემატიკა",
       "grade": 8,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "მათემატიკა",
       "grade": 9,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "მათემატიკა",
       "grade": 10,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "მათემატიკა",
       "grade": 11,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "მათემატიკა",
       "grade": 12,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ქართული",
       "grade": 1,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ქართული",
       "grade": 2,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ქართული",
       "grade": 3,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ქართული",
       "grade": 4,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ქართული",
       "grade": 5,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ქართული",
       "grade": 6,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ქართული ლიტ.",
       "grade": 7,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ქართული ენა",
       "grade": 7,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ქართული ლიტ.",
       "grade": 8,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ქართული ენა",
       "grade": 8,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ქართული ლიტ.",
       "grade": 9,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ქართული ენა",
       "grade": 9,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ქართული ლიტ.",
       "grade": 10,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ქართული ენა",
       "grade": 10,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ქართული ლიტ.",
       "grade": 11,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ქართული ენა",
       "grade": 11,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ქართული ლიტ.",
       "grade": 12,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ქართული ენა",
       "grade": 12,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ინგლისური",
       "grade": 1,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ინგლისური",
       "grade": 2,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ინგლისური",
       "grade": 3,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ინგლისური",
       "grade": 4,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ინგლისური",
       "grade": 5,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ინგლისური",
       "grade": 6,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ინგლ. ლიტ.",
       "grade": 7,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ინგლ. გრამ.",
       "grade": 7,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ინგლ. ლიტ.",
       "grade": 8,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ინგლ. გრამ.",
       "grade": 8,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ინგლ. ლიტ.",
       "grade": 9,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ინგლ. გრამ.",
       "grade": 9,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ინგლ. ლიტ.",
       "grade": 10,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ინგლ. გრამ.",
       "grade": 10,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ინგლ. ლიტ.",
       "grade": 11,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ინგლ. გრამ.",
       "grade": 11,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ინგლ. ლიტ.",
       "grade": 12,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ინგლ. გრამ.",
       "grade": 12,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "რუსული",
       "grade": 5,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "რუს. გრამ.",
       "grade": 5,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "რუსული",
       "grade": 6,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "რუს. გრამ.",
       "grade": 6,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "რუსული",
       "grade": 7,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "რუს. გრამ.",
       "grade": 7,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "რუსული",
       "grade": 8,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "რუს. გრამ.",
       "grade": 8,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "რუსული",
       "grade": 9,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "რუს. გრამ.",
       "grade": 9,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "რუსული",
       "grade": 10,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "რუს. გრამ.",
       "grade": 10,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "რუსული",
       "grade": 11,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "რუს. გრამ.",
       "grade": 11,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "რუსული",
       "grade": 12,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "რუს. გრამ.",
       "grade": 12,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ბუნება",
       "grade": 1,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ბუნება",
       "grade": 2,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ბუნება",
       "grade": 3,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ბუნება",
       "grade": 4,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ბუნება",
       "grade": 5,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ბუნება",
       "grade": 6,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ისტორია",
       "grade": 7,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ისტორია",
       "grade": 8,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ისტორია",
       "grade": 9,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ისტორია",
       "grade": 10,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ისტორია",
       "grade": 11,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ისტორია",
       "grade": 12,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "გეოგრაფია",
       "grade": 7,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "გეოგრაფია",
       "grade": 8,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "გეოგრაფია",
       "grade": 9,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "გეოგრაფია",
       "grade": 10,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "გეოგრაფია",
       "grade": 11,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "გეოგრაფია",
       "grade": 12,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ბიოლოგია",
       "grade": 7,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ბიოლოგია",
       "grade": 8,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ბიოლოგია",
       "grade": 9,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ბიოლოგია",
       "grade": 10,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ბიოლოგია",
       "grade": 11,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ბიოლოგია",
       "grade": 12,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ქიმია",
       "grade": 8,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ქიმია",
       "grade": 9,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ქიმია",
       "grade": 10,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ქიმია",
       "grade": 11,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ქიმია",
       "grade": 12,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ფიზიკა",
       "grade": 7,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ფიზიკა",
       "grade": 8,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ფიზიკა",
       "grade": 9,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ფიზიკა",
       "grade": 10,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ფიზიკა",
       "grade": 11,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     },
     {
       "subject": "ფიზიკა",
       "grade": 12,
       "tests": 4,
       "testsWithoutExactGradeVerification": 0,
-      "testsWithInsufficientSafeQuestions": 0
+      "testsWithInsufficientSafeQuestions": 0,
+      "primaryTestsWithInsufficientExactGradeQuestions": 0
     }
   ],
   "inventoryBySubject": [

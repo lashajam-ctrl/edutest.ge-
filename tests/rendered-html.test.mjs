@@ -142,7 +142,12 @@ test("uses curriculum gating, composite history identities, and adaptive skills"
   assert.match(html, /function isCurriculumEligible\(test\)/);
   assert.match(html, /curriculum-alignment\.js/);
   assert.match(html, /CURRICULUM_ALIGNMENT\.infer/);
-  assert.match(html, /Number\(test\.grade\)<7/);
+  assert.match(html, /String\(test\.pool\|\|''\)\.startsWith\('hist-'\)&&grade<7/);
+  assert.match(html, /function subjectsForGrade\(grade\)/);
+  assert.match(html, /function isTestVisibleToStudent\(test,userGrade\)/);
+  assert.match(html, /Math\.abs\(tg-ug\)<=1/);
+  assert.match(html, /const exactGrade=gradeScoped\.filter/);
+  assert.match(html, /targetGrade<=4&&exactGrade\.length>=Number\(test\.count\|\|0\)/);
   assert.match(html, /_historyId:\(q\._sourcePoolKey\|\|poolKey\)\+'\|'\+q\.id/);
   assert.match(html, /function questionContentFingerprint/);
   assert.match(html, /function dedupeQuestionCandidates/);
