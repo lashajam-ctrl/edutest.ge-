@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 300" role="img" aria-labelledby="title desc">
+  <title id="title">ვაშლების დასათვლელი სურათი</title>
+  <desc id="desc">ღია ფონზე ორ რიგად განლაგებული შვიდი ვაშლი</desc>
+  <rect width="640" height="300" rx="28" fill="#fff7ed"/>
+  <g fill="#ef4444" stroke="#b91c1c" stroke-width="5">
+    <circle cx="105" cy="95" r="38"/><circle cx="245" cy="95" r="38"/><circle cx="385" cy="95" r="38"/><circle cx="525" cy="95" r="38"/>
+    <circle cx="175" cy="215" r="38"/><circle cx="315" cy="215" r="38"/><circle cx="455" cy="215" r="38"/>
+  </g>
+  <g stroke="#166534" stroke-width="9" stroke-linecap="round">
+    <path d="M105 55l8-20M245 55l8-20M385 55l8-20M525 55l8-20M175 175l8-20M315 175l8-20M455 175l8-20"/>
+  </g>
+</svg>
