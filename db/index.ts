@@ -30,6 +30,7 @@ export function ensureSchema() {
       env.DB.prepare("CREATE TABLE IF NOT EXISTS question_history (id text PRIMARY KEY NOT NULL, user_id text NOT NULL REFERENCES users(id) ON DELETE cascade, question_id text NOT NULL, pool_key text NOT NULL, answered_at integer NOT NULL)"),
       env.DB.prepare("CREATE UNIQUE INDEX IF NOT EXISTS question_history_user_question_unique ON question_history (user_id, question_id)"),
       env.DB.prepare("CREATE INDEX IF NOT EXISTS question_history_user_pool_idx ON question_history (user_id, pool_key)")
+      ,env.DB.prepare("CREATE TABLE IF NOT EXISTS rate_limits (key text PRIMARY KEY NOT NULL, window_started_at integer NOT NULL, request_count integer NOT NULL, updated_at integer NOT NULL)")
     ]).then(() => undefined).catch(error => { schemaReady = undefined; throw error; });
   }
   return schemaReady;

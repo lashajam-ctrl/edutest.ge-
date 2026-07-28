@@ -1,6 +1,6 @@
-import { desc, eq } from "drizzle-orm";
+import { and, desc, eq } from "drizzle-orm";
 import { getDb } from "@/db";
-import { attempts, users } from "@/db/schema";
+import { assignments, attempts, users } from "@/db/schema";
 import { getSessionUser } from "@/lib/auth";
 
 export async function GET(request: Request) {
@@ -8,11 +8,17 @@ export async function GET(request: Request) {
   if (!current) return Response.json({ error: "ავტორიზაცია აუცილებელია" }, { status: 401 });
   const url = new URL(request.url);
   const requestedUser = url.searchParams.get("userId");
-  const canReview = current.user.role === "teacher" || current.user.role === "admin";
   let userId = current.user.id;
-  if (requestedUser && canReview) {
-    const [reviewedUser] = await getDb().select({ id: users.id }).from(users).where(eq(users.email, requestedUser.trim().toLowerCase())).limit(1);
-    userId = reviewedUser?.id ?? requestedUser;
+  if (requestedUser) {
+    if (current.user.role !== "teacher" && current.user.role !== "admin") return Response.json({ error: "წვდომა აკრძალულია" }, { status: 403 });
+    const [reviewedUser] = await getDb().select({ id: users.id, role: users.role, grade: users.grade }).from(users).where(eq(users.email, requestedUser.trim().toLowerCase())).limit(1);
+    if (!reviewedUser || reviewedUser.role !== "student") return Response.json({ error: "მოსწავლე ვერ მოიძებნა" }, { status: 404 });
+    if (current.user.role === "teacher") {
+      const [scope] = await getDb().select({ id: assignments.id }).from(assignments)
+        .where(and(eq(assignments.createdBy, current.user.id), eq(assignments.grade, String(reviewedUser.grade ?? "")))).limit(1);
+      if (!scope) return Response.json({ error: "ამ მოსწავლის შედეგებზე წვდომა არ გაქვთ" }, { status: 403 });
+    }
+    userId = reviewedUser.id;
   }
   const rows = await getDb().select().from(attempts).where(eq(attempts.userId, userId)).orderBy(desc(attempts.submittedAt)).limit(250);
   return Response.json({ attempts: rows.map(row => ({ ...row, result: JSON.parse(row.answersJson) })) });

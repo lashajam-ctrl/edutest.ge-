@@ -445,6 +445,14 @@ input:focus,select:focus,textarea:focus{border-color:var(--brand);box-shadow:0 0
 @media(max-width:960px){.lp-hero-v2{grid-template-columns:1fr;gap:46px;padding-top:52px}.lp-copy{text-align:center}.lp-copy h1,.lp-copy>p{margin-left:auto;margin-right:auto}.lp-actions,.lp-proof-line{justify-content:center}.lp-visual{max-width:600px;margin:0 auto;width:100%}.lp-feature-grid{grid-template-columns:1fr 1fr}.lp-live{grid-template-columns:1fr}.lp-live-stats{flex-wrap:wrap}.lp-live-stat{flex:1}.lp-metrics{grid-template-columns:1fr 1fr}}
 @media(max-width:640px){#p-landing>nav{padding:10px 12px!important}.lp-shell{width:min(100% - 24px,1180px)}.lp-hero-v2{min-height:auto;padding:42px 0}.lp-copy h1{font-size:38px}.lp-copy>p{font-size:15px}.lp-visual{padding:0 3px}.lp-window{padding:12px;border-radius:21px;transform:none}.lp-focus-card{padding:17px}.lp-ring{width:64px;height:64px}.lp-float{display:none}.lp-metrics{gap:8px;padding-bottom:46px}.lp-metric{padding:15px}.lp-metric strong{font-size:21px}.lp-section{padding:56px 0}.lp-feature-grid,.lp-steps{grid-template-columns:1fr}.lp-feature{min-height:auto}.lp-live{padding:25px}.lp-live-stats{display:grid;grid-template-columns:1fr 1fr;width:100%}.lp-live-stat{min-width:0}.lp-beta{padding:50px 0}.lp-beta-card{padding:28px 23px;flex-direction:column;align-items:flex-start}.lp-beta-card .btn{width:100%}.lp-footer{flex-direction:column}.lp-footer a{margin:0 16px 0 0}.lang-switcher{display:none}.sidebar.open{width:270px}.main{padding:16px}.topbar{padding:0 14px}}
 </style>
+<style>
+  :focus-visible{outline:3px solid #2563eb!important;outline-offset:3px!important}
+  .ai-feedback-card{padding:18px;border:2px solid #7c3aed;background:linear-gradient(135deg,#faf5ff,#eff6ff)}
+  .ai-feedback-item{padding:12px;background:#fff;border:1px solid #ddd6fe;border-radius:10px;margin-top:10px}
+  .ai-feedback-steps{padding-left:22px;margin:8px 0;line-height:1.55}
+  .ai-feedback-state{font-size:12px;color:#5b21b6;margin-top:8px}
+  @media(max-width:360px){.btn{min-height:44px}.ai-feedback-card{padding:13px}.ai-feedback-item{padding:10px}}
+</style>
 </head>
 <body>
 <div id="global-spinner"></div>
@@ -547,6 +555,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--brand);box-shadow:0 0
           <div class="lp-live-stat"><strong id="lp-excellent">0</strong><span data-i18n="lp_excellent_label">Excellent შედეგი</span></div>
           <div class="lp-live-stat"><strong><span id="lp-average-score">0</span>%</strong><span data-i18n="lp_average_label">საშუალო შედეგი</span></div>
         </div>
+        <div id="lp-live-status" role="status" aria-live="polite" style="font-size:12px;color:#64748b;margin-top:8px">რეალური მონაცემები იტვირთება…</div>
       </div>
     </section>
 
@@ -691,7 +700,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--brand);box-shadow:0 0
       <div class="ni" onclick="sNav('s-leaderboard',this);renderLeaderboard()">🏆 ლიდერბორდი</div>
     </div>
     <div class="sfoot">
-      <div class="susr"><div class="sav" style="background:#2563eb" id="s-sidebar-av">მ</div><div style="overflow:hidden"><div style="color:#fff;font-size:12px;font-weight:500" id="s-sidebar-name">მარიამ კვირიკაშვილი</div><div style="color:rgba(255,255,255,.35);font-size:11px" id="s-sidebar-email">mariam@student.ge</div></div></div>
+      <div class="susr"><div class="sav" style="background:#2563eb" id="s-sidebar-av">•</div><div style="overflow:hidden"><div style="color:#fff;font-size:12px;font-weight:500" id="s-sidebar-name">—</div><div style="color:rgba(255,255,255,.35);font-size:11px" id="s-sidebar-email">—</div></div></div>
       <div class="ni" onclick="doLogout()" style="border-radius:var(--r)">🚪 <span data-i18n="logout">გასვლა</span></div>
     </div>
   </div>
@@ -804,15 +813,15 @@ input:focus,select:focus,textarea:focus{border-color:var(--brand);box-shadow:0 0
       <div id="s-profile" class="hidden fade" style="max-width:480px">
         <div class="card" style="padding:24px;text-align:center;margin-bottom:12px">
           <div style="width:64px;height:64px;background:#2563eb;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:22px;margin:0 auto 12px" id="s-prof-av">მ</div>
-          <h2 style="font-weight:700;font-size:16px" id="s-prof-name">მარიამ კვირიკაშვილი</h2>
-          <p style="color:var(--gray);font-size:12px;margin-bottom:10px" id="s-prof-email">mariam@student.ge</p>
+          <h2 style="font-weight:700;font-size:16px" id="s-prof-name">—</h2>
+          <p style="color:var(--gray);font-size:12px;margin-bottom:10px" id="s-prof-email">—</p>
           <div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap"><span class="badge b-blue" id="s-prof-grade">კლასი 3A</span><span class="badge b-green">Student</span><span class="badge b-amber" id="s-prof-premium" style="display:none">⭐ Premium</span></div>
           <div style="margin-top:12px" id="s-prof-premium-btn"><button class="btn btn-outline btn-sm" onclick="showPremiumModal()" style="border-color:#d97706;color:#d97706">⭐ გამოიწერე Premium</button></div>
         </div>
         <div class="card" style="padding:16px">
           <div style="font-weight:600;margin-bottom:12px" data-i18n="profile_settings">⚙️ პარამეტრები</div>
-          <div class="fg"><div class="label" data-i18n="name">სახელი</div><input id="s-prof-name-input" value="მარიამ კვირიკაშვილი"/></div>
-          <div class="fg"><div class="label" data-i18n="email">ელ-ფოსტა</div><input id="s-prof-email-input" value="mariam@student.ge" readonly aria-readonly="true"/></div>
+          <div class="fg"><div class="label" data-i18n="name">სახელი</div><input id="s-prof-name-input" value="" autocomplete="name"/></div>
+          <div class="fg"><div class="label" data-i18n="email">ელ-ფოსტა</div><input id="s-prof-email-input" value="" readonly aria-readonly="true" autocomplete="email"/></div>
           <div class="fg"><div class="label" data-i18n="grade">კლასი</div><select id="s-prof-grade-input"><option>1A</option><option>1B</option><option>2A</option><option>2B</option><option>3A</option><option>3B</option><option>4A</option><option>4B</option><option>5A</option><option>5B</option><option>6A</option><option>6B</option><option>7A</option><option>7B</option><option>8A</option><option>8B</option><option>9A</option><option>9B</option><option>10A</option><option>10B</option><option>11A</option><option>11B</option><option>12A</option><option>12B</option></select></div>
           <div class="fg"><div class="label" data-i18n="new_password">ახალი პაროლი</div><input type="password" data-i18n-placeholder="change_pass_ph" placeholder="შეცვალეთ პაროლი"/></div>
           <button class="btn btn-primary btn-sm" onclick="saveProfile()" data-i18n="save_profile">💾 შენახვა</button>
@@ -1106,7 +1115,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--brand);box-shadow:0 0
       <div class="ni" onclick="aNav('a-settings',this)">⚙️ პარამეტრები</div>
     </div>
     <div class="sfoot">
-      <div class="susr"><div class="sav" style="background:#7c3aed">ა</div><div><div style="color:#fff;font-size:12px;font-weight:500" data-i18n="adm_role_label">ადმინ</div><div style="color:rgba(255,255,255,.35);font-size:11px">admin@edutest.ge</div></div></div>
+      <div class="susr"><div class="sav" style="background:#7c3aed">ა</div><div><div style="color:#fff;font-size:12px;font-weight:500" data-i18n="adm_role_label">ადმინ</div><div style="color:rgba(255,255,255,.35);font-size:11px">დაცული სესია</div></div></div>
       <div class="ni" onclick="doLogout()" style="border-radius:var(--r)">🚪 <span data-i18n="logout">გასვლა</span></div>
     </div>
   </div>
@@ -1147,8 +1156,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--brand);box-shadow:0 0
       </div>
       <div id="a-pending" class="hidden fade" style="max-width:560px">
         <div style="font-weight:600;margin-bottom:14px" data-i18n="adm_awaiting">⏳ დამტკიცების მოლოდინში</div>
-        <div class="card" style="padding:18px;margin-bottom:10px"><div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px"><div><div style="font-weight:700;font-size:14px;margin-bottom:4px">ეკა ჯაფარიძე</div><div style="font-size:12px;color:var(--gray);margin-bottom:8px">eka@school.ge</div><div style="display:flex;gap:6px"><span class="chip">🏫 სკ. #5</span><span class="chip">📅 2026-06-30</span><span class="badge b-amber">მასწავლებელი</span></div></div><div style="display:flex;flex-direction:column;gap:6px"><button class="btn btn-green btn-sm">✓ დამტკიცება</button><button class="btn btn-danger btn-sm">✗ უარი</button></div></div></div>
-        <div class="card" style="padding:18px"><div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px"><div><div style="font-weight:700;font-size:14px;margin-bottom:4px">ზვიად ბეგიაშვილი</div><div style="font-size:12px;color:var(--gray);margin-bottom:8px">zviad@school.ge</div><div style="display:flex;gap:6px"><span class="chip">🏫 სკ. #12</span><span class="chip">📅 2026-06-29</span><span class="badge b-amber">მასწავლებელი</span></div></div><div style="display:flex;flex-direction:column;gap:6px"><button class="btn btn-green btn-sm">✓ დამტკიცება</button><button class="btn btn-danger btn-sm">✗ უარი</button></div></div></div>
+        <div class="card" style="padding:18px"><p style="color:var(--gray);font-size:13px">მონაცემები გამოჩნდება მხოლოდ ავტორიზებული ადმინისტრატორის დაცული მოთხოვნის შემდეგ.</p></div>
       </div>
       <div id="a-results" class="hidden fade">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
@@ -1179,7 +1187,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--brand);box-shadow:0 0
       <div id="a-settings" class="hidden fade" style="max-width:480px">
         <div class="card" style="padding:18px;margin-bottom:12px"><div style="font-weight:600;margin-bottom:14px">⚙️ პლატფორმის პარამეტრები</div>
           <div class="fg"><div class="label">პლატფ. სახელი</div><input value="EduTest.ge"/></div>
-          <div class="fg"><div class="label">კონტაქტ ელ-ფოსტა</div><input value="admin@edutest.ge"/></div>
+          <div class="fg"><div class="label">კონტაქტ ელ-ფოსტა</div><input value="" autocomplete="email"/></div>
           <div class="fg"><div class="label">JWT ვადა (დღე)</div><input type="number" value="7"/></div>
           <button class="btn btn-primary btn-sm">💾 შენახვა</button>
         </div>
@@ -1289,7 +1297,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--brand);box-shadow:0 0
         <div style="font-weight:700;font-size:16px;margin-bottom:16px">📥 სტუდენტების CSV იმპორტი</div>
         <div class="card" style="padding:18px;margin-bottom:12px;background:#f0fdf4;border:1px solid #86efac">
           <div style="font-weight:600;font-size:13px;margin-bottom:8px">📋 CSV ფორმატი:</div>
-          <code style="font-size:12px;color:#166534;display:block;line-height:1.8">email,name,grade,className<br>student@school.ge,გიორგი ბერიძე,7,7ა<br>student2@school.ge,ნინო გელაშვილი,8,8ბ</code>
+          <code style="font-size:12px;color:#166534;display:block;line-height:1.8">email,name,grade,className<br>learner@example.invalid,სატესტო მოსწავლე,7,7ა</code>
         </div>
         <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:14px">
           <label class="btn btn-outline" style="cursor:pointer;text-align:center">
@@ -1323,7 +1331,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--brand);box-shadow:0 0
             </label>
           </div>
           <div style="margin-top:12px;padding:10px;background:#fef3c7;border-radius:8px;font-size:12px;color:#92400e">
-            ⚠️ Email გაგზავნა საჭიროებს backend-ს (SMTP). დასაყენებლად დაუკავშირდი: admin@edutest.ge
+            ℹ️ წერილები იგზავნება მხოლოდ სერვერზე გამართული ელფოსტის სერვისით.
           </div>
           <button class="btn btn-primary btn-sm" style="margin-top:10px" onclick="saveNotifSettings()">💾 შენახვა</button>
         </div>
@@ -1337,7 +1345,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--brand);box-shadow:0 0
               <div style="font-size:12px;color:var(--gray)">ტესტები პირდაპირ Classroom-ში</div>
             </div>
           </div>
-          <button class="btn btn-outline btn-sm" onclick="alert('Google Classroom ინტეგრაცია საჭიროებს OAuth2 კონფიგურაციას. დეტალებისთვის: admin@edutest.ge')">🔗 კავშირის დაყენება</button>
+          <button class="btn btn-outline btn-sm" disabled aria-disabled="true" title="ინტეგრაცია ჯერ არ არის ჩართული">🔗 მალე დაემატება</button>
         </div>
 
         <!-- Microsoft Teams -->
@@ -1484,7 +1492,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--brand);box-shadow:0 0
     <div style="font-size:12px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:10px;margin-bottom:14px;color:#065f46">
       💡 <strong>1 საგნის შეძენა — <span id="prem-price-subject">9.99₾</span></strong> (ულიმიტო, ამ საგანში)
     </div>
-    <p style="font-size:11px;color:var(--gray)">📞 გამოწერისთვის: <strong>admin@edutest.ge</strong> ან <strong>+995 555 000 000</strong></p>
+    <p style="font-size:11px;color:var(--gray)">გადახდის ფუნქცია სატესტო ეტაპზე გამორთულია.</p>
     <p style="font-size:11px;color:var(--gray);margin-top:4px">ადმინისტრატორი გაააქტიურებს შენს ანგარიშზე</p>
   </div>
 </div>
@@ -12968,15 +12976,9 @@ ALL_TESTS.forEach(test=>{
 
 
 // ── User DB & State ───────────────────────────────────────────────────────────
-const ADMIN_EMAIL_HINT='admin@edutest.ge';
-
-// Admin JWT helper
-function adminAuthHeader(){const t=sessionStorage.getItem('admin_jwt');return t?{'Authorization':'Bearer '+t}:{};}
-function isAdminAuthenticated(){
-  const t=sessionStorage.getItem('admin_jwt');
-  if(!t)return false;
-  try{const p=JSON.parse(atob(t.split('.')[1]));return p.isAdmin&&p.exp*1000>Date.now();}catch{return false;}
-}
+// როლს ადგენს მხოლოდ სერვერის მიერ დაბრუნებული, HttpOnly-cookie-ით დაცული სესია.
+function adminAuthHeader(){return {};}
+function isAdminAuthenticated(){return !!(CUR_USER&&CUR_USER.role==='admin');}
 // მომხმარებლების წყარო არის დაცული სერვერული ბაზა; პაროლები კლიენტის კოდში არ ინახება.
 const DEFAULT_USERS=[];
 
@@ -13999,6 +14001,8 @@ function getTestQs(test){
 
 // ── Navigation ───────────────────────────────────────────────────────────────
 function go(p){
+  const roleRoutes={student:['student','parent'],teacher:['teacher'],admin:['admin']};
+  if(roleRoutes[p]&&(!CUR_USER||!roleRoutes[p].includes(CUR_USER.role))){p=CUR_USER?'landing':'login';}
   if(p!=='take-test'&&timerInt){clearInterval(timerInt);timerInt=null;}
   document.querySelectorAll('.page').forEach(x=>{x.classList.remove('active');});
   const el=document.getElementById('p-'+p);
@@ -14419,21 +14423,17 @@ function previewCSV(input){
     var rows=lines.slice(1);
     var preview=document.getElementById('a-csv-preview');
     if(!preview)return;
-    if(!rows.length){preview.innerHTML='<div style="color:red;font-size:13px">ფაილი ცარიელია</div>';return;}
-    var html='<div style="font-size:13px;margin-bottom:8px;font-weight:600">'+rows.length+' ჩანაწერი ნაპოვნია</div>';
-    html+='<div style="overflow:auto;max-height:200px;border:1px solid var(--border);border-radius:8px">';
-    html+='<table style="width:100%;border-collapse:collapse;font-size:12px">';
-    html+='<thead><tr style="background:var(--bg2)">';
-    header.split(',').forEach(function(h){html+='<th style="padding:6px 8px;text-align:left;border-bottom:1px solid var(--border)">'+h+'</th>';});
-    html+='</tr></thead><tbody>';
-    rows.slice(0,5).forEach(function(row){
-      html+='<tr>';
-      row.split(',').forEach(function(cell){html+='<td style="padding:5px 8px;border-bottom:1px solid var(--border)">'+cell+'</td>';});
-      html+='</tr>';
-    });
-    if(rows.length>5)html+='<tr><td colspan="10" style="padding:5px 8px;color:var(--gray);font-size:11px">... და კიდევ '+(rows.length-5)+' ჩანაწერი</td></tr>';
-    html+='</tbody></table></div>';
-    preview.innerHTML=html;
+    preview.replaceChildren();
+    if(!rows.length){var empty=document.createElement('div');empty.style.cssText='color:red;font-size:13px';empty.textContent='ფაილი ცარიელია';preview.appendChild(empty);return;}
+    var count=document.createElement('div');count.style.cssText='font-size:13px;margin-bottom:8px;font-weight:600';count.textContent=rows.length+' ჩანაწერი ნაპოვნია';preview.appendChild(count);
+    var wrap=document.createElement('div');wrap.style.cssText='overflow:auto;max-height:200px;border:1px solid var(--border);border-radius:8px';
+    var table=document.createElement('table');table.style.cssText='width:100%;border-collapse:collapse;font-size:12px';
+    var thead=document.createElement('thead'),headRow=document.createElement('tr');headRow.style.background='var(--bg2)';
+    header.split(',').forEach(function(value){var th=document.createElement('th');th.style.cssText='padding:6px 8px;text-align:left;border-bottom:1px solid var(--border)';th.textContent=value;headRow.appendChild(th);});
+    thead.appendChild(headRow);table.appendChild(thead);
+    var tbody=document.createElement('tbody');
+    rows.slice(0,5).forEach(function(row){var tr=document.createElement('tr');row.split(',').forEach(function(value){var td=document.createElement('td');td.style.cssText='padding:5px 8px;border-bottom:1px solid var(--border)';td.textContent=value;tr.appendChild(td);});tbody.appendChild(tr);});
+    table.appendChild(tbody);wrap.appendChild(table);preview.appendChild(wrap);
     var btn=document.getElementById('a-csv-import-btn');
     if(btn)btn.style.display='block';
     window._csvRows=rows;
@@ -14442,26 +14442,7 @@ function previewCSV(input){
   reader.readAsText(file);
 }
 function importCSV(){
-  if(!window._csvRows||!window._csvRows.length){alert('ჯერ ფაილი ავირჩიოთ');return;}
-  var headers=window._csvHeader.split(',').map(function(h){return h.trim().toLowerCase();});
-  var imported=0,errors=0;
-  window._csvRows.forEach(function(row){
-    var cells=row.split(',').map(function(c){return c.trim();});
-    var obj={};
-    headers.forEach(function(h,i){obj[h]=cells[i]||'';});
-    if(!obj.email){errors++;return;}
-    var existing=USER_DB.find(function(u){return u.email===obj.email;});
-    if(existing){errors++;return;}
-    USER_DB.push({email:obj.email,name:obj.name||obj.email,role:'student',grade:parseInt(obj.grade)||7,class:obj.classname||obj['class']||'',coins:0,xp:0,badges:[],paid:false,active:true,pw:'changeme123'});
-    imported++;
-  });
-  saveDB();
-  logAuditEvent('CSV_IMPORT','Imported '+imported+' students, '+errors+' skipped');
-  alert('შედეგი: '+imported+' სტუდენტი დარეგისტრირდა, '+errors+' გამოტოვებული (დუბლიკატი ან ცარიელი)');
-  document.getElementById('a-csv-preview').innerHTML='';
-  var btn=document.getElementById('a-csv-import-btn');if(btn)btn.style.display='none';
-  var fi=document.getElementById('a-csv-file');if(fi)fi.value='';
-  window._csvRows=[];
+  alert('CSV იმპორტი სატესტო ეტაპზე გამორთულია. ანგარიშები იქმნება მხოლოდ დაცული სერვერული რეგისტრაციით.');
 }
 
 // ── Enterprise panel ───────────────────────────────────────────────────────
@@ -15175,7 +15156,7 @@ function setRole(r){
     else{b.style.borderColor='var(--border)';b.style.background='#fff';b.style.color='var(--gray)';}
   });
   const em=document.getElementById('l-email');const ps=document.getElementById('l-pass');
-  if(em&&em.value.endsWith('@student.ge'))em.value='';if(ps&&ps.value==='student123')ps.value='';
+  if(em)em.value='';if(ps)ps.value='';
   const rf=document.getElementById('reg-fields');if(rf)rf.classList.toggle('hidden',loginMode!=='reg'||r!=='student');
   const tn=document.getElementById('teacher-note');if(tn)tn.classList.toggle('hidden',r!=='teacher'||loginMode!=='reg');
 }
@@ -15241,30 +15222,29 @@ function goBackToTests(){
 function renderAdminUsers(){
   const tbody=document.getElementById('a-users-tbody');
   if(!tbody)return;
+  tbody.replaceChildren();
   const defaults=DEFAULT_USERS.map(d=>d.email);
-  tbody.innerHTML=USER_DB.map(u=>{
+  USER_DB.forEach(u=>{
     const results=SESSION_RESULTS.filter(r=>r.userId===u.email);
     const isDefault=defaults.includes(u.email);
     const avgPct=results.length?Math.round(results.reduce((s,r)=>s+r.pct,0)/results.length):null;
     const roleLabel={'student':'მოსწავლე','teacher':'მასწავლებელი','admin':'Admin'}[u.role]||u.role;
     const roleColor={'student':'b-blue','teacher':'b-green','admin':'b-red'}[u.role]||'b-blue';
-    return `<tr>
-      <td style="font-weight:500">${u.name}</td>
-      <td style="font-size:11px;color:var(--gray)">${u.email}</td>
-      <td><span class="badge ${roleColor}">${roleLabel}</span></td>
-      <td>${u.grade||'—'}</td>
-      <td>${results.length}${avgPct!==null?' <span style="color:var(--gray);font-size:11px">('+avgPct+'%)</span>':''}</td>
-      <td>
-        ${u.role==='student'?`<button class="btn btn-sm ${u.premium?'btn-amber':'btn-outline'}" onclick="grantPremium('${u.email}',${!u.premium})" style="${u.premium?'background:#fef3c7;border-color:#d97706;color:#92400e':''}">
-          ${u.premium?'⭐ Premium':'○ Free'}</button>`:'—'}
-      </td>
-      <td style="display:flex;gap:4px;flex-wrap:wrap">
-        ${results.length?`<button class="btn btn-danger btn-sm" onclick="adminDeleteResults('${u.email}')">🗑 შედეგ.</button>`:''}
-        <button class="btn btn-outline btn-sm" onclick="adminEditUser('${u.email}')" title="რედაქტირება" style="padding:3px 8px">✎</button>
-        ${!isDefault?`<button class="btn btn-danger btn-sm" onclick="adminDeleteUser('${u.email}')">✕</button>`:''}
-      </td>
-    </tr>`;
-  }).join('');
+    const tr=document.createElement('tr');
+    function cell(value,style){const td=document.createElement('td');if(style)td.style.cssText=style;td.textContent=String(value??'');tr.appendChild(td);return td;}
+    cell(u.name||'—','font-weight:500');cell(u.email||'—','font-size:11px;color:var(--gray)');
+    const roleCell=cell('');const badge=document.createElement('span');badge.className='badge '+roleColor;badge.textContent=roleLabel;roleCell.appendChild(badge);
+    cell(u.grade||'—');
+    cell(String(results.length)+(avgPct!==null?' ('+avgPct+'%)':''));
+    const premiumCell=cell('');
+    if(u.role==='student'){const premium=document.createElement('button');premium.type='button';premium.className='btn btn-sm '+(u.premium?'btn-amber':'btn-outline');premium.textContent=u.premium?'⭐ Premium':'○ Free';premium.addEventListener('click',()=>grantPremium(u.email,!u.premium));premiumCell.appendChild(premium);}else premiumCell.textContent='—';
+    const actions=cell('','display:flex;gap:4px;flex-wrap:wrap');
+    function action(label,className,handler,aria){const button=document.createElement('button');button.type='button';button.className=className;button.textContent=label;button.setAttribute('aria-label',aria);button.addEventListener('click',handler);actions.appendChild(button);}
+    if(results.length)action('🗑 შედეგ.','btn btn-danger btn-sm',()=>adminDeleteResults(u.email),'შედეგების წაშლა');
+    action('✎','btn btn-outline btn-sm',()=>adminEditUser(u.email),'მომხმარებლის რედაქტირება');
+    if(!isDefault)action('✕','btn btn-danger btn-sm',()=>adminDeleteUser(u.email),'მომხმარებლის წაშლა');
+    tbody.appendChild(tr);
+  });
 }
 async function doLogout(){if(timerInt)clearInterval(timerInt);timerInt=null;try{await fetch('/api/auth/logout',{method:'POST'});}catch(e){}CUR_USER=null;go('landing');}
 
@@ -16297,15 +16277,22 @@ async function loadPublicStats(){
   });
   const questions=document.getElementById('lp-question-count');if(questions){questions.textContent=safeQuestionKeys.size.toLocaleString('ka-GE');questions.title='გამოქვეყნებული, სტრუქტურულად უსაფრთხო და შინაარსობრივად უნიკალური კითხვები';}
   const tests=document.getElementById('lp-test-count');if(tests)tests.textContent=ALL_TESTS.filter(isCurriculumEligible).length.toLocaleString('ka-GE');
+  const liveStatus=document.getElementById('lp-live-status');
+  if(liveStatus){liveStatus.textContent='რეალური მონაცემები იტვირთება…';liveStatus.setAttribute('aria-busy','true');}
   try{
     const response=await fetch('/api/public/stats');
     if(!response.ok)throw new Error();
     const data=await response.json();
     const values={"lp-today-tests":data.todayTests,"lp-excellent":data.excellentBadges,"lp-average-score":data.averageScore};
-    Object.entries(values).forEach(([id,value])=>{const el=document.getElementById(id);if(el)el.dataset.target=String(Number(value)||0);});
-    runLpCounters();
+    Object.entries(values).forEach(([id,value])=>{
+      const numeric=Math.max(0,Number(value)||0),el=document.getElementById(id),legacy=document.getElementById(id+'-legacy');
+      if(el)el.textContent=numeric.toLocaleString('ka-GE');
+      if(legacy)legacy.textContent=numeric.toLocaleString('ka-GE');
+    });
+    if(liveStatus){const empty=Number(data.todayTests||0)===0;liveStatus.textContent=empty?'დღეს ჯერ დასრულებული ტესტი არ დაფიქსირებულა.':'განახლებულია რეალური აქტივობიდან.';liveStatus.removeAttribute('aria-busy');}
   }catch(e){
-    document.querySelectorAll('.lp-counter').forEach(el=>{el.textContent='—';});
+    ['lp-today-tests','lp-excellent','lp-average-score','lp-today-tests-legacy','lp-excellent-legacy','lp-average-score-legacy'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent='—';});
+    if(liveStatus){liveStatus.textContent='რეალური მაჩვენებლები დროებით მიუწვდომელია. გვერდის განახლებით სცადე ხელახლა.';liveStatus.removeAttribute('aria-busy');}
   }
 }
 // Run when landing page is visible
@@ -16418,41 +16405,58 @@ function answerTextForFeedback(q,value,correct){
   return Number.isInteger(index)?String(qTransOpt(q,index)):'—';
 }
 
-function renderRealAiFeedback(feedback){
-  const items=Array.isArray(feedback.items)?feedback.items:[];
-  return '<div class="card" style="padding:20px;border:2px solid #7c3aed;background:linear-gradient(135deg,#faf5ff,#eff6ff)">'
-    +'<div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:14px"><div style="font-size:28px">✨</div><div><div style="font-weight:800;font-size:15px;color:#5b21b6">AI დამხმარის განმარტება</div>'
-    +'<div style="font-size:12px;color:#64748b;margin-top:3px">'+esc(feedback.summary||'შეცდომებზე მორგებული განმარტება')+'</div></div></div>'
-    +items.map(function(item){return '<div style="padding:12px;background:#fff;border:1px solid #ddd6fe;border-radius:10px;margin-bottom:9px">'
-      +'<div style="font-size:12px;font-weight:700;color:#6d28d9;margin-bottom:5px">რა აგერია</div><div style="font-size:12px;margin-bottom:8px">'+esc(item.misconception||'')+'</div>'
-      +'<div style="font-size:12px;font-weight:700;color:#166534;margin-bottom:5px">მარტივი ახსნა</div><div style="font-size:12px;margin-bottom:8px">'+esc(item.explanation||'')+'</div>'
-      +'<div style="font-size:12px;color:#1d4ed8"><strong>შემდეგი ნაბიჯი:</strong> '+esc(item.nextStep||'')+'</div></div>';}).join('')
-    +'<div style="font-size:10px;color:#64748b;margin-top:10px">AI-ის განმარტება ეყრდნობა პლატფორმის დამოწმებულ სწორ პასუხს. გაუგებრობის შემთხვევაში გადაამოწმე მასწავლებელთან.</div></div>';
+function aiText(parent,label,value){
+  const heading=document.createElement('div');heading.style.cssText='font-size:12px;font-weight:700;color:#5b21b6;margin-top:8px';heading.textContent=label;parent.appendChild(heading);
+  const body=document.createElement('div');body.style.cssText='font-size:12px;line-height:1.55';body.textContent=String(value||'');parent.appendChild(body);
 }
-
-async function loadAiFeedback(r){
-  const wrong=r.reviewed.filter(q=>!q.ok&&q.type!=='short_answer').slice(0,8);
-  if(!wrong.length)return;
-  const aiEl=document.getElementById('res-ai-analysis');if(!aiEl)return;
-  const baseHtml=aiEl.innerHTML;
-  aiEl.insertAdjacentHTML('beforeend','<div id="ai-feedback-loading" style="font-size:12px;color:#6d28d9;text-align:center;padding:9px">პერსონალური განმარტება მზადდება…</div>');
+function saveAiPractice(feedback,test){
+  const p=feedback&&feedback.practiceQuestion;
+  if(!p||!p.text||!Array.isArray(p.options)||p.options.length!==4||!Number.isInteger(p.correctIndex))return;
+  const pool=test.pool||'general';
+  const generated={id:'ai_'+String(feedback.sourceQuestionId||'q').replace(/[^a-zA-Z0-9_-]/g,'').slice(0,40)+'_'+Date.now(),text:String(p.text),type:'multiple_choice',opts:p.options.map(String),correct:p.correctIndex,pts:1,explain:String(p.explanation||''),skill:String(p.skill||'general'),aiGenerated:true};
+  AI_REMEDIATION_BANK[pool]=[generated,...(AI_REMEDIATION_BANK[pool]||[])].slice(0,40);saveAiRemediation();
+}
+function showAiExplanation(target,feedback,isFallback){
+  target.replaceChildren();
+  aiText(target,isFallback?'პლატფორმის უსაფრთხო განმარტება':'რა აგერია',feedback.misconception);
+  const title=document.createElement('div');title.style.cssText='font-size:12px;font-weight:700;color:#166534;margin-top:8px';title.textContent='ნაბიჯ-ნაბიჯ';target.appendChild(title);
+  const list=document.createElement('ol');list.className='ai-feedback-steps';
+  (Array.isArray(feedback.explanationSteps)?feedback.explanationSteps:[]).forEach(step=>{const li=document.createElement('li');li.textContent=String(step);list.appendChild(li);});target.appendChild(list);
+  aiText(target,'რატომ არის სწორი',feedback.correctReason);
+  aiText(target,'შემდეგი ნაბიჯი',feedback.nextStep);
+  const note=document.createElement('div');note.style.cssText='font-size:10px;color:#64748b;margin-top:10px';note.textContent=isFallback?'AI დროებით მიუწვდომელია; ნაჩვენებია პლატფორმის არადესტრუქციული განმარტება.':'AI განმარტება გადაამოწმე მასწავლებელთან, თუ რამე გაუგებარია.';target.appendChild(note);
+}
+async function requestAiExplanation(button,state,q,test){
+  button.disabled=true;button.textContent='მზადდება…';state.replaceChildren();
   try{
-    const test=ALL_TESTS.find(t=>t.id===r.testId)||{};
-    const payload=wrong.map(q=>({id:q.id,text:qTransText(q),userAnswer:answerTextForFeedback(q,q.ua,false),correctAnswer:answerTextForFeedback(q,q.correct,true),explanation:q.explain||'',skill:q._skill||q.skill||'general',outcome:q._outcome||q.outcome||null}));
-    const response=await fetch('/api/ai/feedback',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({subject:test.subject||r.subject,grade:test.grade||r.grade,items:payload})});
-    if(!response.ok)throw new Error('feedback unavailable');
-    const data=await response.json();
-    document.getElementById('ai-feedback-loading')?.remove();
-    if(!data.enabled){aiEl.innerHTML=baseHtml;return;}
-    const pool=test.pool||'general';
-    const generated=(data.feedback.items||[]).map((item,i)=>{
-      const p=item.practiceQuestion||{};
-      if(!p.text||!Array.isArray(p.options)||p.options.length!==4||!Number.isInteger(p.correctIndex))return null;
-      return{id:'ai_'+String(item.sourceQuestionId||i).replace(/[^a-zA-Z0-9_-]/g,'').slice(0,40)+'_'+Date.now()+'_'+i,text:p.text,type:'multiple_choice',opts:p.options,correct:p.correctIndex,pts:1,explain:p.explanation||'',skill:p.skill||'general',aiGenerated:true};
-    }).filter(Boolean);
-    if(generated.length){AI_REMEDIATION_BANK[pool]=[...generated,...(AI_REMEDIATION_BANK[pool]||[])].slice(0,40);saveAiRemediation();}
-    aiEl.innerHTML=renderRealAiFeedback(data.feedback);
-  }catch(e){document.getElementById('ai-feedback-loading')?.remove();aiEl.innerHTML=baseHtml;}
+    const item={id:String(q.id||''),text:qTransText(q),userAnswer:answerTextForFeedback(q,q.ua,false),correctAnswer:answerTextForFeedback(q,q.correct,true),explanation:q.explain||'',skill:q._skill||q.skill||'general',outcome:q._outcome||q.outcome||null};
+    const response=await fetch('/api/ai/feedback',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify({subject:test.subject||'საგანი',item})});
+    const data=await response.json().catch(()=>({}));
+    if(data.enabled&&data.feedback){showAiExplanation(state,data.feedback,false);saveAiPractice(data.feedback,test);button.textContent='განმარტება მზადაა';return;}
+    if(data.fallback){showAiExplanation(state,data.fallback,true);button.textContent='ხელახლა ცდა';button.disabled=false;return;}
+    throw new Error(data.error||'AI ახსნა ვერ ჩაიტვირთა');
+  }catch(error){
+    const msg=document.createElement('div');msg.className='ai-feedback-state';msg.setAttribute('role','alert');msg.textContent='ახსნა დროებით ვერ ჩაიტვირთა. სცადე ხელახლა.';state.appendChild(msg);
+    button.textContent='ხელახლა ცდა';button.disabled=false;
+  }
+}
+function renderAiFeedbackPanel(r){
+  const aiEl=document.getElementById('res-ai-analysis');if(!aiEl)return;
+  aiEl.replaceChildren();
+  const wrong=(Array.isArray(r.reviewed)?r.reviewed:[]).filter(q=>!q.ok&&q.type!=='short_answer').slice(0,8);
+  if(!wrong.length)return;
+  const test=ALL_TESTS.find(t=>t.id===r.testId)||{};
+  const card=document.createElement('section');card.className='card ai-feedback-card';card.setAttribute('aria-labelledby','ai-feedback-title');
+  const title=document.createElement('h3');title.id='ai-feedback-title';title.style.cssText='font-weight:800;font-size:15px;color:#5b21b6';title.textContent='✨ AI დამხმარის განმარტება';card.appendChild(title);
+  const intro=document.createElement('p');intro.style.cssText='font-size:12px;color:#64748b;margin-top:4px';intro.textContent='აირჩიე არასწორი კითხვა და მოითხოვე კლასზე მორგებული ნაბიჯ-ნაბიჯ ახსნა.';card.appendChild(intro);
+  wrong.forEach((q,index)=>{
+    const item=document.createElement('div');item.className='ai-feedback-item';
+    const label=document.createElement('div');label.style.cssText='font-size:12px;font-weight:700;margin-bottom:8px';label.textContent=(index+1)+'. '+qTransText(q);item.appendChild(label);
+    const button=document.createElement('button');button.type='button';button.className='btn btn-outline btn-sm';button.textContent='ამიხსენი შეცდომა';button.setAttribute('aria-label',(index+1)+'-ე კითხვის შეცდომის ახსნა');
+    const state=document.createElement('div');state.className='ai-feedback-state';state.setAttribute('aria-live','polite');
+    button.addEventListener('click',()=>requestAiExplanation(button,state,q,test));item.appendChild(button);item.appendChild(state);card.appendChild(item);
+  });
+  aiEl.appendChild(card);
 }
 
 function buildHabitNudgeHTML(){
@@ -16480,9 +16484,7 @@ renderResultsPage=function(r){
   _origRenderResultsPage(r);
   var email=CUR_USER?CUR_USER.email:'';
   var hist=email?recordMistakes(email,r.reviewed):{};
-  var aiEl=document.getElementById('res-ai-analysis');
-  if(aiEl) aiEl.innerHTML=buildAiAnalysisHTML(r,hist);
-  loadAiFeedback(r);
+  renderAiFeedbackPanel(r);
   var habitEl=document.getElementById('res-habit-nudge');
   if(habitEl) habitEl.innerHTML=buildHabitNudgeHTML();
   // Adaptive study plan

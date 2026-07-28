@@ -60,3 +60,10 @@ export const questionHistory = sqliteTable("question_history", {
 }, (table) => [
   uniqueIndex("question_history_user_question_unique").on(table.userId, table.questionId),
 ]);
+
+export const rateLimits = sqliteTable("rate_limits", {
+  key: text("key").primaryKey(),
+  windowStartedAt: integer("window_started_at").notNull(),
+  requestCount: integer("request_count").notNull(),
+  updatedAt: integer("updated_at").notNull(),
+});

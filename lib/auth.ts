@@ -48,7 +48,7 @@ export async function createSession(userId: string, request?: Request) {
   const now = new Date();
   const expires = new Date(now.getTime() + 1000 * 60 * 60 * 24 * 14);
   await getDb().insert(sessions).values({ id: crypto.randomUUID(), userId, tokenHash: await sha256(token), createdAt: now, expiresAt: expires });
-  const secure = !request || new URL(request.url).protocol === "https:" ? "; Secure" : "";
+  const secure = !request || new URL(appOrigin(request)).protocol === "https:" ? "; Secure" : "";
   return { token, cookie: `${cookieName}=${token}; Path=/; HttpOnly${secure}; SameSite=Lax; Max-Age=1209600` };
 }
 
@@ -63,7 +63,7 @@ export async function getSessionUser(request: Request) {
 export async function destroySession(request: Request) {
   const current = await getSessionUser(request);
   if (current) await getDb().delete(sessions).where(eq(sessions.id, current.sessionId));
-  const secure = new URL(request.url).protocol === "https:" ? "; Secure" : "";
+  const secure = new URL(appOrigin(request)).protocol === "https:" ? "; Secure" : "";
   return `${cookieName}=; Path=/; HttpOnly${secure}; SameSite=Lax; Max-Age=0`;
 }
 

@@ -7,7 +7,11 @@ export async function GET(request: Request) {
   const current = await getSessionUser(request);
   if (!current) return Response.json({ error: "ავტორიზაცია აუცილებელია" }, { status: 401 });
   const rows = await getDb().select().from(assignments).orderBy(desc(assignments.createdAt)).limit(250);
-  const visible = current.user.role === "student" ? rows.filter(row => String(row.grade) === String(current.user.grade)) : rows;
+  const visible = current.user.role === "student"
+    ? rows.filter(row => String(row.grade) === String(current.user.grade))
+    : current.user.role === "teacher"
+      ? rows.filter(row => row.createdBy === current.user.id)
+      : current.user.role === "admin" ? rows : [];
   return Response.json({ assignments: visible });
 }
 

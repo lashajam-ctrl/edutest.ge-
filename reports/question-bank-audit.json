@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-07-27T07:57:50.356Z",
+  "generatedAt": "2026-07-28T13:55:52.808Z",
   "summary": {
     "pools": 363,
     "tests": 420,
     "questions": 12435,
     "uniqueQuestionIds": 12285,
-    "visualQuestions": 1258,
+    "visualQuestions": 1294,
     "questionsWithExplanation": 5863,
     "questionsWithSkillTag": 5863,
     "questionsWithOutcomeTag": 5863,
@@ -18,15 +18,15 @@
     "blockedCurriculumStageQuestions": 316,
     "blockedUnpublishedPoolQuestions": 1693,
     "generatedExpansionQuestions": 5831,
-    "generatedExpansionVisualQuestions": 1226
+    "generatedExpansionVisualQuestions": 1262
   },
   "typeCounts": {
-    "multiple_choice": 8866,
-    "true_false": 2224,
-    "calc": 553,
-    "match": 121,
+    "multiple_choice": 8891,
+    "true_false": 2231,
+    "calc": 537,
+    "match": 117,
     "fill": 574,
-    "order": 97
+    "order": 85
   },
   "testsBySubjectGrade": {
     "მათემატიკა · 1": {
@@ -1817,7 +1817,7 @@
       ]
     }
   ],
-  "duplicateTextCount": 3428,
+  "duplicateTextCount": 3444,
   "duplicateTextExamples": [
     {
       "text": "сов. вид \"читать\"?",
@@ -2543,14 +2543,14 @@
       "physics": 1086
     },
     "domainCounts": {
-      "georgian.language_system": 238,
+      "georgian.language_system": 234,
       "foreign_language.language_system": 428,
-      "math.numbers_operations": 1331,
-      "math.geometry_space": 139,
-      "math.patterns_algebra": 44,
-      "math.data_probability": 263,
+      "math.numbers_operations": 1307,
+      "math.geometry_space": 151,
+      "math.patterns_algebra": 60,
+      "math.data_probability": 259,
       "math.measurement": 15,
-      "georgian.reading": 1441,
+      "georgian.reading": 1445,
       "georgian.literature_culture": 163,
       "foreign_language.reading": 2351,
       "foreign_language.culture": 338,
