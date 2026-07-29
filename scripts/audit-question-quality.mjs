@@ -6,22 +6,33 @@ const html = fs.readFileSync(new URL("public/app.html", root), "utf8");
 const qualityOverrides = fs.readFileSync(new URL("public/question-quality-overrides.js", root), "utf8");
 const questionPolicySource = fs.readFileSync(new URL("public/question-policy.js", root), "utf8");
 const expansionSource = fs.readFileSync(new URL("public/expanded-question-bank.js", root), "utf8");
+const seniorMathSource = fs.readFileSync(new URL("public/senior-math-bank.js", root), "utf8");
+const languageBlueprintSource = fs.readFileSync(new URL("public/language-blueprint-bank.js", root), "utf8");
 const helpersStart = html.indexOf("const mc=");
 const translationsStart = html.indexOf("const Q_TRANS=");
 const testsStart = html.indexOf("const ALL_TESTS=");
 const testsEnd = html.indexOf("];", testsStart) + 2;
+const catalogBootstrapEnd = html.indexOf("// Student catalog follows", testsEnd);
 if ([helpersStart, translationsStart, testsStart].some(index => index < 0) || testsEnd < 2) {
   throw new Error("Question bank markers were not found");
 }
 
 const appendedPools = html.slice(translationsStart, testsStart)
   .match(/Q_POOL\[['"][^'\"]+['"]\]\s*=\s*\[[\s\S]*?\n\];/g) ?? [];
-const source = `${html.slice(helpersStart, translationsStart)}\n${appendedPools.join("\n")}\n${qualityOverrides}\n${questionPolicySource}\n${expansionSource}\n${html.slice(testsStart, testsEnd)}\nglobalThis.__quality={Q_POOL,ALL_TESTS,expansionStats:globalThis.EDUTEST_EXPANSION_STATS,questionPolicy:globalThis.QUESTION_POLICY};`;
+const source = `${html.slice(helpersStart, translationsStart)}\n${appendedPools.join("\n")}\n${qualityOverrides}\n${questionPolicySource}\n${expansionSource}\n${seniorMathSource}\n${languageBlueprintSource}\n${html.slice(testsStart, testsEnd)}\n${html.slice(testsEnd, catalogBootstrapEnd)}\nglobalThis.__quality={Q_POOL,ALL_TESTS,expansionStats:globalThis.EDUTEST_EXPANSION_STATS,seniorMathStats:globalThis.EDUTEST_SENIOR_MATH_STATS,languageStats:globalThis.EDUTEST_LANGUAGE_STATS,languageBlueprints:globalThis.EDUTEST_LANGUAGE_BLUEPRINTS,questionPolicy:globalThis.QUESTION_POLICY};`;
 const sandbox = {};
 vm.runInNewContext(source, sandbox, { timeout: 30_000 });
-const { Q_POOL, ALL_TESTS, expansionStats, questionPolicy } = sandbox.__quality;
+const { Q_POOL, ALL_TESTS, expansionStats, seniorMathStats, languageStats, languageBlueprints, questionPolicy } = sandbox.__quality;
 
 const OFFICIAL_REFERENCES = [
+  {
+    title: "VII–XII კლასების გრიფირებული სახელმძღვანელოები — ქართული ენა და ლიტერატურა",
+    url: "https://www.mes.gov.ge/content.php?id=9422",
+  },
+  {
+    title: "გრიფირებული სახელმძღვანელოების კატალოგი",
+    url: "https://www.mes.gov.ge/content.php?id=8480&lang=geo",
+  },
   {
     title: "მესამე თაობის ეროვნული სასწავლო გეგმა",
     url: "https://mes.gov.ge/content.php?id=12552",
@@ -57,7 +68,7 @@ const normalize = value => String(value ?? "")
 
 const basePool = value => {
   const pool = String(value ?? "");
-  const match = pool.match(/^(.*-(?:12|34|56|78|910|1112))-\d+$/);
+  const match = pool.match(/^(.*-(?:g\d+|12|34|56|78|910|1112))-\d+$/);
   return match ? match[1] : pool;
 };
 
@@ -188,7 +199,7 @@ for (const question of questionRows) {
 
 const questionByPool = Object.groupBy(questionRows, row => row.poolKey);
 const SUBJECT_FAMILY = {
-  "ქართული ლიტ.": "ქართული", "ქართული ენა": "ქართული",
+  "ქართული ლიტ.": "ქართული ენა და ლიტერატურა", "ქართული ენა": "ქართული ენა და ლიტერატურა",
   "ინგლ. ლიტ.": "ინგლისური", "ინგლ. გრამ.": "ინგლისური",
   "რუს. გრამ.": "რუსული",
 };
@@ -197,10 +208,11 @@ const subjectsForGrade = grade => {
   const g = Number(grade) || 1;
   if (g <= 4) return ["მათემატიკა", "ქართული", "ინგლისური", "ბუნება"];
   if (g <= 6) return ["მათემატიკა", "ქართული", "ინგლისური", "რუსული", "ბუნება"];
-  if (g === 7) return ["მათემატიკა", "ქართული", "ინგლისური", "რუსული", "ისტორია", "გეოგრაფია", "ბიოლოგია", "ფიზიკა"];
-  return ["მათემატიკა", "ქართული", "ინგლისური", "რუსული", "ისტორია", "გეოგრაფია", "ბიოლოგია", "ქიმია", "ფიზიკა"];
+  if (g === 7) return ["ალგებრა", "გეომეტრია", "ქართული ენა და ლიტერატურა", "ინგლისური", "რუსული", "ისტორია", "გეოგრაფია", "ბიოლოგია", "ფიზიკა"];
+  return ["ალგებრა", "გეომეტრია", "ქართული ენა და ლიტერატურა", "ინგლისური", "რუსული", "ისტორია", "გეოგრაფია", "ბიოლოგია", "ქიმია", "ფიზიკა"];
 };
 const isCurriculumEligibleTest = test => Boolean(test)
+  && !test.catalogHidden
   && !(String(test.pool ?? "").startsWith("hist-") && Number(test.grade) < 7)
   && subjectsForGrade(test.grade).includes(subjectFamily(test.subject));
 const contentKey = question => {
@@ -260,7 +272,8 @@ const testChecks = eligibleTests.map(test => {
       : test.semester === 2 ? legacy.slice(Math.ceil(legacy.length / 2)) : legacy;
     const taggedSemester = [1, 2].includes(Number(test.semester))
       ? tagged.filter(question => Number(question.semester) === Number(test.semester)) : tagged;
-    return [...legacySemester, ...taggedSemester];
+    return [...legacySemester, ...taggedSemester]
+      .filter(question => !test.topicGroup || question.topicGroup === test.topicGroup);
   }).filter(question => {
     const exactGrade = Number(question.grade);
     if (Number.isFinite(exactGrade)) return exactGrade === Number(test.grade);
@@ -336,6 +349,27 @@ const inventoryBySubject = Object.entries(Object.groupBy(publishedTests, test =>
 }).sort((a, b) => a.subject.localeCompare(b.subject, "ka"));
 const subjectsBelowDouble = inventoryBySubject.filter(row => row.safeUniqueQuestions < row.baselineSafeUniqueQuestions * 2);
 
+const languageGeneratedRows = questionRows.filter(question => String(question.id || "").startsWith("lb26-"));
+const prematureLanguageTopicRows = languageGeneratedRows.filter(question => Number(question.grade) < Number(question.topicIntroducedGrade || 1));
+const languageCoverage = Object.values(Object.groupBy(languageGeneratedRows, question => `${question.languageCode}|${question.grade}`)).map(rows => ({
+  language: rows[0].languageCode,
+  grade: Number(rows[0].grade),
+  questions: rows.length,
+  components: Object.fromEntries(Object.entries(Object.groupBy(rows, question => question.component)).map(([key, values]) => [key, values.length])),
+  blueprintBuckets: [...new Set(rows.map(question => question.blueprintBucket))].sort(),
+}));
+const languageBlueprintViolations = ALL_TESTS.filter(test => test.contentBlueprint && !test.catalogHidden).flatMap(test => {
+  const expected = test.blueprintAllocation || {};
+  const total = Object.values(expected).reduce((sum, value) => sum + Number(value || 0), 0);
+  const weightTotal = Object.values(test.contentBlueprint).reduce((sum, value) => sum + Number(value || 0), 0);
+  const maxDeviation = Math.max(0, ...Object.entries(expected).map(([bucket, count]) => Math.abs(Number(count) - Number(test.count) * Number(test.contentBlueprint[bucket]) / weightTotal)));
+  const versions = Object.entries(questionByPool).filter(([poolKey]) => basePool(poolKey) === test.pool);
+  const available = versions.flatMap(([, rows]) => rows).filter(question => Number(question.grade) === Number(test.grade)
+    && Number(question.semester) === Number(test.semester) && (!test.topicGroup || question.topicGroup === test.topicGroup));
+  const availableCounts = Object.fromEntries(Object.entries(Object.groupBy(available, question => question.blueprintBucket)).map(([key, rows]) => [key, rows.length]));
+  const shortages = Object.entries(expected).filter(([bucket, count]) => Number(availableCounts[bucket] || 0) < Number(count)).map(([bucket]) => bucket);
+  return total !== Number(test.count) || maxDeviation > 1.000001 || shortages.length ? [{id:test.id,total,requested:test.count,maxDeviation,shortages}] : [];
+});
 const generatedAt = new Date().toISOString();
 const report = {
   generatedAt,
@@ -360,6 +394,12 @@ const report = {
     answerEchoQuestions: issueCounts.answer_echoes_prompt ?? 0,
     publishedSafeUniqueQuestions,
     generatedExpansionQuestions: expansionStats?.generated ?? 0,
+    seniorMathQuestions: seniorMathStats?.questions ?? 0,
+    seniorMathTests: seniorMathStats?.tests ?? 0,
+    languageBlueprintQuestions: languageStats?.questions ?? 0,
+    languageBlueprintTests: languageStats?.tests ?? 0,
+    prematureLanguageTopics: prematureLanguageTopicRows.length,
+    languageBlueprintViolations: languageBlueprintViolations.length,
     generatedExpansionVisualQuestions: expansionStats?.visual ?? 0,
     generatedTypeCounts,
     generatedVisualShare: publishedGeneratedSafeRows.length ? Number((generatedVisualCount / publishedGeneratedSafeRows.length).toFixed(3)) : 0,
@@ -374,6 +414,10 @@ const report = {
     generatedGradePolicyViolations: generatedGradePolicyViolations.length,
     primarySemanticFamilyShortfalls: primarySemanticFamilyShortfalls.length,
   },
+  languageBlueprintConfig: languageBlueprints,
+  languageCoverage,
+  prematureLanguageTopicRows,
+  languageBlueprintViolations,
   severity: {
     critical: testChecks.filter(row => row.risks.includes("insufficient_safe_questions")).length,
     high: (issueCounts.encoding_corruption ?? 0) + (issueCounts.duplicate_options ?? 0),
@@ -465,4 +509,6 @@ if (report.summary.testsWithInsufficientSafeQuestions
   || report.summary.generatedPlaceholderOptions
   || report.summary.generatedIncompletePrompts
   || report.summary.generatedGradePolicyViolations
-  || report.summary.primarySemanticFamilyShortfalls) process.exitCode = 1;
+  || report.summary.primarySemanticFamilyShortfalls
+  || report.summary.prematureLanguageTopics
+  || report.summary.languageBlueprintViolations) process.exitCode = 1;

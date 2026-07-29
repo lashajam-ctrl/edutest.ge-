@@ -59,7 +59,7 @@
     if (/\b(?:undefined|null|nan)\b/iu.test(text)) return false;
 
     const normalized = normalize(text);
-    const instruction = /(?:ჩაწერე|ჩასვი|შეავსე|დაასრულე|დაალაგე|დააკავშირე|მონიშნე|იპოვე|გამოთვალე|ამოხსენი|აირჩიე|რომელი|რამდენი|რა არის|რას ნიშნავს|სწორია თუ მცდარია|complete|choose|find|calculate|order|match|which|what|how many|составьте|соотнесите|вставьте|заполните|выберите|найдите|расположите)/iu;
+    const instruction = /(?:ჩაწერე|ჩასვი|შეავსე|დაასრულე|დაალაგე|დააკავშირე|მონიშნე|იპოვე|გამოთვალე|ამოხსენი|აირჩიე|რომელი|რამდენი|რა არის|რას ნიშნავს|სწორია თუ მცდარია|complete|choose|find|calculate|order|match|which|what|how many|read|write|answer|составьте|соотнесите|вставьте|заполните|выберите|найдите|расположите|прочитайте|запишите|ответьте)/iu;
 
     if (question?.type === 'fill' || question?.type === 'order' || question?.type === 'match') {
       if (!instruction.test(normalized)) return false;
@@ -90,7 +90,7 @@
     if (Number.isFinite(Number(question?.grade)) && Number(question.grade) !== grade) return false;
     if (!hasCompleteInstruction(question)) return false;
 
-    if (subject.includes('math')) {
+    if (subject.includes('math') || subject.includes('alg') || subject.includes('geom')) {
       const values = allNumericValues(question);
       const maxValue = values.length ? Math.max(...values) : 0;
       const advanced = [
@@ -110,7 +110,7 @@
       if (grade === 3 && containsAny(text, advanced.slice(0, 1))) return false;
     }
 
-    if (subject.includes('geo') || subject === 'ქართული') {
+    if (subject.includes('geo') || subject.includes('kab') || subject === 'ქართული' || subject === 'ქართული ენა და ლიტერატურა') {
       if (grade <= 2 && containsAny(text, [
         /რომელი დასკვნა|გამომდინარეობს|თვითკონტროლ|საკუთარ მუშაობას აკონტროლებს/u,
         /შემასმენელ|სინონიმ|ანტონიმ|მეტაფორ|ეპითეტ/u,
@@ -118,7 +118,7 @@
       ])) return false;
     }
 
-    if (subject.includes('eng') || subject === 'ინგლისური') {
+    if (subject.includes('eng') || subject.includes('enb') || subject === 'ინგლისური') {
       if (grade <= 2 && question?.bilingual !== true && !question?.visual && !question?.media) return false;
       if (grade === 1 && containsAny(text, [
         /past tense|present continuous|before sharing|which tense|why did/u

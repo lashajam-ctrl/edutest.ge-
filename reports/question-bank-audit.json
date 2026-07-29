@@ -1,31 +1,4669 @@
 {
-  "generatedAt": "2026-07-28T13:55:52.808Z",
+  "generatedAt": "2026-07-29T07:51:49.133Z",
   "summary": {
-    "pools": 363,
-    "tests": 420,
-    "questions": 12435,
-    "uniqueQuestionIds": 12285,
-    "visualQuestions": 1294,
-    "questionsWithExplanation": 5863,
-    "questionsWithSkillTag": 5863,
-    "questionsWithOutcomeTag": 5863,
-    "questionsMappedToCurriculumDomain": 12435,
+    "pools": 515,
+    "tests": 648,
+    "questions": 19731,
+    "uniqueQuestionIds": 19581,
+    "visualQuestions": 2790,
+    "questionsWithExplanation": 13159,
+    "questionsWithSkillTag": 13159,
+    "questionsWithOutcomeTag": 13159,
+    "questionsMappedToCurriculumDomain": 19731,
     "approvedDomainAlignments": 0,
     "candidateDomainAlignments": 4563,
     "candidateExplicitAlignments": 32,
-    "candidateGeneratedAlignments": 5831,
+    "candidateGeneratedAlignments": 13127,
     "alignmentsRequiringReview": 0,
     "blockedCurriculumStageQuestions": 316,
     "blockedUnpublishedPoolQuestions": 1693,
     "generatedExpansionQuestions": 5831,
-    "generatedExpansionVisualQuestions": 1262
+    "generatedExpansionVisualQuestions": 1262,
+    "seniorMathQuestions": 2304,
+    "seniorMathTests": 72,
+    "languageBlueprintQuestions": 4992,
+    "languageBlueprintTests": 156,
+    "prematureLanguageTopics": 0,
+    "languageBlueprintViolations": 0
   },
+  "languageBlueprintConfig": {
+    "ka": {
+      "7": {
+        "language.grammar": 10,
+        "language.orthography": 5,
+        "language.punctuation": 5,
+        "language.syntax": 5,
+        "language.vocabulary": 5,
+        "language.editing": 5,
+        "language.reading": 5,
+        "literature.comprehension": 20,
+        "literature.genre": 8,
+        "literature.devices": 10,
+        "literature.character": 8,
+        "literature.theme": 8,
+        "literature.author_era": 6
+      },
+      "8": {
+        "language.grammar": 9,
+        "language.orthography": 5,
+        "language.punctuation": 5,
+        "language.syntax": 6,
+        "language.vocabulary": 5,
+        "language.editing": 5,
+        "language.reading": 5,
+        "literature.comprehension": 19,
+        "literature.genre": 8,
+        "literature.devices": 10,
+        "literature.character": 8,
+        "literature.theme": 8,
+        "literature.author_era": 7
+      },
+      "9": {
+        "language.grammar": 8,
+        "language.orthography": 5,
+        "language.punctuation": 6,
+        "language.syntax": 7,
+        "language.vocabulary": 4,
+        "language.editing": 5,
+        "language.reading": 5,
+        "literature.comprehension": 18,
+        "literature.genre": 8,
+        "literature.devices": 10,
+        "literature.character": 8,
+        "literature.theme": 8,
+        "literature.author_era": 8
+      },
+      "10": {
+        "language.grammar": 7,
+        "language.orthography": 5,
+        "language.punctuation": 6,
+        "language.syntax": 8,
+        "language.vocabulary": 4,
+        "language.editing": 5,
+        "language.reading": 5,
+        "literature.comprehension": 17,
+        "literature.genre": 8,
+        "literature.devices": 10,
+        "literature.character": 8,
+        "literature.theme": 8,
+        "literature.author_era": 9
+      },
+      "11": {
+        "language.grammar": 6,
+        "language.orthography": 5,
+        "language.punctuation": 6,
+        "language.syntax": 9,
+        "language.vocabulary": 4,
+        "language.editing": 5,
+        "language.reading": 5,
+        "literature.comprehension": 16,
+        "literature.genre": 8,
+        "literature.devices": 10,
+        "literature.character": 8,
+        "literature.theme": 8,
+        "literature.author_era": 10
+      },
+      "12": {
+        "language.grammar": 5,
+        "language.orthography": 5,
+        "language.punctuation": 6,
+        "language.syntax": 10,
+        "language.vocabulary": 4,
+        "language.editing": 5,
+        "language.reading": 5,
+        "literature.comprehension": 15,
+        "literature.genre": 8,
+        "literature.devices": 10,
+        "literature.character": 8,
+        "literature.theme": 8,
+        "literature.author_era": 11
+      }
+    },
+    "en": {
+      "1": {
+        "grammar": 10,
+        "vocabulary": 45,
+        "reading": 25,
+        "use_of_language": 20
+      },
+      "2": {
+        "grammar": 15,
+        "vocabulary": 40,
+        "reading": 25,
+        "use_of_language": 20
+      },
+      "3": {
+        "grammar": 20,
+        "vocabulary": 35,
+        "reading": 25,
+        "use_of_language": 20
+      },
+      "4": {
+        "grammar": 25,
+        "vocabulary": 30,
+        "reading": 25,
+        "use_of_language": 20
+      },
+      "5": {
+        "grammar": 30,
+        "vocabulary": 25,
+        "reading": 25,
+        "use_of_language": 20
+      },
+      "6": {
+        "grammar": 33,
+        "vocabulary": 22,
+        "reading": 25,
+        "use_of_language": 20
+      },
+      "7": {
+        "grammar": 35,
+        "vocabulary": 20,
+        "reading": 25,
+        "use_of_language": 20
+      },
+      "8": {
+        "grammar": 37,
+        "vocabulary": 18,
+        "reading": 25,
+        "use_of_language": 20
+      },
+      "9": {
+        "grammar": 39,
+        "vocabulary": 16,
+        "reading": 25,
+        "use_of_language": 20
+      },
+      "10": {
+        "grammar": 40,
+        "vocabulary": 15,
+        "reading": 25,
+        "use_of_language": 20
+      },
+      "11": {
+        "grammar": 40,
+        "vocabulary": 14,
+        "reading": 26,
+        "use_of_language": 20
+      },
+      "12": {
+        "grammar": 40,
+        "vocabulary": 12,
+        "reading": 28,
+        "use_of_language": 20
+      }
+    },
+    "ru": {
+      "5": {
+        "grammar": 20,
+        "vocabulary": 35,
+        "reading": 25,
+        "use_of_language": 20
+      },
+      "6": {
+        "grammar": 25,
+        "vocabulary": 30,
+        "reading": 25,
+        "use_of_language": 20
+      },
+      "7": {
+        "grammar": 30,
+        "vocabulary": 25,
+        "reading": 25,
+        "use_of_language": 20
+      },
+      "8": {
+        "grammar": 33,
+        "vocabulary": 22,
+        "reading": 25,
+        "use_of_language": 20
+      },
+      "9": {
+        "grammar": 35,
+        "vocabulary": 20,
+        "reading": 25,
+        "use_of_language": 20
+      },
+      "10": {
+        "grammar": 36,
+        "vocabulary": 18,
+        "reading": 26,
+        "use_of_language": 20
+      },
+      "11": {
+        "grammar": 37,
+        "vocabulary": 16,
+        "reading": 27,
+        "use_of_language": 20
+      },
+      "12": {
+        "grammar": 37,
+        "vocabulary": 15,
+        "reading": 28,
+        "use_of_language": 20
+      }
+    }
+  },
+  "languageCoverage": [
+    {
+      "language": "en",
+      "grade": 1,
+      "questions": 192,
+      "components": {
+        "vocabulary": 88,
+        "use_of_language": 40,
+        "reading": 48,
+        "grammar": 16
+      },
+      "blueprintBuckets": {
+        "vocabulary": 88,
+        "use_of_language": 40,
+        "reading": 48,
+        "grammar": 16
+      }
+    },
+    {
+      "language": "en",
+      "grade": 2,
+      "questions": 192,
+      "components": {
+        "use_of_language": 40,
+        "reading": 48,
+        "vocabulary": 72,
+        "grammar": 32
+      },
+      "blueprintBuckets": {
+        "use_of_language": 40,
+        "reading": 48,
+        "vocabulary": 72,
+        "grammar": 32
+      }
+    },
+    {
+      "language": "en",
+      "grade": 3,
+      "questions": 192,
+      "components": {
+        "reading": 48,
+        "vocabulary": 64,
+        "use_of_language": 40,
+        "grammar": 40
+      },
+      "blueprintBuckets": {
+        "reading": 48,
+        "vocabulary": 64,
+        "use_of_language": 40,
+        "grammar": 40
+      }
+    },
+    {
+      "language": "en",
+      "grade": 4,
+      "questions": 192,
+      "components": {
+        "vocabulary": 56,
+        "use_of_language": 40,
+        "reading": 48,
+        "grammar": 48
+      },
+      "blueprintBuckets": {
+        "vocabulary": 56,
+        "use_of_language": 40,
+        "reading": 48,
+        "grammar": 48
+      }
+    },
+    {
+      "language": "en",
+      "grade": 5,
+      "questions": 192,
+      "components": {
+        "grammar": 56,
+        "reading": 48,
+        "vocabulary": 48,
+        "use_of_language": 40
+      },
+      "blueprintBuckets": {
+        "grammar": 56,
+        "reading": 48,
+        "vocabulary": 48,
+        "use_of_language": 40
+      }
+    },
+    {
+      "language": "en",
+      "grade": 6,
+      "questions": 192,
+      "components": {
+        "reading": 48,
+        "vocabulary": 40,
+        "use_of_language": 40,
+        "grammar": 64
+      },
+      "blueprintBuckets": {
+        "reading": 48,
+        "vocabulary": 40,
+        "use_of_language": 40,
+        "grammar": 64
+      }
+    },
+    {
+      "language": "en",
+      "grade": 7,
+      "questions": 192,
+      "components": {
+        "vocabulary": 40,
+        "grammar": 64,
+        "reading": 48,
+        "use_of_language": 40
+      },
+      "blueprintBuckets": {
+        "vocabulary": 40,
+        "grammar": 64,
+        "reading": 48,
+        "use_of_language": 40
+      }
+    },
+    {
+      "language": "en",
+      "grade": 8,
+      "questions": 192,
+      "components": {
+        "grammar": 72,
+        "reading": 48,
+        "vocabulary": 32,
+        "use_of_language": 40
+      },
+      "blueprintBuckets": {
+        "grammar": 72,
+        "reading": 48,
+        "vocabulary": 32,
+        "use_of_language": 40
+      }
+    },
+    {
+      "language": "en",
+      "grade": 9,
+      "questions": 192,
+      "components": {
+        "vocabulary": 32,
+        "grammar": 72,
+        "reading": 48,
+        "use_of_language": 40
+      },
+      "blueprintBuckets": {
+        "vocabulary": 32,
+        "grammar": 72,
+        "reading": 48,
+        "use_of_language": 40
+      }
+    },
+    {
+      "language": "en",
+      "grade": 10,
+      "questions": 192,
+      "components": {
+        "vocabulary": 32,
+        "grammar": 72,
+        "reading": 48,
+        "use_of_language": 40
+      },
+      "blueprintBuckets": {
+        "vocabulary": 32,
+        "grammar": 72,
+        "reading": 48,
+        "use_of_language": 40
+      }
+    },
+    {
+      "language": "en",
+      "grade": 11,
+      "questions": 192,
+      "components": {
+        "grammar": 80,
+        "vocabulary": 24,
+        "reading": 48,
+        "use_of_language": 40
+      },
+      "blueprintBuckets": {
+        "grammar": 80,
+        "vocabulary": 24,
+        "reading": 48,
+        "use_of_language": 40
+      }
+    },
+    {
+      "language": "en",
+      "grade": 12,
+      "questions": 192,
+      "components": {
+        "grammar": 72,
+        "vocabulary": 24,
+        "reading": 56,
+        "use_of_language": 40
+      },
+      "blueprintBuckets": {
+        "grammar": 72,
+        "vocabulary": 24,
+        "reading": 56,
+        "use_of_language": 40
+      }
+    },
+    {
+      "language": "ka",
+      "grade": 7,
+      "questions": 192,
+      "components": {
+        "literature": 112,
+        "language": 80
+      },
+      "blueprintBuckets": {
+        "literature.comprehension": 40,
+        "language.punctuation": 9,
+        "literature.genre": 16,
+        "language.syntax": 10,
+        "literature.devices": 16,
+        "language.vocabulary": 10,
+        "literature.character": 16,
+        "language.editing": 10,
+        "literature.theme": 16,
+        "language.grammar": 24,
+        "language.reading": 9,
+        "literature.author_era": 8,
+        "language.orthography": 8
+      }
+    },
+    {
+      "language": "ka",
+      "grade": 8,
+      "questions": 192,
+      "components": {
+        "language": 80,
+        "literature": 112
+      },
+      "blueprintBuckets": {
+        "language.punctuation": 8,
+        "literature.genre": 16,
+        "literature.comprehension": 32,
+        "language.syntax": 16,
+        "literature.devices": 16,
+        "language.vocabulary": 11,
+        "literature.character": 16,
+        "language.editing": 10,
+        "literature.theme": 16,
+        "language.grammar": 17,
+        "language.reading": 10,
+        "literature.author_era": 16,
+        "language.orthography": 8
+      }
+    },
+    {
+      "language": "ka",
+      "grade": 9,
+      "questions": 192,
+      "components": {
+        "literature": 112,
+        "language": 80
+      },
+      "blueprintBuckets": {
+        "literature.comprehension": 32,
+        "language.punctuation": 16,
+        "literature.genre": 16,
+        "language.syntax": 16,
+        "literature.devices": 16,
+        "language.vocabulary": 8,
+        "literature.character": 16,
+        "language.editing": 8,
+        "literature.theme": 16,
+        "language.grammar": 16,
+        "language.reading": 8,
+        "literature.author_era": 16,
+        "language.orthography": 8
+      }
+    },
+    {
+      "language": "ka",
+      "grade": 10,
+      "questions": 192,
+      "components": {
+        "language": 80,
+        "literature": 112
+      },
+      "blueprintBuckets": {
+        "language.orthography": 8,
+        "literature.comprehension": 32,
+        "language.punctuation": 16,
+        "literature.genre": 16,
+        "language.syntax": 16,
+        "literature.devices": 16,
+        "language.vocabulary": 8,
+        "literature.character": 16,
+        "language.editing": 8,
+        "literature.theme": 16,
+        "language.grammar": 16,
+        "language.reading": 8,
+        "literature.author_era": 16
+      }
+    },
+    {
+      "language": "ka",
+      "grade": 11,
+      "questions": 192,
+      "components": {
+        "language": 80,
+        "literature": 112
+      },
+      "blueprintBuckets": {
+        "language.grammar": 16,
+        "literature.author_era": 16,
+        "language.orthography": 8,
+        "literature.comprehension": 32,
+        "language.punctuation": 16,
+        "literature.genre": 16,
+        "language.syntax": 16,
+        "literature.devices": 16,
+        "language.vocabulary": 8,
+        "literature.character": 16,
+        "language.editing": 8,
+        "literature.theme": 16,
+        "language.reading": 8
+      }
+    },
+    {
+      "language": "ka",
+      "grade": 12,
+      "questions": 192,
+      "components": {
+        "literature": 112,
+        "language": 80
+      },
+      "blueprintBuckets": {
+        "literature.author_era": 24,
+        "language.orthography": 8,
+        "literature.comprehension": 24,
+        "language.punctuation": 16,
+        "literature.genre": 16,
+        "language.syntax": 24,
+        "literature.devices": 16,
+        "language.vocabulary": 8,
+        "literature.character": 16,
+        "language.editing": 8,
+        "literature.theme": 16,
+        "language.grammar": 8,
+        "language.reading": 8
+      }
+    },
+    {
+      "language": "ru",
+      "grade": 5,
+      "questions": 192,
+      "components": {
+        "reading": 48,
+        "vocabulary": 64,
+        "use_of_language": 40,
+        "grammar": 40
+      },
+      "blueprintBuckets": {
+        "reading": 48,
+        "vocabulary": 64,
+        "use_of_language": 40,
+        "grammar": 40
+      }
+    },
+    {
+      "language": "ru",
+      "grade": 6,
+      "questions": 192,
+      "components": {
+        "reading": 48,
+        "vocabulary": 56,
+        "use_of_language": 40,
+        "grammar": 48
+      },
+      "blueprintBuckets": {
+        "reading": 48,
+        "vocabulary": 56,
+        "use_of_language": 40,
+        "grammar": 48
+      }
+    },
+    {
+      "language": "ru",
+      "grade": 7,
+      "questions": 192,
+      "components": {
+        "vocabulary": 48,
+        "grammar": 56,
+        "reading": 48,
+        "use_of_language": 40
+      },
+      "blueprintBuckets": {
+        "vocabulary": 48,
+        "grammar": 56,
+        "reading": 48,
+        "use_of_language": 40
+      }
+    },
+    {
+      "language": "ru",
+      "grade": 8,
+      "questions": 192,
+      "components": {
+        "grammar": 64,
+        "reading": 48,
+        "vocabulary": 40,
+        "use_of_language": 40
+      },
+      "blueprintBuckets": {
+        "grammar": 64,
+        "reading": 48,
+        "vocabulary": 40,
+        "use_of_language": 40
+      }
+    },
+    {
+      "language": "ru",
+      "grade": 9,
+      "questions": 192,
+      "components": {
+        "vocabulary": 40,
+        "grammar": 64,
+        "reading": 48,
+        "use_of_language": 40
+      },
+      "blueprintBuckets": {
+        "vocabulary": 40,
+        "grammar": 64,
+        "reading": 48,
+        "use_of_language": 40
+      }
+    },
+    {
+      "language": "ru",
+      "grade": 10,
+      "questions": 192,
+      "components": {
+        "vocabulary": 32,
+        "grammar": 72,
+        "reading": 48,
+        "use_of_language": 40
+      },
+      "blueprintBuckets": {
+        "vocabulary": 32,
+        "grammar": 72,
+        "reading": 48,
+        "use_of_language": 40
+      }
+    },
+    {
+      "language": "ru",
+      "grade": 11,
+      "questions": 192,
+      "components": {
+        "grammar": 72,
+        "vocabulary": 32,
+        "reading": 48,
+        "use_of_language": 40
+      },
+      "blueprintBuckets": {
+        "grammar": 72,
+        "vocabulary": 32,
+        "reading": 48,
+        "use_of_language": 40
+      }
+    },
+    {
+      "language": "ru",
+      "grade": 12,
+      "questions": 192,
+      "components": {
+        "grammar": 72,
+        "vocabulary": 24,
+        "reading": 56,
+        "use_of_language": 40
+      },
+      "blueprintBuckets": {
+        "grammar": 72,
+        "vocabulary": 24,
+        "reading": 56,
+        "use_of_language": 40
+      }
+    }
+  ],
+  "languageBlueprintChecks": [
+    {
+      "id": "kab-g7-s1-u1",
+      "grade": 7,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.6,
+      "shortages": [],
+      "expected": {
+        "language.grammar": 1,
+        "language.orthography": 1,
+        "language.punctuation": 1,
+        "language.syntax": 1,
+        "language.vocabulary": 0,
+        "language.editing": 0,
+        "language.reading": 0,
+        "literature.comprehension": 2,
+        "literature.genre": 1,
+        "literature.devices": 1,
+        "literature.character": 1,
+        "literature.theme": 1,
+        "literature.author_era": 0
+      },
+      "availableByBucket": {
+        "literature.comprehension": 20,
+        "language.punctuation": 5,
+        "literature.genre": 8,
+        "language.syntax": 5,
+        "literature.devices": 8,
+        "language.vocabulary": 5,
+        "literature.character": 8,
+        "language.editing": 5,
+        "literature.theme": 8,
+        "language.grammar": 12,
+        "language.reading": 4,
+        "literature.author_era": 4,
+        "language.orthography": 4
+      }
+    },
+    {
+      "id": "kab-g7-s1-u2",
+      "grade": 7,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.6,
+      "shortages": [],
+      "expected": {
+        "language.grammar": 1,
+        "language.orthography": 1,
+        "language.punctuation": 1,
+        "language.syntax": 1,
+        "language.vocabulary": 0,
+        "language.editing": 0,
+        "language.reading": 0,
+        "literature.comprehension": 2,
+        "literature.genre": 1,
+        "literature.devices": 1,
+        "literature.character": 1,
+        "literature.theme": 1,
+        "literature.author_era": 0
+      },
+      "availableByBucket": {
+        "literature.comprehension": 20,
+        "language.punctuation": 5,
+        "literature.genre": 8,
+        "language.syntax": 5,
+        "literature.devices": 8,
+        "language.vocabulary": 5,
+        "literature.character": 8,
+        "language.editing": 5,
+        "literature.theme": 8,
+        "language.grammar": 12,
+        "language.reading": 4,
+        "literature.author_era": 4,
+        "language.orthography": 4
+      }
+    },
+    {
+      "id": "kab-g7-s1-sum",
+      "grade": 7,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0.6000000000000001,
+      "shortages": [],
+      "expected": {
+        "language.grammar": 2,
+        "language.orthography": 1,
+        "language.punctuation": 1,
+        "language.syntax": 1,
+        "language.vocabulary": 1,
+        "language.editing": 1,
+        "language.reading": 1,
+        "literature.comprehension": 4,
+        "literature.genre": 1,
+        "literature.devices": 2,
+        "literature.character": 2,
+        "literature.theme": 2,
+        "literature.author_era": 1
+      },
+      "availableByBucket": {
+        "literature.comprehension": 20,
+        "language.punctuation": 5,
+        "literature.genre": 8,
+        "language.syntax": 5,
+        "literature.devices": 8,
+        "language.vocabulary": 5,
+        "literature.character": 8,
+        "language.editing": 5,
+        "literature.theme": 8,
+        "language.grammar": 12,
+        "language.reading": 4,
+        "literature.author_era": 4,
+        "language.orthography": 4
+      }
+    },
+    {
+      "id": "kab-g7-s2-u1",
+      "grade": 7,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.6,
+      "shortages": [],
+      "expected": {
+        "language.grammar": 1,
+        "language.orthography": 0,
+        "language.punctuation": 1,
+        "language.syntax": 1,
+        "language.vocabulary": 1,
+        "language.editing": 0,
+        "language.reading": 0,
+        "literature.comprehension": 2,
+        "literature.genre": 1,
+        "literature.devices": 1,
+        "literature.character": 1,
+        "literature.theme": 1,
+        "literature.author_era": 0
+      },
+      "availableByBucket": {
+        "language.punctuation": 4,
+        "literature.genre": 8,
+        "literature.comprehension": 20,
+        "language.syntax": 5,
+        "literature.devices": 8,
+        "language.vocabulary": 5,
+        "literature.character": 8,
+        "language.editing": 5,
+        "literature.theme": 8,
+        "language.grammar": 12,
+        "language.reading": 5,
+        "literature.author_era": 4,
+        "language.orthography": 4
+      }
+    },
+    {
+      "id": "kab-g7-s2-u2",
+      "grade": 7,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.6,
+      "shortages": [],
+      "expected": {
+        "language.grammar": 1,
+        "language.orthography": 0,
+        "language.punctuation": 1,
+        "language.syntax": 1,
+        "language.vocabulary": 1,
+        "language.editing": 0,
+        "language.reading": 0,
+        "literature.comprehension": 2,
+        "literature.genre": 1,
+        "literature.devices": 1,
+        "literature.character": 1,
+        "literature.theme": 1,
+        "literature.author_era": 0
+      },
+      "availableByBucket": {
+        "language.punctuation": 4,
+        "literature.genre": 8,
+        "literature.comprehension": 20,
+        "language.syntax": 5,
+        "literature.devices": 8,
+        "language.vocabulary": 5,
+        "literature.character": 8,
+        "language.editing": 5,
+        "literature.theme": 8,
+        "language.grammar": 12,
+        "language.reading": 5,
+        "literature.author_era": 4,
+        "language.orthography": 4
+      }
+    },
+    {
+      "id": "kab-g7-s2-sum",
+      "grade": 7,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0.6000000000000001,
+      "shortages": [],
+      "expected": {
+        "language.grammar": 2,
+        "language.orthography": 1,
+        "language.punctuation": 1,
+        "language.syntax": 1,
+        "language.vocabulary": 1,
+        "language.editing": 1,
+        "language.reading": 1,
+        "literature.comprehension": 4,
+        "literature.genre": 2,
+        "literature.devices": 2,
+        "literature.character": 1,
+        "literature.theme": 2,
+        "literature.author_era": 1
+      },
+      "availableByBucket": {
+        "language.punctuation": 4,
+        "literature.genre": 8,
+        "literature.comprehension": 20,
+        "language.syntax": 5,
+        "literature.devices": 8,
+        "language.vocabulary": 5,
+        "literature.character": 8,
+        "language.editing": 5,
+        "literature.theme": 8,
+        "language.grammar": 12,
+        "language.reading": 5,
+        "literature.author_era": 4,
+        "language.orthography": 4
+      }
+    },
+    {
+      "id": "kab-g8-s1-u1",
+      "grade": 8,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.7,
+      "shortages": [],
+      "expected": {
+        "language.grammar": 1,
+        "language.orthography": 0,
+        "language.punctuation": 1,
+        "language.syntax": 1,
+        "language.vocabulary": 1,
+        "language.editing": 0,
+        "language.reading": 0,
+        "literature.comprehension": 2,
+        "literature.genre": 1,
+        "literature.devices": 1,
+        "literature.character": 1,
+        "literature.theme": 1,
+        "literature.author_era": 0
+      },
+      "availableByBucket": {
+        "language.punctuation": 4,
+        "literature.genre": 8,
+        "literature.comprehension": 16,
+        "language.syntax": 8,
+        "literature.devices": 8,
+        "language.vocabulary": 6,
+        "literature.character": 8,
+        "language.editing": 5,
+        "literature.theme": 8,
+        "language.grammar": 8,
+        "language.reading": 5,
+        "literature.author_era": 8,
+        "language.orthography": 4
+      }
+    },
+    {
+      "id": "kab-g8-s1-u2",
+      "grade": 8,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.7,
+      "shortages": [],
+      "expected": {
+        "language.grammar": 1,
+        "language.orthography": 0,
+        "language.punctuation": 1,
+        "language.syntax": 1,
+        "language.vocabulary": 1,
+        "language.editing": 0,
+        "language.reading": 0,
+        "literature.comprehension": 2,
+        "literature.genre": 1,
+        "literature.devices": 1,
+        "literature.character": 1,
+        "literature.theme": 1,
+        "literature.author_era": 0
+      },
+      "availableByBucket": {
+        "language.punctuation": 4,
+        "literature.genre": 8,
+        "literature.comprehension": 16,
+        "language.syntax": 8,
+        "literature.devices": 8,
+        "language.vocabulary": 6,
+        "literature.character": 8,
+        "language.editing": 5,
+        "literature.theme": 8,
+        "language.grammar": 8,
+        "language.reading": 5,
+        "literature.author_era": 8,
+        "language.orthography": 4
+      }
+    },
+    {
+      "id": "kab-g8-s1-sum",
+      "grade": 8,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0.6000000000000001,
+      "shortages": [],
+      "expected": {
+        "language.grammar": 2,
+        "language.orthography": 1,
+        "language.punctuation": 1,
+        "language.syntax": 1,
+        "language.vocabulary": 1,
+        "language.editing": 1,
+        "language.reading": 1,
+        "literature.comprehension": 4,
+        "literature.genre": 2,
+        "literature.devices": 2,
+        "literature.character": 1,
+        "literature.theme": 2,
+        "literature.author_era": 1
+      },
+      "availableByBucket": {
+        "language.punctuation": 4,
+        "literature.genre": 8,
+        "literature.comprehension": 16,
+        "language.syntax": 8,
+        "literature.devices": 8,
+        "language.vocabulary": 6,
+        "literature.character": 8,
+        "language.editing": 5,
+        "literature.theme": 8,
+        "language.grammar": 8,
+        "language.reading": 5,
+        "literature.author_era": 8,
+        "language.orthography": 4
+      }
+    },
+    {
+      "id": "kab-g8-s2-u1",
+      "grade": 8,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.7,
+      "shortages": [],
+      "expected": {
+        "language.grammar": 1,
+        "language.orthography": 0,
+        "language.punctuation": 0,
+        "language.syntax": 1,
+        "language.vocabulary": 1,
+        "language.editing": 1,
+        "language.reading": 0,
+        "literature.comprehension": 2,
+        "literature.genre": 1,
+        "literature.devices": 1,
+        "literature.character": 1,
+        "literature.theme": 1,
+        "literature.author_era": 0
+      },
+      "availableByBucket": {
+        "literature.comprehension": 16,
+        "language.punctuation": 4,
+        "literature.genre": 8,
+        "language.syntax": 8,
+        "literature.devices": 8,
+        "language.vocabulary": 5,
+        "literature.character": 8,
+        "language.editing": 5,
+        "literature.theme": 8,
+        "language.grammar": 9,
+        "language.reading": 5,
+        "literature.author_era": 8,
+        "language.orthography": 4
+      }
+    },
+    {
+      "id": "kab-g8-s2-u2",
+      "grade": 8,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.7,
+      "shortages": [],
+      "expected": {
+        "language.grammar": 1,
+        "language.orthography": 0,
+        "language.punctuation": 0,
+        "language.syntax": 1,
+        "language.vocabulary": 1,
+        "language.editing": 1,
+        "language.reading": 0,
+        "literature.comprehension": 2,
+        "literature.genre": 1,
+        "literature.devices": 1,
+        "literature.character": 1,
+        "literature.theme": 1,
+        "literature.author_era": 0
+      },
+      "availableByBucket": {
+        "literature.comprehension": 16,
+        "language.punctuation": 4,
+        "literature.genre": 8,
+        "language.syntax": 8,
+        "literature.devices": 8,
+        "language.vocabulary": 5,
+        "literature.character": 8,
+        "language.editing": 5,
+        "literature.theme": 8,
+        "language.grammar": 9,
+        "language.reading": 5,
+        "literature.author_era": 8,
+        "language.orthography": 4
+      }
+    },
+    {
+      "id": "kab-g8-s2-sum",
+      "grade": 8,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0.6000000000000001,
+      "shortages": [],
+      "expected": {
+        "language.grammar": 2,
+        "language.orthography": 1,
+        "language.punctuation": 1,
+        "language.syntax": 1,
+        "language.vocabulary": 1,
+        "language.editing": 1,
+        "language.reading": 1,
+        "literature.comprehension": 4,
+        "literature.genre": 2,
+        "literature.devices": 2,
+        "literature.character": 2,
+        "literature.theme": 1,
+        "literature.author_era": 1
+      },
+      "availableByBucket": {
+        "literature.comprehension": 16,
+        "language.punctuation": 4,
+        "literature.genre": 8,
+        "language.syntax": 8,
+        "literature.devices": 8,
+        "language.vocabulary": 5,
+        "literature.character": 8,
+        "language.editing": 5,
+        "literature.theme": 8,
+        "language.grammar": 9,
+        "language.reading": 5,
+        "literature.author_era": 8,
+        "language.orthography": 4
+      }
+    },
+    {
+      "id": "kab-g9-s1-u1",
+      "grade": 9,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.8,
+      "shortages": [],
+      "expected": {
+        "language.grammar": 1,
+        "language.orthography": 0,
+        "language.punctuation": 1,
+        "language.syntax": 1,
+        "language.vocabulary": 0,
+        "language.editing": 1,
+        "language.reading": 0,
+        "literature.comprehension": 2,
+        "literature.genre": 1,
+        "literature.devices": 1,
+        "literature.character": 1,
+        "literature.theme": 0,
+        "literature.author_era": 1
+      },
+      "availableByBucket": {
+        "literature.comprehension": 16,
+        "language.punctuation": 8,
+        "literature.genre": 8,
+        "language.syntax": 8,
+        "literature.devices": 8,
+        "language.vocabulary": 4,
+        "literature.character": 8,
+        "language.editing": 4,
+        "literature.theme": 8,
+        "language.grammar": 8,
+        "language.reading": 4,
+        "literature.author_era": 8,
+        "language.orthography": 4
+      }
+    },
+    {
+      "id": "kab-g9-s1-u2",
+      "grade": 9,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.8,
+      "shortages": [],
+      "expected": {
+        "language.grammar": 1,
+        "language.orthography": 0,
+        "language.punctuation": 1,
+        "language.syntax": 1,
+        "language.vocabulary": 0,
+        "language.editing": 1,
+        "language.reading": 0,
+        "literature.comprehension": 2,
+        "literature.genre": 1,
+        "literature.devices": 1,
+        "literature.character": 1,
+        "literature.theme": 0,
+        "literature.author_era": 1
+      },
+      "availableByBucket": {
+        "literature.comprehension": 16,
+        "language.punctuation": 8,
+        "literature.genre": 8,
+        "language.syntax": 8,
+        "literature.devices": 8,
+        "language.vocabulary": 4,
+        "literature.character": 8,
+        "language.editing": 4,
+        "literature.theme": 8,
+        "language.grammar": 8,
+        "language.reading": 4,
+        "literature.author_era": 8,
+        "language.orthography": 4
+      }
+    },
+    {
+      "id": "kab-g9-s1-sum",
+      "grade": 9,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0.6000000000000001,
+      "shortages": [],
+      "expected": {
+        "language.grammar": 2,
+        "language.orthography": 1,
+        "language.punctuation": 1,
+        "language.syntax": 1,
+        "language.vocabulary": 1,
+        "language.editing": 1,
+        "language.reading": 1,
+        "literature.comprehension": 4,
+        "literature.genre": 2,
+        "literature.devices": 2,
+        "literature.character": 1,
+        "literature.theme": 1,
+        "literature.author_era": 2
+      },
+      "availableByBucket": {
+        "literature.comprehension": 16,
+        "language.punctuation": 8,
+        "literature.genre": 8,
+        "language.syntax": 8,
+        "literature.devices": 8,
+        "language.vocabulary": 4,
+        "literature.character": 8,
+        "language.editing": 4,
+        "literature.theme": 8,
+        "language.grammar": 8,
+        "language.reading": 4,
+        "literature.author_era": 8,
+        "language.orthography": 4
+      }
+    },
+    {
+      "id": "kab-g9-s2-u1",
+      "grade": 9,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.8,
+      "shortages": [],
+      "expected": {
+        "language.grammar": 1,
+        "language.orthography": 0,
+        "language.punctuation": 1,
+        "language.syntax": 1,
+        "language.vocabulary": 0,
+        "language.editing": 1,
+        "language.reading": 0,
+        "literature.comprehension": 2,
+        "literature.genre": 1,
+        "literature.devices": 1,
+        "literature.character": 1,
+        "literature.theme": 1,
+        "literature.author_era": 0
+      },
+      "availableByBucket": {
+        "language.orthography": 4,
+        "literature.comprehension": 16,
+        "language.punctuation": 8,
+        "literature.genre": 8,
+        "language.syntax": 8,
+        "literature.devices": 8,
+        "language.vocabulary": 4,
+        "literature.character": 8,
+        "language.editing": 4,
+        "literature.theme": 8,
+        "language.grammar": 8,
+        "language.reading": 4,
+        "literature.author_era": 8
+      }
+    },
+    {
+      "id": "kab-g9-s2-u2",
+      "grade": 9,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.8,
+      "shortages": [],
+      "expected": {
+        "language.grammar": 1,
+        "language.orthography": 0,
+        "language.punctuation": 1,
+        "language.syntax": 1,
+        "language.vocabulary": 0,
+        "language.editing": 1,
+        "language.reading": 0,
+        "literature.comprehension": 2,
+        "literature.genre": 1,
+        "literature.devices": 1,
+        "literature.character": 1,
+        "literature.theme": 1,
+        "literature.author_era": 0
+      },
+      "availableByBucket": {
+        "language.orthography": 4,
+        "literature.comprehension": 16,
+        "language.punctuation": 8,
+        "literature.genre": 8,
+        "language.syntax": 8,
+        "literature.devices": 8,
+        "language.vocabulary": 4,
+        "literature.character": 8,
+        "language.editing": 4,
+        "literature.theme": 8,
+        "language.grammar": 8,
+        "language.reading": 4,
+        "literature.author_era": 8
+      }
+    },
+    {
+      "id": "kab-g9-s2-sum",
+      "grade": 9,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0.6000000000000001,
+      "shortages": [],
+      "expected": {
+        "language.grammar": 2,
+        "language.orthography": 1,
+        "language.punctuation": 1,
+        "language.syntax": 1,
+        "language.vocabulary": 1,
+        "language.editing": 1,
+        "language.reading": 1,
+        "literature.comprehension": 4,
+        "literature.genre": 2,
+        "literature.devices": 2,
+        "literature.character": 2,
+        "literature.theme": 1,
+        "literature.author_era": 1
+      },
+      "availableByBucket": {
+        "language.orthography": 4,
+        "literature.comprehension": 16,
+        "language.punctuation": 8,
+        "literature.genre": 8,
+        "language.syntax": 8,
+        "literature.devices": 8,
+        "language.vocabulary": 4,
+        "literature.character": 8,
+        "language.editing": 4,
+        "literature.theme": 8,
+        "language.grammar": 8,
+        "language.reading": 4,
+        "literature.author_era": 8
+      }
+    },
+    {
+      "id": "kab-g10-s1-u1",
+      "grade": 10,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.7,
+      "shortages": [],
+      "expected": {
+        "language.grammar": 1,
+        "language.orthography": 0,
+        "language.punctuation": 1,
+        "language.syntax": 1,
+        "language.vocabulary": 0,
+        "language.editing": 1,
+        "language.reading": 0,
+        "literature.comprehension": 1,
+        "literature.genre": 1,
+        "literature.devices": 1,
+        "literature.character": 1,
+        "literature.theme": 1,
+        "literature.author_era": 1
+      },
+      "availableByBucket": {
+        "language.orthography": 4,
+        "literature.comprehension": 16,
+        "language.punctuation": 8,
+        "literature.genre": 8,
+        "language.syntax": 8,
+        "literature.devices": 8,
+        "language.vocabulary": 4,
+        "literature.character": 8,
+        "language.editing": 4,
+        "literature.theme": 8,
+        "language.grammar": 8,
+        "language.reading": 4,
+        "literature.author_era": 8
+      }
+    },
+    {
+      "id": "kab-g10-s1-u2",
+      "grade": 10,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.7,
+      "shortages": [],
+      "expected": {
+        "language.grammar": 1,
+        "language.orthography": 0,
+        "language.punctuation": 1,
+        "language.syntax": 1,
+        "language.vocabulary": 0,
+        "language.editing": 1,
+        "language.reading": 0,
+        "literature.comprehension": 1,
+        "literature.genre": 1,
+        "literature.devices": 1,
+        "literature.character": 1,
+        "literature.theme": 1,
+        "literature.author_era": 1
+      },
+      "availableByBucket": {
+        "language.orthography": 4,
+        "literature.comprehension": 16,
+        "language.punctuation": 8,
+        "literature.genre": 8,
+        "language.syntax": 8,
+        "literature.devices": 8,
+        "language.vocabulary": 4,
+        "literature.character": 8,
+        "language.editing": 4,
+        "literature.theme": 8,
+        "language.grammar": 8,
+        "language.reading": 4,
+        "literature.author_era": 8
+      }
+    },
+    {
+      "id": "kab-g10-s1-sum",
+      "grade": 10,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0.6000000000000001,
+      "shortages": [],
+      "expected": {
+        "language.grammar": 1,
+        "language.orthography": 1,
+        "language.punctuation": 1,
+        "language.syntax": 2,
+        "language.vocabulary": 1,
+        "language.editing": 1,
+        "language.reading": 1,
+        "literature.comprehension": 3,
+        "literature.genre": 2,
+        "literature.devices": 2,
+        "literature.character": 2,
+        "literature.theme": 1,
+        "literature.author_era": 2
+      },
+      "availableByBucket": {
+        "language.orthography": 4,
+        "literature.comprehension": 16,
+        "language.punctuation": 8,
+        "literature.genre": 8,
+        "language.syntax": 8,
+        "literature.devices": 8,
+        "language.vocabulary": 4,
+        "literature.character": 8,
+        "language.editing": 4,
+        "literature.theme": 8,
+        "language.grammar": 8,
+        "language.reading": 4,
+        "literature.author_era": 8
+      }
+    },
+    {
+      "id": "kab-g10-s2-u1",
+      "grade": 10,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.7,
+      "shortages": [],
+      "expected": {
+        "language.grammar": 1,
+        "language.orthography": 0,
+        "language.punctuation": 1,
+        "language.syntax": 1,
+        "language.vocabulary": 0,
+        "language.editing": 1,
+        "language.reading": 0,
+        "literature.comprehension": 1,
+        "literature.genre": 1,
+        "literature.devices": 1,
+        "literature.character": 1,
+        "literature.theme": 1,
+        "literature.author_era": 1
+      },
+      "availableByBucket": {
+        "language.grammar": 8,
+        "literature.author_era": 8,
+        "language.orthography": 4,
+        "literature.comprehension": 16,
+        "language.punctuation": 8,
+        "literature.genre": 8,
+        "language.syntax": 8,
+        "literature.devices": 8,
+        "language.vocabulary": 4,
+        "literature.character": 8,
+        "language.editing": 4,
+        "literature.theme": 8,
+        "language.reading": 4
+      }
+    },
+    {
+      "id": "kab-g10-s2-u2",
+      "grade": 10,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.7,
+      "shortages": [],
+      "expected": {
+        "language.grammar": 1,
+        "language.orthography": 0,
+        "language.punctuation": 1,
+        "language.syntax": 1,
+        "language.vocabulary": 0,
+        "language.editing": 1,
+        "language.reading": 0,
+        "literature.comprehension": 1,
+        "literature.genre": 1,
+        "literature.devices": 1,
+        "literature.character": 1,
+        "literature.theme": 1,
+        "literature.author_era": 1
+      },
+      "availableByBucket": {
+        "language.grammar": 8,
+        "literature.author_era": 8,
+        "language.orthography": 4,
+        "literature.comprehension": 16,
+        "language.punctuation": 8,
+        "literature.genre": 8,
+        "language.syntax": 8,
+        "literature.devices": 8,
+        "language.vocabulary": 4,
+        "literature.character": 8,
+        "language.editing": 4,
+        "literature.theme": 8,
+        "language.reading": 4
+      }
+    },
+    {
+      "id": "kab-g10-s2-sum",
+      "grade": 10,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0.6000000000000001,
+      "shortages": [],
+      "expected": {
+        "language.grammar": 1,
+        "language.orthography": 1,
+        "language.punctuation": 1,
+        "language.syntax": 2,
+        "language.vocabulary": 1,
+        "language.editing": 1,
+        "language.reading": 1,
+        "literature.comprehension": 3,
+        "literature.genre": 2,
+        "literature.devices": 2,
+        "literature.character": 2,
+        "literature.theme": 1,
+        "literature.author_era": 2
+      },
+      "availableByBucket": {
+        "language.grammar": 8,
+        "literature.author_era": 8,
+        "language.orthography": 4,
+        "literature.comprehension": 16,
+        "language.punctuation": 8,
+        "literature.genre": 8,
+        "language.syntax": 8,
+        "literature.devices": 8,
+        "language.vocabulary": 4,
+        "literature.character": 8,
+        "language.editing": 4,
+        "literature.theme": 8,
+        "language.reading": 4
+      }
+    },
+    {
+      "id": "kab-g11-s1-u1",
+      "grade": 11,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.6000000000000001,
+      "shortages": [],
+      "expected": {
+        "language.grammar": 1,
+        "language.orthography": 0,
+        "language.punctuation": 1,
+        "language.syntax": 1,
+        "language.vocabulary": 0,
+        "language.editing": 1,
+        "language.reading": 0,
+        "literature.comprehension": 1,
+        "literature.genre": 1,
+        "literature.devices": 1,
+        "literature.character": 1,
+        "literature.theme": 1,
+        "literature.author_era": 1
+      },
+      "availableByBucket": {
+        "language.grammar": 8,
+        "literature.author_era": 8,
+        "language.orthography": 4,
+        "literature.comprehension": 16,
+        "language.punctuation": 8,
+        "literature.genre": 8,
+        "language.syntax": 8,
+        "literature.devices": 8,
+        "language.vocabulary": 4,
+        "literature.character": 8,
+        "language.editing": 4,
+        "literature.theme": 8,
+        "language.reading": 4
+      }
+    },
+    {
+      "id": "kab-g11-s1-u2",
+      "grade": 11,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.6000000000000001,
+      "shortages": [],
+      "expected": {
+        "language.grammar": 1,
+        "language.orthography": 0,
+        "language.punctuation": 1,
+        "language.syntax": 1,
+        "language.vocabulary": 0,
+        "language.editing": 1,
+        "language.reading": 0,
+        "literature.comprehension": 1,
+        "literature.genre": 1,
+        "literature.devices": 1,
+        "literature.character": 1,
+        "literature.theme": 1,
+        "literature.author_era": 1
+      },
+      "availableByBucket": {
+        "language.grammar": 8,
+        "literature.author_era": 8,
+        "language.orthography": 4,
+        "literature.comprehension": 16,
+        "language.punctuation": 8,
+        "literature.genre": 8,
+        "language.syntax": 8,
+        "literature.devices": 8,
+        "language.vocabulary": 4,
+        "literature.character": 8,
+        "language.editing": 4,
+        "literature.theme": 8,
+        "language.reading": 4
+      }
+    },
+    {
+      "id": "kab-g11-s1-sum",
+      "grade": 11,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0.6000000000000001,
+      "shortages": [],
+      "expected": {
+        "language.grammar": 1,
+        "language.orthography": 1,
+        "language.punctuation": 1,
+        "language.syntax": 2,
+        "language.vocabulary": 1,
+        "language.editing": 1,
+        "language.reading": 1,
+        "literature.comprehension": 3,
+        "literature.genre": 2,
+        "literature.devices": 2,
+        "literature.character": 2,
+        "literature.theme": 1,
+        "literature.author_era": 2
+      },
+      "availableByBucket": {
+        "language.grammar": 8,
+        "literature.author_era": 8,
+        "language.orthography": 4,
+        "literature.comprehension": 16,
+        "language.punctuation": 8,
+        "literature.genre": 8,
+        "language.syntax": 8,
+        "literature.devices": 8,
+        "language.vocabulary": 4,
+        "literature.character": 8,
+        "language.editing": 4,
+        "literature.theme": 8,
+        "language.reading": 4
+      }
+    },
+    {
+      "id": "kab-g11-s2-u1",
+      "grade": 11,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.6000000000000001,
+      "shortages": [],
+      "expected": {
+        "language.grammar": 1,
+        "language.orthography": 0,
+        "language.punctuation": 1,
+        "language.syntax": 1,
+        "language.vocabulary": 0,
+        "language.editing": 0,
+        "language.reading": 1,
+        "literature.comprehension": 1,
+        "literature.genre": 1,
+        "literature.devices": 1,
+        "literature.character": 1,
+        "literature.theme": 1,
+        "literature.author_era": 1
+      },
+      "availableByBucket": {
+        "language.grammar": 8,
+        "literature.author_era": 8,
+        "language.orthography": 4,
+        "literature.comprehension": 16,
+        "language.punctuation": 8,
+        "literature.genre": 8,
+        "language.syntax": 8,
+        "literature.devices": 8,
+        "language.vocabulary": 4,
+        "literature.character": 8,
+        "language.editing": 4,
+        "literature.theme": 8,
+        "language.reading": 4
+      }
+    },
+    {
+      "id": "kab-g11-s2-u2",
+      "grade": 11,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.6000000000000001,
+      "shortages": [],
+      "expected": {
+        "language.grammar": 1,
+        "language.orthography": 0,
+        "language.punctuation": 1,
+        "language.syntax": 1,
+        "language.vocabulary": 0,
+        "language.editing": 0,
+        "language.reading": 1,
+        "literature.comprehension": 1,
+        "literature.genre": 1,
+        "literature.devices": 1,
+        "literature.character": 1,
+        "literature.theme": 1,
+        "literature.author_era": 1
+      },
+      "availableByBucket": {
+        "language.grammar": 8,
+        "literature.author_era": 8,
+        "language.orthography": 4,
+        "literature.comprehension": 16,
+        "language.punctuation": 8,
+        "literature.genre": 8,
+        "language.syntax": 8,
+        "literature.devices": 8,
+        "language.vocabulary": 4,
+        "literature.character": 8,
+        "language.editing": 4,
+        "literature.theme": 8,
+        "language.reading": 4
+      }
+    },
+    {
+      "id": "kab-g11-s2-sum",
+      "grade": 11,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0.6000000000000001,
+      "shortages": [],
+      "expected": {
+        "language.grammar": 1,
+        "language.orthography": 1,
+        "language.punctuation": 1,
+        "language.syntax": 2,
+        "language.vocabulary": 1,
+        "language.editing": 1,
+        "language.reading": 1,
+        "literature.comprehension": 3,
+        "literature.genre": 1,
+        "literature.devices": 2,
+        "literature.character": 2,
+        "literature.theme": 2,
+        "literature.author_era": 2
+      },
+      "availableByBucket": {
+        "language.grammar": 8,
+        "literature.author_era": 8,
+        "language.orthography": 4,
+        "literature.comprehension": 16,
+        "language.punctuation": 8,
+        "literature.genre": 8,
+        "language.syntax": 8,
+        "literature.devices": 8,
+        "language.vocabulary": 4,
+        "literature.character": 8,
+        "language.editing": 4,
+        "literature.theme": 8,
+        "language.reading": 4
+      }
+    },
+    {
+      "id": "kab-g12-s1-u1",
+      "grade": 12,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "language.grammar": 1,
+        "language.orthography": 0,
+        "language.punctuation": 1,
+        "language.syntax": 1,
+        "language.vocabulary": 0,
+        "language.editing": 0,
+        "language.reading": 1,
+        "literature.comprehension": 1,
+        "literature.genre": 1,
+        "literature.devices": 1,
+        "literature.character": 1,
+        "literature.theme": 1,
+        "literature.author_era": 1
+      },
+      "availableByBucket": {
+        "literature.author_era": 12,
+        "language.orthography": 4,
+        "literature.comprehension": 12,
+        "language.punctuation": 8,
+        "literature.genre": 8,
+        "language.syntax": 12,
+        "literature.devices": 8,
+        "language.vocabulary": 4,
+        "literature.character": 8,
+        "language.editing": 4,
+        "literature.theme": 8,
+        "language.grammar": 4,
+        "language.reading": 4
+      }
+    },
+    {
+      "id": "kab-g12-s1-u2",
+      "grade": 12,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "language.grammar": 1,
+        "language.orthography": 0,
+        "language.punctuation": 1,
+        "language.syntax": 1,
+        "language.vocabulary": 0,
+        "language.editing": 0,
+        "language.reading": 1,
+        "literature.comprehension": 1,
+        "literature.genre": 1,
+        "literature.devices": 1,
+        "literature.character": 1,
+        "literature.theme": 1,
+        "literature.author_era": 1
+      },
+      "availableByBucket": {
+        "literature.author_era": 12,
+        "language.orthography": 4,
+        "literature.comprehension": 12,
+        "language.punctuation": 8,
+        "literature.genre": 8,
+        "language.syntax": 12,
+        "literature.devices": 8,
+        "language.vocabulary": 4,
+        "literature.character": 8,
+        "language.editing": 4,
+        "literature.theme": 8,
+        "language.grammar": 4,
+        "language.reading": 4
+      }
+    },
+    {
+      "id": "kab-g12-s1-sum",
+      "grade": 12,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0.6000000000000001,
+      "shortages": [],
+      "expected": {
+        "language.grammar": 1,
+        "language.orthography": 1,
+        "language.punctuation": 1,
+        "language.syntax": 2,
+        "language.vocabulary": 1,
+        "language.editing": 1,
+        "language.reading": 1,
+        "literature.comprehension": 3,
+        "literature.genre": 1,
+        "literature.devices": 2,
+        "literature.character": 2,
+        "literature.theme": 2,
+        "literature.author_era": 2
+      },
+      "availableByBucket": {
+        "literature.author_era": 12,
+        "language.orthography": 4,
+        "literature.comprehension": 12,
+        "language.punctuation": 8,
+        "literature.genre": 8,
+        "language.syntax": 12,
+        "literature.devices": 8,
+        "language.vocabulary": 4,
+        "literature.character": 8,
+        "language.editing": 4,
+        "literature.theme": 8,
+        "language.grammar": 4,
+        "language.reading": 4
+      }
+    },
+    {
+      "id": "kab-g12-s2-u1",
+      "grade": 12,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "language.grammar": 1,
+        "language.orthography": 1,
+        "language.punctuation": 1,
+        "language.syntax": 1,
+        "language.vocabulary": 0,
+        "language.editing": 0,
+        "language.reading": 0,
+        "literature.comprehension": 1,
+        "literature.genre": 1,
+        "literature.devices": 1,
+        "literature.character": 1,
+        "literature.theme": 1,
+        "literature.author_era": 1
+      },
+      "availableByBucket": {
+        "literature.theme": 8,
+        "language.grammar": 4,
+        "language.reading": 4,
+        "literature.author_era": 12,
+        "language.orthography": 4,
+        "literature.comprehension": 12,
+        "language.punctuation": 8,
+        "literature.genre": 8,
+        "language.syntax": 12,
+        "literature.devices": 8,
+        "language.vocabulary": 4,
+        "literature.character": 8,
+        "language.editing": 4
+      }
+    },
+    {
+      "id": "kab-g12-s2-u2",
+      "grade": 12,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "language.grammar": 1,
+        "language.orthography": 1,
+        "language.punctuation": 1,
+        "language.syntax": 1,
+        "language.vocabulary": 0,
+        "language.editing": 0,
+        "language.reading": 0,
+        "literature.comprehension": 1,
+        "literature.genre": 1,
+        "literature.devices": 1,
+        "literature.character": 1,
+        "literature.theme": 1,
+        "literature.author_era": 1
+      },
+      "availableByBucket": {
+        "literature.theme": 8,
+        "language.grammar": 4,
+        "language.reading": 4,
+        "literature.author_era": 12,
+        "language.orthography": 4,
+        "literature.comprehension": 12,
+        "language.punctuation": 8,
+        "literature.genre": 8,
+        "language.syntax": 12,
+        "literature.devices": 8,
+        "language.vocabulary": 4,
+        "literature.character": 8,
+        "language.editing": 4
+      }
+    },
+    {
+      "id": "kab-g12-s2-sum",
+      "grade": 12,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0.6000000000000001,
+      "shortages": [],
+      "expected": {
+        "language.grammar": 1,
+        "language.orthography": 1,
+        "language.punctuation": 1,
+        "language.syntax": 2,
+        "language.vocabulary": 1,
+        "language.editing": 1,
+        "language.reading": 1,
+        "literature.comprehension": 3,
+        "literature.genre": 1,
+        "literature.devices": 2,
+        "literature.character": 2,
+        "literature.theme": 2,
+        "literature.author_era": 2
+      },
+      "availableByBucket": {
+        "literature.theme": 8,
+        "language.grammar": 4,
+        "language.reading": 4,
+        "literature.author_era": 12,
+        "language.orthography": 4,
+        "literature.comprehension": 12,
+        "language.punctuation": 8,
+        "literature.genre": 8,
+        "language.syntax": 12,
+        "literature.devices": 8,
+        "language.vocabulary": 4,
+        "literature.character": 8,
+        "language.editing": 4
+      }
+    },
+    {
+      "id": "enb-g1-s1-u1",
+      "grade": 1,
+      "subject": "ინგლისური",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 1,
+        "vocabulary": 4,
+        "reading": 3,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "vocabulary": 44,
+        "use_of_language": 20,
+        "reading": 24,
+        "grammar": 8
+      }
+    },
+    {
+      "id": "enb-g1-s1-u2",
+      "grade": 1,
+      "subject": "ინგლისური",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 1,
+        "vocabulary": 4,
+        "reading": 3,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "vocabulary": 44,
+        "use_of_language": 20,
+        "reading": 24,
+        "grammar": 8
+      }
+    },
+    {
+      "id": "enb-g1-s1-sum",
+      "grade": 1,
+      "subject": "ინგლისური",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0,
+      "shortages": [],
+      "expected": {
+        "grammar": 2,
+        "vocabulary": 9,
+        "reading": 5,
+        "use_of_language": 4
+      },
+      "availableByBucket": {
+        "vocabulary": 44,
+        "use_of_language": 20,
+        "reading": 24,
+        "grammar": 8
+      }
+    },
+    {
+      "id": "enb-g1-s2-u1",
+      "grade": 1,
+      "subject": "ინგლისური",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 1,
+        "vocabulary": 5,
+        "reading": 2,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "use_of_language": 20,
+        "reading": 24,
+        "vocabulary": 44,
+        "grammar": 8
+      }
+    },
+    {
+      "id": "enb-g1-s2-u2",
+      "grade": 1,
+      "subject": "ინგლისური",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 1,
+        "vocabulary": 5,
+        "reading": 2,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "use_of_language": 20,
+        "reading": 24,
+        "vocabulary": 44,
+        "grammar": 8
+      }
+    },
+    {
+      "id": "enb-g1-s2-sum",
+      "grade": 1,
+      "subject": "ინგლისური",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0,
+      "shortages": [],
+      "expected": {
+        "grammar": 2,
+        "vocabulary": 9,
+        "reading": 5,
+        "use_of_language": 4
+      },
+      "availableByBucket": {
+        "use_of_language": 20,
+        "reading": 24,
+        "vocabulary": 44,
+        "grammar": 8
+      }
+    },
+    {
+      "id": "enb-g2-s1-u1",
+      "grade": 2,
+      "subject": "ინგლისური",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 2,
+        "vocabulary": 4,
+        "reading": 2,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "use_of_language": 20,
+        "reading": 24,
+        "vocabulary": 36,
+        "grammar": 16
+      }
+    },
+    {
+      "id": "enb-g2-s1-u2",
+      "grade": 2,
+      "subject": "ინგლისური",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 2,
+        "vocabulary": 4,
+        "reading": 2,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "use_of_language": 20,
+        "reading": 24,
+        "vocabulary": 36,
+        "grammar": 16
+      }
+    },
+    {
+      "id": "enb-g2-s1-sum",
+      "grade": 2,
+      "subject": "ინგლისური",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0,
+      "shortages": [],
+      "expected": {
+        "grammar": 3,
+        "vocabulary": 8,
+        "reading": 5,
+        "use_of_language": 4
+      },
+      "availableByBucket": {
+        "use_of_language": 20,
+        "reading": 24,
+        "vocabulary": 36,
+        "grammar": 16
+      }
+    },
+    {
+      "id": "enb-g2-s2-u1",
+      "grade": 2,
+      "subject": "ინგლისური",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 2,
+        "vocabulary": 4,
+        "reading": 2,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "reading": 24,
+        "vocabulary": 36,
+        "use_of_language": 20,
+        "grammar": 16
+      }
+    },
+    {
+      "id": "enb-g2-s2-u2",
+      "grade": 2,
+      "subject": "ინგლისური",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 2,
+        "vocabulary": 4,
+        "reading": 2,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "reading": 24,
+        "vocabulary": 36,
+        "use_of_language": 20,
+        "grammar": 16
+      }
+    },
+    {
+      "id": "enb-g2-s2-sum",
+      "grade": 2,
+      "subject": "ინგლისური",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0,
+      "shortages": [],
+      "expected": {
+        "grammar": 3,
+        "vocabulary": 8,
+        "reading": 5,
+        "use_of_language": 4
+      },
+      "availableByBucket": {
+        "reading": 24,
+        "vocabulary": 36,
+        "use_of_language": 20,
+        "grammar": 16
+      }
+    },
+    {
+      "id": "enb-g3-s1-u1",
+      "grade": 3,
+      "subject": "ინგლისური",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 2,
+        "vocabulary": 4,
+        "reading": 2,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "reading": 24,
+        "vocabulary": 32,
+        "use_of_language": 20,
+        "grammar": 20
+      }
+    },
+    {
+      "id": "enb-g3-s1-u2",
+      "grade": 3,
+      "subject": "ინგლისური",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 2,
+        "vocabulary": 4,
+        "reading": 2,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "reading": 24,
+        "vocabulary": 32,
+        "use_of_language": 20,
+        "grammar": 20
+      }
+    },
+    {
+      "id": "enb-g3-s1-sum",
+      "grade": 3,
+      "subject": "ინგლისური",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0,
+      "shortages": [],
+      "expected": {
+        "grammar": 4,
+        "vocabulary": 7,
+        "reading": 5,
+        "use_of_language": 4
+      },
+      "availableByBucket": {
+        "reading": 24,
+        "vocabulary": 32,
+        "use_of_language": 20,
+        "grammar": 20
+      }
+    },
+    {
+      "id": "enb-g3-s2-u1",
+      "grade": 3,
+      "subject": "ინგლისური",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 2,
+        "vocabulary": 4,
+        "reading": 2,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "vocabulary": 32,
+        "use_of_language": 20,
+        "reading": 24,
+        "grammar": 20
+      }
+    },
+    {
+      "id": "enb-g3-s2-u2",
+      "grade": 3,
+      "subject": "ინგლისური",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 2,
+        "vocabulary": 4,
+        "reading": 2,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "vocabulary": 32,
+        "use_of_language": 20,
+        "reading": 24,
+        "grammar": 20
+      }
+    },
+    {
+      "id": "enb-g3-s2-sum",
+      "grade": 3,
+      "subject": "ინგლისური",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0,
+      "shortages": [],
+      "expected": {
+        "grammar": 4,
+        "vocabulary": 7,
+        "reading": 5,
+        "use_of_language": 4
+      },
+      "availableByBucket": {
+        "vocabulary": 32,
+        "use_of_language": 20,
+        "reading": 24,
+        "grammar": 20
+      }
+    },
+    {
+      "id": "enb-g4-s1-u1",
+      "grade": 4,
+      "subject": "ინგლისური",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 2,
+        "vocabulary": 3,
+        "reading": 3,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "vocabulary": 28,
+        "use_of_language": 20,
+        "reading": 24,
+        "grammar": 24
+      }
+    },
+    {
+      "id": "enb-g4-s1-u2",
+      "grade": 4,
+      "subject": "ინგლისური",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 2,
+        "vocabulary": 3,
+        "reading": 3,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "vocabulary": 28,
+        "use_of_language": 20,
+        "reading": 24,
+        "grammar": 24
+      }
+    },
+    {
+      "id": "enb-g4-s1-sum",
+      "grade": 4,
+      "subject": "ინგლისური",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0,
+      "shortages": [],
+      "expected": {
+        "grammar": 5,
+        "vocabulary": 6,
+        "reading": 5,
+        "use_of_language": 4
+      },
+      "availableByBucket": {
+        "vocabulary": 28,
+        "use_of_language": 20,
+        "reading": 24,
+        "grammar": 24
+      }
+    },
+    {
+      "id": "enb-g4-s2-u1",
+      "grade": 4,
+      "subject": "ინგლისური",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 2,
+        "vocabulary": 3,
+        "reading": 3,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "grammar": 24,
+        "reading": 24,
+        "vocabulary": 28,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "enb-g4-s2-u2",
+      "grade": 4,
+      "subject": "ინგლისური",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 2,
+        "vocabulary": 3,
+        "reading": 3,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "grammar": 24,
+        "reading": 24,
+        "vocabulary": 28,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "enb-g4-s2-sum",
+      "grade": 4,
+      "subject": "ინგლისური",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0,
+      "shortages": [],
+      "expected": {
+        "grammar": 5,
+        "vocabulary": 6,
+        "reading": 5,
+        "use_of_language": 4
+      },
+      "availableByBucket": {
+        "grammar": 24,
+        "reading": 24,
+        "vocabulary": 28,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "enb-g5-s1-u1",
+      "grade": 5,
+      "subject": "ინგლისური",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 3,
+        "vocabulary": 2,
+        "reading": 3,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "grammar": 28,
+        "reading": 24,
+        "vocabulary": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "enb-g5-s1-u2",
+      "grade": 5,
+      "subject": "ინგლისური",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 3,
+        "vocabulary": 2,
+        "reading": 3,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "grammar": 28,
+        "reading": 24,
+        "vocabulary": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "enb-g5-s1-sum",
+      "grade": 5,
+      "subject": "ინგლისური",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0,
+      "shortages": [],
+      "expected": {
+        "grammar": 6,
+        "vocabulary": 5,
+        "reading": 5,
+        "use_of_language": 4
+      },
+      "availableByBucket": {
+        "grammar": 28,
+        "reading": 24,
+        "vocabulary": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "enb-g5-s2-u1",
+      "grade": 5,
+      "subject": "ინგლისური",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 3,
+        "vocabulary": 3,
+        "reading": 2,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "reading": 24,
+        "vocabulary": 24,
+        "use_of_language": 20,
+        "grammar": 28
+      }
+    },
+    {
+      "id": "enb-g5-s2-u2",
+      "grade": 5,
+      "subject": "ინგლისური",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 3,
+        "vocabulary": 3,
+        "reading": 2,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "reading": 24,
+        "vocabulary": 24,
+        "use_of_language": 20,
+        "grammar": 28
+      }
+    },
+    {
+      "id": "enb-g5-s2-sum",
+      "grade": 5,
+      "subject": "ინგლისური",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0,
+      "shortages": [],
+      "expected": {
+        "grammar": 6,
+        "vocabulary": 5,
+        "reading": 5,
+        "use_of_language": 4
+      },
+      "availableByBucket": {
+        "reading": 24,
+        "vocabulary": 24,
+        "use_of_language": 20,
+        "grammar": 28
+      }
+    },
+    {
+      "id": "enb-g6-s1-u1",
+      "grade": 6,
+      "subject": "ინგლისური",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 3,
+        "vocabulary": 2,
+        "reading": 3,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "reading": 24,
+        "vocabulary": 20,
+        "use_of_language": 20,
+        "grammar": 32
+      }
+    },
+    {
+      "id": "enb-g6-s1-u2",
+      "grade": 6,
+      "subject": "ინგლისური",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 3,
+        "vocabulary": 2,
+        "reading": 3,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "reading": 24,
+        "vocabulary": 20,
+        "use_of_language": 20,
+        "grammar": 32
+      }
+    },
+    {
+      "id": "enb-g6-s1-sum",
+      "grade": 6,
+      "subject": "ინგლისური",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0.40000000000000036,
+      "shortages": [],
+      "expected": {
+        "grammar": 7,
+        "vocabulary": 4,
+        "reading": 5,
+        "use_of_language": 4
+      },
+      "availableByBucket": {
+        "reading": 24,
+        "vocabulary": 20,
+        "use_of_language": 20,
+        "grammar": 32
+      }
+    },
+    {
+      "id": "enb-g6-s2-u1",
+      "grade": 6,
+      "subject": "ინგლისური",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 3,
+        "vocabulary": 2,
+        "reading": 3,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "vocabulary": 20,
+        "grammar": 32,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "enb-g6-s2-u2",
+      "grade": 6,
+      "subject": "ინგლისური",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 3,
+        "vocabulary": 2,
+        "reading": 3,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "vocabulary": 20,
+        "grammar": 32,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "enb-g6-s2-sum",
+      "grade": 6,
+      "subject": "ინგლისური",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0.40000000000000036,
+      "shortages": [],
+      "expected": {
+        "grammar": 7,
+        "vocabulary": 4,
+        "reading": 5,
+        "use_of_language": 4
+      },
+      "availableByBucket": {
+        "vocabulary": 20,
+        "grammar": 32,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "enb-g7-s1-u1",
+      "grade": 7,
+      "subject": "ინგლისური",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 4,
+        "vocabulary": 2,
+        "reading": 2,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "vocabulary": 20,
+        "grammar": 32,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "enb-g7-s1-u2",
+      "grade": 7,
+      "subject": "ინგლისური",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 4,
+        "vocabulary": 2,
+        "reading": 2,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "vocabulary": 20,
+        "grammar": 32,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "enb-g7-s1-sum",
+      "grade": 7,
+      "subject": "ინგლისური",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0,
+      "shortages": [],
+      "expected": {
+        "grammar": 7,
+        "vocabulary": 4,
+        "reading": 5,
+        "use_of_language": 4
+      },
+      "availableByBucket": {
+        "vocabulary": 20,
+        "grammar": 32,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "enb-g7-s2-u1",
+      "grade": 7,
+      "subject": "ინგლისური",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 3,
+        "vocabulary": 2,
+        "reading": 3,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "grammar": 32,
+        "reading": 24,
+        "vocabulary": 20,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "enb-g7-s2-u2",
+      "grade": 7,
+      "subject": "ინგლისური",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 3,
+        "vocabulary": 2,
+        "reading": 3,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "grammar": 32,
+        "reading": 24,
+        "vocabulary": 20,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "enb-g7-s2-sum",
+      "grade": 7,
+      "subject": "ინგლისური",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0,
+      "shortages": [],
+      "expected": {
+        "grammar": 7,
+        "vocabulary": 4,
+        "reading": 5,
+        "use_of_language": 4
+      },
+      "availableByBucket": {
+        "grammar": 32,
+        "reading": 24,
+        "vocabulary": 20,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "enb-g8-s1-u1",
+      "grade": 8,
+      "subject": "ინგლისური",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 4,
+        "vocabulary": 2,
+        "reading": 2,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "grammar": 36,
+        "reading": 24,
+        "vocabulary": 16,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "enb-g8-s1-u2",
+      "grade": 8,
+      "subject": "ინგლისური",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 4,
+        "vocabulary": 2,
+        "reading": 2,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "grammar": 36,
+        "reading": 24,
+        "vocabulary": 16,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "enb-g8-s1-sum",
+      "grade": 8,
+      "subject": "ინგლისური",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0.40000000000000036,
+      "shortages": [],
+      "expected": {
+        "grammar": 7,
+        "vocabulary": 4,
+        "reading": 5,
+        "use_of_language": 4
+      },
+      "availableByBucket": {
+        "grammar": 36,
+        "reading": 24,
+        "vocabulary": 16,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "enb-g8-s2-u1",
+      "grade": 8,
+      "subject": "ინგლისური",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 4,
+        "vocabulary": 2,
+        "reading": 2,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "vocabulary": 16,
+        "grammar": 36,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "enb-g8-s2-u2",
+      "grade": 8,
+      "subject": "ინგლისური",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 4,
+        "vocabulary": 2,
+        "reading": 2,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "vocabulary": 16,
+        "grammar": 36,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "enb-g8-s2-sum",
+      "grade": 8,
+      "subject": "ინგლისური",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0.40000000000000036,
+      "shortages": [],
+      "expected": {
+        "grammar": 7,
+        "vocabulary": 4,
+        "reading": 5,
+        "use_of_language": 4
+      },
+      "availableByBucket": {
+        "vocabulary": 16,
+        "grammar": 36,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "enb-g9-s1-u1",
+      "grade": 9,
+      "subject": "ინგლისური",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 4,
+        "vocabulary": 2,
+        "reading": 2,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "vocabulary": 16,
+        "grammar": 36,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "enb-g9-s1-u2",
+      "grade": 9,
+      "subject": "ინგლისური",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 4,
+        "vocabulary": 2,
+        "reading": 2,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "vocabulary": 16,
+        "grammar": 36,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "enb-g9-s1-sum",
+      "grade": 9,
+      "subject": "ინგლისური",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0.20000000000000018,
+      "shortages": [],
+      "expected": {
+        "grammar": 8,
+        "vocabulary": 3,
+        "reading": 5,
+        "use_of_language": 4
+      },
+      "availableByBucket": {
+        "vocabulary": 16,
+        "grammar": 36,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "enb-g9-s2-u1",
+      "grade": 9,
+      "subject": "ინგლისური",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 4,
+        "vocabulary": 2,
+        "reading": 2,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "vocabulary": 16,
+        "grammar": 36,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "enb-g9-s2-u2",
+      "grade": 9,
+      "subject": "ინგლისური",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 4,
+        "vocabulary": 2,
+        "reading": 2,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "vocabulary": 16,
+        "grammar": 36,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "enb-g9-s2-sum",
+      "grade": 9,
+      "subject": "ინგლისური",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0.20000000000000018,
+      "shortages": [],
+      "expected": {
+        "grammar": 8,
+        "vocabulary": 3,
+        "reading": 5,
+        "use_of_language": 4
+      },
+      "availableByBucket": {
+        "vocabulary": 16,
+        "grammar": 36,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "enb-g10-s1-u1",
+      "grade": 10,
+      "subject": "ინგლისური",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 4,
+        "vocabulary": 2,
+        "reading": 2,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "vocabulary": 16,
+        "grammar": 36,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "enb-g10-s1-u2",
+      "grade": 10,
+      "subject": "ინგლისური",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 4,
+        "vocabulary": 2,
+        "reading": 2,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "vocabulary": 16,
+        "grammar": 36,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "enb-g10-s1-sum",
+      "grade": 10,
+      "subject": "ინგლისური",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0,
+      "shortages": [],
+      "expected": {
+        "grammar": 8,
+        "vocabulary": 3,
+        "reading": 5,
+        "use_of_language": 4
+      },
+      "availableByBucket": {
+        "vocabulary": 16,
+        "grammar": 36,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "enb-g10-s2-u1",
+      "grade": 10,
+      "subject": "ინგლისური",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 4,
+        "vocabulary": 2,
+        "reading": 2,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "grammar": 36,
+        "vocabulary": 16,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "enb-g10-s2-u2",
+      "grade": 10,
+      "subject": "ინგლისური",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 4,
+        "vocabulary": 2,
+        "reading": 2,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "grammar": 36,
+        "vocabulary": 16,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "enb-g10-s2-sum",
+      "grade": 10,
+      "subject": "ინგლისური",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0,
+      "shortages": [],
+      "expected": {
+        "grammar": 8,
+        "vocabulary": 3,
+        "reading": 5,
+        "use_of_language": 4
+      },
+      "availableByBucket": {
+        "grammar": 36,
+        "vocabulary": 16,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "enb-g11-s1-u1",
+      "grade": 11,
+      "subject": "ინგლისური",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.3999999999999999,
+      "shortages": [],
+      "expected": {
+        "grammar": 4,
+        "vocabulary": 1,
+        "reading": 3,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "grammar": 40,
+        "vocabulary": 12,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "enb-g11-s1-u2",
+      "grade": 11,
+      "subject": "ინგლისური",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.3999999999999999,
+      "shortages": [],
+      "expected": {
+        "grammar": 4,
+        "vocabulary": 1,
+        "reading": 3,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "grammar": 40,
+        "vocabulary": 12,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "enb-g11-s1-sum",
+      "grade": 11,
+      "subject": "ინგლისური",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0.20000000000000018,
+      "shortages": [],
+      "expected": {
+        "grammar": 8,
+        "vocabulary": 3,
+        "reading": 5,
+        "use_of_language": 4
+      },
+      "availableByBucket": {
+        "grammar": 40,
+        "vocabulary": 12,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "enb-g11-s2-u1",
+      "grade": 11,
+      "subject": "ინგლისური",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.3999999999999999,
+      "shortages": [],
+      "expected": {
+        "grammar": 4,
+        "vocabulary": 1,
+        "reading": 3,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "grammar": 40,
+        "vocabulary": 12,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "enb-g11-s2-u2",
+      "grade": 11,
+      "subject": "ინგლისური",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.3999999999999999,
+      "shortages": [],
+      "expected": {
+        "grammar": 4,
+        "vocabulary": 1,
+        "reading": 3,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "grammar": 40,
+        "vocabulary": 12,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "enb-g11-s2-sum",
+      "grade": 11,
+      "subject": "ინგლისური",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0.20000000000000018,
+      "shortages": [],
+      "expected": {
+        "grammar": 8,
+        "vocabulary": 3,
+        "reading": 5,
+        "use_of_language": 4
+      },
+      "availableByBucket": {
+        "grammar": 40,
+        "vocabulary": 12,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "enb-g12-s1-u1",
+      "grade": 12,
+      "subject": "ინგლისური",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.20000000000000018,
+      "shortages": [],
+      "expected": {
+        "grammar": 4,
+        "vocabulary": 1,
+        "reading": 3,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "grammar": 36,
+        "vocabulary": 12,
+        "reading": 28,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "enb-g12-s1-u2",
+      "grade": 12,
+      "subject": "ინგლისური",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.20000000000000018,
+      "shortages": [],
+      "expected": {
+        "grammar": 4,
+        "vocabulary": 1,
+        "reading": 3,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "grammar": 36,
+        "vocabulary": 12,
+        "reading": 28,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "enb-g12-s1-sum",
+      "grade": 12,
+      "subject": "ინგლისური",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0.40000000000000036,
+      "shortages": [],
+      "expected": {
+        "grammar": 8,
+        "vocabulary": 2,
+        "reading": 6,
+        "use_of_language": 4
+      },
+      "availableByBucket": {
+        "grammar": 36,
+        "vocabulary": 12,
+        "reading": 28,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "enb-g12-s2-u1",
+      "grade": 12,
+      "subject": "ინგლისური",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.20000000000000018,
+      "shortages": [],
+      "expected": {
+        "grammar": 4,
+        "vocabulary": 1,
+        "reading": 3,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "reading": 28,
+        "grammar": 36,
+        "vocabulary": 12,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "enb-g12-s2-u2",
+      "grade": 12,
+      "subject": "ინგლისური",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.20000000000000018,
+      "shortages": [],
+      "expected": {
+        "grammar": 4,
+        "vocabulary": 1,
+        "reading": 3,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "reading": 28,
+        "grammar": 36,
+        "vocabulary": 12,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "enb-g12-s2-sum",
+      "grade": 12,
+      "subject": "ინგლისური",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0.40000000000000036,
+      "shortages": [],
+      "expected": {
+        "grammar": 8,
+        "vocabulary": 2,
+        "reading": 6,
+        "use_of_language": 4
+      },
+      "availableByBucket": {
+        "reading": 28,
+        "grammar": 36,
+        "vocabulary": 12,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "rub-g5-s1-u1",
+      "grade": 5,
+      "subject": "რუსული",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 2,
+        "vocabulary": 3,
+        "reading": 3,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "reading": 24,
+        "vocabulary": 32,
+        "use_of_language": 20,
+        "grammar": 20
+      }
+    },
+    {
+      "id": "rub-g5-s1-u2",
+      "grade": 5,
+      "subject": "რუსული",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 2,
+        "vocabulary": 3,
+        "reading": 3,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "reading": 24,
+        "vocabulary": 32,
+        "use_of_language": 20,
+        "grammar": 20
+      }
+    },
+    {
+      "id": "rub-g5-s1-sum",
+      "grade": 5,
+      "subject": "რუსული",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0,
+      "shortages": [],
+      "expected": {
+        "grammar": 4,
+        "vocabulary": 7,
+        "reading": 5,
+        "use_of_language": 4
+      },
+      "availableByBucket": {
+        "reading": 24,
+        "vocabulary": 32,
+        "use_of_language": 20,
+        "grammar": 20
+      }
+    },
+    {
+      "id": "rub-g5-s2-u1",
+      "grade": 5,
+      "subject": "რუსული",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 2,
+        "vocabulary": 4,
+        "reading": 2,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "reading": 24,
+        "vocabulary": 32,
+        "use_of_language": 20,
+        "grammar": 20
+      }
+    },
+    {
+      "id": "rub-g5-s2-u2",
+      "grade": 5,
+      "subject": "რუსული",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 2,
+        "vocabulary": 4,
+        "reading": 2,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "reading": 24,
+        "vocabulary": 32,
+        "use_of_language": 20,
+        "grammar": 20
+      }
+    },
+    {
+      "id": "rub-g5-s2-sum",
+      "grade": 5,
+      "subject": "რუსული",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0,
+      "shortages": [],
+      "expected": {
+        "grammar": 4,
+        "vocabulary": 7,
+        "reading": 5,
+        "use_of_language": 4
+      },
+      "availableByBucket": {
+        "reading": 24,
+        "vocabulary": 32,
+        "use_of_language": 20,
+        "grammar": 20
+      }
+    },
+    {
+      "id": "rub-g6-s1-u1",
+      "grade": 6,
+      "subject": "რუსული",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 3,
+        "vocabulary": 3,
+        "reading": 2,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "reading": 24,
+        "vocabulary": 28,
+        "use_of_language": 20,
+        "grammar": 24
+      }
+    },
+    {
+      "id": "rub-g6-s1-u2",
+      "grade": 6,
+      "subject": "რუსული",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 3,
+        "vocabulary": 3,
+        "reading": 2,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "reading": 24,
+        "vocabulary": 28,
+        "use_of_language": 20,
+        "grammar": 24
+      }
+    },
+    {
+      "id": "rub-g6-s1-sum",
+      "grade": 6,
+      "subject": "რუსული",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0,
+      "shortages": [],
+      "expected": {
+        "grammar": 5,
+        "vocabulary": 6,
+        "reading": 5,
+        "use_of_language": 4
+      },
+      "availableByBucket": {
+        "reading": 24,
+        "vocabulary": 28,
+        "use_of_language": 20,
+        "grammar": 24
+      }
+    },
+    {
+      "id": "rub-g6-s2-u1",
+      "grade": 6,
+      "subject": "რუსული",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 3,
+        "vocabulary": 3,
+        "reading": 2,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "vocabulary": 28,
+        "grammar": 24,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "rub-g6-s2-u2",
+      "grade": 6,
+      "subject": "რუსული",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 3,
+        "vocabulary": 3,
+        "reading": 2,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "vocabulary": 28,
+        "grammar": 24,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "rub-g6-s2-sum",
+      "grade": 6,
+      "subject": "რუსული",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0,
+      "shortages": [],
+      "expected": {
+        "grammar": 5,
+        "vocabulary": 6,
+        "reading": 5,
+        "use_of_language": 4
+      },
+      "availableByBucket": {
+        "vocabulary": 28,
+        "grammar": 24,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "rub-g7-s1-u1",
+      "grade": 7,
+      "subject": "რუსული",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 3,
+        "vocabulary": 3,
+        "reading": 2,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "vocabulary": 24,
+        "grammar": 28,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "rub-g7-s1-u2",
+      "grade": 7,
+      "subject": "რუსული",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 3,
+        "vocabulary": 3,
+        "reading": 2,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "vocabulary": 24,
+        "grammar": 28,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "rub-g7-s1-sum",
+      "grade": 7,
+      "subject": "რუსული",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0,
+      "shortages": [],
+      "expected": {
+        "grammar": 6,
+        "vocabulary": 5,
+        "reading": 5,
+        "use_of_language": 4
+      },
+      "availableByBucket": {
+        "vocabulary": 24,
+        "grammar": 28,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "rub-g7-s2-u1",
+      "grade": 7,
+      "subject": "რუსული",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 3,
+        "vocabulary": 3,
+        "reading": 2,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "grammar": 28,
+        "reading": 24,
+        "vocabulary": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "rub-g7-s2-u2",
+      "grade": 7,
+      "subject": "რუსული",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 3,
+        "vocabulary": 3,
+        "reading": 2,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "grammar": 28,
+        "reading": 24,
+        "vocabulary": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "rub-g7-s2-sum",
+      "grade": 7,
+      "subject": "რუსული",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0,
+      "shortages": [],
+      "expected": {
+        "grammar": 6,
+        "vocabulary": 5,
+        "reading": 5,
+        "use_of_language": 4
+      },
+      "availableByBucket": {
+        "grammar": 28,
+        "reading": 24,
+        "vocabulary": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "rub-g8-s1-u1",
+      "grade": 8,
+      "subject": "რუსული",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 3,
+        "vocabulary": 2,
+        "reading": 3,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "grammar": 32,
+        "reading": 24,
+        "vocabulary": 20,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "rub-g8-s1-u2",
+      "grade": 8,
+      "subject": "რუსული",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 3,
+        "vocabulary": 2,
+        "reading": 3,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "grammar": 32,
+        "reading": 24,
+        "vocabulary": 20,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "rub-g8-s1-sum",
+      "grade": 8,
+      "subject": "რუსული",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0.40000000000000036,
+      "shortages": [],
+      "expected": {
+        "grammar": 7,
+        "vocabulary": 4,
+        "reading": 5,
+        "use_of_language": 4
+      },
+      "availableByBucket": {
+        "grammar": 32,
+        "reading": 24,
+        "vocabulary": 20,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "rub-g8-s2-u1",
+      "grade": 8,
+      "subject": "რუსული",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 3,
+        "vocabulary": 2,
+        "reading": 3,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "vocabulary": 20,
+        "grammar": 32,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "rub-g8-s2-u2",
+      "grade": 8,
+      "subject": "რუსული",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 3,
+        "vocabulary": 2,
+        "reading": 3,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "vocabulary": 20,
+        "grammar": 32,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "rub-g8-s2-sum",
+      "grade": 8,
+      "subject": "რუსული",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0.40000000000000036,
+      "shortages": [],
+      "expected": {
+        "grammar": 7,
+        "vocabulary": 4,
+        "reading": 5,
+        "use_of_language": 4
+      },
+      "availableByBucket": {
+        "vocabulary": 20,
+        "grammar": 32,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "rub-g9-s1-u1",
+      "grade": 9,
+      "subject": "რუსული",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 3,
+        "vocabulary": 2,
+        "reading": 3,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "vocabulary": 20,
+        "grammar": 32,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "rub-g9-s1-u2",
+      "grade": 9,
+      "subject": "რუსული",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 3,
+        "vocabulary": 2,
+        "reading": 3,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "vocabulary": 20,
+        "grammar": 32,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "rub-g9-s1-sum",
+      "grade": 9,
+      "subject": "რუსული",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0,
+      "shortages": [],
+      "expected": {
+        "grammar": 7,
+        "vocabulary": 4,
+        "reading": 5,
+        "use_of_language": 4
+      },
+      "availableByBucket": {
+        "vocabulary": 20,
+        "grammar": 32,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "rub-g9-s2-u1",
+      "grade": 9,
+      "subject": "რუსული",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 4,
+        "vocabulary": 2,
+        "reading": 2,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "vocabulary": 20,
+        "grammar": 32,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "rub-g9-s2-u2",
+      "grade": 9,
+      "subject": "რუსული",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 4,
+        "vocabulary": 2,
+        "reading": 2,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "vocabulary": 20,
+        "grammar": 32,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "rub-g9-s2-sum",
+      "grade": 9,
+      "subject": "რუსული",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0,
+      "shortages": [],
+      "expected": {
+        "grammar": 7,
+        "vocabulary": 4,
+        "reading": 5,
+        "use_of_language": 4
+      },
+      "availableByBucket": {
+        "vocabulary": 20,
+        "grammar": 32,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "rub-g10-s1-u1",
+      "grade": 10,
+      "subject": "რუსული",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.6000000000000001,
+      "shortages": [],
+      "expected": {
+        "grammar": 4,
+        "vocabulary": 2,
+        "reading": 2,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "vocabulary": 16,
+        "grammar": 36,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "rub-g10-s1-u2",
+      "grade": 10,
+      "subject": "რუსული",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.6000000000000001,
+      "shortages": [],
+      "expected": {
+        "grammar": 4,
+        "vocabulary": 2,
+        "reading": 2,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "vocabulary": 16,
+        "grammar": 36,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "rub-g10-s1-sum",
+      "grade": 10,
+      "subject": "რუსული",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0.3999999999999999,
+      "shortages": [],
+      "expected": {
+        "grammar": 7,
+        "vocabulary": 4,
+        "reading": 5,
+        "use_of_language": 4
+      },
+      "availableByBucket": {
+        "vocabulary": 16,
+        "grammar": 36,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "rub-g10-s2-u1",
+      "grade": 10,
+      "subject": "რუსული",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.6000000000000001,
+      "shortages": [],
+      "expected": {
+        "grammar": 4,
+        "vocabulary": 2,
+        "reading": 2,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "grammar": 36,
+        "vocabulary": 16,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "rub-g10-s2-u2",
+      "grade": 10,
+      "subject": "რუსული",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.6000000000000001,
+      "shortages": [],
+      "expected": {
+        "grammar": 4,
+        "vocabulary": 2,
+        "reading": 2,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "grammar": 36,
+        "vocabulary": 16,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "rub-g10-s2-sum",
+      "grade": 10,
+      "subject": "რუსული",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0.3999999999999999,
+      "shortages": [],
+      "expected": {
+        "grammar": 7,
+        "vocabulary": 4,
+        "reading": 5,
+        "use_of_language": 4
+      },
+      "availableByBucket": {
+        "grammar": 36,
+        "vocabulary": 16,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "rub-g11-s1-u1",
+      "grade": 11,
+      "subject": "რუსული",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.6000000000000001,
+      "shortages": [],
+      "expected": {
+        "grammar": 4,
+        "vocabulary": 1,
+        "reading": 3,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "grammar": 36,
+        "vocabulary": 16,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "rub-g11-s1-u2",
+      "grade": 11,
+      "subject": "რუსული",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.6000000000000001,
+      "shortages": [],
+      "expected": {
+        "grammar": 4,
+        "vocabulary": 1,
+        "reading": 3,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "grammar": 36,
+        "vocabulary": 16,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "rub-g11-s1-sum",
+      "grade": 11,
+      "subject": "რუსული",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0.5999999999999996,
+      "shortages": [],
+      "expected": {
+        "grammar": 8,
+        "vocabulary": 3,
+        "reading": 5,
+        "use_of_language": 4
+      },
+      "availableByBucket": {
+        "grammar": 36,
+        "vocabulary": 16,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "rub-g11-s2-u1",
+      "grade": 11,
+      "subject": "რუსული",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.6000000000000001,
+      "shortages": [],
+      "expected": {
+        "grammar": 4,
+        "vocabulary": 1,
+        "reading": 3,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "grammar": 36,
+        "vocabulary": 16,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "rub-g11-s2-u2",
+      "grade": 11,
+      "subject": "რუსული",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.6000000000000001,
+      "shortages": [],
+      "expected": {
+        "grammar": 4,
+        "vocabulary": 1,
+        "reading": 3,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "grammar": 36,
+        "vocabulary": 16,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "rub-g11-s2-sum",
+      "grade": 11,
+      "subject": "რუსული",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0.5999999999999996,
+      "shortages": [],
+      "expected": {
+        "grammar": 7,
+        "vocabulary": 3,
+        "reading": 6,
+        "use_of_language": 4
+      },
+      "availableByBucket": {
+        "grammar": 36,
+        "vocabulary": 16,
+        "reading": 24,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "rub-g12-s1-u1",
+      "grade": 12,
+      "subject": "რუსული",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 4,
+        "vocabulary": 1,
+        "reading": 3,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "grammar": 36,
+        "vocabulary": 12,
+        "reading": 28,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "rub-g12-s1-u2",
+      "grade": 12,
+      "subject": "რუსული",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 4,
+        "vocabulary": 1,
+        "reading": 3,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "grammar": 36,
+        "vocabulary": 12,
+        "reading": 28,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "rub-g12-s1-sum",
+      "grade": 12,
+      "subject": "რუსული",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0.40000000000000036,
+      "shortages": [],
+      "expected": {
+        "grammar": 7,
+        "vocabulary": 3,
+        "reading": 6,
+        "use_of_language": 4
+      },
+      "availableByBucket": {
+        "grammar": 36,
+        "vocabulary": 12,
+        "reading": 28,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "rub-g12-s2-u1",
+      "grade": 12,
+      "subject": "რუსული",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 4,
+        "vocabulary": 1,
+        "reading": 3,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "reading": 28,
+        "grammar": 36,
+        "vocabulary": 12,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "rub-g12-s2-u2",
+      "grade": 12,
+      "subject": "რუსული",
+      "requested": 10,
+      "expectedTotal": 10,
+      "maxRoundingDeviation": 0.5,
+      "shortages": [],
+      "expected": {
+        "grammar": 4,
+        "vocabulary": 1,
+        "reading": 3,
+        "use_of_language": 2
+      },
+      "availableByBucket": {
+        "reading": 28,
+        "grammar": 36,
+        "vocabulary": 12,
+        "use_of_language": 20
+      }
+    },
+    {
+      "id": "rub-g12-s2-sum",
+      "grade": 12,
+      "subject": "რუსული",
+      "requested": 20,
+      "expectedTotal": 20,
+      "maxRoundingDeviation": 0.40000000000000036,
+      "shortages": [],
+      "expected": {
+        "grammar": 7,
+        "vocabulary": 3,
+        "reading": 6,
+        "use_of_language": 4
+      },
+      "availableByBucket": {
+        "reading": 28,
+        "grammar": 36,
+        "vocabulary": 12,
+        "use_of_language": 20
+      }
+    }
+  ],
+  "languageBlueprintViolations": [],
+  "prematureLanguageTopicRows": [],
   "typeCounts": {
-    "multiple_choice": 8891,
+    "multiple_choice": 14427,
     "true_false": 2231,
-    "calc": 537,
+    "calc": 1049,
     "match": 117,
-    "fill": 574,
+    "fill": 1822,
     "order": 85
   },
   "testsBySubjectGrade": {
@@ -240,45 +4878,51 @@
       ]
     },
     "ინგლისური · 1": {
-      "tests": 4,
-      "requestedQuestions": 60,
+      "tests": 10,
+      "requestedQuestions": 140,
       "pools": [
-        "eng-12"
+        "eng-12",
+        "enb-g1"
       ]
     },
     "ინგლისური · 2": {
-      "tests": 4,
-      "requestedQuestions": 60,
+      "tests": 10,
+      "requestedQuestions": 140,
       "pools": [
-        "eng-12"
+        "eng-12",
+        "enb-g2"
       ]
     },
     "ინგლისური · 3": {
-      "tests": 4,
-      "requestedQuestions": 60,
+      "tests": 10,
+      "requestedQuestions": 140,
       "pools": [
-        "eng-34"
+        "eng-34",
+        "enb-g3"
       ]
     },
     "ინგლისური · 4": {
-      "tests": 4,
-      "requestedQuestions": 60,
+      "tests": 10,
+      "requestedQuestions": 140,
       "pools": [
-        "eng-34"
+        "eng-34",
+        "enb-g4"
       ]
     },
     "ინგლისური · 5": {
-      "tests": 4,
-      "requestedQuestions": 60,
+      "tests": 10,
+      "requestedQuestions": 140,
       "pools": [
-        "eng-56"
+        "eng-56",
+        "enb-g5"
       ]
     },
     "ინგლისური · 6": {
-      "tests": 4,
-      "requestedQuestions": 60,
+      "tests": 10,
+      "requestedQuestions": 140,
       "pools": [
-        "eng-56"
+        "eng-56",
+        "enb-g6"
       ]
     },
     "ინგლ. ლიტ. · 7": {
@@ -366,10 +5010,11 @@
       ]
     },
     "რუსული · 5": {
-      "tests": 4,
-      "requestedQuestions": 60,
+      "tests": 10,
+      "requestedQuestions": 140,
       "pools": [
-        "rus-56"
+        "rus-56",
+        "rub-g5"
       ]
     },
     "რუს. გრამ. · 5": {
@@ -380,10 +5025,11 @@
       ]
     },
     "რუსული · 6": {
-      "tests": 4,
-      "requestedQuestions": 60,
+      "tests": 10,
+      "requestedQuestions": 140,
       "pools": [
-        "rus-56"
+        "rus-56",
+        "rub-g6"
       ]
     },
     "რუს. გრამ. · 6": {
@@ -394,10 +5040,11 @@
       ]
     },
     "რუსული · 7": {
-      "tests": 4,
-      "requestedQuestions": 60,
+      "tests": 10,
+      "requestedQuestions": 140,
       "pools": [
-        "rus-78"
+        "rus-78",
+        "rub-g7"
       ]
     },
     "რუს. გრამ. · 7": {
@@ -408,10 +5055,11 @@
       ]
     },
     "რუსული · 8": {
-      "tests": 4,
-      "requestedQuestions": 60,
+      "tests": 10,
+      "requestedQuestions": 140,
       "pools": [
-        "rus-78"
+        "rus-78",
+        "rub-g8"
       ]
     },
     "რუს. გრამ. · 8": {
@@ -422,10 +5070,11 @@
       ]
     },
     "რუსული · 9": {
-      "tests": 4,
-      "requestedQuestions": 60,
+      "tests": 10,
+      "requestedQuestions": 140,
       "pools": [
-        "rus-910"
+        "rus-910",
+        "rub-g9"
       ]
     },
     "რუს. გრამ. · 9": {
@@ -436,10 +5085,11 @@
       ]
     },
     "რუსული · 10": {
-      "tests": 4,
-      "requestedQuestions": 60,
+      "tests": 10,
+      "requestedQuestions": 140,
       "pools": [
-        "rus-910"
+        "rus-910",
+        "rub-g10"
       ]
     },
     "რუს. გრამ. · 10": {
@@ -450,10 +5100,11 @@
       ]
     },
     "რუსული · 11": {
-      "tests": 4,
-      "requestedQuestions": 60,
+      "tests": 10,
+      "requestedQuestions": 140,
       "pools": [
-        "rus-1112"
+        "rus-1112",
+        "rub-g11"
       ]
     },
     "რუს. გრამ. · 11": {
@@ -464,10 +5115,11 @@
       ]
     },
     "რუსული · 12": {
-      "tests": 4,
-      "requestedQuestions": 60,
+      "tests": 10,
+      "requestedQuestions": 140,
       "pools": [
-        "rus-1112"
+        "rus-1112",
+        "rub-g12"
       ]
     },
     "რუს. გრამ. · 12": {
@@ -762,6 +5414,174 @@
       "requestedQuestions": 60,
       "pools": [
         "phys-1112"
+      ]
+    },
+    "ალგებრა · 7": {
+      "tests": 6,
+      "requestedQuestions": 80,
+      "pools": [
+        "alg-g7"
+      ]
+    },
+    "გეომეტრია · 7": {
+      "tests": 6,
+      "requestedQuestions": 80,
+      "pools": [
+        "geom-g7"
+      ]
+    },
+    "ალგებრა · 8": {
+      "tests": 6,
+      "requestedQuestions": 80,
+      "pools": [
+        "alg-g8"
+      ]
+    },
+    "გეომეტრია · 8": {
+      "tests": 6,
+      "requestedQuestions": 80,
+      "pools": [
+        "geom-g8"
+      ]
+    },
+    "ალგებრა · 9": {
+      "tests": 6,
+      "requestedQuestions": 80,
+      "pools": [
+        "alg-g9"
+      ]
+    },
+    "გეომეტრია · 9": {
+      "tests": 6,
+      "requestedQuestions": 80,
+      "pools": [
+        "geom-g9"
+      ]
+    },
+    "ალგებრა · 10": {
+      "tests": 6,
+      "requestedQuestions": 80,
+      "pools": [
+        "alg-g10"
+      ]
+    },
+    "გეომეტრია · 10": {
+      "tests": 6,
+      "requestedQuestions": 80,
+      "pools": [
+        "geom-g10"
+      ]
+    },
+    "ალგებრა · 11": {
+      "tests": 6,
+      "requestedQuestions": 80,
+      "pools": [
+        "alg-g11"
+      ]
+    },
+    "გეომეტრია · 11": {
+      "tests": 6,
+      "requestedQuestions": 80,
+      "pools": [
+        "geom-g11"
+      ]
+    },
+    "ალგებრა · 12": {
+      "tests": 6,
+      "requestedQuestions": 80,
+      "pools": [
+        "alg-g12"
+      ]
+    },
+    "გეომეტრია · 12": {
+      "tests": 6,
+      "requestedQuestions": 80,
+      "pools": [
+        "geom-g12"
+      ]
+    },
+    "ქართული ენა და ლიტერატურა · 7": {
+      "tests": 6,
+      "requestedQuestions": 80,
+      "pools": [
+        "kab-g7"
+      ]
+    },
+    "ქართული ენა და ლიტერატურა · 8": {
+      "tests": 6,
+      "requestedQuestions": 80,
+      "pools": [
+        "kab-g8"
+      ]
+    },
+    "ქართული ენა და ლიტერატურა · 9": {
+      "tests": 6,
+      "requestedQuestions": 80,
+      "pools": [
+        "kab-g9"
+      ]
+    },
+    "ქართული ენა და ლიტერატურა · 10": {
+      "tests": 6,
+      "requestedQuestions": 80,
+      "pools": [
+        "kab-g10"
+      ]
+    },
+    "ქართული ენა და ლიტერატურა · 11": {
+      "tests": 6,
+      "requestedQuestions": 80,
+      "pools": [
+        "kab-g11"
+      ]
+    },
+    "ქართული ენა და ლიტერატურა · 12": {
+      "tests": 6,
+      "requestedQuestions": 80,
+      "pools": [
+        "kab-g12"
+      ]
+    },
+    "ინგლისური · 7": {
+      "tests": 6,
+      "requestedQuestions": 80,
+      "pools": [
+        "enb-g7"
+      ]
+    },
+    "ინგლისური · 8": {
+      "tests": 6,
+      "requestedQuestions": 80,
+      "pools": [
+        "enb-g8"
+      ]
+    },
+    "ინგლისური · 9": {
+      "tests": 6,
+      "requestedQuestions": 80,
+      "pools": [
+        "enb-g9"
+      ]
+    },
+    "ინგლისური · 10": {
+      "tests": 6,
+      "requestedQuestions": 80,
+      "pools": [
+        "enb-g10"
+      ]
+    },
+    "ინგლისური · 11": {
+      "tests": 6,
+      "requestedQuestions": 80,
+      "pools": [
+        "enb-g11"
+      ]
+    },
+    "ინგლისური · 12": {
+      "tests": 6,
+      "requestedQuestions": 80,
+      "pools": [
+        "enb-g12"
       ]
     }
   },
@@ -1817,7 +6637,7 @@
       ]
     }
   ],
-  "duplicateTextCount": 3444,
+  "duplicateTextCount": 3761,
   "duplicateTextExamples": [
     {
       "text": "сов. вид \"читать\"?",
@@ -2529,12 +7349,12 @@
       "blocked_unpublished_pool": 1693,
       "candidate_explicit_alignment": 32,
       "blocked_curriculum_stage": 316,
-      "candidate_generated_alignment": 5831
+      "candidate_generated_alignment": 13127
     },
     "areaCounts": {
-      "georgian": 1850,
-      "foreign_language": 3117,
-      "math": 1792,
+      "georgian": 3002,
+      "foreign_language": 6957,
+      "math": 4096,
       "nature": 1349,
       "history": 858,
       "geography": 233,
@@ -2543,17 +7363,17 @@
       "physics": 1086
     },
     "domainCounts": {
-      "georgian.language_system": 234,
-      "foreign_language.language_system": 428,
-      "math.numbers_operations": 1307,
-      "math.geometry_space": 151,
-      "math.patterns_algebra": 60,
-      "math.data_probability": 259,
-      "math.measurement": 15,
+      "georgian.language_system": 714,
+      "foreign_language.language_system": 3292,
+      "math.numbers_operations": 2383,
+      "math.geometry_space": 999,
+      "math.patterns_algebra": 236,
+      "math.data_probability": 439,
+      "math.measurement": 39,
       "georgian.reading": 1445,
-      "georgian.literature_culture": 163,
-      "foreign_language.reading": 2351,
-      "foreign_language.culture": 338,
+      "georgian.literature_culture": 835,
+      "foreign_language.reading": 3283,
+      "foreign_language.culture": 382,
       "nature.inquiry": 970,
       "nature.earth_environment": 58,
       "nature.living_world": 262,

@@ -6,7 +6,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;600;700;800&display=swap" rel="stylesheet"/>
 <title>EduTest.ge — სკოლის ონლაინ ტესტების პლატფორმა I–XII კლასი</title>
-<meta name="description" content="EduTest.ge — საქართველოს სასკოლო ონლაინ სატესტო პლატფორმა. 420 ტესტი, 6,604 კითხვა, 12 საგანი, I–XII კლასი."/>
+<meta name="description" content="EduTest.ge — კლასზე მორგებული სასკოლო ტესტები, ახსნა და პროგრესის ანალიზი I–XII კლასებისთვის."/>
 <meta name="keywords" content="ედუტესტი, სკოლა, ტესტი, ქართული, მათემატიკა, ისტორია, ბიოლოგია, ონლაინ სწავლება, edutest, georgia school test"/>
 <meta name="author" content="EduTest.ge"/>
 <meta name="robots" content="index, follow"/>
@@ -14,14 +14,14 @@
 <!-- Open Graph -->
 <meta property="og:type" content="website"/>
 <meta property="og:title" content="EduTest.ge — სკოლის ონლაინ ტესტების პლატფორმა"/>
-<meta property="og:description" content="420 ტესტი · 6,604 კითხვა · 12 საგანი · I–XII კლასი. გაიგე, რა იცი და რა ისწავლო შემდეგ."/>
+<meta property="og:description" content="კლასზე მორგებული ტესტები · ახსნა · პროგრესის ანალიზი · I–XII კლასი."/>
 <meta property="og:url" content="https://edutest.ge/"/>
 <meta property="og:locale" content="ka_GE"/>
 <meta property="og:site_name" content="EduTest.ge"/>
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="EduTest.ge — სკოლის ონლაინ ტესტების პლატფორმა"/>
-<meta name="twitter:description" content="420 ტესტი · 6,604 კითხვა · I–XII კლასი. ქართული სკოლებისთვის."/>
+<meta name="twitter:description" content="კლასზე მორგებული სასკოლო ტესტები, ახსნა და პროგრესის ანალიზი I–XII კლასებისთვის."/>
 <!-- Schema.org JSON-LD -->
 <script type="application/ld+json">
 {
@@ -12498,6 +12498,8 @@ Q_POOL['hist-910-5']=[
 <script src="/question-quality-overrides.js"></script>
 <script src="/question-policy.js"></script>
 <script src="/expanded-question-bank.js"></script>
+<script src="/senior-math-bank.js"></script>
+<script src="/language-blueprint-bank.js"></script>
 <script>
 const ALL_TESTS=[
 {id:'math-g1-s1',title:'მათემატიკა — I კლასი — I სემ.',subject:'მათემატიკა',grade:1,pool:'math-12',count:10,time:15,attempts:3,paid:false,semester:1,testType:'mid'},
@@ -12921,18 +12923,41 @@ const ALL_TESTS=[
 {id:'phys-g12-s1-sum',title:'ფიზიკა — XII კლასი — I სემ. შემაჯამებელი',subject:'ფიზიკა',grade:12,pool:'phys-1112',count:20,time:40,attempts:2,paid:true,semester:1,testType:'sum',sumTest:true},
 {id:'phys-g12-s2-sum',title:'ფიზიკა — XII კლასი — II სემ. შემაჯამებელი',subject:'ფიზიკა',grade:12,pool:'phys-1112',count:20,time:40,attempts:2,paid:true,semester:0,testType:'sum',sumTest:true}
 ];
+// VII–XII კლასების ძველი გაერთიანებული მათემატიკის ტესტები რჩება მხოლოდ
+// ისტორიული შედეგებისა და უკვე გაცემული დავალებების უსაფრთხოდ წასაკითხად.
+ALL_TESTS.forEach(test=>{
+  if(/^math-g(?:7|8|9|10|11|12)-/.test(test.id)){
+    test.legacy=true;
+    test.catalogHidden=true;
+    test.curriculumStage='legacy_combined_math';
+  }
+});
+ALL_TESTS.push(...(globalThis.EDUTEST_SENIOR_MATH_TESTS||[]));
+// Preserve legacy language tests for historical result/assignment lookup, but
+// replace their shared-grade templates in every live catalog with exact-grade,
+// blueprint-driven banks.
+ALL_TESTS.forEach(test=>{
+  if(/^(?:geo|gg)-g(?:7|8|9|10|11|12)-/.test(test.id)
+    ||/^(?:eng|eg)-g(?:1|2|3|4|5|6|7|8|9|10|11|12)-/.test(test.id)
+    ||/^(?:rus|rg)-g(?:5|6|7|8|9|10|11|12)-/.test(test.id)){
+    test.legacy=true;
+    test.catalogHidden=true;
+    test.curriculumStage='legacy_shared_grade_language';
+  }
+});
+ALL_TESTS.push(...(globalThis.EDUTEST_LANGUAGE_TESTS||[]));
 // Student catalog follows the official school-subject stages. Split language
 // modules remain separate tests internally, but are shown as one school subject.
 const SUBJECT_FAMILY={
-  'ქართული ლიტ.':'ქართული','ქართული ენა':'ქართული',
+  'ქართული ლიტ.':'ქართული ენა და ლიტერატურა','ქართული ენა':'ქართული ენა და ლიტერატურა',
   'ინგლ. ლიტ.':'ინგლისური','ინგლ. გრამ.':'ინგლისური',
   'რუს. გრამ.':'რუსული'
 };
 const STUDENT_SUBJECTS_BY_STAGE={
   primary:['მათემატიკა','ქართული','ინგლისური','ბუნება'],
   upperPrimary:['მათემატიკა','ქართული','ინგლისური','რუსული','ბუნება'],
-  grade7:['მათემატიკა','ქართული','ინგლისური','რუსული','ისტორია','გეოგრაფია','ბიოლოგია','ფიზიკა'],
-  secondary:['მათემატიკა','ქართული','ინგლისური','რუსული','ისტორია','გეოგრაფია','ბიოლოგია','ქიმია','ფიზიკა']
+  grade7:['ალგებრა','გეომეტრია','ქართული ენა და ლიტერატურა','ინგლისური','რუსული','ისტორია','გეოგრაფია','ბიოლოგია','ფიზიკა'],
+  secondary:['ალგებრა','გეომეტრია','ქართული ენა და ლიტერატურა','ინგლისური','რუსული','ისტორია','გეოგრაფია','ბიოლოგია','ქიმია','ფიზიკა']
 };
 function subjectFamily(subject){return SUBJECT_FAMILY[subject]||subject;}
 function subjectsForGrade(grade){
@@ -12949,6 +12974,7 @@ function isStudentGradeVisible(testGrade,userGrade){
 }
 function isCurriculumEligible(test){
   if(!test)return false;
+  if(test.catalogHidden)return false;
   const grade=Number(test.grade);
   if(String(test.pool||'').startsWith('hist-')&&grade<7)return false;
   return isSubjectAvailableForGrade(test.subject,grade);
@@ -12970,6 +12996,7 @@ ALL_TESTS.forEach(test=>{
   }
   if(test.semester===1) available=available.slice(0,Math.ceil(available.length/2));
   else if(test.semester===2) available=available.slice(Math.ceil(available.length/2));
+  if(test.topicGroup) available=available.filter(question=>question.topicGroup===test.topicGroup);
   test.count=Math.min(test.count,available.length);
 });
 
@@ -13577,7 +13604,7 @@ function renderSubjectMastery(containerId){
   const email=CUR_USER.email;const u=USER_DB.find(x=>x.email===email);
   const grade=parseInt((u&&u.grade)||1)||1;
   const subjects=subjectsForGrade(grade);
-  const icons={'მათემატიკა':'📐','ქართული':'📚','ინგლისური':'🇬🇧','რუსული':'🇷🇺','ბუნება':'🌿','ისტორია':'🏛️','გეოგრაფია':'🌍','ბიოლოგია':'🧬','ქიმია':'⚗️','ფიზიკა':'⚡'};
+  const icons={'მათემატიკა':'📐','ალგებრა':'𝑥','გეომეტრია':'📐','ქართული':'📚','ქართული ენა და ლიტერატურა':'📚','ინგლისური':'🇬🇧','რუსული':'🇷🇺','ბუნება':'🌿','ისტორია':'🏛️','გეოგრაფია':'🌍','ბიოლოგია':'🧬','ქიმია':'⚗️','ფიზიკა':'⚡'};
   const myResults=SESSION_RESULTS.filter(r=>r.userId===email);
   const rows=subjects.map(subj=>{
     const subjTests=ALL_TESTS.filter(t=>isCurriculumEligible(t)&&subjectFamily(t.subject)===subj&&(parseInt(t.grade)===grade||t.grade===String(grade)));
@@ -13675,7 +13702,7 @@ const USER_DB=[...DEFAULT_USERS];
 
 
 // Subject → i18n key map for dynamic title translation
-const SUBJ_KEY={'მათემატიკა':'math','ქართული':'georgian','ინგლისური':'english','რუსული':'russian','ბუნება':'nature','ისტორია':'history','გეოგრაფია':'geography','ბიოლოგია':'biology','ქიმია':'chemistry','ფიზიკა':'physics'};
+const SUBJ_KEY={'მათემატიკა':'math','ქართული':'georgian','ქართული ენა და ლიტერატურა':'georgian','ინგლისური':'english','რუსული':'russian','ბუნება':'nature','ისტორია':'history','გეოგრაფია':'geography','ბიოლოგია':'biology','ქიმია':'chemistry','ფიზიკა':'physics'};
 const GRADE_ROMAN=['I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII'];
 
 // Generate translated test title on-the-fly
@@ -13717,8 +13744,8 @@ let curTest=null;
 let curTestQs=[];
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
-const SUBJ_COLORS={'მათემატიკა':'linear-gradient(135deg,#6366f1,#8b5cf6)','ქართული':'linear-gradient(135deg,#f59e0b,#d97706)','ინგლისური':'linear-gradient(135deg,#10b981,#059669)','რუსული':'linear-gradient(135deg,#ef4444,#dc2626)','ბუნება':'linear-gradient(135deg,#0ea5e9,#0284c7)','ისტორია':'linear-gradient(135deg,#8b5cf6,#7c3aed)','გეოგრაფია':'linear-gradient(135deg,#14b8a6,#0d9488)','ბიოლოგია':'linear-gradient(135deg,#22c55e,#16a34a)','ქიმია':'linear-gradient(135deg,#f97316,#ea580c)','ფიზიკა':'linear-gradient(135deg,#3b82f6,#2563eb)'};
-const SUBJ_ICONS={'მათემატიკა':'📐','ქართული':'📚','ინგლისური':'🇬🇧','რუსული':'🇷🇺','ბუნება':'🌿','ისტორია':'🏛️','გეოგრაფია':'🌍','ბიოლოგია':'🧬','ქიმია':'⚗️','ფიზიკა':'⚡'};
+const SUBJ_COLORS={'მათემატიკა':'linear-gradient(135deg,#6366f1,#8b5cf6)','ალგებრა':'linear-gradient(135deg,#4f46e5,#7c3aed)','გეომეტრია':'linear-gradient(135deg,#0284c7,#0d9488)','ქართული':'linear-gradient(135deg,#f59e0b,#d97706)','ქართული ენა და ლიტერატურა':'linear-gradient(135deg,#f59e0b,#d97706)','ინგლისური':'linear-gradient(135deg,#10b981,#059669)','რუსული':'linear-gradient(135deg,#ef4444,#dc2626)','ბუნება':'linear-gradient(135deg,#0ea5e9,#0284c7)','ისტორია':'linear-gradient(135deg,#8b5cf6,#7c3aed)','გეოგრაფია':'linear-gradient(135deg,#14b8a6,#0d9488)','ბიოლოგია':'linear-gradient(135deg,#22c55e,#16a34a)','ქიმია':'linear-gradient(135deg,#f97316,#ea580c)','ფიზიკა':'linear-gradient(135deg,#3b82f6,#2563eb)'};
+const SUBJ_ICONS={'მათემატიკა':'📐','ალგებრა':'𝑥','გეომეტრია':'📐','ქართული':'📚','ქართული ენა და ლიტერატურა':'📚','ინგლისური':'🇬🇧','რუსული':'🇷🇺','ბუნება':'🌿','ისტორია':'🏛️','გეოგრაფია':'🌍','ბიოლოგია':'🧬','ქიმია':'⚗️','ფიზიკა':'⚡'};
 
 function shuffleArr(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 let _tabSwitchCount=0;
@@ -13914,7 +13941,7 @@ function inferQuestionSkill(q,test){
   if(q.skill)return q.skill;
   const text=String(q.text||'').toLocaleLowerCase('ka-GE');
   const pool=String(test.pool||'');
-  if(pool.startsWith('math')){
+  if(pool.startsWith('math')||pool.startsWith('alg')||pool.startsWith('geom')){
     if(/სამკუთხ|კვადრატ|მართკუთხედ|წრე|კუთხ|ფიგურ|perimeter|area/.test(text))return 'math.geometry';
     if(/სანტიმეტრ|მეტრ|კილოგრამ|ლიტრ|საათ|წუთ|measurement/.test(text))return 'math.measurement';
     if(/ცხრილ|დიაგრამ|მონაცემ|საშუალო|probab/.test(text))return 'math.data';
@@ -13935,6 +13962,38 @@ function inferQuestionSkill(q,test){
   return pool+'.core';
 }
 
+function allocateContentBlueprint(weights,total,rotation){
+  if(typeof globalThis.EDUTEST_ALLOCATE_BLUEPRINT==='function')return globalThis.EDUTEST_ALLOCATE_BLUEPRINT(weights,total,rotation||0);
+  const entries=Object.entries(weights||{}),sum=entries.reduce((n,row)=>n+Number(row[1]||0),0);
+  if(!entries.length||sum<=0)return{};
+  const rows=entries.map(([key,weight],index)=>{const exact=total*Number(weight)/sum;return{key,index,count:Math.floor(exact),rest:exact-Math.floor(exact)};});
+  let left=total-rows.reduce((n,row)=>n+row.count,0);
+  rows.sort((a,b)=>b.rest-a.rest||a.index-b.index);
+  for(let i=0;i<left;i++)rows[i%rows.length].count++;
+  return Object.fromEntries(rows.map(row=>[row.key,row.count]));
+}
+function selectQuestionsByBlueprint(rows,test,email,totalCount,existing){
+  const current=existing||[];
+  const required=Math.max(0,Number(totalCount||0)-current.length);
+  if(!required)return[];
+  if(!test.contentBlueprint)return adaptiveSelectQs(email,balanceQuestionShapes(rows,required,current),required);
+  const target=test.blueprintAllocation||allocateContentBlueprint(test.contentBlueprint,Number(totalCount||0),Number(test.grade||0)+Number(test.semester||0));
+  const already=Object.fromEntries(Object.keys(target).map(key=>[key,current.filter(q=>q.blueprintBucket===key).length]));
+  const selected=[],used=new Set(current.map(q=>q._historyId||q.id));
+  Object.entries(target).forEach(([bucket,count])=>{
+    const need=Math.max(0,Number(count)-Number(already[bucket]||0));
+    if(!need)return;
+    const candidates=(rows||[]).filter(q=>q.blueprintBucket===bucket&&!used.has(q._historyId||q.id));
+    const picks=adaptiveSelectQs(email,balanceQuestionShapes(candidates,need,current.concat(selected)),need);
+    picks.forEach(q=>{selected.push(q);used.add(q._historyId||q.id);});
+  });
+  if(selected.length<required){
+    const rest=(rows||[]).filter(q=>!used.has(q._historyId||q.id));
+    const need=required-selected.length;
+    selected.push(...adaptiveSelectQs(email,balanceQuestionShapes(rest,need,current.concat(selected)),need));
+  }
+  return selected.slice(0,required);
+}
 function getTestQs(test){
   const userId = CUR_USER?.email || 'guest';
   ensureQuestionHistoryOwner(userId);
@@ -13959,7 +14018,7 @@ function getTestQs(test){
       :test.semester===2?legacy.slice(Math.ceil(legacy.length/2)):legacy;
     const taggedSubset=Number(test.semester)===1||Number(test.semester)===2
       ?semesterTagged.filter(q=>Number(q.semester)===Number(test.semester)):semesterTagged;
-    return legacySubset.concat(taggedSubset);
+    return legacySubset.concat(taggedSubset).filter(q=>!test.topicGroup||q.topicGroup===test.topicGroup);
   }).filter(q=>{
     const targetGrade=Number(test.grade),explicitGrade=Number(q.grade);
     if(Number.isFinite(explicitGrade))return explicitGrade===targetGrade;
@@ -13986,7 +14045,7 @@ function getTestQs(test){
     &&!SERVER_SEEN_QUESTIONS.has(q._contentHistoryId)
     &&!SERVER_SEEN_QUESTIONS.has(q._semanticHistoryId)
   )));
-  let selected=adaptiveSelectQs(email,balanceQuestionShapes(unseen,test.count),test.count);
+  let selected=selectQuestionsByBlueprint(unseen,test,email,test.count,[]);
   // Only after the complete relevant bank is exhausted do we cycle the oldest
   // material, while still keeping all currently unseen questions first.
   if(selected.length<test.count){
@@ -13994,7 +14053,7 @@ function getTestQs(test){
     const usedFingerprints=selected.flatMap(q=>[q._contentHistoryId,q._semanticHistoryId]);
     const fallback=dedupeQuestionCandidates(shuffleArr(tagged.filter(q=>!used.has(q._historyId))),usedFingerprints);
     const deficit=test.count-selected.length;
-    selected=selected.concat(adaptiveSelectQs(email,balanceQuestionShapes(fallback,deficit,selected),deficit));
+    selected=selected.concat(selectQuestionsByBlueprint(fallback,test,email,test.count,selected));
   }
   return spreadQuestionTypes(selected).map(q=>shuffleOpts(prepareQ(q)));
 }
@@ -15308,14 +15367,24 @@ function updateStudentHomeStats(){
 
 // ── Student Tests List ────────────────────────────────────────────────────────
 function populateSubjectDropdown(selId,allowedSubjects){
-  const subjectNames=[t('math'),t('georgian'),t('geo_lit'),t('geo_lang'),t('english'),t('eng_lit'),t('eng_gram'),t('russian'),t('rus_gram'),t('nature'),t('history'),t('geography'),t('biology'),t('chemistry'),t('physics')];
-  const subjectValues=['მათემატიკა','ქართული','ქართული ლიტ.','ქართული ენა','ინგლისური','ინგლ. ლიტ.','ინგლ. გრამ.','რუსული','რუს. გრამ.','ბუნება','ისტორია','გეოგრაფია','ბიოლოგია','ქიმია','ფიზიკა'];
+  const subjectNames=[t('math'),'ალგებრა','გეომეტრია',t('georgian'),'ქართული ენა და ლიტერატურა',t('geo_lit'),t('geo_lang'),t('english'),t('eng_lit'),t('eng_gram'),t('russian'),t('rus_gram'),t('nature'),t('history'),t('geography'),t('biology'),t('chemistry'),t('physics')];
+  const subjectValues=['მათემატიკა','ალგებრა','გეომეტრია','ქართული','ქართული ენა და ლიტერატურა','ქართული ლიტ.','ქართული ენა','ინგლისური','ინგლ. ლიტ.','ინგლ. გრამ.','რუსული','რუს. გრამ.','ბუნება','ისტორია','გეოგრაფია','ბიოლოგია','ქიმია','ფიზიკა'];
   const sel=document.getElementById(selId);if(!sel)return;
   const curVal=sel.dataset.realVal||sel.value;
   const values=Array.isArray(allowedSubjects)?allowedSubjects:subjectValues;
   const labels=Array.isArray(allowedSubjects)?allowedSubjects:subjectNames;
   sel.innerHTML='<option value="">'+t('all_subjects')+'</option>'+
     values.map((v,i)=>'<option value="'+v+'"'+(curVal===v?' selected':'')+'>'+labels[i]+'</option>').join('');
+}
+function testCompositionLabel(test){
+  const counts=test&&test.componentCounts;
+  if(!counts)return'';
+  const labels={language:'ენა',literature:'ლიტერატურა',grammar:'გრამატიკა',vocabulary:'ლექსიკა',reading:'წაკითხვა',use_of_language:'ენის გამოყენება'};
+  return Object.entries(counts).filter(row=>Number(row[1])>0).map(([key,value])=>(labels[key]||key)+' '+value).join(' · ');
+}
+function testCompositionChip(test){
+  const label=testCompositionLabel(test);
+  return label?`<span class="chip" style="background:#ecfeff;color:#155e75" title="კლასის კონფიგურირებადი ტესტის შემადგენლობა">🧩 ${label}</span>`:'';
 }
 function renderStudentTests(){
   let grade=document.getElementById('s-filter-grade')?.value||'';
@@ -15353,7 +15422,7 @@ function renderStudentTests(){
   list.innerHTML=tests.map(tx=>`
     <div class="card" style="padding:16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:10px">
       <div style="width:44px;height:44px;border-radius:10px;background:${SUBJ_COLORS[tx.subject]||'#6366f1'};display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">${SUBJ_ICONS[tx.subject]||'📝'}</div>
-      <div style="flex:1"><div style="font-weight:600;margin-bottom:6px">${txTitle(tx)}<span class="ver-badge">${t('ver_label')} ${getUserVersion(CUR_USER?.email||'guest', tx.pool)+1}/${getPoolVersionCount(tx.pool)}</span></div><div style="display:flex;gap:6px;flex-wrap:wrap"><span class="chip">⏱ ${tx.time} ${t('min_abbr')}</span><span class="chip">❓ ${tx.count} ${t('q_label')}</span>${tx.semester?`<span class="chip" style="background:#ede9fe;color:#5b21b6">📅 ${tx.semester===1?t('sem1'):tx.semester===2?t('sem2'):''}</span>`:''}${tx.testType==='sum'?`<span class="chip" style="background:#fef3c7;color:#92400e">📋 ${t('test_sum')}</span>`:''}${(()=>{const a=getTestAccess(CUR_USER?.email||'',tx.id);if(a==='free')return'<span class="chip" style="background:#d1fae5;color:#065f46">🆓 უფასო ტესტი</span>';if(a==='locked')return`<span class="chip" style="background:#fef3c7;color:#92400e">💳 ${fmtPrice('perSubject')}</span>`;if(a==='premium')return'<span class="chip" style="background:#ede9fe;color:#5b21b6">⭐ Premium</span>';return'<span class="chip" style="background:#dbeafe;color:#1e40af">✅ შეძენილი</span>';})()}</div></div>
+      <div style="flex:1"><div style="font-weight:600;margin-bottom:6px">${txTitle(tx)}<span class="ver-badge">${t('ver_label')} ${getUserVersion(CUR_USER?.email||'guest', tx.pool)+1}/${getPoolVersionCount(tx.pool)}</span></div><div style="display:flex;gap:6px;flex-wrap:wrap"><span class="chip">⏱ ${tx.time} ${t('min_abbr')}</span><span class="chip">❓ ${tx.count} ${t('q_label')}</span>${testCompositionChip(tx)}${tx.semester?`<span class="chip" style="background:#ede9fe;color:#5b21b6">📅 ${tx.semester===1?t('sem1'):tx.semester===2?t('sem2'):''}</span>`:''}${tx.testType==='sum'?`<span class="chip" style="background:#fef3c7;color:#92400e">📋 ${t('test_sum')}</span>`:''}${(()=>{const a=getTestAccess(CUR_USER?.email||'',tx.id);if(a==='free')return'<span class="chip" style="background:#d1fae5;color:#065f46">🆓 უფასო ტესტი</span>';if(a==='locked')return`<span class="chip" style="background:#fef3c7;color:#92400e">💳 ${fmtPrice('perSubject')}</span>`;if(a==='premium')return'<span class="chip" style="background:#ede9fe;color:#5b21b6">⭐ Premium</span>';return'<span class="chip" style="background:#dbeafe;color:#1e40af">✅ შეძენილი</span>';})()}</div></div>
       ${(()=>{const acc=getTestAccess(CUR_USER?.email||'',tx.id);if(acc==='locked')return`<button class="btn btn-sm" style="background:#f59e0b;color:#fff;border:none;cursor:pointer" onclick="showPayModal('${tx.id}')">💳 ${fmtPrice('perSubject')}</button>`;if(acc==='free')return`<button class="btn btn-sm" style="background:#10b981;color:#fff;border:none;cursor:pointer" onclick="startTestById('${tx.id}')">🆓 ${t('start_test')}</button>`;return`<button class="btn btn-primary btn-sm" onclick="startTestById('${tx.id}')">🚀 ${t('start_test')}</button>`;})()}
     </div>`).join('');
 }
@@ -15364,13 +15433,13 @@ function renderTeacherTests(){
   const subj=document.getElementById('t-filter-subject')?.value||'';
   const grade=document.getElementById('t-filter-grade')?.value||'';
   const tbody=document.getElementById('t-test-tbody');if(!tbody)return;
-  let tests=ALL_TESTS;
+  let tests=ALL_TESTS.filter(test=>!test.catalogHidden);
   if(subj)tests=tests.filter(t=>t.subject===subj);
   if(grade)tests=tests.filter(t=>t.grade===parseInt(grade));
   if(!tests.length){tbody.innerHTML='<tr><td colspan="6" style="text-align:center;color:var(--gray);padding:24px">'+t('no_tests')+'</td></tr>';return;}
   tbody.innerHTML=tests.map(tx=>`
     <tr>
-      <td style="font-weight:500">${txTitle(tx)}${!isCurriculumEligible(tx)?'<div style="margin-top:4px"><span class="badge b-amber">⚠ სასწავლო გეგმასთან შესადარებელია</span></div>':''}</td>
+      <td style="font-weight:500">${txTitle(tx)}${testCompositionLabel(tx)?`<div style="font-size:11px;color:var(--gray);margin-top:4px">🧩 ${testCompositionLabel(tx)}</div>`:''}${!isCurriculumEligible(tx)?'<div style="margin-top:4px"><span class="badge b-amber">⚠ სასწავლო გეგმასთან შესადარებელია</span></div>':''}</td>
       <td><span class="chip">${SUBJ_ICONS[tx.subject]||''} ${tx.subject.slice(0,4)}.</span></td>
       <td><span style="display:inline-flex;width:26px;height:26px;border-radius:50%;background:#dbeafe;color:#1d4ed8;align-items:center;justify-content:center;font-weight:700;font-size:11px">${tx.grade}</span></td>
       <td>${tx.count}</td>

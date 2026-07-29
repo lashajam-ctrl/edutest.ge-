@@ -60,7 +60,7 @@
 
   function basePool(pool){
     const value=String(pool||'');
-    const versioned=value.match(/^(.*-(?:12|34|56|78|910|1112))-\d+$/);
+    const versioned=value.match(/^(.*-(?:g\d+|12|34|56|78|910|1112))-\d+$/);
     return versioned?versioned[1]:value;
   }
   function gradeBand(pool,grades){
@@ -70,9 +70,9 @@
   }
   function areaFor(pool){
     const p=basePool(pool);
-    if(p.startsWith('math-'))return'math';
-    if(p.startsWith('geo-')||p.startsWith('gg-'))return'georgian';
-    if(p.startsWith('eng-')||p.startsWith('eg-')||p.startsWith('rus-')||p.startsWith('rg-'))return'foreign_language';
+    if(p.startsWith('math-')||p.startsWith('alg-')||p.startsWith('geom-'))return'math';
+    if(p.startsWith('geo-')||p.startsWith('gg-')||p.startsWith('kab-'))return'georgian';
+    if(p.startsWith('eng-')||p.startsWith('eg-')||p.startsWith('enb-')||p.startsWith('rus-')||p.startsWith('rg-')||p.startsWith('rub-'))return'foreign_language';
     if(p.startsWith('nat-'))return'nature';
     if(p.startsWith('hist-'))return'history';
     if(p.startsWith('geog-'))return'geography';
@@ -92,12 +92,12 @@
     ],'numbers_operations');
     if(area==='georgian'){
       if(question.media)return['visual_comprehension',.96];
-      if(p.startsWith('gg-')||/(ზმნ|არსებით|ზედსართავ|ბრუნვ|წინადადებ|მართლწერ|სინონიმ|ანტონიმ|ლექსიკ)/.test(text))return['language_system',.94];
-      if(/(ავტორ|პერსონაჟ|ლექს|მოთხრობ|რომან|პოემ|ლიტერატ)/.test(text))return['literature_culture',.9];
+      if(question.component==='language'||p.startsWith('gg-')||/(ზმნ|არსებით|ზედსართავ|ბრუნვ|წინადადებ|მართლწერ|სინონიმ|ანტონიმ|ლექსიკ)/.test(text))return['language_system',.94];
+      if(question.component==='literature'||/(ავტორ|პერსონაჟ|ლექს|მოთხრობ|რომან|პოემ|ლიტერატ)/.test(text))return['literature_culture',.9];
       return['reading',.78];
     }
     if(area==='foreign_language'){
-      if(p.startsWith('eg-')||p.startsWith('rg-')||/(grammar|tense|article|preposition|verb|noun|adjective|глагол|падеж|предлог)/i.test(text))return['language_system',.94];
+      if(['grammar','vocabulary','use_of_language'].includes(question.component)||p.startsWith('eg-')||p.startsWith('rg-')||/(grammar|tense|article|preposition|verb|noun|adjective|глагол|падеж|предлог)/i.test(text))return['language_system',.94];
       if(/(author|character|story|poem|novel|автор|герой|рассказ|стих)/i.test(text))return['culture',.88];
       return['reading',.78];
     }
