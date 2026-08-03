@@ -3,9 +3,10 @@ import fs from "node:fs";
 import test from "node:test";
 import vm from "node:vm";
 
+const validator = fs.readFileSync(new URL("../public/generated-bank-validator.js", import.meta.url), "utf8");
 const source = fs.readFileSync(new URL("../public/senior-math-bank.js", import.meta.url), "utf8");
 const sandbox = { Q_POOL: {} };
-vm.runInNewContext(`${source}\nglobalThis.__result={Q_POOL,tests:EDUTEST_SENIOR_MATH_TESTS,stats:EDUTEST_SENIOR_MATH_STATS};`, sandbox, {
+vm.runInNewContext(`${validator}\n${source}\nglobalThis.__result={Q_POOL,tests:EDUTEST_SENIOR_MATH_TESTS,stats:EDUTEST_SENIOR_MATH_STATS};`, sandbox, {
   timeout: 30_000,
 });
 
@@ -19,6 +20,8 @@ const directions = [
 test("senior mathematics is split into stable algebra and geometry inventories", () => {
   assert.equal(stats.tests, 72);
   assert.equal(stats.questions, 2304);
+  assert.equal(stats.validation.checked, 2304);
+  assert.equal(stats.validation.blocked, 0);
   assert.equal(stats.testsPerGrade, 12);
   assert.equal(stats.questionsPerGrade, 384);
   assert.equal(tests.length, 72);
@@ -63,6 +66,7 @@ test("senior mathematics is split into stable algebra and geometry inventories",
         assert.match(row.outcome, new RegExp(`^NCP-CANDIDATE\\.MATH\\.G${grade}\\.`));
         assert.equal(row.reviewStatus, "generated_review_required");
         assert.equal(row.qualityStatus, "machine_validated");
+        assert.equal(row.validationStatus, "release_validated");
         assert.ok([1, 2].includes(row.semester));
         assert.ok(["s1-unit-a", "s1-unit-b", "s2-unit-a", "s2-unit-b"].includes(row.topicGroup));
         assert.ok(Number(row.pts) > 0);

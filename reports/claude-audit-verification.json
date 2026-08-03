@@ -1,0 +1,443 @@
+{
+  "generatedAt": "2026-08-03T08:57:52.404Z",
+  "baselineClaim": {
+    "pools": 50,
+    "questions": 5831
+  },
+  "current": {
+    "pools": 515,
+    "tests": 648,
+    "activeTests": 440,
+    "questions": 20035,
+    "publishedQuestionRecords": 13802,
+    "seniorMathQuestions": 2304,
+    "languageBlueprintQuestions": 4992
+  },
+  "findings": {
+    "duplicateOptions": {
+      "all": 92,
+      "published": 91,
+      "blockedBySelector": 91,
+      "liveSelectable": 0,
+      "claudeIdsStillPresent": []
+    },
+    "ambiguousBars": {
+      "all": 0,
+      "published": 0,
+      "ids": []
+    },
+    "trueFalseSchemes": [
+      {
+        "scheme": "სწორია|მცდარია",
+        "questions": 1707
+      },
+      {
+        "scheme": "true|false",
+        "questions": 302
+      },
+      {
+        "scheme": "верно|неверно",
+        "questions": 222
+      }
+    ],
+    "internalMetadataVisible": false,
+    "earlyUnknownMinuend": {
+      "all": 0,
+      "published": 0,
+      "ids": []
+    },
+    "crossGradeExactGroups": 1025,
+    "crossGradeExactExamples": [
+      {
+        "text": "რომელი ცხოველია გამოსახული",
+        "grades": [
+          1,
+          2
+        ],
+        "ids": [
+          "nat12v2_1",
+          "exp26-nat-1-1",
+          "exp26-nat-2-2",
+          "exp26-nat-1-49",
+          "exp26-nat-2-50",
+          "exp26-nat-1-97",
+          "exp26-nat-2-98",
+          "exp26-nat-1-145",
+          "exp26-nat-2-146",
+          "exp26-nat-1-193",
+          "exp26-nat-2-194"
+        ],
+        "pools": [
+          "nat-12"
+        ]
+      },
+      {
+        "text": "დაალაგე რიცხვები უმცირესიდან უდიდესამდე",
+        "grades": [
+          1,
+          2
+        ],
+        "ids": [
+          "exp26-math-1-17",
+          "exp26-math-2-18"
+        ],
+        "pools": [
+          "math-12"
+        ]
+      },
+      {
+        "text": "ყურადღებით წაიკითხე და შეასრულე დაალაგე რიცხვები უმცირესიდან უდიდესამდე",
+        "grades": [
+          1,
+          2
+        ],
+        "ids": [
+          "exp26-math-1-19",
+          "exp26-math-2-20"
+        ],
+        "pools": [
+          "math-12"
+        ]
+      },
+      {
+        "text": "დიაგრამაზე რომელი სვეტია ყველაზე მაღალი",
+        "grades": [
+          1,
+          2
+        ],
+        "ids": [
+          "exp26-math-1-37",
+          "exp26-math-2-38",
+          "exp26-math-1-117",
+          "exp26-math-2-118",
+          "exp26-math-1-197",
+          "exp26-math-2-198",
+          "exp26-math-1-277",
+          "exp26-math-2-278"
+        ],
+        "pools": [
+          "math-12"
+        ]
+      },
+      {
+        "text": "ყურადღებით წაიკითხე და შეასრულე დიაგრამაზე რომელი სვეტია ყველაზე მაღალი",
+        "grades": [
+          1,
+          2
+        ],
+        "ids": [
+          "exp26-math-1-39",
+          "exp26-math-2-40",
+          "exp26-math-1-119",
+          "exp26-math-2-120",
+          "exp26-math-1-199",
+          "exp26-math-2-200",
+          "exp26-math-1-279",
+          "exp26-math-2-280"
+        ],
+        "pools": [
+          "math-12"
+        ]
+      },
+      {
+        "text": "დააკავშირე თითოეული მოქმედება სწორ პასუხთან",
+        "grades": [
+          1,
+          2
+        ],
+        "ids": [
+          "exp26-math-1-41",
+          "exp26-math-2-42"
+        ],
+        "pools": [
+          "math-12"
+        ]
+      },
+      {
+        "text": "ყურადღებით წაიკითხე და შეასრულე დააკავშირე თითოეული მოქმედება სწორ პასუხთან",
+        "grades": [
+          1,
+          2
+        ],
+        "ids": [
+          "exp26-math-1-43",
+          "exp26-math-2-44"
+        ],
+        "pools": [
+          "math-12"
+        ]
+      },
+      {
+        "text": "რომელი გამოსახულების პასუხია უფრო დიდი",
+        "grades": [
+          1,
+          2
+        ],
+        "ids": [
+          "exp26-math-1-57",
+          "exp26-math-2-58"
+        ],
+        "pools": [
+          "math-12"
+        ]
+      },
+      {
+        "text": "ყურადღებით წაიკითხე და შეასრულე რომელი გამოსახულების პასუხია უფრო დიდი",
+        "grades": [
+          1,
+          2
+        ],
+        "ids": [
+          "exp26-math-1-59",
+          "exp26-math-2-60"
+        ],
+        "pools": [
+          "math-12"
+        ]
+      },
+      {
+        "text": "რამდენი წრეა გამოსახული",
+        "grades": [
+          1,
+          2
+        ],
+        "ids": [
+          "exp26-math-1-69",
+          "exp26-math-2-70",
+          "exp26-math-1-149",
+          "exp26-math-2-150",
+          "exp26-math-1-229",
+          "exp26-math-2-230"
+        ],
+        "pools": [
+          "math-12"
+        ]
+      },
+      {
+        "text": "ყურადღებით წაიკითხე და შეასრულე რამდენი წრეა გამოსახული",
+        "grades": [
+          1,
+          2
+        ],
+        "ids": [
+          "exp26-math-1-71",
+          "exp26-math-2-72",
+          "exp26-math-1-151",
+          "exp26-math-2-152",
+          "exp26-math-1-231",
+          "exp26-math-2-232"
+        ],
+        "pools": [
+          "math-12"
+        ]
+      },
+      {
+        "text": "სამკუთხედს რამდენი გვერდი აქვს",
+        "grades": [
+          1,
+          2
+        ],
+        "ids": [
+          "exp26-math-1-73",
+          "exp26-math-2-154"
+        ],
+        "pools": [
+          "math-12"
+        ]
+      },
+      {
+        "text": "კვადრატს რამდენი გვერდი აქვს",
+        "grades": [
+          1,
+          2
+        ],
+        "ids": [
+          "exp26-math-2-74",
+          "exp26-math-1-233"
+        ],
+        "pools": [
+          "math-12"
+        ]
+      },
+      {
+        "text": "ყურადღებით წაიკითხე და შეასრულე წრეს რამდენი გვერდი აქვს",
+        "grades": [
+          1,
+          2
+        ],
+        "ids": [
+          "exp26-math-1-75",
+          "exp26-math-2-156"
+        ],
+        "pools": [
+          "math-12"
+        ]
+      },
+      {
+        "text": "ყურადღებით წაიკითხე და შეასრულე სამკუთხედს რამდენი გვერდი აქვს",
+        "grades": [
+          1,
+          2
+        ],
+        "ids": [
+          "exp26-math-2-76",
+          "exp26-math-1-235"
+        ],
+        "pools": [
+          "math-12"
+        ]
+      },
+      {
+        "text": "წრეს რამდენი გვერდი აქვს",
+        "grades": [
+          1,
+          2
+        ],
+        "ids": [
+          "exp26-math-1-153",
+          "exp26-math-2-234"
+        ],
+        "pools": [
+          "math-12"
+        ]
+      },
+      {
+        "text": "ყურადღებით წაიკითხე და შეასრულე კვადრატს რამდენი გვერდი აქვს",
+        "grades": [
+          1,
+          2
+        ],
+        "ids": [
+          "exp26-math-1-155",
+          "exp26-math-2-236"
+        ],
+        "pools": [
+          "math-12"
+        ]
+      },
+      {
+        "text": "80 8",
+        "grades": [
+          3,
+          5
+        ],
+        "ids": [
+          "exp26-math-3-1",
+          "exp26-math-5-17"
+        ],
+        "pools": [
+          "math-34",
+          "math-56"
+        ]
+      },
+      {
+        "text": "240 3",
+        "grades": [
+          4,
+          6
+        ],
+        "ids": [
+          "exp26-math-4-2",
+          "exp26-math-6-186"
+        ],
+        "pools": [
+          "math-34",
+          "math-56"
+        ]
+      },
+      {
+        "text": "მართკუთხედის სიგრძეა 3 სმ სიგანე 10 სმ იპოვე პერიმეტრი",
+        "grades": [
+          3,
+          5
+        ],
+        "ids": [
+          "exp26-math-3-3",
+          "exp26-math-5-43"
+        ],
+        "pools": [
+          "math-34",
+          "math-56"
+        ]
+      }
+    ],
+    "semanticAll": {
+      "groups": 14025,
+      "redundant": 6010,
+      "maxGroup": 367
+    },
+    "semanticPublished": {
+      "groups": 10221,
+      "redundant": 3581,
+      "maxGroup": 367
+    },
+    "lowUniquenessActivePools": [
+      {
+        "pool": "math-34",
+        "questions": 363,
+        "groups": 51,
+        "redundant": 312,
+        "maxGroup": 65,
+        "uniqueness": 0.1405
+      },
+      {
+        "pool": "math-56",
+        "questions": 363,
+        "groups": 56,
+        "redundant": 307,
+        "maxGroup": 65,
+        "uniqueness": 0.1543
+      }
+    ],
+    "exposedAnswerFiles": [
+      "public/app.html",
+      "public/expanded-question-bank.js",
+      "public/senior-math-bank.js",
+      "public/language-blueprint-bank.js"
+    ],
+    "clientScoresAttempts": true,
+    "practiceLabelPresent": true
+  },
+  "verificationMatrix": [
+    {
+      "id": "duplicate_distractors_20",
+      "status": "false_positive",
+      "evidence": "პუნქტუაცია/გამოტოვება პასუხის მნიშვნელობის ნაწილია; exact-option validator იყენებს NFKC+case+whitespace შედარებას და არა სასვენი ნიშნების წაშლას. ცალკე აღმოჩენილი 91 რეალური legacy ჩანაწერი live selector-მა დაბლოკა; live-selectable=0."
+    },
+    {
+      "id": "ambiguous_bar_extrema",
+      "status": "confirmed_fixed",
+      "evidence": "0 ambiguous generated bar chart(s)"
+    },
+    {
+      "id": "true_false_terminology",
+      "status": "already_fixed",
+      "evidence": "learner renderer localizes binary answers and the expansion generator now uses სწორია/მცდარია."
+    },
+    {
+      "id": "learner_internal_metadata",
+      "status": "confirmed_fixed",
+      "evidence": "internal outcome/alignment label is no longer rendered to learners."
+    },
+    {
+      "id": "grade_1_2_unknown_minuend",
+      "status": "confirmed_fixed",
+      "evidence": "0 remaining row(s)"
+    },
+    {
+      "id": "shared_grade_7_12_text",
+      "status": "confirmed_fixed",
+      "evidence": "exact-grade selector is mandatory when sufficient and senior/language banks carry exact grade metadata."
+    },
+    {
+      "id": "template_inflation",
+      "status": "confirmed_fixed",
+      "evidence": "semantic history dedupe, catalog diversity gate, and generated-bank release gate block low-diversity live selection."
+    },
+    {
+      "id": "client_answer_exposure",
+      "status": "deferred_mitigated",
+      "evidence": "current catalog is explicitly practice/self-check only; API rejects non-practice submissions. Public correct answers remain unsuitable for future graded exams."
+    }
+  ]
+}

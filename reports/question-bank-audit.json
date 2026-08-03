@@ -1,24 +1,24 @@
 {
-  "generatedAt": "2026-07-29T07:51:49.133Z",
+  "generatedAt": "2026-08-03T08:57:44.319Z",
   "summary": {
     "pools": 515,
     "tests": 648,
-    "questions": 19731,
-    "uniqueQuestionIds": 19581,
-    "visualQuestions": 2790,
-    "questionsWithExplanation": 13159,
-    "questionsWithSkillTag": 13159,
-    "questionsWithOutcomeTag": 13159,
-    "questionsMappedToCurriculumDomain": 19731,
+    "questions": 20035,
+    "uniqueQuestionIds": 19885,
+    "visualQuestions": 2860,
+    "questionsWithExplanation": 13463,
+    "questionsWithSkillTag": 13463,
+    "questionsWithOutcomeTag": 13463,
+    "questionsMappedToCurriculumDomain": 20035,
     "approvedDomainAlignments": 0,
     "candidateDomainAlignments": 4563,
     "candidateExplicitAlignments": 32,
-    "candidateGeneratedAlignments": 13127,
+    "candidateGeneratedAlignments": 13431,
     "alignmentsRequiringReview": 0,
     "blockedCurriculumStageQuestions": 316,
     "blockedUnpublishedPoolQuestions": 1693,
-    "generatedExpansionQuestions": 5831,
-    "generatedExpansionVisualQuestions": 1262,
+    "generatedExpansionQuestions": 6135,
+    "generatedExpansionVisualQuestions": 1332,
     "seniorMathQuestions": 2304,
     "seniorMathTests": 72,
     "languageBlueprintQuestions": 4992,
@@ -250,16 +250,16 @@
       "grade": 1,
       "questions": 192,
       "components": {
-        "vocabulary": 88,
-        "use_of_language": 40,
+        "grammar": 16,
+        "vocabulary": 96,
         "reading": 48,
-        "grammar": 16
+        "use_of_language": 32
       },
       "blueprintBuckets": {
-        "vocabulary": 88,
-        "use_of_language": 40,
+        "grammar": 16,
+        "vocabulary": 96,
         "reading": 48,
-        "grammar": 16
+        "use_of_language": 32
       }
     },
     {
@@ -267,16 +267,16 @@
       "grade": 2,
       "questions": 192,
       "components": {
-        "use_of_language": 40,
+        "grammar": 32,
+        "vocabulary": 80,
         "reading": 48,
-        "vocabulary": 72,
-        "grammar": 32
+        "use_of_language": 32
       },
       "blueprintBuckets": {
-        "use_of_language": 40,
+        "grammar": 32,
+        "vocabulary": 80,
         "reading": 48,
-        "vocabulary": 72,
-        "grammar": 32
+        "use_of_language": 32
       }
     },
     {
@@ -284,16 +284,16 @@
       "grade": 3,
       "questions": 192,
       "components": {
-        "reading": 48,
+        "use_of_language": 44,
+        "grammar": 36,
         "vocabulary": 64,
-        "use_of_language": 40,
-        "grammar": 40
+        "reading": 48
       },
       "blueprintBuckets": {
-        "reading": 48,
+        "use_of_language": 44,
+        "grammar": 36,
         "vocabulary": 64,
-        "use_of_language": 40,
-        "grammar": 40
+        "reading": 48
       }
     },
     {
@@ -301,16 +301,16 @@
       "grade": 4,
       "questions": 192,
       "components": {
-        "vocabulary": 56,
-        "use_of_language": 40,
-        "reading": 48,
-        "grammar": 48
+        "use_of_language": 32,
+        "grammar": 48,
+        "vocabulary": 64,
+        "reading": 48
       },
       "blueprintBuckets": {
-        "vocabulary": 56,
-        "use_of_language": 40,
-        "reading": 48,
-        "grammar": 48
+        "use_of_language": 32,
+        "grammar": 48,
+        "vocabulary": 64,
+        "reading": 48
       }
     },
     {
@@ -318,16 +318,16 @@
       "grade": 5,
       "questions": 192,
       "components": {
-        "grammar": 56,
         "reading": 48,
-        "vocabulary": 48,
-        "use_of_language": 40
+        "use_of_language": 32,
+        "grammar": 64,
+        "vocabulary": 48
       },
       "blueprintBuckets": {
-        "grammar": 56,
         "reading": 48,
-        "vocabulary": 48,
-        "use_of_language": 40
+        "use_of_language": 32,
+        "grammar": 64,
+        "vocabulary": 48
       }
     },
     {
@@ -336,15 +336,15 @@
       "questions": 192,
       "components": {
         "reading": 48,
-        "vocabulary": 40,
-        "use_of_language": 40,
-        "grammar": 64
+        "use_of_language": 32,
+        "grammar": 64,
+        "vocabulary": 48
       },
       "blueprintBuckets": {
         "reading": 48,
-        "vocabulary": 40,
-        "use_of_language": 40,
-        "grammar": 64
+        "use_of_language": 32,
+        "grammar": 64,
+        "vocabulary": 48
       }
     },
     {
@@ -353,15 +353,15 @@
       "questions": 192,
       "components": {
         "vocabulary": 40,
-        "grammar": 64,
         "reading": 48,
-        "use_of_language": 40
+        "use_of_language": 40,
+        "grammar": 64
       },
       "blueprintBuckets": {
         "vocabulary": 40,
-        "grammar": 64,
         "reading": 48,
-        "use_of_language": 40
+        "use_of_language": 40,
+        "grammar": 64
       }
     },
     {
@@ -369,16 +369,16 @@
       "grade": 8,
       "questions": 192,
       "components": {
-        "grammar": 72,
+        "grammar": 80,
         "reading": 48,
-        "vocabulary": 32,
-        "use_of_language": 40
+        "use_of_language": 32,
+        "vocabulary": 32
       },
       "blueprintBuckets": {
-        "grammar": 72,
+        "grammar": 80,
         "reading": 48,
-        "vocabulary": 32,
-        "use_of_language": 40
+        "use_of_language": 32,
+        "vocabulary": 32
       }
     },
     {
@@ -387,15 +387,15 @@
       "questions": 192,
       "components": {
         "vocabulary": 32,
-        "grammar": 72,
+        "grammar": 80,
         "reading": 48,
-        "use_of_language": 40
+        "use_of_language": 32
       },
       "blueprintBuckets": {
         "vocabulary": 32,
-        "grammar": 72,
+        "grammar": 80,
         "reading": 48,
-        "use_of_language": 40
+        "use_of_language": 32
       }
     },
     {
@@ -404,15 +404,15 @@
       "questions": 192,
       "components": {
         "vocabulary": 32,
-        "grammar": 72,
+        "grammar": 80,
         "reading": 48,
-        "use_of_language": 40
+        "use_of_language": 32
       },
       "blueprintBuckets": {
         "vocabulary": 32,
-        "grammar": 72,
+        "grammar": 80,
         "reading": 48,
-        "use_of_language": 40
+        "use_of_language": 32
       }
     },
     {
@@ -421,15 +421,15 @@
       "questions": 192,
       "components": {
         "grammar": 80,
-        "vocabulary": 24,
+        "vocabulary": 32,
         "reading": 48,
-        "use_of_language": 40
+        "use_of_language": 32
       },
       "blueprintBuckets": {
         "grammar": 80,
-        "vocabulary": 24,
+        "vocabulary": 32,
         "reading": 48,
-        "use_of_language": 40
+        "use_of_language": 32
       }
     },
     {
@@ -437,16 +437,16 @@
       "grade": 12,
       "questions": 192,
       "components": {
-        "grammar": 72,
-        "vocabulary": 24,
-        "reading": 56,
-        "use_of_language": 40
+        "grammar": 80,
+        "vocabulary": 32,
+        "reading": 48,
+        "use_of_language": 32
       },
       "blueprintBuckets": {
-        "grammar": 72,
-        "vocabulary": 24,
-        "reading": 56,
-        "use_of_language": 40
+        "grammar": 80,
+        "vocabulary": 32,
+        "reading": 48,
+        "use_of_language": 32
       }
     },
     {
@@ -454,23 +454,23 @@
       "grade": 7,
       "questions": 192,
       "components": {
-        "literature": 112,
-        "language": 80
+        "language": 86,
+        "literature": 106
       },
       "blueprintBuckets": {
-        "literature.comprehension": 40,
-        "language.punctuation": 9,
-        "literature.genre": 16,
-        "language.syntax": 10,
+        "language.syntax": 12,
         "literature.devices": 16,
         "language.vocabulary": 10,
-        "literature.character": 16,
-        "language.editing": 10,
+        "literature.character": 12,
+        "language.editing": 11,
         "literature.theme": 16,
-        "language.grammar": 24,
-        "language.reading": 9,
-        "literature.author_era": 8,
-        "language.orthography": 8
+        "language.grammar": 16,
+        "literature.author_era": 16,
+        "literature.comprehension": 31,
+        "language.punctuation": 13,
+        "literature.genre": 15,
+        "language.orthography": 12,
+        "language.reading": 12
       }
     },
     {
@@ -478,23 +478,23 @@
       "grade": 8,
       "questions": 192,
       "components": {
-        "language": 80,
-        "literature": 112
+        "literature": 108,
+        "language": 84
       },
       "blueprintBuckets": {
-        "language.punctuation": 8,
-        "literature.genre": 16,
-        "literature.comprehension": 32,
-        "language.syntax": 16,
-        "literature.devices": 16,
+        "literature.genre": 15,
+        "language.syntax": 15,
+        "literature.devices": 14,
         "language.vocabulary": 11,
         "literature.character": 16,
         "language.editing": 10,
         "literature.theme": 16,
-        "language.grammar": 17,
-        "language.reading": 10,
-        "literature.author_era": 16,
-        "language.orthography": 8
+        "language.grammar": 15,
+        "language.reading": 11,
+        "literature.author_era": 15,
+        "literature.comprehension": 32,
+        "language.orthography": 11,
+        "language.punctuation": 11
       }
     },
     {
@@ -502,23 +502,23 @@
       "grade": 9,
       "questions": 192,
       "components": {
-        "literature": 112,
-        "language": 80
+        "literature": 107,
+        "language": 85
       },
       "blueprintBuckets": {
-        "literature.comprehension": 32,
-        "language.punctuation": 16,
+        "literature.comprehension": 31,
+        "language.punctuation": 15,
         "literature.genre": 16,
-        "language.syntax": 16,
-        "literature.devices": 16,
-        "language.vocabulary": 8,
-        "literature.character": 16,
-        "language.editing": 8,
+        "language.syntax": 15,
+        "literature.devices": 15,
+        "language.vocabulary": 4,
+        "language.editing": 14,
         "literature.theme": 16,
         "language.grammar": 16,
-        "language.reading": 8,
+        "language.reading": 11,
         "literature.author_era": 16,
-        "language.orthography": 8
+        "language.orthography": 10,
+        "literature.character": 13
       }
     },
     {
@@ -526,23 +526,23 @@
       "grade": 10,
       "questions": 192,
       "components": {
-        "language": 80,
-        "literature": 112
+        "literature": 106,
+        "language": 86
       },
       "blueprintBuckets": {
-        "language.orthography": 8,
-        "literature.comprehension": 32,
+        "literature.comprehension": 31,
         "language.punctuation": 16,
         "literature.genre": 16,
-        "language.syntax": 16,
-        "literature.devices": 16,
-        "language.vocabulary": 8,
+        "language.syntax": 15,
+        "language.vocabulary": 4,
         "literature.character": 16,
-        "language.editing": 8,
+        "language.editing": 14,
         "literature.theme": 16,
         "language.grammar": 16,
-        "language.reading": 8,
-        "literature.author_era": 16
+        "language.reading": 12,
+        "literature.author_era": 14,
+        "language.orthography": 9,
+        "literature.devices": 13
       }
     },
     {
@@ -550,23 +550,23 @@
       "grade": 11,
       "questions": 192,
       "components": {
-        "language": 80,
-        "literature": 112
+        "language": 82,
+        "literature": 110
       },
       "blueprintBuckets": {
-        "language.grammar": 16,
-        "literature.author_era": 16,
         "language.orthography": 8,
         "literature.comprehension": 32,
-        "language.punctuation": 16,
+        "language.punctuation": 15,
         "literature.genre": 16,
-        "language.syntax": 16,
-        "literature.devices": 16,
-        "language.vocabulary": 8,
+        "language.vocabulary": 4,
+        "literature.devices": 15,
         "literature.character": 16,
-        "language.editing": 8,
         "literature.theme": 16,
-        "language.reading": 8
+        "language.grammar": 16,
+        "language.reading": 12,
+        "literature.author_era": 15,
+        "language.syntax": 14,
+        "language.editing": 13
       }
     },
     {
@@ -574,23 +574,23 @@
       "grade": 12,
       "questions": 192,
       "components": {
-        "literature": 112,
-        "language": 80
+        "language": 82,
+        "literature": 110
       },
       "blueprintBuckets": {
-        "literature.author_era": 24,
         "language.orthography": 8,
-        "literature.comprehension": 24,
-        "language.punctuation": 16,
+        "literature.comprehension": 30,
+        "language.punctuation": 15,
         "literature.genre": 16,
-        "language.syntax": 24,
+        "language.vocabulary": 4,
         "literature.devices": 16,
-        "language.vocabulary": 8,
         "literature.character": 16,
-        "language.editing": 8,
+        "language.editing": 13,
         "literature.theme": 16,
-        "language.grammar": 8,
-        "language.reading": 8
+        "language.grammar": 15,
+        "literature.author_era": 16,
+        "language.reading": 12,
+        "language.syntax": 15
       }
     },
     {
@@ -599,15 +599,15 @@
       "questions": 192,
       "components": {
         "reading": 48,
-        "vocabulary": 64,
-        "use_of_language": 40,
-        "grammar": 40
+        "use_of_language": 44,
+        "grammar": 36,
+        "vocabulary": 64
       },
       "blueprintBuckets": {
         "reading": 48,
-        "vocabulary": 64,
-        "use_of_language": 40,
-        "grammar": 40
+        "use_of_language": 44,
+        "grammar": 36,
+        "vocabulary": 64
       }
     },
     {
@@ -616,14 +616,14 @@
       "questions": 192,
       "components": {
         "reading": 48,
-        "vocabulary": 56,
-        "use_of_language": 40,
+        "vocabulary": 64,
+        "use_of_language": 32,
         "grammar": 48
       },
       "blueprintBuckets": {
         "reading": 48,
-        "vocabulary": 56,
-        "use_of_language": 40,
+        "vocabulary": 64,
+        "use_of_language": 32,
         "grammar": 48
       }
     },
@@ -633,15 +633,15 @@
       "questions": 192,
       "components": {
         "vocabulary": 48,
-        "grammar": 56,
         "reading": 48,
-        "use_of_language": 40
+        "use_of_language": 32,
+        "grammar": 64
       },
       "blueprintBuckets": {
         "vocabulary": 48,
-        "grammar": 56,
         "reading": 48,
-        "use_of_language": 40
+        "use_of_language": 32,
+        "grammar": 64
       }
     },
     {
@@ -651,14 +651,14 @@
       "components": {
         "grammar": 64,
         "reading": 48,
-        "vocabulary": 40,
-        "use_of_language": 40
+        "vocabulary": 48,
+        "use_of_language": 32
       },
       "blueprintBuckets": {
         "grammar": 64,
         "reading": 48,
-        "vocabulary": 40,
-        "use_of_language": 40
+        "vocabulary": 48,
+        "use_of_language": 32
       }
     },
     {
@@ -684,15 +684,15 @@
       "questions": 192,
       "components": {
         "vocabulary": 32,
-        "grammar": 72,
+        "grammar": 64,
         "reading": 48,
-        "use_of_language": 40
+        "use_of_language": 48
       },
       "blueprintBuckets": {
         "vocabulary": 32,
-        "grammar": 72,
+        "grammar": 64,
         "reading": 48,
-        "use_of_language": 40
+        "use_of_language": 48
       }
     },
     {
@@ -700,16 +700,16 @@
       "grade": 11,
       "questions": 192,
       "components": {
-        "grammar": 72,
+        "grammar": 80,
         "vocabulary": 32,
         "reading": 48,
-        "use_of_language": 40
+        "use_of_language": 32
       },
       "blueprintBuckets": {
-        "grammar": 72,
+        "grammar": 80,
         "vocabulary": 32,
         "reading": 48,
-        "use_of_language": 40
+        "use_of_language": 32
       }
     },
     {
@@ -717,16 +717,16 @@
       "grade": 12,
       "questions": 192,
       "components": {
-        "grammar": 72,
-        "vocabulary": 24,
-        "reading": 56,
-        "use_of_language": 40
+        "grammar": 80,
+        "vocabulary": 32,
+        "reading": 48,
+        "use_of_language": 32
       },
       "blueprintBuckets": {
-        "grammar": 72,
-        "vocabulary": 24,
-        "reading": 56,
-        "use_of_language": 40
+        "grammar": 80,
+        "vocabulary": 32,
+        "reading": 48,
+        "use_of_language": 32
       }
     }
   ],
@@ -741,11 +741,11 @@
       "shortages": [],
       "expected": {
         "language.grammar": 1,
-        "language.orthography": 1,
-        "language.punctuation": 1,
+        "language.orthography": 0,
+        "language.punctuation": 0,
         "language.syntax": 1,
-        "language.vocabulary": 0,
-        "language.editing": 0,
+        "language.vocabulary": 1,
+        "language.editing": 1,
         "language.reading": 0,
         "literature.comprehension": 2,
         "literature.genre": 1,
@@ -755,19 +755,19 @@
         "literature.author_era": 0
       },
       "availableByBucket": {
-        "literature.comprehension": 20,
-        "language.punctuation": 5,
-        "literature.genre": 8,
-        "language.syntax": 5,
-        "literature.devices": 8,
-        "language.vocabulary": 5,
-        "literature.character": 8,
-        "language.editing": 5,
-        "literature.theme": 8,
-        "language.grammar": 12,
-        "language.reading": 4,
+        "language.syntax": 3,
+        "literature.devices": 4,
+        "language.vocabulary": 2,
+        "literature.character": 4,
+        "language.editing": 4,
+        "literature.theme": 4,
+        "language.grammar": 4,
         "literature.author_era": 4,
-        "language.orthography": 4
+        "literature.comprehension": 7,
+        "language.punctuation": 3,
+        "literature.genre": 3,
+        "language.orthography": 3,
+        "language.reading": 3
       }
     },
     {
@@ -780,11 +780,11 @@
       "shortages": [],
       "expected": {
         "language.grammar": 1,
-        "language.orthography": 1,
-        "language.punctuation": 1,
+        "language.orthography": 0,
+        "language.punctuation": 0,
         "language.syntax": 1,
-        "language.vocabulary": 0,
-        "language.editing": 0,
+        "language.vocabulary": 1,
+        "language.editing": 1,
         "language.reading": 0,
         "literature.comprehension": 2,
         "literature.genre": 1,
@@ -794,19 +794,19 @@
         "literature.author_era": 0
       },
       "availableByBucket": {
-        "literature.comprehension": 20,
-        "language.punctuation": 5,
-        "literature.genre": 8,
-        "language.syntax": 5,
-        "literature.devices": 8,
-        "language.vocabulary": 5,
-        "literature.character": 8,
-        "language.editing": 5,
-        "literature.theme": 8,
-        "language.grammar": 12,
-        "language.reading": 4,
+        "language.orthography": 3,
+        "literature.comprehension": 8,
+        "language.punctuation": 4,
+        "literature.genre": 4,
+        "literature.devices": 4,
+        "language.vocabulary": 3,
+        "language.editing": 2,
+        "literature.theme": 4,
+        "language.grammar": 4,
+        "language.reading": 3,
         "literature.author_era": 4,
-        "language.orthography": 4
+        "language.syntax": 3,
+        "literature.character": 2
       }
     },
     {
@@ -833,19 +833,19 @@
         "literature.author_era": 1
       },
       "availableByBucket": {
-        "literature.comprehension": 20,
-        "language.punctuation": 5,
-        "literature.genre": 8,
-        "language.syntax": 5,
+        "language.syntax": 6,
         "literature.devices": 8,
         "language.vocabulary": 5,
-        "literature.character": 8,
-        "language.editing": 5,
+        "literature.character": 6,
+        "language.editing": 6,
         "literature.theme": 8,
-        "language.grammar": 12,
-        "language.reading": 4,
-        "literature.author_era": 4,
-        "language.orthography": 4
+        "language.grammar": 8,
+        "literature.author_era": 8,
+        "literature.comprehension": 15,
+        "language.punctuation": 7,
+        "literature.genre": 7,
+        "language.orthography": 6,
+        "language.reading": 6
       }
     },
     {
@@ -859,11 +859,11 @@
       "expected": {
         "language.grammar": 1,
         "language.orthography": 0,
-        "language.punctuation": 1,
-        "language.syntax": 1,
+        "language.punctuation": 0,
+        "language.syntax": 0,
         "language.vocabulary": 1,
-        "language.editing": 0,
-        "language.reading": 0,
+        "language.editing": 1,
+        "language.reading": 1,
         "literature.comprehension": 2,
         "literature.genre": 1,
         "literature.devices": 1,
@@ -872,19 +872,19 @@
         "literature.author_era": 0
       },
       "availableByBucket": {
-        "language.punctuation": 4,
-        "literature.genre": 8,
-        "literature.comprehension": 20,
-        "language.syntax": 5,
-        "literature.devices": 8,
-        "language.vocabulary": 5,
-        "literature.character": 8,
-        "language.editing": 5,
-        "literature.theme": 8,
-        "language.grammar": 12,
-        "language.reading": 5,
+        "literature.genre": 4,
+        "language.syntax": 2,
+        "literature.devices": 4,
+        "language.vocabulary": 2,
+        "literature.character": 4,
+        "language.editing": 3,
+        "literature.theme": 4,
+        "language.grammar": 4,
+        "language.reading": 4,
         "literature.author_era": 4,
-        "language.orthography": 4
+        "literature.comprehension": 8,
+        "language.orthography": 3,
+        "language.punctuation": 2
       }
     },
     {
@@ -898,11 +898,11 @@
       "expected": {
         "language.grammar": 1,
         "language.orthography": 0,
-        "language.punctuation": 1,
-        "language.syntax": 1,
+        "language.punctuation": 0,
+        "language.syntax": 0,
         "language.vocabulary": 1,
-        "language.editing": 0,
-        "language.reading": 0,
+        "language.editing": 1,
+        "language.reading": 1,
         "literature.comprehension": 2,
         "literature.genre": 1,
         "literature.devices": 1,
@@ -911,19 +911,19 @@
         "literature.author_era": 0
       },
       "availableByBucket": {
+        "language.orthography": 3,
+        "literature.comprehension": 8,
         "language.punctuation": 4,
-        "literature.genre": 8,
-        "literature.comprehension": 20,
-        "language.syntax": 5,
-        "literature.devices": 8,
-        "language.vocabulary": 5,
-        "literature.character": 8,
-        "language.editing": 5,
-        "literature.theme": 8,
-        "language.grammar": 12,
-        "language.reading": 5,
+        "literature.genre": 4,
+        "language.syntax": 4,
+        "literature.devices": 4,
+        "language.vocabulary": 3,
+        "literature.theme": 4,
+        "language.grammar": 4,
+        "language.reading": 2,
         "literature.author_era": 4,
-        "language.orthography": 4
+        "language.editing": 2,
+        "literature.character": 2
       }
     },
     {
@@ -950,19 +950,19 @@
         "literature.author_era": 1
       },
       "availableByBucket": {
-        "language.punctuation": 4,
         "literature.genre": 8,
-        "literature.comprehension": 20,
-        "language.syntax": 5,
+        "language.syntax": 6,
         "literature.devices": 8,
         "language.vocabulary": 5,
-        "literature.character": 8,
+        "literature.character": 6,
         "language.editing": 5,
         "literature.theme": 8,
-        "language.grammar": 12,
-        "language.reading": 5,
-        "literature.author_era": 4,
-        "language.orthography": 4
+        "language.grammar": 8,
+        "language.reading": 6,
+        "literature.author_era": 8,
+        "literature.comprehension": 16,
+        "language.orthography": 6,
+        "language.punctuation": 6
       }
     },
     {
@@ -976,10 +976,10 @@
       "expected": {
         "language.grammar": 1,
         "language.orthography": 0,
-        "language.punctuation": 1,
+        "language.punctuation": 0,
         "language.syntax": 1,
         "language.vocabulary": 1,
-        "language.editing": 0,
+        "language.editing": 1,
         "language.reading": 0,
         "literature.comprehension": 2,
         "literature.genre": 1,
@@ -989,19 +989,19 @@
         "literature.author_era": 0
       },
       "availableByBucket": {
-        "language.punctuation": 4,
-        "literature.genre": 8,
-        "literature.comprehension": 16,
-        "language.syntax": 8,
-        "literature.devices": 8,
-        "language.vocabulary": 6,
-        "literature.character": 8,
-        "language.editing": 5,
-        "literature.theme": 8,
-        "language.grammar": 8,
-        "language.reading": 5,
-        "literature.author_era": 8,
-        "language.orthography": 4
+        "literature.genre": 3,
+        "language.syntax": 3,
+        "literature.devices": 4,
+        "language.vocabulary": 2,
+        "literature.character": 4,
+        "language.editing": 3,
+        "literature.theme": 4,
+        "language.grammar": 4,
+        "language.reading": 4,
+        "literature.author_era": 4,
+        "literature.comprehension": 8,
+        "language.orthography": 3,
+        "language.punctuation": 2
       }
     },
     {
@@ -1015,10 +1015,10 @@
       "expected": {
         "language.grammar": 1,
         "language.orthography": 0,
-        "language.punctuation": 1,
+        "language.punctuation": 0,
         "language.syntax": 1,
         "language.vocabulary": 1,
-        "language.editing": 0,
+        "language.editing": 1,
         "language.reading": 0,
         "literature.comprehension": 2,
         "literature.genre": 1,
@@ -1028,19 +1028,19 @@
         "literature.author_era": 0
       },
       "availableByBucket": {
+        "language.orthography": 3,
+        "literature.comprehension": 8,
         "language.punctuation": 4,
-        "literature.genre": 8,
-        "literature.comprehension": 16,
-        "language.syntax": 8,
-        "literature.devices": 8,
-        "language.vocabulary": 6,
-        "literature.character": 8,
-        "language.editing": 5,
-        "literature.theme": 8,
-        "language.grammar": 8,
-        "language.reading": 5,
-        "literature.author_era": 8,
-        "language.orthography": 4
+        "literature.genre": 4,
+        "language.syntax": 4,
+        "language.vocabulary": 3,
+        "literature.character": 4,
+        "literature.theme": 4,
+        "language.grammar": 4,
+        "language.reading": 2,
+        "literature.author_era": 4,
+        "literature.devices": 2,
+        "language.editing": 2
       }
     },
     {
@@ -1067,19 +1067,19 @@
         "literature.author_era": 1
       },
       "availableByBucket": {
-        "language.punctuation": 4,
-        "literature.genre": 8,
-        "literature.comprehension": 16,
-        "language.syntax": 8,
-        "literature.devices": 8,
-        "language.vocabulary": 6,
+        "literature.genre": 7,
+        "language.syntax": 7,
+        "literature.devices": 6,
+        "language.vocabulary": 5,
         "literature.character": 8,
         "language.editing": 5,
         "literature.theme": 8,
         "language.grammar": 8,
-        "language.reading": 5,
+        "language.reading": 6,
         "literature.author_era": 8,
-        "language.orthography": 4
+        "literature.comprehension": 16,
+        "language.orthography": 6,
+        "language.punctuation": 6
       }
     },
     {
@@ -1095,9 +1095,9 @@
         "language.orthography": 0,
         "language.punctuation": 0,
         "language.syntax": 1,
-        "language.vocabulary": 1,
+        "language.vocabulary": 0,
         "language.editing": 1,
-        "language.reading": 0,
+        "language.reading": 1,
         "literature.comprehension": 2,
         "literature.genre": 1,
         "literature.devices": 1,
@@ -1106,19 +1106,19 @@
         "literature.author_era": 0
       },
       "availableByBucket": {
-        "literature.comprehension": 16,
-        "language.punctuation": 4,
-        "literature.genre": 8,
-        "language.syntax": 8,
-        "literature.devices": 8,
-        "language.vocabulary": 5,
-        "literature.character": 8,
-        "language.editing": 5,
-        "literature.theme": 8,
-        "language.grammar": 9,
-        "language.reading": 5,
-        "literature.author_era": 8,
-        "language.orthography": 4
+        "literature.comprehension": 8,
+        "literature.genre": 4,
+        "language.syntax": 4,
+        "literature.devices": 4,
+        "language.vocabulary": 2,
+        "literature.character": 4,
+        "language.editing": 2,
+        "literature.theme": 4,
+        "language.grammar": 4,
+        "language.reading": 3,
+        "literature.author_era": 4,
+        "language.orthography": 3,
+        "language.punctuation": 2
       }
     },
     {
@@ -1134,9 +1134,9 @@
         "language.orthography": 0,
         "language.punctuation": 0,
         "language.syntax": 1,
-        "language.vocabulary": 1,
+        "language.vocabulary": 0,
         "language.editing": 1,
-        "language.reading": 0,
+        "language.reading": 1,
         "literature.comprehension": 2,
         "literature.genre": 1,
         "literature.devices": 1,
@@ -1145,19 +1145,19 @@
         "literature.author_era": 0
       },
       "availableByBucket": {
-        "literature.comprehension": 16,
-        "language.punctuation": 4,
-        "literature.genre": 8,
-        "language.syntax": 8,
-        "literature.devices": 8,
-        "language.vocabulary": 5,
-        "literature.character": 8,
-        "language.editing": 5,
-        "literature.theme": 8,
-        "language.grammar": 9,
-        "language.reading": 5,
-        "literature.author_era": 8,
-        "language.orthography": 4
+        "language.orthography": 2,
+        "literature.comprehension": 8,
+        "language.punctuation": 3,
+        "literature.genre": 4,
+        "language.syntax": 4,
+        "literature.devices": 4,
+        "language.vocabulary": 4,
+        "literature.character": 4,
+        "literature.theme": 4,
+        "language.grammar": 3,
+        "literature.author_era": 3,
+        "language.editing": 3,
+        "language.reading": 2
       }
     },
     {
@@ -1185,18 +1185,18 @@
       },
       "availableByBucket": {
         "literature.comprehension": 16,
-        "language.punctuation": 4,
         "literature.genre": 8,
         "language.syntax": 8,
         "literature.devices": 8,
-        "language.vocabulary": 5,
+        "language.vocabulary": 6,
         "literature.character": 8,
         "language.editing": 5,
         "literature.theme": 8,
-        "language.grammar": 9,
+        "language.grammar": 7,
         "language.reading": 5,
-        "literature.author_era": 8,
-        "language.orthography": 4
+        "literature.author_era": 7,
+        "language.orthography": 5,
+        "language.punctuation": 5
       }
     },
     {
@@ -1216,26 +1216,26 @@
         "language.editing": 1,
         "language.reading": 0,
         "literature.comprehension": 2,
-        "literature.genre": 1,
+        "literature.genre": 0,
         "literature.devices": 1,
         "literature.character": 1,
-        "literature.theme": 0,
+        "literature.theme": 1,
         "literature.author_era": 1
       },
       "availableByBucket": {
-        "literature.comprehension": 16,
-        "language.punctuation": 8,
-        "literature.genre": 8,
-        "language.syntax": 8,
-        "literature.devices": 8,
-        "language.vocabulary": 4,
-        "literature.character": 8,
-        "language.editing": 4,
-        "literature.theme": 8,
-        "language.grammar": 8,
-        "language.reading": 4,
-        "literature.author_era": 8,
-        "language.orthography": 4
+        "literature.comprehension": 8,
+        "language.punctuation": 3,
+        "literature.genre": 4,
+        "language.syntax": 4,
+        "literature.devices": 4,
+        "language.vocabulary": 1,
+        "language.editing": 3,
+        "literature.theme": 4,
+        "language.grammar": 4,
+        "language.reading": 3,
+        "literature.author_era": 4,
+        "language.orthography": 3,
+        "literature.character": 3
       }
     },
     {
@@ -1255,26 +1255,26 @@
         "language.editing": 1,
         "language.reading": 0,
         "literature.comprehension": 2,
-        "literature.genre": 1,
+        "literature.genre": 0,
         "literature.devices": 1,
         "literature.character": 1,
-        "literature.theme": 0,
+        "literature.theme": 1,
         "literature.author_era": 1
       },
       "availableByBucket": {
-        "literature.comprehension": 16,
-        "language.punctuation": 8,
-        "literature.genre": 8,
-        "language.syntax": 8,
-        "literature.devices": 8,
-        "language.vocabulary": 4,
-        "literature.character": 8,
+        "language.orthography": 2,
+        "literature.comprehension": 8,
+        "language.punctuation": 4,
+        "literature.genre": 4,
+        "language.syntax": 4,
+        "language.vocabulary": 1,
+        "literature.character": 4,
         "language.editing": 4,
-        "literature.theme": 8,
-        "language.grammar": 8,
-        "language.reading": 4,
-        "literature.author_era": 8,
-        "language.orthography": 4
+        "literature.theme": 4,
+        "language.grammar": 4,
+        "literature.author_era": 4,
+        "literature.devices": 3,
+        "language.reading": 2
       }
     },
     {
@@ -1302,18 +1302,18 @@
       },
       "availableByBucket": {
         "literature.comprehension": 16,
-        "language.punctuation": 8,
+        "language.punctuation": 7,
         "literature.genre": 8,
         "language.syntax": 8,
-        "literature.devices": 8,
-        "language.vocabulary": 4,
-        "literature.character": 8,
-        "language.editing": 4,
+        "literature.devices": 7,
+        "language.vocabulary": 2,
+        "language.editing": 7,
         "literature.theme": 8,
         "language.grammar": 8,
-        "language.reading": 4,
+        "language.reading": 5,
         "literature.author_era": 8,
-        "language.orthography": 4
+        "language.orthography": 5,
+        "literature.character": 7
       }
     },
     {
@@ -1330,29 +1330,29 @@
         "language.punctuation": 1,
         "language.syntax": 1,
         "language.vocabulary": 0,
-        "language.editing": 1,
-        "language.reading": 0,
+        "language.editing": 0,
+        "language.reading": 1,
         "literature.comprehension": 2,
-        "literature.genre": 1,
+        "literature.genre": 0,
         "literature.devices": 1,
         "literature.character": 1,
         "literature.theme": 1,
-        "literature.author_era": 0
+        "literature.author_era": 1
       },
       "availableByBucket": {
-        "language.orthography": 4,
-        "literature.comprehension": 16,
-        "language.punctuation": 8,
-        "literature.genre": 8,
-        "language.syntax": 8,
-        "literature.devices": 8,
-        "language.vocabulary": 4,
-        "literature.character": 8,
-        "language.editing": 4,
-        "literature.theme": 8,
-        "language.grammar": 8,
-        "language.reading": 4,
-        "literature.author_era": 8
+        "literature.comprehension": 8,
+        "language.punctuation": 4,
+        "literature.genre": 4,
+        "language.syntax": 4,
+        "literature.devices": 4,
+        "language.vocabulary": 1,
+        "language.editing": 3,
+        "literature.theme": 4,
+        "language.grammar": 4,
+        "language.reading": 3,
+        "literature.author_era": 4,
+        "language.orthography": 3,
+        "literature.character": 2
       }
     },
     {
@@ -1369,29 +1369,29 @@
         "language.punctuation": 1,
         "language.syntax": 1,
         "language.vocabulary": 0,
-        "language.editing": 1,
-        "language.reading": 0,
+        "language.editing": 0,
+        "language.reading": 1,
         "literature.comprehension": 2,
-        "literature.genre": 1,
+        "literature.genre": 0,
         "literature.devices": 1,
         "literature.character": 1,
         "literature.theme": 1,
-        "literature.author_era": 0
+        "literature.author_era": 1
       },
       "availableByBucket": {
-        "language.orthography": 4,
-        "literature.comprehension": 16,
-        "language.punctuation": 8,
-        "literature.genre": 8,
-        "language.syntax": 8,
-        "literature.devices": 8,
-        "language.vocabulary": 4,
-        "literature.character": 8,
+        "language.grammar": 4,
+        "literature.author_era": 4,
+        "language.orthography": 2,
+        "literature.comprehension": 7,
+        "language.punctuation": 4,
+        "literature.genre": 4,
+        "language.vocabulary": 1,
+        "literature.devices": 4,
+        "literature.character": 4,
         "language.editing": 4,
-        "literature.theme": 8,
-        "language.grammar": 8,
-        "language.reading": 4,
-        "literature.author_era": 8
+        "literature.theme": 4,
+        "language.reading": 3,
+        "language.syntax": 3
       }
     },
     {
@@ -1418,19 +1418,19 @@
         "literature.author_era": 1
       },
       "availableByBucket": {
-        "language.orthography": 4,
-        "literature.comprehension": 16,
+        "literature.comprehension": 15,
         "language.punctuation": 8,
         "literature.genre": 8,
-        "language.syntax": 8,
+        "language.syntax": 7,
         "literature.devices": 8,
-        "language.vocabulary": 4,
-        "literature.character": 8,
-        "language.editing": 4,
+        "language.vocabulary": 2,
+        "language.editing": 7,
         "literature.theme": 8,
         "language.grammar": 8,
-        "language.reading": 4,
-        "literature.author_era": 8
+        "language.reading": 6,
+        "literature.author_era": 8,
+        "language.orthography": 5,
+        "literature.character": 6
       }
     },
     {
@@ -1447,8 +1447,8 @@
         "language.punctuation": 1,
         "language.syntax": 1,
         "language.vocabulary": 0,
-        "language.editing": 1,
-        "language.reading": 0,
+        "language.editing": 0,
+        "language.reading": 1,
         "literature.comprehension": 1,
         "literature.genre": 1,
         "literature.devices": 1,
@@ -1457,19 +1457,19 @@
         "literature.author_era": 1
       },
       "availableByBucket": {
-        "language.orthography": 4,
-        "literature.comprehension": 16,
-        "language.punctuation": 8,
-        "literature.genre": 8,
-        "language.syntax": 8,
-        "literature.devices": 8,
-        "language.vocabulary": 4,
-        "literature.character": 8,
+        "literature.comprehension": 8,
+        "language.punctuation": 4,
+        "literature.genre": 4,
+        "language.syntax": 4,
+        "language.vocabulary": 1,
+        "literature.character": 4,
         "language.editing": 4,
-        "literature.theme": 8,
-        "language.grammar": 8,
-        "language.reading": 4,
-        "literature.author_era": 8
+        "literature.theme": 4,
+        "language.grammar": 4,
+        "language.reading": 2,
+        "literature.author_era": 3,
+        "language.orthography": 3,
+        "literature.devices": 3
       }
     },
     {
@@ -1486,8 +1486,8 @@
         "language.punctuation": 1,
         "language.syntax": 1,
         "language.vocabulary": 0,
-        "language.editing": 1,
-        "language.reading": 0,
+        "language.editing": 0,
+        "language.reading": 1,
         "literature.comprehension": 1,
         "literature.genre": 1,
         "literature.devices": 1,
@@ -1496,19 +1496,19 @@
         "literature.author_era": 1
       },
       "availableByBucket": {
-        "language.orthography": 4,
-        "literature.comprehension": 16,
-        "language.punctuation": 8,
-        "literature.genre": 8,
-        "language.syntax": 8,
-        "literature.devices": 8,
-        "language.vocabulary": 4,
-        "literature.character": 8,
-        "language.editing": 4,
-        "literature.theme": 8,
-        "language.grammar": 8,
-        "language.reading": 4,
-        "literature.author_era": 8
+        "language.grammar": 4,
+        "literature.author_era": 4,
+        "language.orthography": 2,
+        "literature.comprehension": 7,
+        "language.punctuation": 4,
+        "language.vocabulary": 1,
+        "language.syntax": 4,
+        "literature.devices": 4,
+        "literature.character": 4,
+        "literature.genre": 4,
+        "literature.theme": 4,
+        "language.reading": 3,
+        "language.editing": 3
       }
     },
     {
@@ -1535,19 +1535,19 @@
         "literature.author_era": 2
       },
       "availableByBucket": {
-        "language.orthography": 4,
-        "literature.comprehension": 16,
+        "literature.comprehension": 15,
         "language.punctuation": 8,
         "literature.genre": 8,
         "language.syntax": 8,
-        "literature.devices": 8,
-        "language.vocabulary": 4,
+        "language.vocabulary": 2,
         "literature.character": 8,
-        "language.editing": 4,
+        "language.editing": 7,
         "literature.theme": 8,
         "language.grammar": 8,
-        "language.reading": 4,
-        "literature.author_era": 8
+        "language.reading": 5,
+        "literature.author_era": 7,
+        "language.orthography": 5,
+        "literature.devices": 7
       }
     },
     {
@@ -1560,11 +1560,11 @@
       "shortages": [],
       "expected": {
         "language.grammar": 1,
-        "language.orthography": 0,
+        "language.orthography": 1,
         "language.punctuation": 1,
         "language.syntax": 1,
         "language.vocabulary": 0,
-        "language.editing": 1,
+        "language.editing": 0,
         "language.reading": 0,
         "literature.comprehension": 1,
         "literature.genre": 1,
@@ -1574,19 +1574,19 @@
         "literature.author_era": 1
       },
       "availableByBucket": {
-        "language.grammar": 8,
-        "literature.author_era": 8,
-        "language.orthography": 4,
-        "literature.comprehension": 16,
-        "language.punctuation": 8,
-        "literature.genre": 8,
-        "language.syntax": 8,
-        "literature.devices": 8,
-        "language.vocabulary": 4,
-        "literature.character": 8,
-        "language.editing": 4,
-        "literature.theme": 8,
-        "language.reading": 4
+        "language.orthography": 3,
+        "literature.comprehension": 8,
+        "language.punctuation": 4,
+        "literature.genre": 4,
+        "language.syntax": 4,
+        "language.vocabulary": 1,
+        "literature.character": 4,
+        "literature.theme": 4,
+        "language.grammar": 4,
+        "language.reading": 3,
+        "literature.author_era": 4,
+        "literature.devices": 2,
+        "language.editing": 3
       }
     },
     {
@@ -1599,11 +1599,11 @@
       "shortages": [],
       "expected": {
         "language.grammar": 1,
-        "language.orthography": 0,
+        "language.orthography": 1,
         "language.punctuation": 1,
         "language.syntax": 1,
         "language.vocabulary": 0,
-        "language.editing": 1,
+        "language.editing": 0,
         "language.reading": 0,
         "literature.comprehension": 1,
         "literature.genre": 1,
@@ -1613,19 +1613,19 @@
         "literature.author_era": 1
       },
       "availableByBucket": {
-        "language.grammar": 8,
-        "literature.author_era": 8,
-        "language.orthography": 4,
-        "literature.comprehension": 16,
-        "language.punctuation": 8,
-        "literature.genre": 8,
-        "language.syntax": 8,
-        "literature.devices": 8,
-        "language.vocabulary": 4,
-        "literature.character": 8,
+        "language.grammar": 4,
+        "language.reading": 4,
+        "literature.author_era": 3,
+        "literature.comprehension": 8,
+        "language.punctuation": 4,
+        "literature.genre": 4,
+        "language.vocabulary": 1,
+        "literature.devices": 4,
+        "literature.character": 4,
         "language.editing": 4,
-        "literature.theme": 8,
-        "language.reading": 4
+        "literature.theme": 4,
+        "language.orthography": 1,
+        "language.syntax": 3
       }
     },
     {
@@ -1652,19 +1652,19 @@
         "literature.author_era": 2
       },
       "availableByBucket": {
-        "language.grammar": 8,
-        "literature.author_era": 8,
         "language.orthography": 4,
         "literature.comprehension": 16,
         "language.punctuation": 8,
         "literature.genre": 8,
-        "language.syntax": 8,
-        "literature.devices": 8,
-        "language.vocabulary": 4,
+        "language.syntax": 7,
+        "language.vocabulary": 2,
         "literature.character": 8,
-        "language.editing": 4,
         "literature.theme": 8,
-        "language.reading": 4
+        "language.grammar": 8,
+        "language.reading": 7,
+        "literature.author_era": 7,
+        "literature.devices": 6,
+        "language.editing": 7
       }
     },
     {
@@ -1677,11 +1677,11 @@
       "shortages": [],
       "expected": {
         "language.grammar": 1,
-        "language.orthography": 0,
+        "language.orthography": 1,
         "language.punctuation": 1,
         "language.syntax": 1,
         "language.vocabulary": 0,
-        "language.editing": 1,
+        "language.editing": 0,
         "language.reading": 0,
         "literature.comprehension": 1,
         "literature.genre": 1,
@@ -1691,19 +1691,19 @@
         "literature.author_era": 1
       },
       "availableByBucket": {
-        "language.grammar": 8,
-        "literature.author_era": 8,
-        "language.orthography": 4,
-        "literature.comprehension": 16,
-        "language.punctuation": 8,
-        "literature.genre": 8,
-        "language.syntax": 8,
-        "literature.devices": 8,
-        "language.vocabulary": 4,
-        "literature.character": 8,
-        "language.editing": 4,
-        "literature.theme": 8,
-        "language.reading": 4
+        "language.orthography": 3,
+        "literature.comprehension": 8,
+        "language.punctuation": 4,
+        "literature.genre": 4,
+        "language.vocabulary": 1,
+        "literature.devices": 4,
+        "literature.character": 4,
+        "literature.theme": 4,
+        "language.grammar": 4,
+        "language.reading": 3,
+        "literature.author_era": 4,
+        "language.syntax": 2,
+        "language.editing": 3
       }
     },
     {
@@ -1716,11 +1716,11 @@
       "shortages": [],
       "expected": {
         "language.grammar": 1,
-        "language.orthography": 0,
+        "language.orthography": 1,
         "language.punctuation": 1,
         "language.syntax": 1,
         "language.vocabulary": 0,
-        "language.editing": 1,
+        "language.editing": 0,
         "language.reading": 0,
         "literature.comprehension": 1,
         "literature.genre": 1,
@@ -1730,19 +1730,19 @@
         "literature.author_era": 1
       },
       "availableByBucket": {
-        "language.grammar": 8,
-        "literature.author_era": 8,
-        "language.orthography": 4,
-        "literature.comprehension": 16,
-        "language.punctuation": 8,
-        "literature.genre": 8,
-        "language.syntax": 8,
-        "literature.devices": 8,
-        "language.vocabulary": 4,
-        "literature.character": 8,
-        "language.editing": 4,
-        "literature.theme": 8,
-        "language.reading": 4
+        "language.grammar": 4,
+        "language.reading": 3,
+        "literature.author_era": 4,
+        "literature.comprehension": 8,
+        "language.punctuation": 4,
+        "language.vocabulary": 1,
+        "language.syntax": 4,
+        "literature.devices": 4,
+        "literature.character": 4,
+        "literature.genre": 4,
+        "literature.theme": 4,
+        "language.editing": 3,
+        "language.orthography": 1
       }
     },
     {
@@ -1769,19 +1769,19 @@
         "literature.author_era": 2
       },
       "availableByBucket": {
-        "language.grammar": 8,
-        "literature.author_era": 8,
         "language.orthography": 4,
         "literature.comprehension": 16,
         "language.punctuation": 8,
         "literature.genre": 8,
-        "language.syntax": 8,
+        "language.vocabulary": 2,
         "literature.devices": 8,
-        "language.vocabulary": 4,
         "literature.character": 8,
-        "language.editing": 4,
         "literature.theme": 8,
-        "language.reading": 4
+        "language.grammar": 8,
+        "language.reading": 6,
+        "literature.author_era": 8,
+        "language.syntax": 6,
+        "language.editing": 6
       }
     },
     {
@@ -1794,12 +1794,12 @@
       "shortages": [],
       "expected": {
         "language.grammar": 1,
-        "language.orthography": 0,
+        "language.orthography": 1,
         "language.punctuation": 1,
         "language.syntax": 1,
         "language.vocabulary": 0,
         "language.editing": 0,
-        "language.reading": 1,
+        "language.reading": 0,
         "literature.comprehension": 1,
         "literature.genre": 1,
         "literature.devices": 1,
@@ -1808,19 +1808,19 @@
         "literature.author_era": 1
       },
       "availableByBucket": {
-        "language.grammar": 8,
-        "literature.author_era": 8,
-        "language.orthography": 4,
-        "literature.comprehension": 16,
-        "language.punctuation": 8,
-        "literature.genre": 8,
-        "language.syntax": 8,
-        "literature.devices": 8,
-        "language.vocabulary": 4,
-        "literature.character": 8,
+        "language.orthography": 2,
+        "literature.comprehension": 8,
+        "language.punctuation": 4,
+        "literature.genre": 4,
+        "language.syntax": 4,
+        "language.vocabulary": 1,
+        "literature.character": 4,
         "language.editing": 4,
-        "literature.theme": 8,
-        "language.reading": 4
+        "literature.theme": 4,
+        "language.grammar": 4,
+        "literature.author_era": 4,
+        "literature.devices": 3,
+        "language.reading": 2
       }
     },
     {
@@ -1833,12 +1833,12 @@
       "shortages": [],
       "expected": {
         "language.grammar": 1,
-        "language.orthography": 0,
+        "language.orthography": 1,
         "language.punctuation": 1,
         "language.syntax": 1,
         "language.vocabulary": 0,
         "language.editing": 0,
-        "language.reading": 1,
+        "language.reading": 0,
         "literature.comprehension": 1,
         "literature.genre": 1,
         "literature.devices": 1,
@@ -1847,19 +1847,19 @@
         "literature.author_era": 1
       },
       "availableByBucket": {
-        "language.grammar": 8,
-        "literature.author_era": 8,
-        "language.orthography": 4,
-        "literature.comprehension": 16,
-        "language.punctuation": 8,
-        "literature.genre": 8,
-        "language.syntax": 8,
-        "literature.devices": 8,
-        "language.vocabulary": 4,
-        "literature.character": 8,
-        "language.editing": 4,
-        "literature.theme": 8,
-        "language.reading": 4
+        "language.editing": 3,
+        "literature.theme": 4,
+        "language.grammar": 4,
+        "language.reading": 4,
+        "literature.author_era": 3,
+        "literature.comprehension": 8,
+        "language.vocabulary": 1,
+        "literature.genre": 4,
+        "language.syntax": 4,
+        "literature.devices": 4,
+        "literature.character": 4,
+        "language.orthography": 2,
+        "language.punctuation": 3
       }
     },
     {
@@ -1886,19 +1886,19 @@
         "literature.author_era": 2
       },
       "availableByBucket": {
-        "language.grammar": 8,
-        "literature.author_era": 8,
         "language.orthography": 4,
         "literature.comprehension": 16,
-        "language.punctuation": 8,
+        "language.punctuation": 7,
         "literature.genre": 8,
         "language.syntax": 8,
-        "literature.devices": 8,
-        "language.vocabulary": 4,
+        "language.vocabulary": 2,
         "literature.character": 8,
-        "language.editing": 4,
+        "language.editing": 7,
         "literature.theme": 8,
-        "language.reading": 4
+        "language.grammar": 8,
+        "literature.author_era": 7,
+        "language.reading": 6,
+        "literature.devices": 7
       }
     },
     {
@@ -1910,13 +1910,13 @@
       "maxRoundingDeviation": 0.5,
       "shortages": [],
       "expected": {
-        "language.grammar": 1,
-        "language.orthography": 0,
+        "language.grammar": 0,
+        "language.orthography": 1,
         "language.punctuation": 1,
         "language.syntax": 1,
         "language.vocabulary": 0,
-        "language.editing": 0,
-        "language.reading": 1,
+        "language.editing": 1,
+        "language.reading": 0,
         "literature.comprehension": 1,
         "literature.genre": 1,
         "literature.devices": 1,
@@ -1925,19 +1925,19 @@
         "literature.author_era": 1
       },
       "availableByBucket": {
-        "literature.author_era": 12,
-        "language.orthography": 4,
-        "literature.comprehension": 12,
-        "language.punctuation": 8,
-        "literature.genre": 8,
-        "language.syntax": 12,
-        "literature.devices": 8,
-        "language.vocabulary": 4,
-        "literature.character": 8,
+        "language.orthography": 2,
+        "literature.comprehension": 8,
+        "language.punctuation": 4,
+        "literature.genre": 4,
+        "language.vocabulary": 1,
+        "literature.devices": 4,
+        "literature.character": 4,
         "language.editing": 4,
-        "literature.theme": 8,
-        "language.grammar": 4,
-        "language.reading": 4
+        "literature.theme": 4,
+        "language.grammar": 3,
+        "literature.author_era": 4,
+        "language.reading": 3,
+        "language.syntax": 3
       }
     },
     {
@@ -1949,13 +1949,13 @@
       "maxRoundingDeviation": 0.5,
       "shortages": [],
       "expected": {
-        "language.grammar": 1,
-        "language.orthography": 0,
+        "language.grammar": 0,
+        "language.orthography": 1,
         "language.punctuation": 1,
         "language.syntax": 1,
         "language.vocabulary": 0,
-        "language.editing": 0,
-        "language.reading": 1,
+        "language.editing": 1,
+        "language.reading": 0,
         "literature.comprehension": 1,
         "literature.genre": 1,
         "literature.devices": 1,
@@ -1964,19 +1964,19 @@
         "literature.author_era": 1
       },
       "availableByBucket": {
-        "literature.author_era": 12,
-        "language.orthography": 4,
-        "literature.comprehension": 12,
-        "language.punctuation": 8,
-        "literature.genre": 8,
-        "language.syntax": 12,
-        "literature.devices": 8,
-        "language.vocabulary": 4,
-        "literature.character": 8,
-        "language.editing": 4,
-        "literature.theme": 8,
+        "language.editing": 3,
+        "literature.theme": 4,
         "language.grammar": 4,
-        "language.reading": 4
+        "language.reading": 3,
+        "literature.author_era": 4,
+        "literature.comprehension": 7,
+        "language.vocabulary": 1,
+        "language.punctuation": 4,
+        "literature.genre": 4,
+        "language.syntax": 4,
+        "literature.devices": 4,
+        "literature.character": 4,
+        "language.orthography": 2
       }
     },
     {
@@ -2003,19 +2003,19 @@
         "literature.author_era": 2
       },
       "availableByBucket": {
-        "literature.author_era": 12,
         "language.orthography": 4,
-        "literature.comprehension": 12,
+        "literature.comprehension": 15,
         "language.punctuation": 8,
         "literature.genre": 8,
-        "language.syntax": 12,
+        "language.vocabulary": 2,
         "literature.devices": 8,
-        "language.vocabulary": 4,
         "literature.character": 8,
-        "language.editing": 4,
+        "language.editing": 7,
         "literature.theme": 8,
-        "language.grammar": 4,
-        "language.reading": 4
+        "language.grammar": 7,
+        "literature.author_era": 8,
+        "language.reading": 6,
+        "language.syntax": 7
       }
     },
     {
@@ -2027,13 +2027,13 @@
       "maxRoundingDeviation": 0.5,
       "shortages": [],
       "expected": {
-        "language.grammar": 1,
-        "language.orthography": 1,
+        "language.grammar": 0,
+        "language.orthography": 0,
         "language.punctuation": 1,
         "language.syntax": 1,
         "language.vocabulary": 0,
-        "language.editing": 0,
-        "language.reading": 0,
+        "language.editing": 1,
+        "language.reading": 1,
         "literature.comprehension": 1,
         "literature.genre": 1,
         "literature.devices": 1,
@@ -2042,19 +2042,19 @@
         "literature.author_era": 1
       },
       "availableByBucket": {
-        "literature.theme": 8,
-        "language.grammar": 4,
         "language.reading": 4,
-        "literature.author_era": 12,
-        "language.orthography": 4,
-        "literature.comprehension": 12,
-        "language.punctuation": 8,
-        "literature.genre": 8,
-        "language.syntax": 12,
-        "literature.devices": 8,
-        "language.vocabulary": 4,
-        "literature.character": 8,
-        "language.editing": 4
+        "literature.author_era": 4,
+        "language.grammar": 4,
+        "literature.comprehension": 7,
+        "language.punctuation": 4,
+        "language.vocabulary": 1,
+        "language.syntax": 4,
+        "literature.devices": 4,
+        "literature.character": 4,
+        "literature.genre": 4,
+        "literature.theme": 4,
+        "language.orthography": 1,
+        "language.editing": 3
       }
     },
     {
@@ -2066,13 +2066,13 @@
       "maxRoundingDeviation": 0.5,
       "shortages": [],
       "expected": {
-        "language.grammar": 1,
-        "language.orthography": 1,
+        "language.grammar": 0,
+        "language.orthography": 0,
         "language.punctuation": 1,
         "language.syntax": 1,
         "language.vocabulary": 0,
-        "language.editing": 0,
-        "language.reading": 0,
+        "language.editing": 1,
+        "language.reading": 1,
         "literature.comprehension": 1,
         "literature.genre": 1,
         "literature.devices": 1,
@@ -2081,19 +2081,19 @@
         "literature.author_era": 1
       },
       "availableByBucket": {
-        "literature.theme": 8,
+        "language.editing": 3,
+        "literature.theme": 4,
         "language.grammar": 4,
-        "language.reading": 4,
-        "literature.author_era": 12,
-        "language.orthography": 4,
-        "literature.comprehension": 12,
-        "language.punctuation": 8,
-        "literature.genre": 8,
-        "language.syntax": 12,
-        "literature.devices": 8,
-        "language.vocabulary": 4,
-        "literature.character": 8,
-        "language.editing": 4
+        "language.reading": 2,
+        "literature.author_era": 4,
+        "literature.comprehension": 8,
+        "language.vocabulary": 1,
+        "literature.genre": 4,
+        "language.syntax": 4,
+        "literature.devices": 4,
+        "literature.character": 4,
+        "language.orthography": 3,
+        "language.punctuation": 3
       }
     },
     {
@@ -2120,19 +2120,19 @@
         "literature.author_era": 2
       },
       "availableByBucket": {
-        "literature.theme": 8,
-        "language.grammar": 4,
-        "language.reading": 4,
-        "literature.author_era": 12,
-        "language.orthography": 4,
-        "literature.comprehension": 12,
-        "language.punctuation": 8,
-        "literature.genre": 8,
-        "language.syntax": 12,
+        "language.reading": 6,
+        "literature.author_era": 8,
+        "language.grammar": 8,
+        "literature.comprehension": 15,
+        "language.punctuation": 7,
+        "language.vocabulary": 2,
+        "language.syntax": 8,
         "literature.devices": 8,
-        "language.vocabulary": 4,
         "literature.character": 8,
-        "language.editing": 4
+        "literature.genre": 8,
+        "literature.theme": 8,
+        "language.editing": 6,
+        "language.orthography": 4
       }
     },
     {
@@ -2145,15 +2145,15 @@
       "shortages": [],
       "expected": {
         "grammar": 1,
-        "vocabulary": 4,
-        "reading": 3,
+        "vocabulary": 5,
+        "reading": 2,
         "use_of_language": 2
       },
       "availableByBucket": {
-        "vocabulary": 44,
-        "use_of_language": 20,
-        "reading": 24,
-        "grammar": 8
+        "grammar": 4,
+        "vocabulary": 24,
+        "reading": 12,
+        "use_of_language": 8
       }
     },
     {
@@ -2166,15 +2166,15 @@
       "shortages": [],
       "expected": {
         "grammar": 1,
-        "vocabulary": 4,
-        "reading": 3,
+        "vocabulary": 5,
+        "reading": 2,
         "use_of_language": 2
       },
       "availableByBucket": {
-        "vocabulary": 44,
-        "use_of_language": 20,
-        "reading": 24,
-        "grammar": 8
+        "vocabulary": 24,
+        "use_of_language": 8,
+        "grammar": 4,
+        "reading": 12
       }
     },
     {
@@ -2192,10 +2192,10 @@
         "use_of_language": 4
       },
       "availableByBucket": {
-        "vocabulary": 44,
-        "use_of_language": 20,
+        "grammar": 8,
+        "vocabulary": 48,
         "reading": 24,
-        "grammar": 8
+        "use_of_language": 16
       }
     },
     {
@@ -2213,10 +2213,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "use_of_language": 20,
-        "reading": 24,
-        "vocabulary": 44,
-        "grammar": 8
+        "grammar": 4,
+        "vocabulary": 24,
+        "reading": 12,
+        "use_of_language": 8
       }
     },
     {
@@ -2234,10 +2234,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "use_of_language": 20,
-        "reading": 24,
-        "vocabulary": 44,
-        "grammar": 8
+        "reading": 12,
+        "vocabulary": 24,
+        "use_of_language": 8,
+        "grammar": 4
       }
     },
     {
@@ -2255,10 +2255,10 @@
         "use_of_language": 4
       },
       "availableByBucket": {
-        "use_of_language": 20,
+        "grammar": 8,
+        "vocabulary": 48,
         "reading": 24,
-        "vocabulary": 44,
-        "grammar": 8
+        "use_of_language": 16
       }
     },
     {
@@ -2276,10 +2276,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "use_of_language": 20,
-        "reading": 24,
-        "vocabulary": 36,
-        "grammar": 16
+        "grammar": 8,
+        "vocabulary": 20,
+        "reading": 12,
+        "use_of_language": 8
       }
     },
     {
@@ -2297,10 +2297,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "use_of_language": 20,
-        "reading": 24,
-        "vocabulary": 36,
-        "grammar": 16
+        "reading": 12,
+        "vocabulary": 20,
+        "use_of_language": 8,
+        "grammar": 8
       }
     },
     {
@@ -2318,10 +2318,10 @@
         "use_of_language": 4
       },
       "availableByBucket": {
-        "use_of_language": 20,
+        "grammar": 16,
+        "vocabulary": 40,
         "reading": 24,
-        "vocabulary": 36,
-        "grammar": 16
+        "use_of_language": 16
       }
     },
     {
@@ -2333,16 +2333,16 @@
       "maxRoundingDeviation": 0.5,
       "shortages": [],
       "expected": {
-        "grammar": 2,
+        "grammar": 1,
         "vocabulary": 4,
-        "reading": 2,
+        "reading": 3,
         "use_of_language": 2
       },
       "availableByBucket": {
-        "reading": 24,
-        "vocabulary": 36,
-        "use_of_language": 20,
-        "grammar": 16
+        "grammar": 8,
+        "vocabulary": 20,
+        "reading": 12,
+        "use_of_language": 8
       }
     },
     {
@@ -2354,16 +2354,16 @@
       "maxRoundingDeviation": 0.5,
       "shortages": [],
       "expected": {
-        "grammar": 2,
+        "grammar": 1,
         "vocabulary": 4,
-        "reading": 2,
+        "reading": 3,
         "use_of_language": 2
       },
       "availableByBucket": {
-        "reading": 24,
-        "vocabulary": 36,
-        "use_of_language": 20,
-        "grammar": 16
+        "reading": 12,
+        "vocabulary": 20,
+        "use_of_language": 8,
+        "grammar": 8
       }
     },
     {
@@ -2381,10 +2381,10 @@
         "use_of_language": 4
       },
       "availableByBucket": {
+        "grammar": 16,
+        "vocabulary": 40,
         "reading": 24,
-        "vocabulary": 36,
-        "use_of_language": 20,
-        "grammar": 16
+        "use_of_language": 16
       }
     },
     {
@@ -2402,10 +2402,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "reading": 24,
-        "vocabulary": 32,
-        "use_of_language": 20,
-        "grammar": 20
+        "use_of_language": 11,
+        "grammar": 9,
+        "vocabulary": 16,
+        "reading": 12
       }
     },
     {
@@ -2423,10 +2423,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "reading": 24,
-        "vocabulary": 32,
-        "use_of_language": 20,
-        "grammar": 20
+        "reading": 12,
+        "vocabulary": 16,
+        "use_of_language": 11,
+        "grammar": 9
       }
     },
     {
@@ -2444,10 +2444,10 @@
         "use_of_language": 4
       },
       "availableByBucket": {
-        "reading": 24,
+        "use_of_language": 22,
+        "grammar": 18,
         "vocabulary": 32,
-        "use_of_language": 20,
-        "grammar": 20
+        "reading": 24
       }
     },
     {
@@ -2460,15 +2460,15 @@
       "shortages": [],
       "expected": {
         "grammar": 2,
-        "vocabulary": 4,
-        "reading": 2,
+        "vocabulary": 3,
+        "reading": 3,
         "use_of_language": 2
       },
       "availableByBucket": {
-        "vocabulary": 32,
-        "use_of_language": 20,
-        "reading": 24,
-        "grammar": 20
+        "use_of_language": 11,
+        "grammar": 9,
+        "vocabulary": 16,
+        "reading": 12
       }
     },
     {
@@ -2481,15 +2481,15 @@
       "shortages": [],
       "expected": {
         "grammar": 2,
-        "vocabulary": 4,
-        "reading": 2,
+        "vocabulary": 3,
+        "reading": 3,
         "use_of_language": 2
       },
       "availableByBucket": {
-        "vocabulary": 32,
-        "use_of_language": 20,
-        "reading": 24,
-        "grammar": 20
+        "vocabulary": 16,
+        "reading": 12,
+        "use_of_language": 11,
+        "grammar": 9
       }
     },
     {
@@ -2507,10 +2507,10 @@
         "use_of_language": 4
       },
       "availableByBucket": {
+        "use_of_language": 22,
+        "grammar": 18,
         "vocabulary": 32,
-        "use_of_language": 20,
-        "reading": 24,
-        "grammar": 20
+        "reading": 24
       }
     },
     {
@@ -2528,10 +2528,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "vocabulary": 28,
-        "use_of_language": 20,
-        "reading": 24,
-        "grammar": 24
+        "use_of_language": 8,
+        "grammar": 12,
+        "vocabulary": 16,
+        "reading": 12
       }
     },
     {
@@ -2549,10 +2549,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "vocabulary": 28,
-        "use_of_language": 20,
-        "reading": 24,
-        "grammar": 24
+        "vocabulary": 16,
+        "reading": 12,
+        "use_of_language": 8,
+        "grammar": 12
       }
     },
     {
@@ -2570,10 +2570,10 @@
         "use_of_language": 4
       },
       "availableByBucket": {
-        "vocabulary": 28,
-        "use_of_language": 20,
-        "reading": 24,
-        "grammar": 24
+        "use_of_language": 16,
+        "grammar": 24,
+        "vocabulary": 32,
+        "reading": 24
       }
     },
     {
@@ -2585,16 +2585,16 @@
       "maxRoundingDeviation": 0.5,
       "shortages": [],
       "expected": {
-        "grammar": 2,
+        "grammar": 3,
         "vocabulary": 3,
-        "reading": 3,
+        "reading": 2,
         "use_of_language": 2
       },
       "availableByBucket": {
-        "grammar": 24,
-        "reading": 24,
-        "vocabulary": 28,
-        "use_of_language": 20
+        "reading": 12,
+        "use_of_language": 8,
+        "grammar": 12,
+        "vocabulary": 16
       }
     },
     {
@@ -2606,16 +2606,16 @@
       "maxRoundingDeviation": 0.5,
       "shortages": [],
       "expected": {
-        "grammar": 2,
+        "grammar": 3,
         "vocabulary": 3,
-        "reading": 3,
+        "reading": 2,
         "use_of_language": 2
       },
       "availableByBucket": {
-        "grammar": 24,
-        "reading": 24,
-        "vocabulary": 28,
-        "use_of_language": 20
+        "reading": 12,
+        "vocabulary": 16,
+        "use_of_language": 8,
+        "grammar": 12
       }
     },
     {
@@ -2633,10 +2633,10 @@
         "use_of_language": 4
       },
       "availableByBucket": {
-        "grammar": 24,
         "reading": 24,
-        "vocabulary": 28,
-        "use_of_language": 20
+        "use_of_language": 16,
+        "grammar": 24,
+        "vocabulary": 32
       }
     },
     {
@@ -2649,15 +2649,15 @@
       "shortages": [],
       "expected": {
         "grammar": 3,
-        "vocabulary": 2,
-        "reading": 3,
+        "vocabulary": 3,
+        "reading": 2,
         "use_of_language": 2
       },
       "availableByBucket": {
-        "grammar": 28,
-        "reading": 24,
-        "vocabulary": 24,
-        "use_of_language": 20
+        "reading": 12,
+        "use_of_language": 8,
+        "grammar": 16,
+        "vocabulary": 12
       }
     },
     {
@@ -2670,15 +2670,15 @@
       "shortages": [],
       "expected": {
         "grammar": 3,
-        "vocabulary": 2,
-        "reading": 3,
+        "vocabulary": 3,
+        "reading": 2,
         "use_of_language": 2
       },
       "availableByBucket": {
-        "grammar": 28,
-        "reading": 24,
-        "vocabulary": 24,
-        "use_of_language": 20
+        "grammar": 16,
+        "reading": 12,
+        "vocabulary": 12,
+        "use_of_language": 8
       }
     },
     {
@@ -2696,10 +2696,10 @@
         "use_of_language": 4
       },
       "availableByBucket": {
-        "grammar": 28,
         "reading": 24,
-        "vocabulary": 24,
-        "use_of_language": 20
+        "use_of_language": 16,
+        "grammar": 32,
+        "vocabulary": 24
       }
     },
     {
@@ -2717,10 +2717,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "reading": 24,
-        "vocabulary": 24,
-        "use_of_language": 20,
-        "grammar": 28
+        "reading": 12,
+        "use_of_language": 8,
+        "grammar": 16,
+        "vocabulary": 12
       }
     },
     {
@@ -2738,10 +2738,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "reading": 24,
-        "vocabulary": 24,
-        "use_of_language": 20,
-        "grammar": 28
+        "vocabulary": 12,
+        "grammar": 16,
+        "reading": 12,
+        "use_of_language": 8
       }
     },
     {
@@ -2760,9 +2760,9 @@
       },
       "availableByBucket": {
         "reading": 24,
-        "vocabulary": 24,
-        "use_of_language": 20,
-        "grammar": 28
+        "use_of_language": 16,
+        "grammar": 32,
+        "vocabulary": 24
       }
     },
     {
@@ -2780,10 +2780,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "reading": 24,
-        "vocabulary": 20,
-        "use_of_language": 20,
-        "grammar": 32
+        "reading": 12,
+        "use_of_language": 8,
+        "grammar": 16,
+        "vocabulary": 12
       }
     },
     {
@@ -2801,10 +2801,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "reading": 24,
-        "vocabulary": 20,
-        "use_of_language": 20,
-        "grammar": 32
+        "vocabulary": 12,
+        "grammar": 16,
+        "reading": 12,
+        "use_of_language": 8
       }
     },
     {
@@ -2823,9 +2823,9 @@
       },
       "availableByBucket": {
         "reading": 24,
-        "vocabulary": 20,
-        "use_of_language": 20,
-        "grammar": 32
+        "use_of_language": 16,
+        "grammar": 32,
+        "vocabulary": 24
       }
     },
     {
@@ -2843,10 +2843,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "vocabulary": 20,
-        "grammar": 32,
-        "reading": 24,
-        "use_of_language": 20
+        "vocabulary": 12,
+        "reading": 12,
+        "use_of_language": 8,
+        "grammar": 16
       }
     },
     {
@@ -2864,10 +2864,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "vocabulary": 20,
-        "grammar": 32,
-        "reading": 24,
-        "use_of_language": 20
+        "vocabulary": 12,
+        "grammar": 16,
+        "reading": 12,
+        "use_of_language": 8
       }
     },
     {
@@ -2885,10 +2885,10 @@
         "use_of_language": 4
       },
       "availableByBucket": {
-        "vocabulary": 20,
-        "grammar": 32,
+        "vocabulary": 24,
         "reading": 24,
-        "use_of_language": 20
+        "use_of_language": 16,
+        "grammar": 32
       }
     },
     {
@@ -2900,16 +2900,16 @@
       "maxRoundingDeviation": 0.5,
       "shortages": [],
       "expected": {
-        "grammar": 4,
+        "grammar": 3,
         "vocabulary": 2,
-        "reading": 2,
+        "reading": 3,
         "use_of_language": 2
       },
       "availableByBucket": {
-        "vocabulary": 20,
-        "grammar": 32,
-        "reading": 24,
-        "use_of_language": 20
+        "vocabulary": 10,
+        "reading": 12,
+        "use_of_language": 10,
+        "grammar": 16
       }
     },
     {
@@ -2921,16 +2921,16 @@
       "maxRoundingDeviation": 0.5,
       "shortages": [],
       "expected": {
-        "grammar": 4,
+        "grammar": 3,
         "vocabulary": 2,
-        "reading": 2,
+        "reading": 3,
         "use_of_language": 2
       },
       "availableByBucket": {
-        "vocabulary": 20,
-        "grammar": 32,
-        "reading": 24,
-        "use_of_language": 20
+        "vocabulary": 10,
+        "grammar": 16,
+        "reading": 12,
+        "use_of_language": 10
       }
     },
     {
@@ -2949,9 +2949,9 @@
       },
       "availableByBucket": {
         "vocabulary": 20,
-        "grammar": 32,
         "reading": 24,
-        "use_of_language": 20
+        "use_of_language": 20,
+        "grammar": 32
       }
     },
     {
@@ -2969,10 +2969,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "grammar": 32,
-        "reading": 24,
-        "vocabulary": 20,
-        "use_of_language": 20
+        "grammar": 16,
+        "reading": 12,
+        "use_of_language": 10,
+        "vocabulary": 10
       }
     },
     {
@@ -2990,10 +2990,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "grammar": 32,
-        "reading": 24,
-        "vocabulary": 20,
-        "use_of_language": 20
+        "grammar": 16,
+        "vocabulary": 10,
+        "reading": 12,
+        "use_of_language": 10
       }
     },
     {
@@ -3013,8 +3013,8 @@
       "availableByBucket": {
         "grammar": 32,
         "reading": 24,
-        "vocabulary": 20,
-        "use_of_language": 20
+        "use_of_language": 20,
+        "vocabulary": 20
       }
     },
     {
@@ -3032,10 +3032,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "grammar": 36,
-        "reading": 24,
-        "vocabulary": 16,
-        "use_of_language": 20
+        "grammar": 20,
+        "reading": 12,
+        "use_of_language": 8,
+        "vocabulary": 8
       }
     },
     {
@@ -3053,10 +3053,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "grammar": 36,
-        "reading": 24,
-        "vocabulary": 16,
-        "use_of_language": 20
+        "grammar": 20,
+        "vocabulary": 8,
+        "reading": 12,
+        "use_of_language": 8
       }
     },
     {
@@ -3074,10 +3074,10 @@
         "use_of_language": 4
       },
       "availableByBucket": {
-        "grammar": 36,
+        "grammar": 40,
         "reading": 24,
-        "vocabulary": 16,
-        "use_of_language": 20
+        "use_of_language": 16,
+        "vocabulary": 16
       }
     },
     {
@@ -3095,10 +3095,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "vocabulary": 16,
-        "grammar": 36,
-        "reading": 24,
-        "use_of_language": 20
+        "vocabulary": 8,
+        "grammar": 20,
+        "reading": 12,
+        "use_of_language": 8
       }
     },
     {
@@ -3116,10 +3116,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "vocabulary": 16,
-        "grammar": 36,
-        "reading": 24,
-        "use_of_language": 20
+        "grammar": 20,
+        "vocabulary": 8,
+        "reading": 12,
+        "use_of_language": 8
       }
     },
     {
@@ -3138,9 +3138,9 @@
       },
       "availableByBucket": {
         "vocabulary": 16,
-        "grammar": 36,
+        "grammar": 40,
         "reading": 24,
-        "use_of_language": 20
+        "use_of_language": 16
       }
     },
     {
@@ -3158,10 +3158,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "vocabulary": 16,
-        "grammar": 36,
-        "reading": 24,
-        "use_of_language": 20
+        "vocabulary": 8,
+        "grammar": 20,
+        "reading": 12,
+        "use_of_language": 8
       }
     },
     {
@@ -3179,10 +3179,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "vocabulary": 16,
-        "grammar": 36,
-        "reading": 24,
-        "use_of_language": 20
+        "grammar": 20,
+        "vocabulary": 8,
+        "reading": 12,
+        "use_of_language": 8
       }
     },
     {
@@ -3201,9 +3201,9 @@
       },
       "availableByBucket": {
         "vocabulary": 16,
-        "grammar": 36,
+        "grammar": 40,
         "reading": 24,
-        "use_of_language": 20
+        "use_of_language": 16
       }
     },
     {
@@ -3221,10 +3221,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "vocabulary": 16,
-        "grammar": 36,
-        "reading": 24,
-        "use_of_language": 20
+        "vocabulary": 8,
+        "grammar": 20,
+        "reading": 12,
+        "use_of_language": 8
       }
     },
     {
@@ -3242,10 +3242,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "vocabulary": 16,
-        "grammar": 36,
-        "reading": 24,
-        "use_of_language": 20
+        "grammar": 20,
+        "vocabulary": 8,
+        "reading": 12,
+        "use_of_language": 8
       }
     },
     {
@@ -3264,9 +3264,9 @@
       },
       "availableByBucket": {
         "vocabulary": 16,
-        "grammar": 36,
+        "grammar": 40,
         "reading": 24,
-        "use_of_language": 20
+        "use_of_language": 16
       }
     },
     {
@@ -3284,10 +3284,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "vocabulary": 16,
-        "grammar": 36,
-        "reading": 24,
-        "use_of_language": 20
+        "vocabulary": 8,
+        "grammar": 20,
+        "reading": 12,
+        "use_of_language": 8
       }
     },
     {
@@ -3305,10 +3305,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "vocabulary": 16,
-        "grammar": 36,
-        "reading": 24,
-        "use_of_language": 20
+        "grammar": 20,
+        "vocabulary": 8,
+        "reading": 12,
+        "use_of_language": 8
       }
     },
     {
@@ -3327,9 +3327,9 @@
       },
       "availableByBucket": {
         "vocabulary": 16,
-        "grammar": 36,
+        "grammar": 40,
         "reading": 24,
-        "use_of_language": 20
+        "use_of_language": 16
       }
     },
     {
@@ -3347,10 +3347,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "grammar": 36,
-        "vocabulary": 16,
-        "reading": 24,
-        "use_of_language": 20
+        "grammar": 20,
+        "vocabulary": 8,
+        "reading": 12,
+        "use_of_language": 8
       }
     },
     {
@@ -3368,10 +3368,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "grammar": 36,
-        "vocabulary": 16,
-        "reading": 24,
-        "use_of_language": 20
+        "grammar": 20,
+        "vocabulary": 8,
+        "reading": 12,
+        "use_of_language": 8
       }
     },
     {
@@ -3389,10 +3389,10 @@
         "use_of_language": 4
       },
       "availableByBucket": {
-        "grammar": 36,
+        "grammar": 40,
         "vocabulary": 16,
         "reading": 24,
-        "use_of_language": 20
+        "use_of_language": 16
       }
     },
     {
@@ -3410,10 +3410,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "grammar": 40,
-        "vocabulary": 12,
-        "reading": 24,
-        "use_of_language": 20
+        "grammar": 20,
+        "vocabulary": 8,
+        "reading": 12,
+        "use_of_language": 8
       }
     },
     {
@@ -3431,10 +3431,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "grammar": 40,
-        "vocabulary": 12,
-        "reading": 24,
-        "use_of_language": 20
+        "grammar": 20,
+        "vocabulary": 8,
+        "reading": 12,
+        "use_of_language": 8
       }
     },
     {
@@ -3453,9 +3453,9 @@
       },
       "availableByBucket": {
         "grammar": 40,
-        "vocabulary": 12,
+        "vocabulary": 16,
         "reading": 24,
-        "use_of_language": 20
+        "use_of_language": 16
       }
     },
     {
@@ -3473,10 +3473,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "grammar": 40,
-        "vocabulary": 12,
-        "reading": 24,
-        "use_of_language": 20
+        "grammar": 20,
+        "vocabulary": 8,
+        "reading": 12,
+        "use_of_language": 8
       }
     },
     {
@@ -3494,10 +3494,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "grammar": 40,
-        "vocabulary": 12,
-        "reading": 24,
-        "use_of_language": 20
+        "grammar": 20,
+        "vocabulary": 8,
+        "reading": 12,
+        "use_of_language": 8
       }
     },
     {
@@ -3516,9 +3516,9 @@
       },
       "availableByBucket": {
         "grammar": 40,
-        "vocabulary": 12,
+        "vocabulary": 16,
         "reading": 24,
-        "use_of_language": 20
+        "use_of_language": 16
       }
     },
     {
@@ -3536,10 +3536,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "grammar": 36,
-        "vocabulary": 12,
-        "reading": 28,
-        "use_of_language": 20
+        "grammar": 20,
+        "vocabulary": 8,
+        "reading": 12,
+        "use_of_language": 8
       }
     },
     {
@@ -3557,10 +3557,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "grammar": 36,
-        "vocabulary": 12,
-        "reading": 28,
-        "use_of_language": 20
+        "grammar": 20,
+        "vocabulary": 8,
+        "reading": 12,
+        "use_of_language": 8
       }
     },
     {
@@ -3578,10 +3578,10 @@
         "use_of_language": 4
       },
       "availableByBucket": {
-        "grammar": 36,
-        "vocabulary": 12,
-        "reading": 28,
-        "use_of_language": 20
+        "grammar": 40,
+        "vocabulary": 16,
+        "reading": 24,
+        "use_of_language": 16
       }
     },
     {
@@ -3599,10 +3599,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "reading": 28,
-        "grammar": 36,
-        "vocabulary": 12,
-        "use_of_language": 20
+        "grammar": 20,
+        "vocabulary": 8,
+        "reading": 12,
+        "use_of_language": 8
       }
     },
     {
@@ -3620,10 +3620,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "reading": 28,
-        "grammar": 36,
-        "vocabulary": 12,
-        "use_of_language": 20
+        "grammar": 20,
+        "vocabulary": 8,
+        "reading": 12,
+        "use_of_language": 8
       }
     },
     {
@@ -3641,10 +3641,10 @@
         "use_of_language": 4
       },
       "availableByBucket": {
-        "reading": 28,
-        "grammar": 36,
-        "vocabulary": 12,
-        "use_of_language": 20
+        "grammar": 40,
+        "vocabulary": 16,
+        "reading": 24,
+        "use_of_language": 16
       }
     },
     {
@@ -3657,15 +3657,15 @@
       "shortages": [],
       "expected": {
         "grammar": 2,
-        "vocabulary": 3,
-        "reading": 3,
+        "vocabulary": 4,
+        "reading": 2,
         "use_of_language": 2
       },
       "availableByBucket": {
-        "reading": 24,
-        "vocabulary": 32,
-        "use_of_language": 20,
-        "grammar": 20
+        "reading": 12,
+        "use_of_language": 11,
+        "grammar": 9,
+        "vocabulary": 16
       }
     },
     {
@@ -3678,15 +3678,15 @@
       "shortages": [],
       "expected": {
         "grammar": 2,
-        "vocabulary": 3,
-        "reading": 3,
+        "vocabulary": 4,
+        "reading": 2,
         "use_of_language": 2
       },
       "availableByBucket": {
-        "reading": 24,
-        "vocabulary": 32,
-        "use_of_language": 20,
-        "grammar": 20
+        "reading": 12,
+        "vocabulary": 16,
+        "use_of_language": 11,
+        "grammar": 9
       }
     },
     {
@@ -3705,9 +3705,9 @@
       },
       "availableByBucket": {
         "reading": 24,
-        "vocabulary": 32,
-        "use_of_language": 20,
-        "grammar": 20
+        "use_of_language": 22,
+        "grammar": 18,
+        "vocabulary": 32
       }
     },
     {
@@ -3725,10 +3725,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "reading": 24,
-        "vocabulary": 32,
-        "use_of_language": 20,
-        "grammar": 20
+        "reading": 12,
+        "vocabulary": 16,
+        "use_of_language": 11,
+        "grammar": 9
       }
     },
     {
@@ -3746,10 +3746,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "reading": 24,
-        "vocabulary": 32,
-        "use_of_language": 20,
-        "grammar": 20
+        "vocabulary": 16,
+        "reading": 12,
+        "use_of_language": 11,
+        "grammar": 9
       }
     },
     {
@@ -3769,8 +3769,8 @@
       "availableByBucket": {
         "reading": 24,
         "vocabulary": 32,
-        "use_of_language": 20,
-        "grammar": 20
+        "use_of_language": 22,
+        "grammar": 18
       }
     },
     {
@@ -3788,10 +3788,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "reading": 24,
-        "vocabulary": 28,
-        "use_of_language": 20,
-        "grammar": 24
+        "reading": 12,
+        "vocabulary": 16,
+        "use_of_language": 8,
+        "grammar": 12
       }
     },
     {
@@ -3809,10 +3809,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "reading": 24,
-        "vocabulary": 28,
-        "use_of_language": 20,
-        "grammar": 24
+        "vocabulary": 16,
+        "reading": 12,
+        "use_of_language": 8,
+        "grammar": 12
       }
     },
     {
@@ -3831,8 +3831,8 @@
       },
       "availableByBucket": {
         "reading": 24,
-        "vocabulary": 28,
-        "use_of_language": 20,
+        "vocabulary": 32,
+        "use_of_language": 16,
         "grammar": 24
       }
     },
@@ -3845,16 +3845,16 @@
       "maxRoundingDeviation": 0.5,
       "shortages": [],
       "expected": {
-        "grammar": 3,
+        "grammar": 2,
         "vocabulary": 3,
-        "reading": 2,
+        "reading": 3,
         "use_of_language": 2
       },
       "availableByBucket": {
-        "vocabulary": 28,
-        "grammar": 24,
-        "reading": 24,
-        "use_of_language": 20
+        "vocabulary": 16,
+        "reading": 12,
+        "use_of_language": 8,
+        "grammar": 12
       }
     },
     {
@@ -3866,16 +3866,16 @@
       "maxRoundingDeviation": 0.5,
       "shortages": [],
       "expected": {
-        "grammar": 3,
+        "grammar": 2,
         "vocabulary": 3,
-        "reading": 2,
+        "reading": 3,
         "use_of_language": 2
       },
       "availableByBucket": {
-        "vocabulary": 28,
-        "grammar": 24,
-        "reading": 24,
-        "use_of_language": 20
+        "vocabulary": 16,
+        "grammar": 12,
+        "reading": 12,
+        "use_of_language": 8
       }
     },
     {
@@ -3893,10 +3893,10 @@
         "use_of_language": 4
       },
       "availableByBucket": {
-        "vocabulary": 28,
-        "grammar": 24,
+        "vocabulary": 32,
         "reading": 24,
-        "use_of_language": 20
+        "use_of_language": 16,
+        "grammar": 24
       }
     },
     {
@@ -3914,10 +3914,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "vocabulary": 24,
-        "grammar": 28,
-        "reading": 24,
-        "use_of_language": 20
+        "vocabulary": 12,
+        "reading": 12,
+        "use_of_language": 8,
+        "grammar": 16
       }
     },
     {
@@ -3935,10 +3935,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "vocabulary": 24,
-        "grammar": 28,
-        "reading": 24,
-        "use_of_language": 20
+        "vocabulary": 12,
+        "grammar": 16,
+        "reading": 12,
+        "use_of_language": 8
       }
     },
     {
@@ -3957,9 +3957,9 @@
       },
       "availableByBucket": {
         "vocabulary": 24,
-        "grammar": 28,
         "reading": 24,
-        "use_of_language": 20
+        "use_of_language": 16,
+        "grammar": 32
       }
     },
     {
@@ -3972,15 +3972,15 @@
       "shortages": [],
       "expected": {
         "grammar": 3,
-        "vocabulary": 3,
-        "reading": 2,
+        "vocabulary": 2,
+        "reading": 3,
         "use_of_language": 2
       },
       "availableByBucket": {
-        "grammar": 28,
-        "reading": 24,
-        "vocabulary": 24,
-        "use_of_language": 20
+        "grammar": 16,
+        "reading": 12,
+        "vocabulary": 12,
+        "use_of_language": 8
       }
     },
     {
@@ -3993,15 +3993,15 @@
       "shortages": [],
       "expected": {
         "grammar": 3,
-        "vocabulary": 3,
-        "reading": 2,
+        "vocabulary": 2,
+        "reading": 3,
         "use_of_language": 2
       },
       "availableByBucket": {
-        "grammar": 28,
-        "reading": 24,
-        "vocabulary": 24,
-        "use_of_language": 20
+        "grammar": 16,
+        "vocabulary": 12,
+        "reading": 12,
+        "use_of_language": 8
       }
     },
     {
@@ -4019,10 +4019,10 @@
         "use_of_language": 4
       },
       "availableByBucket": {
-        "grammar": 28,
+        "grammar": 32,
         "reading": 24,
         "vocabulary": 24,
-        "use_of_language": 20
+        "use_of_language": 16
       }
     },
     {
@@ -4040,10 +4040,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "grammar": 32,
-        "reading": 24,
-        "vocabulary": 20,
-        "use_of_language": 20
+        "grammar": 16,
+        "reading": 12,
+        "vocabulary": 12,
+        "use_of_language": 8
       }
     },
     {
@@ -4061,10 +4061,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "grammar": 32,
-        "reading": 24,
-        "vocabulary": 20,
-        "use_of_language": 20
+        "grammar": 16,
+        "vocabulary": 12,
+        "reading": 12,
+        "use_of_language": 8
       }
     },
     {
@@ -4084,8 +4084,8 @@
       "availableByBucket": {
         "grammar": 32,
         "reading": 24,
-        "vocabulary": 20,
-        "use_of_language": 20
+        "vocabulary": 24,
+        "use_of_language": 16
       }
     },
     {
@@ -4103,10 +4103,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "vocabulary": 20,
-        "grammar": 32,
-        "reading": 24,
-        "use_of_language": 20
+        "vocabulary": 12,
+        "grammar": 16,
+        "reading": 12,
+        "use_of_language": 8
       }
     },
     {
@@ -4124,10 +4124,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "vocabulary": 20,
-        "grammar": 32,
-        "reading": 24,
-        "use_of_language": 20
+        "grammar": 16,
+        "vocabulary": 12,
+        "reading": 12,
+        "use_of_language": 8
       }
     },
     {
@@ -4145,10 +4145,10 @@
         "use_of_language": 4
       },
       "availableByBucket": {
-        "vocabulary": 20,
+        "vocabulary": 24,
         "grammar": 32,
         "reading": 24,
-        "use_of_language": 20
+        "use_of_language": 16
       }
     },
     {
@@ -4160,16 +4160,16 @@
       "maxRoundingDeviation": 0.5,
       "shortages": [],
       "expected": {
-        "grammar": 3,
+        "grammar": 4,
         "vocabulary": 2,
-        "reading": 3,
+        "reading": 2,
         "use_of_language": 2
       },
       "availableByBucket": {
-        "vocabulary": 20,
-        "grammar": 32,
-        "reading": 24,
-        "use_of_language": 20
+        "vocabulary": 10,
+        "grammar": 16,
+        "reading": 12,
+        "use_of_language": 10
       }
     },
     {
@@ -4181,16 +4181,16 @@
       "maxRoundingDeviation": 0.5,
       "shortages": [],
       "expected": {
-        "grammar": 3,
+        "grammar": 4,
         "vocabulary": 2,
-        "reading": 3,
+        "reading": 2,
         "use_of_language": 2
       },
       "availableByBucket": {
-        "vocabulary": 20,
-        "grammar": 32,
-        "reading": 24,
-        "use_of_language": 20
+        "grammar": 16,
+        "vocabulary": 10,
+        "reading": 12,
+        "use_of_language": 10
       }
     },
     {
@@ -4229,10 +4229,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "vocabulary": 20,
-        "grammar": 32,
-        "reading": 24,
-        "use_of_language": 20
+        "vocabulary": 10,
+        "grammar": 16,
+        "reading": 12,
+        "use_of_language": 10
       }
     },
     {
@@ -4250,10 +4250,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "vocabulary": 20,
-        "grammar": 32,
-        "reading": 24,
-        "use_of_language": 20
+        "grammar": 16,
+        "vocabulary": 10,
+        "reading": 12,
+        "use_of_language": 10
       }
     },
     {
@@ -4292,10 +4292,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "vocabulary": 16,
-        "grammar": 36,
-        "reading": 24,
-        "use_of_language": 20
+        "vocabulary": 8,
+        "grammar": 16,
+        "reading": 12,
+        "use_of_language": 12
       }
     },
     {
@@ -4313,10 +4313,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "vocabulary": 16,
-        "grammar": 36,
-        "reading": 24,
-        "use_of_language": 20
+        "grammar": 16,
+        "vocabulary": 8,
+        "reading": 12,
+        "use_of_language": 12
       }
     },
     {
@@ -4335,9 +4335,9 @@
       },
       "availableByBucket": {
         "vocabulary": 16,
-        "grammar": 36,
+        "grammar": 32,
         "reading": 24,
-        "use_of_language": 20
+        "use_of_language": 24
       }
     },
     {
@@ -4349,16 +4349,16 @@
       "maxRoundingDeviation": 0.6000000000000001,
       "shortages": [],
       "expected": {
-        "grammar": 4,
+        "grammar": 3,
         "vocabulary": 2,
-        "reading": 2,
+        "reading": 3,
         "use_of_language": 2
       },
       "availableByBucket": {
-        "grammar": 36,
-        "vocabulary": 16,
-        "reading": 24,
-        "use_of_language": 20
+        "grammar": 16,
+        "vocabulary": 8,
+        "reading": 12,
+        "use_of_language": 12
       }
     },
     {
@@ -4370,16 +4370,16 @@
       "maxRoundingDeviation": 0.6000000000000001,
       "shortages": [],
       "expected": {
-        "grammar": 4,
+        "grammar": 3,
         "vocabulary": 2,
-        "reading": 2,
+        "reading": 3,
         "use_of_language": 2
       },
       "availableByBucket": {
-        "grammar": 36,
-        "vocabulary": 16,
-        "reading": 24,
-        "use_of_language": 20
+        "grammar": 16,
+        "vocabulary": 8,
+        "reading": 12,
+        "use_of_language": 12
       }
     },
     {
@@ -4397,10 +4397,10 @@
         "use_of_language": 4
       },
       "availableByBucket": {
-        "grammar": 36,
+        "grammar": 32,
         "vocabulary": 16,
         "reading": 24,
-        "use_of_language": 20
+        "use_of_language": 24
       }
     },
     {
@@ -4418,10 +4418,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "grammar": 36,
-        "vocabulary": 16,
-        "reading": 24,
-        "use_of_language": 20
+        "grammar": 20,
+        "vocabulary": 8,
+        "reading": 12,
+        "use_of_language": 8
       }
     },
     {
@@ -4439,10 +4439,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "grammar": 36,
-        "vocabulary": 16,
-        "reading": 24,
-        "use_of_language": 20
+        "grammar": 20,
+        "vocabulary": 8,
+        "reading": 12,
+        "use_of_language": 8
       }
     },
     {
@@ -4460,10 +4460,10 @@
         "use_of_language": 4
       },
       "availableByBucket": {
-        "grammar": 36,
+        "grammar": 40,
         "vocabulary": 16,
         "reading": 24,
-        "use_of_language": 20
+        "use_of_language": 16
       }
     },
     {
@@ -4481,10 +4481,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "grammar": 36,
-        "vocabulary": 16,
-        "reading": 24,
-        "use_of_language": 20
+        "grammar": 20,
+        "vocabulary": 8,
+        "reading": 12,
+        "use_of_language": 8
       }
     },
     {
@@ -4502,10 +4502,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "grammar": 36,
-        "vocabulary": 16,
-        "reading": 24,
-        "use_of_language": 20
+        "grammar": 20,
+        "vocabulary": 8,
+        "reading": 12,
+        "use_of_language": 8
       }
     },
     {
@@ -4523,10 +4523,10 @@
         "use_of_language": 4
       },
       "availableByBucket": {
-        "grammar": 36,
+        "grammar": 40,
         "vocabulary": 16,
         "reading": 24,
-        "use_of_language": 20
+        "use_of_language": 16
       }
     },
     {
@@ -4544,10 +4544,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "grammar": 36,
-        "vocabulary": 12,
-        "reading": 28,
-        "use_of_language": 20
+        "grammar": 20,
+        "vocabulary": 8,
+        "reading": 12,
+        "use_of_language": 8
       }
     },
     {
@@ -4565,10 +4565,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "grammar": 36,
-        "vocabulary": 12,
-        "reading": 28,
-        "use_of_language": 20
+        "grammar": 20,
+        "vocabulary": 8,
+        "reading": 12,
+        "use_of_language": 8
       }
     },
     {
@@ -4586,10 +4586,10 @@
         "use_of_language": 4
       },
       "availableByBucket": {
-        "grammar": 36,
-        "vocabulary": 12,
-        "reading": 28,
-        "use_of_language": 20
+        "grammar": 40,
+        "vocabulary": 16,
+        "reading": 24,
+        "use_of_language": 16
       }
     },
     {
@@ -4607,10 +4607,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "reading": 28,
-        "grammar": 36,
-        "vocabulary": 12,
-        "use_of_language": 20
+        "grammar": 20,
+        "vocabulary": 8,
+        "reading": 12,
+        "use_of_language": 8
       }
     },
     {
@@ -4628,10 +4628,10 @@
         "use_of_language": 2
       },
       "availableByBucket": {
-        "reading": 28,
-        "grammar": 36,
-        "vocabulary": 12,
-        "use_of_language": 20
+        "grammar": 20,
+        "vocabulary": 8,
+        "reading": 12,
+        "use_of_language": 8
       }
     },
     {
@@ -4649,22 +4649,22 @@
         "use_of_language": 4
       },
       "availableByBucket": {
-        "reading": 28,
-        "grammar": 36,
-        "vocabulary": 12,
-        "use_of_language": 20
+        "grammar": 40,
+        "vocabulary": 16,
+        "reading": 24,
+        "use_of_language": 16
       }
     }
   ],
   "languageBlueprintViolations": [],
   "prematureLanguageTopicRows": [],
   "typeCounts": {
-    "multiple_choice": 14427,
+    "multiple_choice": 14675,
     "true_false": 2231,
-    "calc": 1049,
+    "calc": 1070,
     "match": 117,
-    "fill": 1822,
-    "order": 85
+    "fill": 1853,
+    "order": 89
   },
   "testsBySubjectGrade": {
     "მათემატიკა · 1": {
@@ -6637,7 +6637,7 @@
       ]
     }
   ],
-  "duplicateTextCount": 3761,
+  "duplicateTextCount": 3967,
   "duplicateTextExamples": [
     {
       "text": "сов. вид \"читать\"?",
@@ -7349,55 +7349,55 @@
       "blocked_unpublished_pool": 1693,
       "candidate_explicit_alignment": 32,
       "blocked_curriculum_stage": 316,
-      "candidate_generated_alignment": 13127
+      "candidate_generated_alignment": 13431
     },
     "areaCounts": {
-      "georgian": 3002,
-      "foreign_language": 6957,
-      "math": 4096,
+      "georgian": 3050,
+      "foreign_language": 7069,
+      "math": 4120,
       "nature": 1349,
-      "history": 858,
-      "geography": 233,
-      "biology": 1079,
-      "chemistry": 1071,
-      "physics": 1086
+      "history": 882,
+      "geography": 257,
+      "biology": 1103,
+      "chemistry": 1095,
+      "physics": 1110
     },
     "domainCounts": {
-      "georgian.language_system": 714,
-      "foreign_language.language_system": 3292,
-      "math.numbers_operations": 2383,
-      "math.geometry_space": 999,
+      "georgian.language_system": 763,
+      "foreign_language.language_system": 3370,
+      "math.numbers_operations": 2398,
+      "math.geometry_space": 1002,
       "math.patterns_algebra": 236,
-      "math.data_probability": 439,
+      "math.data_probability": 445,
       "math.measurement": 39,
-      "georgian.reading": 1445,
-      "georgian.literature_culture": 835,
-      "foreign_language.reading": 3283,
-      "foreign_language.culture": 382,
+      "georgian.reading": 1469,
+      "georgian.literature_culture": 810,
+      "foreign_language.reading": 3311,
+      "foreign_language.culture": 388,
       "nature.inquiry": 970,
       "nature.earth_environment": 58,
       "nature.living_world": 262,
       "nature.matter_phenomena": 59,
-      "history.society_state": 733,
+      "history.society_state": 757,
       "history.time_space": 79,
       "history.culture_religion": 29,
-      "geography.map_space": 176,
-      "geography.natural_processes": 34,
+      "geography.map_space": 196,
+      "geography.natural_processes": 38,
       "geography.population_economy": 18,
       "geography.sustainability": 5,
-      "biology.organization_processes": 677,
+      "biology.organization_processes": 684,
       "biology.heredity_evolution": 125,
       "biology.ecology_biodiversity": 46,
-      "chemistry.substances_structure": 735,
-      "chemistry.reactions_quantities": 326,
+      "chemistry.substances_structure": 747,
+      "chemistry.reactions_quantities": 338,
       "chemistry.inquiry_safety": 10,
-      "physics.motion_forces": 494,
+      "physics.motion_forces": 518,
       "physics.inquiry_data": 365,
       "physics.waves_fields": 128,
       "physics.energy": 99,
       "history.sources_interpretation": 17,
       "georgian.visual_comprehension": 8,
-      "biology.inquiry": 231
+      "biology.inquiry": 248
     },
     "note": "Automatic domain inference is a review candidate only. Only explicit, individually tagged outcomes count as reviewed; neither status is a Ministry endorsement or textbook-edition page certification."
   },

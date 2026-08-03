@@ -92,6 +92,9 @@ test("validates reported scores and restricts assignment deletion to its owner",
     readFile(new URL("app/api/assignments/route.ts", root), "utf8"),
   ]);
   assert.match(attemptsRoute, /expectedPct/);
+  assert.match(attemptsRoute, /body\.assessmentMode !== "practice"/);
+  assert.match(attemptsRoute, /verified: false/);
+  assert.match(attemptsRoute, /status: 409/);
   assert.match(attemptsRoute, /users\.email/);
   assert.match(assignmentsRoute, /assignments\.createdBy, current\.user\.id/);
 });
@@ -148,7 +151,7 @@ test("uses curriculum gating, composite history identities, and adaptive skills"
   assert.match(html, /Math\.abs\(tg-ug\)<=1/);
   assert.match(html, /isSubjectAvailableForGrade\(test\.subject,userGrade\)/);
   assert.match(html, /const exactGrade=gradeScoped\.filter/);
-  assert.match(html, /targetGrade<=4&&exactGrade\.length>=Number\(test\.count\|\|0\)/);
+  assert.match(html, /const subset=exactGrade\.length>=Number\(test\.count\|\|0\)\?exactGrade:gradeScoped/);
   assert.match(html, /_historyId:\(q\._sourcePoolKey\|\|poolKey\)\+'\|'\+q\.id/);
   assert.match(html, /function questionContentFingerprint/);
   assert.match(html, /function questionSemanticFingerprint/);
@@ -162,7 +165,11 @@ test("uses curriculum gating, composite history identities, and adaptive skills"
   assert.match(html, /content:media:/);
   assert.match(html, /function isStructurallyValidQuestion/);
   assert.match(html, /function hasQuestionEncodingCorruption/);
-  assert.match(html, /სასწავლო მიმართულების კანდიდატი/);
+  assert.doesNotMatch(html, /სასწავლო მიმართულების კანდიდატი/);
+  assert.match(html, /generated-bank-validator\.js/);
+  assert.match(html, /function hasSufficientCatalogDiversity\(test\)/);
+  assert.match(html, /q\.validationStatus==='blocked'/);
+  assert.match(html, /სავარჯიშო ტესტი · თვითშემოწმება/);
   assert.match(html, /curTestQs\.flatMap\(q=>\[q\._historyId\|\|q\.id,q\._contentHistoryId,q\._semanticHistoryId\]/);
   assert.match(html, /skillPerf/);
   assert.match(html, /AI_REMEDIATION_BANK/);

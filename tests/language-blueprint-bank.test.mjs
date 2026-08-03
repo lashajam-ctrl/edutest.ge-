@@ -3,11 +3,12 @@ import fs from "node:fs";
 import test from "node:test";
 import vm from "node:vm";
 
+const validator = fs.readFileSync(new URL("../public/generated-bank-validator.js", import.meta.url), "utf8");
 const source = fs.readFileSync(new URL("../public/language-blueprint-bank.js", import.meta.url), "utf8");
 
 function loadBank() {
   const sandbox = { Q_POOL: {} };
-  vm.runInNewContext(source, sandbox, { timeout: 30_000 });
+  vm.runInNewContext(`${validator}\n${source}`, sandbox, { timeout: 30_000 });
   return sandbox;
 }
 
@@ -18,6 +19,8 @@ test("language blueprint bank has the expected exact-grade inventory", () => {
   const pools = sandbox.Q_POOL;
 
   assert.equal(stats.questions, 4_992);
+  assert.equal(stats.validation.checked, 4_992);
+  assert.equal(stats.validation.blocked, 0);
   assert.equal(stats.tests, 156);
   assert.equal(stats.prematureTopicViolations, 0);
   assert.equal(Object.keys(pools).length, 104);
@@ -57,6 +60,7 @@ test("every language question is unique, grade-aligned, traceable and structural
     assert.ok(question.explain);
     assert.ok(question.curriculumSource);
     assert.equal(question.copyrightStatus, "original_or_public_domain");
+    assert.equal(question.validationStatus, "release_validated");
     if (question.type === "multiple_choice") {
       assert.equal(question.opts.length, 4);
       assert.equal(new Set(question.opts).size, 4);

@@ -27,11 +27,14 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   const current = await getSessionUser(request);
   if (!current) return Response.json({ error: "ავტორიზაცია აუცილებელია" }, { status: 401 });
-  const body = await request.json() as { testId?: string; earned?: number; totalPts?: number; pct?: number; result?: unknown };
+  const body = await request.json() as { assessmentMode?: string; testId?: string; earned?: number; totalPts?: number; pct?: number; result?: unknown };
+  if (body.assessmentMode !== "practice") return Response.json({ error: "დაცული შეფასებითი ტესტი უნდა შემოწმდეს სერვერზე" }, { status: 409 });
   const earned = Number(body.earned); const totalPts = Number(body.totalPts); const pct = Number(body.pct);
   const expectedPct = Math.round((earned / totalPts) * 100);
   if (!body.testId || !Number.isFinite(earned) || !Number.isFinite(totalPts) || !Number.isFinite(pct) || totalPts <= 0 || earned < 0 || earned > totalPts || pct < 0 || pct > 100 || Math.abs(Math.round(pct) - expectedPct) > 1) return Response.json({ error: "არასწორი შედეგი" }, { status: 400 });
-  const row = { id: crypto.randomUUID(), userId: current.user.id, testId: body.testId, score: Math.round(earned), maxScore: Math.round(totalPts), percentage: Math.round(pct), answersJson: JSON.stringify(body.result ?? {}), submittedAt: new Date() };
+  const safeResult = body.result && typeof body.result === "object" ? body.result as Record<string, unknown> : {};
+  const practiceResult = { ...safeResult, assessmentMode: "practice", verified: false };
+  const row = { id: crypto.randomUUID(), userId: current.user.id, testId: body.testId, score: Math.round(earned), maxScore: Math.round(totalPts), percentage: Math.round(pct), answersJson: JSON.stringify(practiceResult), submittedAt: new Date() };
   await getDb().insert(attempts).values(row);
-  return Response.json({ attempt: row }, { status: 201 });
+  return Response.json({ attempt: { ...row, assessmentMode: "practice", verified: false } }, { status: 201 });
 }

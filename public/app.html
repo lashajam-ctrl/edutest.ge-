@@ -923,7 +923,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--brand);box-shadow:0 0
       <div id="tt-topbar-right" style="display:flex;align-items:center;gap:10px">
         <div id="tt-progress-label" style="font-size:12px;color:var(--gray)" data-i18n="progress_label">პროგრესი:</div>
         <div id="tt-progress-bar" style="width:80px"><div class="pbar"><div class="pfill" id="q-prog" style="width:5%;background:#2563eb"></div></div></div>
-        <span id="tt-practice-badge" class="hidden" style="background:#d1fae5;color:#065f46;font-size:11px;font-weight:700;padding:3px 10px;border-radius:999px;border:1px solid #6ee7b7;margin-right:8px">✏️ პრაქტიკის რეჟიმი</span>
+        <span id="tt-practice-badge" class="hidden" style="background:#d1fae5;color:#065f46;font-size:11px;font-weight:700;padding:3px 10px;border-radius:999px;border:1px solid #6ee7b7;margin-right:8px">✏️ სავარჯიშო ტესტი · თვითშემოწმება</span>
         <div class="timer" id="timer">20:00</div>
         <button class="btn btn-ghost btn-sm" onclick="openReportModal()" title="შეცდომის შეტყობინება" style="padding:4px 8px;font-size:14px;color:var(--gray)">🚩</button>
       </div>
@@ -12498,6 +12498,7 @@ Q_POOL['hist-910-5']=[
 <script src="/question-quality-overrides.js"></script>
 <script src="/question-policy.js"></script>
 <script src="/expanded-question-bank.js"></script>
+<script src="/generated-bank-validator.js"></script>
 <script src="/senior-math-bank.js"></script>
 <script src="/language-blueprint-bank.js"></script>
 <script>
@@ -12972,12 +12973,29 @@ function isStudentGradeVisible(testGrade,userGrade){
   const tg=Number(testGrade),ug=Number(userGrade);
   return Number.isFinite(tg)&&Number.isFinite(ug)&&Math.abs(tg-ug)<=1;
 }
+const CATALOG_DIVERSITY_CACHE=new Map();
+function hasSufficientCatalogDiversity(test){
+  if(!test||!test.pool)return false;
+  const cacheKey=[test.id,test.pool,test.grade,test.semester,test.topicGroup,test.count].join('|');
+  if(CATALOG_DIVERSITY_CACHE.has(cacheKey))return CATALOG_DIVERSITY_CACHE.get(cacheKey);
+  const targetGrade=Number(test.grade);
+  const candidates=Object.entries(Q_POOL).filter(([key])=>key===test.pool||key.startsWith(test.pool+'-')).flatMap(([,rows])=>rows||[])
+    .filter(q=>isStructurallyValidQuestion(q))
+    .filter(q=>Number(q.grade)===targetGrade||(Number(q.gradeMin)===targetGrade&&Number(q.gradeMax)===targetGrade))
+    .filter(q=>!test.semester||!q.semester||Number(q.semester)===Number(test.semester))
+    .filter(q=>!test.topicGroup||q.topicGroup===test.topicGroup);
+  const families=new Set(candidates.map(q=>String(q.templateShape||q.skill||questionSemanticFingerprint(q))));
+  const required=Math.max(Number(test.count||0),Math.min(20,candidates.length));
+  const valid=candidates.length>=Number(test.count||0)&&families.size>=required;
+  CATALOG_DIVERSITY_CACHE.set(cacheKey,valid);
+  return valid;
+}
 function isCurriculumEligible(test){
   if(!test)return false;
   if(test.catalogHidden)return false;
   const grade=Number(test.grade);
   if(String(test.pool||'').startsWith('hist-')&&grade<7)return false;
-  return isSubjectAvailableForGrade(test.subject,grade);
+  return isSubjectAvailableForGrade(test.subject,grade)&&hasSufficientCatalogDiversity(test);
 }
 function isTestVisibleToStudent(test,userGrade){
   return isCurriculumEligible(test)
@@ -13033,7 +13051,7 @@ function saveVers(){_lsSet('edutest_vers',USER_VERS);}
 
 async function syncAttemptToServer(result){
   try{
-    const response=await fetch('/api/attempts',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({testId:result.testId,earned:result.earned,totalPts:result.totalPts,pct:result.pct,result})});
+    const response=await fetch('/api/attempts',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({assessmentMode:'practice',testId:result.testId,earned:result.earned,totalPts:result.totalPts,pct:result.pct,result})});
     if(!response.ok)throw new Error('sync failed');
     result.synced=true;saveResults();
   }catch(e){result.synced=false;saveResults();}
@@ -13862,13 +13880,14 @@ function questionSemanticFingerprint(q){
 
 function isStructurallyValidQuestion(q){
   if(!q||!String(q.id||'').trim()||!String(q.text||'').trim())return false;
+  if(q.validationStatus==='blocked')return false;
   if(hasQuestionEncodingCorruption([q.text,...(Array.isArray(q.opts)?q.opts:[]),q.explain,q.media&&q.media.alt,q.visual&&q.visual.alt,q.visual&&q.visual.caption].filter(Boolean).join(' ')))return false;
   if(!Number.isFinite(Number(q.pts))||Number(q.pts)<=0)return false;
   if(q.type==='multiple_choice'||q.type==='true_false'){
     if(!Array.isArray(q.opts)||q.opts.length<2)return false;
     const correct=Number(q.correct);
     if(!Number.isInteger(correct)||correct<0||correct>=q.opts.length)return false;
-    const normalized=q.opts.map(value=>normalizedQuestionContent(value)||String(value||'').trim());
+    const normalized=q.opts.map(value=>String(value??'').normalize('NFKC').toLocaleLowerCase('ka-GE').replace(/\s+/gu,' ').trim());
     if(normalized.some(value=>!value)||new Set(normalized).size!==normalized.length)return false;
   }
   if(q.type==='calc'&&!Number.isFinite(Number(q.correct)))return false;
@@ -14028,10 +14047,9 @@ function getTestQs(test){
   const targetGrade=Number(test.grade);
   const exactGrade=gradeScoped.filter(q=>Number(q.grade)===targetGrade
     || (Number(q.gradeMin)===targetGrade&&Number(q.gradeMax)===targetGrade));
-  // For I-IV grades, legacy two-grade banks are used only as a fallback. The
-  // exact-grade bank prevents fractions, advanced science and other upper-level
-  // material from leaking into a younger student's paper.
-  const subset=targetGrade<=4&&exactGrade.length>=Number(test.count||0)?exactGrade:gradeScoped;
+  // Exact-grade material is mandatory whenever the current bank can fill the
+  // paper; shared legacy rows remain readable only as a history-compatible fallback.
+  const subset=exactGrade.length>=Number(test.count||0)?exactGrade:gradeScoped;
   const poolKey=test.pool+'-'+(vIdx+1);
   const email = CUR_USER ? CUR_USER.email : 'guest';
   const tagged = subset.map((q,i)=>{
@@ -15422,7 +15440,7 @@ function renderStudentTests(){
   list.innerHTML=tests.map(tx=>`
     <div class="card" style="padding:16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:10px">
       <div style="width:44px;height:44px;border-radius:10px;background:${SUBJ_COLORS[tx.subject]||'#6366f1'};display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">${SUBJ_ICONS[tx.subject]||'📝'}</div>
-      <div style="flex:1"><div style="font-weight:600;margin-bottom:6px">${txTitle(tx)}<span class="ver-badge">${t('ver_label')} ${getUserVersion(CUR_USER?.email||'guest', tx.pool)+1}/${getPoolVersionCount(tx.pool)}</span></div><div style="display:flex;gap:6px;flex-wrap:wrap"><span class="chip">⏱ ${tx.time} ${t('min_abbr')}</span><span class="chip">❓ ${tx.count} ${t('q_label')}</span>${testCompositionChip(tx)}${tx.semester?`<span class="chip" style="background:#ede9fe;color:#5b21b6">📅 ${tx.semester===1?t('sem1'):tx.semester===2?t('sem2'):''}</span>`:''}${tx.testType==='sum'?`<span class="chip" style="background:#fef3c7;color:#92400e">📋 ${t('test_sum')}</span>`:''}${(()=>{const a=getTestAccess(CUR_USER?.email||'',tx.id);if(a==='free')return'<span class="chip" style="background:#d1fae5;color:#065f46">🆓 უფასო ტესტი</span>';if(a==='locked')return`<span class="chip" style="background:#fef3c7;color:#92400e">💳 ${fmtPrice('perSubject')}</span>`;if(a==='premium')return'<span class="chip" style="background:#ede9fe;color:#5b21b6">⭐ Premium</span>';return'<span class="chip" style="background:#dbeafe;color:#1e40af">✅ შეძენილი</span>';})()}</div></div>
+      <div style="flex:1"><div style="font-weight:600;margin-bottom:6px">${txTitle(tx)}<span class="ver-badge">${t('ver_label')} ${getUserVersion(CUR_USER?.email||'guest', tx.pool)+1}/${getPoolVersionCount(tx.pool)}</span></div><div style="display:flex;gap:6px;flex-wrap:wrap"><span class="chip">⏱ ${tx.time} ${t('min_abbr')}</span><span class="chip">❓ ${tx.count} ${t('q_label')}</span>${testCompositionChip(tx)}<span class="chip" style="background:#ecfdf5;color:#065f46">✏️ სავარჯიშო · თვითშემოწმება</span>${tx.semester?`<span class="chip" style="background:#ede9fe;color:#5b21b6">📅 ${tx.semester===1?t('sem1'):tx.semester===2?t('sem2'):''}</span>`:''}${tx.testType==='sum'?`<span class="chip" style="background:#fef3c7;color:#92400e">📋 ${t('test_sum')}</span>`:''}${(()=>{const a=getTestAccess(CUR_USER?.email||'',tx.id);if(a==='free')return'<span class="chip" style="background:#d1fae5;color:#065f46">🆓 უფასო ტესტი</span>';if(a==='locked')return`<span class="chip" style="background:#fef3c7;color:#92400e">💳 ${fmtPrice('perSubject')}</span>`;if(a==='premium')return'<span class="chip" style="background:#ede9fe;color:#5b21b6">⭐ Premium</span>';return'<span class="chip" style="background:#dbeafe;color:#1e40af">✅ შეძენილი</span>';})()}</div></div>
       ${(()=>{const acc=getTestAccess(CUR_USER?.email||'',tx.id);if(acc==='locked')return`<button class="btn btn-sm" style="background:#f59e0b;color:#fff;border:none;cursor:pointer" onclick="showPayModal('${tx.id}')">💳 ${fmtPrice('perSubject')}</button>`;if(acc==='free')return`<button class="btn btn-sm" style="background:#10b981;color:#fff;border:none;cursor:pointer" onclick="startTestById('${tx.id}')">🆓 ${t('start_test')}</button>`;return`<button class="btn btn-primary btn-sm" onclick="startTestById('${tx.id}')">🚀 ${t('start_test')}</button>`;})()}
     </div>`).join('');
 }
@@ -15612,13 +15630,12 @@ function startTest(){
   if(!curTest){go(curRole==='teacher'?'teacher':'student');return;}
   if(window.resetQuestionSpeech)resetQuestionSpeech();
   // Practice mode: no timer, no tab penalty
+  const pb=document.getElementById('tt-practice-badge');if(pb)pb.classList.remove('hidden');
   if(window._practiceMode){
     timerSec=9999*60;
     document.getElementById('timer').style.display='none';
-    const pb=document.getElementById('tt-practice-badge');if(pb)pb.classList.remove('hidden');
   } else {
     document.getElementById('timer').style.display='';
-    const pb=document.getElementById('tt-practice-badge');if(pb)pb.classList.add('hidden');
     timerSec=curTest.time*60;
   }
   curTestQs=getTestQs(curTest);
@@ -15676,13 +15693,6 @@ function renderQ(){
   }
   const oldReadAloud=document.getElementById('q-read-aloud');if(oldReadAloud)oldReadAloud.remove();
   const oldCurriculumMeta=document.getElementById('q-curriculum-meta');if(oldCurriculumMeta)oldCurriculumMeta.remove();
-  if(q._alignment&&q._alignment.outcomeLabel){
-    const curriculumMeta=document.createElement('div');curriculumMeta.id='q-curriculum-meta';
-    curriculumMeta.style.cssText='font-size:11px;line-height:1.5;color:#475569;margin:7px 0 0;padding:7px 10px;background:#f8fafc;border-left:3px solid #2563eb;border-radius:6px';
-    const isExplicit=q._alignment.alignmentType==='explicit_result_code';
-    curriculumMeta.textContent=(isExplicit?'სასწავლო შედეგი: ':'სასწავლო მიმართულების კანდიდატი: ')+q._alignment.outcomeLabel;
-    _qtEl.insertAdjacentElement('afterend',curriculumMeta);
-  }
   const oldMedia=document.getElementById('q-media');if(oldMedia)oldMedia.remove();
   if(q.visual){
     renderGeneratedVisual(q,document.getElementById('q-curriculum-meta')||_qtEl);
@@ -15882,7 +15892,7 @@ function finishTest(){
   const badge=pct>=90?'🏆 Excellent':pct>=70?'✅ Good':pct>=50?'📘 Pass':'❌ Fail';
   const bc=pct>=90?'b-blue':pct>=70?'b-green':pct>=50?'b-amber':'b-red';
   const _gradeForResult=parseInt((CUR_USER&&USER_DB.find(u=>u.email===CUR_USER.email)||{}).grade)||parseInt(curTest.grade)||1;
-  const result={userId:CUR_USER?.email||'guest',testId:curTest.id,title:curTest.title,subject:curTest.subject,grade:curTest.grade,earned,totalPts,correct:correctCount,total:curTestQs.length,pct,badge,bc,date:new Date().toLocaleDateString('ka-GE'),userGrade:_gradeForResult,xpEarned:0,reviewed};
+  const result={userId:CUR_USER?.email||'guest',testId:curTest.id,title:curTest.title,subject:curTest.subject,grade:curTest.grade,earned,totalPts,correct:correctCount,total:curTestQs.length,pct,badge,bc,date:new Date().toLocaleDateString('ka-GE'),userGrade:_gradeForResult,xpEarned:0,reviewed,assessmentMode:'practice',verified:false};
   SESSION_RESULTS.unshift(result);
   advanceUserVersion(CUR_USER?.email || 'guest', curTest.pool);
   saveResults();
@@ -15951,6 +15961,7 @@ function renderResultsPage(r){
           <div><div style="font-size:28px;font-weight:800">${r.correct}/${r.total}</div><div style="font-size:11px;color:var(--gray)">${t('correct')}</div></div>
         </div>`;
     }
+    sumEl.insertAdjacentHTML('beforeend','<div style="margin:16px auto 0;max-width:520px;padding:9px 12px;border-radius:10px;background:#ecfdf5;color:#065f46;font-size:12px;font-weight:700">✏️ ეს არის სავარჯიშო თვითშემოწმება და არა დაცული შეფასებითი გამოცდა.</div>');
     sumEl.insertAdjacentHTML('beforeend','<button id="res-read-aloud" type="button" class="read-aloud-btn" style="margin:18px auto 0" onclick="toggleResultSpeech()">🔊 შედეგის მოსმენა</button>');
     if(window.updateQuestionSpeechButton)updateQuestionSpeechButton();
   }

@@ -759,6 +759,7 @@
     tests: 0,
     questions: 0,
     versions: VERSION_COUNT,
+    validation: { checked: 0, blocked: 0, directAnswerAgreement: 0, curatedRuleTable: 0 },
   };
 
   GRADES.forEach(grade => {
@@ -782,6 +783,15 @@
             rows.push(decorate(question, direction, grade, semester, version, slot, code));
           });
         }
+        rows.forEach(row => {
+          const result = root.EDUTEST_GENERATED_VALIDATOR
+            ? root.EDUTEST_GENERATED_VALIDATOR.validateAndMark(row, { expectedGrade: grade })
+            : { valid: true, evidence: 'validator_unavailable' };
+          stats.validation.checked += 1;
+          if (!result.valid) stats.validation.blocked += 1;
+          if (result.evidence === 'direct_answer_agreement') stats.validation.directAnswerAgreement += 1;
+          if (result.evidence === 'curated_rule_table') stats.validation.curatedRuleTable += 1;
+        });
         Q_POOL[`${prefix}-g${grade}-${version}`] = rows;
         stats.grades[grade][direction].questions += rows.length;
         stats.questions += rows.length;

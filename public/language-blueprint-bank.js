@@ -228,10 +228,16 @@
   const EN_GRAMMAR = [
     [1,'be_am','Complete: I ___ a pupil.','am',['is','are','be'],'“I” takes “am” in the present form of “be”.'],
     [1,'be_is','Complete: This ___ my book.','is',['am','are','be'],'A singular “this” takes “is”.'],
+    [1,'be_are','Complete: You ___ my friend.','are',['am','is','be'],'“You” takes “are” in the present form of “be”.'],
+    [1,'have','Complete: I ___ a red pencil.','have',['has','am','is'],'“I” takes “have”.'],
     [2,'article','Choose the correct phrase.','an apple',['a apple','the an apple','apple an'],'Use “an” before a vowel sound.'],
     [2,'plural','Choose the plural form of “book”.','books',['bookes','bookses','book'],'Most nouns add -s in the plural.'],
+    [2,'has','Complete: Tom ___ a blue bag.','has',['have','is have','having'],'Third-person singular takes “has”.'],
+    [2,'demonstrative','Complete: ___ are my shoes.','These',['This','That','It'],'Use “these” for more than one nearby object.'],
     [3,'present_simple','Complete: Maya ___ to school every day.','walks',['walk','walking','walked'],'In the present simple, third-person singular usually takes -s.'],
     [3,'present_continuous','Complete: They ___ football now.','are playing',['play','played','is playing'],'“Now” signals present continuous: are + verb-ing.'],
+    [3,'do_question','Complete: ___ you like apples?','Do',['Does','Are','Is'],'A present-simple question with “you” starts with “Do”.'],
+    [3,'present_negative','Complete: He ___ like cold milk.','does not',['do not','is not like','not does'],'Third-person singular negative uses “does not” + base verb.'],
     [4,'can','Complete: A bird ___ fly.','can',['cans','is can','can to'],'A modal verb is followed by the base form.'],
     [4,'comparison','Complete: A train is ___ than a bicycle.','faster',['fastest','more fast','fast'],'A short adjective usually takes -er in a comparison.'],
     [5,'past_simple','Complete: We ___ the museum yesterday.','visited',['visit','are visiting','have visit'],'“Yesterday” calls for the past simple.'],
@@ -252,8 +258,9 @@
     [12,'advanced_cohesion','Choose the connector showing concession.','Nevertheless',['Therefore','For example','Similarly'],'“Nevertheless” introduces a contrast despite the previous point.'],
   ];
   const EN_WORDS = {
-    1:[['happy','ბედნიერი'],['book','წიგნი'],['red','წითელი'],['family','ოჯახი']],
-    3:[['quiet','წყნარი'],['journey','მოგზაურობა'],['helpful','დამხმარე'],['weather','ამინდი']],
+    1:[['happy','ბედნიერი'],['book','წიგნი'],['red','წითელი'],['family','ოჯახი'],['school','სკოლა'],['friend','მეგობარი'],['cat','კატა'],['sun','მზე']],
+    2:[['pencil','ფანქარი'],['teacher','მასწავლებელი'],['green','მწვანე'],['window','ფანჯარა'],['water','წყალი'],['small','პატარა'],['play','თამაში'],['day','დღე']],
+    3:[['quiet','წყნარი'],['journey','მოგზაურობა'],['helpful','დამხმარე'],['weather','ამინდი'],['garden','ბაღი'],['morning','დილა'],['clean','სუფთა'],['carry','ტარება']],
     5:[['careful','ფრთხილი'],['discover','აღმოჩენა'],['environment','გარემო'],['healthy','ჯანსაღი']],
     7:[['reliable','სანდო'],['challenge','გამოწვევა'],['improve','გაუმჯობესება'],['evidence','მტკიცებულება']],
     9:[['sustainable','მდგრადი'],['significant','მნიშვნელოვანი'],['interpret','განმარტება'],['consequence','შედეგი']],
@@ -261,7 +268,17 @@
   };
   const EN_READING = [
     [1,'Mia has a red bag. She takes it to school.','What colour is Mia’s bag?','red',['blue','green','black']],
+    [1,'Ben has one cat. The cat is small.','What animal does Ben have?','a cat',['a bird','a dog','a fish']],
+    [1,'The sun is yellow. It is in the sky.','What colour is the sun?','yellow',['black','blue','pink']],
+    [1,'Ana opens her book. She reads at school.','What does Ana open?','her book',['a window','a bag','a door']],
+    [2,'Luka has two pencils. One is green and one is blue.','How many pencils does Luka have?','two',['one','three','four']],
+    [2,'Nina drinks water after she plays.','What does Nina drink?','water',['milk','tea','juice']],
+    [2,'The classroom has three windows. They are open today.','What is open?','the windows',['the books','the bags','the pencils']],
+    [2,'Gio puts his bag under the chair.','Where is Gio’s bag?','under the chair',['on the desk','near the door','in the garden']],
     [3,'Leo waters the class plant every Monday. The leaves stay green.','Why do the leaves stay green?','Leo waters the plant.',['The class closes.','The plant is plastic.','Monday is a colour.']],
+    [3,'Maya walks to school with her sister. They arrive at eight.','Who walks with Maya?','her sister',['her teacher','her friend Leo','her brother']],
+    [3,'Tom is wearing a coat because the morning is cold.','Why is Tom wearing a coat?','The morning is cold.',['It is very hot.','He is swimming.','The coat is a book.']],
+    [3,'The children clean the table before lunch.','What do the children clean?','the table',['the garden','the bus','the window']],
     [5,'Nora missed the bus, so she walked to school and arrived before the bell.','What did Nora do after missing the bus?','She walked to school.',['She went home.','She called the bell.','She missed school.']],
     [7,'The science club tested two kinds of soil. Seeds grew faster in the soil that held more water.','What conclusion is supported?','Water retention affected growth.',['All seeds are identical.','Soil never matters.','The club used no water.']],
     [9,'The town added a protected cycle lane. Six months later, more students cycled and traffic near the school decreased.','Which claim is best supported?','The lane was associated with more cycling and less nearby traffic.',['The lane ended all traffic.','Every student bought a bicycle.','Weather no longer affected travel.']],
@@ -291,7 +308,14 @@
     }
     const rows = grade <= 3
       ? [[1,'Choose the polite greeting.','Hello!',['Close!','Table!','Never!'],'A greeting is used when meeting someone.','greeting'],
-         [2,'Choose the natural classroom request.','Can I have a pencil, please?',['Pencil is run.','I pencil yesterday.','Please blue quickly.'],'“Can I …, please?” is a polite request.','request']]
+         [1,'Choose the polite goodbye.','Goodbye!',['Book!','Open!','Yellow!'],'“Goodbye” is used when leaving.','goodbye'],
+         [1,'Choose the answer to “What is your name?”','My name is Nino.',['I am seven books.','It is red name.','Good morning pencil.'],'The answer gives the speaker’s name.','introduction'],
+         [1,'Choose the answer to “How old are you?”','I am seven.',['I am a pencil.','Seven is blue.','My old book.'],'The answer gives the child’s age with “I am”.','age'],
+         [2,'Choose the natural classroom request.','Can I have a pencil, please?',['Pencil is run.','I pencil yesterday.','Please blue quickly.'],'“Can I …, please?” is a polite request.','request'],
+         [2,'Choose the answer to “How are you?”','I am fine, thank you.',['I am a window.','It is Monday pencil.','Fine is running.'],'This is a natural polite response.','wellbeing'],
+         [2,'Choose the classroom instruction.','Open your book, please.',['Your book is blue quickly.','Please book opens I.','Yesterday open red.'],'The imperative “Open …” gives a clear instruction.','instruction'],
+         [3,'Choose the natural answer to “Where is the ball?”','It is under the chair.',['It is happy Monday.','The chair is read.','Under is a balling.'],'A location question needs a place phrase.','location'],
+         [3,'Choose the natural invitation.','Let’s play after school.',['School plays a let.','After is played blue.','Let play yesterday school.'],'“Let’s” is used to make a simple suggestion.','invitation']]
       : grade <= 6
         ? [[4,'Choose the natural response to “How often do you read?”','I read every day.',['At the library table.','Yesterday tomorrow.','Very book.'],'A frequency question needs a frequency expression.','frequency'],
            [5,'Choose the best connector: I was tired, ___ I finished the task.','but',['because of','or else because','at'],'“But” contrasts tiredness with completing the task.','connector']]
@@ -451,6 +475,7 @@
     tests:0,
     languages:{},
     prematureTopicViolations:0,
+    validation:{checked:0,blocked:0,directAnswerAgreement:0,curatedRuleTable:0},
   };
 
   Object.entries(LANGUAGE_CONFIG).forEach(([language, config]) => {
@@ -461,10 +486,20 @@
       for (let version = 1; version <= VERSION_COUNT; version += 1) {
         const rows = [];
         for (let semester = 1; semester <= 2; semester += 1) {
-          const semesterBuckets = bucketSequence(weights, QUESTIONS_PER_SEMESTER_VERSION,
-            grade + semester + version);
           for (let unit = 0; unit < 2; unit += 1) {
-            const buckets = semesterBuckets.slice(unit * 12, unit * 12 + 12);
+            // Allocate each thematic unit independently. This guarantees that
+            // both unit tests have blueprint coverage instead of inheriting a
+            // skewed half of one semester-wide sequence.
+            const buckets = bucketSequence(weights, QUESTIONS_PER_SEMESTER_VERSION / 2,
+              grade + semester + version + unit * 3);
+            // Across the four deterministic versions, every positive-weight
+            // blueprint bucket is guaranteed to appear in each unit. Low-weight
+            // skills (for example orthography or vocabulary) therefore remain
+            // available when a 10/20-question paper rounds them up to one item.
+            Object.keys(weights).filter(key => Number(weights[key]) > 0).forEach((key, index) => {
+              if (index % VERSION_COUNT !== version - 1 || buckets.includes(key)) return;
+              buckets[(index + semester + unit) % buckets.length] = key;
+            });
             buckets.forEach((bucket, slot) => {
               const seed = grade * 100000 + semester * 10000 + version * 1000 + unit * 100 + slot;
               const question = language === 'ka' ? georgianQuestion(bucket, grade, seed)
@@ -475,6 +510,15 @@
             });
           }
         }
+        rows.forEach(row => {
+          const result = root.EDUTEST_GENERATED_VALIDATOR
+            ? root.EDUTEST_GENERATED_VALIDATOR.validateAndMark(row, { expectedGrade: grade })
+            : { valid:true, evidence:'validator_unavailable' };
+          stats.validation.checked += 1;
+          if (!result.valid) stats.validation.blocked += 1;
+          if (result.evidence === 'direct_answer_agreement') stats.validation.directAnswerAgreement += 1;
+          if (result.evidence === 'curated_rule_table') stats.validation.curatedRuleTable += 1;
+        });
         Q_POOL[`${config.prefix}-g${grade}-${version}`] = rows;
         stats.languages[language].grades[grade].questions += rows.length;
         stats.languages[language].questions += rows.length;
@@ -484,11 +528,11 @@
       const paid = grade >= 9;
       const baseMinutes = grade <= 4 ? 15 : grade <= 8 ? 20 : grade <= 10 ? 25 : 30;
       const definitions = [
-        ['s1-u1','I სემ. · თემატური 1',1,null,10,'unit'],
-        ['s1-u2','I სემ. · თემატური 2',1,null,10,'unit'],
+        ['s1-u1','I სემ. · თემატური 1',1,'s1-unit-a',10,'unit'],
+        ['s1-u2','I სემ. · თემატური 2',1,'s1-unit-b',10,'unit'],
         ['s1-sum','I სემ. · შემაჯამებელი',1,null,20,'sum'],
-        ['s2-u1','II სემ. · თემატური 1',2,null,10,'unit'],
-        ['s2-u2','II სემ. · თემატური 2',2,null,10,'unit'],
+        ['s2-u1','II სემ. · თემატური 1',2,'s2-unit-a',10,'unit'],
+        ['s2-u2','II სემ. · თემატური 2',2,'s2-unit-b',10,'unit'],
         ['s2-sum','II სემ. · შემაჯამებელი',2,null,20,'sum'],
       ];
       definitions.forEach(([suffix, label, semester, topicGroup, count, testType]) => {

@@ -35,7 +35,7 @@
     return out.slice(0,4);
   };
   const mcq=(text,correct,distractors,explain,pts=2)=>({text,type:'multiple_choice',opts:uniqueOptions(correct,distractors),correct:0,pts,explain});
-  const tf=(text,isTrue,explain,pts=1)=>({text,type:'true_false',opts:['ჭეშმარიტია','მცდარია'],correct:isTrue?0:1,pts,explain});
+  const tf=(text,isTrue,explain,pts=1)=>({text,type:'true_false',opts:['✅ სწორია','❌ მცდარია'],correct:isTrue?0:1,pts,explain});
   const calcQ=(text,answer,explain,pts=2,tolerance=0)=>({text,type:'calc',correct:Number(answer),pts,tolerance,explain});
   const fillInstruction=text=>{
     const value=String(text||'').trim();
@@ -47,8 +47,26 @@
   const fillQ=(text,answers,explain,pts=2)=>({text:fillInstruction(text),type:'fill',blanks:answers.map(String),pts,explain});
   const orderQ=(text,items,explain,pts=2)=>({text,type:'order',items:[...items],correct:[...items],pts,explain});
   const matchQ=(text,pairs,explain,pts=2)=>({text,type:'match',pairs:pairs.map(pair=>[...pair]),correct:pairs.map(pair=>pair[1]),pts,explain});
+  const ensureUniqueBarExtremum=q=>{
+    if(q?.visual?.kind!=='bars'||!Array.isArray(q.visual.labels)||!Array.isArray(q.visual.values)||!Array.isArray(q.opts))return q;
+    const text=normalize(q.text),direction=/(უმცირეს|ყველაზე მცირე|ყველაზე მჟავე)/u.test(text)?'min'
+      :/(უმაღლეს|უდიდეს|ყველაზე მეტ|ყველაზე სწრაფ)/u.test(text)?'max':null;
+    if(!direction)return q;
+    const labels=q.visual.labels.map(String),values=q.visual.values.map(Number);
+    const correctLabel=String(q.opts[Number(q.correct)]??''),correctIndex=labels.indexOf(correctLabel);
+    if(correctIndex<0||!Number.isFinite(values[correctIndex]))return q;
+    const target=values[correctIndex];
+    values.forEach((value,position)=>{
+      if(position===correctIndex||!Number.isFinite(value))return;
+      if(direction==='max'&&value>=target)values[position]=Math.max(0,target-(position+1));
+      if(direction==='min'&&value<=target)values[position]=target+position+1;
+    });
+    const unit=q.visual.unit?` ${q.visual.unit}`:'';
+    q.visual={...q.visual,values,alt:labels.map((label,position)=>`${label}: ${values[position]}${unit}`).join(', ')};
+    return q;
+  };
   const meta=(q,prefix,grade,index,skill)=>({
-    ...q,
+    ...ensureUniqueBarExtremum(q),
     id:`exp26-${prefix}-${grade}-${index}`,
     grade,gradeMin:grade,gradeMax:grade,semester:q.semester||Math.floor(index/2)%2+1,
     skill:`${prefix}.${skill}`,
@@ -149,7 +167,7 @@
         q=mcq('რომელი გამოსახულების პასუხია უფრო დიდი?',left,[right],`${left}=${a+b}, ხოლო ${right}=${a+lower}.`);break;
       }
       case 15:
-        skill='missing_minuend';q=fillQ(`ჩაწერე გამოტოვებული რიცხვი: ___ − ${b} = ${a}.`,[a+b],`${a}+${b}=${a+b}.`);break;
+        skill='subtraction_story_fill';q=fillQ(`${place} იდო ${total} ${item}. ${b} აიღეს. ჩაწერე, რამდენი დარჩა: ___ .`,[total-b],`${total}−${b}=${total-b}.`);break;
       case 16:{
         skill='tens_and_ones';const value=n(seed+19,10,11),tens=Math.floor(value/10),ones=value%10;
         q=mcq(`რამდენი ათეული და ერთეულია რიცხვ ${value}-ში?`,`${tens} ათეული და ${ones} ერთეული`,[
@@ -797,7 +815,11 @@
     while(Q_POOL[`${base}-${version}`]){existing.push(...Q_POOL[`${base}-${version}`]);version++;}
     const existingKeys=new Set(existing.filter(valid).map(contentKey));
     const minimumPerGrade=(grades[1]<=6&&['math','geo','eng','nat'].includes(prefix))?120:0;
-    const target=Math.max(existingKeys.size,grades.length*minimumPerGrade),rows=[];let attempt=0;
+    // Keep a small validated reserve above the legacy baseline. Besides giving
+    // the selector room to reject unsafe legacy records, this makes the
+    // published safe-unique inventory at least twice the baseline after
+    // duplicate filtering.
+    const target=Math.max(existingKeys.size+8,grades.length*minimumPerGrade),rows=[];let attempt=0;
     while(rows.length<target&&attempt<target*6+240){
       const grade=grades[attempt%grades.length];let q=build(prefix,grade,attempt+1);
       let key=contentKey(q),gradedKey=`g${grade}:${key}`;

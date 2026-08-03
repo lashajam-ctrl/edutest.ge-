@@ -1,0 +1,2255 @@
+{
+  "generatedAt": "2026-08-03T08:57:50.864Z",
+  "releaseGate": "pass",
+  "summary": {
+    "generatedOutputsFullyChecked": 7296,
+    "generatorSkillFamilies": 235,
+    "deterministicTemplateFamilies": 3519,
+    "seniorMath": {
+      "outputs": 2304,
+      "skillFamilies": 116,
+      "templateFamilies": 576,
+      "testsChecked": 72
+    },
+    "language": {
+      "outputs": 4992,
+      "skillFamilies": 119,
+      "templateFamilies": 2943,
+      "testsChecked": 156
+    },
+    "proofCounts": {
+      "computationallyRecomputed": 484,
+      "directAnswerAgreement": 3812,
+      "curatedFactoryRule": 204,
+      "curatedLanguageRuleTable": 2796
+    },
+    "blockedOutputs": 0,
+    "prematureTopicViolations": 0,
+    "testDiversityFailures": 0,
+    "exceptions": 0
+  },
+  "byGrade": {
+    "seniorMath": {
+      "7": {
+        "questions": 384,
+        "skills": 66,
+        "templateShapes": 96,
+        "blocked": 0
+      },
+      "8": {
+        "questions": 384,
+        "skills": 65,
+        "templateShapes": 96,
+        "blocked": 0
+      },
+      "9": {
+        "questions": 384,
+        "skills": 68,
+        "templateShapes": 96,
+        "blocked": 0
+      },
+      "10": {
+        "questions": 384,
+        "skills": 59,
+        "templateShapes": 96,
+        "blocked": 0
+      },
+      "11": {
+        "questions": 384,
+        "skills": 56,
+        "templateShapes": 96,
+        "blocked": 0
+      },
+      "12": {
+        "questions": 384,
+        "skills": 56,
+        "templateShapes": 96,
+        "blocked": 0
+      }
+    },
+    "language": {
+      "1": {
+        "questions": 192,
+        "skills": 9,
+        "templateShapes": 123,
+        "blocked": 0
+      },
+      "2": {
+        "questions": 192,
+        "skills": 13,
+        "templateShapes": 129,
+        "blocked": 0
+      },
+      "3": {
+        "questions": 192,
+        "skills": 17,
+        "templateShapes": 132,
+        "blocked": 0
+      },
+      "4": {
+        "questions": 192,
+        "skills": 10,
+        "templateShapes": 142,
+        "blocked": 0
+      },
+      "5": {
+        "questions": 384,
+        "skills": 19,
+        "templateShapes": 246,
+        "blocked": 0
+      },
+      "6": {
+        "questions": 384,
+        "skills": 23,
+        "templateShapes": 243,
+        "blocked": 0
+      },
+      "7": {
+        "questions": 576,
+        "skills": 41,
+        "templateShapes": 371,
+        "blocked": 0
+      },
+      "8": {
+        "questions": 576,
+        "skills": 44,
+        "templateShapes": 371,
+        "blocked": 0
+      },
+      "9": {
+        "questions": 576,
+        "skills": 44,
+        "templateShapes": 318,
+        "blocked": 0
+      },
+      "10": {
+        "questions": 576,
+        "skills": 43,
+        "templateShapes": 287,
+        "blocked": 0
+      },
+      "11": {
+        "questions": 576,
+        "skills": 45,
+        "templateShapes": 293,
+        "blocked": 0
+      },
+      "12": {
+        "questions": 576,
+        "skills": 45,
+        "templateShapes": 288,
+        "blocked": 0
+      }
+    }
+  },
+  "languageByCode": {
+    "ka": {
+      "outputs": 1152,
+      "grades": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "skillFamilies": 26,
+      "templateFamilies": 804,
+      "curatedRuleTableChecks": 1152,
+      "blocked": 0
+    },
+    "en": {
+      "outputs": 2304,
+      "grades": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "skillFamilies": 58,
+      "templateFamilies": 1336,
+      "curatedRuleTableChecks": 2304,
+      "blocked": 0
+    },
+    "ru": {
+      "outputs": 1536,
+      "grades": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "skillFamilies": 35,
+      "templateFamilies": 803,
+      "curatedRuleTableChecks": 1536,
+      "blocked": 0
+    }
+  },
+  "testDiversity": [
+    {
+      "id": "alg-g7-s1-u1",
+      "grade": 7,
+      "subject": "ალგებრა",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 12,
+      "valid": true
+    },
+    {
+      "id": "alg-g7-s1-u2",
+      "grade": 7,
+      "subject": "ალგებრა",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 12,
+      "valid": true
+    },
+    {
+      "id": "alg-g7-s1-sum",
+      "grade": 7,
+      "subject": "ალგებრა",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 24,
+      "valid": true
+    },
+    {
+      "id": "alg-g7-s2-u1",
+      "grade": 7,
+      "subject": "ალგებრა",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 12,
+      "valid": true
+    },
+    {
+      "id": "alg-g7-s2-u2",
+      "grade": 7,
+      "subject": "ალგებრა",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 12,
+      "valid": true
+    },
+    {
+      "id": "alg-g7-s2-sum",
+      "grade": 7,
+      "subject": "ალგებრა",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 24,
+      "valid": true
+    },
+    {
+      "id": "geom-g7-s1-u1",
+      "grade": 7,
+      "subject": "გეომეტრია",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 12,
+      "valid": true
+    },
+    {
+      "id": "geom-g7-s1-u2",
+      "grade": 7,
+      "subject": "გეომეტრია",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 12,
+      "valid": true
+    },
+    {
+      "id": "geom-g7-s1-sum",
+      "grade": 7,
+      "subject": "გეომეტრია",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 24,
+      "valid": true
+    },
+    {
+      "id": "geom-g7-s2-u1",
+      "grade": 7,
+      "subject": "გეომეტრია",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 12,
+      "valid": true
+    },
+    {
+      "id": "geom-g7-s2-u2",
+      "grade": 7,
+      "subject": "გეომეტრია",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 12,
+      "valid": true
+    },
+    {
+      "id": "geom-g7-s2-sum",
+      "grade": 7,
+      "subject": "გეომეტრია",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 24,
+      "valid": true
+    },
+    {
+      "id": "alg-g8-s1-u1",
+      "grade": 8,
+      "subject": "ალგებრა",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 12,
+      "valid": true
+    },
+    {
+      "id": "alg-g8-s1-u2",
+      "grade": 8,
+      "subject": "ალგებრა",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 12,
+      "valid": true
+    },
+    {
+      "id": "alg-g8-s1-sum",
+      "grade": 8,
+      "subject": "ალგებრა",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 24,
+      "valid": true
+    },
+    {
+      "id": "alg-g8-s2-u1",
+      "grade": 8,
+      "subject": "ალგებრა",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 12,
+      "valid": true
+    },
+    {
+      "id": "alg-g8-s2-u2",
+      "grade": 8,
+      "subject": "ალგებრა",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 12,
+      "valid": true
+    },
+    {
+      "id": "alg-g8-s2-sum",
+      "grade": 8,
+      "subject": "ალგებრა",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 24,
+      "valid": true
+    },
+    {
+      "id": "geom-g8-s1-u1",
+      "grade": 8,
+      "subject": "გეომეტრია",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 12,
+      "valid": true
+    },
+    {
+      "id": "geom-g8-s1-u2",
+      "grade": 8,
+      "subject": "გეომეტრია",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 12,
+      "valid": true
+    },
+    {
+      "id": "geom-g8-s1-sum",
+      "grade": 8,
+      "subject": "გეომეტრია",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 24,
+      "valid": true
+    },
+    {
+      "id": "geom-g8-s2-u1",
+      "grade": 8,
+      "subject": "გეომეტრია",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 12,
+      "valid": true
+    },
+    {
+      "id": "geom-g8-s2-u2",
+      "grade": 8,
+      "subject": "გეომეტრია",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 12,
+      "valid": true
+    },
+    {
+      "id": "geom-g8-s2-sum",
+      "grade": 8,
+      "subject": "გეომეტრია",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 24,
+      "valid": true
+    },
+    {
+      "id": "alg-g9-s1-u1",
+      "grade": 9,
+      "subject": "ალგებრა",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 12,
+      "valid": true
+    },
+    {
+      "id": "alg-g9-s1-u2",
+      "grade": 9,
+      "subject": "ალგებრა",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 12,
+      "valid": true
+    },
+    {
+      "id": "alg-g9-s1-sum",
+      "grade": 9,
+      "subject": "ალგებრა",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 24,
+      "valid": true
+    },
+    {
+      "id": "alg-g9-s2-u1",
+      "grade": 9,
+      "subject": "ალგებრა",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 12,
+      "valid": true
+    },
+    {
+      "id": "alg-g9-s2-u2",
+      "grade": 9,
+      "subject": "ალგებრა",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 12,
+      "valid": true
+    },
+    {
+      "id": "alg-g9-s2-sum",
+      "grade": 9,
+      "subject": "ალგებრა",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 24,
+      "valid": true
+    },
+    {
+      "id": "geom-g9-s1-u1",
+      "grade": 9,
+      "subject": "გეომეტრია",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 12,
+      "valid": true
+    },
+    {
+      "id": "geom-g9-s1-u2",
+      "grade": 9,
+      "subject": "გეომეტრია",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 12,
+      "valid": true
+    },
+    {
+      "id": "geom-g9-s1-sum",
+      "grade": 9,
+      "subject": "გეომეტრია",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 24,
+      "valid": true
+    },
+    {
+      "id": "geom-g9-s2-u1",
+      "grade": 9,
+      "subject": "გეომეტრია",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 12,
+      "valid": true
+    },
+    {
+      "id": "geom-g9-s2-u2",
+      "grade": 9,
+      "subject": "გეომეტრია",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 12,
+      "valid": true
+    },
+    {
+      "id": "geom-g9-s2-sum",
+      "grade": 9,
+      "subject": "გეომეტრია",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 24,
+      "valid": true
+    },
+    {
+      "id": "alg-g10-s1-u1",
+      "grade": 10,
+      "subject": "ალგებრა",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 12,
+      "valid": true
+    },
+    {
+      "id": "alg-g10-s1-u2",
+      "grade": 10,
+      "subject": "ალგებრა",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 12,
+      "valid": true
+    },
+    {
+      "id": "alg-g10-s1-sum",
+      "grade": 10,
+      "subject": "ალგებრა",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 24,
+      "valid": true
+    },
+    {
+      "id": "alg-g10-s2-u1",
+      "grade": 10,
+      "subject": "ალგებრა",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 12,
+      "valid": true
+    },
+    {
+      "id": "alg-g10-s2-u2",
+      "grade": 10,
+      "subject": "ალგებრა",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 12,
+      "valid": true
+    },
+    {
+      "id": "alg-g10-s2-sum",
+      "grade": 10,
+      "subject": "ალგებრა",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 24,
+      "valid": true
+    },
+    {
+      "id": "geom-g10-s1-u1",
+      "grade": 10,
+      "subject": "გეომეტრია",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 12,
+      "valid": true
+    },
+    {
+      "id": "geom-g10-s1-u2",
+      "grade": 10,
+      "subject": "გეომეტრია",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 12,
+      "valid": true
+    },
+    {
+      "id": "geom-g10-s1-sum",
+      "grade": 10,
+      "subject": "გეომეტრია",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 24,
+      "valid": true
+    },
+    {
+      "id": "geom-g10-s2-u1",
+      "grade": 10,
+      "subject": "გეომეტრია",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 12,
+      "valid": true
+    },
+    {
+      "id": "geom-g10-s2-u2",
+      "grade": 10,
+      "subject": "გეომეტრია",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 12,
+      "valid": true
+    },
+    {
+      "id": "geom-g10-s2-sum",
+      "grade": 10,
+      "subject": "გეომეტრია",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 24,
+      "valid": true
+    },
+    {
+      "id": "alg-g11-s1-u1",
+      "grade": 11,
+      "subject": "ალგებრა",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 12,
+      "valid": true
+    },
+    {
+      "id": "alg-g11-s1-u2",
+      "grade": 11,
+      "subject": "ალგებრა",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 12,
+      "valid": true
+    },
+    {
+      "id": "alg-g11-s1-sum",
+      "grade": 11,
+      "subject": "ალგებრა",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 24,
+      "valid": true
+    },
+    {
+      "id": "alg-g11-s2-u1",
+      "grade": 11,
+      "subject": "ალგებრა",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 12,
+      "valid": true
+    },
+    {
+      "id": "alg-g11-s2-u2",
+      "grade": 11,
+      "subject": "ალგებრა",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 12,
+      "valid": true
+    },
+    {
+      "id": "alg-g11-s2-sum",
+      "grade": 11,
+      "subject": "ალგებრა",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 24,
+      "valid": true
+    },
+    {
+      "id": "geom-g11-s1-u1",
+      "grade": 11,
+      "subject": "გეომეტრია",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 12,
+      "valid": true
+    },
+    {
+      "id": "geom-g11-s1-u2",
+      "grade": 11,
+      "subject": "გეომეტრია",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 12,
+      "valid": true
+    },
+    {
+      "id": "geom-g11-s1-sum",
+      "grade": 11,
+      "subject": "გეომეტრია",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 24,
+      "valid": true
+    },
+    {
+      "id": "geom-g11-s2-u1",
+      "grade": 11,
+      "subject": "გეომეტრია",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 12,
+      "valid": true
+    },
+    {
+      "id": "geom-g11-s2-u2",
+      "grade": 11,
+      "subject": "გეომეტრია",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 12,
+      "valid": true
+    },
+    {
+      "id": "geom-g11-s2-sum",
+      "grade": 11,
+      "subject": "გეომეტრია",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 24,
+      "valid": true
+    },
+    {
+      "id": "alg-g12-s1-u1",
+      "grade": 12,
+      "subject": "ალგებრა",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 12,
+      "valid": true
+    },
+    {
+      "id": "alg-g12-s1-u2",
+      "grade": 12,
+      "subject": "ალგებრა",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 12,
+      "valid": true
+    },
+    {
+      "id": "alg-g12-s1-sum",
+      "grade": 12,
+      "subject": "ალგებრა",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 24,
+      "valid": true
+    },
+    {
+      "id": "alg-g12-s2-u1",
+      "grade": 12,
+      "subject": "ალგებრა",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 12,
+      "valid": true
+    },
+    {
+      "id": "alg-g12-s2-u2",
+      "grade": 12,
+      "subject": "ალგებრა",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 12,
+      "valid": true
+    },
+    {
+      "id": "alg-g12-s2-sum",
+      "grade": 12,
+      "subject": "ალგებრა",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 24,
+      "valid": true
+    },
+    {
+      "id": "geom-g12-s1-u1",
+      "grade": 12,
+      "subject": "გეომეტრია",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 12,
+      "valid": true
+    },
+    {
+      "id": "geom-g12-s1-u2",
+      "grade": 12,
+      "subject": "გეომეტრია",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 12,
+      "valid": true
+    },
+    {
+      "id": "geom-g12-s1-sum",
+      "grade": 12,
+      "subject": "გეომეტრია",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 24,
+      "valid": true
+    },
+    {
+      "id": "geom-g12-s2-u1",
+      "grade": 12,
+      "subject": "გეომეტრია",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 12,
+      "valid": true
+    },
+    {
+      "id": "geom-g12-s2-u2",
+      "grade": 12,
+      "subject": "გეომეტრია",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 12,
+      "valid": true
+    },
+    {
+      "id": "geom-g12-s2-sum",
+      "grade": 12,
+      "subject": "გეომეტრია",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 24,
+      "valid": true
+    },
+    {
+      "id": "kab-g7-s1-u1",
+      "grade": 7,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 45,
+      "valid": true
+    },
+    {
+      "id": "kab-g7-s1-u2",
+      "grade": 7,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 45,
+      "valid": true
+    },
+    {
+      "id": "kab-g7-s1-sum",
+      "grade": 7,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 79,
+      "valid": true
+    },
+    {
+      "id": "kab-g7-s2-u1",
+      "grade": 7,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 44,
+      "valid": true
+    },
+    {
+      "id": "kab-g7-s2-u2",
+      "grade": 7,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 46,
+      "valid": true
+    },
+    {
+      "id": "kab-g7-s2-sum",
+      "grade": 7,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 81,
+      "valid": true
+    },
+    {
+      "id": "kab-g8-s1-u1",
+      "grade": 8,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 45,
+      "valid": true
+    },
+    {
+      "id": "kab-g8-s1-u2",
+      "grade": 8,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 46,
+      "valid": true
+    },
+    {
+      "id": "kab-g8-s1-sum",
+      "grade": 8,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 82,
+      "valid": true
+    },
+    {
+      "id": "kab-g8-s2-u1",
+      "grade": 8,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 46,
+      "valid": true
+    },
+    {
+      "id": "kab-g8-s2-u2",
+      "grade": 8,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 46,
+      "valid": true
+    },
+    {
+      "id": "kab-g8-s2-sum",
+      "grade": 8,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 80,
+      "valid": true
+    },
+    {
+      "id": "kab-g9-s1-u1",
+      "grade": 9,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 46,
+      "valid": true
+    },
+    {
+      "id": "kab-g9-s1-u2",
+      "grade": 9,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 46,
+      "valid": true
+    },
+    {
+      "id": "kab-g9-s1-sum",
+      "grade": 9,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 82,
+      "valid": true
+    },
+    {
+      "id": "kab-g9-s2-u1",
+      "grade": 9,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 45,
+      "valid": true
+    },
+    {
+      "id": "kab-g9-s2-u2",
+      "grade": 9,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 47,
+      "valid": true
+    },
+    {
+      "id": "kab-g9-s2-sum",
+      "grade": 9,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 83,
+      "valid": true
+    },
+    {
+      "id": "kab-g10-s1-u1",
+      "grade": 10,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 47,
+      "valid": true
+    },
+    {
+      "id": "kab-g10-s1-u2",
+      "grade": 10,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 46,
+      "valid": true
+    },
+    {
+      "id": "kab-g10-s1-sum",
+      "grade": 10,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 83,
+      "valid": true
+    },
+    {
+      "id": "kab-g10-s2-u1",
+      "grade": 10,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 46,
+      "valid": true
+    },
+    {
+      "id": "kab-g10-s2-u2",
+      "grade": 10,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 47,
+      "valid": true
+    },
+    {
+      "id": "kab-g10-s2-sum",
+      "grade": 10,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 82,
+      "valid": true
+    },
+    {
+      "id": "kab-g11-s1-u1",
+      "grade": 11,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 47,
+      "valid": true
+    },
+    {
+      "id": "kab-g11-s1-u2",
+      "grade": 11,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 46,
+      "valid": true
+    },
+    {
+      "id": "kab-g11-s1-sum",
+      "grade": 11,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 81,
+      "valid": true
+    },
+    {
+      "id": "kab-g11-s2-u1",
+      "grade": 11,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 46,
+      "valid": true
+    },
+    {
+      "id": "kab-g11-s2-u2",
+      "grade": 11,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 47,
+      "valid": true
+    },
+    {
+      "id": "kab-g11-s2-sum",
+      "grade": 11,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 87,
+      "valid": true
+    },
+    {
+      "id": "kab-g12-s1-u1",
+      "grade": 12,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 47,
+      "valid": true
+    },
+    {
+      "id": "kab-g12-s1-u2",
+      "grade": 12,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 46,
+      "valid": true
+    },
+    {
+      "id": "kab-g12-s1-sum",
+      "grade": 12,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 85,
+      "valid": true
+    },
+    {
+      "id": "kab-g12-s2-u1",
+      "grade": 12,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 45,
+      "valid": true
+    },
+    {
+      "id": "kab-g12-s2-u2",
+      "grade": 12,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 44,
+      "valid": true
+    },
+    {
+      "id": "kab-g12-s2-sum",
+      "grade": 12,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 81,
+      "valid": true
+    },
+    {
+      "id": "enb-g1-s1-u1",
+      "grade": 1,
+      "subject": "ინგლისური",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 20,
+      "valid": true
+    },
+    {
+      "id": "enb-g1-s1-u2",
+      "grade": 1,
+      "subject": "ინგლისური",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 18,
+      "valid": true
+    },
+    {
+      "id": "enb-g1-s1-sum",
+      "grade": 1,
+      "subject": "ინგლისური",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 20,
+      "valid": true
+    },
+    {
+      "id": "enb-g1-s2-u1",
+      "grade": 1,
+      "subject": "ინგლისური",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 21,
+      "valid": true
+    },
+    {
+      "id": "enb-g1-s2-u2",
+      "grade": 1,
+      "subject": "ინგლისური",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 20,
+      "valid": true
+    },
+    {
+      "id": "enb-g1-s2-sum",
+      "grade": 1,
+      "subject": "ინგლისური",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 21,
+      "valid": true
+    },
+    {
+      "id": "enb-g2-s1-u1",
+      "grade": 2,
+      "subject": "ინგლისური",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 25,
+      "valid": true
+    },
+    {
+      "id": "enb-g2-s1-u2",
+      "grade": 2,
+      "subject": "ინგლისური",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 22,
+      "valid": true
+    },
+    {
+      "id": "enb-g2-s1-sum",
+      "grade": 2,
+      "subject": "ინგლისური",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 27,
+      "valid": true
+    },
+    {
+      "id": "enb-g2-s2-u1",
+      "grade": 2,
+      "subject": "ინგლისური",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 25,
+      "valid": true
+    },
+    {
+      "id": "enb-g2-s2-u2",
+      "grade": 2,
+      "subject": "ინგლისური",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 21,
+      "valid": true
+    },
+    {
+      "id": "enb-g2-s2-sum",
+      "grade": 2,
+      "subject": "ინგლისური",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 28,
+      "valid": true
+    },
+    {
+      "id": "enb-g3-s1-u1",
+      "grade": 3,
+      "subject": "ინგლისური",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 26,
+      "valid": true
+    },
+    {
+      "id": "enb-g3-s1-u2",
+      "grade": 3,
+      "subject": "ინგლისური",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 27,
+      "valid": true
+    },
+    {
+      "id": "enb-g3-s1-sum",
+      "grade": 3,
+      "subject": "ინგლისური",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 35,
+      "valid": true
+    },
+    {
+      "id": "enb-g3-s2-u1",
+      "grade": 3,
+      "subject": "ინგლისური",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 28,
+      "valid": true
+    },
+    {
+      "id": "enb-g3-s2-u2",
+      "grade": 3,
+      "subject": "ინგლისური",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 25,
+      "valid": true
+    },
+    {
+      "id": "enb-g3-s2-sum",
+      "grade": 3,
+      "subject": "ინგლისური",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 33,
+      "valid": true
+    },
+    {
+      "id": "enb-g4-s1-u1",
+      "grade": 4,
+      "subject": "ინგლისური",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 22,
+      "valid": true
+    },
+    {
+      "id": "enb-g4-s1-u2",
+      "grade": 4,
+      "subject": "ინგლისური",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 20,
+      "valid": true
+    },
+    {
+      "id": "enb-g4-s1-sum",
+      "grade": 4,
+      "subject": "ინგლისური",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 26,
+      "valid": true
+    },
+    {
+      "id": "enb-g4-s2-u1",
+      "grade": 4,
+      "subject": "ინგლისური",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 21,
+      "valid": true
+    },
+    {
+      "id": "enb-g4-s2-u2",
+      "grade": 4,
+      "subject": "ინგლისური",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 23,
+      "valid": true
+    },
+    {
+      "id": "enb-g4-s2-sum",
+      "grade": 4,
+      "subject": "ინგლისური",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 27,
+      "valid": true
+    },
+    {
+      "id": "enb-g5-s1-u1",
+      "grade": 5,
+      "subject": "ინგლისური",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 24,
+      "valid": true
+    },
+    {
+      "id": "enb-g5-s1-u2",
+      "grade": 5,
+      "subject": "ინგლისური",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 21,
+      "valid": true
+    },
+    {
+      "id": "enb-g5-s1-sum",
+      "grade": 5,
+      "subject": "ინგლისური",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 25,
+      "valid": true
+    },
+    {
+      "id": "enb-g5-s2-u1",
+      "grade": 5,
+      "subject": "ინგლისური",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 22,
+      "valid": true
+    },
+    {
+      "id": "enb-g5-s2-u2",
+      "grade": 5,
+      "subject": "ინგლისური",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 23,
+      "valid": true
+    },
+    {
+      "id": "enb-g5-s2-sum",
+      "grade": 5,
+      "subject": "ინგლისური",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 25,
+      "valid": true
+    },
+    {
+      "id": "enb-g6-s1-u1",
+      "grade": 6,
+      "subject": "ინგლისური",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 22,
+      "valid": true
+    },
+    {
+      "id": "enb-g6-s1-u2",
+      "grade": 6,
+      "subject": "ინგლისური",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 23,
+      "valid": true
+    },
+    {
+      "id": "enb-g6-s1-sum",
+      "grade": 6,
+      "subject": "ინგლისური",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 25,
+      "valid": true
+    },
+    {
+      "id": "enb-g6-s2-u1",
+      "grade": 6,
+      "subject": "ინგლისური",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 22,
+      "valid": true
+    },
+    {
+      "id": "enb-g6-s2-u2",
+      "grade": 6,
+      "subject": "ინგლისური",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 23,
+      "valid": true
+    },
+    {
+      "id": "enb-g6-s2-sum",
+      "grade": 6,
+      "subject": "ინგლისური",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 25,
+      "valid": true
+    },
+    {
+      "id": "enb-g7-s1-u1",
+      "grade": 7,
+      "subject": "ინგლისური",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 20,
+      "valid": true
+    },
+    {
+      "id": "enb-g7-s1-u2",
+      "grade": 7,
+      "subject": "ინგლისური",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 22,
+      "valid": true
+    },
+    {
+      "id": "enb-g7-s1-sum",
+      "grade": 7,
+      "subject": "ინგლისური",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 24,
+      "valid": true
+    },
+    {
+      "id": "enb-g7-s2-u1",
+      "grade": 7,
+      "subject": "ინგლისური",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 19,
+      "valid": true
+    },
+    {
+      "id": "enb-g7-s2-u2",
+      "grade": 7,
+      "subject": "ინგლისური",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 23,
+      "valid": true
+    },
+    {
+      "id": "enb-g7-s2-sum",
+      "grade": 7,
+      "subject": "ინგლისური",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 24,
+      "valid": true
+    },
+    {
+      "id": "enb-g8-s1-u1",
+      "grade": 8,
+      "subject": "ინგლისური",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 21,
+      "valid": true
+    },
+    {
+      "id": "enb-g8-s1-u2",
+      "grade": 8,
+      "subject": "ინგლისური",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 24,
+      "valid": true
+    },
+    {
+      "id": "enb-g8-s1-sum",
+      "grade": 8,
+      "subject": "ინგლისური",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 26,
+      "valid": true
+    },
+    {
+      "id": "enb-g8-s2-u1",
+      "grade": 8,
+      "subject": "ინგლისური",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 23,
+      "valid": true
+    },
+    {
+      "id": "enb-g8-s2-u2",
+      "grade": 8,
+      "subject": "ინგლისური",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 24,
+      "valid": true
+    },
+    {
+      "id": "enb-g8-s2-sum",
+      "grade": 8,
+      "subject": "ინგლისური",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 26,
+      "valid": true
+    },
+    {
+      "id": "enb-g9-s1-u1",
+      "grade": 9,
+      "subject": "ინგლისური",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 23,
+      "valid": true
+    },
+    {
+      "id": "enb-g9-s1-u2",
+      "grade": 9,
+      "subject": "ინგლისური",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 24,
+      "valid": true
+    },
+    {
+      "id": "enb-g9-s1-sum",
+      "grade": 9,
+      "subject": "ინგლისური",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 26,
+      "valid": true
+    },
+    {
+      "id": "enb-g9-s2-u1",
+      "grade": 9,
+      "subject": "ინგლისური",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 23,
+      "valid": true
+    },
+    {
+      "id": "enb-g9-s2-u2",
+      "grade": 9,
+      "subject": "ინგლისური",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 20,
+      "valid": true
+    },
+    {
+      "id": "enb-g9-s2-sum",
+      "grade": 9,
+      "subject": "ინგლისური",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 27,
+      "valid": true
+    },
+    {
+      "id": "enb-g10-s1-u1",
+      "grade": 10,
+      "subject": "ინგლისური",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 22,
+      "valid": true
+    },
+    {
+      "id": "enb-g10-s1-u2",
+      "grade": 10,
+      "subject": "ინგლისური",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 20,
+      "valid": true
+    },
+    {
+      "id": "enb-g10-s1-sum",
+      "grade": 10,
+      "subject": "ინგლისური",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 26,
+      "valid": true
+    },
+    {
+      "id": "enb-g10-s2-u1",
+      "grade": 10,
+      "subject": "ინგლისური",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 23,
+      "valid": true
+    },
+    {
+      "id": "enb-g10-s2-u2",
+      "grade": 10,
+      "subject": "ინგლისური",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 20,
+      "valid": true
+    },
+    {
+      "id": "enb-g10-s2-sum",
+      "grade": 10,
+      "subject": "ინგლისური",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 26,
+      "valid": true
+    },
+    {
+      "id": "enb-g11-s1-u1",
+      "grade": 11,
+      "subject": "ინგლისური",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 24,
+      "valid": true
+    },
+    {
+      "id": "enb-g11-s1-u2",
+      "grade": 11,
+      "subject": "ინგლისური",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 20,
+      "valid": true
+    },
+    {
+      "id": "enb-g11-s1-sum",
+      "grade": 11,
+      "subject": "ინგლისური",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 27,
+      "valid": true
+    },
+    {
+      "id": "enb-g11-s2-u1",
+      "grade": 11,
+      "subject": "ინგლისური",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 24,
+      "valid": true
+    },
+    {
+      "id": "enb-g11-s2-u2",
+      "grade": 11,
+      "subject": "ინგლისური",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 24,
+      "valid": true
+    },
+    {
+      "id": "enb-g11-s2-sum",
+      "grade": 11,
+      "subject": "ინგლისური",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 27,
+      "valid": true
+    },
+    {
+      "id": "enb-g12-s1-u1",
+      "grade": 12,
+      "subject": "ინგლისური",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 24,
+      "valid": true
+    },
+    {
+      "id": "enb-g12-s1-u2",
+      "grade": 12,
+      "subject": "ინგლისური",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 24,
+      "valid": true
+    },
+    {
+      "id": "enb-g12-s1-sum",
+      "grade": 12,
+      "subject": "ინგლისური",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 27,
+      "valid": true
+    },
+    {
+      "id": "enb-g12-s2-u1",
+      "grade": 12,
+      "subject": "ინგლისური",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 20,
+      "valid": true
+    },
+    {
+      "id": "enb-g12-s2-u2",
+      "grade": 12,
+      "subject": "ინგლისური",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 22,
+      "valid": true
+    },
+    {
+      "id": "enb-g12-s2-sum",
+      "grade": 12,
+      "subject": "ინგლისური",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 26,
+      "valid": true
+    },
+    {
+      "id": "rub-g5-s1-u1",
+      "grade": 5,
+      "subject": "რუსული",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 42,
+      "valid": true
+    },
+    {
+      "id": "rub-g5-s1-u2",
+      "grade": 5,
+      "subject": "რუსული",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 41,
+      "valid": true
+    },
+    {
+      "id": "rub-g5-s1-sum",
+      "grade": 5,
+      "subject": "რუსული",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 73,
+      "valid": true
+    },
+    {
+      "id": "rub-g5-s2-u1",
+      "grade": 5,
+      "subject": "რუსული",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 41,
+      "valid": true
+    },
+    {
+      "id": "rub-g5-s2-u2",
+      "grade": 5,
+      "subject": "რუსული",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 39,
+      "valid": true
+    },
+    {
+      "id": "rub-g5-s2-sum",
+      "grade": 5,
+      "subject": "რუსული",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 72,
+      "valid": true
+    },
+    {
+      "id": "rub-g6-s1-u1",
+      "grade": 6,
+      "subject": "რუსული",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 42,
+      "valid": true
+    },
+    {
+      "id": "rub-g6-s1-u2",
+      "grade": 6,
+      "subject": "რუსული",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 40,
+      "valid": true
+    },
+    {
+      "id": "rub-g6-s1-sum",
+      "grade": 6,
+      "subject": "რუსული",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 76,
+      "valid": true
+    },
+    {
+      "id": "rub-g6-s2-u1",
+      "grade": 6,
+      "subject": "რუსული",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 40,
+      "valid": true
+    },
+    {
+      "id": "rub-g6-s2-u2",
+      "grade": 6,
+      "subject": "რუსული",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 41,
+      "valid": true
+    },
+    {
+      "id": "rub-g6-s2-sum",
+      "grade": 6,
+      "subject": "რუსული",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 70,
+      "valid": true
+    },
+    {
+      "id": "rub-g7-s1-u1",
+      "grade": 7,
+      "subject": "რუსული",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 46,
+      "valid": true
+    },
+    {
+      "id": "rub-g7-s1-u2",
+      "grade": 7,
+      "subject": "რუსული",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 45,
+      "valid": true
+    },
+    {
+      "id": "rub-g7-s1-sum",
+      "grade": 7,
+      "subject": "რუსული",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 79,
+      "valid": true
+    },
+    {
+      "id": "rub-g7-s2-u1",
+      "grade": 7,
+      "subject": "რუსული",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 47,
+      "valid": true
+    },
+    {
+      "id": "rub-g7-s2-u2",
+      "grade": 7,
+      "subject": "რუსული",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 47,
+      "valid": true
+    },
+    {
+      "id": "rub-g7-s2-sum",
+      "grade": 7,
+      "subject": "რუსული",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 80,
+      "valid": true
+    },
+    {
+      "id": "rub-g8-s1-u1",
+      "grade": 8,
+      "subject": "რუსული",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 47,
+      "valid": true
+    },
+    {
+      "id": "rub-g8-s1-u2",
+      "grade": 8,
+      "subject": "რუსული",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 47,
+      "valid": true
+    },
+    {
+      "id": "rub-g8-s1-sum",
+      "grade": 8,
+      "subject": "რუსული",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 80,
+      "valid": true
+    },
+    {
+      "id": "rub-g8-s2-u1",
+      "grade": 8,
+      "subject": "რუსული",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 46,
+      "valid": true
+    },
+    {
+      "id": "rub-g8-s2-u2",
+      "grade": 8,
+      "subject": "რუსული",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 46,
+      "valid": true
+    },
+    {
+      "id": "rub-g8-s2-sum",
+      "grade": 8,
+      "subject": "რუსული",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 83,
+      "valid": true
+    },
+    {
+      "id": "rub-g9-s1-u1",
+      "grade": 9,
+      "subject": "რუსული",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 46,
+      "valid": true
+    },
+    {
+      "id": "rub-g9-s1-u2",
+      "grade": 9,
+      "subject": "რუსული",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 45,
+      "valid": true
+    },
+    {
+      "id": "rub-g9-s1-sum",
+      "grade": 9,
+      "subject": "რუსული",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 82,
+      "valid": true
+    },
+    {
+      "id": "rub-g9-s2-u1",
+      "grade": 9,
+      "subject": "რუსული",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 45,
+      "valid": true
+    },
+    {
+      "id": "rub-g9-s2-u2",
+      "grade": 9,
+      "subject": "რუსული",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 45,
+      "valid": true
+    },
+    {
+      "id": "rub-g9-s2-sum",
+      "grade": 9,
+      "subject": "რუსული",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 82,
+      "valid": true
+    },
+    {
+      "id": "rub-g10-s1-u1",
+      "grade": 10,
+      "subject": "რუსული",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 46,
+      "valid": true
+    },
+    {
+      "id": "rub-g10-s1-u2",
+      "grade": 10,
+      "subject": "რუსული",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 42,
+      "valid": true
+    },
+    {
+      "id": "rub-g10-s1-sum",
+      "grade": 10,
+      "subject": "რუსული",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 78,
+      "valid": true
+    },
+    {
+      "id": "rub-g10-s2-u1",
+      "grade": 10,
+      "subject": "რუსული",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 44,
+      "valid": true
+    },
+    {
+      "id": "rub-g10-s2-u2",
+      "grade": 10,
+      "subject": "რუსული",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 43,
+      "valid": true
+    },
+    {
+      "id": "rub-g10-s2-sum",
+      "grade": 10,
+      "subject": "რუსული",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 81,
+      "valid": true
+    },
+    {
+      "id": "rub-g11-s1-u1",
+      "grade": 11,
+      "subject": "რუსული",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 47,
+      "valid": true
+    },
+    {
+      "id": "rub-g11-s1-u2",
+      "grade": 11,
+      "subject": "რუსული",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 45,
+      "valid": true
+    },
+    {
+      "id": "rub-g11-s1-sum",
+      "grade": 11,
+      "subject": "რუსული",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 85,
+      "valid": true
+    },
+    {
+      "id": "rub-g11-s2-u1",
+      "grade": 11,
+      "subject": "რუსული",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 46,
+      "valid": true
+    },
+    {
+      "id": "rub-g11-s2-u2",
+      "grade": 11,
+      "subject": "რუსული",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 45,
+      "valid": true
+    },
+    {
+      "id": "rub-g11-s2-sum",
+      "grade": 11,
+      "subject": "რუსული",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 85,
+      "valid": true
+    },
+    {
+      "id": "rub-g12-s1-u1",
+      "grade": 12,
+      "subject": "რუსული",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 46,
+      "valid": true
+    },
+    {
+      "id": "rub-g12-s1-u2",
+      "grade": 12,
+      "subject": "რუსული",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 45,
+      "valid": true
+    },
+    {
+      "id": "rub-g12-s1-sum",
+      "grade": 12,
+      "subject": "რუსული",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 85,
+      "valid": true
+    },
+    {
+      "id": "rub-g12-s2-u1",
+      "grade": 12,
+      "subject": "რუსული",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 45,
+      "valid": true
+    },
+    {
+      "id": "rub-g12-s2-u2",
+      "grade": 12,
+      "subject": "რუსული",
+      "required": 10,
+      "available": 48,
+      "conceptualFamilies": 44,
+      "valid": true
+    },
+    {
+      "id": "rub-g12-s2-sum",
+      "grade": 12,
+      "subject": "რუსული",
+      "required": 20,
+      "available": 96,
+      "conceptualFamilies": 78,
+      "valid": true
+    }
+  ],
+  "exceptions": []
+}

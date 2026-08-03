@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-29T07:51:54.149Z",
+  "generatedAt": "2026-08-03T08:57:49.453Z",
   "intendedUse": "Production test-bank release gate for EduTest.ge",
   "grain": "One question record; viability also evaluated at one published-test definition",
   "officialReferences": [
@@ -39,38 +39,38 @@
   "summary": {
     "pools": 515,
     "tests": 648,
-    "questions": 19731,
-    "uniqueQuestionIds": 19581,
+    "questions": 20035,
+    "uniqueQuestionIds": 19885,
     "duplicateQuestionIds": 150,
     "duplicateQuestionTexts": 261,
     "duplicateQuestionTextsWithinExactGrade": 0,
-    "questionsWithBlockingIssues": 279,
+    "questionsWithBlockingIssues": 92,
     "encodingCorruptedQuestions": 0,
-    "duplicateOptionQuestions": 279,
+    "duplicateOptionQuestions": 92,
     "questionsMissingExplanation": 6564,
     "questionsMissingExplicitOutcome": 6564,
     "questionsMissingSkillTag": 6564,
     "trueFalseQuestions": 2231,
-    "answerEchoQuestions": 20,
-    "publishedSafeUniqueQuestions": 13023,
-    "generatedExpansionQuestions": 5831,
+    "answerEchoQuestions": 40,
+    "publishedSafeUniqueQuestions": 13257,
+    "generatedExpansionQuestions": 6135,
     "seniorMathQuestions": 2304,
     "seniorMathTests": 72,
     "languageBlueprintQuestions": 4992,
     "languageBlueprintTests": 156,
     "prematureLanguageTopics": 0,
     "languageBlueprintViolations": 0,
-    "generatedExpansionVisualQuestions": 1262,
+    "generatedExpansionVisualQuestions": 1332,
     "generatedTypeCounts": {
-      "calc": 883,
-      "multiple_choice": 8176,
+      "calc": 896,
+      "multiple_choice": 8372,
       "order": 27,
       "fill": 1460,
       "match": 68,
       "true_false": 98
     },
-    "generatedVisualShare": 0.214,
-    "generatedInteractiveShare": 0.228,
+    "generatedVisualShare": 0.215,
+    "generatedInteractiveShare": 0.224,
     "subjectsBelowDouble": 0,
     "testsWithInsufficientSafeQuestions": 0,
     "testsWithoutExactGradeVerification": 0,
@@ -305,8 +305,8 @@
       "grade": 7,
       "questions": 192,
       "components": {
-        "literature": 112,
-        "language": 80
+        "language": 86,
+        "literature": 106
       },
       "blueprintBuckets": [
         "language.editing",
@@ -329,8 +329,8 @@
       "grade": 8,
       "questions": 192,
       "components": {
-        "language": 80,
-        "literature": 112
+        "literature": 108,
+        "language": 84
       },
       "blueprintBuckets": [
         "language.editing",
@@ -353,8 +353,8 @@
       "grade": 9,
       "questions": 192,
       "components": {
-        "literature": 112,
-        "language": 80
+        "literature": 107,
+        "language": 85
       },
       "blueprintBuckets": [
         "language.editing",
@@ -377,8 +377,8 @@
       "grade": 10,
       "questions": 192,
       "components": {
-        "language": 80,
-        "literature": 112
+        "literature": 106,
+        "language": 86
       },
       "blueprintBuckets": [
         "language.editing",
@@ -401,8 +401,8 @@
       "grade": 11,
       "questions": 192,
       "components": {
-        "language": 80,
-        "literature": 112
+        "language": 82,
+        "literature": 110
       },
       "blueprintBuckets": [
         "language.editing",
@@ -425,8 +425,8 @@
       "grade": 12,
       "questions": 192,
       "components": {
-        "literature": 112,
-        "language": 80
+        "language": 82,
+        "literature": 110
       },
       "blueprintBuckets": [
         "language.editing",
@@ -449,10 +449,10 @@
       "grade": 1,
       "questions": 192,
       "components": {
-        "vocabulary": 88,
-        "use_of_language": 40,
+        "grammar": 16,
+        "vocabulary": 96,
         "reading": 48,
-        "grammar": 16
+        "use_of_language": 32
       },
       "blueprintBuckets": [
         "grammar",
@@ -466,10 +466,10 @@
       "grade": 2,
       "questions": 192,
       "components": {
-        "use_of_language": 40,
+        "grammar": 32,
+        "vocabulary": 80,
         "reading": 48,
-        "vocabulary": 72,
-        "grammar": 32
+        "use_of_language": 32
       },
       "blueprintBuckets": [
         "grammar",
@@ -483,10 +483,10 @@
       "grade": 3,
       "questions": 192,
       "components": {
-        "reading": 48,
+        "use_of_language": 44,
+        "grammar": 36,
         "vocabulary": 64,
-        "use_of_language": 40,
-        "grammar": 40
+        "reading": 48
       },
       "blueprintBuckets": [
         "grammar",
@@ -500,10 +500,10 @@
       "grade": 4,
       "questions": 192,
       "components": {
-        "vocabulary": 56,
-        "use_of_language": 40,
-        "reading": 48,
-        "grammar": 48
+        "use_of_language": 32,
+        "grammar": 48,
+        "vocabulary": 64,
+        "reading": 48
       },
       "blueprintBuckets": [
         "grammar",
@@ -517,10 +517,10 @@
       "grade": 5,
       "questions": 192,
       "components": {
-        "grammar": 56,
         "reading": 48,
-        "vocabulary": 48,
-        "use_of_language": 40
+        "use_of_language": 32,
+        "grammar": 64,
+        "vocabulary": 48
       },
       "blueprintBuckets": [
         "grammar",
@@ -535,9 +535,9 @@
       "questions": 192,
       "components": {
         "reading": 48,
-        "vocabulary": 40,
-        "use_of_language": 40,
-        "grammar": 64
+        "use_of_language": 32,
+        "grammar": 64,
+        "vocabulary": 48
       },
       "blueprintBuckets": [
         "grammar",
@@ -552,9 +552,9 @@
       "questions": 192,
       "components": {
         "vocabulary": 40,
-        "grammar": 64,
         "reading": 48,
-        "use_of_language": 40
+        "use_of_language": 40,
+        "grammar": 64
       },
       "blueprintBuckets": [
         "grammar",
@@ -568,10 +568,10 @@
       "grade": 8,
       "questions": 192,
       "components": {
-        "grammar": 72,
+        "grammar": 80,
         "reading": 48,
-        "vocabulary": 32,
-        "use_of_language": 40
+        "use_of_language": 32,
+        "vocabulary": 32
       },
       "blueprintBuckets": [
         "grammar",
@@ -586,9 +586,9 @@
       "questions": 192,
       "components": {
         "vocabulary": 32,
-        "grammar": 72,
+        "grammar": 80,
         "reading": 48,
-        "use_of_language": 40
+        "use_of_language": 32
       },
       "blueprintBuckets": [
         "grammar",
@@ -603,9 +603,9 @@
       "questions": 192,
       "components": {
         "vocabulary": 32,
-        "grammar": 72,
+        "grammar": 80,
         "reading": 48,
-        "use_of_language": 40
+        "use_of_language": 32
       },
       "blueprintBuckets": [
         "grammar",
@@ -620,9 +620,9 @@
       "questions": 192,
       "components": {
         "grammar": 80,
-        "vocabulary": 24,
+        "vocabulary": 32,
         "reading": 48,
-        "use_of_language": 40
+        "use_of_language": 32
       },
       "blueprintBuckets": [
         "grammar",
@@ -636,10 +636,10 @@
       "grade": 12,
       "questions": 192,
       "components": {
-        "grammar": 72,
-        "vocabulary": 24,
-        "reading": 56,
-        "use_of_language": 40
+        "grammar": 80,
+        "vocabulary": 32,
+        "reading": 48,
+        "use_of_language": 32
       },
       "blueprintBuckets": [
         "grammar",
@@ -654,9 +654,9 @@
       "questions": 192,
       "components": {
         "reading": 48,
-        "vocabulary": 64,
-        "use_of_language": 40,
-        "grammar": 40
+        "use_of_language": 44,
+        "grammar": 36,
+        "vocabulary": 64
       },
       "blueprintBuckets": [
         "grammar",
@@ -671,8 +671,8 @@
       "questions": 192,
       "components": {
         "reading": 48,
-        "vocabulary": 56,
-        "use_of_language": 40,
+        "vocabulary": 64,
+        "use_of_language": 32,
         "grammar": 48
       },
       "blueprintBuckets": [
@@ -688,9 +688,9 @@
       "questions": 192,
       "components": {
         "vocabulary": 48,
-        "grammar": 56,
         "reading": 48,
-        "use_of_language": 40
+        "use_of_language": 32,
+        "grammar": 64
       },
       "blueprintBuckets": [
         "grammar",
@@ -706,8 +706,8 @@
       "components": {
         "grammar": 64,
         "reading": 48,
-        "vocabulary": 40,
-        "use_of_language": 40
+        "vocabulary": 48,
+        "use_of_language": 32
       },
       "blueprintBuckets": [
         "grammar",
@@ -739,9 +739,9 @@
       "questions": 192,
       "components": {
         "vocabulary": 32,
-        "grammar": 72,
+        "grammar": 64,
         "reading": 48,
-        "use_of_language": 40
+        "use_of_language": 48
       },
       "blueprintBuckets": [
         "grammar",
@@ -755,10 +755,10 @@
       "grade": 11,
       "questions": 192,
       "components": {
-        "grammar": 72,
+        "grammar": 80,
         "vocabulary": 32,
         "reading": 48,
-        "use_of_language": 40
+        "use_of_language": 32
       },
       "blueprintBuckets": [
         "grammar",
@@ -772,10 +772,10 @@
       "grade": 12,
       "questions": 192,
       "components": {
-        "grammar": 72,
-        "vocabulary": 24,
-        "reading": 56,
-        "use_of_language": 40
+        "grammar": 80,
+        "vocabulary": 32,
+        "reading": 48,
+        "use_of_language": 32
       },
       "blueprintBuckets": [
         "grammar",
@@ -789,17 +789,17 @@
   "languageBlueprintViolations": [],
   "severity": {
     "critical": 0,
-    "high": 279,
-    "medium": 281
+    "high": 92,
+    "medium": 301
   },
   "issueCounts": {
     "missing_explanation": 6564,
     "missing_explicit_outcome": 6564,
     "missing_skill_tag": 6564,
     "low_depth_binary_format": 2231,
-    "duplicate_options": 279,
     "fragmented_or_too_short_stem": 895,
-    "answer_echoes_prompt": 20
+    "duplicate_options": 92,
+    "answer_echoes_prompt": 40
   },
   "bySubjectGrade": [
     {
@@ -1519,16 +1519,16 @@
         12
       ],
       "pools": 3,
-      "rawQuestions": 718,
-      "safeUniqueQuestions": 718,
+      "rawQuestions": 742,
+      "safeUniqueQuestions": 742,
       "baselineSafeUniqueQuestions": 359,
-      "generatedSafeUniqueQuestions": 359,
-      "growthRatio": 2,
-      "exactGradeTaggedQuestions": 359,
-      "visualQuestions": 71,
-      "generatedVisualQuestions": 71,
+      "generatedSafeUniqueQuestions": 383,
+      "growthRatio": 2.067,
+      "exactGradeTaggedQuestions": 383,
+      "visualQuestions": 75,
+      "generatedVisualQuestions": 75,
       "typeCounts": {
-        "multiple_choice": 556,
+        "multiple_choice": 580,
         "true_false": 144,
         "match": 6,
         "order": 6,
@@ -1573,16 +1573,16 @@
         12
       ],
       "pools": 3,
-      "rawQuestions": 158,
-      "safeUniqueQuestions": 157,
+      "rawQuestions": 182,
+      "safeUniqueQuestions": 181,
       "baselineSafeUniqueQuestions": 78,
-      "generatedSafeUniqueQuestions": 79,
-      "growthRatio": 2.013,
-      "exactGradeTaggedQuestions": 79,
-      "visualQuestions": 15,
-      "generatedVisualQuestions": 15,
+      "generatedSafeUniqueQuestions": 103,
+      "growthRatio": 2.321,
+      "exactGradeTaggedQuestions": 103,
+      "visualQuestions": 19,
+      "generatedVisualQuestions": 19,
       "typeCounts": {
-        "multiple_choice": 124,
+        "multiple_choice": 148,
         "true_false": 27,
         "match": 3,
         "order": 3
@@ -1653,16 +1653,16 @@
         12
       ],
       "pools": 3,
-      "rawQuestions": 456,
-      "safeUniqueQuestions": 397,
+      "rawQuestions": 480,
+      "safeUniqueQuestions": 421,
       "baselineSafeUniqueQuestions": 198,
-      "generatedSafeUniqueQuestions": 199,
-      "growthRatio": 2.005,
-      "exactGradeTaggedQuestions": 199,
-      "visualQuestions": 157,
-      "generatedVisualQuestions": 157,
+      "generatedSafeUniqueQuestions": 223,
+      "growthRatio": 2.126,
+      "exactGradeTaggedQuestions": 223,
+      "visualQuestions": 181,
+      "generatedVisualQuestions": 181,
       "typeCounts": {
-        "multiple_choice": 357,
+        "multiple_choice": 381,
         "true_false": 30,
         "match": 4,
         "fill": 2,
@@ -1680,16 +1680,16 @@
         6
       ],
       "pools": 3,
-      "rawQuestions": 1078,
-      "safeUniqueQuestions": 1050,
-      "baselineSafeUniqueQuestions": 330,
+      "rawQuestions": 1097,
+      "safeUniqueQuestions": 1060,
+      "baselineSafeUniqueQuestions": 340,
       "generatedSafeUniqueQuestions": 720,
-      "growthRatio": 3.182,
+      "growthRatio": 3.118,
       "exactGradeTaggedQuestions": 720,
       "visualQuestions": 139,
       "generatedVisualQuestions": 136,
       "typeCounts": {
-        "multiple_choice": 716,
+        "multiple_choice": 726,
         "calc": 138,
         "true_false": 102,
         "order": 4,
@@ -1710,17 +1710,17 @@
         12
       ],
       "pools": 8,
-      "rawQuestions": 1511,
-      "safeUniqueQuestions": 1511,
+      "rawQuestions": 1536,
+      "safeUniqueQuestions": 1536,
       "baselineSafeUniqueQuestions": 0,
-      "generatedSafeUniqueQuestions": 1511,
+      "generatedSafeUniqueQuestions": 1536,
       "growthRatio": null,
-      "exactGradeTaggedQuestions": 1511,
-      "visualQuestions": 313,
-      "generatedVisualQuestions": 313,
+      "exactGradeTaggedQuestions": 1536,
+      "visualQuestions": 320,
+      "generatedVisualQuestions": 320,
       "typeCounts": {
         "fill": 384,
-        "multiple_choice": 1127
+        "multiple_choice": 1152
       }
     },
     {
@@ -1734,20 +1734,20 @@
         12
       ],
       "pools": 3,
-      "rawQuestions": 725,
-      "safeUniqueQuestions": 720,
-      "baselineSafeUniqueQuestions": 360,
-      "generatedSafeUniqueQuestions": 360,
-      "growthRatio": 2,
-      "exactGradeTaggedQuestions": 360,
-      "visualQuestions": 70,
-      "generatedVisualQuestions": 70,
+      "rawQuestions": 750,
+      "safeUniqueQuestions": 745,
+      "baselineSafeUniqueQuestions": 361,
+      "generatedSafeUniqueQuestions": 384,
+      "growthRatio": 2.064,
+      "exactGradeTaggedQuestions": 384,
+      "visualQuestions": 76,
+      "generatedVisualQuestions": 76,
       "typeCounts": {
-        "multiple_choice": 492,
+        "multiple_choice": 516,
         "true_false": 127,
         "match": 1,
         "fill": 2,
-        "calc": 95,
+        "calc": 96,
         "order": 3
       }
     },
@@ -1789,17 +1789,17 @@
         12
       ],
       "pools": 6,
-      "rawQuestions": 1088,
-      "safeUniqueQuestions": 1088,
+      "rawQuestions": 1152,
+      "safeUniqueQuestions": 1152,
       "baselineSafeUniqueQuestions": 0,
-      "generatedSafeUniqueQuestions": 1088,
+      "generatedSafeUniqueQuestions": 1152,
       "growthRatio": null,
-      "exactGradeTaggedQuestions": 1088,
-      "visualQuestions": 229,
-      "generatedVisualQuestions": 229,
+      "exactGradeTaggedQuestions": 1152,
+      "visualQuestions": 240,
+      "generatedVisualQuestions": 240,
       "typeCounts": {
         "fill": 288,
-        "multiple_choice": 800
+        "multiple_choice": 864
       }
     },
     {
@@ -1812,20 +1812,20 @@
         12
       ],
       "pools": 3,
-      "rawQuestions": 697,
-      "safeUniqueQuestions": 695,
-      "baselineSafeUniqueQuestions": 347,
-      "generatedSafeUniqueQuestions": 348,
-      "growthRatio": 2.003,
-      "exactGradeTaggedQuestions": 348,
+      "rawQuestions": 735,
+      "safeUniqueQuestions": 733,
+      "baselineSafeUniqueQuestions": 361,
+      "generatedSafeUniqueQuestions": 372,
+      "growthRatio": 2.03,
+      "exactGradeTaggedQuestions": 372,
       "visualQuestions": 36,
       "generatedVisualQuestions": 36,
       "typeCounts": {
-        "multiple_choice": 399,
+        "multiple_choice": 425,
         "true_false": 133,
         "match": 7,
         "fill": 8,
-        "calc": 148
+        "calc": 160
       }
     }
   ],
@@ -1854,8 +1854,8 @@
       "pool": "math-12",
       "requested": 10,
       "candidates": 122,
-      "safeUniqueCandidates": 120,
-      "blockedCandidates": 1,
+      "safeUniqueCandidates": 121,
+      "blockedCandidates": 0,
       "exactGradeTaggedCandidates": 57,
       "risks": []
     },
@@ -1883,7 +1883,7 @@
       "requested": 20,
       "candidates": 244,
       "safeUniqueCandidates": 230,
-      "blockedCandidates": 1,
+      "blockedCandidates": 0,
       "exactGradeTaggedCandidates": 113,
       "risks": []
     },
@@ -1910,8 +1910,8 @@
       "pool": "math-12",
       "requested": 10,
       "candidates": 128,
-      "safeUniqueCandidates": 126,
-      "blockedCandidates": 1,
+      "safeUniqueCandidates": 127,
+      "blockedCandidates": 0,
       "exactGradeTaggedCandidates": 63,
       "risks": []
     },
@@ -1939,7 +1939,7 @@
       "requested": 20,
       "candidates": 258,
       "safeUniqueCandidates": 244,
-      "blockedCandidates": 1,
+      "blockedCandidates": 0,
       "exactGradeTaggedCandidates": 127,
       "risks": []
     },
@@ -2064,8 +2064,8 @@
       "pool": "math-56",
       "requested": 10,
       "candidates": 123,
-      "safeUniqueCandidates": 110,
-      "blockedCandidates": 11,
+      "safeUniqueCandidates": 120,
+      "blockedCandidates": 0,
       "exactGradeTaggedCandidates": 61,
       "risks": []
     },
@@ -2078,8 +2078,8 @@
       "pool": "math-56",
       "requested": 10,
       "candidates": 121,
-      "safeUniqueCandidates": 114,
-      "blockedCandidates": 7,
+      "safeUniqueCandidates": 121,
+      "blockedCandidates": 0,
       "exactGradeTaggedCandidates": 60,
       "risks": []
     },
@@ -2092,8 +2092,8 @@
       "pool": "math-56",
       "requested": 20,
       "candidates": 123,
-      "safeUniqueCandidates": 110,
-      "blockedCandidates": 11,
+      "safeUniqueCandidates": 120,
+      "blockedCandidates": 0,
       "exactGradeTaggedCandidates": 61,
       "risks": []
     },
@@ -2106,8 +2106,8 @@
       "pool": "math-56",
       "requested": 20,
       "candidates": 244,
-      "safeUniqueCandidates": 221,
-      "blockedCandidates": 18,
+      "safeUniqueCandidates": 237,
+      "blockedCandidates": 0,
       "exactGradeTaggedCandidates": 121,
       "risks": []
     },
@@ -2120,8 +2120,8 @@
       "pool": "math-56",
       "requested": 10,
       "candidates": 122,
-      "safeUniqueCandidates": 109,
-      "blockedCandidates": 11,
+      "safeUniqueCandidates": 119,
+      "blockedCandidates": 0,
       "exactGradeTaggedCandidates": 60,
       "risks": []
     },
@@ -2134,8 +2134,8 @@
       "pool": "math-56",
       "requested": 10,
       "candidates": 120,
-      "safeUniqueCandidates": 113,
-      "blockedCandidates": 7,
+      "safeUniqueCandidates": 120,
+      "blockedCandidates": 0,
       "exactGradeTaggedCandidates": 59,
       "risks": []
     },
@@ -2148,8 +2148,8 @@
       "pool": "math-56",
       "requested": 20,
       "candidates": 122,
-      "safeUniqueCandidates": 109,
-      "blockedCandidates": 11,
+      "safeUniqueCandidates": 119,
+      "blockedCandidates": 0,
       "exactGradeTaggedCandidates": 60,
       "risks": []
     },
@@ -2162,8 +2162,8 @@
       "pool": "math-56",
       "requested": 20,
       "candidates": 242,
-      "safeUniqueCandidates": 219,
-      "blockedCandidates": 18,
+      "safeUniqueCandidates": 235,
+      "blockedCandidates": 0,
       "exactGradeTaggedCandidates": 119,
       "risks": []
     },
@@ -2847,10 +2847,10 @@
       "semester": 1,
       "pool": "hist-78",
       "requested": 10,
-      "candidates": 90,
-      "safeUniqueCandidates": 90,
+      "candidates": 92,
+      "safeUniqueCandidates": 92,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 32,
+      "exactGradeTaggedCandidates": 34,
       "risks": []
     },
     {
@@ -2861,10 +2861,10 @@
       "semester": 2,
       "pool": "hist-78",
       "requested": 10,
-      "candidates": 86,
-      "safeUniqueCandidates": 84,
+      "candidates": 88,
+      "safeUniqueCandidates": 86,
       "blockedCandidates": 2,
-      "exactGradeTaggedCandidates": 28,
+      "exactGradeTaggedCandidates": 30,
       "risks": []
     },
     {
@@ -2875,10 +2875,10 @@
       "semester": 1,
       "pool": "hist-78",
       "requested": 20,
-      "candidates": 90,
-      "safeUniqueCandidates": 90,
+      "candidates": 92,
+      "safeUniqueCandidates": 92,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 32,
+      "exactGradeTaggedCandidates": 34,
       "risks": []
     },
     {
@@ -2889,10 +2889,10 @@
       "semester": 0,
       "pool": "hist-78",
       "requested": 20,
-      "candidates": 176,
-      "safeUniqueCandidates": 173,
+      "candidates": 180,
+      "safeUniqueCandidates": 177,
       "blockedCandidates": 2,
-      "exactGradeTaggedCandidates": 60,
+      "exactGradeTaggedCandidates": 64,
       "risks": []
     },
     {
@@ -2903,10 +2903,10 @@
       "semester": 1,
       "pool": "hist-78",
       "requested": 10,
-      "candidates": 84,
-      "safeUniqueCandidates": 84,
+      "candidates": 87,
+      "safeUniqueCandidates": 87,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 26,
+      "exactGradeTaggedCandidates": 29,
       "risks": []
     },
     {
@@ -2917,10 +2917,10 @@
       "semester": 2,
       "pool": "hist-78",
       "requested": 10,
-      "candidates": 85,
-      "safeUniqueCandidates": 83,
+      "candidates": 86,
+      "safeUniqueCandidates": 84,
       "blockedCandidates": 2,
-      "exactGradeTaggedCandidates": 27,
+      "exactGradeTaggedCandidates": 28,
       "risks": []
     },
     {
@@ -2931,10 +2931,10 @@
       "semester": 1,
       "pool": "hist-78",
       "requested": 20,
-      "candidates": 84,
-      "safeUniqueCandidates": 84,
+      "candidates": 87,
+      "safeUniqueCandidates": 87,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 26,
+      "exactGradeTaggedCandidates": 29,
       "risks": []
     },
     {
@@ -2945,10 +2945,10 @@
       "semester": 0,
       "pool": "hist-78",
       "requested": 20,
-      "candidates": 169,
-      "safeUniqueCandidates": 166,
+      "candidates": 173,
+      "safeUniqueCandidates": 170,
       "blockedCandidates": 2,
-      "exactGradeTaggedCandidates": 53,
+      "exactGradeTaggedCandidates": 57,
       "risks": []
     },
     {
@@ -2959,10 +2959,10 @@
       "semester": 1,
       "pool": "hist-910",
       "requested": 10,
-      "candidates": 71,
-      "safeUniqueCandidates": 49,
+      "candidates": 74,
+      "safeUniqueCandidates": 52,
       "blockedCandidates": 1,
-      "exactGradeTaggedCandidates": 14,
+      "exactGradeTaggedCandidates": 17,
       "risks": []
     },
     {
@@ -2987,10 +2987,10 @@
       "semester": 1,
       "pool": "hist-910",
       "requested": 20,
-      "candidates": 71,
-      "safeUniqueCandidates": 49,
+      "candidates": 74,
+      "safeUniqueCandidates": 52,
       "blockedCandidates": 1,
-      "exactGradeTaggedCandidates": 14,
+      "exactGradeTaggedCandidates": 17,
       "risks": []
     },
     {
@@ -3001,10 +3001,10 @@
       "semester": 0,
       "pool": "hist-910",
       "requested": 20,
-      "candidates": 141,
-      "safeUniqueCandidates": 80,
+      "candidates": 144,
+      "safeUniqueCandidates": 83,
       "blockedCandidates": 4,
-      "exactGradeTaggedCandidates": 27,
+      "exactGradeTaggedCandidates": 30,
       "risks": []
     },
     {
@@ -3015,10 +3015,10 @@
       "semester": 1,
       "pool": "hist-910",
       "requested": 10,
-      "candidates": 70,
-      "safeUniqueCandidates": 48,
+      "candidates": 72,
+      "safeUniqueCandidates": 50,
       "blockedCandidates": 1,
-      "exactGradeTaggedCandidates": 13,
+      "exactGradeTaggedCandidates": 15,
       "risks": []
     },
     {
@@ -3029,10 +3029,10 @@
       "semester": 2,
       "pool": "hist-910",
       "requested": 10,
-      "candidates": 70,
-      "safeUniqueCandidates": 48,
+      "candidates": 73,
+      "safeUniqueCandidates": 51,
       "blockedCandidates": 3,
-      "exactGradeTaggedCandidates": 13,
+      "exactGradeTaggedCandidates": 16,
       "risks": []
     },
     {
@@ -3043,10 +3043,10 @@
       "semester": 1,
       "pool": "hist-910",
       "requested": 20,
-      "candidates": 70,
-      "safeUniqueCandidates": 48,
+      "candidates": 72,
+      "safeUniqueCandidates": 50,
       "blockedCandidates": 1,
-      "exactGradeTaggedCandidates": 13,
+      "exactGradeTaggedCandidates": 15,
       "risks": []
     },
     {
@@ -3057,10 +3057,10 @@
       "semester": 0,
       "pool": "hist-910",
       "requested": 20,
-      "candidates": 140,
-      "safeUniqueCandidates": 79,
+      "candidates": 145,
+      "safeUniqueCandidates": 84,
       "blockedCandidates": 4,
-      "exactGradeTaggedCandidates": 26,
+      "exactGradeTaggedCandidates": 31,
       "risks": []
     },
     {
@@ -3071,10 +3071,10 @@
       "semester": 1,
       "pool": "hist-1112",
       "requested": 10,
-      "candidates": 67,
-      "safeUniqueCandidates": 27,
+      "candidates": 70,
+      "safeUniqueCandidates": 30,
       "blockedCandidates": 40,
-      "exactGradeTaggedCandidates": 10,
+      "exactGradeTaggedCandidates": 13,
       "risks": []
     },
     {
@@ -3085,10 +3085,10 @@
       "semester": 2,
       "pool": "hist-1112",
       "requested": 10,
-      "candidates": 65,
-      "safeUniqueCandidates": 25,
+      "candidates": 66,
+      "safeUniqueCandidates": 26,
       "blockedCandidates": 40,
-      "exactGradeTaggedCandidates": 9,
+      "exactGradeTaggedCandidates": 10,
       "risks": []
     },
     {
@@ -3099,10 +3099,10 @@
       "semester": 1,
       "pool": "hist-1112",
       "requested": 17,
-      "candidates": 67,
-      "safeUniqueCandidates": 27,
+      "candidates": 70,
+      "safeUniqueCandidates": 30,
       "blockedCandidates": 40,
-      "exactGradeTaggedCandidates": 10,
+      "exactGradeTaggedCandidates": 13,
       "risks": []
     },
     {
@@ -3113,10 +3113,10 @@
       "semester": 0,
       "pool": "hist-1112",
       "requested": 20,
-      "candidates": 132,
-      "safeUniqueCandidates": 52,
+      "candidates": 136,
+      "safeUniqueCandidates": 56,
       "blockedCandidates": 80,
-      "exactGradeTaggedCandidates": 19,
+      "exactGradeTaggedCandidates": 23,
       "risks": []
     },
     {
@@ -3127,10 +3127,10 @@
       "semester": 1,
       "pool": "hist-1112",
       "requested": 10,
-      "candidates": 64,
-      "safeUniqueCandidates": 24,
+      "candidates": 66,
+      "safeUniqueCandidates": 26,
       "blockedCandidates": 40,
-      "exactGradeTaggedCandidates": 7,
+      "exactGradeTaggedCandidates": 9,
       "risks": []
     },
     {
@@ -3141,10 +3141,10 @@
       "semester": 2,
       "pool": "hist-1112",
       "requested": 10,
-      "candidates": 63,
-      "safeUniqueCandidates": 23,
+      "candidates": 65,
+      "safeUniqueCandidates": 25,
       "blockedCandidates": 40,
-      "exactGradeTaggedCandidates": 7,
+      "exactGradeTaggedCandidates": 9,
       "risks": []
     },
     {
@@ -3155,10 +3155,10 @@
       "semester": 1,
       "pool": "hist-1112",
       "requested": 17,
-      "candidates": 64,
-      "safeUniqueCandidates": 24,
+      "candidates": 66,
+      "safeUniqueCandidates": 26,
       "blockedCandidates": 40,
-      "exactGradeTaggedCandidates": 7,
+      "exactGradeTaggedCandidates": 9,
       "risks": []
     },
     {
@@ -3169,10 +3169,10 @@
       "semester": 0,
       "pool": "hist-1112",
       "requested": 20,
-      "candidates": 127,
-      "safeUniqueCandidates": 47,
+      "candidates": 131,
+      "safeUniqueCandidates": 51,
       "blockedCandidates": 80,
-      "exactGradeTaggedCandidates": 14,
+      "exactGradeTaggedCandidates": 18,
       "risks": []
     },
     {
@@ -3183,10 +3183,10 @@
       "semester": 1,
       "pool": "geog-78",
       "requested": 10,
-      "candidates": 23,
-      "safeUniqueCandidates": 23,
+      "candidates": 25,
+      "safeUniqueCandidates": 25,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 8,
+      "exactGradeTaggedCandidates": 10,
       "risks": []
     },
     {
@@ -3197,10 +3197,10 @@
       "semester": 2,
       "pool": "geog-78",
       "requested": 10,
-      "candidates": 21,
-      "safeUniqueCandidates": 21,
+      "candidates": 23,
+      "safeUniqueCandidates": 23,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 7,
+      "exactGradeTaggedCandidates": 9,
       "risks": []
     },
     {
@@ -3211,10 +3211,10 @@
       "semester": 1,
       "pool": "geog-78",
       "requested": 15,
-      "candidates": 23,
-      "safeUniqueCandidates": 23,
+      "candidates": 25,
+      "safeUniqueCandidates": 25,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 8,
+      "exactGradeTaggedCandidates": 10,
       "risks": []
     },
     {
@@ -3225,10 +3225,10 @@
       "semester": 0,
       "pool": "geog-78",
       "requested": 20,
-      "candidates": 44,
-      "safeUniqueCandidates": 44,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 15,
+      "exactGradeTaggedCandidates": 19,
       "risks": []
     },
     {
@@ -3239,10 +3239,10 @@
       "semester": 1,
       "pool": "geog-78",
       "requested": 10,
-      "candidates": 22,
-      "safeUniqueCandidates": 22,
+      "candidates": 24,
+      "safeUniqueCandidates": 24,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 7,
+      "exactGradeTaggedCandidates": 9,
       "risks": []
     },
     {
@@ -3253,10 +3253,10 @@
       "semester": 2,
       "pool": "geog-78",
       "requested": 10,
-      "candidates": 21,
-      "safeUniqueCandidates": 21,
+      "candidates": 23,
+      "safeUniqueCandidates": 23,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 7,
+      "exactGradeTaggedCandidates": 9,
       "risks": []
     },
     {
@@ -3267,10 +3267,10 @@
       "semester": 1,
       "pool": "geog-78",
       "requested": 15,
-      "candidates": 22,
-      "safeUniqueCandidates": 22,
+      "candidates": 24,
+      "safeUniqueCandidates": 24,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 7,
+      "exactGradeTaggedCandidates": 9,
       "risks": []
     },
     {
@@ -3281,10 +3281,10 @@
       "semester": 0,
       "pool": "geog-78",
       "requested": 20,
-      "candidates": 43,
-      "safeUniqueCandidates": 43,
+      "candidates": 47,
+      "safeUniqueCandidates": 47,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 14,
+      "exactGradeTaggedCandidates": 18,
       "risks": []
     },
     {
@@ -3295,10 +3295,10 @@
       "semester": 1,
       "pool": "geog-910",
       "requested": 10,
-      "candidates": 20,
-      "safeUniqueCandidates": 20,
+      "candidates": 22,
+      "safeUniqueCandidates": 22,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 7,
+      "exactGradeTaggedCandidates": 9,
       "risks": []
     },
     {
@@ -3309,10 +3309,10 @@
       "semester": 2,
       "pool": "geog-910",
       "requested": 10,
-      "candidates": 18,
-      "safeUniqueCandidates": 18,
+      "candidates": 20,
+      "safeUniqueCandidates": 20,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 6,
+      "exactGradeTaggedCandidates": 8,
       "risks": []
     },
     {
@@ -3323,10 +3323,10 @@
       "semester": 1,
       "pool": "geog-910",
       "requested": 13,
-      "candidates": 20,
-      "safeUniqueCandidates": 20,
+      "candidates": 22,
+      "safeUniqueCandidates": 22,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 7,
+      "exactGradeTaggedCandidates": 9,
       "risks": []
     },
     {
@@ -3337,10 +3337,10 @@
       "semester": 0,
       "pool": "geog-910",
       "requested": 20,
-      "candidates": 38,
-      "safeUniqueCandidates": 38,
+      "candidates": 42,
+      "safeUniqueCandidates": 42,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 13,
+      "exactGradeTaggedCandidates": 17,
       "risks": []
     },
     {
@@ -3351,10 +3351,10 @@
       "semester": 1,
       "pool": "geog-910",
       "requested": 10,
-      "candidates": 19,
-      "safeUniqueCandidates": 19,
+      "candidates": 21,
+      "safeUniqueCandidates": 21,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 6,
+      "exactGradeTaggedCandidates": 8,
       "risks": []
     },
     {
@@ -3365,10 +3365,10 @@
       "semester": 2,
       "pool": "geog-910",
       "requested": 10,
-      "candidates": 18,
-      "safeUniqueCandidates": 18,
+      "candidates": 20,
+      "safeUniqueCandidates": 20,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 6,
+      "exactGradeTaggedCandidates": 8,
       "risks": []
     },
     {
@@ -3379,10 +3379,10 @@
       "semester": 1,
       "pool": "geog-910",
       "requested": 13,
-      "candidates": 19,
-      "safeUniqueCandidates": 19,
+      "candidates": 21,
+      "safeUniqueCandidates": 21,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 6,
+      "exactGradeTaggedCandidates": 8,
       "risks": []
     },
     {
@@ -3393,10 +3393,10 @@
       "semester": 0,
       "pool": "geog-910",
       "requested": 20,
-      "candidates": 37,
-      "safeUniqueCandidates": 37,
+      "candidates": 41,
+      "safeUniqueCandidates": 41,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 12,
+      "exactGradeTaggedCandidates": 16,
       "risks": []
     },
     {
@@ -3407,10 +3407,10 @@
       "semester": 1,
       "pool": "geog-1112",
       "requested": 10,
-      "candidates": 20,
-      "safeUniqueCandidates": 20,
+      "candidates": 22,
+      "safeUniqueCandidates": 22,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 7,
+      "exactGradeTaggedCandidates": 9,
       "risks": []
     },
     {
@@ -3421,10 +3421,10 @@
       "semester": 2,
       "pool": "geog-1112",
       "requested": 10,
-      "candidates": 18,
-      "safeUniqueCandidates": 18,
+      "candidates": 20,
+      "safeUniqueCandidates": 20,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 6,
+      "exactGradeTaggedCandidates": 8,
       "risks": []
     },
     {
@@ -3435,10 +3435,10 @@
       "semester": 1,
       "pool": "geog-1112",
       "requested": 13,
-      "candidates": 20,
-      "safeUniqueCandidates": 20,
+      "candidates": 22,
+      "safeUniqueCandidates": 22,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 7,
+      "exactGradeTaggedCandidates": 9,
       "risks": []
     },
     {
@@ -3449,10 +3449,10 @@
       "semester": 0,
       "pool": "geog-1112",
       "requested": 20,
-      "candidates": 38,
-      "safeUniqueCandidates": 38,
+      "candidates": 42,
+      "safeUniqueCandidates": 42,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 13,
+      "exactGradeTaggedCandidates": 17,
       "risks": []
     },
     {
@@ -3463,10 +3463,10 @@
       "semester": 1,
       "pool": "geog-1112",
       "requested": 10,
-      "candidates": 19,
-      "safeUniqueCandidates": 19,
+      "candidates": 21,
+      "safeUniqueCandidates": 21,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 6,
+      "exactGradeTaggedCandidates": 8,
       "risks": []
     },
     {
@@ -3477,10 +3477,10 @@
       "semester": 2,
       "pool": "geog-1112",
       "requested": 10,
-      "candidates": 18,
-      "safeUniqueCandidates": 18,
+      "candidates": 20,
+      "safeUniqueCandidates": 20,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 6,
+      "exactGradeTaggedCandidates": 8,
       "risks": []
     },
     {
@@ -3491,10 +3491,10 @@
       "semester": 1,
       "pool": "geog-1112",
       "requested": 13,
-      "candidates": 19,
-      "safeUniqueCandidates": 19,
+      "candidates": 21,
+      "safeUniqueCandidates": 21,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 6,
+      "exactGradeTaggedCandidates": 8,
       "risks": []
     },
     {
@@ -3505,10 +3505,10 @@
       "semester": 0,
       "pool": "geog-1112",
       "requested": 20,
-      "candidates": 37,
-      "safeUniqueCandidates": 37,
+      "candidates": 41,
+      "safeUniqueCandidates": 41,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 12,
+      "exactGradeTaggedCandidates": 16,
       "risks": []
     },
     {
@@ -3519,10 +3519,10 @@
       "semester": 1,
       "pool": "bio-78",
       "requested": 10,
-      "candidates": 90,
-      "safeUniqueCandidates": 89,
+      "candidates": 92,
+      "safeUniqueCandidates": 91,
       "blockedCandidates": 1,
-      "exactGradeTaggedCandidates": 30,
+      "exactGradeTaggedCandidates": 32,
       "risks": []
     },
     {
@@ -3533,10 +3533,10 @@
       "semester": 2,
       "pool": "bio-78",
       "requested": 10,
-      "candidates": 90,
-      "safeUniqueCandidates": 90,
+      "candidates": 92,
+      "safeUniqueCandidates": 92,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 30,
+      "exactGradeTaggedCandidates": 32,
       "risks": []
     },
     {
@@ -3547,10 +3547,10 @@
       "semester": 1,
       "pool": "bio-78",
       "requested": 20,
-      "candidates": 90,
-      "safeUniqueCandidates": 89,
+      "candidates": 92,
+      "safeUniqueCandidates": 91,
       "blockedCandidates": 1,
-      "exactGradeTaggedCandidates": 30,
+      "exactGradeTaggedCandidates": 32,
       "risks": []
     },
     {
@@ -3561,10 +3561,10 @@
       "semester": 0,
       "pool": "bio-78",
       "requested": 20,
-      "candidates": 180,
-      "safeUniqueCandidates": 179,
+      "candidates": 184,
+      "safeUniqueCandidates": 183,
       "blockedCandidates": 1,
-      "exactGradeTaggedCandidates": 60,
+      "exactGradeTaggedCandidates": 64,
       "risks": []
     },
     {
@@ -3575,10 +3575,10 @@
       "semester": 1,
       "pool": "bio-78",
       "requested": 10,
-      "candidates": 89,
-      "safeUniqueCandidates": 88,
+      "candidates": 91,
+      "safeUniqueCandidates": 90,
       "blockedCandidates": 1,
-      "exactGradeTaggedCandidates": 29,
+      "exactGradeTaggedCandidates": 31,
       "risks": []
     },
     {
@@ -3589,10 +3589,10 @@
       "semester": 2,
       "pool": "bio-78",
       "requested": 10,
-      "candidates": 90,
-      "safeUniqueCandidates": 90,
+      "candidates": 92,
+      "safeUniqueCandidates": 92,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 30,
+      "exactGradeTaggedCandidates": 32,
       "risks": []
     },
     {
@@ -3603,10 +3603,10 @@
       "semester": 1,
       "pool": "bio-78",
       "requested": 20,
-      "candidates": 89,
-      "safeUniqueCandidates": 88,
+      "candidates": 91,
+      "safeUniqueCandidates": 90,
       "blockedCandidates": 1,
-      "exactGradeTaggedCandidates": 29,
+      "exactGradeTaggedCandidates": 31,
       "risks": []
     },
     {
@@ -3617,10 +3617,10 @@
       "semester": 0,
       "pool": "bio-78",
       "requested": 20,
-      "candidates": 179,
-      "safeUniqueCandidates": 178,
+      "candidates": 183,
+      "safeUniqueCandidates": 182,
       "blockedCandidates": 1,
-      "exactGradeTaggedCandidates": 59,
+      "exactGradeTaggedCandidates": 63,
       "risks": []
     },
     {
@@ -3631,10 +3631,10 @@
       "semester": 1,
       "pool": "bio-910",
       "requested": 10,
-      "candidates": 90,
-      "safeUniqueCandidates": 90,
+      "candidates": 92,
+      "safeUniqueCandidates": 92,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 30,
+      "exactGradeTaggedCandidates": 32,
       "risks": []
     },
     {
@@ -3645,10 +3645,10 @@
       "semester": 2,
       "pool": "bio-910",
       "requested": 10,
-      "candidates": 90,
-      "safeUniqueCandidates": 90,
+      "candidates": 92,
+      "safeUniqueCandidates": 92,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 30,
+      "exactGradeTaggedCandidates": 32,
       "risks": []
     },
     {
@@ -3659,10 +3659,10 @@
       "semester": 1,
       "pool": "bio-910",
       "requested": 20,
-      "candidates": 90,
-      "safeUniqueCandidates": 90,
+      "candidates": 92,
+      "safeUniqueCandidates": 92,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 30,
+      "exactGradeTaggedCandidates": 32,
       "risks": []
     },
     {
@@ -3673,10 +3673,10 @@
       "semester": 0,
       "pool": "bio-910",
       "requested": 20,
-      "candidates": 180,
-      "safeUniqueCandidates": 180,
+      "candidates": 184,
+      "safeUniqueCandidates": 184,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 60,
+      "exactGradeTaggedCandidates": 64,
       "risks": []
     },
     {
@@ -3687,10 +3687,10 @@
       "semester": 1,
       "pool": "bio-910",
       "requested": 10,
-      "candidates": 90,
-      "safeUniqueCandidates": 90,
+      "candidates": 92,
+      "safeUniqueCandidates": 92,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 30,
+      "exactGradeTaggedCandidates": 32,
       "risks": []
     },
     {
@@ -3701,10 +3701,10 @@
       "semester": 2,
       "pool": "bio-910",
       "requested": 10,
-      "candidates": 90,
-      "safeUniqueCandidates": 90,
+      "candidates": 92,
+      "safeUniqueCandidates": 92,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 30,
+      "exactGradeTaggedCandidates": 32,
       "risks": []
     },
     {
@@ -3715,10 +3715,10 @@
       "semester": 1,
       "pool": "bio-910",
       "requested": 20,
-      "candidates": 90,
-      "safeUniqueCandidates": 90,
+      "candidates": 92,
+      "safeUniqueCandidates": 92,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 30,
+      "exactGradeTaggedCandidates": 32,
       "risks": []
     },
     {
@@ -3729,10 +3729,10 @@
       "semester": 0,
       "pool": "bio-910",
       "requested": 20,
-      "candidates": 180,
-      "safeUniqueCandidates": 180,
+      "candidates": 184,
+      "safeUniqueCandidates": 184,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 60,
+      "exactGradeTaggedCandidates": 64,
       "risks": []
     },
     {
@@ -3743,10 +3743,10 @@
       "semester": 1,
       "pool": "bio-1112",
       "requested": 10,
-      "candidates": 90,
-      "safeUniqueCandidates": 90,
+      "candidates": 92,
+      "safeUniqueCandidates": 92,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 30,
+      "exactGradeTaggedCandidates": 32,
       "risks": []
     },
     {
@@ -3757,10 +3757,10 @@
       "semester": 2,
       "pool": "bio-1112",
       "requested": 10,
-      "candidates": 90,
-      "safeUniqueCandidates": 90,
+      "candidates": 92,
+      "safeUniqueCandidates": 92,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 30,
+      "exactGradeTaggedCandidates": 32,
       "risks": []
     },
     {
@@ -3771,10 +3771,10 @@
       "semester": 1,
       "pool": "bio-1112",
       "requested": 20,
-      "candidates": 90,
-      "safeUniqueCandidates": 90,
+      "candidates": 92,
+      "safeUniqueCandidates": 92,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 30,
+      "exactGradeTaggedCandidates": 32,
       "risks": []
     },
     {
@@ -3785,10 +3785,10 @@
       "semester": 0,
       "pool": "bio-1112",
       "requested": 20,
-      "candidates": 180,
-      "safeUniqueCandidates": 180,
+      "candidates": 184,
+      "safeUniqueCandidates": 184,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 60,
+      "exactGradeTaggedCandidates": 64,
       "risks": []
     },
     {
@@ -3799,10 +3799,10 @@
       "semester": 1,
       "pool": "bio-1112",
       "requested": 10,
-      "candidates": 90,
-      "safeUniqueCandidates": 90,
+      "candidates": 92,
+      "safeUniqueCandidates": 92,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 30,
+      "exactGradeTaggedCandidates": 32,
       "risks": []
     },
     {
@@ -3813,10 +3813,10 @@
       "semester": 2,
       "pool": "bio-1112",
       "requested": 10,
-      "candidates": 90,
-      "safeUniqueCandidates": 90,
+      "candidates": 92,
+      "safeUniqueCandidates": 92,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 30,
+      "exactGradeTaggedCandidates": 32,
       "risks": []
     },
     {
@@ -3827,10 +3827,10 @@
       "semester": 1,
       "pool": "bio-1112",
       "requested": 20,
-      "candidates": 90,
-      "safeUniqueCandidates": 90,
+      "candidates": 92,
+      "safeUniqueCandidates": 92,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 30,
+      "exactGradeTaggedCandidates": 32,
       "risks": []
     },
     {
@@ -3841,10 +3841,10 @@
       "semester": 0,
       "pool": "bio-1112",
       "requested": 20,
-      "candidates": 180,
-      "safeUniqueCandidates": 180,
+      "candidates": 184,
+      "safeUniqueCandidates": 184,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 60,
+      "exactGradeTaggedCandidates": 64,
       "risks": []
     },
     {
@@ -3856,8 +3856,8 @@
       "pool": "chem-78",
       "requested": 10,
       "candidates": 84,
-      "safeUniqueCandidates": 80,
-      "blockedCandidates": 4,
+      "safeUniqueCandidates": 84,
+      "blockedCandidates": 0,
       "exactGradeTaggedCandidates": 24,
       "risks": []
     },
@@ -3869,10 +3869,10 @@
       "semester": 2,
       "pool": "chem-78",
       "requested": 10,
-      "candidates": 91,
-      "safeUniqueCandidates": 91,
+      "candidates": 94,
+      "safeUniqueCandidates": 94,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 31,
+      "exactGradeTaggedCandidates": 34,
       "risks": []
     },
     {
@@ -3884,8 +3884,8 @@
       "pool": "chem-78",
       "requested": 20,
       "candidates": 84,
-      "safeUniqueCandidates": 80,
-      "blockedCandidates": 4,
+      "safeUniqueCandidates": 84,
+      "blockedCandidates": 0,
       "exactGradeTaggedCandidates": 24,
       "risks": []
     },
@@ -3897,10 +3897,10 @@
       "semester": 0,
       "pool": "chem-78",
       "requested": 20,
-      "candidates": 175,
-      "safeUniqueCandidates": 171,
-      "blockedCandidates": 4,
-      "exactGradeTaggedCandidates": 55,
+      "candidates": 178,
+      "safeUniqueCandidates": 178,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 58,
       "risks": []
     },
     {
@@ -3911,10 +3911,10 @@
       "semester": 1,
       "pool": "chem-910",
       "requested": 10,
-      "candidates": 94,
-      "safeUniqueCandidates": 89,
-      "blockedCandidates": 5,
-      "exactGradeTaggedCandidates": 32,
+      "candidates": 97,
+      "safeUniqueCandidates": 97,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 35,
       "risks": []
     },
     {
@@ -3925,10 +3925,10 @@
       "semester": 2,
       "pool": "chem-910",
       "requested": 10,
-      "candidates": 91,
-      "safeUniqueCandidates": 90,
+      "candidates": 93,
+      "safeUniqueCandidates": 92,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 30,
+      "exactGradeTaggedCandidates": 32,
       "risks": []
     },
     {
@@ -3939,10 +3939,10 @@
       "semester": 1,
       "pool": "chem-910",
       "requested": 20,
-      "candidates": 94,
-      "safeUniqueCandidates": 89,
-      "blockedCandidates": 5,
-      "exactGradeTaggedCandidates": 32,
+      "candidates": 97,
+      "safeUniqueCandidates": 97,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 35,
       "risks": []
     },
     {
@@ -3953,10 +3953,10 @@
       "semester": 0,
       "pool": "chem-910",
       "requested": 20,
-      "candidates": 185,
-      "safeUniqueCandidates": 179,
-      "blockedCandidates": 5,
-      "exactGradeTaggedCandidates": 62,
+      "candidates": 190,
+      "safeUniqueCandidates": 189,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 67,
       "risks": []
     },
     {
@@ -3968,8 +3968,8 @@
       "pool": "chem-910",
       "requested": 10,
       "candidates": 86,
-      "safeUniqueCandidates": 81,
-      "blockedCandidates": 5,
+      "safeUniqueCandidates": 86,
+      "blockedCandidates": 0,
       "exactGradeTaggedCandidates": 24,
       "risks": []
     },
@@ -3981,10 +3981,10 @@
       "semester": 2,
       "pool": "chem-910",
       "requested": 10,
-      "candidates": 92,
-      "safeUniqueCandidates": 91,
+      "candidates": 95,
+      "safeUniqueCandidates": 94,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 31,
+      "exactGradeTaggedCandidates": 34,
       "risks": []
     },
     {
@@ -3996,8 +3996,8 @@
       "pool": "chem-910",
       "requested": 20,
       "candidates": 86,
-      "safeUniqueCandidates": 81,
-      "blockedCandidates": 5,
+      "safeUniqueCandidates": 86,
+      "blockedCandidates": 0,
       "exactGradeTaggedCandidates": 24,
       "risks": []
     },
@@ -4009,10 +4009,10 @@
       "semester": 0,
       "pool": "chem-910",
       "requested": 20,
-      "candidates": 178,
-      "safeUniqueCandidates": 172,
-      "blockedCandidates": 5,
-      "exactGradeTaggedCandidates": 55,
+      "candidates": 181,
+      "safeUniqueCandidates": 180,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 58,
       "risks": []
     },
     {
@@ -4023,10 +4023,10 @@
       "semester": 1,
       "pool": "chem-1112",
       "requested": 10,
-      "candidates": 91,
-      "safeUniqueCandidates": 88,
-      "blockedCandidates": 3,
-      "exactGradeTaggedCandidates": 31,
+      "candidates": 94,
+      "safeUniqueCandidates": 94,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 34,
       "risks": []
     },
     {
@@ -4037,10 +4037,10 @@
       "semester": 2,
       "pool": "chem-1112",
       "requested": 10,
-      "candidates": 90,
-      "safeUniqueCandidates": 88,
-      "blockedCandidates": 2,
-      "exactGradeTaggedCandidates": 30,
+      "candidates": 92,
+      "safeUniqueCandidates": 92,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 32,
       "risks": []
     },
     {
@@ -4051,10 +4051,10 @@
       "semester": 1,
       "pool": "chem-1112",
       "requested": 20,
-      "candidates": 91,
-      "safeUniqueCandidates": 88,
-      "blockedCandidates": 3,
-      "exactGradeTaggedCandidates": 31,
+      "candidates": 94,
+      "safeUniqueCandidates": 94,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 34,
       "risks": []
     },
     {
@@ -4065,10 +4065,10 @@
       "semester": 0,
       "pool": "chem-1112",
       "requested": 20,
-      "candidates": 181,
-      "safeUniqueCandidates": 176,
-      "blockedCandidates": 5,
-      "exactGradeTaggedCandidates": 61,
+      "candidates": 186,
+      "safeUniqueCandidates": 186,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 66,
       "risks": []
     },
     {
@@ -4080,8 +4080,8 @@
       "pool": "chem-1112",
       "requested": 10,
       "candidates": 84,
-      "safeUniqueCandidates": 81,
-      "blockedCandidates": 3,
+      "safeUniqueCandidates": 84,
+      "blockedCandidates": 0,
       "exactGradeTaggedCandidates": 24,
       "risks": []
     },
@@ -4093,10 +4093,10 @@
       "semester": 2,
       "pool": "chem-1112",
       "requested": 10,
-      "candidates": 90,
-      "safeUniqueCandidates": 88,
-      "blockedCandidates": 2,
-      "exactGradeTaggedCandidates": 30,
+      "candidates": 93,
+      "safeUniqueCandidates": 93,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 33,
       "risks": []
     },
     {
@@ -4108,8 +4108,8 @@
       "pool": "chem-1112",
       "requested": 20,
       "candidates": 84,
-      "safeUniqueCandidates": 81,
-      "blockedCandidates": 3,
+      "safeUniqueCandidates": 84,
+      "blockedCandidates": 0,
       "exactGradeTaggedCandidates": 24,
       "risks": []
     },
@@ -4121,10 +4121,10 @@
       "semester": 0,
       "pool": "chem-1112",
       "requested": 20,
-      "candidates": 174,
-      "safeUniqueCandidates": 169,
-      "blockedCandidates": 5,
-      "exactGradeTaggedCandidates": 54,
+      "candidates": 177,
+      "safeUniqueCandidates": 177,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 57,
       "risks": []
     },
     {
@@ -4135,10 +4135,10 @@
       "semester": 1,
       "pool": "phys-78",
       "requested": 10,
-      "candidates": 92,
-      "safeUniqueCandidates": 92,
+      "candidates": 94,
+      "safeUniqueCandidates": 94,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 30,
+      "exactGradeTaggedCandidates": 32,
       "risks": []
     },
     {
@@ -4149,10 +4149,10 @@
       "semester": 2,
       "pool": "phys-78",
       "requested": 10,
-      "candidates": 91,
-      "safeUniqueCandidates": 87,
+      "candidates": 93,
+      "safeUniqueCandidates": 89,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 30,
+      "exactGradeTaggedCandidates": 32,
       "risks": []
     },
     {
@@ -4163,10 +4163,10 @@
       "semester": 1,
       "pool": "phys-78",
       "requested": 20,
-      "candidates": 92,
-      "safeUniqueCandidates": 92,
+      "candidates": 94,
+      "safeUniqueCandidates": 94,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 30,
+      "exactGradeTaggedCandidates": 32,
       "risks": []
     },
     {
@@ -4177,10 +4177,10 @@
       "semester": 0,
       "pool": "phys-78",
       "requested": 20,
-      "candidates": 183,
-      "safeUniqueCandidates": 179,
+      "candidates": 187,
+      "safeUniqueCandidates": 183,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 60,
+      "exactGradeTaggedCandidates": 64,
       "risks": []
     },
     {
@@ -4191,10 +4191,10 @@
       "semester": 1,
       "pool": "phys-78",
       "requested": 10,
-      "candidates": 91,
-      "safeUniqueCandidates": 91,
+      "candidates": 93,
+      "safeUniqueCandidates": 93,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 29,
+      "exactGradeTaggedCandidates": 31,
       "risks": []
     },
     {
@@ -4205,10 +4205,10 @@
       "semester": 2,
       "pool": "phys-78",
       "requested": 10,
-      "candidates": 91,
-      "safeUniqueCandidates": 87,
+      "candidates": 93,
+      "safeUniqueCandidates": 89,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 30,
+      "exactGradeTaggedCandidates": 32,
       "risks": []
     },
     {
@@ -4219,10 +4219,10 @@
       "semester": 1,
       "pool": "phys-78",
       "requested": 20,
-      "candidates": 91,
-      "safeUniqueCandidates": 91,
+      "candidates": 93,
+      "safeUniqueCandidates": 93,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 29,
+      "exactGradeTaggedCandidates": 31,
       "risks": []
     },
     {
@@ -4233,10 +4233,10 @@
       "semester": 0,
       "pool": "phys-78",
       "requested": 20,
-      "candidates": 182,
-      "safeUniqueCandidates": 178,
+      "candidates": 186,
+      "safeUniqueCandidates": 182,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 59,
+      "exactGradeTaggedCandidates": 63,
       "risks": []
     },
     {
@@ -4247,10 +4247,10 @@
       "semester": 1,
       "pool": "phys-910",
       "requested": 10,
-      "candidates": 93,
-      "safeUniqueCandidates": 93,
+      "candidates": 95,
+      "safeUniqueCandidates": 95,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 31,
+      "exactGradeTaggedCandidates": 33,
       "risks": []
     },
     {
@@ -4261,10 +4261,10 @@
       "semester": 2,
       "pool": "phys-910",
       "requested": 10,
-      "candidates": 91,
-      "safeUniqueCandidates": 90,
+      "candidates": 93,
+      "safeUniqueCandidates": 92,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 30,
+      "exactGradeTaggedCandidates": 32,
       "risks": []
     },
     {
@@ -4275,10 +4275,10 @@
       "semester": 1,
       "pool": "phys-910",
       "requested": 20,
-      "candidates": 93,
-      "safeUniqueCandidates": 93,
+      "candidates": 95,
+      "safeUniqueCandidates": 95,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 31,
+      "exactGradeTaggedCandidates": 33,
       "risks": []
     },
     {
@@ -4289,10 +4289,10 @@
       "semester": 0,
       "pool": "phys-910",
       "requested": 20,
-      "candidates": 184,
-      "safeUniqueCandidates": 183,
+      "candidates": 188,
+      "safeUniqueCandidates": 187,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 61,
+      "exactGradeTaggedCandidates": 65,
       "risks": []
     },
     {
@@ -4303,10 +4303,10 @@
       "semester": 1,
       "pool": "phys-910",
       "requested": 10,
-      "candidates": 92,
-      "safeUniqueCandidates": 92,
+      "candidates": 94,
+      "safeUniqueCandidates": 94,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 30,
+      "exactGradeTaggedCandidates": 32,
       "risks": []
     },
     {
@@ -4317,10 +4317,10 @@
       "semester": 2,
       "pool": "phys-910",
       "requested": 10,
-      "candidates": 92,
-      "safeUniqueCandidates": 91,
+      "candidates": 94,
+      "safeUniqueCandidates": 93,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 31,
+      "exactGradeTaggedCandidates": 33,
       "risks": []
     },
     {
@@ -4331,10 +4331,10 @@
       "semester": 1,
       "pool": "phys-910",
       "requested": 20,
-      "candidates": 92,
-      "safeUniqueCandidates": 92,
+      "candidates": 94,
+      "safeUniqueCandidates": 94,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 30,
+      "exactGradeTaggedCandidates": 32,
       "risks": []
     },
     {
@@ -4345,10 +4345,10 @@
       "semester": 0,
       "pool": "phys-910",
       "requested": 20,
-      "candidates": 184,
-      "safeUniqueCandidates": 183,
+      "candidates": 188,
+      "safeUniqueCandidates": 187,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 61,
+      "exactGradeTaggedCandidates": 65,
       "risks": []
     },
     {
@@ -4359,10 +4359,10 @@
       "semester": 1,
       "pool": "phys-1112",
       "requested": 10,
-      "candidates": 90,
-      "safeUniqueCandidates": 89,
-      "blockedCandidates": 1,
-      "exactGradeTaggedCandidates": 30,
+      "candidates": 92,
+      "safeUniqueCandidates": 92,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 32,
       "risks": []
     },
     {
@@ -4373,10 +4373,10 @@
       "semester": 2,
       "pool": "phys-1112",
       "requested": 10,
-      "candidates": 90,
-      "safeUniqueCandidates": 90,
+      "candidates": 92,
+      "safeUniqueCandidates": 92,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 30,
+      "exactGradeTaggedCandidates": 32,
       "risks": []
     },
     {
@@ -4387,10 +4387,10 @@
       "semester": 1,
       "pool": "phys-1112",
       "requested": 20,
-      "candidates": 90,
-      "safeUniqueCandidates": 89,
-      "blockedCandidates": 1,
-      "exactGradeTaggedCandidates": 30,
+      "candidates": 92,
+      "safeUniqueCandidates": 92,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 32,
       "risks": []
     },
     {
@@ -4401,10 +4401,10 @@
       "semester": 0,
       "pool": "phys-1112",
       "requested": 20,
-      "candidates": 180,
-      "safeUniqueCandidates": 179,
-      "blockedCandidates": 1,
-      "exactGradeTaggedCandidates": 60,
+      "candidates": 184,
+      "safeUniqueCandidates": 184,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 64,
       "risks": []
     },
     {
@@ -4415,10 +4415,10 @@
       "semester": 1,
       "pool": "phys-1112",
       "requested": 10,
-      "candidates": 89,
-      "safeUniqueCandidates": 88,
-      "blockedCandidates": 1,
-      "exactGradeTaggedCandidates": 29,
+      "candidates": 91,
+      "safeUniqueCandidates": 91,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 31,
       "risks": []
     },
     {
@@ -4429,10 +4429,10 @@
       "semester": 2,
       "pool": "phys-1112",
       "requested": 10,
-      "candidates": 90,
-      "safeUniqueCandidates": 90,
+      "candidates": 92,
+      "safeUniqueCandidates": 92,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 30,
+      "exactGradeTaggedCandidates": 32,
       "risks": []
     },
     {
@@ -4443,10 +4443,10 @@
       "semester": 1,
       "pool": "phys-1112",
       "requested": 20,
-      "candidates": 89,
-      "safeUniqueCandidates": 88,
-      "blockedCandidates": 1,
-      "exactGradeTaggedCandidates": 29,
+      "candidates": 91,
+      "safeUniqueCandidates": 91,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 31,
       "risks": []
     },
     {
@@ -4457,10 +4457,10 @@
       "semester": 0,
       "pool": "phys-1112",
       "requested": 20,
-      "candidates": 179,
-      "safeUniqueCandidates": 178,
-      "blockedCandidates": 1,
-      "exactGradeTaggedCandidates": 59,
+      "candidates": 183,
+      "safeUniqueCandidates": 183,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 63,
       "risks": []
     },
     {
@@ -5479,10 +5479,10 @@
       "semester": 1,
       "pool": "kab-g7",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 92,
-      "blockedCandidates": 4,
-      "exactGradeTaggedCandidates": 92,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -5493,10 +5493,10 @@
       "semester": 1,
       "pool": "kab-g7",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 92,
-      "blockedCandidates": 4,
-      "exactGradeTaggedCandidates": 92,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -5508,9 +5508,9 @@
       "pool": "kab-g7",
       "requested": 20,
       "candidates": 96,
-      "safeUniqueCandidates": 92,
-      "blockedCandidates": 4,
-      "exactGradeTaggedCandidates": 92,
+      "safeUniqueCandidates": 96,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 96,
       "risks": []
     },
     {
@@ -5521,10 +5521,10 @@
       "semester": 2,
       "pool": "kab-g7",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 93,
-      "blockedCandidates": 3,
-      "exactGradeTaggedCandidates": 93,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -5535,10 +5535,10 @@
       "semester": 2,
       "pool": "kab-g7",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 93,
-      "blockedCandidates": 3,
-      "exactGradeTaggedCandidates": 93,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -5550,9 +5550,9 @@
       "pool": "kab-g7",
       "requested": 20,
       "candidates": 96,
-      "safeUniqueCandidates": 93,
-      "blockedCandidates": 3,
-      "exactGradeTaggedCandidates": 93,
+      "safeUniqueCandidates": 96,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 96,
       "risks": []
     },
     {
@@ -5563,10 +5563,10 @@
       "semester": 1,
       "pool": "kab-g8",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 93,
-      "blockedCandidates": 3,
-      "exactGradeTaggedCandidates": 93,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -5577,10 +5577,10 @@
       "semester": 1,
       "pool": "kab-g8",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 93,
-      "blockedCandidates": 3,
-      "exactGradeTaggedCandidates": 93,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -5592,9 +5592,9 @@
       "pool": "kab-g8",
       "requested": 20,
       "candidates": 96,
-      "safeUniqueCandidates": 93,
-      "blockedCandidates": 3,
-      "exactGradeTaggedCandidates": 93,
+      "safeUniqueCandidates": 96,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 96,
       "risks": []
     },
     {
@@ -5605,10 +5605,10 @@
       "semester": 2,
       "pool": "kab-g8",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 91,
-      "blockedCandidates": 5,
-      "exactGradeTaggedCandidates": 91,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -5619,10 +5619,10 @@
       "semester": 2,
       "pool": "kab-g8",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 91,
-      "blockedCandidates": 5,
-      "exactGradeTaggedCandidates": 91,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -5634,9 +5634,9 @@
       "pool": "kab-g8",
       "requested": 20,
       "candidates": 96,
-      "safeUniqueCandidates": 91,
-      "blockedCandidates": 5,
-      "exactGradeTaggedCandidates": 91,
+      "safeUniqueCandidates": 96,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 96,
       "risks": []
     },
     {
@@ -5647,10 +5647,10 @@
       "semester": 1,
       "pool": "kab-g9",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 89,
-      "blockedCandidates": 7,
-      "exactGradeTaggedCandidates": 89,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -5661,10 +5661,10 @@
       "semester": 1,
       "pool": "kab-g9",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 89,
-      "blockedCandidates": 7,
-      "exactGradeTaggedCandidates": 89,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -5676,9 +5676,9 @@
       "pool": "kab-g9",
       "requested": 20,
       "candidates": 96,
-      "safeUniqueCandidates": 89,
-      "blockedCandidates": 7,
-      "exactGradeTaggedCandidates": 89,
+      "safeUniqueCandidates": 96,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 96,
       "risks": []
     },
     {
@@ -5689,10 +5689,10 @@
       "semester": 2,
       "pool": "kab-g9",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 89,
-      "blockedCandidates": 7,
-      "exactGradeTaggedCandidates": 89,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -5703,10 +5703,10 @@
       "semester": 2,
       "pool": "kab-g9",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 89,
-      "blockedCandidates": 7,
-      "exactGradeTaggedCandidates": 89,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -5718,9 +5718,9 @@
       "pool": "kab-g9",
       "requested": 20,
       "candidates": 96,
-      "safeUniqueCandidates": 89,
-      "blockedCandidates": 7,
-      "exactGradeTaggedCandidates": 89,
+      "safeUniqueCandidates": 96,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 96,
       "risks": []
     },
     {
@@ -5731,10 +5731,10 @@
       "semester": 1,
       "pool": "kab-g10",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 89,
-      "blockedCandidates": 7,
-      "exactGradeTaggedCandidates": 89,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -5745,10 +5745,10 @@
       "semester": 1,
       "pool": "kab-g10",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 89,
-      "blockedCandidates": 7,
-      "exactGradeTaggedCandidates": 89,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -5760,9 +5760,9 @@
       "pool": "kab-g10",
       "requested": 20,
       "candidates": 96,
-      "safeUniqueCandidates": 89,
-      "blockedCandidates": 7,
-      "exactGradeTaggedCandidates": 89,
+      "safeUniqueCandidates": 96,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 96,
       "risks": []
     },
     {
@@ -5773,10 +5773,10 @@
       "semester": 2,
       "pool": "kab-g10",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 90,
-      "blockedCandidates": 6,
-      "exactGradeTaggedCandidates": 90,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -5787,10 +5787,10 @@
       "semester": 2,
       "pool": "kab-g10",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 90,
-      "blockedCandidates": 6,
-      "exactGradeTaggedCandidates": 90,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -5802,9 +5802,9 @@
       "pool": "kab-g10",
       "requested": 20,
       "candidates": 96,
-      "safeUniqueCandidates": 90,
-      "blockedCandidates": 6,
-      "exactGradeTaggedCandidates": 90,
+      "safeUniqueCandidates": 96,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 96,
       "risks": []
     },
     {
@@ -5815,10 +5815,10 @@
       "semester": 1,
       "pool": "kab-g11",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 90,
-      "blockedCandidates": 6,
-      "exactGradeTaggedCandidates": 90,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -5829,10 +5829,10 @@
       "semester": 1,
       "pool": "kab-g11",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 90,
-      "blockedCandidates": 6,
-      "exactGradeTaggedCandidates": 90,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -5844,9 +5844,9 @@
       "pool": "kab-g11",
       "requested": 20,
       "candidates": 96,
-      "safeUniqueCandidates": 90,
-      "blockedCandidates": 6,
-      "exactGradeTaggedCandidates": 90,
+      "safeUniqueCandidates": 96,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 96,
       "risks": []
     },
     {
@@ -5857,10 +5857,10 @@
       "semester": 2,
       "pool": "kab-g11",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 90,
-      "blockedCandidates": 6,
-      "exactGradeTaggedCandidates": 90,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -5871,10 +5871,10 @@
       "semester": 2,
       "pool": "kab-g11",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 90,
-      "blockedCandidates": 6,
-      "exactGradeTaggedCandidates": 90,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -5886,9 +5886,9 @@
       "pool": "kab-g11",
       "requested": 20,
       "candidates": 96,
-      "safeUniqueCandidates": 90,
-      "blockedCandidates": 6,
-      "exactGradeTaggedCandidates": 90,
+      "safeUniqueCandidates": 96,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 96,
       "risks": []
     },
     {
@@ -5899,10 +5899,10 @@
       "semester": 1,
       "pool": "kab-g12",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 91,
-      "blockedCandidates": 5,
-      "exactGradeTaggedCandidates": 91,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -5913,10 +5913,10 @@
       "semester": 1,
       "pool": "kab-g12",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 91,
-      "blockedCandidates": 5,
-      "exactGradeTaggedCandidates": 91,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -5928,9 +5928,9 @@
       "pool": "kab-g12",
       "requested": 20,
       "candidates": 96,
-      "safeUniqueCandidates": 91,
-      "blockedCandidates": 5,
-      "exactGradeTaggedCandidates": 91,
+      "safeUniqueCandidates": 96,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 96,
       "risks": []
     },
     {
@@ -5941,10 +5941,10 @@
       "semester": 2,
       "pool": "kab-g12",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 91,
-      "blockedCandidates": 5,
-      "exactGradeTaggedCandidates": 91,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -5955,10 +5955,10 @@
       "semester": 2,
       "pool": "kab-g12",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 91,
-      "blockedCandidates": 5,
-      "exactGradeTaggedCandidates": 91,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -5970,9 +5970,9 @@
       "pool": "kab-g12",
       "requested": 20,
       "candidates": 96,
-      "safeUniqueCandidates": 91,
-      "blockedCandidates": 5,
-      "exactGradeTaggedCandidates": 91,
+      "safeUniqueCandidates": 96,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 96,
       "risks": []
     },
     {
@@ -5983,10 +5983,10 @@
       "semester": 1,
       "pool": "enb-g1",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -5997,10 +5997,10 @@
       "semester": 1,
       "pool": "enb-g1",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -6025,10 +6025,10 @@
       "semester": 2,
       "pool": "enb-g1",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -6039,10 +6039,10 @@
       "semester": 2,
       "pool": "enb-g1",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -6067,10 +6067,10 @@
       "semester": 1,
       "pool": "enb-g2",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -6081,10 +6081,10 @@
       "semester": 1,
       "pool": "enb-g2",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -6109,10 +6109,10 @@
       "semester": 2,
       "pool": "enb-g2",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -6123,10 +6123,10 @@
       "semester": 2,
       "pool": "enb-g2",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -6151,10 +6151,10 @@
       "semester": 1,
       "pool": "enb-g3",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -6165,10 +6165,10 @@
       "semester": 1,
       "pool": "enb-g3",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -6193,10 +6193,10 @@
       "semester": 2,
       "pool": "enb-g3",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -6207,10 +6207,10 @@
       "semester": 2,
       "pool": "enb-g3",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -6235,10 +6235,10 @@
       "semester": 1,
       "pool": "enb-g4",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -6249,10 +6249,10 @@
       "semester": 1,
       "pool": "enb-g4",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -6277,10 +6277,10 @@
       "semester": 2,
       "pool": "enb-g4",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -6291,10 +6291,10 @@
       "semester": 2,
       "pool": "enb-g4",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -6319,10 +6319,10 @@
       "semester": 1,
       "pool": "enb-g5",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -6333,10 +6333,10 @@
       "semester": 1,
       "pool": "enb-g5",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -6361,10 +6361,10 @@
       "semester": 2,
       "pool": "enb-g5",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -6375,10 +6375,10 @@
       "semester": 2,
       "pool": "enb-g5",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -6403,10 +6403,10 @@
       "semester": 1,
       "pool": "enb-g6",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -6417,10 +6417,10 @@
       "semester": 1,
       "pool": "enb-g6",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -6445,10 +6445,10 @@
       "semester": 2,
       "pool": "enb-g6",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -6459,10 +6459,10 @@
       "semester": 2,
       "pool": "enb-g6",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -6487,10 +6487,10 @@
       "semester": 1,
       "pool": "enb-g7",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -6501,10 +6501,10 @@
       "semester": 1,
       "pool": "enb-g7",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -6529,10 +6529,10 @@
       "semester": 2,
       "pool": "enb-g7",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -6543,10 +6543,10 @@
       "semester": 2,
       "pool": "enb-g7",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -6571,10 +6571,10 @@
       "semester": 1,
       "pool": "enb-g8",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -6585,10 +6585,10 @@
       "semester": 1,
       "pool": "enb-g8",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -6613,10 +6613,10 @@
       "semester": 2,
       "pool": "enb-g8",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -6627,10 +6627,10 @@
       "semester": 2,
       "pool": "enb-g8",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -6655,10 +6655,10 @@
       "semester": 1,
       "pool": "enb-g9",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -6669,10 +6669,10 @@
       "semester": 1,
       "pool": "enb-g9",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -6697,10 +6697,10 @@
       "semester": 2,
       "pool": "enb-g9",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -6711,10 +6711,10 @@
       "semester": 2,
       "pool": "enb-g9",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -6739,10 +6739,10 @@
       "semester": 1,
       "pool": "enb-g10",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -6753,10 +6753,10 @@
       "semester": 1,
       "pool": "enb-g10",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -6781,10 +6781,10 @@
       "semester": 2,
       "pool": "enb-g10",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -6795,10 +6795,10 @@
       "semester": 2,
       "pool": "enb-g10",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -6823,10 +6823,10 @@
       "semester": 1,
       "pool": "enb-g11",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -6837,10 +6837,10 @@
       "semester": 1,
       "pool": "enb-g11",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -6865,10 +6865,10 @@
       "semester": 2,
       "pool": "enb-g11",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -6879,10 +6879,10 @@
       "semester": 2,
       "pool": "enb-g11",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -6907,10 +6907,10 @@
       "semester": 1,
       "pool": "enb-g12",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -6921,10 +6921,10 @@
       "semester": 1,
       "pool": "enb-g12",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -6949,10 +6949,10 @@
       "semester": 2,
       "pool": "enb-g12",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -6963,10 +6963,10 @@
       "semester": 2,
       "pool": "enb-g12",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -6991,10 +6991,10 @@
       "semester": 1,
       "pool": "rub-g5",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -7005,10 +7005,10 @@
       "semester": 1,
       "pool": "rub-g5",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -7033,10 +7033,10 @@
       "semester": 2,
       "pool": "rub-g5",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -7047,10 +7047,10 @@
       "semester": 2,
       "pool": "rub-g5",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -7075,10 +7075,10 @@
       "semester": 1,
       "pool": "rub-g6",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -7089,10 +7089,10 @@
       "semester": 1,
       "pool": "rub-g6",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -7117,10 +7117,10 @@
       "semester": 2,
       "pool": "rub-g6",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -7131,10 +7131,10 @@
       "semester": 2,
       "pool": "rub-g6",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -7159,10 +7159,10 @@
       "semester": 1,
       "pool": "rub-g7",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -7173,10 +7173,10 @@
       "semester": 1,
       "pool": "rub-g7",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -7201,10 +7201,10 @@
       "semester": 2,
       "pool": "rub-g7",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -7215,10 +7215,10 @@
       "semester": 2,
       "pool": "rub-g7",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -7243,10 +7243,10 @@
       "semester": 1,
       "pool": "rub-g8",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -7257,10 +7257,10 @@
       "semester": 1,
       "pool": "rub-g8",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -7285,10 +7285,10 @@
       "semester": 2,
       "pool": "rub-g8",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -7299,10 +7299,10 @@
       "semester": 2,
       "pool": "rub-g8",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -7327,10 +7327,10 @@
       "semester": 1,
       "pool": "rub-g9",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -7341,10 +7341,10 @@
       "semester": 1,
       "pool": "rub-g9",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -7369,10 +7369,10 @@
       "semester": 2,
       "pool": "rub-g9",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -7383,10 +7383,10 @@
       "semester": 2,
       "pool": "rub-g9",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 96,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
       "blockedCandidates": 0,
-      "exactGradeTaggedCandidates": 96,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -7411,10 +7411,10 @@
       "semester": 1,
       "pool": "rub-g10",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 91,
-      "blockedCandidates": 5,
-      "exactGradeTaggedCandidates": 91,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -7425,10 +7425,10 @@
       "semester": 1,
       "pool": "rub-g10",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 91,
-      "blockedCandidates": 5,
-      "exactGradeTaggedCandidates": 91,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -7440,9 +7440,9 @@
       "pool": "rub-g10",
       "requested": 20,
       "candidates": 96,
-      "safeUniqueCandidates": 91,
-      "blockedCandidates": 5,
-      "exactGradeTaggedCandidates": 91,
+      "safeUniqueCandidates": 96,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 96,
       "risks": []
     },
     {
@@ -7453,10 +7453,10 @@
       "semester": 2,
       "pool": "rub-g10",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 94,
-      "blockedCandidates": 2,
-      "exactGradeTaggedCandidates": 94,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -7467,10 +7467,10 @@
       "semester": 2,
       "pool": "rub-g10",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 94,
-      "blockedCandidates": 2,
-      "exactGradeTaggedCandidates": 94,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -7482,9 +7482,9 @@
       "pool": "rub-g10",
       "requested": 20,
       "candidates": 96,
-      "safeUniqueCandidates": 94,
-      "blockedCandidates": 2,
-      "exactGradeTaggedCandidates": 94,
+      "safeUniqueCandidates": 96,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 96,
       "risks": []
     },
     {
@@ -7495,10 +7495,10 @@
       "semester": 1,
       "pool": "rub-g11",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 93,
-      "blockedCandidates": 3,
-      "exactGradeTaggedCandidates": 93,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -7509,10 +7509,10 @@
       "semester": 1,
       "pool": "rub-g11",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 93,
-      "blockedCandidates": 3,
-      "exactGradeTaggedCandidates": 93,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -7524,9 +7524,9 @@
       "pool": "rub-g11",
       "requested": 20,
       "candidates": 96,
-      "safeUniqueCandidates": 93,
-      "blockedCandidates": 3,
-      "exactGradeTaggedCandidates": 93,
+      "safeUniqueCandidates": 96,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 96,
       "risks": []
     },
     {
@@ -7537,10 +7537,10 @@
       "semester": 2,
       "pool": "rub-g11",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 95,
-      "blockedCandidates": 1,
-      "exactGradeTaggedCandidates": 95,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -7551,10 +7551,10 @@
       "semester": 2,
       "pool": "rub-g11",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 95,
-      "blockedCandidates": 1,
-      "exactGradeTaggedCandidates": 95,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -7566,9 +7566,9 @@
       "pool": "rub-g11",
       "requested": 20,
       "candidates": 96,
-      "safeUniqueCandidates": 95,
-      "blockedCandidates": 1,
-      "exactGradeTaggedCandidates": 95,
+      "safeUniqueCandidates": 96,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 96,
       "risks": []
     },
     {
@@ -7579,10 +7579,10 @@
       "semester": 1,
       "pool": "rub-g12",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 90,
-      "blockedCandidates": 6,
-      "exactGradeTaggedCandidates": 90,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -7593,10 +7593,10 @@
       "semester": 1,
       "pool": "rub-g12",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 90,
-      "blockedCandidates": 6,
-      "exactGradeTaggedCandidates": 90,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -7608,9 +7608,9 @@
       "pool": "rub-g12",
       "requested": 20,
       "candidates": 96,
-      "safeUniqueCandidates": 90,
-      "blockedCandidates": 6,
-      "exactGradeTaggedCandidates": 90,
+      "safeUniqueCandidates": 96,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 96,
       "risks": []
     },
     {
@@ -7621,10 +7621,10 @@
       "semester": 2,
       "pool": "rub-g12",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 88,
-      "blockedCandidates": 8,
-      "exactGradeTaggedCandidates": 88,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -7635,10 +7635,10 @@
       "semester": 2,
       "pool": "rub-g12",
       "requested": 10,
-      "candidates": 96,
-      "safeUniqueCandidates": 88,
-      "blockedCandidates": 8,
-      "exactGradeTaggedCandidates": 88,
+      "candidates": 48,
+      "safeUniqueCandidates": 48,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 48,
       "risks": []
     },
     {
@@ -7650,9 +7650,9 @@
       "pool": "rub-g12",
       "requested": 20,
       "candidates": 96,
-      "safeUniqueCandidates": 88,
-      "blockedCandidates": 8,
-      "exactGradeTaggedCandidates": 88,
+      "safeUniqueCandidates": 96,
+      "blockedCandidates": 0,
+      "exactGradeTaggedCandidates": 96,
       "risks": []
     }
   ],
@@ -7701,9 +7701,9 @@
       "poolKey": "eg-1112-1",
       "basePool": "eg-1112",
       "questions": 15,
-      "blockingQuestions": 1,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 1
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "rg-56-1",
@@ -7757,33 +7757,33 @@
       "poolKey": "math-56-1",
       "basePool": "math-56",
       "questions": 23,
-      "blockingQuestions": 4,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 4
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "math-78-1",
       "basePool": "math-78",
       "questions": 31,
-      "blockingQuestions": 1,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 1
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "math-910-1",
       "basePool": "math-910",
       "questions": 28,
-      "blockingQuestions": 8,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 8
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "math-1112-1",
       "basePool": "math-1112",
       "questions": 23,
-      "blockingQuestions": 6,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 6
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "geo-12-1",
@@ -7877,9 +7877,9 @@
       "poolKey": "eng-1112-1",
       "basePool": "eng-1112",
       "questions": 35,
-      "blockingQuestions": 1,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 1
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "rus-12-1",
@@ -7973,9 +7973,9 @@
       "poolKey": "nat-910-1",
       "basePool": "nat-910",
       "questions": 28,
-      "blockingQuestions": 1,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 1
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "nat-1112-1",
@@ -8053,33 +8053,33 @@
       "poolKey": "math-56-2",
       "basePool": "math-56",
       "questions": 20,
-      "blockingQuestions": 3,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 3
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "math-56-3",
       "basePool": "math-56",
       "questions": 20,
-      "blockingQuestions": 3,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 3
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "math-56-4",
       "basePool": "math-56",
       "questions": 20,
-      "blockingQuestions": 3,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 3
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "math-56-5",
       "basePool": "math-56",
       "questions": 20,
-      "blockingQuestions": 3,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 3
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "math-78-2",
@@ -8117,65 +8117,65 @@
       "poolKey": "math-910-2",
       "basePool": "math-910",
       "questions": 20,
-      "blockingQuestions": 3,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 3
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "math-910-3",
       "basePool": "math-910",
       "questions": 20,
-      "blockingQuestions": 7,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 7
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "math-910-4",
       "basePool": "math-910",
       "questions": 20,
-      "blockingQuestions": 3,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 3
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "math-910-5",
       "basePool": "math-910",
       "questions": 20,
-      "blockingQuestions": 5,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 5
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "math-1112-2",
       "basePool": "math-1112",
       "questions": 20,
-      "blockingQuestions": 2,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 2
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "math-1112-3",
       "basePool": "math-1112",
       "questions": 20,
-      "blockingQuestions": 3,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 3
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "math-1112-4",
       "basePool": "math-1112",
       "questions": 20,
-      "blockingQuestions": 3,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 3
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "math-1112-5",
       "basePool": "math-1112",
       "questions": 20,
-      "blockingQuestions": 6,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 6
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "eng-12-2",
@@ -8869,9 +8869,9 @@
       "poolKey": "nat-78-4",
       "basePool": "nat-78",
       "questions": 20,
-      "blockingQuestions": 2,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 2
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "nat-78-5",
@@ -9405,9 +9405,9 @@
       "poolKey": "chem-78-1",
       "basePool": "chem-78",
       "questions": 20,
-      "blockingQuestions": 2,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 2
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "chem-78-2",
@@ -9421,9 +9421,9 @@
       "poolKey": "chem-78-3",
       "basePool": "chem-78",
       "questions": 20,
-      "blockingQuestions": 1,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 1
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "chem-78-4",
@@ -9445,17 +9445,17 @@
       "poolKey": "chem-910-1",
       "basePool": "chem-910",
       "questions": 20,
-      "blockingQuestions": 3,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 3
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "chem-910-2",
       "basePool": "chem-910",
       "questions": 20,
-      "blockingQuestions": 2,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 2
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "chem-910-3",
@@ -9485,9 +9485,9 @@
       "poolKey": "chem-1112-1",
       "basePool": "chem-1112",
       "questions": 20,
-      "blockingQuestions": 1,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 1
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "chem-1112-2",
@@ -9501,9 +9501,9 @@
       "poolKey": "chem-1112-3",
       "basePool": "chem-1112",
       "questions": 20,
-      "blockingQuestions": 1,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 1
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "chem-1112-4",
@@ -9517,9 +9517,9 @@
       "poolKey": "chem-1112-5",
       "basePool": "chem-1112",
       "questions": 20,
-      "blockingQuestions": 1,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 1
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "phys-12-1",
@@ -9565,17 +9565,17 @@
       "poolKey": "phys-56-1",
       "basePool": "phys-56",
       "questions": 20,
-      "blockingQuestions": 1,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 1
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "phys-56-2",
       "basePool": "phys-56",
       "questions": 20,
-      "blockingQuestions": 1,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 1
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "phys-56-3",
@@ -9693,9 +9693,9 @@
       "poolKey": "phys-1112-2",
       "basePool": "phys-1112",
       "questions": 20,
-      "blockingQuestions": 1,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 1
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "phys-1112-3",
@@ -9813,17 +9813,17 @@
       "poolKey": "chem-1112-6",
       "basePool": "chem-1112",
       "questions": 20,
-      "blockingQuestions": 2,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 2
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "chem-12-6",
       "basePool": "chem-12",
       "questions": 20,
-      "blockingQuestions": 1,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 1
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "chem-34-6",
@@ -9837,17 +9837,17 @@
       "poolKey": "chem-56-6",
       "basePool": "chem-56",
       "questions": 20,
-      "blockingQuestions": 1,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 1
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "chem-78-6",
       "basePool": "chem-78",
       "questions": 20,
-      "blockingQuestions": 1,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 1
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "chem-910-6",
@@ -9957,9 +9957,9 @@
       "poolKey": "math-1112-6",
       "basePool": "math-1112",
       "questions": 20,
-      "blockingQuestions": 3,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 3
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "math-12-6",
@@ -9973,9 +9973,9 @@
       "poolKey": "math-12-7",
       "basePool": "math-12",
       "questions": 8,
-      "blockingQuestions": 1,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 1
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "geo-12-6",
@@ -9997,25 +9997,25 @@
       "poolKey": "math-56-6",
       "basePool": "math-56",
       "questions": 20,
-      "blockingQuestions": 2,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 2
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "math-78-6",
       "basePool": "math-78",
       "questions": 20,
-      "blockingQuestions": 1,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 1
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "math-910-6",
       "basePool": "math-910",
       "questions": 20,
-      "blockingQuestions": 4,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 4
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "phys-1112-6",
@@ -10188,7 +10188,7 @@
     {
       "poolKey": "math-78-7",
       "basePool": "math-78",
-      "questions": 128,
+      "questions": 136,
       "blockingQuestions": 0,
       "encodingCorruption": 0,
       "duplicateOptionQuestions": 0
@@ -10196,7 +10196,7 @@
     {
       "poolKey": "math-910-7",
       "basePool": "math-910",
-      "questions": 90,
+      "questions": 98,
       "blockingQuestions": 0,
       "encodingCorruption": 0,
       "duplicateOptionQuestions": 0
@@ -10204,7 +10204,7 @@
     {
       "poolKey": "math-1112-7",
       "basePool": "math-1112",
-      "questions": 95,
+      "questions": 103,
       "blockingQuestions": 0,
       "encodingCorruption": 0,
       "duplicateOptionQuestions": 0
@@ -10236,7 +10236,7 @@
     {
       "poolKey": "geo-78-6",
       "basePool": "geo-78",
-      "questions": 114,
+      "questions": 122,
       "blockingQuestions": 0,
       "encodingCorruption": 0,
       "duplicateOptionQuestions": 0
@@ -10244,7 +10244,7 @@
     {
       "poolKey": "geo-910-6",
       "basePool": "geo-910",
-      "questions": 111,
+      "questions": 119,
       "blockingQuestions": 0,
       "encodingCorruption": 0,
       "duplicateOptionQuestions": 0
@@ -10252,7 +10252,7 @@
     {
       "poolKey": "geo-1112-6",
       "basePool": "geo-1112",
-      "questions": 114,
+      "questions": 122,
       "blockingQuestions": 0,
       "encodingCorruption": 0,
       "duplicateOptionQuestions": 0
@@ -10260,7 +10260,7 @@
     {
       "poolKey": "gg-78-2",
       "basePool": "gg-78",
-      "questions": 15,
+      "questions": 23,
       "blockingQuestions": 0,
       "encodingCorruption": 0,
       "duplicateOptionQuestions": 0
@@ -10268,7 +10268,7 @@
     {
       "poolKey": "gg-910-2",
       "basePool": "gg-910",
-      "questions": 15,
+      "questions": 23,
       "blockingQuestions": 0,
       "encodingCorruption": 0,
       "duplicateOptionQuestions": 0
@@ -10276,7 +10276,7 @@
     {
       "poolKey": "gg-1112-2",
       "basePool": "gg-1112",
-      "questions": 15,
+      "questions": 23,
       "blockingQuestions": 0,
       "encodingCorruption": 0,
       "duplicateOptionQuestions": 0
@@ -10308,7 +10308,7 @@
     {
       "poolKey": "eng-78-6",
       "basePool": "eng-78",
-      "questions": 115,
+      "questions": 123,
       "blockingQuestions": 0,
       "encodingCorruption": 0,
       "duplicateOptionQuestions": 0
@@ -10316,7 +10316,7 @@
     {
       "poolKey": "eng-910-6",
       "basePool": "eng-910",
-      "questions": 118,
+      "questions": 126,
       "blockingQuestions": 0,
       "encodingCorruption": 0,
       "duplicateOptionQuestions": 0
@@ -10324,7 +10324,7 @@
     {
       "poolKey": "eng-1112-6",
       "basePool": "eng-1112",
-      "questions": 114,
+      "questions": 122,
       "blockingQuestions": 0,
       "encodingCorruption": 0,
       "duplicateOptionQuestions": 0
@@ -10332,7 +10332,7 @@
     {
       "poolKey": "eg-78-2",
       "basePool": "eg-78",
-      "questions": 15,
+      "questions": 23,
       "blockingQuestions": 0,
       "encodingCorruption": 0,
       "duplicateOptionQuestions": 0
@@ -10340,7 +10340,7 @@
     {
       "poolKey": "eg-910-2",
       "basePool": "eg-910",
-      "questions": 15,
+      "questions": 23,
       "blockingQuestions": 0,
       "encodingCorruption": 0,
       "duplicateOptionQuestions": 0
@@ -10348,7 +10348,7 @@
     {
       "poolKey": "eg-1112-2",
       "basePool": "eg-1112",
-      "questions": 14,
+      "questions": 22,
       "blockingQuestions": 0,
       "encodingCorruption": 0,
       "duplicateOptionQuestions": 0
@@ -10356,7 +10356,7 @@
     {
       "poolKey": "rus-56-6",
       "basePool": "rus-56",
-      "questions": 114,
+      "questions": 122,
       "blockingQuestions": 0,
       "encodingCorruption": 0,
       "duplicateOptionQuestions": 0
@@ -10364,7 +10364,7 @@
     {
       "poolKey": "rus-78-6",
       "basePool": "rus-78",
-      "questions": 115,
+      "questions": 123,
       "blockingQuestions": 0,
       "encodingCorruption": 0,
       "duplicateOptionQuestions": 0
@@ -10372,7 +10372,7 @@
     {
       "poolKey": "rus-910-6",
       "basePool": "rus-910",
-      "questions": 115,
+      "questions": 123,
       "blockingQuestions": 0,
       "encodingCorruption": 0,
       "duplicateOptionQuestions": 0
@@ -10380,7 +10380,7 @@
     {
       "poolKey": "rus-1112-6",
       "basePool": "rus-1112",
-      "questions": 114,
+      "questions": 122,
       "blockingQuestions": 0,
       "encodingCorruption": 0,
       "duplicateOptionQuestions": 0
@@ -10388,7 +10388,7 @@
     {
       "poolKey": "rg-56-2",
       "basePool": "rg-56",
-      "questions": 15,
+      "questions": 23,
       "blockingQuestions": 0,
       "encodingCorruption": 0,
       "duplicateOptionQuestions": 0
@@ -10396,7 +10396,7 @@
     {
       "poolKey": "rg-78-2",
       "basePool": "rg-78",
-      "questions": 15,
+      "questions": 23,
       "blockingQuestions": 0,
       "encodingCorruption": 0,
       "duplicateOptionQuestions": 0
@@ -10404,7 +10404,7 @@
     {
       "poolKey": "rg-910-2",
       "basePool": "rg-910",
-      "questions": 15,
+      "questions": 23,
       "blockingQuestions": 0,
       "encodingCorruption": 0,
       "duplicateOptionQuestions": 0
@@ -10412,7 +10412,7 @@
     {
       "poolKey": "rg-1112-2",
       "basePool": "rg-1112",
-      "questions": 15,
+      "questions": 23,
       "blockingQuestions": 0,
       "encodingCorruption": 0,
       "duplicateOptionQuestions": 0
@@ -10444,7 +10444,7 @@
     {
       "poolKey": "hist-78-6",
       "basePool": "hist-78",
-      "questions": 113,
+      "questions": 121,
       "blockingQuestions": 0,
       "encodingCorruption": 0,
       "duplicateOptionQuestions": 0
@@ -10452,7 +10452,7 @@
     {
       "poolKey": "hist-910-6",
       "basePool": "hist-910",
-      "questions": 53,
+      "questions": 61,
       "blockingQuestions": 0,
       "encodingCorruption": 0,
       "duplicateOptionQuestions": 0
@@ -10460,7 +10460,7 @@
     {
       "poolKey": "hist-1112-6",
       "basePool": "hist-1112",
-      "questions": 33,
+      "questions": 41,
       "blockingQuestions": 0,
       "encodingCorruption": 0,
       "duplicateOptionQuestions": 0
@@ -10468,7 +10468,7 @@
     {
       "poolKey": "geog-78-2",
       "basePool": "geog-78",
-      "questions": 29,
+      "questions": 37,
       "blockingQuestions": 0,
       "encodingCorruption": 0,
       "duplicateOptionQuestions": 0
@@ -10476,7 +10476,7 @@
     {
       "poolKey": "geog-910-2",
       "basePool": "geog-910",
-      "questions": 25,
+      "questions": 33,
       "blockingQuestions": 0,
       "encodingCorruption": 0,
       "duplicateOptionQuestions": 0
@@ -10484,7 +10484,7 @@
     {
       "poolKey": "geog-1112-2",
       "basePool": "geog-1112",
-      "questions": 25,
+      "questions": 33,
       "blockingQuestions": 0,
       "encodingCorruption": 0,
       "duplicateOptionQuestions": 0
@@ -10492,7 +10492,7 @@
     {
       "poolKey": "bio-78-7",
       "basePool": "bio-78",
-      "questions": 119,
+      "questions": 127,
       "blockingQuestions": 0,
       "encodingCorruption": 0,
       "duplicateOptionQuestions": 0
@@ -10500,7 +10500,7 @@
     {
       "poolKey": "bio-910-7",
       "basePool": "bio-910",
-      "questions": 120,
+      "questions": 128,
       "blockingQuestions": 0,
       "encodingCorruption": 0,
       "duplicateOptionQuestions": 0
@@ -10508,7 +10508,7 @@
     {
       "poolKey": "bio-1112-7",
       "basePool": "bio-1112",
-      "questions": 120,
+      "questions": 128,
       "blockingQuestions": 0,
       "encodingCorruption": 0,
       "duplicateOptionQuestions": 0
@@ -10516,7 +10516,7 @@
     {
       "poolKey": "chem-78-7",
       "basePool": "chem-78",
-      "questions": 116,
+      "questions": 124,
       "blockingQuestions": 0,
       "encodingCorruption": 0,
       "duplicateOptionQuestions": 0
@@ -10524,7 +10524,7 @@
     {
       "poolKey": "chem-910-7",
       "basePool": "chem-910",
-      "questions": 117,
+      "questions": 125,
       "blockingQuestions": 0,
       "encodingCorruption": 0,
       "duplicateOptionQuestions": 0
@@ -10532,7 +10532,7 @@
     {
       "poolKey": "chem-1112-7",
       "basePool": "chem-1112",
-      "questions": 115,
+      "questions": 123,
       "blockingQuestions": 0,
       "encodingCorruption": 0,
       "duplicateOptionQuestions": 0
@@ -10540,7 +10540,7 @@
     {
       "poolKey": "phys-78-7",
       "basePool": "phys-78",
-      "questions": 119,
+      "questions": 127,
       "blockingQuestions": 0,
       "encodingCorruption": 0,
       "duplicateOptionQuestions": 0
@@ -10548,7 +10548,7 @@
     {
       "poolKey": "phys-910-7",
       "basePool": "phys-910",
-      "questions": 122,
+      "questions": 130,
       "blockingQuestions": 0,
       "encodingCorruption": 0,
       "duplicateOptionQuestions": 0
@@ -10556,7 +10556,7 @@
     {
       "poolKey": "phys-1112-7",
       "basePool": "phys-1112",
-      "questions": 119,
+      "questions": 127,
       "blockingQuestions": 0,
       "encodingCorruption": 0,
       "duplicateOptionQuestions": 0
@@ -10949,193 +10949,193 @@
       "poolKey": "kab-g7-1",
       "basePool": "kab-g7",
       "questions": 48,
-      "blockingQuestions": 3,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 3
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "kab-g7-2",
       "basePool": "kab-g7",
       "questions": 48,
-      "blockingQuestions": 1,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 1
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "kab-g7-3",
       "basePool": "kab-g7",
       "questions": 48,
-      "blockingQuestions": 1,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 1
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "kab-g7-4",
       "basePool": "kab-g7",
       "questions": 48,
-      "blockingQuestions": 2,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 2
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "kab-g8-1",
       "basePool": "kab-g8",
       "questions": 48,
-      "blockingQuestions": 1,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 1
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "kab-g8-2",
       "basePool": "kab-g8",
       "questions": 48,
-      "blockingQuestions": 2,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 2
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "kab-g8-3",
       "basePool": "kab-g8",
       "questions": 48,
-      "blockingQuestions": 2,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 2
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "kab-g8-4",
       "basePool": "kab-g8",
       "questions": 48,
-      "blockingQuestions": 3,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 3
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "kab-g9-1",
       "basePool": "kab-g9",
       "questions": 48,
-      "blockingQuestions": 3,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 3
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "kab-g9-2",
       "basePool": "kab-g9",
       "questions": 48,
-      "blockingQuestions": 4,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 4
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "kab-g9-3",
       "basePool": "kab-g9",
       "questions": 48,
-      "blockingQuestions": 4,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 4
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "kab-g9-4",
       "basePool": "kab-g9",
       "questions": 48,
-      "blockingQuestions": 3,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 3
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "kab-g10-1",
       "basePool": "kab-g10",
       "questions": 48,
-      "blockingQuestions": 4,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 4
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "kab-g10-2",
       "basePool": "kab-g10",
       "questions": 48,
-      "blockingQuestions": 4,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 4
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "kab-g10-3",
       "basePool": "kab-g10",
       "questions": 48,
-      "blockingQuestions": 3,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 3
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "kab-g10-4",
       "basePool": "kab-g10",
       "questions": 48,
-      "blockingQuestions": 2,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 2
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "kab-g11-1",
       "basePool": "kab-g11",
       "questions": 48,
-      "blockingQuestions": 4,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 4
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "kab-g11-2",
       "basePool": "kab-g11",
       "questions": 48,
-      "blockingQuestions": 3,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 3
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "kab-g11-3",
       "basePool": "kab-g11",
       "questions": 48,
-      "blockingQuestions": 2,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 2
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "kab-g11-4",
       "basePool": "kab-g11",
       "questions": 48,
-      "blockingQuestions": 3,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 3
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "kab-g12-1",
       "basePool": "kab-g12",
       "questions": 48,
-      "blockingQuestions": 2,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 2
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "kab-g12-2",
       "basePool": "kab-g12",
       "questions": 48,
-      "blockingQuestions": 2,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 2
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "kab-g12-3",
       "basePool": "kab-g12",
       "questions": 48,
-      "blockingQuestions": 3,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 3
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "kab-g12-4",
       "basePool": "kab-g12",
       "questions": 48,
-      "blockingQuestions": 3,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 3
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "enb-g1-1",
@@ -11685,41 +11685,41 @@
       "poolKey": "rub-g10-1",
       "basePool": "rub-g10",
       "questions": 48,
-      "blockingQuestions": 1,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 1
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "rub-g10-2",
       "basePool": "rub-g10",
       "questions": 48,
-      "blockingQuestions": 1,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 1
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "rub-g10-3",
       "basePool": "rub-g10",
       "questions": 48,
-      "blockingQuestions": 2,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 2
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "rub-g10-4",
       "basePool": "rub-g10",
       "questions": 48,
-      "blockingQuestions": 3,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 3
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "rub-g11-1",
       "basePool": "rub-g11",
       "questions": 48,
-      "blockingQuestions": 1,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 1
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "rub-g11-2",
@@ -11733,33 +11733,33 @@
       "poolKey": "rub-g11-3",
       "basePool": "rub-g11",
       "questions": 48,
-      "blockingQuestions": 1,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 1
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "rub-g11-4",
       "basePool": "rub-g11",
       "questions": 48,
-      "blockingQuestions": 2,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 2
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "rub-g12-1",
       "basePool": "rub-g12",
       "questions": 48,
-      "blockingQuestions": 6,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 6
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "rub-g12-2",
       "basePool": "rub-g12",
       "questions": 48,
-      "blockingQuestions": 3,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 3
+      "duplicateOptionQuestions": 0
     },
     {
       "poolKey": "rub-g12-3",
@@ -11773,789 +11773,12 @@
       "poolKey": "rub-g12-4",
       "basePool": "rub-g12",
       "questions": 48,
-      "blockingQuestions": 5,
+      "blockingQuestions": 0,
       "encodingCorruption": 0,
-      "duplicateOptionQuestions": 5
+      "duplicateOptionQuestions": 0
     }
   ],
   "blockingOrSemanticExamples": [
-    {
-      "id": "eg1112_g11",
-      "poolKey": "eg-1112-1",
-      "text": "Correctly punctuated:",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag"
-      ]
-    },
-    {
-      "id": "m56_5",
-      "poolKey": "math-56-1",
-      "text": "-5+8=?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
-    {
-      "id": "m56_9",
-      "poolKey": "math-56-1",
-      "text": "-3×(-4)=?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
-    {
-      "id": "m56_13",
-      "poolKey": "math-56-1",
-      "text": "-10+(-5)=?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
-    {
-      "id": "m56_18",
-      "poolKey": "math-56-1",
-      "text": "-8 + 3 = ?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
-    {
-      "id": "m78_11",
-      "poolKey": "math-78-1",
-      "text": "x²+3x=0→x=?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
-    {
-      "id": "m910_10",
-      "poolKey": "math-910-1",
-      "text": "tan(0°)=?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
-    {
-      "id": "m910_12",
-      "poolKey": "math-910-1",
-      "text": "cos(90°)=?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
-    {
-      "id": "m910_15",
-      "poolKey": "math-910-1",
-      "text": "cos(180°)=?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
-    {
-      "id": "m910_19",
-      "poolKey": "math-910-1",
-      "text": "log(a/b)=?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
-    {
-      "id": "m910_R1",
-      "poolKey": "math-910-1",
-      "text": "კვადრატული განტოლება x² − 5x + 6 = 0-ის ფესვებია:",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag"
-      ]
-    },
-    {
-      "id": "m910_R2",
-      "poolKey": "math-910-1",
-      "text": "კვადრატული განტოლების x² + 4x + 5 = 0 დისკრიმინანტი D = ?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag"
-      ]
-    },
-    {
-      "id": "m910_R3",
-      "poolKey": "math-910-1",
-      "text": "განტოლება 2x² − 3x − 2 = 0. ვიეტას ფორმულებით ფესვების ჯამი x₁+x₂ = ?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag"
-      ]
-    },
-    {
-      "id": "m910_R5",
-      "poolKey": "math-910-1",
-      "text": "თუ კვადრატული განტოლების ფესვებია x₁ = 3 და x₂ = −1, მაშინ ფესვების ნამრავლი x₁·x₂ = ?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag"
-      ]
-    },
-    {
-      "id": "m1112_3",
-      "poolKey": "math-1112-1",
-      "text": "(sin x)'=?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
-    {
-      "id": "m1112_4",
-      "poolKey": "math-1112-1",
-      "text": "lim(1/x),x→∞=?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
-    {
-      "id": "m1112_11",
-      "poolKey": "math-1112-1",
-      "text": "lim sin(x)/x,x→0=?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag"
-      ]
-    },
-    {
-      "id": "m1112_12",
-      "poolKey": "math-1112-1",
-      "text": "∫cos x dx=?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
-    {
-      "id": "m1112_15",
-      "poolKey": "math-1112-1",
-      "text": "(cos x)'=?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
-    {
-      "id": "m1112_16",
-      "poolKey": "math-1112-1",
-      "text": "f(x)=x³-3x. ლოკალური მინიმუმი სად?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag"
-      ]
-    },
-    {
-      "id": "eg1112_g11",
-      "poolKey": "eng-1112-1",
-      "text": "Correctly punctuated:",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag"
-      ]
-    },
-    {
-      "id": "n910_11",
-      "poolKey": "nat-910-1",
-      "text": "ელექტრული სიმძლავრე გამოიხატება ფორმულით:",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag"
-      ]
-    },
-    {
-      "id": "m56v2_3",
-      "poolKey": "math-56-2",
-      "text": "-7 + 3 = ?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
-    {
-      "id": "m56v2_8",
-      "poolKey": "math-56-2",
-      "text": "-2 × 5 = ?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
-    {
-      "id": "m56v2_13",
-      "poolKey": "math-56-2",
-      "text": "-6 - (-2) = ?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
-    {
-      "id": "m56v3_3",
-      "poolKey": "math-56-3",
-      "text": "-4 - 3 = ?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
-    {
-      "id": "m56v3_8",
-      "poolKey": "math-56-3",
-      "text": "-3 × (-4) = ?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
-    {
-      "id": "m56v3_13",
-      "poolKey": "math-56-3",
-      "text": "-8 + (-5) = ?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
-    {
-      "id": "m56v4_3",
-      "poolKey": "math-56-4",
-      "text": "-9 + 4 = ?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
-    {
-      "id": "m56v4_8",
-      "poolKey": "math-56-4",
-      "text": "-6 × 3 = ?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
-    {
-      "id": "m56v4_13",
-      "poolKey": "math-56-4",
-      "text": "-5 - (-8) = ?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
-    {
-      "id": "m56v5_3",
-      "poolKey": "math-56-5",
-      "text": "-2 - 9 = ?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
-    {
-      "id": "m56v5_8",
-      "poolKey": "math-56-5",
-      "text": "(-4) × (-7) = ?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
-    {
-      "id": "m56v5_13",
-      "poolKey": "math-56-5",
-      "text": "-10 + 3 = ?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
-    {
-      "id": "m910v2_3",
-      "poolKey": "math-910-2",
-      "text": "cos(90°) = ?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
-    {
-      "id": "m910v2_7",
-      "poolKey": "math-910-2",
-      "text": "sin(0°) = ?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
-    {
-      "id": "m910v2_14",
-      "poolKey": "math-910-2",
-      "text": "lim(x→∞) 1/x = ?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
-    {
-      "id": "m910v3_1",
-      "poolKey": "math-910-3",
-      "text": "tan(60°) = ?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
-    {
-      "id": "m910v3_3",
-      "poolKey": "math-910-3",
-      "text": "sin(150°) = ?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
-    {
-      "id": "m910v3_7",
-      "poolKey": "math-910-3",
-      "text": "sin(180°) = ?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
-    {
-      "id": "m910v3_8",
-      "poolKey": "math-910-3",
-      "text": "cos(120°) = ?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
-    {
-      "id": "m910v3_11",
-      "poolKey": "math-910-3",
-      "text": "tan(0°) = ?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
-    {
-      "id": "m910v3_13",
-      "poolKey": "math-910-3",
-      "text": "sin(270°) = ?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
-    {
-      "id": "m910v3_14",
-      "poolKey": "math-910-3",
-      "text": "lim(x→0) sin(x)/x = ?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag"
-      ]
-    },
-    {
-      "id": "m910v4_1",
-      "poolKey": "math-910-4",
-      "text": "cos(120°) = ?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
-    {
-      "id": "m910v4_7",
-      "poolKey": "math-910-4",
-      "text": "cos(270°) = ?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
-    {
-      "id": "m910v4_13",
-      "poolKey": "math-910-4",
-      "text": "sin(210°) = ?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
-    {
-      "id": "m910v5_3",
-      "poolKey": "math-910-5",
-      "text": "cos(180°) = ?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
-    {
-      "id": "m910v5_5",
-      "poolKey": "math-910-5",
-      "text": "tan(135°) = ?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
-    {
-      "id": "m910v5_7",
-      "poolKey": "math-910-5",
-      "text": "sin(315°) = ?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
-    {
-      "id": "m910v5_11",
-      "poolKey": "math-910-5",
-      "text": "cot(45°) = ?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
-    {
-      "id": "m910v5_14",
-      "poolKey": "math-910-5",
-      "text": "lim(x→∞) 5/x² = ?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
-    {
-      "id": "m1112v2_4",
-      "poolKey": "math-1112-2",
-      "text": "d/dx(cos x) = ?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
-    {
-      "id": "m1112v2_13",
-      "poolKey": "math-1112-2",
-      "text": "d/dx(sin x + x) = ?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag"
-      ]
-    },
-    {
-      "id": "m1112v3_10",
-      "poolKey": "math-1112-3",
-      "text": "∫₋₁¹ x dx = ?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
-    {
-      "id": "m1112v3_11",
-      "poolKey": "math-1112-3",
-      "text": "d/dx(3x³ - x) = ?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
-    {
-      "id": "m1112v3_14",
-      "poolKey": "math-1112-3",
-      "text": "d/dx(cos²x) = ?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
-    {
-      "id": "m1112v4_3",
-      "poolKey": "math-1112-4",
-      "text": "d/dx(x · cos x) = ?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag"
-      ]
-    },
-    {
-      "id": "m1112v4_5",
-      "poolKey": "math-1112-4",
-      "text": "∫ sin x dx = ?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
-    {
-      "id": "m1112v4_11",
-      "poolKey": "math-1112-4",
-      "text": "d/dx(x² + sin x) = ?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag"
-      ]
-    },
-    {
-      "id": "m1112v5_1",
-      "poolKey": "math-1112-5",
-      "text": "d/dx(sin x + x²) = ?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag"
-      ]
-    },
-    {
-      "id": "m1112v5_3",
-      "poolKey": "math-1112-5",
-      "text": "d/dx(x² · eˣ) = ?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
-    {
-      "id": "m1112v5_7",
-      "poolKey": "math-1112-5",
-      "text": "∫₋₂² x³ dx = ?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
-    {
-      "id": "m1112v5_9",
-      "poolKey": "math-1112-5",
-      "text": "d/dx(1/x) = ?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
-    {
-      "id": "m1112v5_11",
-      "poolKey": "math-1112-5",
-      "text": "d/dx(x² · sin x) = ?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag"
-      ]
-    },
-    {
-      "id": "m1112v5_13",
-      "poolKey": "math-1112-5",
-      "text": "∫₀¹ eˣ dx = ?",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag",
-        "fragmented_or_too_short_stem"
-      ]
-    },
     {
       "id": "r56v3_17",
       "poolKey": "rus-56-3",
@@ -12735,28 +11958,6 @@
       ]
     },
     {
-      "id": "n78v4_3",
-      "poolKey": "nat-78-4",
-      "text": "ქიმიური \"მჟავა\" ახასიათებს:",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag"
-      ]
-    },
-    {
-      "id": "n78v4_4",
-      "poolKey": "nat-78-4",
-      "text": "ქიმიური \"ტუტე\" ახასიათებს:",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag"
-      ]
-    },
-    {
       "id": "h56_8",
       "poolKey": "hist-56-1",
       "text": "ძველ საბერძნეთში გამართული სპორტული თამაშები ეწოდება:",
@@ -12779,127 +11980,6 @@
       ]
     },
     {
-      "id": "chem78_9",
-      "poolKey": "chem-78-1",
-      "text": "ჟანგვის ხარისხი H₂O-ში H-სთვის:",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag"
-      ]
-    },
-    {
-      "id": "chem78_10",
-      "poolKey": "chem-78-1",
-      "text": "ჟანგვის ხარისხი H₂O-ში O-სთვის:",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag"
-      ]
-    },
-    {
-      "id": "chem78v3_9",
-      "poolKey": "chem-78-3",
-      "text": "ოქსიდაციის ხარისხი Na-სთვის NaCl-ში:",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag"
-      ]
-    },
-    {
-      "id": "chem910_5",
-      "poolKey": "chem-910-1",
-      "text": "ალქანების ზოგადი ფორმულა:",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag"
-      ]
-    },
-    {
-      "id": "chem910_6",
-      "poolKey": "chem-910-1",
-      "text": "ალქენების ზოგადი ფორმულა:",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag"
-      ]
-    },
-    {
-      "id": "chem910_7",
-      "poolKey": "chem-910-1",
-      "text": "ალქინების ზოგადი ფორმულა:",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag"
-      ]
-    },
-    {
-      "id": "chem910v2_5",
-      "poolKey": "chem-910-2",
-      "text": "ეგზოთერმული რეაქციის ΔH:",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag"
-      ]
-    },
-    {
-      "id": "chem910v2_6",
-      "poolKey": "chem-910-2",
-      "text": "ენდოთერმული რეაქციის ΔH:",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag"
-      ]
-    },
-    {
-      "id": "chem1112_2",
-      "poolKey": "chem-1112-1",
-      "text": "გალვანური ელემენტის ემძ (EMF):",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag"
-      ]
-    },
-    {
-      "id": "chem1112v3_7",
-      "poolKey": "chem-1112-3",
-      "text": "სტანდარტული ელექტრო-პოტენციალი H₂-ისთვის:",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag"
-      ]
-    },
-    {
-      "id": "chem1112v5_11",
-      "poolKey": "chem-1112-5",
-      "text": "გამოიყვანეთ ΔH NH₃-ის სინთეზისთვის: N₂ + 3H₂ → 2NH₃, ΔH = -92 kJ, 1 მოლ NH₃-ისთვის:",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag"
-      ]
-    },
-    {
       "id": "phys12v5_8",
       "poolKey": "phys-12-5",
       "text": "ორი მაგნიტი ერთმანეთს ეწინააღმდეგება, ეს ნიშნავს, რომ...",
@@ -12908,39 +11988,6 @@
         "missing_explicit_outcome",
         "missing_skill_tag",
         "answer_echoes_prompt"
-      ]
-    },
-    {
-      "id": "phys56_3",
-      "poolKey": "phys-56-1",
-      "text": "წნევა გამოითვლება...",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag"
-      ]
-    },
-    {
-      "id": "phys56v2_4",
-      "poolKey": "phys-56-2",
-      "text": "1 პასკალი (პა) ტოლია...",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag"
-      ]
-    },
-    {
-      "id": "phys1112v2_10",
-      "poolKey": "phys-1112-2",
-      "text": "ფოტოელექტრული ეფექტი: E_kin=hf-W, სად W სამუშაო ფუნქციაა. ელექტრონი გამოდის მეტალიდან, თუ:",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag"
       ]
     },
     {
@@ -12966,17 +12013,6 @@
       ]
     },
     {
-      "id": "chem1112v6_3",
-      "poolKey": "chem-1112-6",
-      "text": "ΔG = ΔH - TΔS. T=300K, ΔH=-100 კჯ, ΔS=+200 ჯ/K. ΔG:",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag"
-      ]
-    },
-    {
       "id": "chem1112v6_5",
       "poolKey": "chem-1112-6",
       "text": "Ksp CaCO₃=3.3×10⁻⁹. ეს ნიშნავს:",
@@ -12985,50 +12021,6 @@
         "missing_explicit_outcome",
         "missing_skill_tag",
         "answer_echoes_prompt"
-      ]
-    },
-    {
-      "id": "chem1112v6_13",
-      "poolKey": "chem-1112-6",
-      "text": "ენდოთერმული რეაქცია:",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag"
-      ]
-    },
-    {
-      "id": "chem12v6_5",
-      "poolKey": "chem-12-6",
-      "text": "ლიმონი მჟავეა, ეს ნიშნავს:",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag"
-      ]
-    },
-    {
-      "id": "chem56v6_19",
-      "poolKey": "chem-56-6",
-      "text": "NaOH pH მნიშვნელობა:",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag"
-      ]
-    },
-    {
-      "id": "chem78v6_2",
-      "poolKey": "chem-78-6",
-      "text": "ჟანგვის ხარისხი Na₂SO₄-ში S-ისა:",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag"
       ]
     },
     {
@@ -13051,124 +12043,6 @@
         "missing_explicit_outcome",
         "missing_skill_tag",
         "answer_echoes_prompt"
-      ]
-    },
-    {
-      "id": "m1112v6_7",
-      "poolKey": "math-1112-6",
-      "text": "ვექტორები a⃗=(3;4), b⃗=(1;−2). |a⃗+b⃗| =",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag"
-      ]
-    },
-    {
-      "id": "m1112v6_10",
-      "poolKey": "math-1112-6",
-      "text": "f(x)=x³−3x. ფუნქციის ლოკალური მინიმუმი:",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag"
-      ]
-    },
-    {
-      "id": "m1112v6_14",
-      "poolKey": "math-1112-6",
-      "text": "ბურთი ისროლეს ვერტიკალურად ზევით: h(t)=−5t²+20t. მაქსიმალური სიმაღლე:",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag"
-      ]
-    },
-    {
-      "id": "m12vis_8",
-      "poolKey": "math-12-7",
-      "text": "რომელი მოქმედებით ვითვლით სურათზე ყველა ვაშლს ორ რიგად?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "m56v6_6",
-      "poolKey": "math-56-6",
-      "text": "ორშაბათს ჰაერის ტემპერატურა იყო −3°C. ტემპერატურა კიდევ 7 გრადუსით დაეცა. ახალი ტემპერატურაა:",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag"
-      ]
-    },
-    {
-      "id": "m56v6_14",
-      "poolKey": "math-56-6",
-      "text": "გამოთვალეთ: (−8)×(−6)+(−4)×5",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag"
-      ]
-    },
-    {
-      "id": "m78v6_6",
-      "poolKey": "math-78-6",
-      "text": "ფასი გაიზარდა 80 ₾-დან 100 ₾-მდე. პროცენტული ზრდაა:",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag"
-      ]
-    },
-    {
-      "id": "m910v6_7",
-      "poolKey": "math-910-6",
-      "text": "2x²−5x+3=0 განტოლების ფესვებია:",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag"
-      ]
-    },
-    {
-      "id": "m910v6_11",
-      "poolKey": "math-910-6",
-      "text": "f(x)=x²−5x+6 ფუნქციის ნულებია:",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag"
-      ]
-    },
-    {
-      "id": "m910v6_12",
-      "poolKey": "math-910-6",
-      "text": "გადაუტანეთ: 3x−7>2x+5. გამოსავალი:",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag"
-      ]
-    },
-    {
-      "id": "m910v6_19",
-      "poolKey": "math-910-6",
-      "text": "f(x)=x². g(x)=f(x−2)+3. g ფუნქციის ვერტექსი:",
-      "flags": [
-        "duplicate_options",
-        "missing_explanation",
-        "missing_explicit_outcome",
-        "missing_skill_tag"
       ]
     },
     {
@@ -14200,715 +13074,183 @@
       ]
     },
     {
-      "id": "lb26-kab-g7-s1-v1-u0-q2",
-      "poolKey": "kab-g7-1",
-      "text": "VII კლასი, I სემესტრი, თემა 1, სავარჯიშო 2. ყურადღებით წაიკითხე და აირჩიე პასუხი: რომელ წინადადებაშია მიმართვა სწორად გამოყოფილი?",
+      "id": "exp26-eng-1-37",
+      "poolKey": "eng-12-6",
+      "text": "სწორია თუ მცდარია: “cat” ნიშნავს „კატა“-ს.",
       "flags": [
-        "duplicate_options"
+        "low_depth_binary_format",
+        "answer_echoes_prompt"
       ]
     },
     {
-      "id": "lb26-kab-g7-s1-v1-u1-q7",
-      "poolKey": "kab-g7-1",
-      "text": "VII კლასი, I სემესტრი, თემა 2, სავარჯიშო 7. ყურადღებით წაიკითხე და აირჩიე პასუხი: რომელი სიტყვაა მართლწერის ნორმის შესაბამისად დაწერილი?",
+      "id": "exp26-eng-2-38",
+      "poolKey": "eng-12-6",
+      "text": "სწორია თუ მცდარია: “cat” ნიშნავს „კატა“-ს.",
       "flags": [
-        "duplicate_options"
+        "low_depth_binary_format",
+        "answer_echoes_prompt"
       ]
     },
     {
-      "id": "lb26-kab-g7-s1-v1-u1-q11",
-      "poolKey": "kab-g7-1",
-      "text": "VII კლასი, I სემესტრი, თემა 2, სავარჯიშო 11. ყურადღებით წაიკითხე და აირჩიე პასუხი: რომელ წინადადებაშია მიმართვა სწორად გამოყოფილი?",
+      "id": "exp26-eng-1-39",
+      "poolKey": "eng-12-6",
+      "text": "ყურადღებით წაიკითხე და შეასრულე: სწორია თუ მცდარია: “dog” ნიშნავს „ძაღლი“-ს.",
       "flags": [
-        "duplicate_options"
+        "low_depth_binary_format",
+        "answer_echoes_prompt"
       ]
     },
     {
-      "id": "lb26-kab-g7-s2-v2-u0-q2",
-      "poolKey": "kab-g7-2",
-      "text": "VII კლასი, II სემესტრი, თემა 1, სავარჯიშო 2. დაეყრდენი ტექსტურ ან ენობრივ ნიშანს: რომელ წინადადებაშია მიმართვა სწორად გამოყოფილი?",
+      "id": "exp26-eng-2-40",
+      "poolKey": "eng-12-6",
+      "text": "ყურადღებით წაიკითხე და შეასრულე: სწორია თუ მცდარია: “dog” ნიშნავს „ძაღლი“-ს.",
       "flags": [
-        "duplicate_options"
+        "low_depth_binary_format",
+        "answer_echoes_prompt"
       ]
     },
     {
-      "id": "lb26-kab-g7-s1-v3-u0-q2",
-      "poolKey": "kab-g7-3",
-      "text": "VII კლასი, I სემესტრი, თემა 1, სავარჯიშო 2. იმსჯელე და მონიშნე დასაბუთებული პასუხი: რომელ წინადადებაშია მიმართვა სწორად გამოყოფილი?",
+      "id": "exp26-eng-1-85",
+      "poolKey": "eng-12-6",
+      "text": "სწორია თუ მცდარია: “book” ნიშნავს „წიგნი“-ს.",
       "flags": [
-        "duplicate_options"
+        "low_depth_binary_format",
+        "answer_echoes_prompt"
       ]
     },
     {
-      "id": "lb26-kab-g7-s2-v4-u0-q3",
-      "poolKey": "kab-g7-4",
-      "text": "VII კლასი, II სემესტრი, თემა 1, სავარჯიშო 3. შეამოწმე ყველა ვარიანტი და უპასუხე: რომელი სიტყვაა მართლწერის ნორმის შესაბამისად დაწერილი?",
+      "id": "exp26-eng-2-86",
+      "poolKey": "eng-12-6",
+      "text": "სწორია თუ მცდარია: “book” ნიშნავს „წიგნი“-ს.",
       "flags": [
-        "duplicate_options"
+        "low_depth_binary_format",
+        "answer_echoes_prompt"
       ]
     },
     {
-      "id": "lb26-kab-g7-s2-v4-u0-q7",
-      "poolKey": "kab-g7-4",
-      "text": "VII კლასი, II სემესტრი, თემა 1, სავარჯიშო 7. შეამოწმე ყველა ვარიანტი და უპასუხე: რომელ წინადადებაშია მიმართვა სწორად გამოყოფილი?",
+      "id": "exp26-eng-1-87",
+      "poolKey": "eng-12-6",
+      "text": "ყურადღებით წაიკითხე და შეასრულე: სწორია თუ მცდარია: “tree” ნიშნავს „ხე“-ს.",
       "flags": [
-        "duplicate_options"
+        "low_depth_binary_format",
+        "answer_echoes_prompt"
       ]
     },
     {
-      "id": "lb26-kab-g8-s2-v1-u0-q2",
-      "poolKey": "kab-g8-1",
-      "text": "VIII კლასი, II სემესტრი, თემა 1, სავარჯიშო 2. ყურადღებით წაიკითხე და აირჩიე პასუხი: რომელ წინადადებაშია მიმართვა სწორად გამოყოფილი?",
+      "id": "exp26-eng-2-88",
+      "poolKey": "eng-12-6",
+      "text": "ყურადღებით წაიკითხე და შეასრულე: სწორია თუ მცდარია: “tree” ნიშნავს „ხე“-ს.",
       "flags": [
-        "duplicate_options"
+        "low_depth_binary_format",
+        "answer_echoes_prompt"
       ]
     },
     {
-      "id": "lb26-kab-g8-s1-v2-u0-q2",
-      "poolKey": "kab-g8-2",
-      "text": "VIII კლასი, I სემესტრი, თემა 1, სავარჯიშო 2. დაეყრდენი ტექსტურ ან ენობრივ ნიშანს: რომელ წინადადებაშია მიმართვა სწორად გამოყოფილი?",
+      "id": "exp26-eng-1-133",
+      "poolKey": "eng-12-6",
+      "text": "სწორია თუ მცდარია: “sun” ნიშნავს „მზე“-ს.",
       "flags": [
-        "duplicate_options"
+        "low_depth_binary_format",
+        "answer_echoes_prompt"
       ]
     },
     {
-      "id": "lb26-kab-g8-s2-v2-u0-q4",
-      "poolKey": "kab-g8-2",
-      "text": "VIII კლასი, II სემესტრი, თემა 1, სავარჯიშო 4. დაეყრდენი ტექსტურ ან ენობრივ ნიშანს: რომელ წინადადებაშია მიმართვა სწორად გამოყოფილი?",
+      "id": "exp26-eng-2-134",
+      "poolKey": "eng-12-6",
+      "text": "სწორია თუ მცდარია: “sun” ნიშნავს „მზე“-ს.",
       "flags": [
-        "duplicate_options"
+        "low_depth_binary_format",
+        "answer_echoes_prompt"
       ]
     },
     {
-      "id": "lb26-kab-g8-s1-v3-u0-q4",
-      "poolKey": "kab-g8-3",
-      "text": "VIII კლასი, I სემესტრი, თემა 1, სავარჯიშო 4. იმსჯელე და მონიშნე დასაბუთებული პასუხი: რომელ წინადადებაშია მიმართვა სწორად გამოყოფილი?",
+      "id": "exp26-eng-1-135",
+      "poolKey": "eng-12-6",
+      "text": "ყურადღებით წაიკითხე და შეასრულე: სწორია თუ მცდარია: “ball” ნიშნავს „ბურთი“-ს.",
       "flags": [
-        "duplicate_options"
+        "low_depth_binary_format",
+        "answer_echoes_prompt"
       ]
     },
     {
-      "id": "lb26-kab-g8-s2-v3-u0-q7",
-      "poolKey": "kab-g8-3",
-      "text": "VIII კლასი, II სემესტრი, თემა 1, სავარჯიშო 7. იმსჯელე და მონიშნე დასაბუთებული პასუხი: რომელ წინადადებაშია მიმართვა სწორად გამოყოფილი?",
+      "id": "exp26-eng-2-136",
+      "poolKey": "eng-12-6",
+      "text": "ყურადღებით წაიკითხე და შეასრულე: სწორია თუ მცდარია: “ball” ნიშნავს „ბურთი“-ს.",
       "flags": [
-        "duplicate_options"
+        "low_depth_binary_format",
+        "answer_echoes_prompt"
       ]
     },
     {
-      "id": "lb26-kab-g8-s1-v4-u0-q7",
-      "poolKey": "kab-g8-4",
-      "text": "VIII კლასი, I სემესტრი, თემა 1, სავარჯიშო 7. შეამოწმე ყველა ვარიანტი და უპასუხე: რომელ წინადადებაშია მიმართვა სწორად გამოყოფილი?",
+      "id": "exp26-eng-1-181",
+      "poolKey": "eng-12-6",
+      "text": "სწორია თუ მცდარია: “apple” ნიშნავს „ვაშლი“-ს.",
       "flags": [
-        "duplicate_options"
+        "low_depth_binary_format",
+        "answer_echoes_prompt"
       ]
     },
     {
-      "id": "lb26-kab-g8-s2-v4-u0-q3",
-      "poolKey": "kab-g8-4",
-      "text": "VIII კლასი, II სემესტრი, თემა 1, სავარჯიშო 3. შეამოწმე ყველა ვარიანტი და უპასუხე: რომელი სიტყვაა მართლწერის ნორმის შესაბამისად დაწერილი?",
+      "id": "exp26-eng-2-182",
+      "poolKey": "eng-12-6",
+      "text": "სწორია თუ მცდარია: “apple” ნიშნავს „ვაშლი“-ს.",
       "flags": [
-        "duplicate_options"
+        "low_depth_binary_format",
+        "answer_echoes_prompt"
       ]
     },
     {
-      "id": "lb26-kab-g8-s2-v4-u0-q7",
-      "poolKey": "kab-g8-4",
-      "text": "VIII კლასი, II სემესტრი, თემა 1, სავარჯიშო 7. შეამოწმე ყველა ვარიანტი და უპასუხე: რომელ წინადადებაშია მიმართვა სწორად გამოყოფილი?",
+      "id": "exp26-eng-1-183",
+      "poolKey": "eng-12-6",
+      "text": "ყურადღებით წაიკითხე და შეასრულე: სწორია თუ მცდარია: “fish” ნიშნავს „თევზი“-ს.",
       "flags": [
-        "duplicate_options"
+        "low_depth_binary_format",
+        "answer_echoes_prompt"
       ]
     },
     {
-      "id": "lb26-kab-g9-s1-v1-u0-q2",
-      "poolKey": "kab-g9-1",
-      "text": "IX კლასი, I სემესტრი, თემა 1, სავარჯიშო 2. ყურადღებით წაიკითხე და აირჩიე პასუხი: რომელ წინადადებაშია ჩართული სიტყვა სწორად გამოყოფილი?",
+      "id": "exp26-eng-2-184",
+      "poolKey": "eng-12-6",
+      "text": "ყურადღებით წაიკითხე და შეასრულე: სწორია თუ მცდარია: “fish” ნიშნავს „თევზი“-ს.",
       "flags": [
-        "duplicate_options"
+        "low_depth_binary_format",
+        "answer_echoes_prompt"
       ]
     },
     {
-      "id": "lb26-kab-g9-s2-v1-u0-q4",
-      "poolKey": "kab-g9-1",
-      "text": "IX კლასი, II სემესტრი, თემა 1, სავარჯიშო 4. ყურადღებით წაიკითხე და აირჩიე პასუხი: რომელ წინადადებაშია ჩართული სიტყვა სწორად გამოყოფილი?",
+      "id": "exp26-eng-1-229",
+      "poolKey": "eng-12-6",
+      "text": "სწორია თუ მცდარია: “bird” ნიშნავს „ჩიტი“-ს.",
       "flags": [
-        "duplicate_options"
+        "low_depth_binary_format",
+        "answer_echoes_prompt"
       ]
     },
     {
-      "id": "lb26-kab-g9-s2-v1-u0-q7",
-      "poolKey": "kab-g9-1",
-      "text": "IX კლასი, II სემესტრი, თემა 1, სავარჯიშო 7. ყურადღებით წაიკითხე და აირჩიე პასუხი: რომელ წინადადებაშია ჩართული სიტყვა სწორად გამოყოფილი?",
+      "id": "exp26-eng-2-230",
+      "poolKey": "eng-12-6",
+      "text": "სწორია თუ მცდარია: “bird” ნიშნავს „ჩიტი“-ს.",
       "flags": [
-        "duplicate_options"
+        "low_depth_binary_format",
+        "answer_echoes_prompt"
       ]
     },
     {
-      "id": "lb26-kab-g9-s1-v2-u0-q4",
-      "poolKey": "kab-g9-2",
-      "text": "IX კლასი, I სემესტრი, თემა 1, სავარჯიშო 4. დაეყრდენი ტექსტურ ან ენობრივ ნიშანს: რომელ წინადადებაშია ჩართული სიტყვა სწორად გამოყოფილი?",
+      "id": "exp26-eng-1-231",
+      "poolKey": "eng-12-6",
+      "text": "ყურადღებით წაიკითხე და შეასრულე: სწორია თუ მცდარია: “flower” ნიშნავს „ყვავილი“-ს.",
       "flags": [
-        "duplicate_options"
+        "low_depth_binary_format",
+        "answer_echoes_prompt"
       ]
     },
     {
-      "id": "lb26-kab-g9-s1-v2-u0-q7",
-      "poolKey": "kab-g9-2",
-      "text": "IX კლასი, I სემესტრი, თემა 1, სავარჯიშო 7. დაეყრდენი ტექსტურ ან ენობრივ ნიშანს: რომელ წინადადებაშია ჩართული სიტყვა სწორად გამოყოფილი?",
+      "id": "exp26-eng-2-232",
+      "poolKey": "eng-12-6",
+      "text": "ყურადღებით წაიკითხე და შეასრულე: სწორია თუ მცდარია: “flower” ნიშნავს „ყვავილი“-ს.",
       "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-kab-g9-s2-v2-u0-q3",
-      "poolKey": "kab-g9-2",
-      "text": "IX კლასი, II სემესტრი, თემა 1, სავარჯიშო 3. დაეყრდენი ტექსტურ ან ენობრივ ნიშანს: რომელი სიტყვაა მართლწერის ნორმის შესაბამისად დაწერილი?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-kab-g9-s2-v2-u0-q6",
-      "poolKey": "kab-g9-2",
-      "text": "IX კლასი, II სემესტრი, თემა 1, სავარჯიშო 6. დაეყრდენი ტექსტურ ან ენობრივ ნიშანს: რომელ წინადადებაშია ჩართული სიტყვა სწორად გამოყოფილი?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-kab-g9-s1-v3-u0-q3",
-      "poolKey": "kab-g9-3",
-      "text": "IX კლასი, I სემესტრი, თემა 1, სავარჯიშო 3. იმსჯელე და მონიშნე დასაბუთებული პასუხი: რომელი სიტყვაა მართლწერის ნორმის შესაბამისად დაწერილი?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-kab-g9-s1-v3-u0-q6",
-      "poolKey": "kab-g9-3",
-      "text": "IX კლასი, I სემესტრი, თემა 1, სავარჯიშო 6. იმსჯელე და მონიშნე დასაბუთებული პასუხი: რომელ წინადადებაშია ჩართული სიტყვა სწორად გამოყოფილი?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-kab-g9-s2-v3-u0-q3",
-      "poolKey": "kab-g9-3",
-      "text": "IX კლასი, II სემესტრი, თემა 1, სავარჯიშო 3. იმსჯელე და მონიშნე დასაბუთებული პასუხი: რომელი სიტყვაა მართლწერის ნორმის შესაბამისად დაწერილი?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-kab-g9-s2-v3-u0-q6",
-      "poolKey": "kab-g9-3",
-      "text": "IX კლასი, II სემესტრი, თემა 1, სავარჯიშო 6. იმსჯელე და მონიშნე დასაბუთებული პასუხი: რომელ წინადადებაშია ჩართული სიტყვა სწორად გამოყოფილი?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-kab-g9-s1-v4-u0-q3",
-      "poolKey": "kab-g9-4",
-      "text": "IX კლასი, I სემესტრი, თემა 1, სავარჯიშო 3. შეამოწმე ყველა ვარიანტი და უპასუხე: რომელი სიტყვაა მართლწერის ნორმის შესაბამისად დაწერილი?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-kab-g9-s1-v4-u0-q6",
-      "poolKey": "kab-g9-4",
-      "text": "IX კლასი, I სემესტრი, თემა 1, სავარჯიშო 6. შეამოწმე ყველა ვარიანტი და უპასუხე: რომელ წინადადებაშია ჩართული სიტყვა სწორად გამოყოფილი?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-kab-g9-s2-v4-u0-q10",
-      "poolKey": "kab-g9-4",
-      "text": "IX კლასი, II სემესტრი, თემა 1, სავარჯიშო 10. შეამოწმე ყველა ვარიანტი და უპასუხე: რომელ წინადადებაშია ჩართული სიტყვა სწორად გამოყოფილი?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-kab-g10-s1-v1-u0-q4",
-      "poolKey": "kab-g10-1",
-      "text": "X კლასი, I სემესტრი, თემა 1, სავარჯიშო 4. ყურადღებით წაიკითხე და აირჩიე პასუხი: რომელ წინადადებაშია ჩართული სიტყვა სწორად გამოყოფილი?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-kab-g10-s1-v1-u0-q7",
-      "poolKey": "kab-g10-1",
-      "text": "X კლასი, I სემესტრი, თემა 1, სავარჯიშო 7. ყურადღებით წაიკითხე და აირჩიე პასუხი: რომელ წინადადებაშია ჩართული სიტყვა სწორად გამოყოფილი?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-kab-g10-s2-v1-u0-q3",
-      "poolKey": "kab-g10-1",
-      "text": "X კლასი, II სემესტრი, თემა 1, სავარჯიშო 3. ყურადღებით წაიკითხე და აირჩიე პასუხი: რომელი სიტყვაა მართლწერის ნორმის შესაბამისად დაწერილი?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-kab-g10-s2-v1-u0-q6",
-      "poolKey": "kab-g10-1",
-      "text": "X კლასი, II სემესტრი, თემა 1, სავარჯიშო 6. ყურადღებით წაიკითხე და აირჩიე პასუხი: რომელ წინადადებაშია ჩართული სიტყვა სწორად გამოყოფილი?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-kab-g10-s1-v2-u0-q3",
-      "poolKey": "kab-g10-2",
-      "text": "X კლასი, I სემესტრი, თემა 1, სავარჯიშო 3. დაეყრდენი ტექსტურ ან ენობრივ ნიშანს: რომელი სიტყვაა მართლწერის ნორმის შესაბამისად დაწერილი?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-kab-g10-s1-v2-u0-q6",
-      "poolKey": "kab-g10-2",
-      "text": "X კლასი, I სემესტრი, თემა 1, სავარჯიშო 6. დაეყრდენი ტექსტურ ან ენობრივ ნიშანს: რომელ წინადადებაშია ჩართული სიტყვა სწორად გამოყოფილი?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-kab-g10-s2-v2-u0-q3",
-      "poolKey": "kab-g10-2",
-      "text": "X კლასი, II სემესტრი, თემა 1, სავარჯიშო 3. დაეყრდენი ტექსტურ ან ენობრივ ნიშანს: რომელი სიტყვაა მართლწერის ნორმის შესაბამისად დაწერილი?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-kab-g10-s2-v2-u0-q6",
-      "poolKey": "kab-g10-2",
-      "text": "X კლასი, II სემესტრი, თემა 1, სავარჯიშო 6. დაეყრდენი ტექსტურ ან ენობრივ ნიშანს: რომელ წინადადებაშია ჩართული სიტყვა სწორად გამოყოფილი?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-kab-g10-s1-v3-u0-q3",
-      "poolKey": "kab-g10-3",
-      "text": "X კლასი, I სემესტრი, თემა 1, სავარჯიშო 3. იმსჯელე და მონიშნე დასაბუთებული პასუხი: რომელი სიტყვაა მართლწერის ნორმის შესაბამისად დაწერილი?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-kab-g10-s1-v3-u0-q6",
-      "poolKey": "kab-g10-3",
-      "text": "X კლასი, I სემესტრი, თემა 1, სავარჯიშო 6. იმსჯელე და მონიშნე დასაბუთებული პასუხი: რომელ წინადადებაშია ჩართული სიტყვა სწორად გამოყოფილი?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-kab-g10-s2-v3-u0-q10",
-      "poolKey": "kab-g10-3",
-      "text": "X კლასი, II სემესტრი, თემა 1, სავარჯიშო 10. იმსჯელე და მონიშნე დასაბუთებული პასუხი: რომელ წინადადებაშია ჩართული სიტყვა სწორად გამოყოფილი?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-kab-g10-s1-v4-u0-q10",
-      "poolKey": "kab-g10-4",
-      "text": "X კლასი, I სემესტრი, თემა 1, სავარჯიშო 10. შეამოწმე ყველა ვარიანტი და უპასუხე: რომელ წინადადებაშია ჩართული სიტყვა სწორად გამოყოფილი?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-kab-g10-s2-v4-u0-q10",
-      "poolKey": "kab-g10-4",
-      "text": "X კლასი, II სემესტრი, თემა 1, სავარჯიშო 10. შეამოწმე ყველა ვარიანტი და უპასუხე: რომელ წინადადებაშია ჩართული სიტყვა სწორად გამოყოფილი?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-kab-g11-s1-v1-u0-q3",
-      "poolKey": "kab-g11-1",
-      "text": "XI კლასი, I სემესტრი, თემა 1, სავარჯიშო 3. ყურადღებით წაიკითხე და აირჩიე პასუხი: რომელი სიტყვაა მართლწერის ნორმის შესაბამისად დაწერილი?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-kab-g11-s1-v1-u0-q6",
-      "poolKey": "kab-g11-1",
-      "text": "XI კლასი, I სემესტრი, თემა 1, სავარჯიშო 6. ყურადღებით წაიკითხე და აირჩიე პასუხი: რომელ წინადადებაშია ჩართული სიტყვა სწორად გამოყოფილი?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-kab-g11-s2-v1-u0-q3",
-      "poolKey": "kab-g11-1",
-      "text": "XI კლასი, II სემესტრი, თემა 1, სავარჯიშო 3. ყურადღებით წაიკითხე და აირჩიე პასუხი: რომელი სიტყვაა მართლწერის ნორმის შესაბამისად დაწერილი?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-kab-g11-s2-v1-u0-q6",
-      "poolKey": "kab-g11-1",
-      "text": "XI კლასი, II სემესტრი, თემა 1, სავარჯიშო 6. ყურადღებით წაიკითხე და აირჩიე პასუხი: რომელ წინადადებაშია ჩართული სიტყვა სწორად გამოყოფილი?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-kab-g11-s1-v2-u0-q3",
-      "poolKey": "kab-g11-2",
-      "text": "XI კლასი, I სემესტრი, თემა 1, სავარჯიშო 3. დაეყრდენი ტექსტურ ან ენობრივ ნიშანს: რომელი სიტყვაა მართლწერის ნორმის შესაბამისად დაწერილი?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-kab-g11-s1-v2-u0-q6",
-      "poolKey": "kab-g11-2",
-      "text": "XI კლასი, I სემესტრი, თემა 1, სავარჯიშო 6. დაეყრდენი ტექსტურ ან ენობრივ ნიშანს: რომელ წინადადებაშია ჩართული სიტყვა სწორად გამოყოფილი?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-kab-g11-s2-v2-u0-q10",
-      "poolKey": "kab-g11-2",
-      "text": "XI კლასი, II სემესტრი, თემა 1, სავარჯიშო 10. დაეყრდენი ტექსტურ ან ენობრივ ნიშანს: რომელ წინადადებაშია ჩართული სიტყვა სწორად გამოყოფილი?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-kab-g11-s1-v3-u0-q10",
-      "poolKey": "kab-g11-3",
-      "text": "XI კლასი, I სემესტრი, თემა 1, სავარჯიშო 10. იმსჯელე და მონიშნე დასაბუთებული პასუხი: რომელ წინადადებაშია ჩართული სიტყვა სწორად გამოყოფილი?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-kab-g11-s2-v3-u0-q10",
-      "poolKey": "kab-g11-3",
-      "text": "XI კლასი, II სემესტრი, თემა 1, სავარჯიშო 10. იმსჯელე და მონიშნე დასაბუთებული პასუხი: რომელ წინადადებაშია ჩართული სიტყვა სწორად გამოყოფილი?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-kab-g11-s1-v4-u0-q10",
-      "poolKey": "kab-g11-4",
-      "text": "XI კლასი, I სემესტრი, თემა 1, სავარჯიშო 10. შეამოწმე ყველა ვარიანტი და უპასუხე: რომელ წინადადებაშია ჩართული სიტყვა სწორად გამოყოფილი?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-kab-g11-s2-v4-u0-q12",
-      "poolKey": "kab-g11-4",
-      "text": "XI კლასი, II სემესტრი, თემა 1, სავარჯიშო 12. შეამოწმე ყველა ვარიანტი და უპასუხე: რომელ წინადადებაშია ჩართული სიტყვა სწორად გამოყოფილი?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-kab-g11-s2-v4-u1-q3",
-      "poolKey": "kab-g11-4",
-      "text": "XI კლასი, II სემესტრი, თემა 2, სავარჯიშო 3. შეამოწმე ყველა ვარიანტი და უპასუხე: რომელ წინადადებაშია ჩართული სიტყვა სწორად გამოყოფილი?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-kab-g12-s1-v1-u0-q6",
-      "poolKey": "kab-g12-1",
-      "text": "XII კლასი, I სემესტრი, თემა 1, სავარჯიშო 6. ყურადღებით წაიკითხე და აირჩიე პასუხი: რომელ წინადადებაშია ჩართული სიტყვა სწორად გამოყოფილი?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-kab-g12-s2-v1-u0-q10",
-      "poolKey": "kab-g12-1",
-      "text": "XII კლასი, II სემესტრი, თემა 1, სავარჯიშო 10. ყურადღებით წაიკითხე და აირჩიე პასუხი: რომელ წინადადებაშია ჩართული სიტყვა სწორად გამოყოფილი?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-kab-g12-s1-v2-u0-q10",
-      "poolKey": "kab-g12-2",
-      "text": "XII კლასი, I სემესტრი, თემა 1, სავარჯიშო 10. დაეყრდენი ტექსტურ ან ენობრივ ნიშანს: რომელ წინადადებაშია ჩართული სიტყვა სწორად გამოყოფილი?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-kab-g12-s2-v2-u0-q10",
-      "poolKey": "kab-g12-2",
-      "text": "XII კლასი, II სემესტრი, თემა 1, სავარჯიშო 10. დაეყრდენი ტექსტურ ან ენობრივ ნიშანს: რომელ წინადადებაშია ჩართული სიტყვა სწორად გამოყოფილი?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-kab-g12-s1-v3-u0-q10",
-      "poolKey": "kab-g12-3",
-      "text": "XII კლასი, I სემესტრი, თემა 1, სავარჯიშო 10. იმსჯელე და მონიშნე დასაბუთებული პასუხი: რომელ წინადადებაშია ჩართული სიტყვა სწორად გამოყოფილი?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-kab-g12-s2-v3-u0-q12",
-      "poolKey": "kab-g12-3",
-      "text": "XII კლასი, II სემესტრი, თემა 1, სავარჯიშო 12. იმსჯელე და მონიშნე დასაბუთებული პასუხი: რომელ წინადადებაშია ჩართული სიტყვა სწორად გამოყოფილი?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-kab-g12-s2-v3-u1-q3",
-      "poolKey": "kab-g12-3",
-      "text": "XII კლასი, II სემესტრი, თემა 2, სავარჯიშო 3. იმსჯელე და მონიშნე დასაბუთებული პასუხი: რომელ წინადადებაშია ჩართული სიტყვა სწორად გამოყოფილი?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-kab-g12-s1-v4-u0-q12",
-      "poolKey": "kab-g12-4",
-      "text": "XII კლასი, I სემესტრი, თემა 1, სავარჯიშო 12. შეამოწმე ყველა ვარიანტი და უპასუხე: რომელ წინადადებაშია ჩართული სიტყვა სწორად გამოყოფილი?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-kab-g12-s1-v4-u1-q3",
-      "poolKey": "kab-g12-4",
-      "text": "XII კლასი, I სემესტრი, თემა 2, სავარჯიშო 3. შეამოწმე ყველა ვარიანტი და უპასუხე: რომელ წინადადებაშია ჩართული სიტყვა სწორად გამოყოფილი?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-kab-g12-s2-v4-u1-q4",
-      "poolKey": "kab-g12-4",
-      "text": "XII კლასი, II სემესტრი, თემა 2, სავარჯიშო 4. შეამოწმე ყველა ვარიანტი და უპასუხე: რომელ წინადადებაშია ჩართული სიტყვა სწორად გამოყოფილი?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-rub-g10-s1-v1-u1-q8",
-      "poolKey": "rub-g10-1",
-      "text": "Класс 10, семестр 1, раздел 2, задание 8. Прочитайте внимательно и выберите ответ: Где правильно расставлены знаки?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-rub-g10-s2-v2-u1-q12",
-      "poolKey": "rub-g10-2",
-      "text": "Класс 10, семестр 2, раздел 2, задание 12. Используйте языковую подсказку: Где правильно расставлены знаки?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-rub-g10-s1-v3-u0-q12",
-      "poolKey": "rub-g10-3",
-      "text": "Класс 10, семестр 1, раздел 1, задание 12. Рассуждайте по шагам и ответьте: Где правильно расставлены знаки?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-rub-g10-s1-v3-u1-q3",
-      "poolKey": "rub-g10-3",
-      "text": "Класс 10, семестр 1, раздел 2, задание 3. Рассуждайте по шагам и ответьте: Где правильно расставлены знаки?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-rub-g10-s1-v4-u0-q6",
-      "poolKey": "rub-g10-4",
-      "text": "Класс 10, семестр 1, раздел 1, задание 6. Проверьте варианты и ответьте: Где правильно расставлены знаки?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-rub-g10-s1-v4-u1-q4",
-      "poolKey": "rub-g10-4",
-      "text": "Класс 10, семестр 1, раздел 2, задание 4. Проверьте варианты и ответьте: Где правильно расставлены знаки?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-rub-g10-s2-v4-u0-q2",
-      "poolKey": "rub-g10-4",
-      "text": "Класс 10, семестр 2, раздел 1, задание 2. Проверьте варианты и ответьте: Где правильно расставлены знаки?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-rub-g11-s1-v1-u0-q3",
-      "poolKey": "rub-g11-1",
-      "text": "Класс 11, семестр 1, раздел 1, задание 3. Прочитайте внимательно и выберите ответ: Где правильно расставлены знаки?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-rub-g11-s1-v3-u1-q10",
-      "poolKey": "rub-g11-3",
-      "text": "Класс 11, семестр 1, раздел 2, задание 10. Рассуждайте по шагам и ответьте: Где правильно расставлены знаки?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-rub-g11-s1-v4-u1-q11",
-      "poolKey": "rub-g11-4",
-      "text": "Класс 11, семестр 1, раздел 2, задание 11. Проверьте варианты и ответьте: Где правильно расставлены знаки?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-rub-g11-s2-v4-u0-q2",
-      "poolKey": "rub-g11-4",
-      "text": "Класс 11, семестр 2, раздел 1, задание 2. Проверьте варианты и ответьте: Где правильно расставлены знаки?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-rub-g12-s1-v1-u0-q3",
-      "poolKey": "rub-g12-1",
-      "text": "Класс 12, семестр 1, раздел 1, задание 3. Прочитайте внимательно и выберите ответ: Где правильно расставлены знаки?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-rub-g12-s1-v1-u1-q8",
-      "poolKey": "rub-g12-1",
-      "text": "Класс 12, семестр 1, раздел 2, задание 8. Прочитайте внимательно и выберите ответ: Где правильно расставлены знаки?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-rub-g12-s1-v1-u1-q12",
-      "poolKey": "rub-g12-1",
-      "text": "Класс 12, семестр 1, раздел 2, задание 12. Прочитайте внимательно и выберите ответ: Выберите правильное оформление вводного слова.",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-rub-g12-s2-v1-u0-q3",
-      "poolKey": "rub-g12-1",
-      "text": "Класс 12, семестр 2, раздел 1, задание 3. Прочитайте внимательно и выберите ответ: Выберите правильное оформление вводного слова.",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-rub-g12-s2-v1-u0-q10",
-      "poolKey": "rub-g12-1",
-      "text": "Класс 12, семестр 2, раздел 1, задание 10. Прочитайте внимательно и выберите ответ: Выберите правильное оформление вводного слова.",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-rub-g12-s2-v1-u1-q4",
-      "poolKey": "rub-g12-1",
-      "text": "Класс 12, семестр 2, раздел 2, задание 4. Прочитайте внимательно и выберите ответ: Где правильно расставлены знаки?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-rub-g12-s2-v2-u0-q4",
-      "poolKey": "rub-g12-2",
-      "text": "Класс 12, семестр 2, раздел 1, задание 4. Используйте языковую подсказку: Выберите правильное оформление вводного слова.",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-rub-g12-s2-v2-u0-q11",
-      "poolKey": "rub-g12-2",
-      "text": "Класс 12, семестр 2, раздел 1, задание 11. Используйте языковую подсказку: Выберите правильное оформление вводного слова.",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-rub-g12-s2-v2-u1-q2",
-      "poolKey": "rub-g12-2",
-      "text": "Класс 12, семестр 2, раздел 2, задание 2. Используйте языковую подсказку: Выберите правильное оформление вводного слова.",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-rub-g12-s1-v4-u0-q6",
-      "poolKey": "rub-g12-4",
-      "text": "Класс 12, семестр 1, раздел 1, задание 6. Проверьте варианты и ответьте: Где правильно расставлены знаки?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-rub-g12-s1-v4-u1-q8",
-      "poolKey": "rub-g12-4",
-      "text": "Класс 12, семестр 1, раздел 2, задание 8. Проверьте варианты и ответьте: Выберите правильное оформление вводного слова.",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-rub-g12-s1-v4-u1-q11",
-      "poolKey": "rub-g12-4",
-      "text": "Класс 12, семестр 1, раздел 2, задание 11. Проверьте варианты и ответьте: Где правильно расставлены знаки?",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-rub-g12-s2-v4-u1-q4",
-      "poolKey": "rub-g12-4",
-      "text": "Класс 12, семестр 2, раздел 2, задание 4. Проверьте варианты и ответьте: Выберите правильное оформление вводного слова.",
-      "flags": [
-        "duplicate_options"
-      ]
-    },
-    {
-      "id": "lb26-rub-g12-s2-v4-u1-q7",
-      "poolKey": "rub-g12-4",
-      "text": "Класс 12, семестр 2, раздел 2, задание 7. Проверьте варианты и ответьте: Где правильно расставлены знаки?",
-      "flags": [
-        "duplicate_options"
+        "low_depth_binary_format",
+        "answer_echoes_prompt"
       ]
     }
   ],

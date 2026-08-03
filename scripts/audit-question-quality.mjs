@@ -93,7 +93,10 @@ function structuralFlags(question) {
     if (!Array.isArray(question.opts) || question.opts.length < 2) {
       flags.push("missing_options");
     } else {
-      const options = question.opts.map(option => normalize(option) || String(option ?? "").trim());
+      // Punctuation, hyphenation and spacing can be the assessed distinction
+      // in language questions, so option identity must preserve them.
+      const options = question.opts.map(option => String(option ?? "").normalize("NFKC")
+        .toLocaleLowerCase("ka-GE").replace(/\s+/gu, " ").trim());
       if (options.some(option => !option)) flags.push("empty_option");
       if (new Set(options).size !== options.length) flags.push("duplicate_options");
       if (!Number.isInteger(Number(question.correct)) || Number(question.correct) < 0 || Number(question.correct) >= question.opts.length) {
