@@ -57,9 +57,10 @@ test("renders untrusted CSV, user and AI values as text, including XSS-shaped in
 });
 
 test("persists teacher and administrator management data on the server", async () => {
-  const [schema, html, management, attempts, users, reports] = await Promise.all([
+  const [schema, html, management, attempts, users, reports, migration, attemptIndexMigration] = await Promise.all([
     source("db/schema.ts"), source("public/app.html"), source("public/management-overrides.js"),
     source("app/api/attempts/route.ts"), source("app/api/admin/users/route.ts"), source("app/api/reports/route.ts"),
+    source("drizzle/0003_adorable_lockheed.sql"), source("drizzle/0004_boring_wong.sql"),
   ]);
   for (const table of ["issue_reports", "admin_audit_events", "admin_content", "custom_tests"]) assert.match(schema, new RegExp(table));
   assert.match(html, /function showBuilder\(/);
@@ -74,6 +75,9 @@ test("persists teacher and administrator management data on the server", async (
   assert.match(attempts, /export async function DELETE/);
   assert.match(users, /newEmail/);
   assert.match(reports, /export async function PATCH/);
+  assert.doesNotMatch(migration, /CREATE (?:TABLE|INDEX) `(?!IF NOT EXISTS)/);
+  assert.match(migration, /CREATE TABLE IF NOT EXISTS `rate_limits`/);
+  assert.match(attemptIndexMigration, /CREATE INDEX IF NOT EXISTS/);
 });
 
 test("ships no demo credentials, realistic pre-rendered PII, or secret-shaped values", async () => {

@@ -1,4 +1,4 @@
-CREATE TABLE `admin_audit_events` (
+CREATE TABLE IF NOT EXISTS `admin_audit_events` (
 	`id` text PRIMARY KEY NOT NULL,
 	`admin_id` text NOT NULL,
 	`action` text NOT NULL,
@@ -7,8 +7,8 @@ CREATE TABLE `admin_audit_events` (
 	FOREIGN KEY (`admin_id`) REFERENCES `users`(`id`) ON UPDATE no action ON DELETE cascade
 );
 --> statement-breakpoint
-CREATE INDEX `idx_admin_audit_created` ON `admin_audit_events` (`created_at`);--> statement-breakpoint
-CREATE TABLE `admin_content` (
+CREATE INDEX IF NOT EXISTS `idx_admin_audit_created` ON `admin_audit_events` (`created_at`);--> statement-breakpoint
+CREATE TABLE IF NOT EXISTS `admin_content` (
 	`key` text PRIMARY KEY NOT NULL,
 	`value_json` text NOT NULL,
 	`updated_by` text NOT NULL,
@@ -16,7 +16,7 @@ CREATE TABLE `admin_content` (
 	FOREIGN KEY (`updated_by`) REFERENCES `users`(`id`) ON UPDATE no action ON DELETE restrict
 );
 --> statement-breakpoint
-CREATE TABLE `custom_tests` (
+CREATE TABLE IF NOT EXISTS `custom_tests` (
 	`id` text PRIMARY KEY NOT NULL,
 	`created_by` text NOT NULL,
 	`title` text NOT NULL,
@@ -31,9 +31,9 @@ CREATE TABLE `custom_tests` (
 	FOREIGN KEY (`created_by`) REFERENCES `users`(`id`) ON UPDATE no action ON DELETE cascade
 );
 --> statement-breakpoint
-CREATE INDEX `idx_custom_tests_creator` ON `custom_tests` (`created_by`);--> statement-breakpoint
-CREATE INDEX `idx_custom_tests_published_grade` ON `custom_tests` (`published`,`grade`);--> statement-breakpoint
-CREATE TABLE `issue_reports` (
+CREATE INDEX IF NOT EXISTS `idx_custom_tests_creator` ON `custom_tests` (`created_by`);--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS `idx_custom_tests_published_grade` ON `custom_tests` (`published`,`grade`);--> statement-breakpoint
+CREATE TABLE IF NOT EXISTS `issue_reports` (
 	`id` text PRIMARY KEY NOT NULL,
 	`user_id` text NOT NULL,
 	`test_id` text NOT NULL,
@@ -50,8 +50,8 @@ CREATE TABLE `issue_reports` (
 	FOREIGN KEY (`resolved_by`) REFERENCES `users`(`id`) ON UPDATE no action ON DELETE set null
 );
 --> statement-breakpoint
-CREATE INDEX `idx_issue_reports_resolved_created` ON `issue_reports` (`resolved`,`created_at`);--> statement-breakpoint
-CREATE TABLE `rate_limits` (
+CREATE INDEX IF NOT EXISTS `idx_issue_reports_resolved_created` ON `issue_reports` (`resolved`,`created_at`);--> statement-breakpoint
+CREATE TABLE IF NOT EXISTS `rate_limits` (
 	`key` text PRIMARY KEY NOT NULL,
 	`window_started_at` integer NOT NULL,
 	`request_count` integer NOT NULL,
