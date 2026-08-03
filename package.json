@@ -11,7 +11,7 @@
     "build:cloudflare": "node scripts/build-cloudflare.mjs",
     "deploy:cloudflare": "npm run build:cloudflare && wrangler deploy",
     "start": "vinext start",
-    "test": "node scripts/audit-question-bank.mjs && node scripts/audit-question-quality.mjs && node scripts/validate-generated-banks.mjs && node scripts/audit-claude-findings.mjs && node --test tests/question-policy.test.mjs tests/rendered-html.test.mjs tests/security-regression.test.mjs tests/senior-math-bank.test.mjs tests/language-blueprint-bank.test.mjs tests/claude-audit-regression.test.mjs && vinext build",
+    "test": "node scripts/check-browser-syntax.mjs && node scripts/audit-question-bank.mjs && node scripts/audit-question-quality.mjs && node scripts/validate-generated-banks.mjs && node scripts/audit-claude-findings.mjs && node --test tests/question-policy.test.mjs tests/rendered-html.test.mjs tests/security-regression.test.mjs tests/senior-math-bank.test.mjs tests/language-blueprint-bank.test.mjs tests/claude-audit-regression.test.mjs && vinext build",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "db:generate": "drizzle-kit generate",
     "audit:questions": "node scripts/audit-question-bank.mjs && node scripts/audit-question-quality.mjs && node scripts/validate-generated-banks.mjs && node scripts/audit-claude-findings.mjs"

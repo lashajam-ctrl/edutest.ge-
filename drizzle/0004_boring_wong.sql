@@ -1,0 +1,1 @@
+CREATE INDEX `idx_attempts_user_submitted` ON `attempts` (`user_id`,`submitted_at`);

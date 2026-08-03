@@ -1,4 +1,4 @@
-import { integer, sqliteTable, text, uniqueIndex } from "drizzle-orm/sqlite-core";
+import { index, integer, sqliteTable, text, uniqueIndex } from "drizzle-orm/sqlite-core";
 
 export const users = sqliteTable("users", {
   id: text("id").primaryKey(),
@@ -39,7 +39,7 @@ export const attempts = sqliteTable("attempts", {
   percentage: integer("percentage").notNull(),
   answersJson: text("answers_json").notNull(),
   submittedAt: integer("submitted_at", { mode: "timestamp_ms" }).notNull(),
-});
+}, (table) => [index("idx_attempts_user_submitted").on(table.userId, table.submittedAt)]);
 
 export const assignments = sqliteTable("assignments", {
   id: text("id").primaryKey(),
@@ -67,3 +67,50 @@ export const rateLimits = sqliteTable("rate_limits", {
   requestCount: integer("request_count").notNull(),
   updatedAt: integer("updated_at").notNull(),
 });
+
+export const issueReports = sqliteTable("issue_reports", {
+  id: text("id").primaryKey(),
+  userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  testId: text("test_id").notNull(),
+  testTitle: text("test_title").notNull(),
+  questionId: text("question_id").notNull(),
+  questionText: text("question_text").notNull(),
+  type: text("type").notNull(),
+  comment: text("comment").notNull().default(""),
+  resolved: integer("resolved", { mode: "boolean" }).notNull().default(false),
+  resolvedBy: text("resolved_by").references(() => users.id, { onDelete: "set null" }),
+  resolvedAt: integer("resolved_at", { mode: "timestamp_ms" }),
+  createdAt: integer("created_at", { mode: "timestamp_ms" }).notNull(),
+}, (table) => [index("idx_issue_reports_resolved_created").on(table.resolved, table.createdAt)]);
+
+export const adminAuditEvents = sqliteTable("admin_audit_events", {
+  id: text("id").primaryKey(),
+  adminId: text("admin_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  action: text("action").notNull(),
+  details: text("details").notNull().default(""),
+  createdAt: integer("created_at", { mode: "timestamp_ms" }).notNull(),
+}, (table) => [index("idx_admin_audit_created").on(table.createdAt)]);
+
+export const adminContent = sqliteTable("admin_content", {
+  key: text("key").primaryKey(),
+  valueJson: text("value_json").notNull(),
+  updatedBy: text("updated_by").notNull().references(() => users.id, { onDelete: "restrict" }),
+  updatedAt: integer("updated_at", { mode: "timestamp_ms" }).notNull(),
+});
+
+export const customTests = sqliteTable("custom_tests", {
+  id: text("id").primaryKey(),
+  createdBy: text("created_by").notNull().references(() => users.id, { onDelete: "cascade" }),
+  title: text("title").notNull(),
+  subject: text("subject").notNull(),
+  grade: integer("grade").notNull(),
+  durationMinutes: integer("duration_minutes").notNull(),
+  attemptsAllowed: integer("attempts_allowed").notNull(),
+  published: integer("published", { mode: "boolean" }).notNull().default(false),
+  questionsJson: text("questions_json").notNull(),
+  createdAt: integer("created_at", { mode: "timestamp_ms" }).notNull(),
+  updatedAt: integer("updated_at", { mode: "timestamp_ms" }).notNull(),
+}, (table) => [
+  index("idx_custom_tests_creator").on(table.createdBy),
+  index("idx_custom_tests_published_grade").on(table.published, table.grade),
+]);

@@ -22,6 +22,20 @@
       "when": 1784022123246,
       "tag": "0002_curly_sabretooth",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1785754125235,
+      "tag": "0003_adorable_lockheed",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1785754147005,
+      "tag": "0004_boring_wong",
+      "breakpoints": true
     }
   ]
 }

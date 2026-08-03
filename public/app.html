@@ -48,6 +48,133 @@
   "teaches": ["მათემატიკა", "ქართული ენა", "ქართული ლიტერატურა", "ინგლისური", "რუსული", "ბიოლოგია", "ქიმია", "ფიზიკა", "ისტორია", "გეოგრაფია", "ბუნება"]
 }
 </script>
+<script>
+// ── Server-backed management and authoring (2026-08) ────────────────────────
+const MANAGEMENT_TEST_IDS=new Set();
+let MANAGEMENT_LOADING=false;
+let _builderStep=1;
+let _builderSelection=[];
+
+function serverAttemptToResult(attempt){
+  const base=attempt.result&&typeof attempt.result==='object'?attempt.result:{};
+  const submitted=new Date(attempt.submittedAt);
+  return {...base,userId:attempt.userEmail||base.userId||CUR_USER?.email||'',userName:attempt.userName||'',grade:attempt.userGrade||base.grade||'',testId:attempt.testId,pct:Number(attempt.percentage)||0,earned:Number(attempt.score)||0,totalPts:Number(attempt.maxScore)||0,submittedAt:attempt.submittedAt,date:Number.isNaN(submitted.getTime())?'—':submitted.toLocaleDateString('ka-GE'),synced:true};
+}
+function installCustomTest(test){
+  if(!test||!test.id||MANAGEMENT_TEST_IDS.has(test.id))return;
+  const pool='custom-'+test.id;
+  const questions=(Array.isArray(test.questions)?test.questions:[]).map(q=>({id:q.id,text:q.text,q:q.text,type:'multiple_choice',opts:Array.isArray(q.options)?q.options:[],correct:Number(q.correct),pts:Number(q.points)||1,explain:q.explanation||'',skill:q.skill||'teacher-created'}));
+  if(!questions.length)return;
+  Q_POOL[pool+'-1']=questions;
+  ALL_TESTS.push({id:test.id,title:test.title,subject:test.subject,grade:Number(test.grade),time:Number(test.durationMinutes)||20,attempts:Number(test.attemptsAllowed)||1,count:questions.length,paid:false,pool,semester:null,testType:'practice',teacherCreated:true,createdBy:test.createdBy,published:!!test.published,curriculumVerified:false});
+  MANAGEMENT_TEST_IDS.add(test.id);
+}
+async function loadCustomTestsFromServer(){
+  if(!CUR_USER)return;
+  try{
+    const response=await fetch('/api/custom-tests');
+    if(!response.ok)return;
+    const data=await response.json();
+    (data.tests||[]).forEach(installCustomTest);
+    if(CUR_USER?.role==='teacher'||CUR_USER?.role==='admin')renderTeacherTests();
+    if(CUR_USER?.role==='student'){renderStudentTests();renderAssignedTests();}
+  }catch(e){}
+}
+async function loadManagementData(){
+  if(MANAGEMENT_LOADING||!CUR_USER||!['teacher','admin'].includes(CUR_USER.role))return;
+  MANAGEMENT_LOADING=true;
+  try{
+    const [attemptResponse,studentResponse]=await Promise.all([fetch('/api/attempts?scope=managed'),fetch('/api/management/students')]);
+    if(attemptResponse.ok){
+      const data=await attemptResponse.json();
+      SESSION_RESULTS.length=0;(data.attempts||[]).map(serverAttemptToResult).forEach(result=>SESSION_RESULTS.push(result));
+    }
+    if(studentResponse.ok&&CUR_USER.role==='teacher'){
+      const data=await studentResponse.json();
+      USER_DB.length=0;USER_DB.push(CUR_USER);
+      (data.students||[]).forEach(user=>USER_DB.push({...user,joinDate:user.createdAt?new Date(user.createdAt).toLocaleDateString('ka-GE'):''}));
+    }
+    renderTeacherHome();renderTeacherStudents();renderTeacherAnalytics();renderAdminHome();renderAdminUsers();renderAdminResults();renderAdminSchools();
+  }finally{MANAGEMENT_LOADING=false;}
+}
+
+function builderCandidates(){
+  const subject=document.getElementById('b-subj')?.value||'';
+  const grade=Number(document.getElementById('b-grade')?.value)||1;
+  const seen=new Set(),rows=[];
+  ALL_TESTS.filter(test=>test.subject===subject&&Number(test.grade)===grade&&!test.teacherCreated).forEach(test=>{
+    for(let version=1;version<=8;version++){
+      const pool=Q_POOL[test.pool+'-'+version];if(!pool)continue;
+      pool.forEach(q=>{const id=String(q.id||test.pool+'-'+version+'-'+rows.length);if(seen.has(id)||!q.text&&!q.q||!Array.isArray(q.opts)||q.opts.length<2)return;seen.add(id);rows.push({...q,id});});
+    }
+  });
+  return rows.slice(0,60);
+}
+function renderBuilderPicker(){
+  const picker=document.getElementById('q-picker');if(!picker)return;
+  picker.replaceChildren();
+  const rows=builderCandidates();
+  if(!rows.length){const empty=document.createElement('div');empty.style.cssText='padding:16px;color:var(--gray);font-size:12px';empty.textContent='ამ საგნისა და კლასისთვის კითხვები ვერ მოიძებნა.';picker.appendChild(empty);return;}
+  rows.forEach(q=>{
+    const label=document.createElement('label');label.style.cssText='display:flex;gap:8px;align-items:flex-start;padding:8px;border-bottom:1px solid var(--border);font-size:12px;cursor:pointer';
+    const input=document.createElement('input');input.type='checkbox';input.style.width='auto';input.checked=_builderSelection.some(item=>item.id===q.id);
+    input.addEventListener('change',()=>{if(input.checked)_builderSelection.push(q);else _builderSelection=_builderSelection.filter(item=>item.id!==q.id);const count=document.getElementById('sel-count');if(count)count.textContent=String(_builderSelection.length);});
+    const text=document.createElement('span');text.textContent=q.text||q.q||'';label.append(input,text);picker.appendChild(label);
+  });
+}
+function updateBuilderStep(){
+  [1,2,3].forEach(step=>{document.getElementById('bstep-content-'+step)?.classList.toggle('hidden',step!==_builderStep);document.getElementById('bstep-'+step)?.classList.toggle('act',step===_builderStep);});
+  const prev=document.getElementById('b-prev'),next=document.getElementById('b-next');if(prev)prev.style.visibility=_builderStep===1?'hidden':'visible';if(next)next.textContent=_builderStep===3?'✓ ტესტის შექმნა':'შემდეგი →';
+  if(_builderStep===2)renderBuilderPicker();
+  if(_builderStep===3){const summary=document.getElementById('b-summary');if(summary)summary.textContent=(document.getElementById('b-title')?.value||'ტესტი')+' · '+_builderSelection.length+' კითხვა · '+(document.getElementById('b-grade')?.value||'')+' კლასი';}
+}
+function showBuilder(){
+  if(!CUR_USER||!['teacher','admin'].includes(CUR_USER.role)){alert('ტესტის შექმნა მხოლოდ მასწავლებელს ან ადმინისტრატორს შეუძლია.');return;}
+  _builderStep=1;_builderSelection=[];
+  const title=document.getElementById('b-title');if(title)title.value='';
+  const grade=document.getElementById('b-grade');if(grade&&CUR_USER.grade)grade.value=String(CUR_USER.grade);
+  document.getElementById('builder-modal')?.classList.remove('hidden');updateBuilderStep();setTimeout(()=>title?.focus(),0);
+}
+function hideBuilder(){document.getElementById('builder-modal')?.classList.add('hidden');}
+async function bNav(direction){
+  if(direction<0){_builderStep=Math.max(1,_builderStep-1);updateBuilderStep();return;}
+  if(_builderStep===1){if(!(document.getElementById('b-title')?.value||'').trim()){alert('შეიყვანე ტესტის სათაური.');return;}_builderStep=2;updateBuilderStep();return;}
+  if(_builderStep===2){if(!_builderSelection.length){alert('აირჩიე მინიმუმ ერთი კითხვა.');return;}_builderStep=3;updateBuilderStep();return;}
+  const button=document.getElementById('b-next');if(button){button.disabled=true;button.textContent='⏳ ინახება...';}
+  try{
+    const payload={title:(document.getElementById('b-title')?.value||'').trim(),subject:document.getElementById('b-subj')?.value,grade:Number(document.getElementById('b-grade')?.value),durationMinutes:Number(document.getElementById('b-time')?.value)||20,attemptsAllowed:Number(document.getElementById('b-att')?.value)||1,published:!!document.getElementById('b-pub')?.checked,questions:_builderSelection.map(q=>({id:q.id,text:q.text||q.q,options:q.opts,correct:Number(q.correct),explanation:q.explain||'',skill:q.skill||'teacher-created'}))};
+    const response=await fetch('/api/custom-tests',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});const data=await response.json();if(!response.ok)throw new Error(data.error||'ტესტი ვერ შეიქმნა');
+    installCustomTest(data.test);hideBuilder();renderTeacherTests();renderAssignPanel();alert('✅ ტესტი შეიქმნა და სერვერზე შენახულია.');
+  }catch(error){alert(error.message||'ტესტი ვერ შეიქმნა');}finally{if(button){button.disabled=false;button.textContent='✓ ტესტის შექმნა';}}
+}
+async function adminDeleteTest(testId){
+  const test=ALL_TESTS.find(item=>item.id===testId);if(!test)return;
+  if(!test.teacherCreated){alert('სტანდარტული კურიკულუმის ტესტი ვერ წაიშლება.');return;}
+  if(!confirm('წაიშალოს ტესტი?'))return;
+  const response=await fetch('/api/custom-tests?id='+encodeURIComponent(testId),{method:'DELETE'});if(!response.ok){alert('ტესტი ვერ წაიშალა.');return;}
+  const index=ALL_TESTS.findIndex(item=>item.id===testId);if(index>=0)ALL_TESTS.splice(index,1);MANAGEMENT_TEST_IDS.delete(testId);renderTeacherTests();
+}
+
+async function loadAdminContent(key,fallback){
+  try{const response=await fetch('/api/admin/content?key='+encodeURIComponent(key));if(!response.ok)return fallback;const data=await response.json();return data.value??fallback;}catch{return fallback;}
+}
+async function saveAdminContent(key,value){
+  const response=await fetch('/api/admin/content',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({key,value})});
+  if(!response.ok){const data=await response.json().catch(()=>({}));throw new Error(data.error||'შენახვა ვერ შესრულდა');}
+}
+async function hydrateAdminContent(){
+  if(CUR_USER?.role!=='admin')return;
+  [ANSWER_OVERRIDES,_qeCustom]=await Promise.all([loadAdminContent('answer-overrides',{}),loadAdminContent('custom-questions',{})]);
+  const settings=await loadAdminContent('platform-settings',{});const name=document.getElementById('adm-platform-name'),email=document.getElementById('adm-contact-email');if(name&&settings.name)name.value=settings.name;if(email&&settings.contactEmail)email.value=settings.contactEmail;
+}
+function saveAnswerOverrides(){saveAdminContent('answer-overrides',ANSWER_OVERRIDES).catch(error=>alert(error.message));}
+function saveCustomQuestions(){return saveAdminContent('custom-questions',_qeCustom);}
+async function savePlatformSettings(){
+  const name=(document.getElementById('adm-platform-name')?.value||'').trim();const contactEmail=(document.getElementById('adm-contact-email')?.value||'').trim();
+  if(!name||contactEmail&&!/^\S+@\S+\.\S+$/.test(contactEmail)){alert('შეიყვანე სწორი სახელი და ელფოსტა.');return;}
+  try{await saveAdminContent('platform-settings',{name:name.slice(0,100),contactEmail:contactEmail.slice(0,254)});const saved=document.getElementById('adm-platform-saved');if(saved){saved.style.display='block';setTimeout(()=>saved.style.display='none',2000);}}catch(error){alert(error.message);}
+}
+</script>
 <style>
 :root{color-scheme:light;--blue:#2563eb;--blue-d:#1d4ed8;--blue-l:#dbeafe;--green:#16a34a;--green-l:#dcfce7;--amber:#d97706;--amber-l:#fef3c7;--red:#dc2626;--red-l:#fee2e2;--gray:#6b7280;--gray-l:#f9fafb;--border:#e5e7eb;--white:#fff;--shadow:0 1px 3px rgba(0,0,0,.1);--shadow-md:0 4px 6px rgba(0,0,0,.1);--r:8px;--rl:12px;--bg:#f8fafc;--surface:#ffffff}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -971,22 +1098,22 @@ input:focus,select:focus,textarea:focus{border-color:var(--brand);box-shadow:0 0
   <div class="sidebar">
     <div class="slogo">
       <div class="slogo-icon" style="background:#16a34a">E</div>
-      <div><div style="color:#fff;font-weight:700;font-size:14px">EduTest.ge</div><div style="font-size:10px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.05em">teacher</div></div>
+      <div><div style="color:#fff;font-weight:700;font-size:14px">EduTest.ge</div><div style="font-size:10px;color:rgba(255,255,255,.35);letter-spacing:.05em">მასწავლებელი</div></div>
     </div>
     <div class="snav">
-      <div class="ni act" onclick="tNav('t-home',this)">🏠 Dashboard</div>
+      <div class="ni act" onclick="tNav('t-home',this)">🏠 მთავარი</div>
       <div class="ni" onclick="tNav('t-tests',this)">📝 <span data-i18n="tests">ჩემი ტესტები</span></div>
       <div class="ni" onclick="tNav('t-students',this)">👥 <span data-i18n="students">მოსწავლეები</span></div>
       <div class="ni" onclick="tNav('t-assign',this);renderAssignPanel()">📋 დავალებები</div>
       <div class="ni" onclick="tNav('t-analytics',this)">📊 ანალიტიკა</div>
     </div>
     <div class="sfoot">
-      <div class="susr"><div class="sav" style="background:#16a34a" id="t-sidebar-av">ნ</div><div><div style="color:#fff;font-size:12px;font-weight:500" id="t-sidebar-name">ნინო გელაშვილი</div><div style="color:rgba(255,255,255,.35);font-size:11px" id="t-sidebar-email">nino@edutest.ge</div></div></div>
+      <div class="susr"><div class="sav" style="background:#16a34a" id="t-sidebar-av">•</div><div><div style="color:#fff;font-size:12px;font-weight:500" id="t-sidebar-name">—</div><div style="color:rgba(255,255,255,.35);font-size:11px" id="t-sidebar-email">—</div></div></div>
       <div class="ni" onclick="doLogout()" style="border-radius:var(--r)">🚪 <span data-i18n="logout">გასვლა</span></div>
     </div>
   </div>
   <div style="flex:1;display:flex;flex-direction:column;overflow:auto">
-    <div class="topbar"><div style="display:flex;align-items:center;gap:8px"><button class="hamburger" onclick="toggleSidebar('teacher')">☰</button><div><div style="display:flex;align-items:center;gap:8px"><button class="btn btn-ghost btn-sm" id="t-back-btn" onclick="tNav('t-home',document.querySelector('#p-teacher .ni'))" style="display:none;padding:4px 8px;font-size:12px">←</button><div style="font-weight:600" id="t-topbar-title">Dashboard</div></div><div style="font-size:11px;color:var(--gray)" id="t-topbar-sub">მასწავლებელი</div></div></div><button class="btn btn-primary btn-sm" id="t-new-btn" onclick="showBuilder()" style="display:none">+ ახალი ტესტი</button></div>
+    <div class="topbar"><div style="display:flex;align-items:center;gap:8px"><button class="hamburger" onclick="toggleSidebar('teacher')">☰</button><div><div style="display:flex;align-items:center;gap:8px"><button class="btn btn-ghost btn-sm" id="t-back-btn" onclick="tNav('t-home',document.querySelector('#p-teacher .ni'))" style="display:none;padding:4px 8px;font-size:12px">←</button><div style="font-weight:600" id="t-topbar-title">მთავარი</div></div><div style="font-size:11px;color:var(--gray)" id="t-topbar-sub">მასწავლებელი</div></div></div><button class="btn btn-primary btn-sm" id="t-new-btn" onclick="showBuilder()" style="display:none">+ ახალი ტესტი</button></div>
     <div class="main">
       <div id="t-home" class="fade">
         <div class="card" style="padding:12px 16px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap"><div><div style="font-weight:600;font-size:12px">ანგარიშის უსაფრთხოება</div><div style="font-size:11px;color:var(--gray)">მიაბით Google, Microsoft ან Facebook დამატებით შესასვლელად</div></div><div style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn btn-outline btn-sm" onclick="linkOAuth('google')">G&nbsp; Google</button><button class="btn btn-outline btn-sm" onclick="linkOAuth('microsoft')">▦&nbsp; Microsoft</button><button class="btn btn-outline btn-sm" onclick="linkOAuth('facebook')">f&nbsp; Facebook</button></div></div>
@@ -1001,17 +1128,13 @@ input:focus,select:focus,textarea:focus{border-color:var(--brand);box-shadow:0 0
             <div style="font-weight:600;font-size:13px;margin-bottom:10px">📊 ყველაზე შეცდომიანი კითხვები</div>
             <div id="t-q-analytics"><div style="color:var(--gray);font-size:12px;text-align:center;padding:16px">ჯერ შედეგები არ არის</div></div>
           </div>
-          <div class="card" style="padding:16px">
-            <div style="font-weight:600;margin-bottom:12px;font-size:13px">⏳ გასაფასებელი submission-ები</div>
-            <div style="padding:8px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:12px;font-weight:500">მარიამ კ.</div><div style="font-size:11px;color:var(--gray)">ქართული · დღეს</div></div><button class="btn btn-outline btn-sm">შეფასება</button></div>
-            <div style="padding:8px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:12px;font-weight:500">გიორგი ნ.</div><div style="font-size:11px;color:var(--gray)">ქართული · გუშინ</div></div><button class="btn btn-outline btn-sm">შეფასება</button></div>
-            <div style="padding:8px 0;display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:12px;font-weight:500">სოფო მ.</div><div style="font-size:11px;color:var(--gray)">ქართული · გუშინ</div></div><button class="btn btn-outline btn-sm">შეფასება</button></div>
+          <div class="card" id="t-pending-work-card" style="padding:16px">
+            <div style="font-weight:600;margin-bottom:12px;font-size:13px">⏳ ხელით შესაფასებელი ნამუშევრები</div>
+            <div style="font-size:12px;color:var(--gray)">იტვირთება...</div>
           </div>
-          <div class="card" style="padding:16px">
-            <div style="font-weight:600;margin-bottom:12px;font-size:13px">📊 კლასი 3A სტატისტიკა</div>
-            <div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>მათემატიკა</span><span style="font-weight:600">78%</span></div><div class="pbar"><div class="pfill" style="width:78%;background:#2563eb"></div></div></div>
-            <div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>ქართული</span><span style="font-weight:600">65%</span></div><div class="pbar"><div class="pfill" style="width:65%;background:#d97706"></div></div></div>
-            <div><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>ბუნება</span><span style="font-weight:600">91%</span></div><div class="pbar"><div class="pfill" style="width:91%;background:#16a34a"></div></div></div>
+          <div class="card" id="t-class-summary-card" style="padding:16px">
+            <div style="font-weight:600;margin-bottom:12px;font-size:13px">📊 რეალური შედეგები საგნების მიხედვით</div>
+            <div style="font-size:12px;color:var(--gray)">იტვირთება...</div>
           </div>
         </div>
       </div>
@@ -1066,7 +1189,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--brand);box-shadow:0 0
             </select>
           </div>
           <div>
-            <label class="label">Deadline</label>
+            <label class="label">ვადა</label>
             <input type="date" id="ta-deadline" style="width:100%;padding:8px;border:1.5px solid var(--border);border-radius:var(--r);font-size:13px;font-family:inherit;background:var(--bg)">
           </div>
         </div>
@@ -1081,7 +1204,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--brand);box-shadow:0 0
     <div id="t-assign-list"></div>
   </div>
 </div>
-<div id="t-analytics" class="hidden fade">
+      <div id="t-analytics" class="hidden fade" aria-live="polite">
         <div style="font-weight:600;margin-bottom:14px">ანალიტიკა</div>
         <div class="g2">
           <div class="card" style="padding:16px"><div style="font-weight:600;margin-bottom:14px;font-size:13px">📈 კლ. 3A — ტესტები</div>
@@ -1105,7 +1228,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--brand);box-shadow:0 0
   <div class="sidebar">
     <div class="slogo"><div class="slogo-icon" style="background:#7c3aed" id="a-sidebar-av">A</div><div><div style="color:#fff;font-weight:700;font-size:14px" id="a-sidebar-name">Admin</div><div style="font-size:10px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.05em">admin</div></div></div>
     <div class="snav">
-      <div class="ni act" onclick="aNav('a-home',this)">🏠 Dashboard</div>
+      <div class="ni act" onclick="aNav('a-home',this)">🏠 მთავარი</div>
       <div class="ni" onclick="aNav('a-schools',this)" data-i18n="adm_schools">🏫 სკოლები</div>
       <div class="ni" onclick="aNav('a-users',this)" data-i18n="adm_users">👥 მომხმარებლები</div>
       <div class="ni" onclick="aNav('a-results',this)">📊 ყველა შედეგი</div>
@@ -1120,7 +1243,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--brand);box-shadow:0 0
     </div>
   </div>
   <div style="flex:1;display:flex;flex-direction:column;overflow:auto">
-    <div class="topbar"><div style="display:flex;align-items:center;gap:8px"><button class="hamburger" onclick="toggleSidebar('admin')" style="color:#1a202c">☰</button><div><div style="display:flex;align-items:center;gap:8px"><button class="btn btn-ghost btn-sm" id="a-back-btn" onclick="aNav('a-home',document.querySelector('#p-admin .ni'))" style="display:none;padding:4px 8px;font-size:12px">←</button><div style="font-weight:600" data-i18n="adm_dashboard">Admin Dashboard</div></div><div style="font-size:11px;color:var(--gray)" data-i18n="adm_subtitle">ადმინ · პლატფორმის ადმინისტრატორი</div></div></div><span id="a-topbar-badge" class="badge b-red">⚠ Admin</span></div>
+    <div class="topbar"><div style="display:flex;align-items:center;gap:8px"><button class="hamburger" onclick="toggleSidebar('admin')" style="color:#1a202c">☰</button><div><div style="display:flex;align-items:center;gap:8px"><button class="btn btn-ghost btn-sm" id="a-back-btn" onclick="aNav('a-home',document.querySelector('#p-admin .ni'))" style="display:none;padding:4px 8px;font-size:12px">←</button><div style="font-weight:600" data-i18n="adm_dashboard">ადმინისტრატორის მთავარი</div></div><div style="font-size:11px;color:var(--gray)" data-i18n="adm_subtitle">ადმინისტრატორი · პლატფორმის მართვა</div></div></div><span id="a-topbar-badge" class="badge b-red">⚠ ადმინისტრატორი</span></div>
     <div class="main">
       <div id="a-home" class="fade">
         <div class="stat-g">
@@ -1151,7 +1274,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--brand);box-shadow:0 0
         </div>
       </div>
       <div id="a-users" class="hidden fade">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"><div style="font-weight:600" data-i18n="adm_users_title">მომხმარებლები</div><input data-i18n-placeholder="adm_search" placeholder="🔍 ძებნა..." style="width:180px;padding:6px 10px"/></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"><div style="font-weight:600" data-i18n="adm_users_title">მომხმარებლები</div><input id="a-user-search" data-i18n-placeholder="adm_search" placeholder="🔍 ძებნა..." aria-label="მომხმარებლის ძებნა" oninput="renderAdminUsers()" style="width:180px;padding:6px 10px"/></div>
         <div class="card tbl-wrap"><table class="tbl" id="a-users-table"><thead><tr><th>სახელი</th><th>ელ-ფოსტა</th><th>როლი</th><th>კლ.</th><th>შედეგები</th><th>Premium</th><th>ქმ.</th></tr></thead><tbody id="a-users-tbody"><tr><td colspan="7" style="text-align:center;padding:20px;color:var(--gray)">იტვირთება...</td></tr></tbody></table></div>
       </div>
       <div id="a-pending" class="hidden fade" style="max-width:560px">
@@ -1186,10 +1309,11 @@ input:focus,select:focus,textarea:focus{border-color:var(--brand);box-shadow:0 0
 
       <div id="a-settings" class="hidden fade" style="max-width:480px">
         <div class="card" style="padding:18px;margin-bottom:12px"><div style="font-weight:600;margin-bottom:14px">⚙️ პლატფორმის პარამეტრები</div>
-          <div class="fg"><div class="label">პლატფ. სახელი</div><input value="EduTest.ge"/></div>
-          <div class="fg"><div class="label">კონტაქტ ელ-ფოსტა</div><input value="" autocomplete="email"/></div>
-          <div class="fg"><div class="label">JWT ვადა (დღე)</div><input type="number" value="7"/></div>
-          <button class="btn btn-primary btn-sm">💾 შენახვა</button>
+          <div class="fg"><div class="label">პლატფორმის სახელი</div><input id="adm-platform-name" value="EduTest.ge"/></div>
+          <div class="fg"><div class="label">საკონტაქტო ელფოსტა</div><input id="adm-contact-email" value="" autocomplete="email"/></div>
+          <div class="fg"><div class="label">დაცული სესიის ვადა</div><input value="14 დღე" disabled aria-label="დაცული სესიის ვადა"/></div>
+          <div id="adm-platform-saved" style="display:none;color:#059669;font-size:12px;margin-bottom:8px">✅ პარამეტრები შენახულია</div>
+          <button class="btn btn-primary btn-sm" onclick="savePlatformSettings()">💾 შენახვა</button>
         </div>
         <div class="card" style="padding:18px;margin-bottom:12px"><div style="font-weight:600;margin-bottom:14px">💰 გადახდის ოდენობები</div>
           <div class="fg">
@@ -1283,7 +1407,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--brand);box-shadow:0 0
       <div id="a-audit" class="hidden fade">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
           <div style="font-weight:600">📋 ცვლილებების ჟურნალი</div>
-          <button class="btn btn-outline btn-sm" onclick="if(confirm('გასუფთავდეს ჟურნალი?')){ADMIN_AUDIT_LOG=[];saveAuditLog();renderAdminAudit();}">🗑 გასუფთავება</button>
+          <button class="btn btn-outline btn-sm" onclick="clearAuditLog()">🗑 გასუფთავება</button>
         </div>
         <div class="card tbl-wrap">
           <table class="tbl" id="a-audit-table">
@@ -13525,9 +13649,9 @@ const DEFAULT_PRIZE_CONFIG={
   ],
   note:'გამარჯვებული გამოვლინდება სასწავლო წლის ბოლოს.'
 };
-let PRIZE_CONFIG={...DEFAULT_PRIZE_CONFIG};
-function loadPrizeConfig(){try{const s=localStorage.getItem('edutest_prizes');if(s)PRIZE_CONFIG=JSON.parse(s);}catch(e){}}
-function savePrizeConfig(){try{localStorage.setItem('edutest_prizes',JSON.stringify(PRIZE_CONFIG));}catch(e){}}
+let PRIZE_CONFIG={...DEFAULT_PRIZE_CONFIG,prizes:DEFAULT_PRIZE_CONFIG.prizes.map(prize=>({...prize}))};
+function loadPrizeConfig(){/* სერვერზე ინახება ადმინისტრატორის სესიის ფარგლებში. */}
+function savePrizeConfig(){/* თავსებადობის no-op: შენახვას adminSavePrizes ასრულებს. */}
 loadPrizeConfig();
 function renderAdminPrizeForm(){
   const el=id=>document.getElementById(id);
@@ -13729,7 +13853,12 @@ function txTitle(tx){
   const subjKey=SUBJ_KEY[tx.subject]||'';
   const subjName=subjKey?t(subjKey):tx.subject;
   const gradeStr=tx.grade?GRADE_ROMAN[tx.grade-1]+' '+t('class_label'):'';
-  return gradeStr?subjName+' — '+gradeStr:subjName;
+  const parts=[gradeStr?subjName+' — '+gradeStr:subjName];
+  if(tx.semester===1)parts.push('I სემ.');
+  else if(tx.semester===2)parts.push('II სემ.');
+  if(tx.testType==='sum'||tx.sumTest)parts.push('შემაჯამებელი');
+  else if(tx.teacherCreated)parts.push('მასწავლებლის ტესტი');
+  return parts.filter(Boolean).join(' — ');
 }
 
 // Get title from a result record (uses testId to look up tx in ALL_TESTS)
@@ -14552,12 +14681,8 @@ function saveTeamsWebhook(){
 }
 function exportAllResultsExcel(){
   var rows=[['Email','სახელი','ტესტი','ქულა','თარიღი']];
-  var all=JSON.parse(localStorage.getItem('all_results')||'[]');
-  USER_DB.forEach(function(u){
-    var ur=JSON.parse(localStorage.getItem('results_'+u.email)||'[]');
-    ur.forEach(function(r){
-      rows.push([u.email,u.name||'',r.testId||'',r.pct||'',r.date?new Date(r.date).toLocaleDateString('ka-GE'):'']);
-    });
+  SESSION_RESULTS.forEach(function(r){
+    rows.push([r.userId||'',r.userName||'',r.testTitle||r.testId||'',r.pct||'',r.date||'']);
   });
   var csv=rows.map(function(r){return r.map(function(c){return '"'+String(c).replace(/"/g,'""')+'"';}).join(',');}).join('\n');
   var blob=new Blob(['﻿'+csv],{type:'text/csv;charset=utf-8'});
@@ -14567,11 +14692,11 @@ function exportAllResultsExcel(){
   logAuditEvent('EXPORT','All results exported to CSV');
 }
 function exportStudentProgress(){
-  var rows=[['Email','სახელი','კლასი','XP','კოინები','ჩატარებული ტესტები','საშ. ქულა']];
+  var rows=[['Email','სახელი','კლასი','ჩატარებული ტესტები','საშ. ქულა']];
   USER_DB.filter(function(u){return u.role==='student';}).forEach(function(u){
-    var ur=JSON.parse(localStorage.getItem('results_'+u.email)||'[]');
+    var ur=SESSION_RESULTS.filter(function(r){return r.userId===u.email;});
     var avg=ur.length?Math.round(ur.reduce(function(a,r){return a+(r.pct||0);},0)/ur.length):0;
-    rows.push([u.email,u.name||'',u.class||'',u.xp||0,u.coins||0,ur.length,avg+'%']);
+    rows.push([u.email,u.name||'',u.grade||'',ur.length,avg+'%']);
   });
   var csv=rows.map(function(r){return r.map(function(c){return '"'+String(c).replace(/"/g,'""')+'"';}).join(',');}).join('\n');
   var blob=new Blob(['﻿'+csv],{type:'text/csv;charset=utf-8'});
@@ -16987,6 +17112,7 @@ document.addEventListener('click',function(e){
 });
 
 </script>
+<script src="/management-overrides.js"></script>
 
 <!-- EDIT USER MODAL -->
 <div id="modal-edit-user" class="overlay hidden" onclick="if(event.target===this)this.classList.add('hidden')">
