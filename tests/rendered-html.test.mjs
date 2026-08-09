@@ -99,7 +99,7 @@ test("keeps teacher authoring aligned with the canonical grade taxonomy", async 
   assert.match(html, /function populateBuilderSubjects\(\)/);
   assert.match(html, /const allowed=subjectsForGrade\(grade\)/);
   assert.match(html, /subjectFamily\(test\.subject\)===subject/);
-  assert.match(html, /const canonicalOrder=\['მათემატიკა','ალგებრა','გეომეტრია','ქართული','ქართული ენა და ლიტერატურა'/);
+  assert.match(html, /const canonicalOrder=\['მათემატიკა','ქართული','ქართული ენა და ლიტერატურა'/);
   assert.doesNotMatch(html, /const subjectValues=/);
   assert.match(customTestsRoute, /"ქართული ენა და ლიტერატურა"/);
   assert.match(customTestsRoute, /subjectAllowedForGrade\(subject, grade\)/);

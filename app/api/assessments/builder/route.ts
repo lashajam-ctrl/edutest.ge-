@@ -1,6 +1,6 @@
 import { env } from "cloudflare:workers";
 import { ensureSchema } from "@/db";
-import { assessmentTestJson, subjectAllowedForGrade } from "@/lib/assessment";
+import { assessmentSubjectComponents, assessmentTestJson, subjectAllowedForGrade } from "@/lib/assessment";
 import { getSessionUser } from "@/lib/auth";
 
 const clean = (value: unknown, max: number) => typeof value === "string" ? value.trim().replace(/[\u0000-\u001f\u007f]/g, "").slice(0, max) : "";
@@ -18,7 +18,8 @@ export async function POST(request: Request) {
     return Response.json({ error: "ტესტის მონაცემები არასწორია" }, { status: 400 });
   }
   const placeholders = questionIds.map(() => "?").join(",");
-  const selected = (await env.DB.prepare(`SELECT id,semantic_group_id FROM assessment_questions WHERE active=1 AND grade=? AND subject=? AND id IN (${placeholders})`).bind(grade, subject, ...questionIds).all<{ id: string; semantic_group_id: string }>()).results ?? [];
+  const subjectComponents = assessmentSubjectComponents(subject, grade), subjectPlaceholders = subjectComponents.map(() => "?").join(",");
+  const selected = (await env.DB.prepare(`SELECT id,semantic_group_id FROM assessment_questions WHERE active=1 AND grade=? AND subject IN (${subjectPlaceholders}) AND id IN (${placeholders})`).bind(grade, ...subjectComponents, ...questionIds).all<{ id: string; semantic_group_id: string }>()).results ?? [];
   if (selected.length !== questionIds.length) return Response.json({ error: "ზოგი კითხვა ამ კლასსა და საგანს არ ეკუთვნის" }, { status: 400 });
   if (new Set(selected.map(question => question.semantic_group_id)).size !== selected.length) return Response.json({ error: "ტესტში ერთი და იგივე შინაარსის კითხვა ვერ განმეორდება" }, { status: 400 });
   const id = `sv-custom-${crypto.randomUUID()}`, now = Date.now(), published = current.user.role === "admin" && body.published === true ? 1 : 0;

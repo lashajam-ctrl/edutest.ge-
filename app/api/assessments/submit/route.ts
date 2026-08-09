@@ -1,6 +1,6 @@
 import { env } from "cloudflare:workers";
 import { ensureSchema } from "@/db";
-import { gradeAssessmentAnswer, parsePublicPayload, Presentation, StoredAssessmentQuestion } from "@/lib/assessment";
+import { canonicalAssessmentSubject, gradeAssessmentAnswer, parsePublicPayload, Presentation, StoredAssessmentQuestion } from "@/lib/assessment";
 import { getSessionUser } from "@/lib/auth";
 import { consumeRateLimit } from "@/lib/rate-limit";
 
@@ -43,7 +43,11 @@ export async function POST(request: Request) {
   });
   const percentage = maxScore ? Math.round(score / maxScore * 100) : 0, now = Date.now();
   const test = await env.DB.prepare("SELECT title,subject,grade FROM assessment_tests WHERE id = ?").bind(session.test_id).first<{ title: string; subject: string; grade: number }>();
-  const result = { testId: session.test_id, title: test?.title ?? "ტესტი", subject: test?.subject ?? "", grade: test?.grade ?? null, earned: score, totalPts: maxScore, correct: correctCount, total: questionIds.length, pct: percentage, reviewed, assessmentMode: "verified", verified: true, date: new Date(now).toLocaleDateString("ka-GE") };
+  const resultSubject = canonicalAssessmentSubject(test?.subject ?? "", test?.grade ?? null);
+  const resultTitle = resultSubject === "მათემატიკა" && Number(test?.grade) >= 7
+    ? String(test?.title ?? "ტესტი").replace(/^(?:ალგებრა|გეომეტრია|მათემატიკა)/u, "მათემატიკა")
+    : test?.title ?? "ტესტი";
+  const result = { testId: session.test_id, title: resultTitle, subject: resultSubject, grade: test?.grade ?? null, earned: score, totalPts: maxScore, correct: correctCount, total: questionIds.length, pct: percentage, reviewed, assessmentMode: "verified", verified: true, date: new Date(now).toLocaleDateString("ka-GE") };
   const statements = [
     env.DB.prepare("INSERT INTO attempts (id,user_id,test_id,score,max_score,percentage,answers_json,submitted_at) VALUES (?,?,?,?,?,?,?,?)")
       .bind(crypto.randomUUID(), current.user.id, session.test_id, score, maxScore, percentage, JSON.stringify(result), now),
@@ -59,7 +63,7 @@ export async function POST(request: Request) {
       last_correct=excluded.last_correct, last_answered_at=excluded.last_answered_at, next_review_at=excluded.next_review_at`)
       .bind(current.user.id, id, question.semantic_group_id, item.ok ? 1 : 0, item.ok ? 1 : 0, now, nextReviewAt));
     statements.push(env.DB.prepare("INSERT INTO question_history (id,user_id,question_id,pool_key,answered_at) VALUES (?,?,?,?,?) ON CONFLICT(user_id,question_id) DO UPDATE SET answered_at=excluded.answered_at,pool_key=excluded.pool_key")
-      .bind(crypto.randomUUID(), current.user.id, id, `server:${test?.subject ?? ""}:${test?.grade ?? ""}`, now));
+      .bind(crypto.randomUUID(), current.user.id, id, `server:${resultSubject}:${test?.grade ?? ""}`, now));
   }
   await env.DB.batch(statements);
   return Response.json({ result }, { status: 201, headers: { "Cache-Control": "no-store" } });

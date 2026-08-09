@@ -44,8 +44,31 @@ test("publishes real D1 counts and a complete validated import report", async ()
   assert.match(stats, /assessmentTests/);
   assert.equal(report.sourceQuestions, 12_600);
   assert.equal(report.sourceTests, 336);
-  assert.equal(report.importedTests, 360);
+  assert.equal(report.importedTests, 336);
   assert.equal(report.uniqueIds, 12_600);
   assert.equal(report.lowDiversityPools.every(pool => pool.semanticGroups >= 5), true);
   assert.equal("answerKeys" in report, false);
+});
+
+test("accepts class-section labels and exposes one senior mathematics subject", async () => {
+  const [assessment, start, catalog, client, html, importer, reportText] = await Promise.all([
+    source("lib/assessment.ts"), source("app/api/assessments/start/route.ts"),
+    source("app/api/assessments/catalog/route.ts"), source("public/server-assessments.js"),
+    source("public/app.html"), source("scripts/import-assessment-bank.mjs"),
+    source("reports/assessment-import-report.json"),
+  ]);
+  const report = JSON.parse(reportText);
+  assert.match(assessment, /function schoolGradeNumber/);
+  assert.match(assessment, /\["ალგებრა", "გეომეტრია", "მათემატიკა"\]/);
+  assert.match(start, /schoolGradeNumber\(current\.user\.grade\)/);
+  assert.match(start, /assessmentSubjectComponents/);
+  assert.match(catalog, /preferredSeniorMath/);
+  assert.doesNotMatch(client, /7:\['ალგებრა','გეომეტრია'/);
+  assert.match(client, /7:\['მათემატიკა','ქართული ენა და ლიტერატურა'/);
+  assert.match(html, /'ალგებრა':'მათემატიკა','გეომეტრია':'მათემატიკა'/);
+  assert.doesNotMatch(importer, /status: "split"/);
+  assert.equal(report.importedTests, 336);
+  assert.equal(report.subjectMapping.split, undefined);
+  assert.equal(report.gradeSubjectSemester["7|მათემატიკა|1"], 75);
+  assert.equal(report.gradeSubjectSemester["12|მათემატიკა|2"], 75);
 });

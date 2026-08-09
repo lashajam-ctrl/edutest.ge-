@@ -48,7 +48,7 @@
     "url": "https://edutest.ge"
   },
   "educationalLevel": ["Grade1", "Grade2", "Grade3", "Grade4", "Grade5", "Grade6", "Grade7", "Grade8", "Grade9", "Grade10", "Grade11", "Grade12"],
-  "teaches": ["მათემატიკა", "ალგებრა", "გეომეტრია", "ქართული ენა და ლიტერატურა", "ინგლისური", "რუსული", "ბიოლოგია", "ქიმია", "ფიზიკა", "ისტორია", "გეოგრაფია", "ბუნება"]
+  "teaches": ["მათემატიკა", "ქართული ენა და ლიტერატურა", "ინგლისური", "რუსული", "ბიოლოგია", "ქიმია", "ფიზიკა", "ისტორია", "გეოგრაფია", "ბუნება"]
 }
 </script>
 <script>
@@ -5796,6 +5796,7 @@ ALL_TESTS.push(...(globalThis.EDUTEST_LANGUAGE_TESTS||[]));
 // Student catalog follows the official school-subject stages. Split language
 // modules remain separate tests internally, but are shown as one school subject.
 const SUBJECT_FAMILY={
+  'ალგებრა':'მათემატიკა','გეომეტრია':'მათემატიკა',
   'ქართული ლიტ.':'ქართული ენა და ლიტერატურა','ქართული ენა':'ქართული ენა და ლიტერატურა',
   'ინგლ. ლიტ.':'ინგლისური','ინგლ. გრამ.':'ინგლისური',
   'რუს. გრამ.':'რუსული'
@@ -5803,8 +5804,8 @@ const SUBJECT_FAMILY={
 const STUDENT_SUBJECTS_BY_STAGE={
   primary:['მათემატიკა','ქართული','ინგლისური','ბუნება'],
   upperPrimary:['მათემატიკა','ქართული','ინგლისური','რუსული','ბუნება'],
-  grade7:['ალგებრა','გეომეტრია','ქართული ენა და ლიტერატურა','ინგლისური','რუსული','ისტორია','გეოგრაფია','ბიოლოგია','ფიზიკა'],
-  secondary:['ალგებრა','გეომეტრია','ქართული ენა და ლიტერატურა','ინგლისური','რუსული','ისტორია','გეოგრაფია','ბიოლოგია','ქიმია','ფიზიკა']
+  grade7:['მათემატიკა','ქართული ენა და ლიტერატურა','ინგლისური','რუსული','ისტორია','გეოგრაფია','ბიოლოგია','ფიზიკა'],
+  secondary:['მათემატიკა','ქართული ენა და ლიტერატურა','ინგლისური','რუსული','ისტორია','გეოგრაფია','ბიოლოგია','ქიმია','ფიზიკა']
 };
 function subjectFamily(subject){return SUBJECT_FAMILY[subject]||subject;}
 function subjectsForGrade(grade){
@@ -8289,7 +8290,7 @@ function updateStudentHomeStats(){
 function populateSubjectDropdown(selId,allowedSubjects){
   const sel=document.getElementById(selId);if(!sel)return;
   const curVal=sel.dataset.realVal||sel.value;
-  const canonicalOrder=['მათემატიკა','ალგებრა','გეომეტრია','ქართული','ქართული ენა და ლიტერატურა','ინგლისური','რუსული','ბუნება','ისტორია','გეოგრაფია','ბიოლოგია','ქიმია','ფიზიკა'];
+  const canonicalOrder=['მათემატიკა','ქართული','ქართული ენა და ლიტერატურა','ინგლისური','რუსული','ბუნება','ისტორია','გეოგრაფია','ბიოლოგია','ქიმია','ფიზიკა'];
   const active=new Set(ALL_TESTS.filter(test=>!test.catalogHidden).map(test=>subjectFamily(test.subject)));
   const values=Array.isArray(allowedSubjects)?allowedSubjects:canonicalOrder.filter(subject=>active.has(subject));
   sel.innerHTML='<option value="">'+t('all_subjects')+'</option>'+
@@ -8298,7 +8299,7 @@ function populateSubjectDropdown(selId,allowedSubjects){
 function testCompositionLabel(test){
   const counts=test&&test.componentCounts;
   if(!counts)return'';
-  const labels={language:'ენა',literature:'ლიტერატურა',grammar:'გრამატიკა',vocabulary:'ლექსიკა',reading:'წაკითხვა',use_of_language:'ენის გამოყენება'};
+  const labels={algebra:'ალგებრა',geometry:'გეომეტრია',language:'ენა',literature:'ლიტერატურა',grammar:'გრამატიკა',vocabulary:'ლექსიკა',reading:'წაკითხვა',use_of_language:'ენის გამოყენება'};
   return Object.entries(counts).filter(row=>Number(row[1])>0).map(([key,value])=>(labels[key]||key)+' '+value).join(' · ');
 }
 function testCompositionChip(test){

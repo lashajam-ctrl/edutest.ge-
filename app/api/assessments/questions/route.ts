@@ -1,6 +1,7 @@
 import { env } from "cloudflare:workers";
 import { ensureSchema } from "@/db";
 import { getSessionUser } from "@/lib/auth";
+import { assessmentSubjectComponents } from "@/lib/assessment";
 
 export async function GET(request: Request) {
   const current = await getSessionUser(request);
@@ -11,8 +12,9 @@ export async function GET(request: Request) {
   const subject = (url.searchParams.get("subject") ?? "").trim().slice(0, 100), topic = (url.searchParams.get("topic") ?? "").trim().slice(0, 120);
   const query = (url.searchParams.get("q") ?? "").trim().slice(0, 120), limit = Math.min(100, Math.max(1, Number(url.searchParams.get("limit")) || 60));
   if (!Number.isInteger(grade) || grade < 1 || grade > 12 || !subject) return Response.json({ error: "კლასი და საგანი აუცილებელია" }, { status: 400 });
-  let sql = "SELECT id,grade,subject,semester,topic,question_type,points,public_payload_json FROM assessment_questions WHERE active=1 AND grade=? AND subject=?";
-  const values: unknown[] = [grade, subject];
+  const subjects = assessmentSubjectComponents(subject, grade), placeholders = subjects.map(() => "?").join(",");
+  let sql = `SELECT id,grade,subject,semester,topic,question_type,points,public_payload_json FROM assessment_questions WHERE active=1 AND grade=? AND subject IN (${placeholders})`;
+  const values: unknown[] = [grade, ...subjects];
   if (semester === 1 || semester === 2) { sql += " AND semester=?"; values.push(semester); }
   if (topic) { sql += " AND topic=?"; values.push(topic); }
   if (query) { sql += " AND public_payload_json LIKE ?"; values.push(`%${query}%`); }

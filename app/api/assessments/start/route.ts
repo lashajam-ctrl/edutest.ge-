@@ -1,6 +1,6 @@
 import { env } from "cloudflare:workers";
 import { ensureSchema } from "@/db";
-import { prepareQuestion, StoredAssessmentQuestion, subjectAllowedForGrade } from "@/lib/assessment";
+import { assessmentSubjectComponents, canonicalAssessmentSubject, prepareQuestion, schoolGradeNumber, StoredAssessmentQuestion, subjectAllowedForGrade } from "@/lib/assessment";
 import { getSessionUser } from "@/lib/auth";
 import { consumeRateLimit } from "@/lib/rate-limit";
 
@@ -26,7 +26,7 @@ export async function POST(request: Request) {
   }
   if (!allowed) return Response.json({ error: "ამ ტესტზე წვდომა არ გაქვთ" }, { status: 403 });
   if (current.user.role === "student") {
-    const userGrade = Number(current.user.grade);
+    const userGrade = schoolGradeNumber(current.user.grade);
     if (!Number.isInteger(userGrade) || Math.abs(userGrade - Number(test.grade)) > 1 || !subjectAllowedForGrade(test.subject, Number(test.grade))) {
       return Response.json({ error: "ტესტი თქვენი კლასისთვის ხელმისაწვდომი არ არის" }, { status: 403 });
     }
@@ -42,21 +42,33 @@ export async function POST(request: Request) {
       WHERE tq.test_id = ? AND q.active = 1 ORDER BY tq.position LIMIT 100`).bind(current.user.id, test.id);
   } else {
     const semesterClause = test.semester == null ? "" : " AND q.semester = ?";
-    const bindings: unknown[] = [current.user.id, test.grade, test.subject];
+    const subjects = assessmentSubjectComponents(test.subject, test.grade);
+    const subjectPlaceholders = subjects.map(() => "?").join(",");
+    const bindings: unknown[] = [current.user.id, test.grade, ...subjects];
     if (test.semester != null) bindings.push(test.semester);
     bindings.push(Date.now());
-    statement = env.DB.prepare(`${common} WHERE q.grade = ? AND q.subject = ?${semesterClause} AND q.active = 1
+    statement = env.DB.prepare(`${common} WHERE q.grade = ? AND q.subject IN (${subjectPlaceholders})${semesterClause} AND q.active = 1
       ORDER BY CASE WHEN h.question_id IS NULL THEN 0 WHEN h.last_correct = 0 AND h.next_review_at <= ? THEN 1 ELSE 2 END,
       COALESCE(h.last_answered_at, 0) ASC, q.semantic_group_id, q.id LIMIT 250`)
       .bind(...bindings);
   }
   const candidates = (await statement.all<Candidate>()).results ?? [];
   const selected: Candidate[] = [], semanticGroups = new Set<string>();
-  for (const question of candidates) {
-    if (semanticGroups.has(question.semantic_group_id)) continue;
-    semanticGroups.add(question.semantic_group_id); selected.push(question);
-    if (selected.length >= test.question_count) break;
+  const addQuestions = (rows: Candidate[], limit: number) => {
+    for (const question of rows) {
+      if (selected.length >= limit || semanticGroups.has(question.semantic_group_id)) continue;
+      semanticGroups.add(question.semantic_group_id); selected.push(question);
+    }
+  };
+  const combinedSeniorMath = !test.is_custom && test.grade >= 7 && canonicalAssessmentSubject(test.subject, test.grade) === "მათემატიკა";
+  if (combinedSeniorMath) {
+    const geometryTarget = Math.floor(test.question_count * 0.4), algebraTarget = test.question_count - geometryTarget;
+    const geometry = candidates.filter(question => question.subject === "გეომეტრია" || question.strand === "geometry_space");
+    const geometryIds = new Set(geometry.map(question => question.id));
+    addQuestions(candidates.filter(question => !geometryIds.has(question.id)), algebraTarget);
+    addQuestions(geometry, algebraTarget + geometryTarget);
   }
+  addQuestions(candidates, test.question_count);
   if (selected.length < test.question_count) return Response.json({ error: "ტესტისთვის საკმარისი განსხვავებული კითხვა ვერ მოიძებნა" }, { status: 409 });
 
   const presentation: Record<string, unknown> = {}, questions = selected.map(question => {

@@ -35,10 +35,6 @@ const bool = value => value ? 1 : 0;
 
 function mappedSubject(question) {
   if (question.subject === "მეორე უცხოური — რუსული") return { subject: "რუსული", status: "alias" };
-  if (question.subject === "მათემატიკა" && question.grade >= 7) {
-    const geometry = question.public_payload?.mathStrandKey === "geometry_space";
-    return { subject: geometry ? "გეომეტრია" : "ალგებრა", status: "split" };
-  }
   return { subject: question.subject, status: "exact" };
 }
 
@@ -102,19 +98,15 @@ function makeTestRows(tests, questionRows, now) {
   }
   const rows = [];
   for (const test of tests) {
-    const subjects = test.subject === "მათემატიკა" && test.grade >= 7 ? ["ალგებრა", "გეომეტრია"] : [test.subject === "მეორე უცხოური — რუსული" ? "რუსული" : test.subject];
-    for (const subject of subjects) {
-      const requestedCount = Number(test.count), semester = Number(test.semester);
-      const availableCount = available.get(`${test.grade}|${subject}|${semester}`)?.size ?? 0;
-      const count = subject === "გეომეტრია" ? Math.min(requestedCount, availableCount) : requestedCount;
-      if (availableCount < count || count < 5) throw new Error(`${test.id}/${subject}: insufficient distinct question pool (${availableCount})`);
-      const suffix = subjects.length === 2 ? `-${subject === "ალგებრა" ? "algebra" : "geometry"}` : "";
-      rows.push({
-        id: `sv-${test.id}${suffix}`, sourceTestId: test.id, title: `${subject} — ${test.grade} კლასი — ${semester} სემ.`, subject,
-        grade: test.grade, semester, sourcePool: test.pool, questionCount: count, timeMinutes: Number(test.time), attemptsAllowed: Number(test.attempts),
-        testType: test.testType, published: 1, isCustom: 0, createdBy: null, now,
-      });
-    }
+    const subject = test.subject === "მეორე უცხოური — რუსული" ? "რუსული" : test.subject;
+    const requestedCount = Number(test.count), semester = Number(test.semester);
+    const availableCount = available.get(`${test.grade}|${subject}|${semester}`)?.size ?? 0;
+    if (availableCount < requestedCount || requestedCount < 5) throw new Error(`${test.id}/${subject}: insufficient distinct question pool (${availableCount})`);
+    rows.push({
+      id: `sv-${test.id}`, sourceTestId: test.id, title: `${subject} — ${test.grade} კლასი — ${semester} სემ.${test.testType === "sum" ? " შემაჯამებელი" : ""}`, subject,
+      grade: test.grade, semester, sourcePool: test.pool, questionCount: requestedCount, timeMinutes: Number(test.time), attemptsAllowed: Number(test.attempts),
+      testType: test.testType, published: 1, isCustom: 0, createdBy: null, now,
+    });
   }
   return rows;
 }
@@ -176,7 +168,7 @@ async function main() {
       const statements = ["PRAGMA foreign_keys=ON;", ...chunk.flatMap(row => [questionInsert(row), answerInsert(row)])];
       await writeFile(join(args.out, `questions-${String(offset / chunkSize + 1).padStart(3, "0")}.sql`), `${statements.join("\n")}\n`, "utf8");
     }
-    const testSql = ["PRAGMA foreign_keys=ON;", ...testRows.map(testInsert), `INSERT INTO assessment_import_runs (id,source_hash,source_questions,imported_questions,imported_tests,report_json,imported_at) VALUES (${sql(`import-${sourceHash.slice(0, 16)}`)},${sql(sourceHash)},${source.questions.length},${rows.length},${testRows.length},${sql(JSON.stringify(report))},${now}) ON CONFLICT(source_hash) DO UPDATE SET imported_questions=excluded.imported_questions,imported_tests=excluded.imported_tests,report_json=excluded.report_json,imported_at=excluded.imported_at;`];
+    const testSql = ["PRAGMA foreign_keys=ON;", "UPDATE assessment_tests SET published=0, updated_at=CAST(strftime('%s','now') AS INTEGER)*1000 WHERE is_custom=0 AND grade>=7 AND subject IN ('ალგებრა','გეომეტრია');", ...testRows.map(testInsert), `INSERT INTO assessment_import_runs (id,source_hash,source_questions,imported_questions,imported_tests,report_json,imported_at) VALUES (${sql(`import-${sourceHash.slice(0, 16)}`)},${sql(sourceHash)},${source.questions.length},${rows.length},${testRows.length},${sql(JSON.stringify(report))},${now}) ON CONFLICT(source_hash) DO UPDATE SET imported_questions=excluded.imported_questions,imported_tests=excluded.imported_tests,report_json=excluded.report_json,imported_at=excluded.imported_at;`];
     await writeFile(join(args.out, "tests-and-manifest.sql"), `${testSql.join("\n")}\n`, "utf8");
   }
   console.log(JSON.stringify({ ok: true, dryRun: args.dryRun, questions: rows.length, sourceTests: source.tests.length, importedTests: testRows.length, semanticGroups: semanticCounts.size, report: args.report, out: args.dryRun ? null : args.out }));

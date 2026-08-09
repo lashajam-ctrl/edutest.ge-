@@ -5,16 +5,33 @@ export const ASSESSMENT_SUBJECTS_BY_GRADE: Record<number, string[]> = {
   4: ["მათემატიკა", "ქართული", "ინგლისური", "ბუნება", "მე და საზოგადოება"],
   5: ["მათემატიკა", "ქართული", "ინგლისური", "რუსული", "ბუნება", "ჩვენი საქართველო"],
   6: ["მათემატიკა", "ქართული", "ინგლისური", "რუსული", "ბუნება", "ჩვენი საქართველო"],
-  7: ["ალგებრა", "გეომეტრია", "ქართული ენა და ლიტერატურა", "ინგლისური", "რუსული", "ისტორია", "გეოგრაფია", "ბიოლოგია", "ფიზიკა", "მოქალაქეობა"],
-  8: ["ალგებრა", "გეომეტრია", "ქართული ენა და ლიტერატურა", "ინგლისური", "რუსული", "ისტორია", "გეოგრაფია", "ბიოლოგია", "ფიზიკა", "ქიმია", "მოქალაქეობა"],
-  9: ["ალგებრა", "გეომეტრია", "ქართული ენა და ლიტერატურა", "ინგლისური", "რუსული", "ისტორია", "გეოგრაფია", "ბიოლოგია", "ფიზიკა", "ქიმია", "მოქალაქეობა"],
-  10: ["ალგებრა", "გეომეტრია", "ქართული ენა და ლიტერატურა", "ინგლისური", "რუსული", "ისტორია", "გეოგრაფია", "ბიოლოგია", "ფიზიკა", "ქიმია", "მოქალაქეობა"],
-  11: ["ალგებრა", "გეომეტრია", "ქართული ენა და ლიტერატურა", "ინგლისური", "რუსული", "ისტორია", "გეოგრაფია", "ბიოლოგია", "ფიზიკა", "ქიმია", "მოქალაქეობა"],
-  12: ["ალგებრა", "გეომეტრია", "ქართული ენა და ლიტერატურა", "ინგლისური", "ისტორია", "სამოქალაქო თავდაცვა და უსაფრთხოება"],
+  7: ["მათემატიკა", "ქართული ენა და ლიტერატურა", "ინგლისური", "რუსული", "ისტორია", "გეოგრაფია", "ბიოლოგია", "ფიზიკა", "მოქალაქეობა"],
+  8: ["მათემატიკა", "ქართული ენა და ლიტერატურა", "ინგლისური", "რუსული", "ისტორია", "გეოგრაფია", "ბიოლოგია", "ფიზიკა", "ქიმია", "მოქალაქეობა"],
+  9: ["მათემატიკა", "ქართული ენა და ლიტერატურა", "ინგლისური", "რუსული", "ისტორია", "გეოგრაფია", "ბიოლოგია", "ფიზიკა", "ქიმია", "მოქალაქეობა"],
+  10: ["მათემატიკა", "ქართული ენა და ლიტერატურა", "ინგლისური", "რუსული", "ისტორია", "გეოგრაფია", "ბიოლოგია", "ფიზიკა", "ქიმია", "მოქალაქეობა"],
+  11: ["მათემატიკა", "ქართული ენა და ლიტერატურა", "ინგლისური", "რუსული", "ისტორია", "გეოგრაფია", "ბიოლოგია", "ფიზიკა", "ქიმია", "მოქალაქეობა"],
+  12: ["მათემატიკა", "ქართული ენა და ლიტერატურა", "ინგლისური", "ისტორია", "სამოქალაქო თავდაცვა და უსაფრთხოება"],
 };
 
+export function canonicalAssessmentSubject(subject: unknown, grade: unknown) {
+  const value = String(subject ?? "").trim();
+  const numericGrade = Number(grade);
+  if (numericGrade >= 7 && ["ალგებრა", "გეომეტრია", "მათემატიკა"].includes(value)) return "მათემატიკა";
+  return value;
+}
+
+export function assessmentSubjectComponents(subject: unknown, grade: unknown) {
+  const canonical = canonicalAssessmentSubject(subject, grade);
+  return canonical === "მათემატიკა" && Number(grade) >= 7 ? ["მათემატიკა", "ალგებრა", "გეომეტრია"] : [canonical];
+}
+
+export function schoolGradeNumber(value: unknown) {
+  const match = String(value ?? "").trim().match(/^(1[0-2]|[1-9])/u);
+  return match ? Number(match[1]) : null;
+}
+
 export function subjectAllowedForGrade(subject: string, grade: number) {
-  return ASSESSMENT_SUBJECTS_BY_GRADE[grade]?.includes(subject) ?? false;
+  return ASSESSMENT_SUBJECTS_BY_GRADE[grade]?.includes(canonicalAssessmentSubject(subject, grade)) ?? false;
 }
 
 export type StoredAssessmentQuestion = {
@@ -27,6 +44,7 @@ export type StoredAssessmentQuestion = {
   public_payload_json: string;
   points: number;
   semantic_group_id: string;
+  strand?: string | null;
 };
 
 export type Presentation = { optionOrder?: number[] };
@@ -124,12 +142,18 @@ export function gradeAssessmentAnswer(args: {
 }
 
 export function assessmentTestJson(row: Record<string, unknown>) {
+  const grade = Number(row.grade), internalSubject = String(row.subject), subject = canonicalAssessmentSubject(internalSubject, grade);
+  const standardSeniorMath = !Boolean(row.is_custom) && grade >= 7 && subject === "მათემატიკა";
+  const title = standardSeniorMath
+    ? String(row.title).replace(/^(?:ალგებრა|გეომეტრია|მათემატიკა)/u, "მათემატიკა")
+    : String(row.title);
   return {
-    id: String(row.id), title: String(row.title), subject: String(row.subject), grade: Number(row.grade),
-    semester: row.semester == null ? null : Number(row.semester), pool: `server:${String(row.subject)}:${Number(row.grade)}`,
+    id: String(row.id), title, subject, grade,
+    semester: row.semester == null ? null : Number(row.semester), pool: `server:${subject}:${grade}`,
     count: Number(row.question_count), time: Number(row.time_minutes), attempts: Number(row.attempts_allowed),
     testType: String(row.test_type), paid: false, serverBacked: true, curriculumVerified: true,
     teacherCreated: Boolean(row.is_custom), createdBy: row.created_by ? String(row.created_by) : null,
     published: Boolean(row.published),
+    componentCounts: standardSeniorMath ? { algebra: Math.ceil(Number(row.question_count) * 0.6), geometry: Math.floor(Number(row.question_count) * 0.4) } : undefined,
   };
 }
