@@ -1,7 +1,7 @@
 import { env } from "cloudflare:workers";
 import { ensureSchema } from "@/db";
 import { canonicalAssessmentSubject, gradeAssessmentAnswer, parsePublicPayload, Presentation, StoredAssessmentQuestion } from "@/lib/assessment";
-import { correctKnownExplanation } from "@/lib/assessment-selection";
+import { correctKnownAnswerKey, correctKnownQuestionExplanation } from "@/lib/assessment-selection";
 import { getSessionUser } from "@/lib/auth";
 import { consumeRateLimit } from "@/lib/rate-limit";
 
@@ -33,14 +33,15 @@ export async function POST(request: Request) {
   let score = 0, maxScore = 0, correctCount = 0;
   const reviewed = questionIds.map(id => {
     const question = byId.get(id)!;
-    const publicPayload = parsePublicPayload(question), answerKey = JSON.parse(question.answer_key_json) as Record<string, unknown>;
+    const publicPayload = parsePublicPayload(question);
+    const answerKey = correctKnownAnswerKey(question.id, JSON.parse(question.answer_key_json) as Record<string, unknown>);
     const result = gradeAssessmentAnswer({ question, answerKey, userAnswer: answers[id], presentation: presentation[id], publicPayload });
     maxScore += Number(question.points); if (result.correct) { score += Number(question.points); correctCount++; }
     let submittedAnswer = answers[id] ?? null;
     if (question.question_type === "multiple_choice" && Number.isInteger(Number(submittedAnswer)) && presentation[id]?.optionOrder) {
       submittedAnswer = presentation[id].optionOrder?.[Number(submittedAnswer)] ?? submittedAnswer;
     }
-    return { ...publicPayload, ua: submittedAnswer, ok: result.correct, correctDisplay: result.correctDisplay, explain: correctKnownExplanation(question.explanation) };
+    return { ...publicPayload, ua: submittedAnswer, ok: result.correct, correctDisplay: result.correctDisplay, explain: correctKnownQuestionExplanation(question.id, question.explanation) };
   });
   const percentage = maxScore ? Math.round(score / maxScore * 100) : 0, now = Date.now();
   const test = await env.DB.prepare("SELECT title,subject,grade FROM assessment_tests WHERE id = ?").bind(session.test_id).first<{ title: string; subject: string; grade: number }>();

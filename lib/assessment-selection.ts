@@ -177,7 +177,7 @@ export function correctKnownQuestionPayload(payload: Record<string, unknown>) {
     result.text = gradeOneComparisonPrompts[baseQuestionId];
   }
   if (baseQuestionId === "g1g2_14") {
-    result.text = "წინადადების პირველი სიტყვა ___ ასოთი იწყება.";
+    result.text = "სიტყვა „ბურთი“ ასო ___-თი იწყება.";
   }
   if (String(result.text ?? "").includes("ძლიერი სისხლდენის დროს პირველადი დახმარების ერთ-ერთი ძირითადი ნაბიჯია")) {
     result.text = "ძლიერი სისხლდენის დროს პირველადი დახმარების ერთ-ერთი ძირითადი ნაბიჯია:";
@@ -194,4 +194,16 @@ export function correctKnownExplanation(value: unknown) {
   return String(value ?? "")
     .replaceAll("დაჭერილი პირდაპირი წნევა", "ჭრილობაზე უწყვეტი პირდაპირი დაწოლა")
     .replaceAll("პირდაპირი წნევა", "პირდაპირი დაწოლა");
+}
+
+export function correctKnownAnswerKey(questionId: unknown, answerKey: Record<string, unknown>) {
+  const baseQuestionId = String(questionId ?? "").replace(/_x\d+$/u, "");
+  return baseQuestionId === "g1g2_14" ? { ...answerKey, blanks: ["ბ"] } : answerKey;
+}
+
+export function correctKnownQuestionExplanation(questionId: unknown, value: unknown) {
+  const baseQuestionId = String(questionId ?? "").replace(/_x\d+$/u, "");
+  return baseQuestionId === "g1g2_14"
+    ? "სიტყვა „ბურთი“ ასო „ბ“-თი იწყება."
+    : correctKnownExplanation(value);
 }

@@ -5,8 +5,10 @@ import {
   allocateByWeight,
   assessmentSelectionKey,
   componentCountsForTest,
+  correctKnownAnswerKey,
   correctKnownExplanation,
   correctKnownQuestionPayload,
+  correctKnownQuestionExplanation,
   distinctSelectionGroupCount,
   eligibleCandidatesBySelectionHistory,
   languageBlueprintFor,
@@ -105,7 +107,9 @@ test("rewrites ambiguous grade-one comparison and fill prompts", () => {
   assert.doesNotMatch(comparison.text, /მეტი ჯგუფი/u);
 
   const fill = correctKnownQuestionPayload({ id: "g1g2_14", text: "წინადადება იწყება ___ ასოთი." });
-  assert.equal(fill.text, "წინადადების პირველი სიტყვა ___ ასოთი იწყება.");
+  assert.equal(fill.text, "სიტყვა „ბურთი“ ასო ___-თი იწყება.");
+  assert.deepEqual(correctKnownAnswerKey("g1g2_14_x15", { blanks: ["დიდი"] }), { blanks: ["ბ"] });
+  assert.equal(correctKnownQuestionExplanation("g1g2_14", "შესავსები პასუხია: დიდი."), "სიტყვა „ბურთი“ ასო „ბ“-თი იწყება.");
 });
 
 test("server start route enforces semantic selection and language blueprints", async () => {
