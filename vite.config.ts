@@ -5,6 +5,8 @@ import { sites } from "./build/sites-vite-plugin";
 
 const SITE_CREATOR_PLACEHOLDER_DATABASE_ID =
   "00000000-0000-4000-8000-000000000000";
+const EDUTEST_PRODUCTION_DATABASE_ID =
+  "556b17e3-4032-41a7-ac69-9078beeb34df";
 
 const { d1, r2 } = hostingConfig;
 const isCloudflareProductionBuild =
@@ -24,7 +26,7 @@ const localBindingConfig = {
             ? "edutest-db"
             : "site-creator-d1",
           ...(isCloudflareProductionBuild
-            ? {}
+            ? { database_id: EDUTEST_PRODUCTION_DATABASE_ID }
             : { database_id: SITE_CREATOR_PLACEHOLDER_DATABASE_ID }),
         },
       ]

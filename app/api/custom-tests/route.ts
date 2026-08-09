@@ -14,7 +14,9 @@ const subjectAllowedForGrade = (subject: string, grade: number) => {
 };
 
 function parseQuestions(value: string) { try { return JSON.parse(value) as unknown[]; } catch { return []; } }
-function publicTest(row: typeof customTests.$inferSelect) { return { ...row, questions: parseQuestions(row.questionsJson), questionsJson: undefined }; }
+function publicTest(row: typeof customTests.$inferSelect) {
+  return { id: row.id, createdBy: row.createdBy, title: row.title, subject: row.subject, grade: row.grade, durationMinutes: row.durationMinutes, attemptsAllowed: row.attemptsAllowed, published: row.published, createdAt: row.createdAt, updatedAt: row.updatedAt, deprecated: true };
+}
 
 export async function GET(request: Request) {
   const current = await getSessionUser(request);

@@ -44,3 +44,6 @@ next-env.d.ts
 /.wrangler/
 /outputs/
 /work/
+/.openai/incoming-question-bank-*/
+/.openai/d1-assessment-import/
+/.openai/legacy-client-question-bank/
