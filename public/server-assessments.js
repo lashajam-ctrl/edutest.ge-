@@ -61,6 +61,7 @@
       return originalStartTest();
     }
     if(!CUR_USER){go('login');return;}
+    if(window.applyTestAgeMode)applyTestAgeMode(curTest);
     if(window.resetQuestionSpeech)resetQuestionSpeech();
     var text=document.getElementById('q-text');if(text)text.textContent='ტესტი იტვირთება…';
     var options=document.getElementById('q-opts');if(options)options.replaceChildren();

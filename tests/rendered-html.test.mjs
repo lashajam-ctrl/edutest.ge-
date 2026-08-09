@@ -70,6 +70,21 @@ test("centers the results page and keeps its actions clear on narrow screens", a
   assert.match(html, /#results-btns \.btn\{width:100%;max-width:none/);
 });
 
+test("activates a dedicated child-friendly test interface for grades I-II", async () => {
+  const [html, serverAssessments] = await Promise.all([
+    readFile(new URL("public/app.html", root), "utf8"),
+    readFile(new URL("public/server-assessments.js", root), "utf8"),
+  ]);
+  assert.match(html, /function applyTestAgeMode\(test\)/);
+  assert.match(html, /grade<=2/);
+  assert.match(html, /classList\.toggle\('test-early',early\)/);
+  assert.match(html, /id="q-early-guide"/);
+  assert.match(html, /body\.test-early #q-card/);
+  assert.match(html, /body\.test-early \.qopt\{min-height:68px/);
+  assert.match(html, /if\(p!==['"]take-test['"]\)document\.body\.classList\.remove\(['"]test-early['"]\)/);
+  assert.match(serverAssessments, /applyTestAgeMode\(curTest\)/);
+});
+
 test("keeps test access open while payments are disabled and uses server-side admin accounts", async () => {
   const [html, bootstrapRoute, adminUsersRoute, profileRoute] = await Promise.all([
     readFile(new URL("public/app.html", root), "utf8"),

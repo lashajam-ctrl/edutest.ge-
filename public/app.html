@@ -386,6 +386,54 @@ body.acc-dyslexia{font-family:'Comic Sans MS','OpenDyslexic',sans-serif!importan
 @media(max-width:620px){.generated-visual{min-height:150px;padding:14px}.gvisual-bars{gap:7px}.gvisual-bar-col{min-width:34px}.gvisual-bar{width:28px}.gvisual-timeline{grid-template-columns:1fr 1fr}}
 .speech-notice{position:fixed;left:50%;top:max(12px,env(safe-area-inset-top));z-index:10020;max-width:min(460px,calc(100vw - 28px));transform:translateX(-50%);padding:9px 14px;border:1px solid rgba(255,255,255,.28);border-radius:13px;background:#27234f;color:#fff;font-size:12px;font-weight:700;line-height:1.4;text-align:center;box-shadow:0 16px 40px rgba(28,25,62,.25);pointer-events:none}
 
+/* I-II grade test mode: calmer decisions, larger targets, visible encouragement. */
+#q-early-guide{display:none}
+body.test-early #p-take-test{background:
+  radial-gradient(circle at 8% 8%,rgba(255,255,255,.7) 0 36px,transparent 38px),
+  radial-gradient(circle at 92% 22%,rgba(255,255,255,.58) 0 48px,transparent 50px),
+  linear-gradient(145deg,#fff2b8 0%,#dff8ee 44%,#e4e7ff 100%)!important}
+body.test-early #tt-topbar{border:2px solid rgba(255,255,255,.92)!important;border-radius:22px!important;background:rgba(255,255,255,.9)!important;box-shadow:0 12px 30px rgba(70,82,120,.12)!important}
+body.test-early #tt-title{font-size:15px!important;color:#3d347f}
+body.test-early #q-counter{font-size:12px!important;color:#68718a!important;font-weight:700}
+body.test-early #tt-progress-label{display:none}
+body.test-early #tt-progress-bar{width:120px!important}
+body.test-early #tt-progress-bar .pbar{height:13px;background:#e9edf7;border:2px solid #fff;box-shadow:inset 0 1px 2px rgba(51,65,85,.08)}
+body.test-early #q-prog{background:linear-gradient(90deg,#ff8f70,#ffbf4b)!important;border-radius:999px}
+body.test-early .timer{width:58px;height:58px;border:4px solid #7469e8;color:#5146bd;font-size:12px;background:#fffdf8}
+body.test-early #q-card{max-width:760px!important;padding:clamp(18px,3vw,30px)!important;border:3px solid rgba(255,255,255,.94)!important;border-radius:30px!important;background:rgba(255,253,248,.97)!important;box-shadow:0 24px 58px rgba(69,77,117,.15)!important;overflow:visible!important}
+body.test-early #q-card>div:first-child{margin-bottom:12px!important}
+body.test-early #q-num{width:52px!important;height:52px!important;border-radius:18px!important;background:linear-gradient(145deg,#ff7d65,#ffb247)!important;font-size:19px!important;box-shadow:0 8px 18px rgba(255,126,92,.27);transform:rotate(-2deg)}
+body.test-early #q-type-badge{background:#e3f8ef;color:#08745e;border:1px solid #93dbc8;font-size:12px;padding:7px 11px}
+body.test-early #q-pts-badge{background:#fff2bf;color:#9a5a00;border:1px solid #ffd873;font-size:12px;padding:7px 11px}
+body.test-early #q-early-guide{display:flex;align-items:center;gap:12px;margin:0 0 18px;padding:12px 15px;border:2px solid #d8d4ff;border-radius:18px;background:linear-gradient(135deg,#f6f4ff,#ecfbf6);color:#393279;font-weight:800;line-height:1.45}
+.early-guide-mascot{display:grid;place-items:center;width:42px;height:42px;flex:0 0 42px;border-radius:15px;background:#fff;box-shadow:0 5px 14px rgba(79,70,229,.12);font-size:24px}
+.early-guide-copy strong{display:block;font-size:14px;color:#302879}.early-guide-copy span{display:block;font-size:12px;color:#667085;font-weight:650;margin-top:2px}
+body.test-early #q-text{max-width:650px;margin:0 auto 22px!important;font-size:clamp(20px,3.2vw,27px)!important;line-height:1.6!important;text-align:center;color:#20273a!important;font-weight:800!important;letter-spacing:0}
+body.test-early #q-opts{display:grid;gap:12px}
+body.test-early .qopt{min-height:68px;margin:0!important;padding:15px 18px!important;border:3px solid #dce2f1;border-radius:20px!important;background:#fff;font-size:clamp(16px,2.2vw,19px)!important;font-weight:750;line-height:1.45;box-shadow:0 6px 16px rgba(65,75,110,.06);transition:transform .16s ease,border-color .16s ease,background .16s ease}
+body.test-early .qopt:hover{transform:translateY(-2px);border-color:#9188f4;background:#f9f8ff}
+body.test-early .qopt.sel{border-color:#6358db;background:#eeecff;box-shadow:0 0 0 4px rgba(99,88,219,.1)}
+body.test-early .radio{width:30px;height:30px;flex:0 0 30px;border-width:3px}
+body.test-early .read-aloud-btn{min-height:52px;margin:4px auto 18px;padding:11px 19px;border-width:2px;font-size:15px;box-shadow:0 8px 20px rgba(79,70,229,.12)}
+body.test-early .generated-visual{min-height:210px;border-width:2px;border-radius:24px;background:linear-gradient(145deg,#fff,#eef7ff)}
+body.test-early #q-nav-btns{gap:12px;border-top:2px dashed #e2def0!important;padding-top:18px!important}
+body.test-early #q-nav-btns .btn{min-height:56px;padding:12px 22px;border-radius:18px;font-size:16px;font-weight:850}
+body.test-early #q-next{background:linear-gradient(135deg,#6258e8,#766cf1);box-shadow:0 10px 24px rgba(79,70,229,.22)}
+body.test-early .dot-nav{display:flex!important;max-width:760px;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:14px}
+body.test-early .dot{width:12px;height:12px;border:2px solid rgba(255,255,255,.9);box-sizing:content-box}
+body.test-early .qopt:focus-visible,body.test-early #q-nav-btns .btn:focus-visible{outline:4px solid rgba(79,70,229,.25);outline-offset:3px}
+@media(max-width:640px){
+  body.test-early #p-take-test{padding:8px 8px 18px!important}
+  body.test-early #tt-topbar{border-radius:18px!important}
+  body.test-early #tt-progress-bar{width:auto!important}
+  body.test-early #q-card{padding:16px!important;border-radius:24px!important}
+  body.test-early #q-num{width:46px!important;height:46px!important;border-radius:15px!important}
+  body.test-early #q-text{font-size:20px!important;text-align:left}
+  body.test-early .qopt{min-height:64px;padding:14px!important;font-size:16px!important}
+  body.test-early #q-nav-btns{position:sticky;bottom:0;background:rgba(255,253,248,.96);padding:12px 0 4px!important}
+  body.test-early #q-nav-btns .btn{min-height:52px;padding:10px 16px;font-size:15px}
+}
+
 /* Results stay centered and clear of fixed accessibility controls. */
 #p-results{align-items:center!important;justify-content:flex-start!important;overflow-x:hidden;overflow-y:auto;padding:32px 20px 112px!important;min-height:100dvh}
 .results-shell{width:min(720px,100%);margin:0 auto}
@@ -1161,6 +1209,10 @@ body.student-teen #s-daily-card.student-mission-card #s-daily-btn{color:#4338ca!
         <span class="badge b-blue" id="q-type-badge">MCQ</span>
         <span class="badge b-amber" id="q-pts-badge">2 ქ.</span>
       </div>
+    </div>
+    <div id="q-early-guide" role="status" aria-live="polite">
+      <span class="early-guide-mascot" aria-hidden="true">🌟</span>
+      <span class="early-guide-copy"><strong id="q-early-title">შენ ეს შეგიძლია!</strong><span id="q-early-hint">ყურადღებით ნახე და მონიშნე ერთი პასუხი.</span></span>
     </div>
     <h3 style="font-size:16px;font-weight:600;margin-bottom:18px;line-height:1.5;color:#1a202c" id="q-text">კითხვა...</h3>
     <div id="q-opts"></div>
@@ -6942,6 +6994,7 @@ function go(p){
   const roleRoutes={student:['student','parent'],teacher:['teacher'],admin:['admin']};
   if(roleRoutes[p]&&(!CUR_USER||!roleRoutes[p].includes(CUR_USER.role))){p=CUR_USER?'landing':'login';}
   if(p!=='take-test'&&timerInt){clearInterval(timerInt);timerInt=null;}
+  if(p!=='take-test')document.body.classList.remove('test-early');
   document.querySelectorAll('.page').forEach(x=>{x.classList.remove('active');});
   const el=document.getElementById('p-'+p);
   if(el){el.classList.add('active');el.classList.add('fade');}
@@ -8530,6 +8583,7 @@ function startExam(test){
 function startTest(){
   _tabSwitchCount=0;
   if(!curTest){go(curRole==='teacher'?'teacher':'student');return;}
+  applyTestAgeMode(curTest);
   if(window.resetQuestionSpeech)resetQuestionSpeech();
   // Practice mode: no timer, no tab penalty
   const pb=document.getElementById('tt-practice-badge');if(pb)pb.classList.remove('hidden');
@@ -8555,6 +8609,16 @@ function updateTimer(){
   el.className='timer'+(timerSec<30?' red':timerSec<60?' amb':'');
 }
 
+function applyTestAgeMode(test){
+  const grade=parseInt(String(test?.grade??CUR_USER?.grade??''),10);
+  const early=Number.isInteger(grade)&&grade<=2;
+  document.body.classList.toggle('test-early',early);
+  const title=document.getElementById('q-early-title');
+  const hint=document.getElementById('q-early-hint');
+  if(title)title.textContent=LANG==='en'?'You can do it!':LANG==='ru'?'Ты справишься!':'შენ ეს შეგიძლია!';
+  if(hint)hint.textContent=LANG==='en'?'Look carefully and choose one answer.':LANG==='ru'?'Посмотри внимательно и выбери один ответ.':'ყურადღებით ნახე და მონიშნე ერთი პასუხი.';
+}
+
 function renderGeneratedVisual(q,anchor){
   if(!q||!q.visual)return null;
   const spec=q.visual,figure=document.createElement('figure');figure.id='q-media';figure.className='generated-visual';
@@ -8578,11 +8642,12 @@ function renderGeneratedVisual(q,anchor){
 
 function renderQ(){
   const qs=curTestQs;const q=qs[qIdx];if(!q)return;
+  const earlyMode=document.body.classList.contains('test-early');
   document.getElementById('q-num').textContent=qIdx+1;
   const ofSep=LANG==='ka'?' '+t('of'):' '+t('of')+' ';document.getElementById('q-counter').textContent=t('question')+' '+(qIdx+1)+ofSep+qs.length;
   document.getElementById('q-prog').style.width=(((qIdx+1)/qs.length)*100)+'%';
-  document.getElementById('q-type-badge').textContent=q.aiGenerated?'AI სავარჯიშო':(q.media||q.visual)?'ვიზუალური':q.type==='multiple_choice'?'MCQ':q.type==='true_false'?t('tf_type'):q.type==='calc'?'🧮':q.type==='order'?'🔀':q.type==='match'?'🔗':q.type==='fill'?'✏️':'ღია პასუხი';
-  document.getElementById('q-pts-badge').textContent=q.pts+' '+t('pts_label');
+  document.getElementById('q-type-badge').textContent=earlyMode?(q.media||q.visual?'🖼️ ნახე და აირჩიე':q.type==='true_false'?'✓ სწორია თუ არა?':q.type==='calc'?'🔢 გამოთვალე':'✨ აირჩიე პასუხი'):q.aiGenerated?'AI სავარჯიშო':(q.media||q.visual)?'ვიზუალური':q.type==='multiple_choice'?'MCQ':q.type==='true_false'?t('tf_type'):q.type==='calc'?'🧮':q.type==='order'?'🔀':q.type==='match'?'🔗':q.type==='fill'?'✏️':'ღია პასუხი';
+  document.getElementById('q-pts-badge').textContent=earlyMode?'⭐ '+q.pts:q.pts+' '+t('pts_label');
   const _qtEl=document.getElementById('q-text');
   const translatedQuestionText=qTransText(q);
   if(q.type==='fill'){
