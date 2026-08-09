@@ -33,6 +33,11 @@ const normalize = value => String(value ?? "")
 const sql = value => value == null ? "NULL" : typeof value === "number" ? String(value) : `'${String(value).replaceAll("'", "''")}'`;
 const bool = value => value ? 1 : 0;
 
+function generatedFamilyKey(id) {
+  const match = String(id ?? "").match(/^(g\d+[a-z]+)\d+_(\d+)(?:_x\d+)?$/iu);
+  return match ? `${match[1].toLocaleLowerCase()}:${Number(match[2])}` : "";
+}
+
 function mappedSubject(question) {
   if (question.subject === "მეორე უცხოური — რუსული") return { subject: "რუსული", status: "alias" };
   return { subject: question.subject, status: "exact" };
@@ -101,10 +106,10 @@ function makeTestRows(tests, questionRows, now) {
     const subject = test.subject === "მეორე უცხოური — რუსული" ? "რუსული" : test.subject;
     const requestedCount = Number(test.count), semester = Number(test.semester);
     const availableCount = available.get(`${test.grade}|${subject}|${semester}`)?.size ?? 0;
-    if (availableCount < requestedCount || requestedCount < 5) throw new Error(`${test.id}/${subject}: insufficient distinct question pool (${availableCount})`);
+    if (availableCount < 5 || requestedCount < 5) throw new Error(`${test.id}/${subject}: insufficient distinct question pool (${availableCount})`);
     rows.push({
       id: `sv-${test.id}`, sourceTestId: test.id, title: `${subject} — ${test.grade} კლასი — ${semester} სემ.${test.testType === "sum" ? " შემაჯამებელი" : ""}`, subject,
-      grade: test.grade, semester, sourcePool: test.pool, questionCount: requestedCount, timeMinutes: Number(test.time), attemptsAllowed: Number(test.attempts),
+      grade: test.grade, semester, sourcePool: test.pool, questionCount: Math.min(requestedCount, availableCount), timeMinutes: Number(test.time), attemptsAllowed: Number(test.attempts),
       testType: test.testType, published: 1, isCustom: 0, createdBy: null, now,
     });
   }
@@ -127,7 +132,11 @@ async function main() {
     validateQuestion(question);
     if (ids.has(question.id)) throw new Error(`Duplicate id: ${question.id}`); ids.add(question.id);
     const mapped = mappedSubject(question), payload = publicPayload(question, mapped.subject);
-    const semanticGroupId = `sg_${sha(`${question.grade}|${mapped.subject}|${question.topic}|${normalize(question.public_payload.text)}`).slice(0, 24)}`;
+    const family = generatedFamilyKey(question.id);
+    const semanticIdentity = family
+      ? `${question.grade}|${mapped.subject}|${question.semester}|family:${family}`
+      : `${question.grade}|${mapped.subject}|${question.semester}|${question.topic}|${normalize(question.public_payload.text)}`;
+    const semanticGroupId = `sg_${sha(semanticIdentity).slice(0, 24)}`;
     const row = {
       id: question.id, sourceId: question.id, poolKey: question.pool_key, poolPrefix: question.pool_prefix, grade: question.grade,
       subject: mapped.subject, sourceSubject: question.subject, semester: question.semester, topic: question.topic,

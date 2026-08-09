@@ -1,3 +1,5 @@
+import { componentCountsForTest, correctKnownQuestionPayload } from "./assessment-selection";
+
 export const ASSESSMENT_SUBJECTS_BY_GRADE: Record<number, string[]> = {
   1: ["მათემატიკა", "ქართული", "ინგლისური", "ბუნება"],
   2: ["მათემატიკა", "ქართული", "ინგლისური", "ბუნება"],
@@ -65,7 +67,7 @@ export function parsePublicPayload(question: StoredAssessmentQuestion) {
   payload.subject = question.subject;
   payload.semester = question.semester;
   payload.topic = question.topic;
-  return payload;
+  return correctKnownQuestionPayload(payload);
 }
 
 function randomIndex(maxExclusive: number) {
@@ -147,6 +149,7 @@ export function assessmentTestJson(row: Record<string, unknown>) {
   const title = standardSeniorMath
     ? String(row.title).replace(/^(?:ალგებრა|გეომეტრია|მათემატიკა)/u, "მათემატიკა")
     : String(row.title);
+  const languageComponents = !Boolean(row.is_custom) ? componentCountsForTest(subject, grade, Number(row.question_count)) : null;
   return {
     id: String(row.id), title, subject, grade,
     semester: row.semester == null ? null : Number(row.semester), pool: `server:${subject}:${grade}`,
@@ -154,6 +157,8 @@ export function assessmentTestJson(row: Record<string, unknown>) {
     testType: String(row.test_type), paid: false, serverBacked: true, curriculumVerified: true,
     teacherCreated: Boolean(row.is_custom), createdBy: row.created_by ? String(row.created_by) : null,
     published: Boolean(row.published),
-    componentCounts: standardSeniorMath ? { algebra: Math.ceil(Number(row.question_count) * 0.6), geometry: Math.floor(Number(row.question_count) * 0.4) } : undefined,
+    componentCounts: standardSeniorMath
+      ? { algebra: Math.ceil(Number(row.question_count) * 0.6), geometry: Math.floor(Number(row.question_count) * 0.4) }
+      : languageComponents ?? undefined,
   };
 }

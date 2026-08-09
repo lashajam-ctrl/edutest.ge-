@@ -69,6 +69,7 @@
       var data=await response.json().catch(function(){return{};});
       if(!response.ok)throw new Error(data.error||'ტესტი ვერ დაიწყო');
       serverSessionId=data.sessionId;curTestQs=(data.questions||[]).map(adaptQuestion);qIdx=0;qAnswers={};_tabSwitchCount=0;
+      if(data.test){curTest.count=Number(data.test.count||curTestQs.length);if(data.test.componentCounts)curTest.componentCounts=data.test.componentCounts;}
       if(timerInt)clearInterval(timerInt);timerSec=Number(curTest.time||data.test?.time||20)*60;
       document.getElementById('timer').style.display='';document.getElementById('tt-title').textContent=curTest.title;
       renderQ();buildDots();updateTimer();

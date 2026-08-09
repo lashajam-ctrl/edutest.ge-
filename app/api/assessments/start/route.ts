@@ -1,6 +1,7 @@
 import { env } from "cloudflare:workers";
 import { ensureSchema } from "@/db";
 import { assessmentSubjectComponents, canonicalAssessmentSubject, prepareQuestion, schoolGradeNumber, StoredAssessmentQuestion, subjectAllowedForGrade } from "@/lib/assessment";
+import { allocateByWeight, assessmentSelectionKey, distinctSelectionGroupCount, eligibleCandidatesBySelectionHistory, languageBlueprintFor, languageBucketFor, rankCandidatesBySelectionHistory } from "@/lib/assessment-selection";
 import { getSessionUser } from "@/lib/auth";
 import { consumeRateLimit } from "@/lib/rate-limit";
 
@@ -52,24 +53,64 @@ export async function POST(request: Request) {
       COALESCE(h.last_answered_at, 0) ASC, q.semantic_group_id, q.id LIMIT 250`)
       .bind(...bindings);
   }
-  const candidates = (await statement.all<Candidate>()).results ?? [];
-  const selected: Candidate[] = [], semanticGroups = new Set<string>();
-  const addQuestions = (rows: Candidate[], limit: number) => {
+  const rawCandidates = (await statement.all<Candidate>()).results ?? [];
+  const selectionNow = Date.now();
+  if (!test.is_custom) {
+    const recentSessions = (await env.DB.prepare(`SELECT question_ids_json, started_at FROM assessment_sessions
+      WHERE user_id = ? AND started_at >= ? ORDER BY started_at DESC LIMIT 50`)
+      .bind(current.user.id, selectionNow - 86_400_000).all<{ question_ids_json: string; started_at: number }>()).results ?? [];
+    const recentlyPresented = new Map<string, number>();
+    for (const session of recentSessions) {
+      try {
+        for (const id of JSON.parse(session.question_ids_json) as string[]) recentlyPresented.set(id, Math.max(recentlyPresented.get(id) ?? 0, Number(session.started_at)));
+      } catch {}
+    }
+    for (const question of rawCandidates) {
+      const presentedAt = recentlyPresented.get(question.id);
+      if (presentedAt && !question.history_id) {
+        question.history_id = `session:${question.id}`;
+        question.last_correct = 1;
+        question.next_review_at = selectionNow + 86_400_000;
+        question.last_answered_at = presentedAt;
+      }
+    }
+  }
+  const rankedCandidates = test.is_custom ? rawCandidates : rankCandidatesBySelectionHistory(rawCandidates, selectionNow);
+  const candidates = test.is_custom ? rankedCandidates : eligibleCandidatesBySelectionHistory(rankedCandidates, selectionNow);
+  const distinctAvailable = distinctSelectionGroupCount(candidates);
+  if (distinctAvailable < 5) return Response.json({ error: "ამ ტესტის ახალი განსხვავებული კითხვები ამოიწურა. უკვე გავლილი საკითხები განმეორებით აღარ შემოგთავაზეთ." }, { status: 409 });
+  const targetCount = Math.min(Number(test.question_count), distinctAvailable);
+  const selected: Candidate[] = [], selectionGroups = new Set<string>();
+  const addQuestions = (rows: Candidate[], count: number) => {
+    let added = 0;
     for (const question of rows) {
-      if (selected.length >= limit || semanticGroups.has(question.semantic_group_id)) continue;
-      semanticGroups.add(question.semantic_group_id); selected.push(question);
+      const key = assessmentSelectionKey(question);
+      if (selected.length >= targetCount || added >= count || selectionGroups.has(key)) continue;
+      selectionGroups.add(key); selected.push(question); added++;
     }
   };
   const combinedSeniorMath = !test.is_custom && test.grade >= 7 && canonicalAssessmentSubject(test.subject, test.grade) === "მათემატიკა";
   if (combinedSeniorMath) {
-    const geometryTarget = Math.floor(test.question_count * 0.4), algebraTarget = test.question_count - geometryTarget;
+    const geometryTarget = Math.floor(targetCount * 0.4), algebraTarget = targetCount - geometryTarget;
     const geometry = candidates.filter(question => question.subject === "გეომეტრია" || question.strand === "geometry_space");
     const geometryIds = new Set(geometry.map(question => question.id));
     addQuestions(candidates.filter(question => !geometryIds.has(question.id)), algebraTarget);
-    addQuestions(geometry, algebraTarget + geometryTarget);
+    addQuestions(geometry, geometryTarget);
+  } else if (!test.is_custom) {
+    const blueprint = languageBlueprintFor(test.subject, test.grade);
+    if (blueprint) {
+      const allocation = allocateByWeight(targetCount, blueprint);
+      for (const [bucket, count] of Object.entries(allocation)) {
+        addQuestions(candidates.filter(question => {
+          let text = "";
+          try { text = String((JSON.parse(question.public_payload_json) as Record<string, unknown>).text ?? ""); } catch {}
+          return languageBucketFor(test.subject, question.topic, text) === bucket;
+        }), Number(count));
+      }
+    }
   }
-  addQuestions(candidates, test.question_count);
-  if (selected.length < test.question_count) return Response.json({ error: "ტესტისთვის საკმარისი განსხვავებული კითხვა ვერ მოიძებნა" }, { status: 409 });
+  addQuestions(candidates, targetCount - selected.length);
+  if (selected.length < targetCount) return Response.json({ error: "ტესტისთვის საკმარისი განსხვავებული კითხვა ვერ მოიძებნა" }, { status: 409 });
 
   const presentation: Record<string, unknown> = {}, questions = selected.map(question => {
     const prepared = prepareQuestion(question);
@@ -79,5 +120,12 @@ export async function POST(request: Request) {
   const sessionId = crypto.randomUUID(), startedAt = Date.now(), expiresAt = startedAt + Math.max(30, Number(test.time_minutes) + 30) * 60_000;
   await env.DB.prepare("INSERT INTO assessment_sessions (id,user_id,test_id,question_ids_json,presentation_json,status,started_at,expires_at) VALUES (?,?,?,?,?,'started',?,?)")
     .bind(sessionId, current.user.id, test.id, JSON.stringify(selected.map(question => question.id)), JSON.stringify(presentation), startedAt, expiresAt).run();
-  return Response.json({ sessionId, test: { id: test.id, time: test.time_minutes, count: questions.length }, questions }, { status: 201, headers: { "Cache-Control": "no-store" } });
+  const componentCounts: Record<string, number> = {};
+  for (const question of selected) {
+    let text = "";
+    try { text = String((JSON.parse(question.public_payload_json) as Record<string, unknown>).text ?? ""); } catch {}
+    const bucket = languageBucketFor(test.subject, question.topic, text);
+    if (bucket) componentCounts[bucket] = (componentCounts[bucket] ?? 0) + 1;
+  }
+  return Response.json({ sessionId, test: { id: test.id, time: test.time_minutes, count: questions.length, requestedCount: test.question_count, componentCounts }, questions }, { status: 201, headers: { "Cache-Control": "no-store" } });
 }

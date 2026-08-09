@@ -11,7 +11,7 @@
     "build:cloudflare": "node scripts/build-cloudflare.mjs",
     "deploy:cloudflare": "npm run build:cloudflare && wrangler deploy --config dist/server/wrangler.json",
     "start": "vinext start",
-    "test": "node scripts/check-browser-syntax.mjs && node --test tests/question-policy.test.mjs tests/security-regression.test.mjs tests/secure-assessment.test.mjs tests/claude-audit-regression.test.mjs && vinext build",
+    "test": "node scripts/check-browser-syntax.mjs && node --test tests/assessment-selection.test.mjs tests/question-policy.test.mjs tests/security-regression.test.mjs tests/secure-assessment.test.mjs tests/claude-audit-regression.test.mjs && vinext build",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "db:generate": "drizzle-kit generate",
     "audit:questions": "node --test tests/secure-assessment.test.mjs tests/question-policy.test.mjs"

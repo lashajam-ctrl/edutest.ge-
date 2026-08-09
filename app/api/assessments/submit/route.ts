@@ -1,6 +1,7 @@
 import { env } from "cloudflare:workers";
 import { ensureSchema } from "@/db";
 import { canonicalAssessmentSubject, gradeAssessmentAnswer, parsePublicPayload, Presentation, StoredAssessmentQuestion } from "@/lib/assessment";
+import { correctKnownExplanation } from "@/lib/assessment-selection";
 import { getSessionUser } from "@/lib/auth";
 import { consumeRateLimit } from "@/lib/rate-limit";
 
@@ -39,7 +40,7 @@ export async function POST(request: Request) {
     if (question.question_type === "multiple_choice" && Number.isInteger(Number(submittedAnswer)) && presentation[id]?.optionOrder) {
       submittedAnswer = presentation[id].optionOrder?.[Number(submittedAnswer)] ?? submittedAnswer;
     }
-    return { ...publicPayload, ua: submittedAnswer, ok: result.correct, correctDisplay: result.correctDisplay, explain: question.explanation };
+    return { ...publicPayload, ua: submittedAnswer, ok: result.correct, correctDisplay: result.correctDisplay, explain: correctKnownExplanation(question.explanation) };
   });
   const percentage = maxScore ? Math.round(score / maxScore * 100) : 0, now = Date.now();
   const test = await env.DB.prepare("SELECT title,subject,grade FROM assessment_tests WHERE id = ?").bind(session.test_id).first<{ title: string; subject: string; grade: number }>();

@@ -26,7 +26,7 @@ test("starts sanitized sessions and grades only on the server", async () => {
     source("app/api/assessments/builder/route.ts"),
   ]);
   assert.match(start, /getSessionUser/);
-  assert.match(start, /semanticGroups/);
+  assert.match(start, /assessmentSelectionKey|selectionGroups/);
   assert.match(start, /assessment_question_history/);
   assert.doesNotMatch(start, /assessment_answer_keys|answer_key_json/);
   assert.match(submit, /INNER JOIN assessment_answer_keys/);
