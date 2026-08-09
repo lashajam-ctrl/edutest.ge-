@@ -100,7 +100,7 @@ test("rewrites ambiguous grade-one comparison and fill prompts", () => {
     text: "ახალ სავარჯიშო ბარათზე მოცემულია: სურათების დათვლის ჩანაწერში: ყვითელი — 2, მწვანე — 7. რამდენით მეტია მეტი ჯგუფი?",
     opts: ["5", "2", "6", "7"],
   });
-  assert.equal(comparison.text, "დათვალეს 2 ყვითელი და 7 მწვანე სურათი. რამდენით მეტია მწვანე სურათი ყვითელზე?");
+  assert.equal(comparison.text, "ბარათზე 2 ყვითელი და 7 მწვანე სურათია. რამდენით მეტია მწვანე სურათი, ვიდრე ყვითელი?");
   assert.deepEqual(comparison.opts, ["5", "2", "6", "7"]);
   assert.doesNotMatch(comparison.text, /მეტი ჯგუფი/u);
 
