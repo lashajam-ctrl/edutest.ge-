@@ -3,8 +3,15 @@ import { ensureSchema, getDb } from "@/db";
 import { adminAuditEvents, customTests } from "@/db/schema";
 import { getSessionUser } from "@/lib/auth";
 
-const allowedSubjects = new Set(["მათემატიკა", "ქართული", "ინგლისური", "რუსული", "ბუნება", "ისტორია", "გეოგრაფია", "ბიოლოგია", "ქიმია", "ფიზიკა", "ალგებრა", "გეომეტრია"]);
+const allowedSubjects = new Set(["მათემატიკა", "ქართული", "ქართული ენა და ლიტერატურა", "ინგლისური", "რუსული", "ბუნება", "ისტორია", "გეოგრაფია", "ბიოლოგია", "ქიმია", "ფიზიკა", "ალგებრა", "გეომეტრია"]);
 const clean = (value: unknown, max: number) => typeof value === "string" ? value.trim().replace(/[\u0000-\u001f\u007f]/g, "").slice(0, max) : "";
+const subjectAllowedForGrade = (subject: string, grade: number) => {
+  if (grade <= 4) return ["მათემატიკა", "ქართული", "ინგლისური", "ბუნება"].includes(subject);
+  if (grade <= 6) return ["მათემატიკა", "ქართული", "ინგლისური", "რუსული", "ბუნება"].includes(subject);
+  const senior = ["ალგებრა", "გეომეტრია", "ქართული ენა და ლიტერატურა", "ინგლისური", "რუსული", "ისტორია", "გეოგრაფია", "ბიოლოგია", "ფიზიკა"];
+  if (grade >= 8) senior.push("ქიმია");
+  return senior.includes(subject);
+};
 
 function parseQuestions(value: string) { try { return JSON.parse(value) as unknown[]; } catch { return []; } }
 function publicTest(row: typeof customTests.$inferSelect) { return { ...row, questions: parseQuestions(row.questionsJson), questionsJson: undefined }; }
@@ -31,7 +38,7 @@ export async function POST(request: Request) {
   const title = clean(body.title, 160); const subject = clean(body.subject, 80);
   const grade = Number(body.grade); const durationMinutes = Number(body.durationMinutes); const attemptsAllowed = Number(body.attemptsAllowed);
   const published = body.published === true; const questions = Array.isArray(body.questions) ? body.questions : [];
-  if (!title || !allowedSubjects.has(subject) || !Number.isInteger(grade) || grade < 1 || grade > 12 || !Number.isInteger(durationMinutes) || durationMinutes < 5 || durationMinutes > 180 || !Number.isInteger(attemptsAllowed) || attemptsAllowed < 1 || attemptsAllowed > 20 || questions.length < 1 || questions.length > 40) {
+  if (!title || !allowedSubjects.has(subject) || !Number.isInteger(grade) || grade < 1 || grade > 12 || !subjectAllowedForGrade(subject, grade) || !Number.isInteger(durationMinutes) || durationMinutes < 5 || durationMinutes > 180 || !Number.isInteger(attemptsAllowed) || attemptsAllowed < 1 || attemptsAllowed > 20 || questions.length < 1 || questions.length > 40) {
     return Response.json({ error: "ტესტის მონაცემები არასწორია" }, { status: 400 });
   }
   let normalized: Array<{ id: string; text: string; options: string[]; correct: number; type: string; explanation: string; skill: string; points: number }>;

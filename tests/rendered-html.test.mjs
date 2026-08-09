@@ -79,11 +79,42 @@ test("keeps test access open while payments are disabled and uses server-side ad
   ]);
   assert.match(html, /const PAYMENTS_ENABLED=false/);
   assert.match(html, /if\(!PAYMENTS_ENABLED\)return 'free'/);
+  assert.match(html, /ტესტირების ეტაპზე გადახდები გამორთულია/);
+  assert.doesNotMatch(html, /BOG Pay Merchant ID|TBC Pay API Key|api\/payments\/webhook/);
+  assert.doesNotMatch(html, /id="b-paid"|payStep2\(|payComplete\(/);
+  assert.doesNotMatch(html, /id="landing-price-monthly"/);
   assert.doesNotMatch(html, /password:'(?:student|teacher|admin)123'/);
   assert.match(html, /\/api\/admin\/users/);
   assert.match(bootstrapRoute, /ADMIN_BOOTSTRAP_TOKEN/);
   assert.match(adminUsersRoute, /current\?\.user\.role === "admin"/);
   assert.match(profileRoute, /hashPassword/);
+});
+
+test("keeps teacher authoring aligned with the canonical grade taxonomy", async () => {
+  const [html, customTestsRoute, management] = await Promise.all([
+    readFile(new URL("public/app.html", root), "utf8"),
+    readFile(new URL("app/api/custom-tests/route.ts", root), "utf8"),
+    readFile(new URL("public/management-overrides.js", root), "utf8"),
+  ]);
+  assert.match(html, /function populateBuilderSubjects\(\)/);
+  assert.match(html, /const allowed=subjectsForGrade\(grade\)/);
+  assert.match(html, /subjectFamily\(test\.subject\)===subject/);
+  assert.match(html, /const canonicalOrder=\['მათემატიკა','ალგებრა','გეომეტრია','ქართული','ქართული ენა და ლიტერატურა'/);
+  assert.doesNotMatch(html, /const subjectValues=/);
+  assert.match(customTestsRoute, /"ქართული ენა და ლიტერატურა"/);
+  assert.match(customTestsRoute, /subjectAllowedForGrade\(subject, grade\)/);
+  assert.match(management, /populateBuilderSubjects\(\)/);
+  assert.match(management, /subjectFamily\(test\.subject\)===subject/);
+});
+
+test("renders teacher-authored labels and question options as text", async () => {
+  const html = await readFile(new URL("public/app.html", root), "utf8");
+  assert.match(html, /\$\{esc\(txTitle\(tx\)\)\}/);
+  assert.match(html, /\$\{esc\(rTitle\(r\)\)\}/);
+  assert.match(html, /itemText\.textContent=String\(item\)/);
+  assert.match(html, /optionText\.textContent=String\(o\)/);
+  assert.doesNotMatch(html, /row\.innerHTML=.*\+item\+/);
+  assert.doesNotMatch(html, /d\.innerHTML=.*\+o\+/);
 });
 
 test("validates reported scores and restricts assignment deletion to its owner", async () => {

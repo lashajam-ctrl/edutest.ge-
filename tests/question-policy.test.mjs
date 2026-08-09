@@ -55,6 +55,16 @@ test("enforces early-grade math and language boundaries", () => {
   };
   assert.equal(policy.isGradeAppropriate(addition, { grade: 1, subject: "math-12" }), true);
 
+  const prematureMultiplication = {
+    type: "true_false",
+    grade: 1,
+    gradeMin: 1,
+    gradeMax: 1,
+    text: "4 × 3 = 12.",
+    opts: ["✅ სწორია", "❌ მცდარია"],
+  };
+  assert.equal(policy.isGradeAppropriate(prematureMultiplication, { grade: 1, subject: "math-12" }), false);
+
   const englishOnly = {
     type: "multiple_choice",
     grade: 1,

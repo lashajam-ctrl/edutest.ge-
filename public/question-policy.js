@@ -83,6 +83,7 @@
     const grade = Number(context.grade || question?.grade || 0);
     const subject = String(context.subject || question?.subject || question?.skill || '').toLowerCase();
     const text = normalize(question?.text);
+    const rawText = String(question?.text || '').toLocaleLowerCase('ka-GE');
 
     if (!grade || grade < 1 || grade > 12) return false;
     if (Number.isFinite(Number(question?.gradeMin)) && grade < Number(question.gradeMin)) return false;
@@ -105,8 +106,9 @@
         /ორივე რაოდენობ/u,
         /ორი მოქმედებ/u
       ];
-      if (grade === 1 && (maxValue > 20 || containsAny(text, advanced) || containsAny(text, multiStep))) return false;
-      if (grade === 2 && (maxValue > 100 || containsAny(text, advanced))) return false;
+      const mathText = `${text} ${rawText}`;
+      if (grade === 1 && (maxValue > 20 || containsAny(mathText, advanced) || containsAny(text, multiStep))) return false;
+      if (grade === 2 && (maxValue > 100 || containsAny(mathText, advanced))) return false;
       if (grade === 3 && containsAny(text, advanced.slice(0, 1))) return false;
     }
 
