@@ -94,6 +94,20 @@ test("corrects the severe-bleeding question wording without exposing answer data
   assert.equal(correctKnownExplanation("სწორია პირდაპირი წნევა."), "სწორია პირდაპირი დაწოლა.");
 });
 
+test("rewrites ambiguous grade-one comparison and fill prompts", () => {
+  const comparison = correctKnownQuestionPayload({
+    id: "g1mb4_s2d_x15",
+    text: "ახალ სავარჯიშო ბარათზე მოცემულია: სურათების დათვლის ჩანაწერში: ყვითელი — 2, მწვანე — 7. რამდენით მეტია მეტი ჯგუფი?",
+    opts: ["5", "2", "6", "7"],
+  });
+  assert.equal(comparison.text, "დათვალეს 2 ყვითელი და 7 მწვანე სურათი. რამდენით მეტია მწვანე სურათი ყვითელზე?");
+  assert.deepEqual(comparison.opts, ["5", "2", "6", "7"]);
+  assert.doesNotMatch(comparison.text, /მეტი ჯგუფი/u);
+
+  const fill = correctKnownQuestionPayload({ id: "g1g2_14", text: "წინადადება იწყება ___ ასოთი." });
+  assert.equal(fill.text, "წინადადების პირველი სიტყვა ___ ასოთი იწყება.");
+});
+
 test("server start route enforces semantic selection and language blueprints", async () => {
   const source = await readFile(new URL("../app/api/assessments/start/route.ts", import.meta.url), "utf8");
   assert.match(source, /assessmentSelectionKey/);

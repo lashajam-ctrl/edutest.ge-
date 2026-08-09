@@ -81,6 +81,10 @@ test("activates a dedicated child-friendly test interface for grades I-II", asyn
   assert.match(html, /id="q-early-guide"/);
   assert.match(html, /body\.test-early #q-card/);
   assert.match(html, /body\.test-early \.qopt\{min-height:68px/);
+  assert.match(html, /body\.test-early \.fill-input\{min-width:155px;min-height:56px/);
+  assert.match(html, /q\.type==='fill'\?'✏️ ჩაწერე'/);
+  assert.match(html, /წაიკითხე წინადადება და ჩაწერე გამოტოვებული სიტყვა/);
+  assert.match(html, /inp\.autocomplete='off';inp\.spellcheck=false/);
   assert.match(html, /if\(p!==['"]take-test['"]\)document\.body\.classList\.remove\(['"]test-early['"]\)/);
   assert.match(serverAssessments, /applyTestAgeMode\(curTest\)/);
 });

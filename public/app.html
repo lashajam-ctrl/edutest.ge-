@@ -422,6 +422,11 @@ body.test-early #q-next{background:linear-gradient(135deg,#6258e8,#766cf1);box-s
 body.test-early .dot-nav{display:flex!important;max-width:760px;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:14px}
 body.test-early .dot{width:12px;height:12px;border:2px solid rgba(255,255,255,.9);box-sizing:content-box}
 body.test-early .qopt:focus-visible,body.test-early #q-nav-btns .btn:focus-visible{outline:4px solid rgba(79,70,229,.25);outline-offset:3px}
+.fill-expression{display:block;line-height:2.5;font-size:17px;padding:14px 16px;background:#f8fafc;border:2px solid #e2e8f0;border-radius:16px;color:#20273a}
+.fill-input{display:inline-block;min-width:145px;max-width:210px;min-height:48px;padding:8px 12px;margin:4px 7px;border:2px solid var(--primary);border-radius:12px;background:#fff;font-family:inherit;font-size:18px;font-weight:750;text-align:center;color:#20273a;outline:none;box-shadow:0 4px 12px rgba(79,70,229,.09)}
+.fill-input:focus{border-color:#5146bd;box-shadow:0 0 0 4px rgba(99,88,219,.16)}
+body.test-early .fill-expression{font-size:clamp(19px,3vw,24px);font-weight:750;line-height:2.8;padding:18px;background:#fff;border:3px solid #dce2f1;text-align:center}
+body.test-early .fill-input{min-width:155px;min-height:56px;font-size:21px;border-width:3px;border-radius:16px}
 @media(max-width:640px){
   body.test-early #p-take-test{padding:8px 8px 18px!important}
   body.test-early #tt-topbar{border-radius:18px!important}
@@ -432,6 +437,8 @@ body.test-early .qopt:focus-visible,body.test-early #q-nav-btns .btn:focus-visib
   body.test-early .qopt{min-height:64px;padding:14px!important;font-size:16px!important}
   body.test-early #q-nav-btns{position:sticky;bottom:0;background:rgba(255,253,248,.96);padding:12px 0 4px!important}
   body.test-early #q-nav-btns .btn{min-height:52px;padding:10px 16px;font-size:15px}
+  .fill-expression{padding:12px;font-size:16px;line-height:2.7}
+  .fill-input,body.test-early .fill-input{min-width:min(150px,46vw);max-width:46vw;min-height:52px;margin:5px 4px;font-size:18px}
 }
 
 /* Results stay centered and clear of fixed accessibility controls. */
@@ -8643,10 +8650,23 @@ function renderGeneratedVisual(q,anchor){
 function renderQ(){
   const qs=curTestQs;const q=qs[qIdx];if(!q)return;
   const earlyMode=document.body.classList.contains('test-early');
+  if(earlyMode){
+    const earlyHint=document.getElementById('q-early-hint');
+    if(earlyHint){
+      const hints={
+        fill:{ka:'წაიკითხე წინადადება და ჩაწერე გამოტოვებული სიტყვა.',ru:'Прочитай предложение и впиши пропущенное слово.',en:'Read the sentence and type the missing word.'},
+        order:{ka:'დაალაგე ნაწილები სწორი თანმიმდევრობით.',ru:'Расположи части в правильном порядке.',en:'Put the parts in the correct order.'},
+        match:{ka:'დააკავშირე ერთმანეთთან სწორი წყვილები.',ru:'Соедини правильные пары.',en:'Match the correct pairs.'},
+        calc:{ka:'გამოთვალე და ჩაწერე პასუხი.',ru:'Вычисли и впиши ответ.',en:'Calculate and type the answer.'},
+        default:{ka:'ყურადღებით ნახე და მონიშნე ერთი პასუხი.',ru:'Посмотри внимательно и выбери один ответ.',en:'Look carefully and choose one answer.'}
+      };
+      const copy=hints[q.type]||hints.default;earlyHint.textContent=copy[LANG]||copy.ka;
+    }
+  }
   document.getElementById('q-num').textContent=qIdx+1;
   const ofSep=LANG==='ka'?' '+t('of'):' '+t('of')+' ';document.getElementById('q-counter').textContent=t('question')+' '+(qIdx+1)+ofSep+qs.length;
   document.getElementById('q-prog').style.width=(((qIdx+1)/qs.length)*100)+'%';
-  document.getElementById('q-type-badge').textContent=earlyMode?(q.media||q.visual?'🖼️ ნახე და აირჩიე':q.type==='true_false'?'✓ სწორია თუ არა?':q.type==='calc'?'🔢 გამოთვალე':'✨ აირჩიე პასუხი'):q.aiGenerated?'AI სავარჯიშო':(q.media||q.visual)?'ვიზუალური':q.type==='multiple_choice'?'MCQ':q.type==='true_false'?t('tf_type'):q.type==='calc'?'🧮':q.type==='order'?'🔀':q.type==='match'?'🔗':q.type==='fill'?'✏️':'ღია პასუხი';
+  document.getElementById('q-type-badge').textContent=earlyMode?(q.media||q.visual?'🖼️ ნახე და აირჩიე':q.type==='true_false'?'✓ სწორია თუ არა?':q.type==='calc'?'🔢 გამოთვალე':q.type==='fill'?'✏️ ჩაწერე':q.type==='order'?'🔀 დაალაგე':q.type==='match'?'🔗 დააკავშირე':'✨ აირჩიე პასუხი'):q.aiGenerated?'AI სავარჯიშო':(q.media||q.visual)?'ვიზუალური':q.type==='multiple_choice'?'MCQ':q.type==='true_false'?t('tf_type'):q.type==='calc'?'🧮':q.type==='order'?'🔀':q.type==='match'?'🔗':q.type==='fill'?'✏️':'ღია პასუხი';
   document.getElementById('q-pts-badge').textContent=earlyMode?'⭐ '+q.pts:q.pts+' '+t('pts_label');
   const _qtEl=document.getElementById('q-text');
   const translatedQuestionText=qTransText(q);
@@ -8654,7 +8674,7 @@ function renderQ(){
     const separator=translatedQuestionText.indexOf(':');
     _qtEl.textContent=separator>0&&separator<120
       ?translatedQuestionText.slice(0,separator+1)
-      :(LANG==='ka'?'შეავსე გამოტოვებული ადგილი.':LANG==='ru'?'Заполни пропуск.':'Fill in the blank.');
+      :(LANG==='ka'?(earlyMode?'ჩაწერე გამოტოვებული სიტყვა.':'შეავსე გამოტოვებული ადგილი.'):LANG==='ru'?'Впиши пропущенное слово.':'Type the missing word.');
   }else{
     _qtEl.textContent=translatedQuestionText;
   }
@@ -8678,7 +8698,7 @@ function renderQ(){
   _raBtn.onclick=function(e){e.stopPropagation();toggleQuestionSpeech();};
   (document.getElementById('q-media')||document.getElementById('q-curriculum-meta')||_qtEl).insertAdjacentElement('afterend',_raBtn);
   if(window.updateQuestionSpeechButton)updateQuestionSpeechButton();
-  const opts=document.getElementById('q-opts');opts.innerHTML='';
+  const opts=document.getElementById('q-opts');opts.replaceChildren();
   if(q.type==='short_answer'){
     const ta=document.createElement('textarea');ta.rows=4;ta.placeholder=t('enter_ans');ta.style.cssText='width:100%;padding:10px;border:1.5px solid var(--border);border-radius:var(--r);font-family:inherit;font-size:13px;resize:vertical';
     ta.value=qAnswers[q.id]||'';ta.oninput=e=>qAnswers[q.id]=e.target.value;opts.appendChild(ta);
@@ -8757,14 +8777,16 @@ function renderQ(){
     const separator=fillText.indexOf(':');
     const expression=separator>0&&separator<120?fillText.slice(separator+1).trim():fillText;
     const parts=expression.split('___');
-    const wrap=document.createElement('div');wrap.style.cssText='line-height:2.2;font-size:15px;padding:8px 0';
+    const wrap=document.createElement('div');wrap.className='fill-expression';
     const saved=qAnswers[q.id]||[];
     const inputs=[];
     parts.forEach((part,i)=>{
       const sp=document.createElement('span');sp.textContent=part;wrap.appendChild(sp);
       if(i<parts.length-1){
-        const inp=document.createElement('input');inp.type='text';inp.placeholder='___';
-        inp.style.cssText='display:inline-block;width:120px;padding:4px 8px;border:none;border-bottom:2px solid var(--primary);background:transparent;font-family:inherit;font-size:15px;text-align:center;margin:0 4px;outline:none';
+        const inp=document.createElement('input');inp.type='text';inp.className='fill-input';
+        inp.placeholder=LANG==='ka'?'ჩაწერე':LANG==='ru'?'впиши':'type here';
+        inp.autocomplete='off';inp.spellcheck=false;inp.setAttribute('autocapitalize','none');
+        inp.setAttribute('aria-label',(LANG==='ka'?'გამოტოვებული სიტყვის პასუხი ':LANG==='ru'?'Ответ для пропуска ':'Answer for blank ')+(i+1));
         inp.value=saved[i]||'';
         inp.oninput=e=>{if(!qAnswers[q.id])qAnswers[q.id]=[];qAnswers[q.id][i]=e.target.value.trim();updateDots();};
         inputs.push(inp);wrap.appendChild(inp);

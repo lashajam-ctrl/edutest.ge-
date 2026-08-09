@@ -165,6 +165,20 @@ export function componentCountsForTest(subject: unknown, grade: unknown, count: 
 
 export function correctKnownQuestionPayload(payload: Record<string, unknown>) {
   const result = { ...payload };
+  const baseQuestionId = String(result.id ?? "").replace(/_x\d+$/u, "");
+  const gradeOneComparisonPrompts: Record<string, string> = {
+    g1mb1_s2d: "დათვალეს 3 წითელი და 5 ლურჯი სურათი. რამდენით მეტია ლურჯი სურათი წითელზე?",
+    g1mb2_s2d: "დათვალეს 4 კატის და 2 ძაღლის სურათი. რამდენით მეტია კატის სურათი ძაღლისაზე?",
+    g1mb3_s2d: "დათვალეს 6 წიგნის და 3 რვეულის სურათი. რამდენით მეტია წიგნის სურათი რვეულისაზე?",
+    g1mb4_s2d: "დათვალეს 2 ყვითელი და 7 მწვანე სურათი. რამდენით მეტია მწვანე სურათი ყვითელზე?",
+    g1mb5_s2d: "დათვალეს 5 ბურთის და 8 კუბის სურათი. რამდენით მეტია კუბის სურათი ბურთისაზე?",
+  };
+  if (gradeOneComparisonPrompts[baseQuestionId]) {
+    result.text = gradeOneComparisonPrompts[baseQuestionId];
+  }
+  if (baseQuestionId === "g1g2_14") {
+    result.text = "წინადადების პირველი სიტყვა ___ ასოთი იწყება.";
+  }
   if (String(result.text ?? "").includes("ძლიერი სისხლდენის დროს პირველადი დახმარების ერთ-ერთი ძირითადი ნაბიჯია")) {
     result.text = "ძლიერი სისხლდენის დროს პირველადი დახმარების ერთ-ერთი ძირითადი ნაბიჯია:";
   }
