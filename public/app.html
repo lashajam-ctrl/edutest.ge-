@@ -18,10 +18,13 @@
 <meta property="og:url" content="https://edutest.ge/"/>
 <meta property="og:locale" content="ka_GE"/>
 <meta property="og:site_name" content="EduTest.ge"/>
+<meta property="og:image" content="https://edutest.ge/og-v2.png"/>
+<meta property="og:image:alt" content="EduTest.ge — ისწავლე თამაშით. გაიზარდე ცოდნით."/>
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="EduTest.ge — სკოლის ონლაინ ტესტების პლატფორმა"/>
 <meta name="twitter:description" content="კლასზე მორგებული სასკოლო ტესტები, ახსნა და პროგრესის ანალიზი I–XII კლასებისთვის."/>
+<meta name="twitter:image" content="https://edutest.ge/og-v2.png"/>
 <!-- Schema.org JSON-LD -->
 <script type="application/ld+json">
 {
@@ -589,6 +592,66 @@ input:focus,select:focus,textarea:focus{border-color:var(--brand);box-shadow:0 0
   .ai-feedback-state{font-size:12px;color:#5b21b6;margin-top:8px}
   @media(max-width:360px){.btn{min-height:44px}.ai-feedback-card{padding:13px}.ai-feedback-item{padding:10px}}
 </style>
+<style id="edutest-concept-refresh">
+/* Warm mission-led visual direction, adapted from the supplied concepts. */
+:root{--concept-navy:#18182f;--concept-coral:#ff6b57;--concept-coral-2:#ff9457;--concept-cream:#fff8ee;--concept-mint:#5cc9a7;--concept-sun:#ffc94a}
+#p-landing{background:radial-gradient(circle at 9% 3%,rgba(92,201,167,.2),transparent 30%),radial-gradient(circle at 92% 5%,rgba(79,70,229,.18),transparent 28%),linear-gradient(155deg,#fff8ee 0%,#f9f4ff 52%,#eefaf5 100%)!important}
+#p-landing>nav{background:rgba(255,248,238,.9);border-bottom-color:rgba(65,57,94,.12)}
+.lp-copy h1 span:last-child{color:var(--concept-coral)}
+.lp-eyebrow{border-color:#efe0d0;background:rgba(255,252,246,.92);color:#4f46e5}
+.lp-window{background:radial-gradient(circle at 24% 0%,#2a2a5c,#131327 72%);border-color:rgba(255,255,255,.14);box-shadow:0 34px 90px rgba(24,24,47,.28)}
+.lp-focus-card{background:linear-gradient(135deg,var(--concept-coral),var(--concept-coral-2));box-shadow:0 16px 34px rgba(255,107,87,.3)}
+.lp-ring::after{background:#f47b5d}
+.lp-float{background:var(--concept-sun);color:#5a3d00;border-color:rgba(90,61,0,.14)}
+.lp-metric{background:#f1eefe;border-color:#ded7f5}.lp-metric:nth-child(2){background:#eaf8f2;border-color:#cfeadf}.lp-metric:nth-child(3){background:#fff0e8;border-color:#f4d5c7}.lp-metric:nth-child(4){background:#fff5d9;border-color:#f2dfad}
+.lp-section-soft{background:linear-gradient(135deg,rgba(255,239,217,.8),rgba(232,248,241,.82));border-color:#e7ddcf}
+.lp-feature,.lp-step{box-shadow:0 12px 32px rgba(35,29,67,.06)}
+.lp-live{background:radial-gradient(circle at 20% 0%,#2a2a5c,#131327 72%)}
+.lp-beta-card{background:linear-gradient(135deg,#fff0e8,#e7f8f2);border-color:#eadfd4}
+
+#p-student .main{background:radial-gradient(circle at 4% 0,rgba(92,201,167,.17),transparent 28%),radial-gradient(circle at 97% 8%,rgba(255,107,87,.15),transparent 28%),#f7f3ec}
+.student-quest-hero{position:relative;overflow:hidden;margin-bottom:16px;padding:22px;border-radius:24px;background:radial-gradient(circle at 22% -10%,#34356e,var(--concept-navy) 70%);color:#fff;box-shadow:0 20px 48px rgba(24,24,47,.23)}
+.student-quest-hero::after{content:'';position:absolute;width:210px;height:210px;border-radius:50%;right:-74px;top:-92px;border:1px solid rgba(255,255,255,.1);box-shadow:0 0 0 28px rgba(255,255,255,.035),0 0 0 58px rgba(255,255,255,.025);pointer-events:none}
+.student-hero-top{position:relative;z-index:1;display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.student-avatar-mark{width:48px;height:48px;display:grid;place-items:center;flex:none;border-radius:16px;background:linear-gradient(135deg,#7168f5,#4f46e5);border:2px solid rgba(255,255,255,.72);font-size:21px;box-shadow:0 9px 24px rgba(0,0,0,.2)}
+.student-hero-copy{min-width:0;flex:1}.student-hero-copy #s-home-greeting{font-size:18px;font-weight:850;line-height:1.3}.student-hero-copy p{margin:3px 0 0;color:rgba(255,255,255,.66);font-size:11px}
+.student-status-pills{display:flex;gap:7px;position:relative;z-index:1}.student-status-pill{padding:7px 10px;border:1px solid rgba(255,255,255,.12);border-radius:999px;background:rgba(255,255,255,.1);font-size:11px;font-weight:800;white-space:nowrap}
+#s-daily-card.student-mission-card{display:none;margin:0!important;padding:17px!important;border:0!important;border-radius:19px!important;background:linear-gradient(135deg,var(--concept-coral),var(--concept-coral-2))!important;color:#fff;box-shadow:0 14px 30px rgba(255,107,87,.3)!important;position:relative;z-index:1}
+#s-daily-card.student-mission-card #s-daily-title{color:#fff!important;font-size:17px!important;margin:5px 0 12px!important}
+#s-daily-card.student-mission-card #s-daily-countdown{color:rgba(255,255,255,.76)!important}
+#s-daily-card.student-mission-card #s-daily-btn{background:#fff!important;color:#df4d3c!important;border-radius:999px!important;padding:8px 16px!important;box-shadow:0 8px 18px rgba(99,36,24,.16)}
+#s-daily-card.student-mission-card #s-daily-btn.is-complete{background:#e8fff2!important;color:#087c68!important}
+#s-daily-card.student-mission-card .mission-label{font-size:10px;font-weight:850;letter-spacing:.09em;text-transform:uppercase;color:rgba(255,255,255,.8)}
+#s-home-stats{grid-template-columns:repeat(2,minmax(0,1fr));margin-bottom:16px}
+#s-home-stats .stat{background:rgba(255,252,246,.94);border-color:#e8ded3;min-height:132px}
+.student-journey-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(260px,.65fr);gap:14px;margin-bottom:14px}
+.student-journey-card{padding:19px!important;background:rgba(255,250,242,.97)!important;border-color:#e8ded3!important}
+.student-section-title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:16px;font-size:14px;font-weight:850}.student-section-title small{font-size:10px;color:var(--muted);font-weight:650}
+.student-path{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;position:relative}
+.student-path::before{content:'';position:absolute;left:8%;right:8%;top:21px;height:3px;border-radius:99px;background:#eadfce}
+.student-path-step{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;min-width:0}
+.student-path-node{width:44px;height:44px;display:grid;place-items:center;border:3px solid #fff;border-radius:50%;background:#efe7dc;color:#9b8f82;font-size:16px;box-shadow:0 5px 15px rgba(38,31,61,.1)}
+.student-path-step.is-done .student-path-node{background:var(--concept-mint);color:#fff}.student-path-step.is-active .student-path-node{background:var(--concept-coral);color:#fff;box-shadow:0 0 0 6px rgba(255,107,87,.13),0 8px 18px rgba(255,107,87,.24)}
+.student-path-label{font-size:10px;line-height:1.35;color:#6d6479;font-weight:750}.student-path-step.is-active .student-path-label{color:#2b2440}.student-path-step.is-locked{opacity:.55}
+.student-badge-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.student-badge{min-height:56px;display:grid;place-items:center;border-radius:14px;background:#f0e9de;border:1px solid #e4d9ca;font-size:21px;filter:grayscale(1);opacity:.42;transition:transform .2s,filter .2s,opacity .2s}
+.student-badge.is-earned{background:linear-gradient(145deg,#fff2ca,#ffe2a2);border-color:#f1c968;filter:none;opacity:1;box-shadow:0 7px 17px rgba(224,160,32,.14)}
+.student-badge.is-earned:hover{transform:translateY(-2px)}
+.student-reward-note{display:flex;align-items:center;gap:10px;margin-top:12px;padding:12px;border-radius:14px;background:#fff0d5;color:#6a4505;font-size:11px;font-weight:750}
+body.student-teen #p-student .main{background:radial-gradient(circle at 4% 0,rgba(79,70,229,.13),transparent 28%),radial-gradient(circle at 97% 8%,rgba(92,201,167,.13),transparent 28%),#f1eef5}
+body.student-teen .student-quest-hero{background:radial-gradient(circle at 22% -10%,#34356e,#111327 72%)}
+body.student-teen #s-daily-card.student-mission-card{background:linear-gradient(135deg,#4f46e5,#496e91)!important;box-shadow:0 14px 30px rgba(79,70,229,.28)!important}
+body.student-teen #s-daily-card.student-mission-card #s-daily-btn{color:#4338ca!important}
+#p-teacher .main{background:radial-gradient(circle at 5% 0,rgba(92,201,167,.14),transparent 28%),radial-gradient(circle at 96% 6%,rgba(79,70,229,.11),transparent 26%),#f5f3ee}
+#t-home .stat{background:rgba(255,252,246,.96);border-color:#e6ded5}
+#t-home .g2>.card{border-color:#e6ded5;background:rgba(255,252,246,.96)}
+#p-take-test,#p-results{background:radial-gradient(circle at 8% 4%,rgba(255,107,87,.14),transparent 31%),radial-gradient(circle at 94% 88%,rgba(92,201,167,.17),transparent 29%),linear-gradient(135deg,#f5f0e9,#f4f1fa)!important}
+#q-prog{background:linear-gradient(90deg,var(--concept-coral),var(--concept-coral-2))!important}
+#q-num{background:var(--concept-navy)!important}
+@media(max-width:820px){.student-journey-grid{grid-template-columns:1fr}.student-quest-hero{padding:18px}.student-path-label{font-size:9px}}
+@media(max-width:520px){.student-hero-top{align-items:flex-start;flex-wrap:wrap}.student-hero-copy{width:calc(100% - 62px)}.student-status-pills{width:100%}.student-status-pill{flex:1;text-align:center}.student-path{grid-template-columns:repeat(2,1fr);gap:16px 8px}.student-path::before{display:none}.student-badge-grid{grid-template-columns:repeat(4,1fr)}#s-home-stats .stat{min-height:118px}.student-journey-card{padding:15px!important}}
+@media(max-width:360px){.student-quest-hero{padding:15px;border-radius:20px}.student-avatar-mark{width:42px;height:42px}.student-status-pill{padding:6px 8px;font-size:10px}.student-mission-card{padding:14px!important}.student-badge{min-height:49px;font-size:18px}}
+</style>
 </head>
 <body>
 <div id="global-spinner"></div>
@@ -840,11 +903,37 @@ input:focus,select:focus,textarea:focus{border-color:var(--brand);box-shadow:0 0
     <div class="topbar"><div style="display:flex;align-items:center;gap:8px"><button class="hamburger" aria-label="მენიუ" onclick="toggleSidebar('student')">☰</button><div><div style="display:flex;align-items:center;gap:8px"><button class="btn btn-ghost btn-sm" id="s-back-btn" onclick="sNav('s-home',document.querySelector('#p-student .ni'))" style="display:none;padding:4px 8px;font-size:12px">←</button><div style="font-weight:600" id="s-topbar-title">მთავარი</div></div><div style="font-size:11px;color:var(--gray)" id="s-topbar-sub">მოსწავლე</div></div></div><div style="display:flex;gap:8px"><span class="badge b-blue" id="s-topbar-badge">მოსწავლე</span><span class="badge b-green" id="s-online-badge">✓ ონლაინ</span></div></div>
     <div class="main">
       <div id="s-home" class="fade">
-        <div style="background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:14px;padding:18px;margin-bottom:16px;color:#fff">
-          <div style="font-size:20px;margin-bottom:4px" id="s-home-greeting">👋 გამარჯობა!</div>
-          <p style="opacity:.85;font-size:13px">ტესტები გელოდება. წარმატებები! 🌟</p>
-          <button class="btn" style="margin-top:10px;background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.75)" onclick="sNav('s-tests',document.querySelectorAll('#p-student .ni')[1])" data-i18n="tests">ტესტების ნახვა →</button>
-        </div>
+        <section class="student-quest-hero" aria-labelledby="s-home-greeting">
+          <div class="student-hero-top">
+            <div class="student-avatar-mark" id="s-hero-avatar" aria-hidden="true">✦</div>
+            <div class="student-hero-copy">
+              <div id="s-home-greeting">👋 გამარჯობა!</div>
+              <p id="s-hero-subtitle">ერთი პატარა ნაბიჯი დღეს — უფრო ძლიერი ცოდნა ხვალ.</p>
+            </div>
+            <div class="student-status-pills" aria-label="მოსწავლის მიმდინარე სტატუსი">
+              <span class="student-status-pill">🔥 <span id="sh-streak-hero">0 დღე</span></span>
+              <span class="student-status-pill">⚡ <span id="sh-xp-hero">0 XP</span></span>
+            </div>
+          </div>
+          <div id="s-daily-card" class="student-mission-card" aria-live="polite">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px">
+              <div>
+                <div class="mission-label">🚀 დღევანდელი მისია</div>
+                <div id="s-daily-title">კლასზე მორგებული მოკლე ტესტი</div>
+              </div>
+              <div id="s-daily-countdown" style="text-align:right;font-size:10px"></div>
+            </div>
+            <div style="height:9px;border-radius:99px;background:rgba(255,255,255,.28);overflow:hidden;margin:2px 0 12px"><div style="height:100%;width:35%;border-radius:inherit;background:#fff"></div></div>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
+              <div style="display:flex;gap:7px;flex-wrap:wrap;font-size:11px;font-weight:750">
+                <span>⏱ დაახლოებით 5 წუთი</span>
+                <span id="s-daily-xp-badge">+30 XP</span>
+                <span>🔥 <span id="s-daily-streak-label">0 დღე</span></span>
+              </div>
+              <button id="s-daily-btn" class="btn btn-sm" onclick="startDailyChallenge()">დაწყება ▶</button>
+            </div>
+          </div>
+        </section>
         <div class="stat-g" id="s-home-stats">
           <div class="stat"><div class="stat-ic" style="background:#dbeafe">📝</div><div class="stat-v" style="color:#2563eb" id="sh-tests">0</div><div class="stat-l" data-i18n="completed_tests">დასრულებული ტესტი</div></div>
           <div class="stat" style="cursor:pointer" onclick="sNav('s-leaderboard',null);renderLeaderboard()"><div class="stat-ic" style="background:#e0e7ff">⚡</div><div class="stat-v" style="color:#4f46e5" id="sh-xp">0 XP</div>
@@ -854,33 +943,37 @@ input:focus,select:focus,textarea:focus{border-color:var(--brand);box-shadow:0 0
             </div>
           </div>
           </div>
-          <!-- Daily Challenge Card -->
-          <!-- Enhanced Daily Mission Card -->
-          <div id="s-daily-card" class="card" style="margin-bottom:14px;padding:16px;background:linear-gradient(135deg,#fdf4ff,#fae8ff);border:2px solid #d946ef;border-radius:14px;display:none">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-              <div style="display:flex;align-items:center;gap:8px">
-                <div style="font-size:22px">🎯</div>
-                <div>
-                  <div style="font-weight:800;color:#7e22ce;font-size:13px;letter-spacing:.02em">დღის მისია</div>
-                  <div style="font-size:10px;color:#a21caf;display:flex;align-items:center;gap:4px">⏱ ~5 წუთი &nbsp;·&nbsp; <span id="s-daily-xp-badge" style="background:#f3e8ff;color:#7e22ce;padding:1px 7px;border-radius:999px;font-weight:700">+30 XP</span></div>
-                </div>
-              </div>
-              <div style="text-align:right;font-size:10px;color:#a21caf" id="s-daily-countdown"></div>
-            </div>
-            <div id="s-daily-title" style="font-size:14px;font-weight:700;color:#581c87;margin-bottom:10px"></div>
-            <div style="display:flex;align-items:center;justify-content:space-between;gap:10px">
-              <div style="display:flex;gap:6px;flex-wrap:wrap">
-                <span style="font-size:11px;background:#f3e8ff;color:#7e22ce;padding:3px 8px;border-radius:999px">🔥 <span id="s-daily-streak-label">streak</span></span>
-                <span style="font-size:11px;background:#fce7f3;color:#be185d;padding:3px 8px;border-radius:999px">2× XP ბონუსი</span>
-              </div>
-              <button id="s-daily-btn" class="btn btn-sm" style="background:linear-gradient(135deg,#d946ef,#a855f7);color:#fff;white-space:nowrap;font-weight:700;border:none" onclick="startDailyChallenge()">▶ დაწყება</button>
-            </div>
-          </div>
           <div style="display:none">
           <div class="stat" style="cursor:pointer" onclick="sNav('s-leaderboard',null);renderLeaderboard()"><div class="stat-ic" style="background:#fff7ed">🔥</div><div class="stat-v" style="color:#ea580c" id="sh-streak">0 დღე</div><div class="stat-l">Streak <span id="sh-freeze-badge" style="display:none;font-size:10px;background:#dbeafe;color:#1d4ed8;padding:1px 6px;border-radius:999px;cursor:pointer" onclick="useStreakFreeze()" title="Streak Freeze გამოყენება">🧊 <span id="sh-freeze-count">0</span></span></div></div>
           <div class="stat"><div class="stat-ic" style="background:#dcfce7">📊</div><div class="stat-v" style="color:#16a34a" id="sh-avg">—</div><div class="stat-l" data-i18n="avg_score">საშუალო ქულა</div></div>
           <div class="stat"><div class="stat-ic" style="background:#fef3c7">⭐</div><div class="stat-v" style="color:#d97706" id="sh-pts">0</div><div class="stat-l" data-i18n="total_pts_label">სულ ქულა</div></div>
           <div class="stat"><div class="stat-ic" style="background:#ede9fe">🏆</div><div class="stat-v" style="color:#7c3aed" id="sh-exc">0</div><div class="stat-l" data-i18n="excellent_badge">მაღალი შედეგი</div></div>
+        </div>
+        <div class="student-journey-grid">
+          <section class="card student-journey-card" aria-labelledby="s-journey-title">
+            <div class="student-section-title"><span id="s-journey-title">🗺️ დღევანდელი სასწავლო რუკა</span><small id="s-journey-progress">0/4 ნაბიჯი</small></div>
+            <ol class="student-path">
+              <li class="student-path-step is-active" id="s-path-checkin"><span class="student-path-node">1</span><span class="student-path-label">პირველი ტესტი</span></li>
+              <li class="student-path-step is-locked" id="s-path-practice"><span class="student-path-node">2</span><span class="student-path-label">ვარჯიშის რიტმი</span></li>
+              <li class="student-path-step is-locked" id="s-path-focus"><span class="student-path-node">3</span><span class="student-path-label">ძლიერი სერია</span></li>
+              <li class="student-path-step is-locked" id="s-path-next"><span class="student-path-node">★</span><span class="student-path-label">ახალი დონე</span></li>
+            </ol>
+            <button class="btn btn-primary" style="margin-top:20px;width:100%;justify-content:center" onclick="sNav('s-tests',document.querySelectorAll('#p-student .ni')[1])">აირჩიე შემდეგი ტესტი →</button>
+          </section>
+          <section class="card student-journey-card" aria-labelledby="s-badges-title">
+            <div class="student-section-title"><span id="s-badges-title">🏆 ჩემი მიღწევები</span><small id="s-badge-progress">0/8</small></div>
+            <div class="student-badge-grid" id="s-badge-grid">
+              <div class="student-badge" data-required="1" title="პირველი ნაბიჯი" aria-label="პირველი ნაბიჯი">🚀</div>
+              <div class="student-badge" data-required="2" title="ორი ტესტი" aria-label="ორი ტესტი">📖</div>
+              <div class="student-badge" data-required="3" title="სწავლის რიტმი" aria-label="სწავლის რიტმი">🔥</div>
+              <div class="student-badge" data-required="5" title="ხუთი ტესტი" aria-label="ხუთი ტესტი">⭐</div>
+              <div class="student-badge" data-required="8" title="მკვლევარი" aria-label="მკვლევარი">🧭</div>
+              <div class="student-badge" data-required="10" title="ათეული" aria-label="ათეული">💡</div>
+              <div class="student-badge" data-required="15" title="მიზანდასახული" aria-label="მიზანდასახული">🎯</div>
+              <div class="student-badge" data-required="20" title="ცოდნის ჩემპიონი" aria-label="ცოდნის ჩემპიონი">🏅</div>
+            </div>
+            <div class="student-reward-note"><span style="font-size:22px" aria-hidden="true">🎁</span><span id="s-reward-note">დაასრულე პირველი ტესტი და გახსენი ახალი ბეიჯი.</span></div>
+          </section>
         </div>
         <!-- Class Team Challenge -->
         <div id="s-class-challenge" class="card" style="margin-bottom:12px;padding:14px;background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:2px solid #16a34a;border-radius:14px;display:none">
@@ -6365,8 +6458,8 @@ function renderDailyChallenge(){
     countdown.textContent='განახლება '+h+'სთ '+m+'წთ-ში';
   }
   const done=hasDoneDaily(CUR_USER.email);
-  if(btn){if(done){btn.textContent='✓ შესრულდა';btn.style.background='#16a34a';btn.disabled=true;}
-  else{btn.textContent='▶ დაწყება';btn.style.background='linear-gradient(135deg,#d946ef,#a855f7)';btn.disabled=false;}}
+  if(btn){btn.classList.toggle('is-complete',done);if(done){btn.textContent='✓ შესრულდა';btn.disabled=true;}
+  else{btn.textContent='დაწყება ▶';btn.disabled=false;}}
 }
 function startDailyChallenge(){
   if(!_dailyChallengeTest||!CUR_USER)return;
@@ -8105,6 +8198,11 @@ function updateStudentUI(){
   const pni=document.getElementById('s-prof-name-input');if(pni)pni.value=CUR_USER.name||'';
   const pei=document.getElementById('s-prof-email-input');if(pei)pei.value=CUR_USER.email||'';
   const userGradeNum2=CUR_USER?.grade?parseInt(CUR_USER.grade):null;
+  document.body.classList.toggle('student-junior',!!userGradeNum2&&userGradeNum2<=6);
+  document.body.classList.toggle('student-teen',!!userGradeNum2&&userGradeNum2>=7);
+  const heroAvatar=document.getElementById('s-hero-avatar');if(heroAvatar)heroAvatar.textContent=userGradeNum2&&userGradeNum2<=6?'✦':'◆';
+  const heroSubtitle=document.getElementById('s-hero-subtitle');if(heroSubtitle)heroSubtitle.textContent=userGradeNum2&&userGradeNum2<=6?'ერთი პატარა ნაბიჯი დღეს — უფრო ძლიერი ცოდნა ხვალ.':'დღევანდელი ფოკუსი — მოკლე ტესტი, ზუსტი უკუკავშირი და შემდეგი ნაბიჯი.';
+  const journeyTitle=document.getElementById('s-journey-title');if(journeyTitle)journeyTitle.textContent=userGradeNum2&&userGradeNum2<=6?'🗺️ დღევანდელი სასწავლო რუკა':'🧭 დღევანდელი სასწავლო გეგმა';
   const sFilterGrade=document.getElementById('s-filter-grade');
   if(sFilterGrade&&userGradeNum2)sFilterGrade.value=String(userGradeNum2);
   updateStudentHomeStats();
@@ -8124,6 +8222,41 @@ function performanceBadgeLabel(pct){
   const labels={ka:['🏆 მაღალი შედეგი','✅ კარგი შედეგი','📘 დამაკმაყოფილებელი','❌ გასაუმჯობესებელი'],en:['🏆 High result','✅ Good result','📘 Satisfactory','❌ Needs improvement'],ru:['🏆 Высокий результат','✅ Хороший результат','📘 Удовлетворительно','❌ Нужно улучшить']}[language]||['🏆 მაღალი შედეგი','✅ კარგი შედეგი','📘 დამაკმაყოფილებელი','❌ გასაუმჯობესებელი'];
   return pct>=90?labels[0]:pct>=70?labels[1]:pct>=50?labels[2]:labels[3];
 }
+function updateStudentJourneyUI(results,xp,streak){
+  const count=Array.isArray(results)?results.length:0;
+  const heroXp=document.getElementById('sh-xp-hero');if(heroXp)heroXp.textContent=xp+' XP';
+  const heroStreak=document.getElementById('sh-streak-hero');if(heroStreak)heroStreak.textContent=streak+' დღე';
+  const steps=[
+    {id:'s-path-checkin',threshold:1,mark:'1'},
+    {id:'s-path-practice',threshold:3,mark:'2'},
+    {id:'s-path-focus',threshold:7,mark:'3'},
+    {id:'s-path-next',threshold:12,mark:'★'}
+  ];
+  let firstOpenFound=false,completed=0;
+  steps.forEach(step=>{
+    const el=document.getElementById(step.id);if(!el)return;
+    const done=count>=step.threshold;
+    const active=!done&&!firstOpenFound;
+    if(done)completed++;if(active)firstOpenFound=true;
+    el.classList.toggle('is-done',done);
+    el.classList.toggle('is-active',active);
+    el.classList.toggle('is-locked',!done&&!active);
+    const node=el.querySelector('.student-path-node');if(node)node.textContent=done?'✓':step.mark;
+  });
+  const progress=document.getElementById('s-journey-progress');if(progress)progress.textContent=completed+'/4 ნაბიჯი';
+  const badges=Array.from(document.querySelectorAll('#s-badge-grid .student-badge'));
+  let earned=0,nextRequired=null;
+  badges.forEach(badge=>{
+    const required=Number(badge.dataset.required)||1;
+    const unlocked=count>=required;
+    badge.classList.toggle('is-earned',unlocked);
+    badge.setAttribute('aria-label',(badge.title||'მიღწევა')+(unlocked?' — მიღებულია':' — ჩაკეტილია'));
+    if(unlocked)earned++;else if(nextRequired===null)nextRequired=required;
+  });
+  const badgeProgress=document.getElementById('s-badge-progress');if(badgeProgress)badgeProgress.textContent=earned+'/'+badges.length;
+  const reward=document.getElementById('s-reward-note');
+  if(reward)reward.textContent=nextRequired===null?'ყველა მიმდინარე მიღწევა გახსნილია — შესანიშნავი პროგრესია!':'კიდევ '+Math.max(1,nextRequired-count)+' ტესტი და შემდეგ ბეიჯს გახსნი.';
+}
 function updateStudentHomeStats(){
   const uid=CUR_USER?.email||'';
   const mine=SESSION_RESULTS.filter(r=>r.userId===uid);
@@ -8136,6 +8269,7 @@ function updateStudentHomeStats(){
   const xp=getUserXP(uid);
   const lv=getLevel(xp);
   const streak=getUserStreak(uid);
+  updateStudentJourneyUI(mine,xp,streak);
   const el_xp=document.getElementById('sh-xp');if(el_xp)el_xp.textContent=xp+' XP';
   const el_lv=document.getElementById('sh-level');if(el_lv)el_lv.textContent=lv.name;
   const el_st=document.getElementById('sh-streak');if(el_st)el_st.textContent='🔥 '+streak+' დღე';
