@@ -20,23 +20,44 @@ const makeCandidate = (id, text, history = {}) => ({
   next_review_at: null, last_answered_at: null, ...history,
 });
 
-test("collapses decorative generator variants into one selection group", () => {
-  const core = "ძლიერი სისხლდენის დროს პირველადი დახმარების ერთ-ერთი ძირითადი ნაბიჯია:";
+test("collapses only decorative copies of the same generated question", () => {
+  const core = "რომელი არის ცოცხალი ბუნების ნაწილი?";
   const candidates = [
-    makeCandidate("g12safe1_07_x15", `თემის სხვა კონტექსტში განხილვისას: სკოლის უსაფრთხოების გეგმაში: ${core}`),
-    makeCandidate("g12safe5_07", `საგამოცდო პრაქტიკისას: ${core}`),
-    makeCandidate("g12safe2_07_x15", `საგანგებო სიტუაციის სიმულაციაში: ${core}`),
-    makeCandidate("g12safe4_07", `პირველი დახმარების ტრენინგში: ${core}`),
+    makeCandidate("g1n1_01", core),
+    makeCandidate("g1n1_01_x15", `დამოუკიდებელ სავარჯიშოში: ${core}`),
   ];
   assert.equal(new Set(candidates.map(assessmentSelectionKey)).size, 1);
   assert.equal(distinctSelectionGroupCount(candidates), 1);
+});
+
+test("keeps genuinely different generated families with the same ordinal available", () => {
+  const candidates = [
+    makeCandidate("g1n1_01", "რომელი არის ცოცხალი ბუნების ნაწილი?"),
+    makeCandidate("g1n2_01", "რომელი არის არაცოცხალი ბუნების ნაწილი?"),
+    makeCandidate("g1n3_01", "რომელი ცხოველი ცხოვრობს წყალში?"),
+  ];
+  assert.equal(distinctSelectionGroupCount(candidates), 3);
+});
+
+test("a completed ten-question nature attempt leaves later families eligible", () => {
+  const now = Date.now(), candidates = [];
+  for (let family = 1; family <= 5; family++) {
+    for (let item = 1; item <= 10; item++) {
+      const id = `g1n${family}_${String(item).padStart(2, "0")}`;
+      candidates.push(makeCandidate(id, `ბუნების კითხვა ${family}-${item}`, family === 1 ? {
+        history_id: `history-${item}`, last_correct: 1, next_review_at: now + 86_400_000, last_answered_at: now,
+      } : {}));
+    }
+  }
+  const eligible = eligibleCandidatesBySelectionHistory(candidates, now);
+  assert.equal(distinctSelectionGroupCount(eligible), 40);
 });
 
 test("a previously answered variant blocks its whole semantic family until review is due", () => {
   const now = Date.now(), text = "ძლიერი სისხლდენის დროს პირველადი დახმარების ერთ-ერთი ძირითადი ნაბიჯია:";
   const candidates = [
     makeCandidate("g12safe1_07", text, { history_id: "history-1", last_correct: 0, next_review_at: now + 86_400_000, last_answered_at: now }),
-    makeCandidate("g12safe2_07_x15", text),
+    makeCandidate("g12safe1_07_x15", text),
     makeCandidate("g12safe1_08", "დამწვრობის დროს უსაფრთხო პირველადი მოქმედებაა:"),
   ];
   const eligible = eligibleCandidatesBySelectionHistory(candidates, now);

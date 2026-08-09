@@ -34,8 +34,8 @@ const sql = value => value == null ? "NULL" : typeof value === "number" ? String
 const bool = value => value ? 1 : 0;
 
 function generatedFamilyKey(id) {
-  const match = String(id ?? "").match(/^(g\d+[a-z]+)\d+_(\d+)(?:_x\d+)?$/iu);
-  return match ? `${match[1].toLocaleLowerCase()}:${Number(match[2])}` : "";
+  const match = String(id ?? "").match(/^(g\d+[a-z]+\d+_\d+)(?:_x\d+)?$/iu);
+  return match ? match[1].toLocaleLowerCase() : "";
 }
 
 function mappedSubject(question) {

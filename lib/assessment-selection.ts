@@ -52,8 +52,8 @@ export function canonicalPromptCore(value: unknown) {
 }
 
 function generatedFamilyKey(id: string) {
-  const match = id.match(/^(g\d+[a-z]+)\d+_(\d+)(?:_x\d+)?$/iu);
-  return match ? `${match[1].toLocaleLowerCase()}:${Number(match[2])}` : "";
+  const match = id.match(/^(g\d+[a-z]+\d+_\d+)(?:_x\d+)?$/iu);
+  return match ? match[1].toLocaleLowerCase() : "";
 }
 
 export function assessmentSelectionKey(question: Pick<SelectionCandidate, "id" | "grade" | "subject" | "semester" | "topic" | "public_payload_json" | "semantic_group_id">) {
