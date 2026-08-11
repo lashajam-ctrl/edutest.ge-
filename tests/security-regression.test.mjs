@@ -13,6 +13,7 @@ test("uses a server session cookie and never a browser-stored JWT", async () => 
   assert.match(auth, /appOrigin\(request\).*Secure/s);
   assert.doesNotMatch(html, /localStorage\.(?:getItem|setItem)\([^)]*(?:jwt|token)/i);
   assert.doesNotMatch(html, /sessionStorage\.(?:getItem|setItem)\([^)]*(?:jwt|token)/i);
+  assert.match(html, /persistSession:false/);
 });
 
 test("enforces server RBAC for student, teacher and administrator data", async () => {
@@ -32,6 +33,9 @@ test("enforces server RBAC for student, teacher and administrator data", async (
   assert.match(attempts, /assignments\.createdBy, current\.user\.id/);
   assert.match(assignments, /row\.assignment\.createdBy === current\.user\.id/);
   assert.match(ai, /current\.user\.role !== "student"/);
+  assert.match(ai, /\/auth\/v1\/user/);
+  assert.match(ai, /\/rest\/v1\/profiles/);
+  assert.match(ai, /user\.role !== "student"/);
   assert.match(reports, /current\.user\.role !== "admin"/);
   assert.match(audit, /current\.user\.role !== "admin"/);
   assert.match(content, /current\.user\.role !== "admin"/);
@@ -41,15 +45,16 @@ test("enforces server RBAC for student, teacher and administrator data", async (
 
 test("renders untrusted CSV, user and AI values as text, including XSS-shaped input", async () => {
   const [html, management] = await Promise.all([source("public/app.html"), source("public/management-overrides.js")]);
-  for (const [start, end] of [
-    ["function previewCSV", "function importCSV"],
-    ["function renderAdminUsers", "async function doLogout"],
-    ["function showAiExplanation", "async function requestAiExplanation"],
-  ]) {
-    const code = section(html, start, end);
-    assert.match(code, /textContent/);
-    assert.doesNotMatch(code, /innerHTML|insertAdjacentHTML/);
-  }
+  const csv = section(html, "function previewCSV", "function importCSV");
+  assert.match(csv, /textContent/);
+  assert.doesNotMatch(csv, /innerHTML|insertAdjacentHTML|outerHTML/);
+  const ai = section(html, "function renderAiExplanation", "const USER_DB");
+  assert.match(ai, /textContent/);
+  assert.doesNotMatch(ai, /innerHTML|insertAdjacentHTML|outerHTML/);
+  const users = section(html, "function renderAdminUsers", "async function doLogout");
+  assert.match(users, /esc\(u\.name\)/);
+  assert.match(users, /data-email="\$\{esc\(u\.email\)\}"/);
+  assert.doesNotMatch(users, />\$\{u\.(?:name|email)\}</);
   const payload = `<img src=x onerror="globalThis.pwned=true">`;
   assert.equal(payload.replace(/[&<>"']/g, ""), "img src=x onerror=globalThis.pwned=true");
   assert.match(management, /textContent/);
@@ -57,19 +62,23 @@ test("renders untrusted CSV, user and AI values as text, including XSS-shaped in
 });
 
 test("persists teacher and administrator management data on the server", async () => {
-  const [schema, html, management, attempts, users, reports, migration, attemptIndexMigration] = await Promise.all([
+  const [schema, html, management, attempts, users, reports, migration, attemptIndexMigration, builder, assessmentReport] = await Promise.all([
     source("db/schema.ts"), source("public/app.html"), source("public/management-overrides.js"),
     source("app/api/attempts/route.ts"), source("app/api/admin/users/route.ts"), source("app/api/reports/route.ts"),
     source("drizzle/0003_adorable_lockheed.sql"), source("drizzle/0004_boring_wong.sql"),
+    source("supabase/functions/assessment-builder/index.ts"),
+    source("supabase/functions/assessment-report/index.ts"),
   ]);
   for (const table of ["issue_reports", "admin_audit_events", "admin_content", "custom_tests"]) assert.match(schema, new RegExp(table));
   assert.match(html, /function showBuilder\(/);
   assert.match(html, /async function bNav\(/);
-  assert.match(html, /\/api\/attempts\?scope=managed/);
-  assert.match(html + management, /\/api\/custom-tests/);
-  assert.match(html + management, /\/api\/admin\/content/);
-  assert.match(management, /prize-settings/);
-  assert.match(management, /SESSION_RESULTS\.forEach/);
+  assert.match(html, /builderFunction:'assessment-builder'/);
+  assert.match(html, /reportFunction:'assessment-report'/);
+  assert.match(builder, /requireTeacher/);
+  assert.match(builder, /owner_user_id:user\.id/);
+  assert.match(builder, /assessment_results/);
+  assert.match(assessmentReport, /requireAdmin/);
+  assert.match(assessmentReport, /assessment_reports/);
   assert.doesNotMatch(html, /localStorage\.getItem\(['"](?:all_results|results_|edutest_prizes)/);
   assert.match(attempts, /scope === "managed"/);
   assert.match(attempts, /export async function DELETE/);
@@ -94,6 +103,29 @@ test("publishes privacy and terms pages with current feature disclosures", async
   await Promise.all([access(new URL("public/privacy.html", root)), access(new URL("public/terms.html", root))]);
   const [privacy, terms] = await Promise.all([source("public/privacy.html"), source("public/terms.html")]);
   assert.match(privacy, /AI განმარტება/);
-  assert.match(privacy, /Secure, HttpOnly და SameSite/);
+  assert.match(privacy, /access token მუდმივ საცავში არ ინახება/);
+  assert.match(privacy, /TOTP ორფაქტორიანი დადასტურება/);
   assert.match(terms, /გადახდის ფუნქცია.*გამორთულია/);
+});
+
+test("publishes verified catalog counts without frozen marketing counters", async () => {
+  const html = await source("public/app.html");
+  assert.match(html, /12,600/);
+  assert.match(html, /data-target="336"/);
+  assert.match(html, /15 საგანი/);
+  assert.doesNotMatch(html, /18,420|12,000 შესანიშნავი|98%|12 საგანი|420 ტესტ/);
+});
+
+test("keeps payments disabled and social OAuth visibly unavailable until configured", async () => {
+  const [html, migration] = await Promise.all([
+    source("public/app.html"),
+    source("supabase/migrations/202608110005_disable_payments.sql"),
+  ]);
+  assert.match(html, /const PAYMENTS_ENABLED=false/);
+  assert.match(html, /if\(!PAYMENTS_ENABLED\)return 'free'/);
+  assert.match(migration, /set paid = false/i);
+  for (const provider of ["Google", "Microsoft", "Facebook"]) {
+    assert.match(html, new RegExp(`<button[^>]+disabled[^>]*>${provider}</button>`));
+  }
+  assert.match(html, /მალე — პროვაიდერის დადასტურების შემდეგ/);
 });

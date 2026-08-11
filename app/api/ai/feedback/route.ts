@@ -15,6 +15,40 @@ type WrongItem = {
 const MAX_BODY_BYTES = 16_384;
 const MAX_REQUESTS_PER_MINUTE = 8;
 
+type FeedbackUser = { id: string; role: string; grade?: string | number | null };
+
+async function authenticatedFeedbackUser(request: Request, runtime: Record<string, string>) {
+  const current = await getSessionUser(request);
+  if (current) return { user: current.user as FeedbackUser, forbidden: current.user.role !== "student" };
+
+  const authorization = request.headers.get("authorization") || "";
+  const token = authorization.match(/^Bearer\s+(.+)$/i)?.[1]?.trim();
+  const supabaseUrl = runtime.SUPABASE_URL?.replace(/\/$/, "");
+  const publishableKey = runtime.SUPABASE_PUBLISHABLE_KEY;
+  if (!token || !supabaseUrl || !publishableKey) return null;
+
+  try {
+    const headers = { apikey: publishableKey, Authorization: `Bearer ${token}` };
+    const userResponse = await fetch(`${supabaseUrl}/auth/v1/user`, { headers, cache: "no-store" });
+    if (!userResponse.ok) return null;
+    const authUser = await userResponse.json() as { id?: unknown };
+    const id = clean(authUser.id, 80);
+    if (!id) return null;
+
+    const profileResponse = await fetch(`${supabaseUrl}/rest/v1/profiles?id=eq.${encodeURIComponent(id)}&select=id,role,grade&limit=1`, {
+      headers: { ...headers, Accept: "application/json" }, cache: "no-store",
+    });
+    if (!profileResponse.ok) return null;
+    const profiles = await profileResponse.json() as Array<{ id?: unknown; role?: unknown; grade?: unknown }>;
+    const profile = profiles[0];
+    if (!profile || clean(profile.id, 80) !== id) return null;
+    const user: FeedbackUser = { id, role: clean(profile.role, 40), grade: clean(profile.grade, 20) };
+    return { user, forbidden: user.role !== "student" };
+  } catch {
+    return null;
+  }
+}
+
 function clean(value: unknown, max: number) {
   return String(value ?? "").replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/gu, " ").trim().slice(0, max);
 }
@@ -78,12 +112,13 @@ function validFeedback(value: unknown) {
     && typeof row.practiceQuestion === "object";
 }
 
-const noStoreHeaders = { "Cache-Control": "no-store", "Vary": "Cookie" };
+const noStoreHeaders = { "Cache-Control": "no-store", "Vary": "Cookie, Authorization" };
 
 export async function POST(request: Request) {
-  const current = await getSessionUser(request);
+  const runtime = env as unknown as Record<string, string>;
+  const current = await authenticatedFeedbackUser(request, runtime);
   if (!current) return Response.json({ error: "ავტორიზაცია აუცილებელია" }, { status: 401, headers: noStoreHeaders });
-  if (current.user.role !== "student") return Response.json({ error: "AI ახსნა ხელმისაწვდომია მოსწავლის ანგარიშისთვის" }, { status: 403, headers: noStoreHeaders });
+  if (current.forbidden) return Response.json({ error: "AI ახსნა ხელმისაწვდომია მოსწავლის ანგარიშისთვის" }, { status: 403, headers: noStoreHeaders });
   if (!request.headers.get("content-type")?.toLowerCase().startsWith("application/json")) {
     return Response.json({ error: "მოსალოდნელია JSON მოთხოვნა" }, { status: 415, headers: noStoreHeaders });
   }
@@ -108,7 +143,6 @@ export async function POST(request: Request) {
     });
   }
 
-  const runtime = env as unknown as Record<string, string>;
   const unavailable = runtime.AI_FEEDBACK_ENABLED !== "true"
     ? "AI_FEEDBACK_DISABLED"
     : runtime.AI_UNDER18_SAFEGUARDS_ACKNOWLEDGED !== "true"

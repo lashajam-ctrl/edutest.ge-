@@ -13,8 +13,9 @@ test("keeps active answer keys out of public assets", async () => {
   const publicText = [html, client, expanded, senior, language].join("\n");
   assert.doesNotMatch(publicText, /g1m1_01/);
   assert.doesNotMatch(publicText, /assessment_answer_keys|answer_key_json/);
-  assert.doesNotMatch(html, /Q_POOL\[['"]/);
-  assert.match(html, /const Q_POOL=\{\};/);
+  assert.doesNotMatch(html, /\bQ_POOL\b/);
+  assert.match(html, /startFunction:'assessment-start'/);
+  assert.match(html, /submitFunction:'assessment-submit'/);
   assert.match(client, /\/api\/assessments\/start/);
   assert.match(client, /\/api\/assessments\/submit/);
 });
@@ -50,7 +51,19 @@ test("publishes real D1 counts and a complete validated import report", async ()
   assert.equal("answerKeys" in report, false);
 });
 
-test("accepts class-section labels and exposes one senior mathematics subject", async () => {
+test("reveals tutoring explanations only after server-side grading", async () => {
+  const [html, submit, migration] = await Promise.all([
+    source("public/app.html"), source("supabase/functions/assessment-submit/index.ts"),
+    source("supabase/migrations/202608110004_enable_post_submit_review.sql"),
+  ]);
+  assert.match(submit, /const reveal=s\.mode==='practice'\|\|!!test\.reveal_answers/);
+  assert.match(submit, /results\.map\(x=>revealReview/);
+  assert.match(migration, /set reveal_answers = true/i);
+  assert.match(html, /🤖 ამიხსენი შეცდომა/);
+  assert.doesNotMatch(html, /"correct"\s*:/);
+});
+
+test("accepts class-section labels and exposes one unified senior mathematics subject", async () => {
   const [assessment, start, catalog, client, html, importer, reportText] = await Promise.all([
     source("lib/assessment.ts"), source("app/api/assessments/start/route.ts"),
     source("app/api/assessments/catalog/route.ts"), source("public/server-assessments.js"),
@@ -59,13 +72,12 @@ test("accepts class-section labels and exposes one senior mathematics subject", 
   ]);
   const report = JSON.parse(reportText);
   assert.match(assessment, /function schoolGradeNumber/);
-  assert.match(assessment, /\["ალგებრა", "გეომეტრია", "მათემატიკა"\]/);
   assert.match(start, /schoolGradeNumber\(current\.user\.grade\)/);
   assert.match(start, /assessmentSubjectComponents/);
   assert.match(catalog, /preferredSeniorMath/);
-  assert.doesNotMatch(client, /7:\['ალგებრა','გეომეტრია'/);
-  assert.match(client, /7:\['მათემატიკა','ქართული ენა და ლიტერატურა'/);
-  assert.match(html, /'ალგებრა':'მათემატიკა','გეომეტრია':'მათემატიკა'/);
+  assert.doesNotMatch(html, /subject:'(?:ალგებრა|გეომეტრია)'/);
+  assert.match(html, /id:'math-g12-s1'.*subject:'მათემატიკა'/);
+  assert.match(html, /15 საგანი/);
   assert.doesNotMatch(importer, /status: "split"/);
   assert.equal(report.importedTests, 336);
   assert.equal(report.subjectMapping.split, undefined);
