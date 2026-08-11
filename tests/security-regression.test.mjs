@@ -132,6 +132,7 @@ test("keeps payments disabled and enables only configured social OAuth providers
   assert.match(html, /\/auth\/v1\/settings/);
   assert.match(html, /external\[provider\]===true/);
   assert.match(html, /skipBrowserRedirect:true/);
+  assert.match(html, /if\(provider==='azure'\)options\.scopes='email profile'/);
   assert.match(html, /window\.top\.location\.assign\(result\.data\.url\)/);
   assert.match(socialMigration, /p_requested_role not in \('student','teacher'\)/);
   assert.match(socialMigration, /then 'pending_teacher' else 'student'/);

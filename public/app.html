@@ -3422,6 +3422,7 @@ async function doSocialLogin(provider){
     button.disabled=true;
     setLoginNotice(info.label+' ავტორიზაცია იხსნება…','success');
     const options={redirectTo:getEduTestAuthRedirectUrl(),skipBrowserRedirect:true};
+    if(provider==='azure')options.scopes='email profile';
     if(provider==='google'||provider==='azure')options.queryParams={prompt:'select_account'};
     const result=await EDUTEST_CLOUD.client.auth.signInWithOAuth({provider:provider,options:options});
     if(result.error)throw result.error;
