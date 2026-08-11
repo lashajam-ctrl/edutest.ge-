@@ -3403,6 +3403,7 @@ function setOAuthButtonState(provider,enabled){
 }
 async function refreshSocialProviderButtons(){
   const status=document.getElementById('oauth-provider-status');
+  updateSocialButtonLabels();
   Object.keys(EDUTEST_OAUTH_PROVIDERS).forEach(p=>setOAuthButtonState(p,false));
   try{
     const response=await fetch('/api/auth/providers',{credentials:'include',cache:'no-store'});
