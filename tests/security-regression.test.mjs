@@ -116,16 +116,27 @@ test("publishes verified catalog counts without frozen marketing counters", asyn
   assert.doesNotMatch(html, /18,420|12,000 შესანიშნავი|98%|12 საგანი|420 ტესტ/);
 });
 
-test("keeps payments disabled and social OAuth visibly unavailable until configured", async () => {
-  const [html, migration] = await Promise.all([
+test("keeps payments disabled and enables only configured social OAuth providers", async () => {
+  const [html, migration, socialMigration] = await Promise.all([
     source("public/app.html"),
     source("supabase/migrations/202608110005_disable_payments.sql"),
+    source("supabase/migrations/202608110006_social_auth_profile.sql"),
   ]);
   assert.match(html, /const PAYMENTS_ENABLED=false/);
   assert.match(html, /if\(!PAYMENTS_ENABLED\)return 'free'/);
   assert.match(migration, /set paid = false/i);
-  for (const provider of ["Google", "Microsoft", "Facebook"]) {
-    assert.match(html, new RegExp(`<button[^>]+disabled[^>]*>${provider}</button>`));
+  for (const [id, provider] of [["google", "Google"], ["azure", "Microsoft"], ["facebook", "Facebook"]]) {
+    assert.match(html, new RegExp(`<button id="oauth-${id}"[^>]+disabled[^>]+doSocialLogin\\('${id}'\\)[^>]*>${provider}</button>`));
   }
-  assert.match(html, /მალე — პროვაიდერის დადასტურების შემდეგ/);
+  assert.match(html, /async function refreshSocialProviderButtons\(\)/);
+  assert.match(html, /\/auth\/v1\/settings/);
+  assert.match(html, /external\[provider\]===true/);
+  assert.match(html, /skipBrowserRedirect:true/);
+  assert.match(html, /window\.top\.location\.assign\(result\.data\.url\)/);
+  assert.match(socialMigration, /p_requested_role not in \('student','teacher'\)/);
+  assert.match(socialMigration, /then 'pending_teacher' else 'student'/);
+  assert.doesNotMatch(socialMigration, /then 'admin'/);
+  assert.match(socialMigration, /profile_completed_at is not null then raise exception 'Profile already completed'/);
+  assert.match(socialMigration, /Teacher must be an adult/);
+  assert.match(socialMigration, /Guardian email is required/);
 });

@@ -63,6 +63,7 @@ const migration2=readFileSync(resolve(root,"supabase/migrations/202608110002_ser
 const migration3=readFileSync(resolve(root,"supabase/migrations/202608110003_assessment_reports.sql"),"utf8");
 const migration4=readFileSync(resolve(root,"supabase/migrations/202608110004_enable_post_submit_review.sql"),"utf8");
 const migration5=readFileSync(resolve(root,"supabase/migrations/202608110005_disable_payments.sql"),"utf8");
+const migration6=readFileSync(resolve(root,"supabase/migrations/202608110006_social_auth_profile.sql"),"utf8");
 assert(/requested_role'\s*=\s*'teacher'\s+then\s+'pending_teacher'/i.test(migration1),"teacher self-registration maps to pending_teacher");
 assert(!/requested_role'\s*=\s*'admin'\s+then\s+'admin'/i.test(migration1),"admin self-registration mapping is absent");
 assert(migration2.includes("revoke insert, update, delete on table public.question_history from authenticated"),"question history is browser read-only");
@@ -70,6 +71,12 @@ assert(migration2.includes("revoke insert, update, delete on table public.subjec
 assert(migration3.includes("revoke all on table public.assessment_reports from anon, authenticated"),"reports table has no direct browser grants");
 assert(/set\s+reveal_answers\s*=\s*true/i.test(migration4),"core tests reveal explanations only after server-side grading");
 assert(/set\s+paid\s*=\s*false/i.test(migration5),"all tests remain free while payment rollout is disabled");
+assert(/p_requested_role not in \('student','teacher'\)/i.test(migration6),"social profile completion accepts only student or teacher roles");
+assert(/then 'pending_teacher' else 'student'/i.test(migration6),"social teacher registration remains pending until administrator review");
+assert(!/then 'admin'/i.test(migration6),"social profile completion cannot self-assign administrator role");
+assert(/profile_completed_at is not null then raise exception 'Profile already completed'/i.test(migration6),"social role selection is one-time only");
+assert(/Teacher must be an adult/i.test(migration6),"social teacher registration requires an adult birth date");
+assert(/Guardian email is required/i.test(migration6),"under-16 social registration requires a separate guardian email");
 assert(html.includes("const PAYMENTS_ENABLED=false")&&html.includes("if(!PAYMENTS_ENABLED)return 'free'"),"public UI cannot activate the deferred paywall");
 
 assert(questions.length===12600,`question inventory is 12,600 (actual ${questions.length})`);

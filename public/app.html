@@ -463,11 +463,11 @@ body.acc-dyslexia{font-family:'Comic Sans MS','OpenDyslexic',sans-serif!importan
     <button class="btn btn-primary" style="width:100%;justify-content:center;padding:11px" id="l-btn" onclick="doLogin()" data-i18n="login">შესვლა</button>
     <div style="display:flex;align-items:center;gap:8px;margin:14px 0 10px;color:#94a3b8;font-size:11px"><span style="height:1px;background:#e2e8f0;flex:1"></span>სოციალური შესვლა<span style="height:1px;background:#e2e8f0;flex:1"></span></div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px">
-      <button type="button" class="btn btn-outline btn-sm" disabled title="Google OAuth კონფიგურაციის შემდეგ ჩაირთვება" style="justify-content:center;opacity:.55">Google</button>
-      <button type="button" class="btn btn-outline btn-sm" disabled title="Microsoft OAuth კონფიგურაციის შემდეგ ჩაირთვება" style="justify-content:center;opacity:.55">Microsoft</button>
-      <button type="button" class="btn btn-outline btn-sm" disabled title="Facebook OAuth კონფიგურაციის შემდეგ ჩაირთვება" style="justify-content:center;opacity:.55">Facebook</button>
+      <button id="oauth-google" type="button" class="btn btn-outline btn-sm" disabled onclick="doSocialLogin('google')" style="justify-content:center;opacity:.55">Google</button>
+      <button id="oauth-azure" type="button" class="btn btn-outline btn-sm" disabled onclick="doSocialLogin('azure')" style="justify-content:center;opacity:.55">Microsoft</button>
+      <button id="oauth-facebook" type="button" class="btn btn-outline btn-sm" disabled onclick="doSocialLogin('facebook')" style="justify-content:center;opacity:.55">Facebook</button>
     </div>
-    <p style="font-size:10px;color:#94a3b8;text-align:center;margin-top:6px">მალე — პროვაიდერის დადასტურების შემდეგ</p>
+    <p id="oauth-provider-status" style="font-size:10px;color:#64748b;text-align:center;margin-top:6px">სოციალური შესვლის ხელმისაწვდომობა მოწმდება…</p>
 
     <div id="login-error" class="hidden" style="margin-top:8px;padding:8px;background:var(--red-l);border-radius:var(--r);font-size:12px;color:var(--red);text-align:center"></div>
     <div id="cloud-auth-status" style="margin-top:8px;padding:7px 9px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:var(--r);font-size:11px;color:#64748b;text-align:center">☁️ Cloud sync: კონფიგურაცია საჭიროა</div>
@@ -488,6 +488,10 @@ body.acc-dyslexia{font-family:'Comic Sans MS','OpenDyslexic',sans-serif!importan
   <div class="card" style="width:100%;max-width:480px;padding:24px">
     <h3 style="font-size:18px;font-weight:800;margin-bottom:6px">ასაკის დადასტურება</h3>
     <p style="font-size:12px;color:var(--gray);line-height:1.5;margin-bottom:14px">ბავშვთა მონაცემების დასაცავად უნდა ვიცოდეთ, გჭირდება თუ არა კანონიერი წარმომადგენლის თანხმობა. ეს ინფორმაცია არ გამოჩნდება საჯაროდ.</p>
+    <div class="fg"><div class="label">სახელი და გვარი</div><input id="age-verify-name" autocomplete="name" maxlength="100"/></div>
+    <div class="fg"><div class="label">როლი</div><select id="age-verify-role" onchange="updateAgeVerificationUI()"><option value="student">მოსწავლე</option><option value="teacher">მასწავლებელი</option></select></div>
+    <div id="age-verify-grade-wrap" class="fg"><div class="label">კლასი</div><select id="age-verify-grade"><option value="">აირჩიეთ კლასი</option><option value="1">I</option><option value="2">II</option><option value="3">III</option><option value="4">IV</option><option value="5">V</option><option value="6">VI</option><option value="7">VII</option><option value="8">VIII</option><option value="9">IX</option><option value="10">X</option><option value="11">XI</option><option value="12">XII</option></select></div>
+    <div class="fg"><div class="label">სკოლა <span style="font-weight:400;color:var(--gray)">(სურვილისამებრ)</span></div><input id="age-verify-school" maxlength="120"/></div>
     <div class="fg"><div class="label">დაბადების თარიღი</div><input id="age-verify-dob" type="date" oninput="updateAgeVerificationUI()"/></div>
     <div id="age-verify-guardian-wrap" class="hidden"><div class="fg"><div class="label">მშობლის/კანონიერი წარმომადგენლის ელ-ფოსტა</div><input id="age-verify-guardian" type="email" placeholder="guardian@example.com"/></div></div>
     <label style="display:flex;gap:8px;font-size:11px;line-height:1.45;margin-bottom:8px"><input id="age-verify-terms" type="checkbox" style="width:16px"> <span>ვეთანხმები <button type="button" onclick="openLegalDocument('terms')" style="border:0;background:none;color:#1d4ed8;text-decoration:underline;cursor:pointer;padding:0;font:inherit">წესებსა და პირობებს</button>.</span></label>
@@ -3368,6 +3372,67 @@ function setLoginNotice(message,kind){
   el.style.background=ok?'#f0fdf4':'#fffbeb';
   el.classList.remove('hidden');
 }
+const EDUTEST_OAUTH_PROVIDERS=Object.freeze({
+  google:{label:'Google'},
+  azure:{label:'Microsoft'},
+  facebook:{label:'Facebook'}
+});
+function setOAuthButtonState(provider,enabled){
+  const button=document.getElementById('oauth-'+provider);
+  if(!button)return;
+  button.disabled=!enabled;
+  button.style.opacity=enabled?'1':'.55';
+  button.setAttribute('aria-disabled',enabled?'false':'true');
+}
+async function refreshSocialProviderButtons(){
+  const status=document.getElementById('oauth-provider-status');
+  Object.keys(EDUTEST_OAUTH_PROVIDERS).forEach(p=>setOAuthButtonState(p,false));
+  if(!isSupabaseConfigured()){
+    if(status)status.textContent='სოციალური შესვლა დროებით მიუწვდომელია.';
+    return;
+  }
+  try{
+    const response=await fetch(EDUTEST_SUPABASE_CONFIG.url+'/auth/v1/settings',{
+      headers:{apikey:EDUTEST_SUPABASE_CONFIG.publishableKey}
+    });
+    if(!response.ok)throw new Error('Auth settings unavailable');
+    const settings=await response.json();
+    const external=settings&&settings.external||{};
+    const enabled=Object.keys(EDUTEST_OAUTH_PROVIDERS).filter(function(provider){
+      return external[provider]===true || settings['external_'+provider+'_enabled']===true;
+    });
+    enabled.forEach(p=>setOAuthButtonState(p,true));
+    if(status){
+      status.textContent=enabled.length
+        ? 'ხელმისაწვდომია: '+enabled.map(p=>EDUTEST_OAUTH_PROVIDERS[p].label).join(', ')
+        : 'სოციალური შესვლა დროებით მიუწვდომელია.';
+    }
+  }catch(error){
+    console.warn('OAuth provider availability',error);
+    if(status)status.textContent='სოციალური შესვლის სტატუსი ვერ შემოწმდა. სცადეთ მოგვიანებით.';
+  }
+}
+async function doSocialLogin(provider){
+  const info=EDUTEST_OAUTH_PROVIDERS[provider];
+  const button=document.getElementById('oauth-'+provider);
+  if(!info||!button||button.disabled)return;
+  try{
+    if(!EDUTEST_CLOUD.client)await initEduTestCloud();
+    if(!EDUTEST_CLOUD.client)throw new Error('Cloud Auth unavailable');
+    button.disabled=true;
+    setLoginNotice(info.label+' ავტორიზაცია იხსნება…','success');
+    const options={redirectTo:getEduTestAuthRedirectUrl(),skipBrowserRedirect:true};
+    if(provider==='google'||provider==='azure')options.queryParams={prompt:'select_account'};
+    const result=await EDUTEST_CLOUD.client.auth.signInWithOAuth({provider:provider,options:options});
+    if(result.error)throw result.error;
+    if(!result.data||!result.data.url)throw new Error('OAuth redirect unavailable');
+    window.top.location.assign(result.data.url);
+  }catch(error){
+    console.warn('OAuth sign-in',provider,error);
+    setLoginNotice(info.label+'-ით შესვლა ვერ გაიხსნა. სცადეთ ხელახლა.','warn');
+    await refreshSocialProviderButtons();
+  }
+}
 function openPasswordRecoveryModal(){
   const m=document.getElementById('password-recovery-modal');
   if(m){m.classList.remove('hidden');m.style.display='flex';}
@@ -3455,8 +3520,12 @@ function updateMinorRegistrationUI(){
   if(wrap)wrap.classList.toggle('hidden',!isUnder16Dob(dob));
 }
 function updateAgeVerificationUI(){
-  const dob=document.getElementById('age-verify-dob')?.value||'';const wrap=document.getElementById('age-verify-guardian-wrap');
-  if(wrap)wrap.classList.toggle('hidden',!isUnder16Dob(dob));
+  const role=document.getElementById('age-verify-role')?.value||'student';
+  const dob=document.getElementById('age-verify-dob')?.value||'';
+  const guardianWrap=document.getElementById('age-verify-guardian-wrap');
+  const gradeWrap=document.getElementById('age-verify-grade-wrap');
+  if(gradeWrap)gradeWrap.classList.toggle('hidden',role!=='student');
+  if(guardianWrap)guardianWrap.classList.toggle('hidden',role!=='student'||!isUnder16Dob(dob));
 }
 function clearPendingMinorLocalLearning(email){
   if(!email)return;
@@ -3506,7 +3575,19 @@ function openLegalDocument(kind){
   body.innerHTML=html;m.classList.remove('hidden');m.style.display='flex';
 }
 function closeLegalDocument(){const m=document.getElementById('legal-modal');if(m){m.classList.add('hidden');m.style.display='none';}}
-function showAgeVerificationModal(){const m=document.getElementById('age-verification-modal');if(m){m.classList.remove('hidden');m.style.display='flex';}}
+function showAgeVerificationModal(){
+  const m=document.getElementById('age-verification-modal');if(!m)return;
+  const metadata=EDUTEST_CLOUD.user?.user_metadata||{};
+  const name=document.getElementById('age-verify-name');
+  const role=document.getElementById('age-verify-role');
+  const grade=document.getElementById('age-verify-grade');
+  const school=document.getElementById('age-verify-school');
+  if(name&&!name.value)name.value=CUR_USER?.name||metadata.name||metadata.full_name||'';
+  if(role)role.value=CUR_USER?.role==='pending_teacher'?'teacher':'student';
+  if(grade&&!grade.value)grade.value=String(CUR_USER?.grade||'').replace(/[^0-9].*$/,'');
+  if(school&&!school.value)school.value=CUR_USER?.school||metadata.school||'';
+  updateAgeVerificationUI();m.classList.remove('hidden');m.style.display='flex';
+}
 function hideAgeVerificationModal(){const m=document.getElementById('age-verification-modal');if(m){m.classList.add('hidden');m.style.display='none';}}
 function showGuardianPendingModal(appUser){
   const m=document.getElementById('guardian-pending-modal');if(!m)return;
@@ -3590,17 +3671,26 @@ async function withdrawGuardianConsent(){
   }catch(e){alert((e&&e.message)||'თანხმობის გაუქმება ვერ შესრულდა.');}
 }
 async function submitAgeVerification(){
+  const name=(document.getElementById('age-verify-name')?.value||'').trim();
+  const role=document.getElementById('age-verify-role')?.value||'student';
+  const grade=document.getElementById('age-verify-grade')?.value||'';
+  const school=(document.getElementById('age-verify-school')?.value||'').trim();
   const dob=document.getElementById('age-verify-dob')?.value||'',g=(document.getElementById('age-verify-guardian')?.value||'').trim().toLowerCase();
   const err=document.getElementById('age-verify-error');const fail=m=>{if(err){err.textContent=m;err.classList.remove('hidden');}};
-  const age=calculateAge(dob);if(age===null||age<5||age>100)return fail('შეიყვანეთ სწორი დაბადების თარიღი.');
+  if(name.length<2||name.length>100)return fail('შეიყვანეთ სახელი და გვარი.');
+  if(role==='student'&&!/^(?:[1-9]|1[0-2])$/.test(grade))return fail('აირჩიეთ კლასი.');
+  const age=calculateAge(dob);if(age===null||age<(role==='teacher'?18:5)||age>100)return fail(role==='teacher'?'მასწავლებლის ანგარიში სრულწლოვან პირს ეკუთვნის.':'შეიყვანეთ სწორი დაბადების თარიღი.');
   if(!document.getElementById('age-verify-terms')?.checked||!document.getElementById('age-verify-privacy')?.checked)return fail('გაგრძელებამდე გაეცანით და დაადასტურეთ წესები/კონფიდენციალურობა.');
-  if(age<16&&(!g||!g.includes('@')||g===String(EDUTEST_CLOUD.user?.email||'').toLowerCase()))return fail('16 წლამდე მოსწავლისთვის მიუთითეთ წარმომადგენლის განსხვავებული სწორი ელფოსტა.');
+  if(role==='student'&&age<16&&(!g||!g.includes('@')||g===String(EDUTEST_CLOUD.user?.email||'').toLowerCase()))return fail('16 წლამდე მოსწავლისთვის მიუთითეთ წარმომადგენლის განსხვავებული სწორი ელფოსტა.');
   try{
-    const r=await EDUTEST_CLOUD.client.rpc('complete_age_verification',{p_birth_date:dob,p_guardian_email:g||null,p_terms_version:EDUTEST_PRIVACY_CONFIG.termsVersion,p_privacy_version:EDUTEST_PRIVACY_CONFIG.privacyVersion,p_guardian_consent_version:EDUTEST_PRIVACY_CONFIG.guardianConsentVersion});
+    const socialProfile=EDUTEST_CLOUD.profile&&!EDUTEST_CLOUD.profile.profile_completed_at;
+    const r=socialProfile
+      ? await EDUTEST_CLOUD.client.rpc('complete_social_profile',{p_name:name,p_requested_role:role,p_grade:grade,p_school:school,p_birth_date:dob,p_guardian_email:g||null,p_terms_version:EDUTEST_PRIVACY_CONFIG.termsVersion,p_privacy_version:EDUTEST_PRIVACY_CONFIG.privacyVersion,p_guardian_consent_version:EDUTEST_PRIVACY_CONFIG.guardianConsentVersion})
+      : await EDUTEST_CLOUD.client.rpc('complete_age_verification',{p_birth_date:dob,p_guardian_email:g||null,p_terms_version:EDUTEST_PRIVACY_CONFIG.termsVersion,p_privacy_version:EDUTEST_PRIVACY_CONFIG.privacyVersion,p_guardian_consent_version:EDUTEST_PRIVACY_CONFIG.guardianConsentVersion});
     if(r.error)throw r.error;hideAgeVerificationModal();
-    if(age<16){clearPendingMinorLocalLearning(EDUTEST_CLOUD.user.email||'');await sendGuardianConsentEmail(g,EDUTEST_CLOUD.user.id);const app=await adoptSupabaseUser(EDUTEST_CLOUD.user,{navigate:false});showGuardianPendingModal(app);}
-    else {const app=await adoptSupabaseUser(EDUTEST_CLOUD.user,{navigate:false});go('student');}
-  }catch(e){fail((e&&e.message)||'ასაკის დადასტურება ვერ შესრულდა.');}
+    if(role==='student'&&age<16){clearPendingMinorLocalLearning(EDUTEST_CLOUD.user.email||'');await sendGuardianConsentEmail(g,EDUTEST_CLOUD.user.id);const app=await adoptSupabaseUser(EDUTEST_CLOUD.user,{navigate:false});showGuardianPendingModal(app);}
+    else await adoptSupabaseUser(EDUTEST_CLOUD.user,{navigate:true});
+  }catch(e){fail((e&&e.message)||'პროფილის დასრულება ვერ შესრულდა.');}
 }
 let ADMIN_MFA_FACTOR_ID='';
 let ADMIN_MFA_PENDING=null;
@@ -3732,6 +3822,7 @@ async function initEduTestCloud(){
     );
     EDUTEST_CLOUD.ready=true;
     setCloudStatus('Cloud sync მზადაა',true);
+    await refreshSocialProviderButtons();
 
     // Restore a persisted Supabase session on page load. getUser() validates it
     // against the Auth server before the app trusts it.
@@ -3783,7 +3874,7 @@ function appUserFromCloud(user,profile){
     cloudId:user.id,
     email:user.email||p.email||'',
     role:safeRole,
-    name:p.name||m.name||user.email||'მოსწავლე',
+    name:p.name||m.name||m.full_name||user.email||'მოსწავლე',
     grade:p.grade||m.grade||'',
     school:p.school||m.school||'',
     premium:!!p.premium,
@@ -3794,6 +3885,7 @@ function appUserFromCloud(user,profile){
     leaderboardOptIn:!!p.leaderboard_opt_in,
     termsVersion:p.terms_version||m.terms_version||'',
     privacyVersion:p.privacy_version||m.privacy_version||'',
+    profileCompletedAt:p.profile_completed_at||'',
     deletionRequestedAt:p.deletion_requested_at||'',
     accountStatus:p.account_status||'',
     joinDate:p.join_date?new Date(p.join_date).toLocaleDateString('ka-GE'):new Date().toLocaleDateString('ka-GE'),
