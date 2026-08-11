@@ -5,7 +5,7 @@
 ## მიმდინარე არქიტექტურა
 
 - ვებ-აპი და API: vinext / Cloudflare Worker (`edutestge`)
-- ანგარიშები და ავტორიზაცია: Supabase Auth, Frankfurt რეგიონი
+- ანგარიშები და ავტორიზაცია: ელფოსტისთვის Supabase Auth (Frankfurt), სოციალური OAuth-ისთვის Cloudflare Worker-ის Secure HttpOnly სესია
 - უსაფრთხო შეფასება: კითხვები მიიღება Supabase Edge Functions-იდან, სწორი პასუხები საჯარო ფაილებში არ ხვდება და შეფასება სრულდება სერვერზე
 - კატალოგი: 12,600 კითხვა, 336 მზა ტესტი, 15 საგანი
 - AI განმარტება: არასწორ პასუხზე, მხოლოდ ავტორიზებული მოსწავლისთვის; OpenAI-ის გასაღები ინახება მხოლოდ Cloudflare Secret-ში
@@ -41,7 +41,7 @@ Seed-ის გაშვებას სჭირდება მხოლოდ
 
 ## სოციალური ავტორიზაცია
 
-Google, Microsoft და Facebook ღილაკები ამჟამად გამორთულია და მონიშნულია როგორც „მალე“. მათი ჩართვა დასაშვებია მხოლოდ შესაბამის დეველოპერულ კონსოლებში აპების შექმნისა და Secret-ების Supabase-ში უსაფრთხოდ შეტანის შემდეგ.
+Google და Microsoft მუშაობს Cloudflare Worker-ის server-side OAuth ნაკადით; Provider Secret-ები ინახება მხოლოდ Cloudflare Secrets-ში. Facebook ღილაკი ავტომატურად რჩება გამორთული, სანამ Meta App ID/Secret production გარემოში არ იქნება დამატებული. სოციალური ავტორიზაციის შედეგად იქმნება Secure, HttpOnly, SameSite=Lax სესიის cookie; OAuth access token ბრაუზერის მუდმივ საცავში არ ინახება.
 
 Supabase callback მისამართი:
 

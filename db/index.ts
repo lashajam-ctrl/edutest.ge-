@@ -19,12 +19,15 @@ export function ensureSchema() {
   if (!env.DB) return Promise.reject(new Error("Cloudflare D1 binding `DB` is unavailable."));
   if (!schemaReady) {
     schemaReady = env.DB.batch([
-      env.DB.prepare("CREATE TABLE IF NOT EXISTS users (id text PRIMARY KEY NOT NULL, email text NOT NULL, name text NOT NULL, role text DEFAULT 'student' NOT NULL, grade text, school text, password_hash text, password_salt text, email_verified integer DEFAULT false NOT NULL, created_at integer NOT NULL, updated_at integer NOT NULL)"),
+      env.DB.prepare("CREATE TABLE IF NOT EXISTS users (id text PRIMARY KEY NOT NULL, email text NOT NULL, name text NOT NULL, role text DEFAULT 'student' NOT NULL, grade text, school text, birth_date text, guardian_email text, guardian_verified_at integer, terms_version text, privacy_version text, profile_completed_at integer, account_status text DEFAULT 'active' NOT NULL, password_hash text, password_salt text, email_verified integer DEFAULT false NOT NULL, created_at integer NOT NULL, updated_at integer NOT NULL)"),
       env.DB.prepare("CREATE UNIQUE INDEX IF NOT EXISTS users_email_unique ON users (email)"),
       env.DB.prepare("CREATE TABLE IF NOT EXISTS identities (id text PRIMARY KEY NOT NULL, user_id text NOT NULL REFERENCES users(id) ON DELETE cascade, provider text NOT NULL, provider_subject text NOT NULL, created_at integer NOT NULL)"),
       env.DB.prepare("CREATE UNIQUE INDEX IF NOT EXISTS identity_provider_subject_unique ON identities (provider, provider_subject)"),
       env.DB.prepare("CREATE TABLE IF NOT EXISTS sessions (id text PRIMARY KEY NOT NULL, user_id text NOT NULL REFERENCES users(id) ON DELETE cascade, token_hash text NOT NULL, expires_at integer NOT NULL, created_at integer NOT NULL)"),
       env.DB.prepare("CREATE UNIQUE INDEX IF NOT EXISTS sessions_token_unique ON sessions (token_hash)"),
+      env.DB.prepare("CREATE TABLE IF NOT EXISTS guardian_consent_requests (id text PRIMARY KEY NOT NULL, child_user_id text NOT NULL REFERENCES users(id) ON DELETE cascade, guardian_email text NOT NULL, token_hash text NOT NULL, status text DEFAULT 'pending' NOT NULL, expires_at integer NOT NULL, created_at integer NOT NULL, accepted_at integer)"),
+      env.DB.prepare("CREATE UNIQUE INDEX IF NOT EXISTS guardian_consent_token_unique ON guardian_consent_requests (token_hash)"),
+      env.DB.prepare("CREATE INDEX IF NOT EXISTS idx_guardian_consent_child_status ON guardian_consent_requests (child_user_id, status)"),
       env.DB.prepare("CREATE TABLE IF NOT EXISTS attempts (id text PRIMARY KEY NOT NULL, user_id text NOT NULL REFERENCES users(id) ON DELETE cascade, test_id text NOT NULL, score integer NOT NULL, max_score integer NOT NULL, percentage integer NOT NULL, answers_json text NOT NULL, submitted_at integer NOT NULL)"),
       env.DB.prepare("CREATE TABLE IF NOT EXISTS assignments (id text PRIMARY KEY NOT NULL, created_by text NOT NULL REFERENCES users(id) ON DELETE cascade, test_id text NOT NULL, grade text NOT NULL, deadline text, note text, created_at integer NOT NULL)"),
       env.DB.prepare("CREATE TABLE IF NOT EXISTS question_history (id text PRIMARY KEY NOT NULL, user_id text NOT NULL REFERENCES users(id) ON DELETE cascade, question_id text NOT NULL, pool_key text NOT NULL, answered_at integer NOT NULL)"),
@@ -55,7 +58,22 @@ export function ensureSchema() {
       env.DB.prepare("CREATE INDEX IF NOT EXISTS idx_assessment_history_semantic ON assessment_question_history (user_id, semantic_group_id)"),
       env.DB.prepare("CREATE TABLE IF NOT EXISTS assessment_import_runs (id text PRIMARY KEY NOT NULL, source_hash text NOT NULL UNIQUE, source_questions integer NOT NULL, imported_questions integer NOT NULL, imported_tests integer NOT NULL, report_json text NOT NULL, imported_at integer NOT NULL)"),
       env.DB.prepare("CREATE INDEX IF NOT EXISTS idx_attempts_user_submitted ON attempts (user_id, submitted_at)")
-    ]).then(() => undefined).catch(error => { schemaReady = undefined; throw error; });
+    ]).then(async () => {
+      const info = await env.DB.prepare("PRAGMA table_info(users)").all<{ name: string }>();
+      const columns = new Set((info.results ?? []).map(row => row.name));
+      const additions: Array<[string, string]> = [
+        ["birth_date", "text"],
+        ["guardian_email", "text"],
+        ["guardian_verified_at", "integer"],
+        ["terms_version", "text"],
+        ["privacy_version", "text"],
+        ["profile_completed_at", "integer"],
+        ["account_status", "text DEFAULT 'active' NOT NULL"],
+      ];
+      for (const [name, definition] of additions) {
+        if (!columns.has(name)) await env.DB.prepare(`ALTER TABLE users ADD COLUMN ${name} ${definition}`).run();
+      }
+    }).then(() => undefined).catch(error => { schemaReady = undefined; throw error; });
   }
   return schemaReady;
 }

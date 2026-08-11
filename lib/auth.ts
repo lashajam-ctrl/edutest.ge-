@@ -68,7 +68,21 @@ export async function destroySession(request: Request) {
 }
 
 export function publicUser(user: typeof users.$inferSelect) {
-  return { id: user.id, email: user.email, name: user.name, role: user.role, grade: user.grade ?? "", school: user.school ?? "" };
+  return {
+    id: user.id,
+    email: user.email,
+    name: user.name,
+    role: user.role,
+    grade: user.grade ?? "",
+    school: user.school ?? "",
+    birthDate: user.birthDate ?? "",
+    guardianEmail: user.guardianEmail ?? "",
+    guardianVerifiedAt: user.guardianVerifiedAt?.toISOString() ?? "",
+    termsVersion: user.termsVersion ?? "",
+    privacyVersion: user.privacyVersion ?? "",
+    profileCompletedAt: user.profileCompletedAt?.toISOString() ?? "",
+    accountStatus: user.accountStatus,
+  };
 }
 
 export type OAuthProvider = "google" | "microsoft" | "facebook";

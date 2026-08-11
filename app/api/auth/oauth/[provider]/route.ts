@@ -11,7 +11,8 @@ export async function GET(request: Request, context: { params: Promise<{ provide
   const requestedRole = requestUrl.searchParams.get("role") === "teacher" ? "pending_teacher" : "student";
   const requestedGrade = requestUrl.searchParams.get("grade")?.trim() ?? "";
   const grade = requestedRole === "student" && /^(?:[1-9]|1[0-2])[A-Za-zა-ჰ]?$/.test(requestedGrade) ? requestedGrade : "";
-  const mode = requestUrl.searchParams.get("mode") === "link" ? "link" : "login";
+  const requestedMode = requestUrl.searchParams.get("mode");
+  const mode = requestedMode === "link" ? "link" : requestedMode === "signup" ? "signup" : "login";
   if (mode === "link" && !(await getSessionUser(request))) return Response.json({ error: "Sign in before linking an account" }, { status: 401 });
   const config = oauthConfig(provider);
   if (!config.clientId || !config.clientSecret) return Response.json({ error: `${provider} ავტორიზაცია ჯერ არ არის კონფიგურირებული` }, { status: 503 });

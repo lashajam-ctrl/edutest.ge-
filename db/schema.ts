@@ -7,6 +7,13 @@ export const users = sqliteTable("users", {
   role: text("role", { enum: ["student", "teacher", "pending_teacher", "admin", "parent"] }).notNull().default("student"),
   grade: text("grade"),
   school: text("school"),
+  birthDate: text("birth_date"),
+  guardianEmail: text("guardian_email"),
+  guardianVerifiedAt: integer("guardian_verified_at", { mode: "timestamp_ms" }),
+  termsVersion: text("terms_version"),
+  privacyVersion: text("privacy_version"),
+  profileCompletedAt: integer("profile_completed_at", { mode: "timestamp_ms" }),
+  accountStatus: text("account_status").notNull().default("active"),
   passwordHash: text("password_hash"),
   passwordSalt: text("password_salt"),
   emailVerified: integer("email_verified", { mode: "boolean" }).notNull().default(false),
@@ -29,6 +36,20 @@ export const sessions = sqliteTable("sessions", {
   expiresAt: integer("expires_at", { mode: "timestamp_ms" }).notNull(),
   createdAt: integer("created_at", { mode: "timestamp_ms" }).notNull(),
 }, (table) => [uniqueIndex("sessions_token_unique").on(table.tokenHash)]);
+
+export const guardianConsentRequests = sqliteTable("guardian_consent_requests", {
+  id: text("id").primaryKey(),
+  childUserId: text("child_user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  guardianEmail: text("guardian_email").notNull(),
+  tokenHash: text("token_hash").notNull(),
+  status: text("status", { enum: ["pending", "accepted", "expired"] }).notNull().default("pending"),
+  expiresAt: integer("expires_at", { mode: "timestamp_ms" }).notNull(),
+  createdAt: integer("created_at", { mode: "timestamp_ms" }).notNull(),
+  acceptedAt: integer("accepted_at", { mode: "timestamp_ms" }),
+}, (table) => [
+  uniqueIndex("guardian_consent_token_unique").on(table.tokenHash),
+  index("idx_guardian_consent_child_status").on(table.childUserId, table.status),
+]);
 
 export const attempts = sqliteTable("attempts", {
   id: text("id").primaryKey(),

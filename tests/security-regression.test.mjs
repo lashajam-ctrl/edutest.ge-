@@ -103,7 +103,8 @@ test("publishes privacy and terms pages with current feature disclosures", async
   await Promise.all([access(new URL("public/privacy.html", root)), access(new URL("public/terms.html", root))]);
   const [privacy, terms] = await Promise.all([source("public/privacy.html"), source("public/terms.html")]);
   assert.match(privacy, /AI განმარტება/);
-  assert.match(privacy, /access token მუდმივ საცავში არ ინახება/);
+  assert.match(privacy, /OAuth access token ბრაუზერის მუდმივ საცავში არ ინახება/);
+  assert.match(privacy, /Secure, HttpOnly და SameSite=Lax/);
   assert.match(privacy, /TOTP ორფაქტორიანი დადასტურება/);
   assert.match(terms, /გადახდის ფუნქცია.*გამორთულია/);
 });
@@ -116,11 +117,16 @@ test("publishes verified catalog counts without frozen marketing counters", asyn
   assert.doesNotMatch(html, /18,420|12,000 შესანიშნავი|98%|12 საგანი|420 ტესტ/);
 });
 
-test("keeps payments disabled and enables only configured social OAuth providers", async () => {
-  const [html, migration, socialMigration] = await Promise.all([
+test("keeps payments disabled and uses secure server OAuth sessions for configured providers", async () => {
+  const [html, migration, socialMigration, oauthStart, oauthCallback, sessionRoute, profileRoute, guardianConfirm] = await Promise.all([
     source("public/app.html"),
     source("supabase/migrations/202608110005_disable_payments.sql"),
     source("supabase/migrations/202608110006_social_auth_profile.sql"),
+    source("app/api/auth/oauth/[provider]/route.ts"),
+    source("app/api/auth/oauth/[provider]/callback/route.ts"),
+    source("app/api/auth/session/route.ts"),
+    source("app/api/auth/profile/route.ts"),
+    source("app/api/auth/guardian/confirm/route.ts"),
   ]);
   assert.match(html, /const PAYMENTS_ENABLED=false/);
   assert.match(html, /if\(!PAYMENTS_ENABLED\)return 'free'/);
@@ -129,11 +135,21 @@ test("keeps payments disabled and enables only configured social OAuth providers
     assert.match(html, new RegExp(`<button id="oauth-${id}"[^>]+disabled[^>]+doSocialLogin\\('${id}'\\)[^>]*>${provider}</button>`));
   }
   assert.match(html, /async function refreshSocialProviderButtons\(\)/);
-  assert.match(html, /\/auth\/v1\/settings/);
-  assert.match(html, /external\[provider\]===true/);
-  assert.match(html, /skipBrowserRedirect:true/);
-  assert.match(html, /if\(provider==='azure'\)options\.scopes='email profile'/);
-  assert.match(html, /window\.top\.location\.assign\(result\.data\.url\)/);
+  assert.match(html, /fetch\('\/api\/auth\/providers'/);
+  assert.match(html, /serverKey:'microsoft'/);
+  assert.match(html, /window\.top\.location\.assign\('\/api\/auth\/oauth\/'/);
+  assert.doesNotMatch(section(html, "async function doSocialLogin", "function openPasswordRecoveryModal"), /signInWithOAuth/);
+  assert.match(html, /fetch\('\/api\/auth\/session',\{credentials:'include'/);
+  assert.match(html, /fetch\('\/api\/auth\/logout',\{method:'POST',credentials:'include'/);
+  assert.match(oauthStart, /oauthStateCookie/);
+  assert.match(oauthStart, /requestedMode === "signup"/);
+  assert.match(oauthCallback, /createSession/);
+  assert.match(oauthCallback, /saved\[5\] !== "signup"/);
+  assert.match(sessionRoute, /getSessionUser/);
+  assert.match(profileRoute, /current\.user\.role === "student" \|\| current\.user\.role === "pending_teacher"/);
+  assert.doesNotMatch(profileRoute, /changes\.role = "admin"/);
+  assert.match(guardianConfirm, /tokenHash/);
+  assert.match(guardianConfirm, /guardianVerifiedAt/);
   assert.match(socialMigration, /p_requested_role not in \('student','teacher'\)/);
   assert.match(socialMigration, /then 'pending_teacher' else 'student'/);
   assert.doesNotMatch(socialMigration, /then 'admin'/);
