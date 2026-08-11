@@ -3,6 +3,16 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
+<script>
+(function redirectToCanonicalHost(){
+  try{
+    var current=window.top.location;
+    if(/\.chatgpt\.site$/i.test(current.hostname)){
+      window.top.location.replace('https://edutest.ge'+current.pathname+current.search+current.hash);
+    }
+  }catch(_){/* The canonical redirect is best-effort; the app remains usable if embedding rules change. */}
+})();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;600;700;800&display=swap" rel="stylesheet"/>
 <title>EduTest.ge — სკოლის ონლაინ ტესტების პლატფორმა I–XII კლასი</title>
@@ -3377,6 +3387,13 @@ const EDUTEST_OAUTH_PROVIDERS=Object.freeze({
   azure:{label:'Microsoft',serverKey:'microsoft'},
   facebook:{label:'Facebook'}
 });
+function updateSocialButtonLabels(){
+  const action=loginMode==='reg'?'რეგისტრაცია':'შესვლა';
+  Object.keys(EDUTEST_OAUTH_PROVIDERS).forEach(function(provider){
+    const button=document.getElementById('oauth-'+provider);
+    if(button)button.textContent=EDUTEST_OAUTH_PROVIDERS[provider].label+'-ით '+action;
+  });
+}
 function setOAuthButtonState(provider,enabled){
   const button=document.getElementById('oauth-'+provider);
   if(!button)return;
@@ -3865,7 +3882,12 @@ async function initServerAuth(){
   try{
     const response=await fetch('/api/auth/session',{credentials:'include',cache:'no-store'});
     if(response.ok){const data=await response.json();if(data&&data.user){await adoptServerUser(data.user,{navigate:status==='success'});if(status)clearOAuthStatusParam();return true;}}
-    if(status){go('login');setLoginNotice(oauthStatusMessage(status),'warn');clearOAuthStatusParam();}
+    if(status){
+      go('login');
+      if(status==='registration-details-required'){loginMode='reg';loginTab('reg');}
+      setLoginNotice(oauthStatusMessage(status),'warn');
+      clearOAuthStatusParam();
+    }
   }catch(error){console.warn('Server session restore',error);if(status){go('login');setLoginNotice('უსაფრთხო სესიის აღდგენა ვერ მოხერხდა. სცადეთ ხელახლა.','warn');}}
   return false;
 }
@@ -4949,6 +4971,7 @@ function loginTab(tab){
   const btn=document.getElementById('l-btn');
   if(btn)btn.textContent=tab==='login'?t('login'):t('register');
   const ae=document.getElementById('auth-email-actions');if(ae)ae.style.display=tab==='login'?'flex':'none';
+  updateSocialButtonLabels();
 }
 
 function setRole(r){

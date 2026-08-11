@@ -135,6 +135,12 @@ test("keeps payments disabled and uses secure server OAuth sessions for configur
     assert.match(html, new RegExp(`<button id="oauth-${id}"[^>]+disabled[^>]+doSocialLogin\\('${id}'\\)[^>]*>${provider}</button>`));
   }
   assert.match(html, /async function refreshSocialProviderButtons\(\)/);
+  assert.match(html, /\.chatgpt\\\.site\$\/i\.test\(current\.hostname\)/);
+  assert.match(html, /window\.top\.location\.replace\('https:\/\/edutest\.ge'/);
+  assert.match(html, /function updateSocialButtonLabels\(\)/);
+  assert.match(html, /\.label\+'-ით '\+action/);
+  assert.match(html, /status==='registration-details-required'/);
+  assert.match(html, /loginTab\('reg'\)/);
   assert.match(html, /fetch\('\/api\/auth\/providers'/);
   assert.match(html, /serverKey:'microsoft'/);
   assert.match(html, /window\.top\.location\.assign\('\/api\/auth\/oauth\/'/);
