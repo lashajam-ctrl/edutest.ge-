@@ -118,7 +118,7 @@ test("publishes verified catalog counts without frozen marketing counters", asyn
 });
 
 test("keeps payments disabled and uses secure server OAuth sessions for configured providers", async () => {
-  const [html, migration, socialMigration, oauthStart, oauthCallback, sessionRoute, profileRoute, guardianConfirm] = await Promise.all([
+  const [html, migration, socialMigration, oauthStart, oauthCallback, sessionRoute, profileRoute, guardianConfirm, authLibrary] = await Promise.all([
     source("public/app.html"),
     source("supabase/migrations/202608110005_disable_payments.sql"),
     source("supabase/migrations/202608110006_social_auth_profile.sql"),
@@ -127,6 +127,7 @@ test("keeps payments disabled and uses secure server OAuth sessions for configur
     source("app/api/auth/session/route.ts"),
     source("app/api/auth/profile/route.ts"),
     source("app/api/auth/guardian/confirm/route.ts"),
+    source("lib/auth.ts"),
   ]);
   assert.match(html, /const PAYMENTS_ENABLED=false/);
   assert.match(html, /if\(!PAYMENTS_ENABLED\)return 'free'/);
@@ -139,18 +140,27 @@ test("keeps payments disabled and uses secure server OAuth sessions for configur
   assert.match(html, /window\.top\.location\.replace\('https:\/\/edutest\.ge'/);
   assert.match(html, /function updateSocialButtonLabels\(\)/);
   assert.match(html, /\.label\+'-ით '\+action/);
+  assert.match(html, /ჯერ აირჩიეთ Google ან Microsoft/);
+  assert.match(html, /showEmailRegistrationForm\(\)/);
+  assert.match(html, /ნაბიჯი 2 \/ 2/);
   assert.match(html, /status==='registration-details-required'/);
   assert.match(html, /loginTab\('reg'\)/);
   assert.match(html, /fetch\('\/api\/auth\/providers'/);
   assert.match(html, /serverKey:'microsoft'/);
   assert.match(html, /window\.top\.location\.assign\('\/api\/auth\/oauth\/'/);
   assert.doesNotMatch(section(html, "async function doSocialLogin", "function openPasswordRecoveryModal"), /signInWithOAuth/);
+  assert.doesNotMatch(section(html, "async function doSocialLogin", "function openPasswordRecoveryModal"), /r-terms|r-privacy|r-grade/);
   assert.match(html, /fetch\('\/api\/auth\/session',\{credentials:'include'/);
   assert.match(html, /fetch\('\/api\/auth\/logout',\{method:'POST',credentials:'include'/);
   assert.match(oauthStart, /oauthStateCookie/);
   assert.match(oauthStart, /requestedMode === "signup"/);
   assert.match(oauthCallback, /createSession/);
   assert.match(oauthCallback, /saved\[5\] !== "signup"/);
+  assert.match(oauthCallback, /const grade = null/);
+  assert.match(oauthCallback, /accountStatus: "onboarding"/);
+  assert.doesNotMatch(oauthCallback, /role === "student" && !grade/);
+  assert.match(authLibrary, /row\?\.user\.accountStatus === "onboarding"/);
+  assert.match(authLibrary, /path === "\/api\/auth\/profile"/);
   assert.match(sessionRoute, /getSessionUser/);
   assert.match(profileRoute, /current\.user\.role === "student" \|\| current\.user\.role === "pending_teacher"/);
   assert.doesNotMatch(profileRoute, /changes\.role = "admin"/);

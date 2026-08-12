@@ -57,6 +57,11 @@ export async function getSessionUser(request: Request) {
   if (!token) return null;
   await ensureSchema();
   const [row] = await getDb().select({ user: users, sessionId: sessions.id }).from(sessions).innerJoin(users, eq(users.id, sessions.userId)).where(and(eq(sessions.tokenHash, await sha256(token)), gt(sessions.expiresAt, new Date()))).limit(1);
+  if (row?.user.accountStatus === "onboarding") {
+    const path = new URL(request.url).pathname;
+    const onboardingRoute = path === "/api/auth/session" || path === "/api/auth/profile" || path === "/api/auth/logout" || path.startsWith("/api/auth/oauth/");
+    if (!onboardingRoute) return null;
+  }
   return row ?? null;
 }
 

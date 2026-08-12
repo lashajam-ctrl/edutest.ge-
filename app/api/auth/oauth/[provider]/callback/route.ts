@@ -70,13 +70,15 @@ export async function GET(request: Request, context: { params: Promise<{ provide
     [user] = await db.select().from(users).where(eq(users.email, email)).limit(1);
     const now = new Date();
     if (user) return redirect(origin, "account-exists", [clearOauthCookie]);
-    const role = saved[3] === "pending_teacher" ? "pending_teacher" as const : "student" as const;
-    const grade = role === "student" && /^(?:[1-9]|1[0-2])[A-Za-zა-ჰ]?$/.test(saved[4] ?? "") ? saved[4] : null;
-    if (role === "student" && !grade) return redirect(origin, "registration-details-required", [clearOauthCookie]);
+    // Provider-first onboarding creates a restricted provisional profile. The
+    // verified user chooses role/grade and accepts the policies on the next,
+    // server-validated profile step before accessing protected learning data.
+    const role = "student" as const;
+    const grade = null;
     user = {
       id: crypto.randomUUID(), email, name: profile.name || email.split("@")[0], role, grade, school: null,
       birthDate: null, guardianEmail: null, guardianVerifiedAt: null, termsVersion: null, privacyVersion: null,
-      profileCompletedAt: null, accountStatus: "active", passwordHash: null, passwordSalt: null,
+      profileCompletedAt: null, accountStatus: "onboarding", passwordHash: null, passwordSalt: null,
       emailVerified: true, createdAt: now, updatedAt: now,
     };
     await db.insert(users).values(user);
