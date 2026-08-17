@@ -320,6 +320,83 @@ body.acc-dyslexia{font-family:'Comic Sans MS','OpenDyslexic',sans-serif!importan
 /* Progress bar animation */
 @keyframes growBar{from{width:0}to{width:var(--target-w)}}
 .animated-bar{animation:growBar .6s ease both;}
+
+/* ══════════════════════════════════════════
+   WARM, GRADE-AWARE EDUTEST THEME
+   ══════════════════════════════════════════ */
+:root{
+  --ink:#29233a;--muted:#6e6478;--brand:#6550b8;--brand-dark:#49378d;
+  --brand-soft:#f0ecff;--warm:#e96f57;--sun:#efad32;--mint:#2f9c83;
+  --canvas:#f4eee8;--surface:#fffaf5;--line:#e4d8d0;
+  --blue:var(--brand);--blue-d:var(--brand-dark);--blue-l:var(--brand-soft);
+  --gray:var(--muted);--border:var(--line);--bg:var(--canvas);--white:#fffdf9;
+  --r:12px;--rl:18px;--shadow:0 8px 26px rgba(70,49,79,.08);--shadow-md:0 18px 44px rgba(70,49,79,.14)
+}
+body{background:radial-gradient(circle at 8% 2%,rgba(239,173,50,.14),transparent 28%),radial-gradient(circle at 93% 6%,rgba(47,156,131,.12),transparent 25%),var(--canvas);color:var(--ink)}
+.card,.stat,.topbar{background:var(--surface)}
+.card{box-shadow:var(--shadow)}
+.card:hover{box-shadow:0 8px 24px rgba(101,80,184,.11)}
+.btn{border-radius:12px;font-weight:700}
+.btn-primary{background:linear-gradient(135deg,var(--brand),#8068d3);box-shadow:0 8px 18px rgba(101,80,184,.2)}
+.btn-primary:hover{background:linear-gradient(135deg,var(--brand-dark),var(--brand))}
+.btn-green{background:linear-gradient(135deg,#248d75,#35a98e)}
+.sidebar{background:#342942}
+.ni.act{background:rgba(239,173,50,.14);color:#ffe2a0;border-left-color:#efad32}
+.ni.act::before{background:#efad32}
+.topbar{border-bottom-color:#e5d8d1}
+#p-landing{background:linear-gradient(145deg,#35264f 0%,#75405f 49%,#cf6f59 100%)!important}
+#p-login{background:radial-gradient(circle at 12% 10%,rgba(239,173,50,.24),transparent 30%),linear-gradient(145deg,#fff4e3,#eee8ff)!important}
+#p-student .main,#p-teacher .main,#p-admin .main{background:linear-gradient(145deg,rgba(255,249,240,.72),rgba(240,235,250,.64))}
+#p-results{background:linear-gradient(145deg,#fff2df,#eeeaff)!important;align-items:center!important;justify-content:flex-start!important;overflow-y:auto;padding:28px 16px 108px!important}
+#p-results>div{width:min(680px,100%)!important;margin:0 auto}
+#results-btns{justify-content:center}
+
+body.grade-band-early{--grade-accent:#f27b58;--grade-accent-2:#efad32;--grade-soft:#fff0ca;--grade-card:#fffaf1;--grade-bg-1:#fff0b9;--grade-bg-2:#dff7e9;--grade-ink:#4d3755}
+body.grade-band-primary{--grade-accent:#d86f4f;--grade-accent-2:#2f9c83;--grade-soft:#ffeadb;--grade-card:#fffaf5;--grade-bg-1:#ffe4ce;--grade-bg-2:#dff3e8;--grade-ink:#473b50}
+body.grade-band-middle{--grade-accent:#7b5cc5;--grade-accent-2:#d77b62;--grade-soft:#eee8ff;--grade-card:#fff9f5;--grade-bg-1:#f1e6ff;--grade-bg-2:#ffe8d9;--grade-ink:#362f52}
+body.grade-band-senior{--grade-accent:#8a4662;--grade-accent-2:#b97a4b;--grade-soft:#f3e6eb;--grade-card:#fffaf4;--grade-bg-1:#eadde3;--grade-bg-2:#f7e8d3;--grade-ink:#332b36}
+
+body.grade-band-early #p-student .main{background:linear-gradient(145deg,#fff6d8,#e5f7ee)}
+body.grade-band-primary #p-student .main{background:linear-gradient(145deg,#fff0e4,#e6f4ed)}
+body.grade-band-middle #p-student .main{background:linear-gradient(145deg,#f1ebff,#ffede4)}
+body.grade-band-senior #p-student .main{background:linear-gradient(145deg,#eee3e8,#f8ecdc)}
+
+#q-grade-guide{display:none}
+body.test-age-theme #p-take-test{background:radial-gradient(circle at 8% 8%,rgba(255,255,255,.66) 0 38px,transparent 40px),radial-gradient(circle at 92% 20%,rgba(255,255,255,.5) 0 50px,transparent 52px),linear-gradient(145deg,var(--grade-bg-1),var(--grade-bg-2))!important}
+body.test-age-theme #tt-topbar{border:2px solid rgba(255,255,255,.86)!important;border-radius:22px!important;background:rgba(255,250,245,.94)!important;box-shadow:0 12px 30px rgba(76,54,75,.11)!important}
+body.test-age-theme #q-prog{background:linear-gradient(90deg,var(--grade-accent),var(--grade-accent-2))!important}
+body.test-age-theme .timer{border-color:var(--grade-accent);color:var(--grade-accent);background:#fffaf5}
+body.test-age-theme #q-card{max-width:760px!important;padding:clamp(18px,3vw,30px)!important;border:3px solid rgba(255,255,255,.9)!important;border-radius:28px!important;background:var(--grade-card)!important;box-shadow:0 24px 56px rgba(72,54,78,.14)!important;overflow:visible!important}
+body.test-age-theme #q-num{width:48px!important;height:48px!important;border-radius:16px!important;background:linear-gradient(145deg,var(--grade-accent),var(--grade-accent-2))!important;font-size:17px!important;box-shadow:0 8px 18px rgba(90,66,92,.17)}
+body.test-age-theme #q-type-badge{background:color-mix(in srgb,var(--grade-accent-2) 16%,#fff);color:var(--grade-ink);border:1px solid color-mix(in srgb,var(--grade-accent-2) 42%,#fff);padding:6px 10px}
+body.test-age-theme #q-pts-badge{background:var(--grade-soft);color:var(--grade-ink);border:1px solid color-mix(in srgb,var(--grade-accent) 32%,#fff);padding:6px 10px}
+body.test-age-theme #q-grade-guide{display:flex;align-items:center;gap:12px;margin:0 0 18px;padding:12px 15px;border:2px solid color-mix(in srgb,var(--grade-accent) 24%,#fff);border-radius:18px;background:linear-gradient(135deg,#fffaf6,color-mix(in srgb,var(--grade-soft) 78%,#fff));color:var(--grade-ink);font-weight:800;line-height:1.45}
+.grade-guide-mascot{display:grid;place-items:center;width:42px;height:42px;flex:0 0 42px;border-radius:15px;background:#fff;box-shadow:0 5px 14px rgba(70,50,90,.1);font-size:23px}
+.grade-guide-copy strong{display:block;font-size:14px}.grade-guide-copy span{display:block;font-size:12px;color:#716778;font-weight:650;margin-top:2px}
+body.test-age-theme #q-text{max-width:660px;margin:0 auto 22px!important;font-size:clamp(18px,2.7vw,24px)!important;line-height:1.62!important;color:#2d2936!important;font-weight:750!important}
+body.test-age-theme #q-opts{display:grid;gap:11px}
+body.test-age-theme .qopt{min-height:60px;margin:0!important;padding:14px 17px!important;border:2px solid #e5dcd7;border-radius:18px!important;background:#fffdfa;font-size:clamp(15px,2vw,18px)!important;line-height:1.45;box-shadow:0 5px 14px rgba(70,54,76,.05)}
+body.test-age-theme .qopt:hover{transform:translateY(-2px);border-color:var(--grade-accent);background:color-mix(in srgb,var(--grade-soft) 48%,#fff)}
+body.test-age-theme .qopt.sel{border-color:var(--grade-accent);background:color-mix(in srgb,var(--grade-soft) 72%,#fff);color:var(--grade-ink);box-shadow:0 0 0 4px color-mix(in srgb,var(--grade-accent) 12%,transparent)}
+body.test-age-theme .radio.sel{background:var(--grade-accent);border-color:var(--grade-accent)}
+body.test-age-theme #q-nav-btns{border-top:2px dashed color-mix(in srgb,var(--grade-accent) 22%,#ddd)!important;background:var(--grade-card)!important;padding-top:16px!important}
+body.test-age-theme #q-next{background:linear-gradient(135deg,var(--grade-accent),var(--grade-accent-2));box-shadow:0 10px 22px rgba(90,66,92,.18)}
+body.grade-band-early.test-age-theme #q-card{border-radius:30px!important}
+body.grade-band-early.test-age-theme #q-text{font-size:clamp(20px,3.2vw,27px)!important;text-align:center;font-weight:800!important}
+body.grade-band-early.test-age-theme .qopt{min-height:68px;border-width:3px;font-weight:750}
+body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px;border-width:3px}
+
+@media(max-width:640px){
+  body.test-age-theme #p-take-test{padding:8px 8px 18px!important}
+  body.test-age-theme #tt-topbar{border-radius:18px!important}
+  body.test-age-theme #q-card{padding:16px!important;border-radius:23px!important}
+  body.test-age-theme #q-text{font-size:19px!important;text-align:left}
+  body.test-age-theme .qopt{min-height:62px;padding:13px!important;font-size:16px!important}
+  body.test-age-theme #q-nav-btns{position:sticky;bottom:0;padding:12px 0 4px!important}
+  body.test-age-theme #q-nav-btns .btn{min-height:52px;padding:10px 16px;font-size:15px}
+  #results-btns{flex-direction:column;padding:0 6px}
+  #results-btns .btn{width:100%;justify-content:center}
+}
 </style>
 <!-- Supabase JS v2: browser client for Auth + cloud learning history. -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -830,6 +907,10 @@ body.acc-dyslexia{font-family:'Comic Sans MS','OpenDyslexic',sans-serif!importan
         <span class="badge b-blue" id="q-type-badge">MCQ</span>
         <span class="badge b-amber" id="q-pts-badge">2 ქ.</span>
       </div>
+    </div>
+    <div id="q-grade-guide" aria-live="polite">
+      <div class="grade-guide-mascot" id="q-grade-mascot">✨</div>
+      <div class="grade-guide-copy"><strong id="q-grade-title">შენ ეს შეგიძლია!</strong><span id="q-grade-hint">ყურადღებით წაიკითხე და აირჩიე პასუხი.</span></div>
     </div>
     <h3 style="font-size:16px;font-weight:600;margin-bottom:18px;line-height:1.5;color:#1a202c" id="q-text">კითხვა...</h3>
     <div id="q-opts"></div>
@@ -3153,6 +3234,8 @@ function teacherResults(){return SERVER_VERIFIED_RESULTS||[];}
 // ── Navigation ───────────────────────────────────────────────────────────────
 function go(p){
   if(p!=='take-test'&&timerInt){clearInterval(timerInt);timerInt=null;}
+  if(p!=='take-test')document.body.classList.remove('test-age-theme');
+  if(['landing','login','teacher','admin'].includes(p))clearGradeTheme();
   document.querySelectorAll('.page').forEach(x=>{x.classList.remove('active');});
   const el=document.getElementById('p-'+p);
   if(el){el.classList.add('active');el.classList.add('fade');}
@@ -5123,6 +5206,7 @@ async function doLogout(){
 // ── Update UI after login ─────────────────────────────────────────────────────
 function updateStudentUI(){
   if(!CUR_USER)return;
+  applyGradeTheme(CUR_USER.grade);
   const initials=(CUR_USER.name||'?').split(' ').map(w=>w[0]).join('').slice(0,2);
   const av=document.getElementById('s-sidebar-av');if(av)av.textContent=initials;
   const sn=document.getElementById('s-sidebar-name');if(sn)sn.textContent=CUR_USER.name||'';
@@ -5373,6 +5457,27 @@ function updateTimer(){
   el.className='timer'+(timerSec<30?' red':timerSec<60?' amb':'');
 }
 
+const GRADE_THEME_CLASSES=['grade-band-early','grade-band-primary','grade-band-middle','grade-band-senior'];
+function clearGradeTheme(){GRADE_THEME_CLASSES.forEach(name=>document.body.classList.remove(name));}
+function gradeThemeFor(value){
+  const grade=parseInt(String(value??''),10);
+  if(!Number.isInteger(grade))return null;
+  if(grade<=2)return {name:'grade-band-early',mascot:'🌞',title:'შენ ეს შეგიძლია!',hint:'ყურადღებით ნახე და მონიშნე ერთი პასუხი.'};
+  if(grade<=6)return {name:'grade-band-primary',mascot:'🌱',title:'იფიქრე ნაბიჯ-ნაბიჯ',hint:'წაიკითხე პირობა და მშვიდად აირჩიე საუკეთესო პასუხი.'};
+  if(grade<=9)return {name:'grade-band-middle',mascot:'🧭',title:'ყურადღებით გააანალიზე',hint:'შეადარე ვარიანტები და გადაწყვეტილება შემდეგ მიიღე.'};
+  return {name:'grade-band-senior',mascot:'🎓',title:'შეაფასე და დაასაბუთე',hint:'გამოიყენე ცოდნა, ლოგიკა და დეტალებზე დაკვირვება.'};
+}
+function applyGradeTheme(value){
+  const theme=gradeThemeFor(value);clearGradeTheme();if(!theme)return null;
+  document.body.classList.add(theme.name);return theme;
+}
+function applyTestAgeMode(test){
+  const theme=applyGradeTheme(test?.grade??CUR_USER?.grade);if(!theme)return;
+  document.body.classList.add('test-age-theme');
+  const mascot=document.getElementById('q-grade-mascot'),title=document.getElementById('q-grade-title'),hint=document.getElementById('q-grade-hint');
+  if(mascot)mascot.textContent=theme.mascot;if(title)title.textContent=theme.title;if(hint)hint.textContent=theme.hint;
+}
+
 function renderQ(){
   const qs=curTestQs;const q=qs[qIdx];if(!q)return;
   document.getElementById('q-num').textContent=qIdx+1;
@@ -5516,7 +5621,7 @@ function buildDots(){
 
 function updateDots(){
   const dots=document.querySelectorAll('.dot');
-  dots.forEach((d,i)=>d.style.background=i===qIdx?'#2563eb':(()=>{const a=qAnswers[curTestQs[i]?.id];if(a===undefined||a===null)return'#d1d5db';if(typeof a==='object'&&!Array.isArray(a)&&Object.keys(a).length===0)return'#d1d5db';if(Array.isArray(a)&&a.filter(v=>v).length===0)return'#d1d5db';return'#16a34a';})());
+  dots.forEach((d,i)=>d.style.background=i===qIdx?'var(--grade-accent,var(--blue))':(()=>{const a=qAnswers[curTestQs[i]?.id];if(a===undefined||a===null)return'#d1d5db';if(typeof a==='object'&&!Array.isArray(a)&&Object.keys(a).length===0)return'#d1d5db';if(Array.isArray(a)&&a.filter(v=>v).length===0)return'#d1d5db';return'var(--mint,#16a34a)';})());
 }
 
 function hideSubmitModal(){document.getElementById('submit-modal').classList.add('hidden');}

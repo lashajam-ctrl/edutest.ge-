@@ -42,6 +42,16 @@ test("uses the secure session cookie for AI feedback", async () => {
   assert.doesNotMatch(feedbackCall, /Authorization|access_token|getSession\(/);
 });
 
+test("restores warm grade-aware interfaces without changing the secure assessment flow", async () => {
+  const [html, client] = await Promise.all([source("public/app.html"), source("public/server-assessments.js")]);
+  for (const band of ["grade-band-early", "grade-band-primary", "grade-band-middle", "grade-band-senior"]) assert.match(html, new RegExp(band));
+  assert.match(html, /function applyTestAgeMode\(test\)/);
+  assert.match(html, /id="q-grade-guide"/);
+  assert.match(html, /--warm:#e96f57/);
+  assert.match(html, /#p-landing\{background:linear-gradient\(145deg,#35264f/);
+  assert.match(client, /applyTestAgeMode\(curTest\)/);
+});
+
 test("starts sanitized sessions and grades only on the server", async () => {
   const [start, submit, catalog, questions, builder] = await Promise.all([
     source("app/api/assessments/start/route.ts"), source("app/api/assessments/submit/route.ts"),
