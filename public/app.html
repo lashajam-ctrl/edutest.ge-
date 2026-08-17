@@ -2927,11 +2927,8 @@ async function requestAiExplanation(index,button){
   if(!q||q.ok||q.reveal===false||!container)return;
   button.disabled=true;button.textContent='⏳ ახსნა მზადდება…';container.replaceChildren();appendAiText(container,'div','AI მასწავლებელი ამზადებს ასაკზე მორგებულ ახსნას…','font-size:12px;color:#475569');
   try{
-    if(!EDUTEST_CLOUD.client)throw new Error('ავტორიზაციის სესია ვერ მოიძებნა');
-    const sessionResult=await EDUTEST_CLOUD.client.auth.getSession();
-    const token=sessionResult&&sessionResult.data&&sessionResult.data.session&&sessionResult.data.session.access_token;
-    if(!token)throw new Error('სესია დასრულდა — გთხოვთ, თავიდან შეხვიდეთ');
-    const response=await fetch('/api/ai/feedback',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},body:JSON.stringify({subject:_lastResult.subject||'',item:{id:String(q.id||''),text:String(q.text||''),userAnswer:reviewAnswerText(q,q.ua),correctAnswer:reviewCorrectAnswerText(q),explanation:String(q.explain||''),skill:String(q.topic||'general'),outcome:null}})});
+    if(!CUR_USER)throw new Error('სესია დასრულდა — გთხოვთ, თავიდან შეხვიდეთ');
+    const response=await fetch('/api/ai/feedback',{method:'POST',credentials:'include',headers:{'Content-Type':'application/json'},body:JSON.stringify({subject:_lastResult.subject||'',item:{id:String(q.id||''),text:String(q.text||''),userAnswer:reviewAnswerText(q,q.ua),correctAnswer:reviewCorrectAnswerText(q),explanation:String(q.explain||''),skill:String(q.topic||'general'),outcome:null}})});
     const data=await response.json().catch(()=>({}));
     const feedback=data.feedback||data.fallback;
     if(!response.ok&&!feedback)throw new Error(data.error||'AI ახსნა დროებით მიუწვდომელია');
@@ -5015,34 +5012,13 @@ async function doLogin(){
   if(btn)btn.disabled=true;
   try{
     if(loginMode==='login'){
-      if(isSupabaseConfigured()){
-        if(!EDUTEST_CLOUD.client)await initEduTestCloud();
-        if(!EDUTEST_CLOUD.client)throw new Error('Supabase client unavailable');
-        const res=await EDUTEST_CLOUD.client.auth.signInWithPassword({email:email,password:pass});
-        if(res.error)throw res.error;
-        const appUser=await adoptSupabaseUser(res.data.user,{navigate:false});
-        if(appUser.role==='pending_teacher'){
-          if(errEl){errEl.textContent='🕐 თქვენი მასწავლებლის ანგარიში ჯერ დასამტკიცებელია.';errEl.style.color='#92400e';errEl.classList.remove('hidden');}
-          await EDUTEST_CLOUD.client.auth.signOut();return;
-        }
-        if(appUser.role==='guardian'){setLoginNotice('Guardian ანგარიში გამოიყენება მხოლოდ წარმომადგენლის consent-link-ით.','success');return;}
-        if(appUser.role==='admin')await ensureAdminMFA(appUser);
-        if(appUser.role==='student'){
-          const gate=studentPrivacyGate(appUser);
-          if(gate==='age_required'){go('login');showAgeVerificationModal();return;}
-          if(gate==='guardian_required'){go('login');showGuardianPendingModal(appUser);return;}
-        }
-        logAuditEvent('LOGIN_CLOUD',appUser.email+' ('+appUser.role+')');
-        go(['student','teacher','admin'].includes(appUser.role)?appUser.role:'student');
-        return;
-      }
-
-      // Optional development-only local mode. Disabled in the production build.
-      if(!EDUTEST_SUPABASE_CONFIG.allowLocalFallback)
-        throw new Error('Cloud Auth ჯერ არ არის კონფიგურირებული — ჩასვი Supabase URL და publishable key.');
-      const found=USER_DB.find(u=>u.email===email&&u.password===pass);
-      if(!found)throw new Error(t('wrong_pass'));
-      CUR_USER=found;curRole=found.role;logAuditEvent('LOGIN_LOCAL',found.email+' ('+found.role+')');go(curRole);return;
+      if(!email||!pass)throw new Error(t('fill_all'));
+      const response=await fetch('/api/auth/login',{method:'POST',credentials:'include',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({email,password:pass})});
+      const data=await response.json().catch(()=>({}));
+      if(!response.ok)throw new Error(data.error||t('wrong_pass'));
+      const appUser=await adoptServerUser(data.user,{navigate:true});
+      logAuditEvent('LOGIN_SERVER',appUser.email+' ('+appUser.role+')');
+      return;
     }
 
     // Registration
@@ -5050,7 +5026,7 @@ async function doLogin(){
     if(!isLegalConfigReady() && EDUTEST_PRIVACY_CONFIG.enforceLegalConfig)throw new Error('რეგისტრაცია დაბლოკილია: შეავსეთ EDUTEST_PRIVACY_CONFIG-ში რეალური controller/მისამართი/Supabase region.');
     if(!email||!pass)throw new Error(t('fill_all'));
     if(!email.includes('@')||!email.includes('.'))throw new Error('გთხოვთ შეიყვანეთ სწორი ელ-ფოსტა');
-    if(pass.length<8)throw new Error('პაროლი მინიმუმ 8 სიმბოლო უნდა იყოს');
+    if(pass.length<10)throw new Error('პაროლი მინიმუმ 10 სიმბოლო უნდა იყოს');
     const rname=(document.getElementById('r-name')?.value||'').trim();
     if(!rname)throw new Error('გთხოვთ შეიყვანეთ სახელი');
     const surname=(document.getElementById('r-surname')?.value||'').trim();
@@ -5067,47 +5043,16 @@ async function doLogin(){
       if(under16&&(!guardianEmail||!guardianEmail.includes('@')||guardianEmail===email))throw new Error('16 წლამდე მოსწავლისთვის მიუთითეთ მშობლის/კანონიერი წარმომადგენლის განსხვავებული სწორი ელფოსტა.');
     }
 
-    if(isSupabaseConfigured()){
-      if(!EDUTEST_CLOUD.client)await initEduTestCloud();
-      if(!EDUTEST_CLOUD.client)throw new Error('Supabase client unavailable');
-      const signupRedirect=getEduTestAuthRedirectUrl();
-      const signupOptions={data:{name:name,grade:grade,school:school,requested_role:requestedRole,birth_date:birthDate,guardian_email:guardianEmail,terms_version:EDUTEST_PRIVACY_CONFIG.termsVersion,privacy_version:EDUTEST_PRIVACY_CONFIG.privacyVersion,guardian_consent_version:EDUTEST_PRIVACY_CONFIG.guardianConsentVersion}};
-      if(signupRedirect)signupOptions.emailRedirectTo=signupRedirect;
-      const res=await EDUTEST_CLOUD.client.auth.signUp({
-        email:email,password:pass,options:signupOptions
-      });
-      if(res.error)throw res.error;
-      if(under16 && res.data && res.data.user){
-        try{await sendGuardianConsentEmail(guardianEmail,res.data.user.id);}catch(e){console.warn('guardian consent email',e);}
-      }
-      if(res.data && res.data.session && res.data.user){
-        const appUser=await adoptSupabaseUser(res.data.user,{navigate:false});
-        if(appUser.role==='pending_teacher'){
-          if(errEl){errEl.textContent='✅ რეგისტრაცია დასრულდა. მასწავლებლის ანგარიში ადმინის დამტკიცებას ელოდება.';errEl.style.color='#166534';errEl.classList.remove('hidden');}
-          await EDUTEST_CLOUD.client.auth.signOut();return;
-        }
-        const gate=studentPrivacyGate(appUser);
-        if(gate==='guardian_required'){go('login');showGuardianPendingModal(appUser);return;}
-        if(gate==='age_required'){go('login');showAgeVerificationModal();return;}
-        go('student');
-      }else{
-        if(errEl){errEl.textContent=under16?'📧 რეგისტრაცია მიღებულია — დაადასტურეთ მოსწავლის ელფოსტა; წარმომადგენელს ცალკე consent-link გაეგზავნა.':'📧 რეგისტრაცია მიღებულია — გადაამოწმეთ ელ-ფოსტა ანგარიშის დასადასტურებლად.';errEl.style.color='#166534';errEl.classList.remove('hidden');}
-        loginMode='login';loginTab('login');
-      }
-      return;
-    }
-
-    // Optional development-only local registration. Disabled in production.
-    if(!EDUTEST_SUPABASE_CONFIG.allowLocalFallback)
-      throw new Error('Cloud Auth ჯერ არ არის კონფიგურირებული — რეგისტრაციამდე ჩასვი Supabase URL და publishable key.');
-    if(USER_DB.find(u=>u.email===email))throw new Error(t('already_exists'));
-    const newUser={email,role:requestedRole==='teacher'?'pending_teacher':'student',name,grade,school,birthDate,guardianEmail,guardianVerifiedAt:under16?'':new Date().toISOString(),premium:false,joinDate:new Date().toLocaleDateString('ka-GE')};
-    USER_DB.push(newUser);saveUsers();
-    if(newUser.role==='pending_teacher'){
-      if(errEl){errEl.textContent='🕐 თქვენი მასწავლებლის ანგარიში განხილვის პროცესშია.';errEl.style.color='#92400e';errEl.classList.remove('hidden');}
-      return;
-    }
-    CUR_USER=newUser;curRole='student';go('student');
+    const registerResponse=await fetch('/api/auth/register',{method:'POST',credentials:'include',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({email,password:pass,name,role:requestedRole,grade,school})});
+    const registered=await registerResponse.json().catch(()=>({}));
+    if(!registerResponse.ok)throw new Error(registered.error||'რეგისტრაცია ვერ დასრულდა');
+    const profilePayload={name,grade,school,requestedRole,termsVersion:EDUTEST_PRIVACY_CONFIG.termsVersion,privacyVersion:EDUTEST_PRIVACY_CONFIG.privacyVersion};
+    if(requestedRole==='student'){profilePayload.birthDate=birthDate;profilePayload.guardianEmail=guardianEmail;}
+    const profileResponse=await fetch('/api/auth/profile',{method:'PATCH',credentials:'include',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(profilePayload)});
+    const profiled=await profileResponse.json().catch(()=>({}));
+    if(!profileResponse.ok)throw new Error(profiled.error||'პროფილის შევსება ვერ დასრულდა');
+    const appUser=await adoptServerUser(profiled.user,{navigate:true});
+    logAuditEvent('REGISTER_SERVER',appUser.email+' ('+appUser.role+')');
   }catch(e){
     if(errEl){errEl.textContent=(e&&e.message)||String(e);errEl.classList.remove('hidden');}
   }finally{if(btn)btn.disabled=false;}
@@ -6309,6 +6254,7 @@ document.addEventListener('click',function(e){
 });
 
 </script>
+<script src="/server-assessments.js"></script>
 
 <!-- EDIT USER MODAL -->
 <div id="modal-edit-user" class="overlay hidden" onclick="if(event.target===this)this.classList.add('hidden')">

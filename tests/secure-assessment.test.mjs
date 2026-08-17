@@ -20,6 +20,28 @@ test("keeps active answer keys out of public assets", async () => {
   assert.match(client, /\/api\/assessments\/submit/);
 });
 
+test("connects every sign-in method to the cookie-authenticated assessment client", async () => {
+  const [html, client, start] = await Promise.all([
+    source("public/app.html"), source("public/server-assessments.js"), source("app/api/assessments/start/route.ts"),
+  ]);
+  assert.match(html, /<script src="\/server-assessments\.js"><\/script>/);
+  assert.match(html, /fetch\('\/api\/auth\/login'.*credentials:'include'/s);
+  assert.match(html, /fetch\('\/api\/auth\/register'.*credentials:'include'/s);
+  assert.doesNotMatch(html, /auth\.signInWithPassword|auth\.signUp\(/);
+  assert.match(client, /fetch\('\/api\/assessments\/start'/);
+  assert.match(client, /fetch\('\/api\/assessments\/submit'/);
+  assert.match(client, /credentials:'include'/);
+  assert.doesNotMatch(client, /EDUTEST_CLOUD|CATALOG_DIVERSITY_CACHE|performanceBadgeLabel|isCurriculumEligible/);
+  assert.match(start, /if \(test\.is_custom\) \{\s*const attemptCount/s);
+});
+
+test("uses the secure session cookie for AI feedback", async () => {
+  const html = await source("public/app.html");
+  const feedbackCall = html.match(/fetch\('\/api\/ai\/feedback'[\s\S]{0,800}/)?.[0] ?? "";
+  assert.match(feedbackCall, /credentials:'include'/);
+  assert.doesNotMatch(feedbackCall, /Authorization|access_token|getSession\(/);
+});
+
 test("starts sanitized sessions and grades only on the server", async () => {
   const [start, submit, catalog, questions, builder] = await Promise.all([
     source("app/api/assessments/start/route.ts"), source("app/api/assessments/submit/route.ts"),

@@ -32,8 +32,10 @@ export async function POST(request: Request) {
       return Response.json({ error: "ტესტი თქვენი კლასისთვის ხელმისაწვდომი არ არის" }, { status: 403 });
     }
   }
-  const attemptCount = await env.DB.prepare("SELECT COUNT(*) AS total FROM attempts WHERE user_id = ? AND test_id = ?").bind(current.user.id, test.id).first<{ total: number }>();
-  if (Number(attemptCount?.total ?? 0) >= Number(test.attempts_allowed)) return Response.json({ error: "ცდების რაოდენობა ამოიწურა" }, { status: 409 });
+  if (test.is_custom) {
+    const attemptCount = await env.DB.prepare("SELECT COUNT(*) AS total FROM attempts WHERE user_id = ? AND test_id = ?").bind(current.user.id, test.id).first<{ total: number }>();
+    if (Number(attemptCount?.total ?? 0) >= Number(test.attempts_allowed)) return Response.json({ error: "ცდების რაოდენობა ამოიწურა" }, { status: 409 });
+  }
 
   const common = `SELECT q.*, h.question_id AS history_id, h.answered_count, h.last_correct, h.next_review_at, h.last_answered_at
     FROM assessment_questions q LEFT JOIN assessment_question_history h ON h.user_id = ? AND h.question_id = q.id`;

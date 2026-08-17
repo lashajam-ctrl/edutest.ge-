@@ -41,7 +41,7 @@ export async function PATCH(request: Request) {
     changes.grade = null;
   }
   if (body.school !== undefined) changes.school = body.school.trim().slice(0, 120) || null;
-  if (body.birthDate !== undefined || completingProfile) {
+  if (body.birthDate !== undefined || (completingProfile && effectiveRole === "student")) {
     const birthDate = (body.birthDate ?? "").trim();
     const age = ageFrom(birthDate);
     if (age === null || age < (effectiveRole === "student" ? 5 : 18) || age > 100) return Response.json({ error: "დაბადების თარიღი არასწორია" }, { status: 400 });
@@ -53,6 +53,13 @@ export async function PATCH(request: Request) {
     changes.birthDate = birthDate;
     changes.guardianEmail = guardianEmail || null;
     changes.guardianVerifiedAt = effectiveRole === "student" && age < 16 ? null : new Date();
+    changes.termsVersion = body.termsVersion!.trim().slice(0, 100);
+    changes.privacyVersion = body.privacyVersion!.trim().slice(0, 100);
+    changes.profileCompletedAt = new Date();
+    changes.accountStatus = "active";
+  }
+  if (completingProfile && effectiveRole !== "student") {
+    if (!(body.termsVersion ?? "").trim() || !(body.privacyVersion ?? "").trim()) return Response.json({ error: "წესებისა და კონფიდენციალურობის დადასტურება აუცილებელია" }, { status: 400 });
     changes.termsVersion = body.termsVersion!.trim().slice(0, 100);
     changes.privacyVersion = body.privacyVersion!.trim().slice(0, 100);
     changes.profileCompletedAt = new Date();
