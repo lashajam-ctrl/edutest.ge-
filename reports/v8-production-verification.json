@@ -1,0 +1,25 @@
+{
+  "verifiedAt": "2026-08-24T07:23:00Z",
+  "sourceCommit": "2a3e0502a68d6379eb4c74c947c3493c439c8f5d",
+  "activeQuestions": 19131,
+  "activeV8Questions": 17781,
+  "retainedLegacyQuestions": 1350,
+  "publishedTests": 556,
+  "publishedV8Tests": 520,
+  "subjects": 15,
+  "activeQuestionsWithoutAnswerKey": 0,
+  "underCapacityV8Tests": 0,
+  "v8QuestionsByDifficulty": {
+    "foundation": 6125,
+    "application": 7945,
+    "reasoning": 3167,
+    "challenge": 544
+  },
+  "v8TestsByDifficulty": {
+    "mixed": 165,
+    "foundation": 113,
+    "application": 157,
+    "reasoning": 84,
+    "challenge": 1
+  }
+}

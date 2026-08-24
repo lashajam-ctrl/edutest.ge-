@@ -111,9 +111,11 @@ test("publishes privacy and terms pages with current feature disclosures", async
 
 test("publishes verified catalog counts without frozen marketing counters", async () => {
   const html = await source("public/app.html");
-  assert.match(html, /12,600/);
-  assert.match(html, /data-target="336"/);
+  assert.match(html, /19,131/);
+  assert.match(html, /data-target="556"/);
   assert.match(html, /15 საგანი/);
+  assert.match(html, /აქტიური კითხვა/);
+  assert.doesNotMatch(html, /გადამოწმებული კითხვა/);
   assert.doesNotMatch(html, /18,420|12,000 შესანიშნავი|98%|12 საგანი|420 ტესტ/);
 });
 
