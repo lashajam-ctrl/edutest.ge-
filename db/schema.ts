@@ -37,6 +37,31 @@ export const sessions = sqliteTable("sessions", {
   createdAt: integer("created_at", { mode: "timestamp_ms" }).notNull(),
 }, (table) => [uniqueIndex("sessions_token_unique").on(table.tokenHash)]);
 
+export const oauthLinkRequests = sqliteTable("oauth_link_requests", {
+  id: text("id").primaryKey(),
+  userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  provider: text("provider", { enum: ["google", "microsoft", "facebook"] }).notNull(),
+  providerSubject: text("provider_subject").notNull(),
+  tokenHash: text("token_hash").notNull(),
+  expiresAt: integer("expires_at", { mode: "timestamp_ms" }).notNull(),
+  createdAt: integer("created_at", { mode: "timestamp_ms" }).notNull(),
+}, (table) => [
+  uniqueIndex("oauth_link_requests_token_unique").on(table.tokenHash),
+  index("idx_oauth_link_requests_user_expires").on(table.userId, table.expiresAt),
+]);
+
+export const passwordResetRequests = sqliteTable("password_reset_requests", {
+  id: text("id").primaryKey(),
+  userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  tokenHash: text("token_hash").notNull(),
+  expiresAt: integer("expires_at", { mode: "timestamp_ms" }).notNull(),
+  usedAt: integer("used_at", { mode: "timestamp_ms" }),
+  createdAt: integer("created_at", { mode: "timestamp_ms" }).notNull(),
+}, (table) => [
+  uniqueIndex("password_reset_requests_token_unique").on(table.tokenHash),
+  index("idx_password_reset_requests_user_expires").on(table.userId, table.expiresAt),
+]);
+
 export const guardianConsentRequests = sqliteTable("guardian_consent_requests", {
   id: text("id").primaryKey(),
   childUserId: text("child_user_id").notNull().references(() => users.id, { onDelete: "cascade" }),

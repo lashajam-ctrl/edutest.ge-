@@ -420,8 +420,8 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
         <button onclick="setLang('en')" id="lang-en" class="lang-btn">🇬🇧 Eng</button>
         <button onclick="setLang('ru')" id="lang-ru" class="lang-btn">🇷🇺 Рус</button>
       </div>
-      <button class="btn btn-ghost" style="color:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.25);padding:6px 12px" onclick="go('login')" data-i18n="login">შესვლა</button>
-      <button class="btn" style="background:#fff;color:#1d4ed8;font-weight:600;padding:6px 12px" onclick="go('login')" data-i18n="register">რეგისტრაცია</button>
+      <button class="btn btn-ghost" style="color:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.25);padding:6px 12px" onclick="openAuth('login')" data-i18n="login">შესვლა</button>
+      <button class="btn" style="background:#fff;color:#1d4ed8;font-weight:600;padding:6px 12px" onclick="openAuth('reg')" data-i18n="register">რეგისტრაცია</button>
     </div>
   </nav>
 
@@ -431,8 +431,8 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
     <h1 style="font-size:clamp(1.8rem,5vw,3rem);font-weight:800;line-height:1.1;margin-bottom:16px"><span data-i18n="hero_h1">სატესტო პლატფორმა</span><br><span style="color:#93c5fd" data-i18n="hero_h1b">ახალი თაობისთვის</span></h1>
     <p style="font-size:15px;opacity:.85;max-width:480px;margin-bottom:28px;line-height:1.6" data-i18n="hero_desc">შეამოწმე ცოდნა, მოიპოვე 🏆 Excellent ბეიჯი და გახდი კლასის საუკეთესო! I–XII კლასი · 15 საგანი · ავტომატური შეფასება.</p>
     <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center">
-      <button class="btn btn-lg" style="background:#fff;color:#1d4ed8" onclick="go('login')" data-i18n="hero_cta">▶ დაწყება — უფასოდ</button>
-      <button class="btn btn-lg" style="background:rgba(255,255,255,.1);color:#fff;border:1.5px solid rgba(255,255,255,.75)" onclick="go('login')" data-i18n="login">შესვლა</button>
+      <button class="btn btn-lg" style="background:#fff;color:#1d4ed8" onclick="openAuth('reg')" data-i18n="hero_cta">▶ დაწყება — უფასოდ</button>
+      <button class="btn btn-lg" style="background:rgba(255,255,255,.1);color:#fff;border:1.5px solid rgba(255,255,255,.75)" onclick="openAuth('login')" data-i18n="login">შესვლა</button>
     </div>
     <!-- VERIFIED CATALOG COUNTS -->
     <div id="lp-social-proof" style="display:flex;gap:0;margin-top:36px;flex-wrap:wrap;justify-content:center;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:0;overflow:hidden;max-width:660px;width:100%">
@@ -483,7 +483,7 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
     <div style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:14px;padding:22px">
       <h2 style="color:#fff;margin-bottom:8px;font-size:20px">სატესტო ეტაპი</h2>
       <p style="color:rgba(255,255,255,.78);font-size:13px;line-height:1.6;margin-bottom:14px">ყველა ტესტი ამ ეტაპზე უფასოა. გადახდები, Premium გამოწერა და საბანკო ინტეგრაციები გამორთულია.</p>
-      <button class="btn" style="background:#fff;color:#1d4ed8;font-weight:700" onclick="go('login')">ანგარიშის შექმნა</button>
+      <button class="btn" style="background:#fff;color:#1d4ed8;font-weight:700" onclick="openAuth('reg')">ანგარიშის შექმნა</button>
     </div>
   </div>
 
@@ -499,19 +499,26 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
   <div class="card" style="width:100%;max-width:420px;padding:28px">
     <div style="text-align:center;margin-bottom:22px">
       <div style="width:48px;height:48px;background:#1d4ed8;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;font-size:18px;margin:0 auto 10px">E</div>
-      <h2 style="font-weight:800;font-size:18px">EduTest.ge</h2>
-      <p style="color:var(--gray);font-size:12px" data-i18n="login_subtitle">სკოლის სატესტო პლატფორმა</p>
+      <h2 style="font-weight:800;font-size:18px">შესვლა ან რეგისტრაცია</h2>
+      <p style="color:var(--gray);font-size:12px">აირჩიეთ თქვენთვის მოსახერხებელი გზა</p>
     </div>
     <div class="lang-switcher" id="langSwitcherLogin" style="margin-bottom:12px;justify-content:flex-end">
   <button onclick="setLang('ka')" id="ll-ka" class="lang-btn lang-btn-dark active">🇬🇪 ქარ</button>
   <button onclick="setLang('en')" id="ll-en" class="lang-btn lang-btn-dark">🇬🇧 Eng</button>
   <button onclick="setLang('ru')" id="ll-ru" class="lang-btn lang-btn-dark">🇷🇺 Рус</button>
 </div>
-    <div class="tab-row">
-      <button class="tab act" id="ltab-login" onclick="loginTab('login')" data-i18n="login">შესვლა</button>
-      <button class="tab" id="ltab-reg" onclick="loginTab('reg')" data-i18n="register">რეგისტრაცია</button>
+    <div style="display:grid;grid-template-columns:1fr;gap:8px;margin-bottom:10px">
+      <button id="oauth-google" type="button" class="btn btn-outline" disabled onclick="doSocialLogin('google')" style="justify-content:center;opacity:.55;font-weight:700">Google-ით გაგრძელება</button>
+      <button id="oauth-azure" type="button" class="btn btn-outline" disabled onclick="doSocialLogin('azure')" style="justify-content:center;opacity:.55;font-weight:700">Microsoft-ით გაგრძელება</button>
+      <button id="oauth-facebook" type="button" class="btn btn-outline" disabled onclick="doSocialLogin('facebook')" style="justify-content:center;opacity:.55;font-weight:700">Facebook-ით გაგრძელება</button>
     </div>
-    <div class="fg" id="email-role-field">
+    <p id="oauth-provider-status" style="font-size:10px;color:#64748b;text-align:center;margin:4px 0 12px">სოციალური შესვლის ხელმისაწვდომობა მოწმდება…</p>
+    <div style="display:flex;align-items:center;gap:8px;margin:2px 0 12px;color:#64748b;font-size:11px"><span style="height:1px;background:#e2e8f0;flex:1"></span><strong>ან ელფოსტით</strong><span style="height:1px;background:#e2e8f0;flex:1"></span></div>
+    <div class="tab-row" style="margin-bottom:14px">
+      <button class="tab act" id="ltab-login" onclick="loginTab('login')">შესვლა</button>
+      <button class="tab" id="ltab-reg" onclick="loginTab('reg')">ახალი ანგარიშის შექმნა</button>
+    </div>
+    <div class="fg hidden" id="email-role-field">
       <div class="label" data-i18n="role_label">როლი</div>
       <div style="display:flex;gap:6px">
         <button class="role-btn" id="rb-student" style="border:2px solid #2563eb;background:#dbeafe;color:#1d4ed8" onclick="setRole('student')" data-i18n="student_role">მოსწავლე</button>
@@ -520,9 +527,8 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
     </div>
     <div class="fg" id="email-address-field"><div class="label" data-i18n="email">ელ-ფოსტა</div><input id="l-email" type="email" data-i18n-placeholder="email_ph" placeholder="თქვენი ელ-ფოსტა"/></div>
     <div class="fg" id="email-password-field"><div class="label" data-i18n="password">პაროლი</div><input id="l-pass" type="password" onkeydown="if(event.key==='Enter')doLogin()" data-i18n-placeholder="password_ph" placeholder="პაროლი"/></div>
-    <div id="auth-email-actions" style="display:flex;gap:10px;justify-content:space-between;align-items:center;margin:-4px 0 12px;flex-wrap:wrap">
+    <div id="auth-email-actions" style="display:flex;gap:10px;justify-content:flex-end;align-items:center;margin:-4px 0 12px;flex-wrap:wrap">
       <button type="button" onclick="requestPasswordReset()" style="border:0;background:transparent;color:#1d4ed8;font-size:12px;font-weight:600;cursor:pointer;padding:0">დაგავიწყდა პაროლი?</button>
-      <button type="button" onclick="resendSignupConfirmation()" style="border:0;background:transparent;color:#475569;font-size:11px;cursor:pointer;padding:0">დადასტურების წერილის ხელახლა გაგზავნა</button>
     </div>
     <div id="reg-fields" class="hidden">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
@@ -548,18 +554,8 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
       ⚠️ მასწავლებლის ანგარიში ადმინის დამტკიცებას საჭიროებს.
     </div>
     <button class="btn btn-primary" style="width:100%;justify-content:center;padding:11px" id="l-btn" onclick="doLogin()" data-i18n="login">შესვლა</button>
-    <div id="social-auth-heading" style="display:flex;align-items:center;gap:8px;margin:14px 0 10px;color:#64748b;font-size:11px"><span style="height:1px;background:#e2e8f0;flex:1"></span><strong id="social-auth-heading-text">სოციალური შესვლა</strong><span style="height:1px;background:#e2e8f0;flex:1"></span></div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px">
-      <button id="oauth-google" type="button" class="btn btn-outline btn-sm" disabled onclick="doSocialLogin('google')" style="justify-content:center;opacity:.55">Google</button>
-      <button id="oauth-azure" type="button" class="btn btn-outline btn-sm" disabled onclick="doSocialLogin('azure')" style="justify-content:center;opacity:.55">Microsoft</button>
-      <button id="oauth-facebook" type="button" class="btn btn-outline btn-sm" disabled onclick="doSocialLogin('facebook')" style="justify-content:center;opacity:.55">Facebook</button>
-    </div>
-    <p id="oauth-provider-status" style="font-size:10px;color:#64748b;text-align:center;margin-top:6px">სოციალური შესვლის ხელმისაწვდომობა მოწმდება…</p>
-    <div id="social-registration-hint" class="hidden" style="padding:10px 12px;margin-top:10px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;color:#1e3a8a;font-size:11px;line-height:1.5;text-align:center">ჯერ აირჩიეთ Google ან Microsoft. შემდეგ მხოლოდ აუცილებელ პირად მონაცემებს შეავსებთ.</div>
-    <button id="email-register-toggle" type="button" class="btn btn-ghost hidden" style="width:100%;justify-content:center;margin-top:8px" onclick="showEmailRegistrationForm()">ან ელ-ფოსტით რეგისტრაცია</button>
-
     <div id="login-error" class="hidden" style="margin-top:8px;padding:8px;background:var(--red-l);border-radius:var(--r);font-size:12px;color:var(--red);text-align:center"></div>
-    <div id="cloud-auth-status" style="margin-top:8px;padding:7px 9px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:var(--r);font-size:11px;color:#64748b;text-align:center">☁️ Cloud sync: კონფიგურაცია საჭიროა</div>
+    <div id="cloud-auth-status" style="display:none">Cloud auth status</div>
     <button class="btn btn-ghost" style="width:100%;justify-content:center;margin-top:6px" onclick="go('landing')" data-i18n="back">← მთავარ გვერდზე</button>
   </div>
 </div>
@@ -642,8 +638,8 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
 <div id="password-recovery-modal" class="hidden" style="position:fixed;inset:0;z-index:99999;background:rgba(15,23,42,.58);display:flex;align-items:center;justify-content:center;padding:20px">
   <div class="card" style="width:100%;max-width:420px;padding:26px">
     <h3 style="font-size:18px;font-weight:800;margin-bottom:6px">ახალი პაროლის დაყენება</h3>
-    <p style="font-size:12px;color:var(--gray);margin-bottom:16px">შეიყვანეთ ახალი პაროლი. მინიმუმ 8 სიმბოლო.</p>
-    <div class="fg"><div class="label">ახალი პაროლი</div><input id="recovery-pass-1" type="password" autocomplete="new-password" placeholder="მინ. 8 სიმბოლო"/></div>
+    <p style="font-size:12px;color:var(--gray);margin-bottom:16px">შეიყვანეთ ახალი პაროლი. მინიმუმ 10 სიმბოლო.</p>
+    <div class="fg"><div class="label">ახალი პაროლი</div><input id="recovery-pass-1" type="password" autocomplete="new-password" placeholder="მინ. 10 სიმბოლო"/></div>
     <div class="fg"><div class="label">გაიმეორეთ პაროლი</div><input id="recovery-pass-2" type="password" autocomplete="new-password" placeholder="გაიმეორეთ პაროლი"/></div>
     <div id="recovery-error" class="hidden" style="margin-bottom:10px;padding:8px;border-radius:var(--r);font-size:12px;text-align:center"></div>
     <button id="recovery-save-btn" class="btn btn-primary" style="width:100%;justify-content:center" onclick="completePasswordRecovery()">პაროლის განახლება</button>
@@ -3472,10 +3468,9 @@ const EDUTEST_OAUTH_PROVIDERS=Object.freeze({
   facebook:{label:'Facebook'}
 });
 function updateSocialButtonLabels(){
-  const action=loginMode==='reg'?'რეგისტრაცია':'შესვლა';
   Object.keys(EDUTEST_OAUTH_PROVIDERS).forEach(function(provider){
     const button=document.getElementById('oauth-'+provider);
-    if(button)button.textContent=EDUTEST_OAUTH_PROVIDERS[provider].label+'-ით '+action;
+    if(button)button.textContent=EDUTEST_OAUTH_PROVIDERS[provider].label+'-ით გაგრძელება';
   });
 }
 function setOAuthButtonState(provider,enabled){
@@ -3499,8 +3494,9 @@ async function refreshSocialProviderButtons(){
     });
     enabled.forEach(p=>setOAuthButtonState(p,true));
     if(status){
+      const pendingFacebook=settings.facebookPendingReview===true;
       status.textContent=enabled.length
-        ? 'ხელმისაწვდომია: '+enabled.map(p=>EDUTEST_OAUTH_PROVIDERS[p].label).join(', ')
+        ? 'ხელმისაწვდომია: '+enabled.map(p=>EDUTEST_OAUTH_PROVIDERS[p].label).join(', ')+(pendingFacebook?' · Facebook დაემატება Meta-ს დამტკიცების შემდეგ':'')
         : 'სოციალური შესვლა დროებით მიუწვდომელია.';
     }
   }catch(error){
@@ -3513,11 +3509,10 @@ async function doSocialLogin(provider){
   const button=document.getElementById('oauth-'+provider);
   if(!info||!button||button.disabled)return;
   try{
-    const mode=loginMode==='reg'?'signup':'login';
     button.disabled=true;
-    setLoginNotice(info.label+' იხსნება… შემდეგ პროფილს დაასრულებთ.','success');
+    setLoginNotice(info.label+' იხსნება…','success');
     const serverKey=info.serverKey||provider;
-    const params=new URLSearchParams({mode:mode});
+    const params=new URLSearchParams({mode:'auto'});
     window.top.location.assign('/api/auth/oauth/'+encodeURIComponent(serverKey)+'?'+params.toString());
   }catch(error){
     console.warn('OAuth sign-in',provider,error);
@@ -3538,14 +3533,10 @@ async function requestPasswordReset(){
   const email=(document.getElementById('l-email')?.value||'').trim().toLowerCase();
   if(!email||!email.includes('@')){setLoginNotice('პაროლის აღსადგენად ჯერ შეიყვანეთ სწორი ელ-ფოსტა.','warn');return;}
   try{
-    if(!isSupabaseConfigured())throw new Error('Cloud Auth ჯერ არ არის კონფიგურირებული.');
-    if(!EDUTEST_CLOUD.client)await initEduTestCloud();
-    const redirectTo=getEduTestAuthRedirectUrl();
-    const options=redirectTo?{redirectTo:redirectTo}:{};
-    const r=await EDUTEST_CLOUD.client.auth.resetPasswordForEmail(email,options);
-    // Do not reveal account existence. Only surface infrastructure/rate-limit problems in console.
-    if(r.error)console.warn('password reset request',r.error);
-    setLoginNotice('თუ ეს ანგარიში არსებობს, პაროლის აღდგენის ბმული ელ-ფოსტაზე გაიგზავნა.','success');
+    const response=await fetch('/api/auth/password/request',{method:'POST',credentials:'include',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({email:email})});
+    const data=await response.json().catch(()=>({}));
+    if(!response.ok)throw new Error(data.error||'მოთხოვნა ვერ გაიგზავნა');
+    setLoginNotice(data.message||'თუ ეს ანგარიში არსებობს, პაროლის აღდგენის ბმული ელ-ფოსტაზე გაიგზავნა.','success');
   }catch(e){
     console.warn(e);
     setLoginNotice('პაროლის აღდგენის მოთხოვნა ვერ გაიგზავნა. შეამოწმეთ Cloud/SMTP კონფიგურაცია და სცადეთ მოგვიანებით.','warn');
@@ -3574,19 +3565,25 @@ async function completePasswordRecovery(){
   const err=document.getElementById('recovery-error');
   const btn=document.getElementById('recovery-save-btn');
   function show(msg,ok){if(!err)return;err.textContent=msg;err.style.color=ok?'#166534':'#b91c1c';err.style.background=ok?'#f0fdf4':'#fef2f2';err.classList.remove('hidden');}
-  if(p1.length<8){show('პაროლი მინიმუმ 8 სიმბოლო უნდა იყოს.',false);return;}
+  if(p1.length<10){show('პაროლი მინიმუმ 10 სიმბოლო უნდა იყოს.',false);return;}
   if(p1!==p2){show('პაროლები ერთმანეთს არ ემთხვევა.',false);return;}
   try{
     if(btn)btn.disabled=true;
-    if(!EDUTEST_CLOUD.client)throw new Error('Supabase client unavailable');
-    const r=await EDUTEST_CLOUD.client.auth.updateUser({password:p1});
-    if(r.error)throw r.error;
-    show('პაროლი წარმატებით განახლდა. ახლა შედით ახალი პაროლით.',true);
-    setTimeout(async function(){
-      try{await EDUTEST_CLOUD.client.auth.signOut();}catch(_){}
-      closePasswordRecoveryModal();go('login');
-      setLoginNotice('პაროლი განახლებულია — შედით ახალი პაროლით.','success');
-    },900);
+    const resetToken=new URLSearchParams(location.search).get('reset')||'';
+    if(resetToken){
+      const response=await fetch('/api/auth/password/complete',{method:'POST',credentials:'include',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({token:resetToken,password:p1})});
+      const data=await response.json().catch(()=>({}));
+      if(!response.ok)throw new Error(data.error||'პაროლის განახლება ვერ მოხერხდა.');
+      show('პაროლი განახლდა — ანგარიში უკვე გახსნილია.',true);
+      try{const clean=new URL(window.top.location.href);clean.searchParams.delete('reset');window.top.history.replaceState({},'',clean.pathname+clean.search+clean.hash);}catch(_){}
+      setTimeout(async function(){closePasswordRecoveryModal();await adoptServerUser(data.user,{navigate:true});},700);
+    }else{
+      if(!EDUTEST_CLOUD.client)throw new Error('აღდგენის ბმული არასწორია ან ვადაგასულია.');
+      const r=await EDUTEST_CLOUD.client.auth.updateUser({password:p1});
+      if(r.error)throw r.error;
+      show('პაროლი განახლდა. ახლა ერთხელ შედით ახალი პაროლით — ძველი ანგარიში ავტომატურად გადმოვა.',true);
+      setTimeout(async function(){try{await EDUTEST_CLOUD.client.auth.signOut();}catch(_){}closePasswordRecoveryModal();openAuth('login');},1000);
+    }
   }catch(e){show((e&&e.message)||'პაროლის განახლება ვერ მოხერხდა.',false);}
   finally{if(btn)btn.disabled=false;}
 }
@@ -3952,20 +3949,26 @@ function oauthStatusMessage(status){
   return ({
     cancelled:'ავტორიზაცია გაუქმდა.',invalid:'ავტორიზაციის მოთხოვნა არასწორია ან ვადაგასულია.',unconfigured:'ეს პროვაიდერი ჯერ არ არის კონფიგურირებული.',
     failed:'პროვაიდერთან ავტორიზაცია ვერ დასრულდა.','no-email':'პროვაიდერმა დადასტურებული ელფოსტა არ მოგვაწოდა.',
-    'email-unverified':'ელფოსტა ჯერ არ არის დადასტურებული.','account-exists':'ეს ელფოსტა უკვე არსებობს. ჯერ შედით ელფოსტით და შემდეგ მიაბით სოციალური ანგარიში.',
-    'registration-details-required':'ახალი ანგარიშისთვის აირჩიეთ „რეგისტრაცია“, როლი და კლასი, შემდეგ დააჭირეთ სოციალურ ღილაკს.',
+    'email-unverified':'ელფოსტა ჯერ არ არის დადასტურებული.','account-exists':'ეს ელფოსტა უკვე არსებობს. სოციალური ანგარიშის დასაკავშირებლად შედით ელფოსტით.',
+    'confirm-password':'ამ ელფოსტაზე ანგარიში უკვე არსებობს. უსაფრთხოდ დასაკავშირებლად ერთხელ შეიყვანეთ მისი პაროლი; შემდეგში ერთი დაჭერით შეხვალთ.',
+    'use-existing-method':'ეს ელფოსტა უკვე სხვა შესვლის მეთოდთანაა დაკავშირებული. შედით ადრე გამოყენებული Google/Microsoft/Facebook ღილაკით; შემდეგ პროფილიდან შეგიძლიათ სხვა მეთოდიც მიაბათ.',
+    'registration-details-required':'ანგარიში ვერ მოიძებნა. სოციალური ღილაკით ხელახლა გაგრძელებისას ახალი ანგარიში ავტომატურად შეიქმნება.',
     'provider-in-use':'ეს სოციალური ანგარიში სხვა მომხმარებელზეა მიბმული.'
   })[status]||'ავტორიზაცია ვერ დასრულდა. სცადეთ ხელახლა.';
 }
 async function initServerAuth(){
   await refreshSocialProviderButtons();
-  const status=new URLSearchParams(location.search).get('auth')||'';
+  const params=new URLSearchParams(location.search);
+  const status=params.get('auth')||'';
+  const resetToken=params.get('reset')||'';
+  if(resetToken){go('login');setTimeout(openPasswordRecoveryModal,0);}
   try{
     const response=await fetch('/api/auth/session',{credentials:'include',cache:'no-store'});
-    if(response.ok){const data=await response.json();if(data&&data.user){await adoptServerUser(data.user,{navigate:status==='success'});if(status)clearOAuthStatusParam();return true;}}
+    if(response.ok){const data=await response.json();if(data&&data.user){await adoptServerUser(data.user,{navigate:status==='success'&&!resetToken});if(status)clearOAuthStatusParam();return true;}}
     if(status){
       go('login');
       if(status==='registration-details-required'){loginMode='reg';loginTab('reg');}
+      if(status==='confirm-password'){loginMode='login';loginTab('login');}
       setLoginNotice(oauthStatusMessage(status),'warn');
       clearOAuthStatusParam();
     }
@@ -3992,14 +3995,10 @@ async function initEduTestCloud(){
     setCloudStatus('Cloud sync მზადაა',true);
     await refreshSocialProviderButtons();
 
-    // Restore a persisted Supabase session on page load. getUser() validates it
-    // against the Auth server before the app trusts it.
+    // Supabase Auth remains only as a temporary recovery bridge for legacy
+    // accounts. Application authentication is always the server HttpOnly session.
     const gu=await EDUTEST_CLOUD.client.auth.getUser();
-    if(!EDUTEST_SERVER_AUTH_ACTIVE && gu && gu.data && gu.data.user){
-      const isGuardianFlow=!!guardianConsentChildId();
-      await adoptSupabaseUser(gu.data.user,{navigate:!isGuardianFlow});
-      if(isGuardianFlow)await maybeOpenGuardianConsentFlow();
-    }
+    if(!EDUTEST_SERVER_AUTH_ACTIVE && gu && gu.data && gu.data.user)EDUTEST_CLOUD.user=gu.data.user;
 
     EDUTEST_CLOUD.client.auth.onAuthStateChange(function(event,session){
       if(event==='SIGNED_OUT'){
@@ -4012,12 +4011,7 @@ async function initEduTestCloud(){
         setTimeout(openPasswordRecoveryModal,0);
         return;
       }
-      if(!EDUTEST_SERVER_AUTH_ACTIVE && (event==='SIGNED_IN'||event==='TOKEN_REFRESHED') && session && session.user){
-        // Avoid heavy async work inside the auth callback itself.
-        setTimeout(async function(){
-          try{await adoptSupabaseUser(session.user,{navigate:false});if(guardianConsentChildId())await maybeOpenGuardianConsentFlow();}catch(e){console.warn(e);}
-        },0);
-      }
+      if(!EDUTEST_SERVER_AUTH_ACTIVE && (event==='SIGNED_IN'||event==='TOKEN_REFRESHED') && session && session.user)EDUTEST_CLOUD.user=session.user;
     });
     return true;
   }catch(e){
@@ -5045,16 +5039,11 @@ function executePromotion(){
 }
 function applyAuthModeLayout(){
   const registration=loginMode==='reg';
-  const showEmail=!registration||emailRegistrationExpanded;
-  ['email-role-field','email-address-field','email-password-field','l-btn'].forEach(function(id){
-    const el=document.getElementById(id);if(el)el.style.display=showEmail?'':'none';
-  });
-  const reg=document.getElementById('reg-fields');if(reg)reg.classList.toggle('hidden',!registration||!emailRegistrationExpanded);
+  const role=document.getElementById('email-role-field');if(role){role.classList.toggle('hidden',!registration);role.style.display=registration?'':'none';}
+  ['email-address-field','email-password-field','l-btn'].forEach(function(id){const el=document.getElementById(id);if(el)el.style.display='';});
+  const reg=document.getElementById('reg-fields');if(reg)reg.classList.toggle('hidden',!registration);
   const actions=document.getElementById('auth-email-actions');if(actions)actions.style.display=!registration?'flex':'none';
-  const hint=document.getElementById('social-registration-hint');if(hint)hint.classList.toggle('hidden',!registration);
-  const toggle=document.getElementById('email-register-toggle');if(toggle)toggle.classList.toggle('hidden',!registration||emailRegistrationExpanded);
-  const heading=document.getElementById('social-auth-heading-text');if(heading)heading.textContent=registration?'აირჩიეთ რეგისტრაციის გზა':'სოციალური შესვლა';
-  const teacher=document.getElementById('teacher-note');if(teacher)teacher.classList.toggle('hidden',!registration||!emailRegistrationExpanded||curRole!=='teacher');
+  const teacher=document.getElementById('teacher-note');if(teacher)teacher.classList.toggle('hidden',!registration||curRole!=='teacher');
 }
 function showEmailRegistrationForm(){
   emailRegistrationExpanded=true;applyAuthModeLayout();
@@ -5062,7 +5051,7 @@ function showEmailRegistrationForm(){
 }
 function loginTab(tab){
   loginMode=tab;
-  emailRegistrationExpanded=false;
+  emailRegistrationExpanded=tab==='reg';
   document.getElementById('ltab-login').classList.toggle('act',tab==='login');
   document.getElementById('ltab-reg').classList.toggle('act',tab==='reg');
   const so=document.getElementById('student-reg-only');if(so)so.classList.toggle('hidden',curRole!=='student');
@@ -5070,6 +5059,12 @@ function loginTab(tab){
   if(btn)btn.textContent=tab==='login'?t('login'):t('register');
   applyAuthModeLayout();
   updateSocialButtonLabels();
+}
+
+function openAuth(mode){
+  go('login');
+  loginTab(mode==='reg'?'reg':'login');
+  const email=document.getElementById('l-email');if(email)setTimeout(function(){email.focus();},0);
 }
 
 function setRole(r){

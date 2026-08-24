@@ -1,3 +1,4 @@
+import { env } from "cloudflare:workers";
 import { appOrigin, getSessionUser, oauthCallbackUrl, oauthConfig, oauthStateCookie, randomToken, sha256, type OAuthProvider } from "@/lib/auth";
 
 function providerFrom(value: string): OAuthProvider | null {
@@ -12,10 +13,13 @@ export async function GET(request: Request, context: { params: Promise<{ provide
   const requestedGrade = requestUrl.searchParams.get("grade")?.trim() ?? "";
   const grade = requestedRole === "student" && /^(?:[1-9]|1[0-2])[A-Za-zა-ჰ]?$/.test(requestedGrade) ? requestedGrade : "";
   const requestedMode = requestUrl.searchParams.get("mode");
-  const mode = requestedMode === "link" ? "link" : requestedMode === "signup" ? "signup" : "login";
+  const mode = requestedMode === "link" ? "link" : requestedMode === "signup" ? "signup" : requestedMode === "login" ? "login" : "auto";
   if (mode === "link" && !(await getSessionUser(request))) return Response.json({ error: "Sign in before linking an account" }, { status: 401 });
   const config = oauthConfig(provider);
   if (!config.clientId || !config.clientSecret) return Response.json({ error: `${provider} ავტორიზაცია ჯერ არ არის კონფიგურირებული` }, { status: 503 });
+  if (provider === "facebook" && (env as unknown as Record<string, string>).FACEBOOK_PUBLIC_ENABLED !== "true") {
+    return Response.json({ error: "Facebook ავტორიზაცია საჯაროდ ჩაირთვება Meta-ს დამტკიცების შემდეგ" }, { status: 503, headers: { "Cache-Control": "no-store" } });
+  }
   const state = randomToken(24);
   const verifier = randomToken(48);
   appOrigin(request);

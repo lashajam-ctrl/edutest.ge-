@@ -5,6 +5,7 @@ import { sessions, users } from "../db/schema";
 
 const encoder = new TextEncoder();
 const cookieName = "edutest_session";
+const oauthLinkCookieName = "edutest_oauth_link";
 
 function bytesToBase64(bytes: Uint8Array) {
   let value = "";
@@ -119,4 +120,17 @@ export function oauthCallbackUrl(request: Request, provider: OAuthProvider) {
 export function oauthStateCookie(value: string, request: Request, maxAge = 600) {
   const secure = new URL(appOrigin(request)).protocol === "https:" ? "; Secure" : "";
   return `edutest_oauth=${value}; Path=/; HttpOnly${secure}; SameSite=Lax; Max-Age=${maxAge}`;
+}
+
+export function requestCookie(request: Request, name: string) {
+  return request.headers.get("cookie")?.split(";").map(value => value.trim()).find(value => value.startsWith(`${name}=`))?.slice(name.length + 1) ?? "";
+}
+
+export function oauthLinkCookie(value: string, request: Request, maxAge = 600) {
+  const secure = new URL(appOrigin(request)).protocol === "https:" ? "; Secure" : "";
+  return `${oauthLinkCookieName}=${value}; Path=/; HttpOnly${secure}; SameSite=Lax; Max-Age=${maxAge}`;
+}
+
+export function oauthLinkToken(request: Request) {
+  return requestCookie(request, oauthLinkCookieName);
 }

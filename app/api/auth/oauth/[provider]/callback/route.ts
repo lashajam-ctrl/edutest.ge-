@@ -1,7 +1,7 @@
 import { and, eq } from "drizzle-orm";
 import { ensureSchema, getDb } from "@/db";
-import { identities, users } from "@/db/schema";
-import { appOrigin, createSession, getSessionUser, oauthCallbackUrl, oauthConfig, oauthStateCookie, type OAuthProvider } from "@/lib/auth";
+import { identities, oauthLinkRequests, users } from "@/db/schema";
+import { appOrigin, createSession, getSessionUser, oauthCallbackUrl, oauthConfig, oauthLinkCookie, oauthStateCookie, randomToken, sha256, type OAuthProvider } from "@/lib/auth";
 
 function providerFrom(value: string): OAuthProvider | null {
   return value === "google" || value === "microsoft" || value === "facebook" ? value : null;
@@ -48,9 +48,9 @@ export async function GET(request: Request, context: { params: Promise<{ provide
       : "https://graph.facebook.com/me?fields=id,name,email";
   const profileResponse = await fetch(profileEndpoint, { headers: { Authorization: `Bearer ${token.access_token}` } });
   if (!profileResponse.ok) return redirect(origin, "failed", [clearOauthCookie]);
-  const profile = await profileResponse.json() as { sub?: string; id?: string; email?: string; email_verified?: boolean; name?: string };
+  const profile = await profileResponse.json() as { sub?: string; id?: string; email?: string; preferred_username?: string; email_verified?: boolean; name?: string };
   const subject = provider === "facebook" ? profile.id : profile.sub;
-  const email = (profile.email ?? "").trim().toLowerCase();
+  const email = (profile.email ?? profile.preferred_username ?? "").trim().toLowerCase();
   if (!subject || !validEmail(email)) return redirect(origin, "no-email", [clearOauthCookie]);
   if (provider === "google" && profile.email_verified !== true) return redirect(origin, "email-unverified", [clearOauthCookie]);
 
@@ -66,24 +66,41 @@ export async function GET(request: Request, context: { params: Promise<{ provide
   }
   let user = linked?.user;
   if (!user) {
-    if (saved[5] !== "signup") return redirect(origin, "registration-details-required", [clearOauthCookie]);
+    const mode = saved[5] || "login";
     [user] = await db.select().from(users).where(eq(users.email, email)).limit(1);
     const now = new Date();
-    if (user) return redirect(origin, "account-exists", [clearOauthCookie]);
+    if (user) {
+      if (mode === "signup") return redirect(origin, "account-exists", [clearOauthCookie]);
+      if (user.passwordHash) {
+        const linkToken = randomToken(32);
+        await db.delete(oauthLinkRequests).where(eq(oauthLinkRequests.userId, user.id));
+        await db.insert(oauthLinkRequests).values({
+          id: crypto.randomUUID(), userId: user.id, provider, providerSubject: subject,
+          tokenHash: await sha256(linkToken), expiresAt: new Date(now.getTime() + 10 * 60 * 1000), createdAt: now,
+        });
+        return redirect(origin, "confirm-password", [clearOauthCookie, oauthLinkCookie(linkToken, request)]);
+      }
+      // An email match alone is not enough to merge two social identities.
+      // Sign in with the provider already linked to the account first, then
+      // add another provider from an authenticated account-linking flow.
+      return redirect(origin, "use-existing-method", [clearOauthCookie]);
+    } else {
+      if (mode === "login") return redirect(origin, "registration-details-required", [clearOauthCookie]);
     // Provider-first onboarding creates a restricted provisional profile. The
     // verified user chooses role/grade and accepts the policies on the next,
     // server-validated profile step before accessing protected learning data.
-    const role = "student" as const;
-    const grade = null;
-    user = {
-      id: crypto.randomUUID(), email, name: profile.name || email.split("@")[0], role, grade, school: null,
-      birthDate: null, guardianEmail: null, guardianVerifiedAt: null, termsVersion: null, privacyVersion: null,
-      profileCompletedAt: null, accountStatus: "onboarding", passwordHash: null, passwordSalt: null,
-      emailVerified: true, createdAt: now, updatedAt: now,
-    };
-    await db.insert(users).values(user);
-    await db.insert(identities).values({ id: crypto.randomUUID(), userId: user.id, provider, providerSubject: subject, createdAt: now }).onConflictDoNothing();
+      const role = "student" as const;
+      const grade = null;
+      user = {
+        id: crypto.randomUUID(), email, name: profile.name || email.split("@")[0], role, grade, school: null,
+        birthDate: null, guardianEmail: null, guardianVerifiedAt: null, termsVersion: null, privacyVersion: null,
+        profileCompletedAt: null, accountStatus: "onboarding", passwordHash: null, passwordSalt: null,
+        emailVerified: true, createdAt: now, updatedAt: now,
+      };
+      await db.insert(users).values(user);
+      await db.insert(identities).values({ id: crypto.randomUUID(), userId: user.id, provider, providerSubject: subject, createdAt: now }).onConflictDoNothing();
+    }
   }
   const session = await createSession(user.id, request);
-  return redirect(origin, "success", [session.cookie, clearOauthCookie]);
+  return redirect(origin, "success", [session.cookie, clearOauthCookie, oauthLinkCookie("", request, 0)]);
 }

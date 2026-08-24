@@ -118,7 +118,7 @@ test("publishes verified catalog counts without frozen marketing counters", asyn
 });
 
 test("keeps payments disabled and uses secure server OAuth sessions for configured providers", async () => {
-  const [html, migration, socialMigration, oauthStart, oauthCallback, sessionRoute, profileRoute, guardianConfirm, authLibrary] = await Promise.all([
+  const [html, migration, socialMigration, oauthStart, oauthCallback, sessionRoute, profileRoute, guardianConfirm, authLibrary, providersRoute, loginRoute, resetRequest, resetComplete] = await Promise.all([
     source("public/app.html"),
     source("supabase/migrations/202608110005_disable_payments.sql"),
     source("supabase/migrations/202608110006_social_auth_profile.sql"),
@@ -128,21 +128,26 @@ test("keeps payments disabled and uses secure server OAuth sessions for configur
     source("app/api/auth/profile/route.ts"),
     source("app/api/auth/guardian/confirm/route.ts"),
     source("lib/auth.ts"),
+    source("app/api/auth/providers/route.ts"),
+    source("app/api/auth/login/route.ts"),
+    source("app/api/auth/password/request/route.ts"),
+    source("app/api/auth/password/complete/route.ts"),
   ]);
   assert.match(html, /const PAYMENTS_ENABLED=false/);
   assert.match(html, /if\(!PAYMENTS_ENABLED\)return 'free'/);
   assert.match(migration, /set paid = false/i);
   for (const [id, provider] of [["google", "Google"], ["azure", "Microsoft"], ["facebook", "Facebook"]]) {
-    assert.match(html, new RegExp(`<button id="oauth-${id}"[^>]+disabled[^>]+doSocialLogin\\('${id}'\\)[^>]*>${provider}</button>`));
+    assert.match(html, new RegExp(`<button id="oauth-${id}"[^>]+disabled[^>]+doSocialLogin\\('${id}'\\)[^>]*>${provider}-ით გაგრძელება</button>`));
   }
   assert.match(html, /async function refreshSocialProviderButtons\(\)/);
   assert.match(html, /\.chatgpt\\\.site\$\/i\.test\(current\.hostname\)/);
   assert.match(html, /window\.top\.location\.replace\('https:\/\/edutest\.ge'/);
   assert.match(html, /function updateSocialButtonLabels\(\)/);
-  assert.match(html, /\.label\+'-ით '\+action/);
-  assert.match(html, /ჯერ აირჩიეთ Google ან Microsoft/);
-  assert.match(html, /showEmailRegistrationForm\(\)/);
+  assert.match(html, /\.label\+'-ით გაგრძელება'/);
+  assert.match(html, /new URLSearchParams\(\{mode:'auto'\}\)/);
+  assert.match(html, /function openAuth\(mode\)/);
   assert.match(html, /ნაბიჯი 2 \/ 2/);
+  assert.match(html, /status==='confirm-password'/);
   assert.match(html, /status==='registration-details-required'/);
   assert.match(html, /loginTab\('reg'\)/);
   assert.match(html, /fetch\('\/api\/auth\/providers'/);
@@ -154,8 +159,13 @@ test("keeps payments disabled and uses secure server OAuth sessions for configur
   assert.match(html, /fetch\('\/api\/auth\/logout',\{method:'POST',credentials:'include'/);
   assert.match(oauthStart, /oauthStateCookie/);
   assert.match(oauthStart, /requestedMode === "signup"/);
+  assert.match(oauthStart, /requestedMode === "login" \? "login" : "auto"/);
+  assert.match(oauthStart, /FACEBOOK_PUBLIC_ENABLED/);
   assert.match(oauthCallback, /createSession/);
-  assert.match(oauthCallback, /saved\[5\] !== "signup"/);
+  assert.match(oauthCallback, /oauthLinkRequests/);
+  assert.match(oauthCallback, /"confirm-password"/);
+  assert.match(oauthCallback, /"use-existing-method"/);
+  assert.match(oauthCallback, /email match alone is not enough/i);
   assert.match(oauthCallback, /const grade = null/);
   assert.match(oauthCallback, /accountStatus: "onboarding"/);
   assert.doesNotMatch(oauthCallback, /role === "student" && !grade/);
@@ -172,4 +182,29 @@ test("keeps payments disabled and uses secure server OAuth sessions for configur
   assert.match(socialMigration, /profile_completed_at is not null then raise exception 'Profile already completed'/);
   assert.match(socialMigration, /Teacher must be an adult/);
   assert.match(socialMigration, /Guardian email is required/);
+  assert.match(providersRoute, /facebookPendingReview/);
+  assert.match(providersRoute, /FACEBOOK_PUBLIC_ENABLED/);
+  assert.match(loginRoute, /migrateSupabaseAccount/);
+  assert.match(loginRoute, /else if \(!valid\)/);
+  assert.match(loginRoute, /oauthLinkToken/);
+  assert.match(loginRoute, /providerLinked/);
+  assert.match(resetRequest, /RESEND_API_KEY/);
+  assert.match(resetRequest, /passwordResetRequests/);
+  assert.match(resetComplete, /isNull\(passwordResetRequests\.usedAt\)/);
+  assert.match(resetComplete, /delete\(sessions\)/);
+});
+
+test("offers one clear authentication surface without exposing backend terminology", async () => {
+  const html = await source("public/app.html");
+  assert.match(html, /შესვლა ან რეგისტრაცია/);
+  assert.match(html, /Google-ით გაგრძელება/);
+  assert.match(html, /Microsoft-ით გაგრძელება/);
+  assert.match(html, /Facebook-ით გაგრძელება/);
+  assert.match(html, /ახალი ანგარიშის შექმნა/);
+  assert.match(html, /openAuth\('reg'\)/);
+  assert.match(html, /\/api\/auth\/password\/request/);
+  assert.match(html, /\/api\/auth\/password\/complete/);
+  assert.match(html, /ამ ელფოსტაზე ანგარიში უკვე არსებობს.*ერთხელ შეიყვანეთ მისი პაროლი/);
+  assert.doesNotMatch(html, />☁️ Cloud sync/);
+  assert.doesNotMatch(html, /დადასტურების წერილის ხელახლა გაგზავნა/);
 });

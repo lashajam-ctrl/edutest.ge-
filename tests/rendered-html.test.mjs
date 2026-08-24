@@ -27,6 +27,8 @@ test("uses a hardened OAuth authorization-code flow", async () => {
   assert.match(startRoute, /scope", "email,public_profile"/);
   assert.match(startRoute, /requestedRole/);
   assert.match(startRoute, /mode === "link"/);
+  assert.match(startRoute, /"auto"/);
+  assert.match(startRoute, /FACEBOOK_PUBLIC_ENABLED/);
   assert.doesNotMatch(startRoute, /User\.Read/);
   assert.match(callbackRoute, /profile\.email_verified !== true/);
   assert.match(callbackRoute, /https:\/\/graph\.facebook\.com\/oauth\/access_token/);
@@ -34,6 +36,9 @@ test("uses a hardened OAuth authorization-code flow", async () => {
   assert.match(callbackRoute, /"account-exists"/);
   assert.match(callbackRoute, /"provider-in-use"/);
   assert.match(callbackRoute, /"registration-details-required"/);
+  assert.match(callbackRoute, /"confirm-password"/);
+  assert.match(callbackRoute, /"use-existing-method"/);
+  assert.match(callbackRoute, /oauthLinkRequests/);
   assert.match(callbackRoute, /headers\.append\("Set-Cookie"/);
   assert.match(authLibrary, /APP_ORIGIN/);
   assert.match(authLibrary, /legacyPasswordIterations/);
