@@ -14,6 +14,7 @@ import {
   languageBlueprintFor,
   languageBucketFor,
 } from "../lib/assessment-selection.ts";
+import { cleanDecorativePrompt } from "../lib/assessment-selection-core.mjs";
 
 const makeCandidate = (id, text, history = {}) => ({
   id, grade: 12, subject: "სამოქალაქო თავდაცვა და უსაფრთხოება", semester: 1,
@@ -42,10 +43,32 @@ test("keeps genuinely different generated families with the same ordinal availab
 });
 
 test("v8 variants share the archive semantic group instead of repeating a concept", () => {
-  const first = { ...makeCandidate("GE-G04-MA-S1-001", "გამოთვალე: 7 + 5 = ?"), semantic_group_id: "v8_abc123" };
-  const second = { ...makeCandidate("GE-G04-MA-S1-101", "საკლასო პრაქტიკა — გამოთვალე: 7 + 5 = ?"), semantic_group_id: "v8_abc123" };
+  const first = { ...makeCandidate("GE-G04-MA-S1-001", "გამოთვალე: 7 + 5 = ?"), semantic_group_id: "v8f_abc123" };
+  const second = { ...makeCandidate("GE-G04-MA-S1-101", "საკლასო პრაქტიკა — გამოთვალე: 7 + 5 = ?"), semantic_group_id: "v8f_abc123" };
   assert.equal(assessmentSelectionKey(first), assessmentSelectionKey(second));
   assert.equal(distinctSelectionGroupCount([first, second]), 1);
+});
+
+test("collapses live English cosmetic variants even when legacy semantic groups differ", () => {
+  const variants = [
+    ["GE2-G03-EN-S2-112", "consider a likely mistake and choose the correct solution: “Cats” is plural.", "v8_86862a11d9a0c7"],
+    ["GE2-G03-EN-S2-032", "find the information that matters and answer: “Cats” is plural.", "v8_ba9687bf9c8c29"],
+    ["GE2-G03-EN-S2-012", "make sure your choice fully matches the task: “Cats” is plural.", "v8_e8ed4eabfc04ca"],
+  ].map(([id, text, semantic_group_id]) => ({ ...makeCandidate(id, text), grade: 3, subject: "ინგლისური", semester: 2, semantic_group_id }));
+  assert.equal(distinctSelectionGroupCount(variants), 1);
+  assert.equal(new Set(variants.map(assessmentSelectionKey)).size, 1);
+});
+
+test("collapses every known English decorative wrapper to the task core", () => {
+  const cores = [
+    "apply the relevant rule and answer: Complete: I ___ a student.",
+    "approach the same learning goal with a different strategy: Complete: I ___ a student.",
+    "connect the task with the correct rule and solve: Complete: I ___ a student.",
+    "Before answering, identify the skill you need. Then solve: Complete: I ___ a student.",
+    "examine every option carefully and solve: Complete: I ___ a student.",
+  ].map((text, index) => ({ ...makeCandidate(`GE2-G01-EN-S1-${index + 1}`, text), grade: 1, subject: "ინგლისური", semantic_group_id: `v8_old${index}` }));
+  assert.equal(distinctSelectionGroupCount(cores), 1);
+  assert.equal(cleanDecorativePrompt("Before answering, identify the skill you need. Then solve: Complete: I ___ a student."), "Complete: I ___ a student.");
 });
 
 test("a completed ten-question nature attempt leaves later families eligible", () => {
@@ -128,4 +151,11 @@ test("server start route enforces semantic selection and language blueprints", a
   assert.match(source, /languageBlueprintFor/);
   assert.match(source, /languageBucketFor/);
   assert.doesNotMatch(source, /semanticGroups\.has\(question\.semantic_group_id\)/);
+});
+
+test("verified submit is idempotent after the results page is already shown", async () => {
+  const source = await readFile(new URL("../public/server-assessments.js", import.meta.url), "utf8");
+  const finish = source.slice(source.indexOf("finishTest=async function"), source.indexOf("loadBuilderCatalog=async function"));
+  assert.match(finish, /hideSubmitModal\(\);\s*if\(serverSubmitting\)return;/u);
+  assert.match(finish, /p-results[^\n]+classList\.contains\('active'\)\)return;/u);
 });

@@ -1,17 +1,17 @@
 # EduTest v8 question-bank audit
 
-Generated: 2026-08-24T07:09:36.430Z
+Generated: 2026-08-24T09:23:43.398Z
 
 ## Outcome
 
 - Source records: 42827
 - Source deliverable records: 30879
-- Accepted for live server selection: 17781
-- Quarantined deliverable records: 13098
-- Generated tests: 520
+- Accepted for live server selection: 17767
+- Quarantined deliverable records: 13112
+- Generated tests: 478
 - Recovered explicit missing fill answers: 7
-- Repaired incomplete fill-question formulations: 214
-- Distinct accepted concepts: 12357
+- Repaired incomplete fill-question formulations: 2550
+- Distinct accepted concepts: 8287
 - Exact duplicate accepted prompts in the same grade/subject/semester: 0
 
 ## Quarantine reasons
@@ -22,6 +22,7 @@ Generated: 2026-08-24T07:09:36.430Z
 - grade_policy_violation: 2589
 - generic_senior_science_not_mapped: 204
 - missing_fill_answer: 67
+- ambiguous_prompt_answer_conflict: 14
 - duplicate_match_item: 13
 - direct_math_answer_mismatch: 5
 
@@ -33,9 +34,9 @@ Generated: 2026-08-24T07:09:36.430Z
 | 1 | ბუნება | 1 | foundation | 117 |
 | 1 | ბუნება | 2 | application | 78 |
 | 1 | ბუნება | 2 | foundation | 105 |
-| 1 | მათემატიკა | 1 | application | 80 |
-| 1 | მათემატიკა | 1 | foundation | 140 |
-| 1 | მათემატიკა | 2 | application | 133 |
+| 1 | მათემატიკა | 1 | application | 77 |
+| 1 | მათემატიკა | 1 | foundation | 139 |
+| 1 | მათემატიკა | 2 | application | 130 |
 | 1 | მათემატიკა | 2 | foundation | 109 |
 | 1 | მე და საზოგადოება | 1 | application | 71 |
 | 1 | მე და საზოგადოება | 1 | foundation | 72 |
@@ -80,7 +81,7 @@ Generated: 2026-08-24T07:09:36.430Z
 | 10 | მათემატიკა | 1 | challenge | 7 |
 | 10 | მათემატიკა | 1 | foundation | 57 |
 | 10 | მათემატიკა | 1 | reasoning | 26 |
-| 10 | მათემატიკა | 2 | application | 74 |
+| 10 | მათემატიკა | 2 | application | 72 |
 | 10 | მათემატიკა | 2 | challenge | 7 |
 | 10 | მათემატიკა | 2 | foundation | 54 |
 | 10 | მათემატიკა | 2 | reasoning | 34 |
@@ -222,10 +223,10 @@ Generated: 2026-08-24T07:09:36.430Z
 | 12 | მათემატიკა | 1 | challenge | 8 |
 | 12 | მათემატიკა | 1 | foundation | 70 |
 | 12 | მათემატიკა | 1 | reasoning | 32 |
-| 12 | მათემატიკა | 2 | application | 86 |
+| 12 | მათემატიკა | 2 | application | 85 |
 | 12 | მათემატიკა | 2 | challenge | 7 |
 | 12 | მათემატიკა | 2 | foundation | 51 |
-| 12 | მათემატიკა | 2 | reasoning | 39 |
+| 12 | მათემატიკა | 2 | reasoning | 37 |
 | 12 | მოქალაქეობა | 1 | application | 15 |
 | 12 | მოქალაქეობა | 1 | challenge | 2 |
 | 12 | მოქალაქეობა | 1 | foundation | 14 |
@@ -267,7 +268,7 @@ Generated: 2026-08-24T07:09:36.430Z
 | 2 | ბუნება | 1 | reasoning | 2 |
 | 2 | ბუნება | 2 | application | 56 |
 | 2 | ბუნება | 2 | foundation | 96 |
-| 2 | მათემატიკა | 1 | application | 89 |
+| 2 | მათემატიკა | 1 | application | 87 |
 | 2 | მათემატიკა | 1 | foundation | 106 |
 | 2 | მათემატიკა | 2 | application | 125 |
 | 2 | მათემატიკა | 2 | foundation | 107 |

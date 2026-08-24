@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { canonicalPromptCore, canonicalPublicTaskCore, cleanDecorativePrompt } from "../lib/assessment-selection-core.mjs";
 
 await import("../public/question-policy.js");
 
@@ -145,6 +146,7 @@ function transform(question, key, mapping) {
     payload.type = "unsupported";
     answerKey = {};
   }
+  payload.text = cleanDecorativePrompt(payload.text);
   return { payload, answerKey, repairedAnswer: recovered.repaired, repairedFormulation: payload.text !== String(question.stem ?? "").trim() };
 }
 
@@ -225,6 +227,58 @@ function testInsert(row) {
 
 function increment(record, key, amount = 1) { record[key] = (record[key] ?? 0) + amount; }
 
+function answerSignature(row) {
+  if (["multiple_choice", "true_false"].includes(row.type)) {
+    return normalize(row.publicPayload.opts?.[row.answerKey.correct]);
+  }
+  if (row.type === "fill") return (row.answerKey.blanks ?? []).map(normalize).join("|");
+  if (row.type === "order") return (row.answerKey.correct ?? []).map(normalize).join("|");
+  if (row.type === "match") return (row.answerKey.pairs ?? []).map(pair => pair.map(normalize).join("→")).sort().join("|");
+  return normalize(JSON.stringify(row.answerKey));
+}
+
+function assignSemanticFamilies(rows) {
+  const parent = new Map();
+  const find = value => {
+    const current = parent.get(value) ?? value;
+    if (current === value) return value;
+    const root = find(current);
+    parent.set(value, root);
+    return root;
+  };
+  const union = (left, right) => {
+    const leftRoot = find(left), rightRoot = find(right);
+    if (leftRoot === rightRoot) return;
+    const [root, child] = [leftRoot, rightRoot].sort((a, b) => a.localeCompare(b));
+    parent.set(child, root);
+  };
+  const canonicalAnswers = new Map();
+  const canonicalSamples = new Map();
+  for (const row of rows) {
+    parent.set(row.sourceFamilyKey, row.sourceFamilyKey);
+    const signature = answerSignature(row);
+    row.canonicalTaskKey = `${row.grade}|${row.subject}|${row.semester}|${canonicalPublicTaskCore(row.publicPayload)}`;
+    row.promptAnswerKey = `${row.grade}|${row.subject}|${row.semester}|${canonicalPromptCore(row.publicPayload.text)}|${signature}`;
+    if (!canonicalAnswers.has(row.canonicalTaskKey)) canonicalAnswers.set(row.canonicalTaskKey, new Set());
+    canonicalAnswers.get(row.canonicalTaskKey).add(signature);
+    if (!canonicalSamples.has(row.canonicalTaskKey)) canonicalSamples.set(row.canonicalTaskKey, []);
+    if (canonicalSamples.get(row.canonicalTaskKey).length < 5) canonicalSamples.get(row.canonicalTaskKey).push({ id: row.id, answer: signature });
+  }
+  const conflictKeys = new Set([...canonicalAnswers.entries()].filter(([, answers]) => answers.size > 1).map(([key]) => key));
+  const canonicalOwners = new Map();
+  for (const row of rows) {
+    if (conflictKeys.has(row.canonicalTaskKey)) continue;
+    const owner = canonicalOwners.get(row.promptAnswerKey);
+    if (owner) union(owner, row.sourceFamilyKey);
+    else canonicalOwners.set(row.promptAnswerKey, row.sourceFamilyKey);
+  }
+  for (const row of rows) row.semanticGroupId = `v8f_${sha(find(row.sourceFamilyKey)).slice(0, 16)}`;
+  return {
+    conflictingIds: new Set(rows.filter(row => conflictKeys.has(row.canonicalTaskKey)).map(row => row.id)),
+    conflictSamples: [...conflictKeys].slice(0, 10).map(key => ({ key, rows: canonicalSamples.get(key) })),
+  };
+}
+
 function makeTests(rows, now) {
   const groups = new Map();
   for (const row of rows) {
@@ -286,7 +340,9 @@ async function main() {
     }
     if (transformed.repairedAnswer) repairedAnswers++;
     if (transformed.repairedFormulation) repairedFormulations++;
-    const semanticGroupId = `v8_${String(question.concept_group).replace(/^CG-/u, "").toLocaleLowerCase()}`;
+    const familyIdentity = String(question.family_id ?? "").trim()
+      || `concept:${String(question.concept_group ?? question.question_id)}`;
+    const sourceFamilyKey = `${question.grade}|${mapping.subject}|${question.semester}|${familyIdentity}`;
     const row = {
       id: question.question_id,
       sourceId: question.question_id,
@@ -304,7 +360,8 @@ async function main() {
       difficulty: question.difficulty,
       reviewStatus: String(question.source_review_status || "structural_review"),
       mappingStatus: "v8_subject_taxonomy",
-      semanticGroupId,
+      semanticGroupId: "",
+      sourceFamilyKey,
       contentHash: sha(JSON.stringify({ payload: transformed.payload, answer: transformed.answerKey, explanation: key.rationale })),
       active: true,
       answerKey: transformed.answerKey,
@@ -312,19 +369,36 @@ async function main() {
       now,
     };
     accepted.push(row);
+  }
+  if (keys.size !== questions.length || [...keys.keys()].some(id => !ids.has(id))) throw new Error("Answer/question referential integrity failed");
+  const familyAudit = assignSemanticFamilies(accepted);
+  if (familyAudit.conflictingIds.size) {
+    increment(quarantineReasons, "ambiguous_prompt_answer_conflict", familyAudit.conflictingIds.size);
+    quarantineSamples.ambiguous_prompt_answer_conflict = [...familyAudit.conflictingIds].slice(0, 20);
+    for (let index = accepted.length - 1; index >= 0; index--) {
+      if (familyAudit.conflictingIds.has(accepted[index].id)) accepted.splice(index, 1);
+    }
+  }
+  for (const row of accepted) {
     increment(byDistribution, `${row.grade}|${row.subject}|${row.semester}|${row.difficulty}`);
     increment(typeCounts, row.type);
     increment(reviewCounts, row.reviewStatus);
   }
-  if (keys.size !== questions.length || [...keys.keys()].some(id => !ids.has(id))) throw new Error("Answer/question referential integrity failed");
   const promptGroups = new Map();
+  const canonicalPromptGroups = new Map();
   for (const row of accepted) {
-    const key = `${row.grade}|${row.subject}|${row.semester}|${normalize(row.publicPayload.text)}`;
+    const signature = answerSignature(row);
+    const key = `${row.grade}|${row.subject}|${row.semester}|${normalize(row.publicPayload.text)}|${signature}`;
     if (!promptGroups.has(key)) promptGroups.set(key, new Set());
     promptGroups.get(key).add(row.semanticGroupId);
+    const canonicalKey = `${row.grade}|${row.subject}|${row.semester}|${canonicalPromptCore(row.publicPayload.text)}|${signature}`;
+    if (!canonicalPromptGroups.has(canonicalKey)) canonicalPromptGroups.set(canonicalKey, new Set());
+    canonicalPromptGroups.get(canonicalKey).add(row.semanticGroupId);
   }
   const acceptedExactDuplicateGroups = [...promptGroups.values()].filter(set => set.size > 1).length;
+  const acceptedCanonicalDuplicateGroups = [...canonicalPromptGroups.values()].filter(set => set.size > 1).length;
   if (acceptedExactDuplicateGroups) throw new Error(`Accepted exact-prompt semantic collisions: ${acceptedExactDuplicateGroups}`);
+  if (acceptedCanonicalDuplicateGroups) throw new Error(`Accepted canonical-prompt semantic collisions: ${acceptedCanonicalDuplicateGroups}`);
   const tests = makeTests(accepted, now);
   const coverage = new Map();
   for (const row of accepted) coverage.set(`${row.grade}|${row.subject}|${row.semester}`, (coverage.get(`${row.grade}|${row.subject}|${row.semester}`) ?? 0) + 1);
@@ -333,14 +407,14 @@ async function main() {
     sourceRecords: questions.length, sourceCanonical: canonical.length, sourceExtension: extension.length,
     sourceDeliverable, acceptedQuestions: accepted.length, quarantinedDeliverable: sourceDeliverable - accepted.length,
     acceptedConcepts: new Set(accepted.map(row => row.semanticGroupId)).size,
-    acceptedExactDuplicateGroups, repairedAnswers, repairedFormulations, generatedTests: tests.length,
+    acceptedExactDuplicateGroups, acceptedCanonicalDuplicateGroups, repairedAnswers, repairedFormulations, generatedTests: tests.length,
     acceptedByType: typeCounts, acceptedByReviewStatus: reviewCounts,
     acceptedBySubjectSemesterDifficulty: byDistribution,
     coveredGradeSubjectSemesters: Object.fromEntries([...coverage.entries()].sort()),
     quarantineReasons, quarantineSamples, warningFlags: warnings,
     validations: {
       json: "pass", ids: "pass", questionAnswerIntegrity: "pass", supportedTypes: "pass", options: "pass",
-      answerKeys: "pass", semesterDifficulty: "pass", gradePolicy: "pass", semanticDuplicates: "pass", serverOnlyAnswers: "pass",
+      answerKeys: "pass", semesterDifficulty: "pass", gradePolicy: "pass", semanticDuplicates: "pass", canonicalPromptDuplicates: "pass", serverOnlyAnswers: "pass",
     },
     limitations: [
       "Exact Georgian National Curriculum outcome codes are not independently subject-expert verified.",

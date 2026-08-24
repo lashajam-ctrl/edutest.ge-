@@ -165,10 +165,13 @@
   };
 
   finishTest=async function(){
-    if(serverSubmitting)return;
-    if(!serverSessionId){alert('უსაფრთხო ტესტის სესია ვერ მოიძებნა.');return;}
-    serverSubmitting=true;
     hideSubmitModal();
+    if(serverSubmitting)return;
+    if(!serverSessionId){
+      if(document.getElementById('p-results')?.classList.contains('active'))return;
+      alert('უსაფრთხო ტესტის სესია ვერ მოიძებნა.');return;
+    }
+    serverSubmitting=true;
     setTestLoading('პასუხები სერვერზე მოწმდება…');
     try{
       const response=await fetch('/api/assessments/submit',{

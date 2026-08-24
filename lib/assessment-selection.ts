@@ -1,3 +1,5 @@
+import { canonicalPromptCore, canonicalPublicTaskCore, normalizeSelectionText as normalize } from "./assessment-selection-core.mjs";
+
 export type SelectionCandidate = {
   id: string;
   grade: number;
@@ -14,42 +16,15 @@ export type SelectionCandidate = {
 
 export type LanguageBucket = "language" | "literature" | "grammar" | "vocabulary" | "reading" | "use_of_language";
 
-const normalize = (value: unknown) => String(value ?? "")
-  .normalize("NFKC")
-  .toLocaleLowerCase("ka-GE")
-  .replace(/[“”„"'`]/gu, "")
-  .replace(/\s+/gu, " ")
-  .trim();
-
-function payloadText(question: Pick<SelectionCandidate, "public_payload_json">) {
+function publicPayload(question: Pick<SelectionCandidate, "public_payload_json">) {
   try {
-    const payload = JSON.parse(question.public_payload_json) as Record<string, unknown>;
-    return String(payload.text ?? "");
+    return JSON.parse(question.public_payload_json) as Record<string, unknown>;
   } catch {
-    return "";
+    return { text: "" };
   }
 }
 
-export function canonicalPromptCore(value: unknown) {
-  let text = normalize(value);
-  const severeBleeding = "ძლიერი სისხლდენის დროს პირველადი დახმარების ერთ-ერთი ძირითადი ნაბიჯია";
-  if (text.includes(severeBleeding)) return severeBleeding;
-
-  const prefixes = [
-    /^(?:თემის სხვა კონტექსტში განხილვისას|საგამოცდო პრაქტიკისას|საგანგებო სიტუაციის სიმულაციაში|პირველი დახმარების ტრენინგში|სკოლის უსაფრთხოების გეგმაში)\s*:\s*/u,
-    /^(?:in a new critical-reading task|in a new academic-language task|in another communication context|in an independent text-analysis task|apply the language rule or evidence)\s*:\s*/iu,
-    /^(?:в новом академическом задании|в самостоятельном задании по анализу текста|в другом коммуникативном контексте|примените языковое правило или доказательство)\s*:\s*/iu,
-  ];
-  let changed = true;
-  while (changed) {
-    changed = false;
-    for (const pattern of prefixes) {
-      const next = text.replace(pattern, "");
-      if (next !== text) { text = next; changed = true; }
-    }
-  }
-  return text.replace(/[.:;!?]+$/gu, "").trim();
-}
+export { canonicalPromptCore };
 
 function generatedFamilyKey(id: string) {
   const match = id.match(/^(g\d+[a-z]+\d+_\d+)(?:_x\d+)?$/iu);
@@ -58,12 +33,17 @@ function generatedFamilyKey(id: string) {
 
 export function assessmentSelectionKey(question: Pick<SelectionCandidate, "id" | "grade" | "subject" | "semester" | "topic" | "public_payload_json" | "semantic_group_id">) {
   const scope = `${question.grade}|${normalize(question.subject)}|${question.semester}`;
-  if (question.id.startsWith("GE-") && question.semantic_group_id.startsWith("v8_")) {
+  if (question.semantic_group_id.startsWith("v8f_")) {
     return `${scope}|semantic:${question.semantic_group_id}`;
+  }
+  const core = canonicalPublicTaskCore(publicPayload(question));
+  // Legacy v8 rows used unreliable concept_group values. Until every deployed
+  // row has the corrected v8f_ family identifier, collapse them by task core.
+  if (question.semantic_group_id.startsWith("v8_")) {
+    return core ? `${scope}|prompt:${core}` : `${scope}|semantic:${question.semantic_group_id}`;
   }
   const family = generatedFamilyKey(question.id);
   if (family) return `${scope}|family:${family}`;
-  const core = canonicalPromptCore(payloadText(question));
   return core ? `${scope}|prompt:${core}` : `${scope}|semantic:${question.semantic_group_id}`;
 }
 
