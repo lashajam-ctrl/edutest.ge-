@@ -35,6 +35,19 @@ test("connects every sign-in method to the cookie-authenticated assessment clien
   assert.match(start, /if \(test\.is_custom\) \{\s*const attemptCount/s);
 });
 
+test("renders and starts only tests from the current server catalog", async () => {
+  const [html, client] = await Promise.all([
+    source("public/app.html"), source("public/server-assessments.js"),
+  ]);
+  assert.match(client, /ALL_TESTS\.splice\(0,ALL_TESTS\.length,\.\.\.byId\.values\(\)\)/);
+  assert.match(client, /installCatalog\(data\.tests\|\|\[\],true\)/);
+  assert.match(client, /startTestById=async function/);
+  assert.match(client, /test&&test\.serverBacked&&String\(test\.id\)===String\(id\)/);
+  assert.match(client, /if\(response\.status===404\)[\s\S]*await loadServerCatalog\(true\)/);
+  assert.match(client, /ტესტების კატალოგი განახლდა\. გთხოვთ, აირჩიოთ ტესტი ხელახლა\./);
+  assert.match(html, /ALL_TESTS\.filter\(tx=>tx&&tx\.serverBacked===true\)/);
+});
+
 test("uses the secure session cookie for AI feedback", async () => {
   const html = await source("public/app.html");
   const feedbackCall = html.match(/fetch\('\/api\/ai\/feedback'[\s\S]{0,800}/)?.[0] ?? "";

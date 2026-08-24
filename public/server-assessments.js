@@ -4,6 +4,9 @@
   let serverSessionId=null;
   let serverSubmitting=false;
   let catalogUserKey='';
+  let catalogReady=false;
+  let catalogLoading=null;
+  window.EDUTEST_CATALOG_STATE='loading';
 
   function catalogErrorMessage(error){
     const message=String(error&&error.message||error||'');
@@ -22,16 +25,19 @@
     list.appendChild(node);
   }
 
-  function installCatalog(tests){
+  function installCatalog(tests,replaceExisting){
     const incoming=Array.isArray(tests)?tests:[];
     const byId=new Map(incoming.map(test=>[String(test.id),Object.assign({},test,{serverBacked:true})]));
-    for(let i=ALL_TESTS.length-1;i>=0;i--){
-      const id=String(ALL_TESTS[i]&&ALL_TESTS[i].id||'');
-      if(ALL_TESTS[i]&&ALL_TESTS[i].serverBacked)ALL_TESTS.splice(i,1);
-      else if(byId.has(id))ALL_TESTS[i]=Object.assign({},ALL_TESTS[i],byId.get(id));
-    }
-    for(const test of byId.values()){
-      if(!ALL_TESTS.some(existing=>String(existing.id)===String(test.id)))ALL_TESTS.push(test);
+    if(replaceExisting){
+      ALL_TESTS.splice(0,ALL_TESTS.length,...byId.values());
+      catalogReady=true;
+      window.EDUTEST_CATALOG_STATE='ready';
+    }else{
+      for(const test of byId.values()){
+        const index=ALL_TESTS.findIndex(existing=>String(existing&&existing.id||'')===String(test.id));
+        if(index>=0)ALL_TESTS[index]=Object.assign({},ALL_TESTS[index],test);
+        else ALL_TESTS.push(test);
+      }
     }
     if(typeof populateSubjectDropdown==='function')populateSubjectDropdown('s-subj-filter');
     if(typeof renderStudentTests==='function'&&document.getElementById('p-student')?.classList.contains('active'))renderStudentTests();
@@ -41,18 +47,23 @@
 
   async function loadServerCatalog(force){
     const userKey=CUR_USER&&CUR_USER.email||'public';
-    if(!force&&catalogUserKey===userKey&&ALL_TESTS.some(test=>test&&test.serverBacked))return true;
+    if(!force&&catalogReady&&catalogUserKey===userKey)return true;
+    if(catalogLoading)return catalogLoading;
     catalogUserKey=userKey;
-    try{
+    window.EDUTEST_CATALOG_STATE='loading';
+    catalogLoading=(async()=>{try{
       const response=await fetch('/api/assessments/catalog',{credentials:'include',cache:'no-store',headers:{Accept:'application/json'}});
       const data=await response.json().catch(()=>({}));
       if(!response.ok)throw new Error(data.error||'ტესტების კატალოგი ვერ ჩაიტვირთა');
-      installCatalog(data.tests||[]);
+      installCatalog(data.tests||[],true);
       return true;
     }catch(error){
+      catalogReady=false;
+      window.EDUTEST_CATALOG_STATE='error';
       setCatalogMessage(catalogErrorMessage(error));
       return false;
-    }
+    }finally{catalogLoading=null;}})();
+    return catalogLoading;
   }
 
   function adaptQuestion(question){
@@ -89,11 +100,17 @@
 
   startTest=async function(){
     if(!CUR_USER){go('login');return;}
-    const requestedId=curTest&&curTest.id;
+    let requestedId=curTest&&curTest.id;
     if(!requestedId){alert('ტესტი ვერ მოიძებნა.');go(curRole==='teacher'?'teacher':'student');return;}
     if(!curTest.serverBacked){
-      await loadServerCatalog(true);
-      curTest=ALL_TESTS.find(test=>String(test.id)===String(requestedId))||curTest;
+      const loaded=await loadServerCatalog(true);
+      curTest=ALL_TESTS.find(test=>test&&test.serverBacked&&String(test.id)===String(requestedId))||null;
+      if(!loaded||!curTest){
+        alert('ტესტების კატალოგი განახლდა. გთხოვთ, აირჩიოთ ტესტი ხელახლა.');
+        go(curRole==='teacher'?'teacher':'student');
+        return;
+      }
+      requestedId=curTest.id;
     }
     if(typeof applyTestAgeMode==='function')applyTestAgeMode(curTest);
     if(typeof resetQuestionSpeech==='function')resetQuestionSpeech();
@@ -104,7 +121,13 @@
         body:JSON.stringify({testId:String(requestedId)})
       });
       const data=await response.json().catch(()=>({}));
-      if(!response.ok)throw new Error(data.error||'ტესტი ვერ დაიწყო');
+      if(!response.ok){
+        if(response.status===404){
+          await loadServerCatalog(true);
+          throw new Error('ტესტების კატალოგი განახლდა. გთხოვთ, აირჩიოთ ტესტი ხელახლა.');
+        }
+        throw new Error(data.error||'ტესტი ვერ დაიწყო');
+      }
       serverSessionId=data.sessionId;
       curTestQs=(data.questions||[]).map(adaptQuestion);
       qIdx=0;qAnswers={};_tabSwitchCount=0;
@@ -124,6 +147,21 @@
       alert(catalogErrorMessage(error));
       go(curRole==='teacher'?'teacher':'student');
     }
+  };
+
+  const previousStartTestById=startTestById;
+  startTestById=async function(id,practice=false){
+    let target=ALL_TESTS.find(test=>test&&test.serverBacked&&String(test.id)===String(id));
+    if(!target){
+      const loaded=await loadServerCatalog(true);
+      target=ALL_TESTS.find(test=>test&&test.serverBacked&&String(test.id)===String(id));
+      if(!loaded||!target){
+        alert('ტესტების კატალოგი განახლდა. გთხოვთ, აირჩიოთ ტესტი ხელახლა.');
+        go(curRole==='teacher'?'teacher':'student');
+        return;
+      }
+    }
+    return previousStartTestById(target.id,practice);
   };
 
   finishTest=async function(){
