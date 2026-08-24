@@ -114,6 +114,8 @@
     }
     if(typeof applyTestAgeMode==='function')applyTestAgeMode(curTest);
     if(typeof resetQuestionSpeech==='function')resetQuestionSpeech();
+    const previousRotationNote=document.getElementById('q-rotation-note');
+    if(previousRotationNote){previousRotationNote.classList.add('hidden');previousRotationNote.textContent='';}
     setTestLoading('ტესტი იტვირთება…');
     try{
       const response=await fetch('/api/assessments/start',{
@@ -135,6 +137,14 @@
       if(data.test){
         curTest.count=Number(data.test.count||curTestQs.length);
         if(data.test.componentCounts)curTest.componentCounts=data.test.componentCounts;
+      }
+      const rotationNote=document.getElementById('q-rotation-note');
+      if(rotationNote){
+        const reused=Number(data.rotation&&data.rotation.reusedGroups||0);
+        rotationNote.classList.toggle('hidden',reused===0);
+        rotationNote.textContent=reused
+          ? '🔄 ახალი საკითხების ამოწურვის გამო '+reused+' ყველაზე დიდი ხნის უნახავი საკითხი დაბრუნდა; ერთ ტესტში ერთი და იგივე შინაარსი არ მეორდება.'
+          : '';
       }
       if(timerInt)clearInterval(timerInt);
       timerSec=Number(curTest.time||data.test&&data.test.time||20)*60;

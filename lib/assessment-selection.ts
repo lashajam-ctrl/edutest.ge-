@@ -123,6 +123,8 @@ export function allocateByWeight(total: number, weights: Partial<Record<Language
 export function languageBucketFor(subject: unknown, topic: unknown, text: unknown): LanguageBucket | null {
   const value = normalize(subject), haystack = normalize(`${topic ?? ""} ${text ?? ""}`);
   if (value === "ქართული" || value === "ქართული ენა და ლიტერატურა") {
+    if (haystack.startsWith("ქართული ·")) return "language";
+    if (haystack.startsWith("ლიტერატურა ·")) return "literature";
     if (/გრამატ|მართლწერ|პუნქტუ|სინტაქ|ლექსიკ|რედაქტ|მორფოლოგ|ბრუნ|ზმნ|არსებით|ზედსართავ|ნაცვალსახელ|მეტყველების ნაწილ|წინადადებ/u.test(haystack)) return "language";
     return "literature";
   }

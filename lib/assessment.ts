@@ -158,7 +158,7 @@ export function assessmentTestJson(row: Record<string, unknown>) {
     semester: row.semester == null ? null : Number(row.semester), pool: `server:${subject}:${grade}`,
     count: Number(row.question_count), time: Number(row.time_minutes), attempts: Number(row.attempts_allowed),
     testType: String(row.test_type), difficulty: row.difficulty ? String(row.difficulty) : null,
-    paid: false, serverBacked: true, curriculumVerified: String(row.source_pool) !== "v8", structuralVerified: true,
+    paid: false, serverBacked: true, curriculumVerified: !["v8", "v11"].includes(String(row.source_pool)), structuralVerified: true,
     teacherCreated: Boolean(row.is_custom), createdBy: row.created_by ? String(row.created_by) : null,
     published: Boolean(row.published),
     componentCounts: standardSeniorMath

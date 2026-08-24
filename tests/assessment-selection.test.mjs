@@ -150,7 +150,20 @@ test("server start route enforces semantic selection and language blueprints", a
   assert.match(source, /assessment_sessions/);
   assert.match(source, /languageBlueprintFor/);
   assert.match(source, /languageBucketFor/);
+  assert.match(source, /rankedCandidates\.filter\(question => !freshIds\.has\(question\.id\)\)/);
+  assert.match(source, /reusedGroups/);
+  assert.match(source, /distinctBankGroups/);
   assert.doesNotMatch(source, /semanticGroups\.has\(question\.semantic_group_id\)/);
+});
+
+test("the learner is told when oldest-seen semantic groups are recycled", async () => {
+  const [html, client] = await Promise.all([
+    readFile(new URL("../public/app.html", import.meta.url), "utf8"),
+    readFile(new URL("../public/server-assessments.js", import.meta.url), "utf8"),
+  ]);
+  assert.match(html, /id="q-rotation-note"/);
+  assert.match(client, /data\.rotation&&data\.rotation\.reusedGroups/);
+  assert.match(client, /ერთ ტესტში ერთი და იგივე შინაარსი არ მეორდება/);
 });
 
 test("verified submit is idempotent after the results page is already shown", async () => {

@@ -45,18 +45,19 @@ export async function POST(request: Request) {
       WHERE tq.test_id = ? AND q.active = 1 ORDER BY tq.position LIMIT 100`).bind(current.user.id, test.id);
   } else {
     const semesterClause = test.semester == null ? "" : " AND q.semester = ?";
-    const poolClause = test.source_pool === "v8" ? " AND q.pool_prefix = ?" : "";
+    const serverPool = ["v8", "v11"].includes(String(test.source_pool)) ? String(test.source_pool) : "";
+    const poolClause = serverPool ? " AND q.pool_prefix = ?" : "";
     const difficultyClause = test.difficulty ? " AND q.difficulty = ?" : "";
     const subjects = assessmentSubjectComponents(test.subject, test.grade);
     const subjectPlaceholders = subjects.map(() => "?").join(",");
     const bindings: unknown[] = [current.user.id, test.grade, ...subjects];
     if (test.semester != null) bindings.push(test.semester);
-    if (test.source_pool === "v8") bindings.push("v8");
+    if (serverPool) bindings.push(serverPool);
     if (test.difficulty) bindings.push(test.difficulty);
     bindings.push(Date.now());
     statement = env.DB.prepare(`${common} WHERE q.grade = ? AND q.subject IN (${subjectPlaceholders})${semesterClause}${poolClause}${difficultyClause} AND q.active = 1
       ORDER BY CASE WHEN h.question_id IS NULL THEN 0 WHEN h.last_correct = 0 AND h.next_review_at <= ? THEN 1 ELSE 2 END,
-      COALESCE(h.last_answered_at, 0) ASC, q.semantic_group_id, q.id LIMIT 250`)
+      COALESCE(h.last_answered_at, 0) ASC, q.semantic_group_id, q.id LIMIT 1000`)
       .bind(...bindings);
   }
   const rawCandidates = (await statement.all<Candidate>()).results ?? [];
@@ -82,10 +83,17 @@ export async function POST(request: Request) {
     }
   }
   const rankedCandidates = test.is_custom ? rawCandidates : rankCandidatesBySelectionHistory(rawCandidates, selectionNow);
-  const candidates = test.is_custom ? rankedCandidates : eligibleCandidatesBySelectionHistory(rankedCandidates, selectionNow);
-  const distinctAvailable = distinctSelectionGroupCount(candidates);
-  if (distinctAvailable < 5) return Response.json({ error: "ამ ტესტის ახალი განსხვავებული კითხვები ამოიწურა. უკვე გავლილი საკითხები განმეორებით აღარ შემოგთავაზეთ." }, { status: 409 });
-  const targetCount = Math.min(Number(test.question_count), distinctAvailable);
+  const freshCandidates = test.is_custom ? rankedCandidates : eligibleCandidatesBySelectionHistory(rankedCandidates, selectionNow);
+  const allDistinct = distinctSelectionGroupCount(rankedCandidates);
+  if (allDistinct < 5) return Response.json({ error: "ამ კლასისა და საგნის ბანკში ტესტისთვის საკმარისი განსხვავებული საკითხები ჯერ არ არის." }, { status: 409 });
+  const targetCount = Math.min(Number(test.question_count), allDistinct);
+  const freshIds = new Set(freshCandidates.map(question => question.id));
+  // Start with unseen/due semantic groups. If that pool is exhausted, recycle
+  // the oldest-seen groups; option shuffling alone never makes a question new.
+  const candidates = test.is_custom
+    ? rankedCandidates
+    : [...freshCandidates, ...rankedCandidates.filter(question => !freshIds.has(question.id))];
+  const freshDistinct = distinctSelectionGroupCount(freshCandidates);
   const selected: Candidate[] = [], selectionGroups = new Set<string>();
   const addQuestions = (rows: Candidate[], count: number) => {
     let added = 0;
@@ -133,5 +141,12 @@ export async function POST(request: Request) {
     const bucket = languageBucketFor(test.subject, question.topic, text);
     if (bucket) componentCounts[bucket] = (componentCounts[bucket] ?? 0) + 1;
   }
-  return Response.json({ sessionId, test: { id: test.id, time: test.time_minutes, count: questions.length, requestedCount: test.question_count, difficulty: test.difficulty, componentCounts }, questions }, { status: 201, headers: { "Cache-Control": "no-store" } });
+  const reusedGroups = Math.max(0, targetCount - Math.min(targetCount, freshDistinct));
+  const rotation = {
+    mode: reusedGroups === 0 ? "fresh" : freshDistinct === 0 ? "recycled" : "mixed",
+    freshGroups: Math.min(targetCount, freshDistinct),
+    reusedGroups,
+    distinctBankGroups: allDistinct,
+  };
+  return Response.json({ sessionId, test: { id: test.id, time: test.time_minutes, count: questions.length, requestedCount: test.question_count, difficulty: test.difficulty, componentCounts }, rotation, questions }, { status: 201, headers: { "Cache-Control": "no-store" } });
 }
