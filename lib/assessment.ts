@@ -47,6 +47,7 @@ export type StoredAssessmentQuestion = {
   points: number;
   semantic_group_id: string;
   strand?: string | null;
+  difficulty?: string | null;
 };
 
 export type Presentation = { optionOrder?: number[] };
@@ -54,6 +55,7 @@ export type Presentation = { optionOrder?: number[] };
 const allowedPayloadKeys = [
   "id", "text", "type", "pts", "grade", "subject", "semester", "topic",
   "opts", "items", "leftItems", "rightOptions", "tolerance", "media", "visual",
+  "difficulty",
 ] as const;
 
 export function parsePublicPayload(question: StoredAssessmentQuestion) {
@@ -67,6 +69,7 @@ export function parsePublicPayload(question: StoredAssessmentQuestion) {
   payload.subject = question.subject;
   payload.semester = question.semester;
   payload.topic = question.topic;
+  if (question.difficulty) payload.difficulty = question.difficulty;
   return correctKnownQuestionPayload(payload);
 }
 
@@ -154,7 +157,8 @@ export function assessmentTestJson(row: Record<string, unknown>) {
     id: String(row.id), title, subject, grade,
     semester: row.semester == null ? null : Number(row.semester), pool: `server:${subject}:${grade}`,
     count: Number(row.question_count), time: Number(row.time_minutes), attempts: Number(row.attempts_allowed),
-    testType: String(row.test_type), paid: false, serverBacked: true, curriculumVerified: true,
+    testType: String(row.test_type), difficulty: row.difficulty ? String(row.difficulty) : null,
+    paid: false, serverBacked: true, curriculumVerified: String(row.source_pool) !== "v8", structuralVerified: true,
     teacherCreated: Boolean(row.is_custom), createdBy: row.created_by ? String(row.created_by) : null,
     published: Boolean(row.published),
     componentCounts: standardSeniorMath

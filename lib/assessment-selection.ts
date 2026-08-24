@@ -58,6 +58,9 @@ function generatedFamilyKey(id: string) {
 
 export function assessmentSelectionKey(question: Pick<SelectionCandidate, "id" | "grade" | "subject" | "semester" | "topic" | "public_payload_json" | "semantic_group_id">) {
   const scope = `${question.grade}|${normalize(question.subject)}|${question.semester}`;
+  if (question.id.startsWith("GE-") && question.semantic_group_id.startsWith("v8_")) {
+    return `${scope}|semantic:${question.semantic_group_id}`;
+  }
   const family = generatedFamilyKey(question.id);
   if (family) return `${scope}|family:${family}`;
   const core = canonicalPromptCore(payloadText(question));

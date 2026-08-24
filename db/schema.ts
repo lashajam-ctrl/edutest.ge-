@@ -210,6 +210,7 @@ export const assessmentTests = sqliteTable("assessment_tests", {
   timeMinutes: integer("time_minutes").notNull(),
   attemptsAllowed: integer("attempts_allowed").notNull(),
   testType: text("test_type").notNull(),
+  difficulty: text("difficulty"),
   published: integer("published", { mode: "boolean" }).notNull().default(false),
   isCustom: integer("is_custom", { mode: "boolean" }).notNull().default(false),
   createdBy: text("created_by").references(() => users.id, { onDelete: "cascade" }),

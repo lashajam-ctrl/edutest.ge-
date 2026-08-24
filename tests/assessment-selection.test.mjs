@@ -41,6 +41,13 @@ test("keeps genuinely different generated families with the same ordinal availab
   assert.equal(distinctSelectionGroupCount(candidates), 3);
 });
 
+test("v8 variants share the archive semantic group instead of repeating a concept", () => {
+  const first = { ...makeCandidate("GE-G04-MA-S1-001", "გამოთვალე: 7 + 5 = ?"), semantic_group_id: "v8_abc123" };
+  const second = { ...makeCandidate("GE-G04-MA-S1-101", "საკლასო პრაქტიკა — გამოთვალე: 7 + 5 = ?"), semantic_group_id: "v8_abc123" };
+  assert.equal(assessmentSelectionKey(first), assessmentSelectionKey(second));
+  assert.equal(distinctSelectionGroupCount([first, second]), 1);
+});
+
 test("a completed ten-question nature attempt leaves later families eligible", () => {
   const now = Date.now(), candidates = [];
   for (let family = 1; family <= 5; family++) {

@@ -5,7 +5,7 @@ import { allocateByWeight, assessmentSelectionKey, distinctSelectionGroupCount, 
 import { getSessionUser } from "@/lib/auth";
 import { consumeRateLimit } from "@/lib/rate-limit";
 
-type TestRow = { id: string; subject: string; grade: number; semester: number | null; question_count: number; time_minutes: number; attempts_allowed: number; published: number; is_custom: number; created_by: string | null };
+type TestRow = { id: string; subject: string; grade: number; semester: number | null; source_pool: string; difficulty: string | null; question_count: number; time_minutes: number; attempts_allowed: number; published: number; is_custom: number; created_by: string | null };
 type Candidate = StoredAssessmentQuestion & { history_id: string | null; answered_count: number | null; last_correct: number | null; next_review_at: number | null; last_answered_at: number | null };
 
 export async function POST(request: Request) {
@@ -45,12 +45,16 @@ export async function POST(request: Request) {
       WHERE tq.test_id = ? AND q.active = 1 ORDER BY tq.position LIMIT 100`).bind(current.user.id, test.id);
   } else {
     const semesterClause = test.semester == null ? "" : " AND q.semester = ?";
+    const poolClause = test.source_pool === "v8" ? " AND q.pool_prefix = ?" : "";
+    const difficultyClause = test.difficulty ? " AND q.difficulty = ?" : "";
     const subjects = assessmentSubjectComponents(test.subject, test.grade);
     const subjectPlaceholders = subjects.map(() => "?").join(",");
     const bindings: unknown[] = [current.user.id, test.grade, ...subjects];
     if (test.semester != null) bindings.push(test.semester);
+    if (test.source_pool === "v8") bindings.push("v8");
+    if (test.difficulty) bindings.push(test.difficulty);
     bindings.push(Date.now());
-    statement = env.DB.prepare(`${common} WHERE q.grade = ? AND q.subject IN (${subjectPlaceholders})${semesterClause} AND q.active = 1
+    statement = env.DB.prepare(`${common} WHERE q.grade = ? AND q.subject IN (${subjectPlaceholders})${semesterClause}${poolClause}${difficultyClause} AND q.active = 1
       ORDER BY CASE WHEN h.question_id IS NULL THEN 0 WHEN h.last_correct = 0 AND h.next_review_at <= ? THEN 1 ELSE 2 END,
       COALESCE(h.last_answered_at, 0) ASC, q.semantic_group_id, q.id LIMIT 250`)
       .bind(...bindings);
@@ -94,7 +98,7 @@ export async function POST(request: Request) {
   const combinedSeniorMath = !test.is_custom && test.grade >= 7 && canonicalAssessmentSubject(test.subject, test.grade) === "მათემატიკა";
   if (combinedSeniorMath) {
     const geometryTarget = Math.floor(targetCount * 0.4), algebraTarget = targetCount - geometryTarget;
-    const geometry = candidates.filter(question => question.subject === "გეომეტრია" || question.strand === "geometry_space");
+    const geometry = candidates.filter(question => question.subject === "გეომეტრია" || question.strand === "geometry_space" || question.strand === "გეომეტრია");
     const geometryIds = new Set(geometry.map(question => question.id));
     addQuestions(candidates.filter(question => !geometryIds.has(question.id)), algebraTarget);
     addQuestions(geometry, geometryTarget);
@@ -129,5 +133,5 @@ export async function POST(request: Request) {
     const bucket = languageBucketFor(test.subject, question.topic, text);
     if (bucket) componentCounts[bucket] = (componentCounts[bucket] ?? 0) + 1;
   }
-  return Response.json({ sessionId, test: { id: test.id, time: test.time_minutes, count: questions.length, requestedCount: test.question_count, componentCounts }, questions }, { status: 201, headers: { "Cache-Control": "no-store" } });
+  return Response.json({ sessionId, test: { id: test.id, time: test.time_minutes, count: questions.length, requestedCount: test.question_count, difficulty: test.difficulty, componentCounts }, questions }, { status: 201, headers: { "Cache-Control": "no-store" } });
 }

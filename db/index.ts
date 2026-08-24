@@ -52,7 +52,7 @@ export function ensureSchema() {
       env.DB.prepare("CREATE INDEX IF NOT EXISTS idx_assessment_questions_catalog ON assessment_questions (grade, subject, semester, active)"),
       env.DB.prepare("CREATE INDEX IF NOT EXISTS idx_assessment_questions_semantic ON assessment_questions (semantic_group_id)"),
       env.DB.prepare("CREATE TABLE IF NOT EXISTS assessment_answer_keys (question_id text PRIMARY KEY NOT NULL REFERENCES assessment_questions(id) ON DELETE cascade, answer_key_json text NOT NULL, explanation text DEFAULT '' NOT NULL, updated_at integer NOT NULL)"),
-      env.DB.prepare("CREATE TABLE IF NOT EXISTS assessment_tests (id text PRIMARY KEY NOT NULL, source_test_id text, title text NOT NULL, subject text NOT NULL, grade integer NOT NULL, semester integer, source_pool text NOT NULL, question_count integer NOT NULL, time_minutes integer NOT NULL, attempts_allowed integer NOT NULL, test_type text NOT NULL, published integer DEFAULT false NOT NULL, is_custom integer DEFAULT false NOT NULL, created_by text REFERENCES users(id) ON DELETE cascade, created_at integer NOT NULL, updated_at integer NOT NULL)"),
+      env.DB.prepare("CREATE TABLE IF NOT EXISTS assessment_tests (id text PRIMARY KEY NOT NULL, source_test_id text, title text NOT NULL, subject text NOT NULL, grade integer NOT NULL, semester integer, source_pool text NOT NULL, question_count integer NOT NULL, time_minutes integer NOT NULL, attempts_allowed integer NOT NULL, test_type text NOT NULL, difficulty text, published integer DEFAULT false NOT NULL, is_custom integer DEFAULT false NOT NULL, created_by text REFERENCES users(id) ON DELETE cascade, created_at integer NOT NULL, updated_at integer NOT NULL)"),
       env.DB.prepare("CREATE INDEX IF NOT EXISTS idx_assessment_tests_catalog ON assessment_tests (published, grade, subject)"),
       env.DB.prepare("CREATE INDEX IF NOT EXISTS idx_assessment_tests_creator ON assessment_tests (created_by)"),
       env.DB.prepare("CREATE TABLE IF NOT EXISTS assessment_test_questions (test_id text NOT NULL REFERENCES assessment_tests(id) ON DELETE cascade, question_id text NOT NULL REFERENCES assessment_questions(id) ON DELETE restrict, position integer NOT NULL, PRIMARY KEY (test_id, question_id))"),
@@ -79,6 +79,9 @@ export function ensureSchema() {
       for (const [name, definition] of additions) {
         if (!columns.has(name)) await env.DB.prepare(`ALTER TABLE users ADD COLUMN ${name} ${definition}`).run();
       }
+      const testInfo = await env.DB.prepare("PRAGMA table_info(assessment_tests)").all<{ name: string }>();
+      const testColumns = new Set((testInfo.results ?? []).map(row => row.name));
+      if (!testColumns.has("difficulty")) await env.DB.prepare("ALTER TABLE assessment_tests ADD COLUMN difficulty text").run();
     }).then(() => undefined).catch(error => { schemaReady = undefined; throw error; });
   }
   return schemaReady;
