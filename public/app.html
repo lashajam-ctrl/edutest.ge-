@@ -3830,11 +3830,11 @@ function showAdminMFAModal(mode,totp){
   const isEnroll=mode==='enroll';
   enroll.classList.toggle('hidden',!isEnroll);
   help.textContent=isEnroll
-    ? 'გახსენით Google Authenticator, Microsoft Authenticator ან სხვა TOTP აპი, დაასკანერეთ QR კოდი და შეიყვანეთ მიღებული 6-ნიშნა კოდი.'
+    ? 'გახსენით Google Authenticator, Microsoft Authenticator ან სხვა TOTP აპი, დაამატეთ ანგარიში ქვემოთ მოცემული საიდუმლო კოდით და შეიყვანეთ მიღებული 6-ნიშნა კოდი.'
     : 'შეიყვანეთ თქვენს Authenticator აპში ნაჩვენები მიმდინარე 6-ნიშნა კოდი.';
   if(isEnroll){
     const qr=document.getElementById('admin-mfa-qr'),secret=document.getElementById('admin-mfa-secret');
-    if(qr)qr.src=String(totp&&totp.qr_code||'');
+    if(qr){const source=String(totp&&totp.qr_code||'');qr.src=source;qr.parentElement.style.display=source?'flex':'none';}
     if(secret)secret.textContent=String(totp&&totp.secret||'');
   }
   const code=document.getElementById('admin-mfa-code');if(code){code.value='';setTimeout(()=>code.focus(),50);}
@@ -3844,6 +3844,21 @@ function hideAdminMFAModal(){
   const modal=document.getElementById('admin-mfa-modal');if(modal){modal.classList.add('hidden');modal.style.display='none';}
 }
 async function beginAdminMFA(){
+  if(CUR_USER&&CUR_USER.authProvider==='server'){
+    const statusResponse=await fetch('/api/auth/mfa',{credentials:'include',cache:'no-store'});
+    const status=await statusResponse.json().catch(()=>({}));
+    if(!statusResponse.ok)throw new Error(status.error||'MFA სტატუსის მიღება ვერ მოხერხდა.');
+    if(status.verified)return true;
+    if(status.enrolled)showAdminMFAModal('challenge');
+    else{
+      const enrollResponse=await fetch('/api/auth/mfa',{method:'POST',credentials:'include',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'enroll'})});
+      const enrolled=await enrollResponse.json().catch(()=>({}));
+      if(!enrollResponse.ok)throw new Error(enrolled.error||'MFA ჩართვა ვერ შესრულდა.');
+      if(enrolled.enrolled)showAdminMFAModal('challenge');
+      else showAdminMFAModal('enroll',{secret:enrolled.secret});
+    }
+    return new Promise((resolve,reject)=>{ADMIN_MFA_PENDING={resolve,reject};});
+  }
   const listed=await EDUTEST_CLOUD.client.auth.mfa.listFactors();
   if(listed.error)throw listed.error;
   const totpFactors=(listed.data&&listed.data.totp)||[];
@@ -3864,20 +3879,30 @@ async function verifyAdminMFA(){
   if(!/^\d{6}$/.test(code)){setAdminMFAError('შეიყვანეთ Authenticator-ის სწორი 6-ნიშნა კოდი.');return;}
   const button=document.getElementById('admin-mfa-verify');if(button)button.disabled=true;
   try{
-    const verified=await EDUTEST_CLOUD.client.auth.mfa.challengeAndVerify({factorId:ADMIN_MFA_FACTOR_ID,code});
-    if(verified.error)throw verified.error;
+    if(CUR_USER&&CUR_USER.authProvider==='server'){
+      const response=await fetch('/api/auth/mfa',{method:'POST',credentials:'include',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'verify',code})});
+      const verified=await response.json().catch(()=>({}));
+      if(!response.ok)throw new Error(verified.error||'კოდის დადასტურება ვერ შესრულდა.');
+    }else{
+      const verified=await EDUTEST_CLOUD.client.auth.mfa.challengeAndVerify({factorId:ADMIN_MFA_FACTOR_ID,code});
+      if(verified.error)throw verified.error;
+    }
     hideAdminMFAModal();const pending=ADMIN_MFA_PENDING;ADMIN_MFA_PENDING=null;if(pending)pending.resolve(true);
   }catch(e){setAdminMFAError((e&&e.message)||'კოდის დადასტურება ვერ შესრულდა.');}
   finally{if(button)button.disabled=false;}
 }
 async function cancelAdminMFA(){
   hideAdminMFAModal();const pending=ADMIN_MFA_PENDING;ADMIN_MFA_PENDING=null;
-  try{await EDUTEST_CLOUD.client.auth.signOut();}catch(_){ }
-  CUR_USER=null;EDUTEST_CLOUD.user=null;EDUTEST_CLOUD.profile=null;go('login');
+  if(CUR_USER&&CUR_USER.authProvider==='server')await doLogout();
+  else{
+    try{await EDUTEST_CLOUD.client.auth.signOut();}catch(_){ }
+    CUR_USER=null;EDUTEST_CLOUD.user=null;EDUTEST_CLOUD.profile=null;go('login');
+  }
   if(pending)pending.reject(new Error('ადმინისტრატორის MFA დადასტურება გაუქმდა.'));
 }
 async function ensureAdminMFA(appUser){
   if(!appUser||appUser.role!=='admin'||!EDUTEST_SUPABASE_CONFIG.requireAdminMFA)return true;
+  if(appUser.authProvider==='server')return beginAdminMFA();
   const assurance=await EDUTEST_CLOUD.client.auth.mfa.getAuthenticatorAssuranceLevel();
   if(assurance.error)throw assurance.error;
   if(assurance.data&&assurance.data.currentLevel==='aal2')return true;
@@ -3887,6 +3912,15 @@ async function touchCloudActivity(){try{if(EDUTEST_CLOUD.client&&EDUTEST_CLOUD.u
 async function exportMyData(){
   if(!CUR_USER)return;
   try{
+    if(CUR_USER.authProvider==='server'){
+      const response=await fetch('/api/auth/data',{credentials:'include',cache:'no-store'});
+      const payload=await response.json().catch(()=>({}));
+      if(!response.ok)throw new Error(payload.error||'მონაცემების ჩამოტვირთვა ვერ შესრულდა.');
+      payload.local_results=SESSION_RESULTS.filter(r=>r.userId===CUR_USER.email);
+      payload.local_adaptive=loadAdaptive(CUR_USER.email);
+      const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='edutest-my-data-'+new Date().toISOString().slice(0,10)+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+      return;
+    }
     let cloud={profile:EDUTEST_CLOUD.profile,question_history:[],subject_history:[],guardian_consent:[]};
     if(EDUTEST_CLOUD.client&&EDUTEST_CLOUD.user){
       const [q,s,g]=await Promise.all([
@@ -3908,11 +3942,18 @@ function purgeLocalUserData(email){
   }catch(e){console.warn('local purge',e);}
 }
 async function deleteMyAccount(){
-  if(!CUR_USER||!EDUTEST_CLOUD.client||!EDUTEST_CLOUD.user){alert('ანგარიშის წაშლა Cloud ანგარიშით შესვლის შემდეგ არის ხელმისაწვდომი.');return;}
+  if(!CUR_USER){alert('ანგარიშის წასაშლელად ჯერ გაიარეთ ავტორიზაცია.');return;}
   if(!confirm('გსურთ ანგარიშისა და სასწავლო ისტორიის წაშლა? ეს მოქმედება შეუქცევადია.'))return;
   if(!confirm('ბოლო დადასტურება: ნამდვილად წავშალოთ EduTest ანგარიში?'))return;
   const email=CUR_USER.email;
   try{
+    if(CUR_USER.authProvider==='server'){
+      const response=await fetch('/api/auth/data',{method:'DELETE',credentials:'include',headers:{'Content-Type':'application/json'},body:JSON.stringify({confirm:'DELETE'})});
+      const result=await response.json().catch(()=>({}));
+      if(!response.ok)throw new Error(result.error||'ანგარიშის წაშლა ვერ შესრულდა.');
+      purgeLocalUserData(email);EDUTEST_SERVER_AUTH_ACTIVE=false;CUR_USER=null;alert('ანგარიში წაიშალა.');go('landing');return;
+    }
+    if(!EDUTEST_CLOUD.client||!EDUTEST_CLOUD.user)throw new Error('Cloud სესია მიუწვდომელია.');
     const r=await EDUTEST_CLOUD.client.functions.invoke('delete-account',{body:{confirm:'DELETE'}});
     if(r.error)throw r.error;
     purgeLocalUserData(email);
@@ -3950,7 +3991,10 @@ async function adoptServerUser(user,opts){
     else if(curRole==='student'&&gate==='age_required'){go('login');showAgeVerificationModal();}
     else if(curRole==='student'&&gate==='guardian_required'){go('login');showGuardianPendingModal(appUser);}
     else if(curRole==='student'&&gate==='blocked'){go('login');setLoginNotice('ანგარიში დროებით დაბლოკილია.','warn');}
-    else if(['student','teacher','admin'].includes(curRole))go(curRole);
+    else if(['student','teacher','admin'].includes(curRole)){
+      if(curRole==='admin')await ensureAdminMFA(appUser);
+      go(curRole);
+    }
   }
   return appUser;
 }
@@ -6374,6 +6418,7 @@ document.addEventListener('click',function(e){
 });
 
 </script>
+<script src="/management-overrides.js"></script>
 <script src="/server-assessments.js"></script>
 
 <!-- EDIT USER MODAL -->

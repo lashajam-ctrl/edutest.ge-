@@ -58,12 +58,21 @@ export async function getSessionUser(request: Request) {
   if (!token) return null;
   await ensureSchema();
   const [row] = await getDb().select({ user: users, sessionId: sessions.id }).from(sessions).innerJoin(users, eq(users.id, sessions.userId)).where(and(eq(sessions.tokenHash, await sha256(token)), gt(sessions.expiresAt, new Date()))).limit(1);
+  const path = new URL(request.url).pathname;
   if (row?.user.accountStatus === "onboarding") {
-    const path = new URL(request.url).pathname;
     const onboardingRoute = path === "/api/auth/session" || path === "/api/auth/profile" || path === "/api/auth/logout" || path.startsWith("/api/auth/oauth/");
     if (!onboardingRoute) return null;
   }
-  return row ?? null;
+  if (!row) return null;
+  let mfaVerified = true;
+  if (row.user.role === "admin") {
+    const verified = await env.DB.prepare("SELECT session_id FROM session_mfa_verifications WHERE session_id = ? AND expires_at > ?")
+      .bind(row.sessionId, Date.now()).first<{ session_id: string }>();
+    mfaVerified = Boolean(verified);
+    const mfaSetupRoute = path === "/api/auth/session" || path === "/api/auth/mfa" || path === "/api/auth/logout";
+    if (!mfaVerified && !mfaSetupRoute) return null;
+  }
+  return { ...row, mfaVerified };
 }
 
 export async function destroySession(request: Request) {

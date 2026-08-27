@@ -89,6 +89,44 @@ test("persists teacher and administrator management data on the server", async (
   assert.match(attemptIndexMigration, /CREATE INDEX IF NOT EXISTS/);
 });
 
+test("loads the server management bridge before the assessment client", async () => {
+  const html = await source("public/app.html");
+  const management = html.indexOf('<script src="/management-overrides.js"></script>');
+  const assessments = html.indexOf('<script src="/server-assessments.js"></script>');
+  assert.ok(management > 0, "management-overrides.js must be loaded");
+  assert.ok(assessments > management, "management bridge must initialize before the assessment client");
+});
+
+test("enforces administrator MFA on the server session", async () => {
+  const [schema, db, auth, route, client, envExample] = await Promise.all([
+    source("db/schema.ts"), source("db/index.ts"), source("lib/auth.ts"),
+    source("app/api/auth/mfa/route.ts"), source("public/app.html"), source(".env.example"),
+  ]);
+  assert.match(schema, /admin_mfa_factors/);
+  assert.match(schema, /session_mfa_verifications/);
+  assert.match(db, /CREATE TABLE IF NOT EXISTS admin_mfa_factors/);
+  assert.match(auth, /row\.user\.role === "admin"/);
+  assert.match(auth, /session_mfa_verifications/);
+  assert.match(auth, /path === "\/api\/auth\/mfa"/);
+  assert.match(route, /consumeRateLimit/);
+  assert.match(route, /verifyAdminMfaCode/);
+  assert.match(client, /fetch\('\/api\/auth\/mfa'/);
+  assert.match(client, /if\(curRole==='admin'\)await ensureAdminMFA\(appUser\)/);
+  assert.match(envExample, /^MFA_ENCRYPTION_KEY=/m);
+});
+
+test("supports authenticated D1 data export and self-deletion", async () => {
+  const [route, client] = await Promise.all([source("app/api/auth/data/route.ts"), source("public/app.html")]);
+  assert.match(route, /export async function GET/);
+  assert.match(route, /export async function DELETE/);
+  assert.match(route, /current\.user\.role === "admin"/);
+  assert.match(route, /body\.confirm !== "DELETE"/);
+  assert.match(route, /delete\(users\)/);
+  assert.doesNotMatch(route, /passwordHash|passwordSalt|tokenHash|providerSubject/);
+  assert.match(client, /fetch\('\/api\/auth\/data'/);
+  assert.match(client, /method:'DELETE'/);
+});
+
 test("ships no demo credentials, realistic pre-rendered PII, or secret-shaped values", async () => {
   const files = ["public/app.html", ".env.example", "README.md"];
   const combined = (await Promise.all(files.map(async file => {

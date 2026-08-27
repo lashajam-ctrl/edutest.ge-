@@ -37,6 +37,23 @@ export const sessions = sqliteTable("sessions", {
   createdAt: integer("created_at", { mode: "timestamp_ms" }).notNull(),
 }, (table) => [uniqueIndex("sessions_token_unique").on(table.tokenHash)]);
 
+/** Encrypted TOTP factors for privileged administrator accounts. */
+export const adminMfaFactors = sqliteTable("admin_mfa_factors", {
+  userId: text("user_id").primaryKey().references(() => users.id, { onDelete: "cascade" }),
+  encryptedSecret: text("encrypted_secret").notNull(),
+  confirmedAt: integer("confirmed_at", { mode: "timestamp_ms" }),
+  lastUsedCounter: integer("last_used_counter").notNull().default(-1),
+  createdAt: integer("created_at", { mode: "timestamp_ms" }).notNull(),
+  updatedAt: integer("updated_at", { mode: "timestamp_ms" }).notNull(),
+});
+
+/** A successful MFA check is scoped to one server session and expires quickly. */
+export const sessionMfaVerifications = sqliteTable("session_mfa_verifications", {
+  sessionId: text("session_id").primaryKey().references(() => sessions.id, { onDelete: "cascade" }),
+  verifiedAt: integer("verified_at", { mode: "timestamp_ms" }).notNull(),
+  expiresAt: integer("expires_at", { mode: "timestamp_ms" }).notNull(),
+}, (table) => [index("idx_session_mfa_expires").on(table.expiresAt)]);
+
 export const oauthLinkRequests = sqliteTable("oauth_link_requests", {
   id: text("id").primaryKey(),
   userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
