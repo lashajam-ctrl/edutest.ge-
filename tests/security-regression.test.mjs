@@ -162,7 +162,7 @@ test("publishes verified catalog counts without frozen marketing counters", asyn
 });
 
 test("keeps payments disabled and uses secure server OAuth sessions for configured providers", async () => {
-  const [html, migration, socialMigration, oauthStart, oauthCallback, sessionRoute, profileRoute, guardianConfirm, authLibrary, providersRoute, loginRoute, resetRequest, resetComplete] = await Promise.all([
+  const [html, migration, socialMigration, oauthStart, oauthCallback, sessionRoute, profileRoute, guardianConfirm, authLibrary, providersRoute, loginRoute, resetRequest, resetComplete, workerConfig] = await Promise.all([
     source("public/app.html"),
     source("supabase/migrations/202608110005_disable_payments.sql"),
     source("supabase/migrations/202608110006_social_auth_profile.sql"),
@@ -176,12 +176,13 @@ test("keeps payments disabled and uses secure server OAuth sessions for configur
     source("app/api/auth/login/route.ts"),
     source("app/api/auth/password/request/route.ts"),
     source("app/api/auth/password/complete/route.ts"),
+    source("wrangler.jsonc"),
   ]);
   assert.match(html, /const PAYMENTS_ENABLED=false/);
   assert.match(html, /if\(!PAYMENTS_ENABLED\)return 'free'/);
   assert.match(migration, /set paid = false/i);
   for (const [id, provider] of [["google", "Google"], ["azure", "Microsoft"], ["facebook", "Facebook"]]) {
-    assert.match(html, new RegExp(`<button id="oauth-${id}"[^>]+disabled[^>]+doSocialLogin\\('${id}'\\)[^>]*>${provider}-ით გაგრძელება</button>`));
+    assert.match(html, new RegExp(`<button id="oauth-${id}"[^>]+disabled[^>]+doSocialLogin\\('${id}'\\)[^>]*>[\\s\\S]*?<span class="oauth-label">${provider}-ით გაგრძელება</span>[\\s\\S]*?</button>`));
   }
   assert.match(html, /async function refreshSocialProviderButtons\(\)/);
   assert.match(html, /\.chatgpt\\\.site\$\/i\.test\(current\.hostname\)/);
@@ -228,6 +229,7 @@ test("keeps payments disabled and uses secure server OAuth sessions for configur
   assert.match(socialMigration, /Guardian email is required/);
   assert.match(providersRoute, /facebookPendingReview/);
   assert.match(providersRoute, /FACEBOOK_PUBLIC_ENABLED/);
+  assert.match(workerConfig, /"FACEBOOK_PUBLIC_ENABLED"\s*:\s*"true"/);
   assert.match(loginRoute, /migrateSupabaseAccount/);
   assert.match(loginRoute, /else if \(!valid\)/);
   assert.match(loginRoute, /oauthLinkToken/);
@@ -245,6 +247,11 @@ test("offers one clear authentication surface without exposing backend terminolo
   assert.match(html, /Microsoft-ით გაგრძელება/);
   assert.match(html, /Facebook-ით გაგრძელება/);
   assert.match(html, /ახალი ანგარიშის შექმნა/);
+  assert.match(html, /id="email-auth-panel" class="hidden"/);
+  assert.match(html, /function toggleEmailAuth\(\)/);
+  assert.match(html, /ელფოსტით და პაროლით გაგრძელება/);
+  assert.match(html, /emailRegistrationExpanded=false;\s*loginTab/);
+  assert.match(html, /status==='confirm-password'.*showEmailRegistrationForm\(\)/);
   assert.match(html, /openAuth\('reg'\)/);
   assert.match(html, /\/api\/auth\/password\/request/);
   assert.match(html, /\/api\/auth\/password\/complete/);

@@ -520,13 +520,18 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
   <button onclick="setLang('en')" id="ll-en" class="lang-btn lang-btn-dark">🇬🇧 Eng</button>
   <button onclick="setLang('ru')" id="ll-ru" class="lang-btn lang-btn-dark">🇷🇺 Рус</button>
 </div>
+    <div style="padding:9px 11px;margin-bottom:10px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;color:#1e3a8a;font-size:11px;line-height:1.45;text-align:center">
+      უკვე გაქვთ ანგარიში? ერთი დაჭერით შედით. ახალი მომხმარებელი იმავე ღილაკით დარეგისტრირდება.
+    </div>
     <div style="display:grid;grid-template-columns:1fr;gap:8px;margin-bottom:10px">
-      <button id="oauth-google" type="button" class="btn btn-outline" disabled onclick="doSocialLogin('google')" style="justify-content:center;opacity:.55;font-weight:700">Google-ით გაგრძელება</button>
-      <button id="oauth-azure" type="button" class="btn btn-outline" disabled onclick="doSocialLogin('azure')" style="justify-content:center;opacity:.55;font-weight:700">Microsoft-ით გაგრძელება</button>
-      <button id="oauth-facebook" type="button" class="btn btn-outline" disabled onclick="doSocialLogin('facebook')" style="justify-content:center;opacity:.55;font-weight:700">Facebook-ით გაგრძელება</button>
+      <button id="oauth-google" type="button" class="btn btn-outline" disabled onclick="doSocialLogin('google')" aria-label="Google-ით შესვლა ან რეგისტრაცია" style="justify-content:space-between;opacity:.55;font-weight:700;padding:11px 14px"><span aria-hidden="true" style="font-size:17px;color:#4285f4">G</span><span class="oauth-label">Google-ით გაგრძელება</span><span aria-hidden="true">→</span></button>
+      <button id="oauth-azure" type="button" class="btn btn-outline" disabled onclick="doSocialLogin('azure')" aria-label="Microsoft-ით შესვლა ან რეგისტრაცია" style="justify-content:space-between;opacity:.55;font-weight:700;padding:11px 14px"><span aria-hidden="true" style="font-size:16px">▦</span><span class="oauth-label">Microsoft-ით გაგრძელება</span><span aria-hidden="true">→</span></button>
+      <button id="oauth-facebook" type="button" class="btn btn-outline" disabled onclick="doSocialLogin('facebook')" aria-label="Facebook-ით შესვლა ან რეგისტრაცია" style="justify-content:space-between;opacity:.55;font-weight:700;padding:11px 14px"><span aria-hidden="true" style="font-size:18px;color:#1877f2">f</span><span class="oauth-label">Facebook-ით გაგრძელება</span><span aria-hidden="true">→</span></button>
     </div>
     <p id="oauth-provider-status" style="font-size:10px;color:#64748b;text-align:center;margin:4px 0 12px">სოციალური შესვლის ხელმისაწვდომობა მოწმდება…</p>
-    <div style="display:flex;align-items:center;gap:8px;margin:2px 0 12px;color:#64748b;font-size:11px"><span style="height:1px;background:#e2e8f0;flex:1"></span><strong>ან ელფოსტით</strong><span style="height:1px;background:#e2e8f0;flex:1"></span></div>
+    <button id="email-auth-toggle" type="button" class="btn btn-ghost" onclick="toggleEmailAuth()" aria-expanded="false" aria-controls="email-auth-panel" style="width:100%;justify-content:center;margin-bottom:10px;color:#334155">✉️ ელფოსტით და პაროლით გაგრძელება</button>
+    <div id="email-auth-panel" class="hidden" style="padding-top:2px">
+    <div style="display:flex;align-items:center;gap:8px;margin:2px 0 12px;color:#64748b;font-size:11px"><span style="height:1px;background:#e2e8f0;flex:1"></span><strong>ელფოსტით</strong><span style="height:1px;background:#e2e8f0;flex:1"></span></div>
     <div class="tab-row" style="margin-bottom:14px">
       <button class="tab act" id="ltab-login" onclick="loginTab('login')">შესვლა</button>
       <button class="tab" id="ltab-reg" onclick="loginTab('reg')">ახალი ანგარიშის შექმნა</button>
@@ -567,6 +572,7 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
       ⚠️ მასწავლებლის ანგარიში ადმინის დამტკიცებას საჭიროებს.
     </div>
     <button class="btn btn-primary" style="width:100%;justify-content:center;padding:11px" id="l-btn" onclick="doLogin()" data-i18n="login">შესვლა</button>
+    </div>
     <div id="login-error" class="hidden" style="margin-top:8px;padding:8px;background:var(--red-l);border-radius:var(--r);font-size:12px;color:var(--red);text-align:center"></div>
     <div id="cloud-auth-status" style="display:none">Cloud auth status</div>
     <button class="btn btn-ghost" style="width:100%;justify-content:center;margin-top:6px" onclick="go('landing')" data-i18n="back">← მთავარ გვერდზე</button>
@@ -3487,7 +3493,8 @@ const EDUTEST_OAUTH_PROVIDERS=Object.freeze({
 function updateSocialButtonLabels(){
   Object.keys(EDUTEST_OAUTH_PROVIDERS).forEach(function(provider){
     const button=document.getElementById('oauth-'+provider);
-    if(button)button.textContent=EDUTEST_OAUTH_PROVIDERS[provider].label+'-ით გაგრძელება';
+    const label=button?.querySelector('.oauth-label');
+    if(label)label.textContent=EDUTEST_OAUTH_PROVIDERS[provider].label+'-ით გაგრძელება';
   });
 }
 function setOAuthButtonState(provider,enabled){
@@ -3513,7 +3520,7 @@ async function refreshSocialProviderButtons(){
     if(status){
       const pendingFacebook=settings.facebookPendingReview===true;
       status.textContent=enabled.length
-        ? 'ხელმისაწვდომია: '+enabled.map(p=>EDUTEST_OAUTH_PROVIDERS[p].label).join(', ')+(pendingFacebook?' · Facebook დაემატება Meta-ს დამტკიცების შემდეგ':'')
+        ? 'უსაფრთხო შესვლა მზადაა'+(pendingFacebook?' · Facebook დაემატება Meta-ს დამტკიცების შემდეგ':'')
         : 'სოციალური შესვლა დროებით მიუწვდომელია.';
     }
   }catch(error){
@@ -4057,7 +4064,7 @@ async function initServerAuth(){
     if(status){
       go('login');
       if(status==='registration-details-required'){loginMode='reg';loginTab('reg');}
-      if(status==='confirm-password'){loginMode='login';loginTab('login');}
+      if(status==='confirm-password'){loginMode='login';loginTab('login');showEmailRegistrationForm();}
       setLoginNotice(oauthStatusMessage(status),'warn');
       clearOAuthStatusParam();
     }
@@ -5153,6 +5160,8 @@ function executePromotion(){
 }
 function applyAuthModeLayout(){
   const registration=loginMode==='reg';
+  const panel=document.getElementById('email-auth-panel');if(panel)panel.classList.toggle('hidden',!emailRegistrationExpanded);
+  const toggle=document.getElementById('email-auth-toggle');if(toggle){toggle.setAttribute('aria-expanded',emailRegistrationExpanded?'true':'false');toggle.textContent=emailRegistrationExpanded?'✕ ელფოსტის ფორმის დახურვა':'✉️ ელფოსტით და პაროლით გაგრძელება';}
   const role=document.getElementById('email-role-field');if(role){role.classList.toggle('hidden',!registration);role.style.display=registration?'':'none';}
   ['email-address-field','email-password-field','l-btn'].forEach(function(id){const el=document.getElementById(id);if(el)el.style.display='';});
   const reg=document.getElementById('reg-fields');if(reg)reg.classList.toggle('hidden',!registration);
@@ -5163,9 +5172,14 @@ function showEmailRegistrationForm(){
   emailRegistrationExpanded=true;applyAuthModeLayout();
   const email=document.getElementById('l-email');if(email)setTimeout(function(){email.focus();},0);
 }
+function toggleEmailAuth(){
+  emailRegistrationExpanded=!emailRegistrationExpanded;
+  applyAuthModeLayout();
+  if(emailRegistrationExpanded){const email=document.getElementById('l-email');if(email)setTimeout(function(){email.focus();},0);}
+  else{const toggle=document.getElementById('email-auth-toggle');if(toggle)setTimeout(function(){toggle.focus();},0);}
+}
 function loginTab(tab){
   loginMode=tab;
-  emailRegistrationExpanded=tab==='reg';
   document.getElementById('ltab-login').classList.toggle('act',tab==='login');
   document.getElementById('ltab-reg').classList.toggle('act',tab==='reg');
   const so=document.getElementById('student-reg-only');if(so)so.classList.toggle('hidden',curRole!=='student');
@@ -5177,8 +5191,9 @@ function loginTab(tab){
 
 function openAuth(mode){
   go('login');
+  emailRegistrationExpanded=false;
   loginTab(mode==='reg'?'reg':'login');
-  const email=document.getElementById('l-email');if(email)setTimeout(function(){email.focus();},0);
+  setTimeout(function(){const first=document.querySelector('#p-login button[id^="oauth-"]:not([disabled])')||document.getElementById('email-auth-toggle');if(first)first.focus();},0);
 }
 
 function setRole(r){
