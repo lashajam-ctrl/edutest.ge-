@@ -13,7 +13,6 @@ const subjectAllowedForGrade = (subject: string, grade: number) => {
   return senior.includes(subject);
 };
 
-function parseQuestions(value: string) { try { return JSON.parse(value) as unknown[]; } catch { return []; } }
 function publicTest(row: typeof customTests.$inferSelect) {
   return { id: row.id, createdBy: row.createdBy, title: row.title, subject: row.subject, grade: row.grade, durationMinutes: row.durationMinutes, attemptsAllowed: row.attemptsAllowed, published: row.published, createdAt: row.createdAt, updatedAt: row.updatedAt, deprecated: true };
 }

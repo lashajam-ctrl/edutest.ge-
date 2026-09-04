@@ -30,8 +30,6 @@ const SUBJECTS_BY_GRADE = {
 const sha = value => createHash("sha256").update(value).digest("hex");
 const normalize = value => String(value ?? "").normalize("NFKC").toLocaleLowerCase("ka-GE").replace(/\s+/gu, " ").trim();
 const sql = value => value == null ? "NULL" : typeof value === "number" ? String(value) : `'${String(value).replaceAll("'", "''")}'`;
-const bool = value => value ? 1 : 0;
-
 function parseArgs(argv) {
   const args = { source: "", out: resolve(".openai/d1-v11-import"), report: resolve("reports/v11-platform-import-report.json"), dryRun: false };
   for (let i = 0; i < argv.length; i++) {

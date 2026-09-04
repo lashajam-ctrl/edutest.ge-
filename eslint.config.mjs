@@ -11,6 +11,13 @@ const eslintConfig = defineConfig([
     ".next/**",
     "out/**",
     "build/**",
+    "dist/**",
+    "work/**",
+    ".openai/**",
+    "supabase/functions/**",
+    ".wrangler/**",
+    ".wrangler-config/**",
+    "node_modules/**",
     "next-env.d.ts",
   ]),
 ]);

@@ -23,7 +23,7 @@ export async function sha256(value: string) {
   return bytesToBase64(new Uint8Array(await crypto.subtle.digest("SHA-256", encoder.encode(value))));
 }
 
-const passwordIterations = 100_000;
+const passwordIterations = 210_000;
 const legacyPasswordIterations = 210_000;
 
 export async function hashPassword(password: string, storedSalt?: string) {
@@ -63,6 +63,10 @@ export async function getSessionUser(request: Request) {
     const onboardingRoute = path === "/api/auth/session" || path === "/api/auth/profile" || path === "/api/auth/logout" || path.startsWith("/api/auth/oauth/");
     if (!onboardingRoute) return null;
   }
+  if (row?.user.accountStatus === "email_pending") {
+    const emailPendingRoute = path === "/api/auth/session" || path === "/api/auth/email/resend" || path === "/api/auth/logout";
+    if (!emailPendingRoute) return null;
+  }
   if (!row) return null;
   let mfaVerified = true;
   if (row.user.role === "admin") {
@@ -97,6 +101,7 @@ export function publicUser(user: typeof users.$inferSelect) {
     privacyVersion: user.privacyVersion ?? "",
     profileCompletedAt: user.profileCompletedAt?.toISOString() ?? "",
     accountStatus: user.accountStatus,
+    emailVerified: user.emailVerified,
   };
 }
 

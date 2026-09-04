@@ -1,7 +1,7 @@
 (function(){
   'use strict';
   REPORTS=[];ADMIN_AUDIT_LOG=[];ANSWER_OVERRIDES={};_qeCustom={};
-  try{['edutest_reports','edutest_audit','edutest_ans_overrides','edutest_custom_q','teams_webhook','notif_settings'].forEach(key=>localStorage.removeItem(key));}catch(e){}
+  try{['edutest_reports','edutest_audit','edutest_ans_overrides','edutest_custom_q','teams_webhook','notif_settings'].forEach(key=>localStorage.removeItem(key));}catch{}
   function element(tag,text,className){const node=document.createElement(tag);if(className)node.className=className;if(text!==undefined&&text!==null)node.textContent=String(text);return node;}
   function tableCell(row,text,style){const cell=element('td',text);if(style)cell.style.cssText=style;row.appendChild(cell);return cell;}
   function emptyRow(tbody,columns,message){tbody.replaceChildren();const row=element('tr');const cell=tableCell(row,message,'text-align:center;padding:24px;color:var(--gray)');cell.colSpan=columns;tbody.appendChild(row);}
@@ -22,7 +22,7 @@
 
   globalThis.loadAuditLog=async function(){
     if(CUR_USER?.role!=='admin')return;
-    try{const response=await fetch('/api/admin/audit');if(!response.ok)return;const data=await response.json();ADMIN_AUDIT_LOG=(data.events||[]).map(event=>({ts:event.createdAt,admin:event.adminEmail,action:event.action,details:event.details}));}catch(e){}
+    try{const response=await fetch('/api/admin/audit');if(!response.ok)return;const data=await response.json();ADMIN_AUDIT_LOG=(data.events||[]).map(event=>({ts:event.createdAt,admin:event.adminEmail,action:event.action,details:event.details}));}catch{}
   };
   globalThis.saveAuditLog=function(){};
   globalThis.logAudit=globalThis.logAuditEvent=function(action,details){
@@ -68,7 +68,7 @@
     if(!rows.length){emptyRow(tbody,6,'შედეგები არ არის');return;}tbody.replaceChildren();rows.forEach(result=>{const row=element('tr'),user=USER_DB.find(item=>item.email===result.userId),pct=Number(result.pct)||0;tableCell(row,user?.name||result.userName||result.userId,'font-weight:500;font-size:13px');tableCell(row,testLabel(result),'font-size:12px');tableCell(row,pct+'%','font-weight:700;color:'+(pct>=70?'#16a34a':pct>=50?'#d97706':'#dc2626'));tableCell(row,(result.earned||0)+'/'+(result.totalPts||0),'font-size:12px');const status=tableCell(row,'');status.appendChild(element('span',performanceBadgeLabel(pct),'badge '+(pct>=90?'b-blue':pct>=70?'b-green':pct>=50?'b-amber':'b-red')));tableCell(row,result.date||'—','font-size:11px;color:var(--gray)');tbody.appendChild(row);});
   };
 
-  globalThis.loadReports=async function(){if(CUR_USER?.role!=='admin')return;try{const response=await fetch('/api/reports');if(!response.ok)return;const data=await response.json();REPORTS=data.reports||[];}catch(e){}};
+  globalThis.loadReports=async function(){if(CUR_USER?.role!=='admin')return;try{const response=await fetch('/api/reports');if(!response.ok)return;const data=await response.json();REPORTS=data.reports||[];}catch{}};
   globalThis.saveReports=function(){};
   globalThis.submitReport=async function(){
     const question=curTestQs&&curTestQs[qIdx],type=document.getElementById('report-type')?.value||'other',comment=document.getElementById('report-comment')?.value||'';if(!question||!CUR_USER){alert('რეპორტის გასაგზავნად ავტორიზაცია აუცილებელია.');return;}
@@ -109,7 +109,6 @@
     const container=document.getElementById('t-analytics');if(!container)return;container.replaceChildren();const heading=element('div','ანალიტიკა');heading.style.cssText='font-weight:600;margin-bottom:14px';container.appendChild(heading);const results=SESSION_RESULTS;if(!results.length){const card=element('div','ანალიტიკა გამოჩნდება მოსწავლეების მიერ ტესტების დასრულების შემდეგ.','card');card.style.cssText='padding:24px;color:var(--gray);text-align:center';container.appendChild(card);return;}const subjects={};results.forEach(result=>{const key=result.subject||'სხვა';subjects[key]??=[];subjects[key].push(result);});Object.entries(subjects).forEach(([subject,items])=>{const card=element('div','', 'card');card.style.cssText='padding:14px;margin-bottom:8px;display:flex;justify-content:space-between';card.append(element('span',subject+' · '+items.length+' შედეგი'),element('strong',average(items)+'%'));container.appendChild(card);});
   };
 
-  const originalTeacherTests=globalThis.renderTeacherTests;
   globalThis.renderTeacherTests=function(){
     populateSubjectDropdown('t-filter-subject');const subject=document.getElementById('t-filter-subject')?.value||'',grade=document.getElementById('t-filter-grade')?.value||'',tbody=document.getElementById('t-test-tbody');if(!tbody)return;let tests=ALL_TESTS.filter(test=>!test.catalogHidden);if(subject)tests=tests.filter(test=>subjectFamily(test.subject)===subject);if(grade)tests=tests.filter(test=>Number(test.grade)===Number(grade));if(!tests.length){emptyRow(tbody,6,t('no_tests'));return;}tbody.replaceChildren();tests.forEach(test=>{const row=element('tr');const title=tableCell(row,'','font-weight:500');title.appendChild(element('div',txTitle(test)));const composition=testCompositionLabel(test);if(composition){const detail=element('div','🧩 '+composition);detail.style.cssText='font-size:11px;color:var(--gray);margin-top:4px';title.appendChild(detail);}if(!isCurriculumEligible(test)){const warning=element('div','⚠ სასწავლო გეგმასთან შესადარებელია','badge b-amber');warning.style.marginTop='4px';title.appendChild(warning);}tableCell(row,(SUBJ_ICONS[test.subject]||'📝')+' '+subjectFamily(test.subject));tableCell(row,test.grade);tableCell(row,test.count);tableCell(row,'სავარჯიშო');const actions=tableCell(row,'','display:flex;gap:4px');actions.append(actionButton('▶','btn btn-ghost btn-sm','ტესტის წინასწარი ნახვა',()=>startTestById(test.id)),actionButton('✏️','btn btn-ghost btn-sm','ტესტის კითხვების რედაქტირება',()=>openQEditor(test.id)));if(test.teacherCreated)actions.appendChild(actionButton('🗑','btn btn-ghost btn-sm','ტესტის წაშლა',()=>adminDeleteTest(test.id)));tbody.appendChild(row);});
   };
@@ -153,5 +152,5 @@
   globalThis.aNav=function(id,node){previousANav(id,node);if(id==='a-reports')loadReports().then(renderAdminReports);if(id==='a-audit')loadAuditLog().then(renderAdminAudit);if(id==='a-settings')hydrateAdminContent();if(id==='a-prizes')renderAdminPrizeForm();};
   const previousTNav=globalThis.tNav;
   globalThis.tNav=function(id,node){previousTNav(id,node);if(id==='t-analytics')renderTeacherAnalytics();};
-  document.addEventListener('DOMContentLoaded',()=>{const adminRole=document.querySelector('#aeu-role option[value="admin"]');if(adminRole)adminRole.remove();const builderSubject=document.getElementById('b-subj'),builderGrade=document.getElementById('b-grade');populateBuilderSubjects();builderSubject?.addEventListener('change',()=>{_builderSelection=[];renderBuilderPicker();});builderGrade?.addEventListener('change',()=>{_builderSelection=[];populateBuilderSubjects();renderBuilderPicker();});});
+  document.addEventListener('DOMContentLoaded',()=>{const adminRole=document.querySelector('#aeu-role option[value="admin"]');if(adminRole)adminRole.remove();const builderSubject=document.getElementById('b-subj'),builderGrade=document.getElementById('b-grade');populateBuilderSubjects();builderSubject?.addEventListener('change',()=>{selQs.clear();loadBuilderCatalog();});builderGrade?.addEventListener('change',()=>{selQs.clear();populateBuilderSubjects();loadBuilderCatalog();});});
 })();

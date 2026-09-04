@@ -8,6 +8,12 @@
   let catalogLoading=null;
   window.EDUTEST_CATALOG_STATE='loading';
 
+  function announce(message,tone='error'){
+    const node=document.createElement('div');node.setAttribute('role',tone==='error'?'alert':'status');node.textContent=String(message||'');
+    node.style.cssText='position:fixed;left:50%;top:18px;transform:translateX(-50%);z-index:100100;max-width:min(520px,calc(100vw - 24px));padding:12px 16px;border-radius:14px;color:#fff;font-weight:700;text-align:center;box-shadow:0 14px 34px rgba(35,22,36,.25);background:'+(tone==='success'?'#237c68':'#9f3f4c');
+    document.body.appendChild(node);setTimeout(()=>node.remove(),5000);
+  }
+
   function catalogErrorMessage(error){
     const message=String(error&&error.message||error||'');
     if(message.includes('ავტორიზაცია აუცილებელია'))return 'სესია დასრულდა — გთხოვთ, თავიდან შეხვიდეთ.';
@@ -39,7 +45,7 @@
         else ALL_TESTS.push(test);
       }
     }
-    if(typeof populateSubjectDropdown==='function')populateSubjectDropdown('s-subj-filter');
+    if(typeof populateSubjectDropdown==='function')populateSubjectDropdown('s-filter-subject');
     if(typeof renderStudentTests==='function'&&document.getElementById('p-student')?.classList.contains('active'))renderStudentTests();
     if(typeof renderTeacherTests==='function'&&document.getElementById('p-teacher')?.classList.contains('active'))renderTeacherTests();
     if(typeof renderAssignPanel==='function')renderAssignPanel();
@@ -92,21 +98,21 @@
   }
 
   function resultBadge(pct){
-    if(pct>=90)return {badge:'🏆 Excellent',bc:'b-blue'};
-    if(pct>=70)return {badge:'✅ Good',bc:'b-green'};
-    if(pct>=50)return {badge:'📘 Pass',bc:'b-amber'};
-    return {badge:'❌ Fail',bc:'b-red'};
+    if(pct>=90)return {badge:'🏆 შესანიშნავი',bc:'b-blue'};
+    if(pct>=70)return {badge:'✅ კარგი',bc:'b-green'};
+    if(pct>=50)return {badge:'📘 ჩაბარებული',bc:'b-amber'};
+    return {badge:'❌ გასაუმჯობესებელი',bc:'b-red'};
   }
 
   startTest=async function(){
     if(!CUR_USER){go('login');return;}
     let requestedId=curTest&&curTest.id;
-    if(!requestedId){alert('ტესტი ვერ მოიძებნა.');go(curRole==='teacher'?'teacher':'student');return;}
+    if(!requestedId){announce('ტესტი ვერ მოიძებნა.');go(curRole==='teacher'?'teacher':'student');return;}
     if(!curTest.serverBacked){
       const loaded=await loadServerCatalog(true);
       curTest=ALL_TESTS.find(test=>test&&test.serverBacked&&String(test.id)===String(requestedId))||null;
       if(!loaded||!curTest){
-        alert('ტესტების კატალოგი განახლდა. გთხოვთ, აირჩიოთ ტესტი ხელახლა.');
+        announce('ტესტების კატალოგი განახლდა. გთხოვთ, აირჩიოთ ტესტი ხელახლა.');
         go(curRole==='teacher'?'teacher':'student');
         return;
       }
@@ -154,7 +160,7 @@
       timerInt=setInterval(()=>{timerSec--;updateTimer();if(timerSec<=0){clearInterval(timerInt);finishTest();}},1000);
     }catch(error){
       serverSessionId=null;
-      alert(catalogErrorMessage(error));
+      announce(catalogErrorMessage(error));
       go(curRole==='teacher'?'teacher':'student');
     }
   };
@@ -166,7 +172,7 @@
       const loaded=await loadServerCatalog(true);
       target=ALL_TESTS.find(test=>test&&test.serverBacked&&String(test.id)===String(id));
       if(!loaded||!target){
-        alert('ტესტების კატალოგი განახლდა. გთხოვთ, აირჩიოთ ტესტი ხელახლა.');
+        announce('ტესტების კატალოგი განახლდა. გთხოვთ, აირჩიოთ ტესტი ხელახლა.');
         go(curRole==='teacher'?'teacher':'student');
         return;
       }
@@ -179,7 +185,7 @@
     if(serverSubmitting)return;
     if(!serverSessionId){
       if(document.getElementById('p-results')?.classList.contains('active'))return;
-      alert('უსაფრთხო ტესტის სესია ვერ მოიძებნა.');return;
+      announce('უსაფრთხო ტესტის სესია ვერ მოიძებნა.');return;
     }
     serverSubmitting=true;
     setTestLoading('პასუხები სერვერზე მოწმდება…');
@@ -201,12 +207,13 @@
       if(typeof _isDailyBonus!=='undefined'&&_isDailyBonus){xpEarned*=2;if(typeof markDailyDone==='function')markDailyDone(CUR_USER.email);_isDailyBonus=false;}
       result.xpEarned=xpEarned;
       SESSION_RESULTS.unshift(result);saveResults();_lastResult=result;serverSessionId=null;
+      if(typeof syncUserLearningState==='function')syncUserLearningState();
       if(typeof showXpToast==='function'&&xpEarned)showXpToast(xpEarned,null);
       if(typeof logAuditEvent==='function')logAuditEvent('TEST_DONE_VERIFIED',(CUR_USER&&CUR_USER.email||'')+' | '+result.testId+' | '+result.pct+'%');
       renderResultsPage(result);go('results');
       if(typeof maybeAutoSpeakResult==='function')setTimeout(()=>maybeAutoSpeakResult(result),120);
     }catch(error){
-      alert(catalogErrorMessage(error)+' პასუხები შენარჩუნებულია და შეგიძლიათ ხელახლა გაგზავნოთ.');
+      announce(catalogErrorMessage(error)+' პასუხები შენარჩუნებულია და შეგიძლიათ ხელახლა გაგზავნოთ.');
     }finally{serverSubmitting=false;}
   };
 
@@ -232,8 +239,8 @@
       const payload={title:(document.getElementById('b-title')?.value||'').trim(),subject:document.getElementById('b-subj')?.value||'',grade:Number(document.getElementById('b-grade')?.value||1),durationMinutes:Number(document.getElementById('b-time')?.value||20),attemptsAllowed:Number(document.getElementById('b-att')?.value||2),published:!!document.getElementById('b-pub')?.checked,questionIds:[...selQs]};
       const response=await fetch('/api/assessments/builder',{method:'POST',credentials:'include',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(payload)});
       const data=await response.json().catch(()=>({}));if(!response.ok)throw new Error(data.error||'ტესტი ვერ შეიქმნა');
-      if(data.test)installCatalog([data.test]);hideBuilder();if(typeof renderTeacherTests==='function')renderTeacherTests();alert('ტესტი შეიქმნა და უსაფრთხოდ შეინახა.');
-    }catch(error){alert(catalogErrorMessage(error));}
+      if(data.test)installCatalog([data.test]);hideBuilder();if(typeof renderTeacherTests==='function')renderTeacherTests();announce('ტესტი შეიქმნა და უსაფრთხოდ შეინახა.','success');
+    }catch(error){announce(catalogErrorMessage(error));}
   };
 
   async function loadPublicStats(){
@@ -243,7 +250,7 @@
       const values={'lp-question-count':data.questions,'lp-test-count':data.tests,'lp-subject-count':data.subjects,'lp-today-tests':data.todayTests,'lp-excellent':data.excellentBadges,'lp-average-score':data.averageScore};
       Object.entries(values).forEach(([id,raw])=>{const value=Math.max(0,Number(raw)||0),el=document.getElementById(id);if(el)el.textContent=value.toLocaleString('ka-GE');});
       if(status){status.textContent=Number(data.todayTests||0)?'მონაცემები განახლებულია რეალური აქტივობიდან.':'დღეს ჯერ დასრულებული ტესტი არ დაფიქსირებულა.';status.removeAttribute('aria-busy');}
-    }catch(_){
+    }catch{
       ['lp-question-count','lp-test-count','lp-subject-count','lp-today-tests','lp-excellent','lp-average-score'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent='—';});
       if(status){status.textContent='რეალური მაჩვენებლები დროებით მიუწვდომელია.';status.removeAttribute('aria-busy');}
     }

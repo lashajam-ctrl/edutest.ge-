@@ -26,8 +26,26 @@ function secureResponse(response: Response): Response {
   secured.headers.set("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
   secured.headers.set("X-Frame-Options", "SAMEORIGIN");
   secured.headers.set("Cross-Origin-Opener-Policy", "same-origin-allow-popups");
+  secured.headers.set("Cross-Origin-Resource-Policy", "same-origin");
+  secured.headers.set("Strict-Transport-Security", "max-age=31536000; includeSubDomains; preload");
+  secured.headers.set("Content-Security-Policy", [
+    "default-src 'self'",
+    "base-uri 'self'",
+    "object-src 'none'",
+    "frame-ancestors 'self'",
+    "form-action 'self'",
+    "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://static.cloudflareinsights.com",
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+    "font-src 'self' https://fonts.gstatic.com data:",
+    "img-src 'self' data: blob:",
+    "media-src 'self' data: blob:",
+    "connect-src 'self' https://rlvxujpwoooxprhzgysj.supabase.co https://cloudflareinsights.com",
+    "worker-src 'self' blob:",
+    "upgrade-insecure-requests",
+  ].join("; "));
   if ((secured.headers.get("Content-Type") ?? "").includes("text/html")) {
     secured.headers.set("Cache-Control", "no-store");
+    secured.headers.set("CDN-Cache-Control", "no-store");
   }
   return secured;
 }

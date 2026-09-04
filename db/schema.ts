@@ -79,6 +79,18 @@ export const passwordResetRequests = sqliteTable("password_reset_requests", {
   index("idx_password_reset_requests_user_expires").on(table.userId, table.expiresAt),
 ]);
 
+export const emailVerificationRequests = sqliteTable("email_verification_requests", {
+  id: text("id").primaryKey(),
+  userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  tokenHash: text("token_hash").notNull(),
+  expiresAt: integer("expires_at", { mode: "timestamp_ms" }).notNull(),
+  usedAt: integer("used_at", { mode: "timestamp_ms" }),
+  createdAt: integer("created_at", { mode: "timestamp_ms" }).notNull(),
+}, (table) => [
+  uniqueIndex("email_verification_token_unique").on(table.tokenHash),
+  index("idx_email_verification_user_expires").on(table.userId, table.expiresAt),
+]);
+
 export const guardianConsentRequests = sqliteTable("guardian_consent_requests", {
   id: text("id").primaryKey(),
   childUserId: text("child_user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
@@ -103,6 +115,12 @@ export const attempts = sqliteTable("attempts", {
   answersJson: text("answers_json").notNull(),
   submittedAt: integer("submitted_at", { mode: "timestamp_ms" }).notNull(),
 }, (table) => [index("idx_attempts_user_submitted").on(table.userId, table.submittedAt)]);
+
+export const userLearningState = sqliteTable("user_learning_state", {
+  userId: text("user_id").primaryKey().references(() => users.id, { onDelete: "cascade" }),
+  stateJson: text("state_json").notNull().default("{}"),
+  updatedAt: integer("updated_at", { mode: "timestamp_ms" }).notNull(),
+});
 
 export const assignments = sqliteTable("assignments", {
   id: text("id").primaryKey(),

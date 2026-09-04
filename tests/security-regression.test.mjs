@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { access, readFile, readdir } from "node:fs/promises";
+import { access, readFile } from "node:fs/promises";
 import test from "node:test";
 
 const root = new URL("../", import.meta.url);
@@ -62,7 +62,7 @@ test("renders untrusted CSV, user and AI values as text, including XSS-shaped in
 });
 
 test("persists teacher and administrator management data on the server", async () => {
-  const [schema, html, management, attempts, users, reports, migration, attemptIndexMigration, builder, assessmentReport] = await Promise.all([
+  const [schema, html, , attempts, users, reports, migration, attemptIndexMigration, builder, assessmentReport] = await Promise.all([
     source("db/schema.ts"), source("public/app.html"), source("public/management-overrides.js"),
     source("app/api/attempts/route.ts"), source("app/api/admin/users/route.ts"), source("app/api/reports/route.ts"),
     source("drizzle/0003_adorable_lockheed.sql"), source("drizzle/0004_boring_wong.sql"),
@@ -149,12 +149,16 @@ test("publishes privacy and terms pages with current feature disclosures", async
 
 test("publishes verified catalog counts without frozen marketing counters", async () => {
   const html = await source("public/app.html");
-  assert.match(html, /19,131/);
-  assert.match(html, /data-target="556"/);
-  assert.match(html, /15 საგანი/);
+  const statsClient = await source("public/server-assessments.js");
+  assert.match(html, /id="lp-question-count"[^>]*>—</);
+  assert.match(html, /id="lp-test-count"[^>]*>—</);
+  assert.match(html, /id="lp-subject-count"[^>]*>—</);
+  assert.doesNotMatch(html, /15 საგანი/);
   assert.match(html, /აქტიური კითხვა/);
+  assert.match(statsClient, /fetch\('\/api\/public\/stats'/);
+  assert.match(statsClient, /cache:'no-store'/);
   assert.doesNotMatch(html, /გადამოწმებული კითხვა/);
-  assert.doesNotMatch(html, /18,420|12,000 შესანიშნავი|98%|12 საგანი|420 ტესტ/);
+  assert.doesNotMatch(html, /19,131|data-target="556"|18,420|12,000 შესანიშნავი|98%|12 საგანი|420 ტესტ/);
 });
 
 test("keeps payments disabled and uses secure server OAuth sessions for configured providers", async () => {
@@ -247,4 +251,51 @@ test("offers one clear authentication surface without exposing backend terminolo
   assert.match(html, /ამ ელფოსტაზე ანგარიში უკვე არსებობს.*ერთხელ შეიყვანეთ მისი პაროლი/);
   assert.doesNotMatch(html, />☁️ Cloud sync/);
   assert.doesNotMatch(html, /დადასტურების წერილის ხელახლა გაგზავნა/);
+});
+
+test("registers a complete validated profile atomically and requires email verification", async () => {
+  const [register, auth, confirm, resend, schema, html] = await Promise.all([
+    source("app/api/auth/register/route.ts"), source("lib/auth.ts"),
+    source("app/api/auth/email/confirm/route.ts"), source("app/api/auth/email/resend/route.ts"),
+    source("db/schema.ts"), source("public/app.html"),
+  ]);
+  assert.match(register, /consumeRateLimit/);
+  assert.match(register, /termsVersion/);
+  assert.match(register, /privacyVersion/);
+  assert.match(register, /guardianEmail/);
+  assert.match(register, /accountStatus: "email_pending"/);
+  assert.match(register, /createAndSendEmailVerification/);
+  assert.match(auth, /row\?\.user\.accountStatus === "email_pending"/);
+  assert.match(confirm, /emailVerified: true/);
+  assert.match(confirm, /accountStatus: "active"/);
+  assert.match(resend, /consumeRateLimit/);
+  assert.match(schema, /email_verification_requests/);
+  assert.match(html, /id="email-verification-modal"/);
+  assert.match(html, /\/api\/auth\/email\/resend/);
+  assert.doesNotMatch(html, /\/api\/auth\/profile[^'"\n]*.*registration/i);
+});
+
+test("persists learning state server-side and sends only verified result emails", async () => {
+  const [state, data, schema, submit, email] = await Promise.all([
+    source("app/api/user-state/route.ts"), source("app/api/auth/data/route.ts"), source("db/schema.ts"),
+    source("app/api/assessments/submit/route.ts"), source("lib/result-email.ts"),
+  ]);
+  assert.match(state, /getSessionUser/);
+  assert.match(state, /consumeRateLimit/);
+  assert.match(state, /encoded\.length > 100_000/);
+  assert.match(schema, /user_learning_state/);
+  assert.match(data, /learningState/);
+  assert.match(submit, /sendAssessmentResultEmail/);
+  assert.match(email, /user\.emailVerified/);
+  assert.match(email, /guardianVerifiedAt/);
+  assert.doesNotMatch(email, /answer|correctAnswer|answerKey/i);
+});
+
+test("sets modern transport, framing and content security headers", async () => {
+  const worker = await source("worker/index.ts");
+  assert.match(worker, /Strict-Transport-Security/);
+  assert.match(worker, /Content-Security-Policy/);
+  assert.match(worker, /frame-ancestors 'self'/);
+  assert.match(worker, /object-src 'none'/);
+  assert.match(worker, /CDN-Cache-Control", "no-store"/);
 });

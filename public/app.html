@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;600;700;800&display=swap" rel="stylesheet"/>
 <title>EduTest.ge — სკოლის ონლაინ ტესტების პლატფორმა I–XII კლასი</title>
-<meta name="description" content="EduTest.ge — საქართველოს სასკოლო ონლაინ სატესტო პლატფორმა. 556 აქტიური ტესტი, 19,131 კითხვა, 15 საგანი, I–XII კლასი. ქართული, ინგლისური, რუსული ენებით. კურიკულუმთან შესაბამისობა საჭიროებს საგნის ექსპერტების პერიოდულ შემოწმებას."/>
+<meta name="description" content="EduTest.ge — საქართველოს სასკოლო ონლაინ სატესტო პლატფორმა I–XII კლასისთვის. კლასზე მორგებული ტესტები, უსაფრთხო შეფასება და პროგრესის ანალიზი."/>
 <meta name="keywords" content="ედუტესტი, სკოლა, ტესტი, ქართული, მათემატიკა, ისტორია, ბიოლოგია, ონლაინ სწავლება, edutest, georgia school test"/>
 <meta name="author" content="EduTest.ge"/>
 <meta name="robots" content="index, follow"/>
@@ -30,16 +30,16 @@
 <!-- Open Graph -->
 <meta property="og:type" content="website"/>
 <meta property="og:title" content="EduTest.ge — სკოლის ონლაინ ტესტების პლატფორმა"/>
-<meta property="og:description" content="556 აქტიური ტესტი · 19,131 კითხვა · 15 საგანი · I–XII კლასი. შეამოწმე ცოდნა და მოიპოვე 🏆 Excellent ბეიჯი!"/>
+<meta property="og:description" content="კლასზე მორგებული სასკოლო ტესტები, უსაფრთხო შეფასება და პროგრესის გასაგები ანალიზი."/>
 <meta property="og:url" content="https://edutest.ge/"/>
-<meta property="og:image" content="https://edutest.ge/og-image.png"/>
+<meta property="og:image" content="https://edutest.ge/og-v2.png"/>
 <meta property="og:locale" content="ka_GE"/>
 <meta property="og:site_name" content="EduTest.ge"/>
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="EduTest.ge — სკოლის ონლაინ ტესტების პლატფორმა"/>
-<meta name="twitter:description" content="556 ტესტი · 19,131 კითხვა · I–XII კლასი. ქართული სკოლებისთვის."/>
-<meta name="twitter:image" content="https://edutest.ge/og-image.png"/>
+<meta name="twitter:description" content="კლასზე მორგებული სასკოლო ტესტები I–XII კლასისთვის."/>
+<meta name="twitter:image" content="https://edutest.ge/og-v2.png"/>
 <!-- Schema.org JSON-LD -->
 <script type="application/ld+json">
 {
@@ -71,7 +71,7 @@
     }
   },
   "educationalLevel": ["Grade1", "Grade2", "Grade3", "Grade4", "Grade5", "Grade6", "Grade7", "Grade8", "Grade9", "Grade10", "Grade11", "Grade12"],
-  "teaches": ["მათემატიკა", "ქართული ენა", "ქართული ლიტერატურა", "ინგლისური", "რუსული", "ბიოლოგია", "ქიმია", "ფიზიკა", "ისტორია", "გეოგრაფია", "ბუნება"]
+  "teaches": ["მათემატიკა", "ქართული ენა და ლიტერატურა", "ინგლისური", "რუსული", "ბიოლოგია", "ქიმია", "ფიზიკა", "ისტორია", "გეოგრაფია", "ბუნება"]
 }
 </script>
 <style>
@@ -413,7 +413,7 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
 }
 </style>
 <!-- Supabase JS v2: browser client for Auth + cloud learning history. -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script async src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" onload="window.dispatchEvent(new Event('edutest-supabase-ready'))"></script>
 </head>
 <body>
 <div id="global-spinner"></div>
@@ -443,7 +443,7 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
   <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;text-align:center;color:#fff">
     <div class="badge b-blue" style="background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.75);margin-bottom:18px" data-i18n="hero_badge">🇬🇪 ქართული სკოლებისთვის</div>
     <h1 style="font-size:clamp(1.8rem,5vw,3rem);font-weight:800;line-height:1.1;margin-bottom:16px"><span data-i18n="hero_h1">სატესტო პლატფორმა</span><br><span style="color:#93c5fd" data-i18n="hero_h1b">ახალი თაობისთვის</span></h1>
-    <p style="font-size:15px;opacity:.85;max-width:480px;margin-bottom:28px;line-height:1.6" data-i18n="hero_desc">შეამოწმე ცოდნა, მოიპოვე 🏆 Excellent ბეიჯი და გახდი კლასის საუკეთესო! I–XII კლასი · 15 საგანი · ავტომატური შეფასება.</p>
+    <p style="font-size:15px;opacity:.85;max-width:480px;margin-bottom:28px;line-height:1.6" data-i18n="hero_desc">შეამოწმე ცოდნა, მიიღე გასაგები უკუკავშირი და თვალყური ადევნე პროგრესს. I–XII კლასი · უსაფრთხო ავტომატური შეფასება.</p>
     <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center">
       <button class="btn btn-lg" style="background:#fff;color:#1d4ed8" onclick="openAuth('reg')" data-i18n="hero_cta">▶ დაწყება — უფასოდ</button>
       <button class="btn btn-lg" style="background:rgba(255,255,255,.1);color:#fff;border:1.5px solid rgba(255,255,255,.75)" onclick="openAuth('login')" data-i18n="login">შესვლა</button>
@@ -451,25 +451,24 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
     <!-- VERIFIED CATALOG COUNTS -->
     <div id="lp-social-proof" style="display:flex;gap:0;margin-top:36px;flex-wrap:wrap;justify-content:center;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:0;overflow:hidden;max-width:660px;width:100%">
       <div style="flex:1;min-width:160px;padding:18px 20px;text-align:center;border-right:1px solid rgba(255,255,255,.15)">
-        <div style="font-size:24px;font-weight:800;color:#fff;line-height:1"><span class="lp-counter" data-target="19131">0</span></div>
+        <div style="font-size:24px;font-weight:800;color:#fff;line-height:1"><span id="lp-question-count" class="lp-counter">—</span></div>
         <div style="opacity:.75;font-size:12px;margin-top:4px">✅ აქტიური კითხვა</div>
       </div>
       <div style="flex:1;min-width:160px;padding:18px 20px;text-align:center;border-right:1px solid rgba(255,255,255,.15)">
-        <div style="font-size:24px;font-weight:800;color:#fbbf24;line-height:1"><span class="lp-counter" data-target="556">0</span></div>
+        <div style="font-size:24px;font-weight:800;color:#fbbf24;line-height:1"><span id="lp-test-count" class="lp-counter">—</span></div>
         <div style="opacity:.75;font-size:12px;margin-top:4px">📝 მზა ტესტი</div>
       </div>
       <div style="flex:1;min-width:160px;padding:18px 20px;text-align:center">
-        <div style="font-size:24px;font-weight:800;color:#4ade80;line-height:1"><span class="lp-counter" data-target="15">0</span></div>
+        <div style="font-size:24px;font-weight:800;color:#4ade80;line-height:1"><span id="lp-subject-count" class="lp-counter">—</span></div>
         <div style="opacity:.75;font-size:12px;margin-top:4px">📚 საგანი</div>
       </div>
     </div>
-    <!-- CLASSIC MINI STATS -->
-    <div style="display:flex;gap:32px;margin-top:24px;flex-wrap:wrap;justify-content:center;opacity:.7">
-      <div style="text-align:center"><div style="font-size:20px;font-weight:700">15</div><div style="font-size:11px" data-i18n="stat_subject">საგანი</div></div>
-      <div style="text-align:center"><div style="font-size:20px;font-weight:700">I–XII</div><div style="font-size:11px" data-i18n="stat_grade">კლასი</div></div>
-      <div style="text-align:center"><div style="font-size:20px;font-weight:700">12 600+</div><div style="font-size:11px" data-i18n="stat_question">კითხვა</div></div>
-      <div style="text-align:center"><div style="font-size:20px;font-weight:700">420</div><div style="font-size:11px">თემატური ჯგუფი</div></div>
+    <div id="lp-live-activity" aria-label="დღევანდელი რეალური აქტივობა" style="display:flex;gap:18px;margin-top:14px;flex-wrap:wrap;justify-content:center;font-size:12px;color:rgba(255,255,255,.86)">
+      <span>დღეს დასრულდა <strong id="lp-today-tests">—</strong> ტესტი</span>
+      <span>შესანიშნავი შედეგი <strong id="lp-excellent">—</strong></span>
+      <span>საშუალო შედეგი <strong id="lp-average-score">—</strong>%</span>
     </div>
+    <div id="lp-live-status" role="status" aria-live="polite" style="font-size:12px;margin-top:16px;opacity:.78">რეალური მონაცემები იტვირთება…</div>
   </div>
 
   <!-- HOW IT WORKS -->
@@ -488,7 +487,7 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
       <div style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:18px"><div style="font-size:24px;margin-bottom:8px">📝</div><h3 style="color:#fff;font-weight:600;margin-bottom:6px" data-i18n="feat1_title">ონლაინ ტესტები</h3><p style="color:rgba(255,255,255,.7);font-size:12px;line-height:1.5" data-i18n="feat1_desc">მასწავლებლები ქმნიან ტესტებს, მოსწავლეები ასრულებენ ბრაუზერში</p></div>
       <div style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:18px"><div style="font-size:24px;margin-bottom:8px">✅</div><h3 style="color:#fff;font-weight:600;margin-bottom:6px" data-i18n="feat2_title">ავტო-შეფასება</h3><p style="color:rgba(255,255,255,.7);font-size:12px;line-height:1.5" data-i18n="feat2_desc">MCQ და True/False ავტომატურად ფასდება, შედეგი — დაუყოვნებლივ</p></div>
       <div style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:18px"><div style="font-size:24px;margin-bottom:8px">📊</div><h3 style="color:#fff;font-weight:600;margin-bottom:6px" data-i18n="feat3_title">ანალიტიკა</h3><p style="color:rgba(255,255,255,.7);font-size:12px;line-height:1.5" data-i18n="feat3_desc">კლასის, მოსწავლის და საგნის მიხედვით დეტალური სტატისტიკა</p></div>
-      <div style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:18px"><div style="font-size:24px;margin-bottom:8px">🏆</div><h3 style="color:#fff;font-weight:600;margin-bottom:6px" data-i18n="feat4_title">ბეიჯები</h3><p style="color:rgba(255,255,255,.7);font-size:12px;line-height:1.5" data-i18n="feat4_desc">Excellent, Good, Pass — მოტივაციისთვის</p></div>
+      <div style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:18px"><div style="font-size:24px;margin-bottom:8px">🏆</div><h3 style="color:#fff;font-weight:600;margin-bottom:6px" data-i18n="feat4_title">ბეიჯები</h3><p style="color:rgba(255,255,255,.7);font-size:12px;line-height:1.5" data-i18n="feat4_desc">შესანიშნავი, კარგი და ჩაბარებული შედეგები — მოტივაციისთვის</p></div>
     </div>
   </div>
 
@@ -539,24 +538,24 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
         <button class="role-btn" id="rb-teacher" style="border:2px solid var(--border);background:#fff;color:var(--gray)" onclick="setRole('teacher')" data-i18n="teacher_role">მასწავლებელი</button>
       </div>
     </div>
-    <div class="fg" id="email-address-field"><div class="label" data-i18n="email">ელ-ფოსტა</div><input id="l-email" type="email" data-i18n-placeholder="email_ph" placeholder="თქვენი ელ-ფოსტა"/></div>
-    <div class="fg" id="email-password-field"><div class="label" data-i18n="password">პაროლი</div><input id="l-pass" type="password" onkeydown="if(event.key==='Enter')doLogin()" data-i18n-placeholder="password_ph" placeholder="პაროლი"/></div>
+    <div class="fg" id="email-address-field"><label class="label" for="l-email" data-i18n="email">ელ-ფოსტა</label><input id="l-email" type="email" autocomplete="email" data-i18n-placeholder="email_ph" placeholder="თქვენი ელ-ფოსტა"/></div>
+    <div class="fg" id="email-password-field"><label class="label" for="l-pass" data-i18n="password">პაროლი</label><input id="l-pass" type="password" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()" data-i18n-placeholder="password_ph" placeholder="პაროლი"/></div>
     <div id="auth-email-actions" style="display:flex;gap:10px;justify-content:flex-end;align-items:center;margin:-4px 0 12px;flex-wrap:wrap">
       <button type="button" onclick="requestPasswordReset()" style="border:0;background:transparent;color:#1d4ed8;font-size:12px;font-weight:600;cursor:pointer;padding:0">დაგავიწყდა პაროლი?</button>
     </div>
     <div id="reg-fields" class="hidden">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-        <div class="fg"><div class="label" data-i18n="name">სახელი</div><input id="r-name" autocomplete="given-name" placeholder="სახელი"/></div>
-        <div class="fg"><div class="label" data-i18n="surname">გვარი</div><input id="r-surname" autocomplete="family-name" placeholder="გვარი"/></div>
+        <div class="fg"><label class="label" for="r-name" data-i18n="name">სახელი</label><input id="r-name" autocomplete="given-name" placeholder="სახელი"/></div>
+        <div class="fg"><label class="label" for="r-surname" data-i18n="surname">გვარი</label><input id="r-surname" autocomplete="family-name" placeholder="გვარი"/></div>
       </div>
-      <div class="fg"><div class="label">სკოლა <span style="color:var(--gray);font-weight:400">(სურვილისამებრ)</span></div><input id="r-school" autocomplete="organization" placeholder="მაგ. სკოლა №1"/></div>
+      <div class="fg"><label class="label" for="r-school">სკოლა <span style="color:var(--gray);font-weight:400">(სურვილისამებრ)</span></label><input id="r-school" autocomplete="organization" placeholder="მაგ. სკოლა №1"/></div>
       <div id="student-reg-only">
-        <div class="fg"><div class="label" data-i18n="grade">კლასი</div><select id="r-grade"><option>1A</option><option>1B</option><option>2A</option><option>2B</option><option>3A</option><option>3B</option><option>4A</option><option>4B</option><option>5A</option><option>5B</option><option>6A</option><option>6B</option><option>7A</option><option>7B</option><option>8A</option><option>8B</option><option>9A</option><option>9B</option><option>10A</option><option>10B</option><option>11A</option><option>11B</option><option>12A</option><option>12B</option></select></div>
-        <div class="fg"><div class="label">დაბადების თარიღი</div><input id="r-dob" type="date" autocomplete="bday" oninput="updateMinorRegistrationUI()"/></div>
+        <div class="fg"><label class="label" for="r-grade" data-i18n="grade">კლასი</label><select id="r-grade"><option>1A</option><option>1B</option><option>2A</option><option>2B</option><option>3A</option><option>3B</option><option>4A</option><option>4B</option><option>5A</option><option>5B</option><option>6A</option><option>6B</option><option>7A</option><option>7B</option><option>8A</option><option>8B</option><option>9A</option><option>9B</option><option>10A</option><option>10B</option><option>11A</option><option>11B</option><option>12A</option><option>12B</option></select></div>
+        <div class="fg"><label class="label" for="r-dob">დაბადების თარიღი</label><input id="r-dob" type="date" autocomplete="bday" oninput="updateMinorRegistrationUI()"/></div>
         <div id="guardian-fields" class="hidden" style="padding:12px;background:#fff7ed;border:1px solid #fed7aa;border-radius:10px;margin-bottom:12px">
           <div style="font-size:12px;font-weight:700;color:#9a3412;margin-bottom:5px">👨‍👩‍👧 16 წლამდე მოსწავლისთვის საჭიროა მშობლის/კანონიერი წარმომადგენლის დადასტურება</div>
           <div style="font-size:11px;color:#7c2d12;margin-bottom:8px">წარმომადგენელი მიიღებს უსაფრთხო magic-link-ს საკუთარ ელფოსტაზე. ბავშვის ანგარიში მანამდე სასწავლო მონაცემებს ვერ დაამუშავებს.</div>
-          <div class="fg" style="margin-bottom:0"><div class="label">მშობლის/კანონიერი წარმომადგენლის ელ-ფოსტა</div><input id="r-guardian-email" type="email" autocomplete="email" placeholder="guardian@example.com"/></div>
+          <div class="fg" style="margin-bottom:0"><label class="label" for="r-guardian-email">მშობლის/კანონიერი წარმომადგენლის ელ-ფოსტა</label><input id="r-guardian-email" type="email" autocomplete="email" placeholder="guardian@example.com"/></div>
         </div>
       </div>
       <div style="padding:11px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;margin-bottom:12px;font-size:11px;line-height:1.5;color:#475569">
@@ -575,7 +574,7 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
 </div>
 
 <!-- LEGAL / CHILD SAFETY MODAL -->
-<div id="legal-modal" class="hidden" style="position:fixed;inset:0;z-index:100020;background:rgba(15,23,42,.65);display:flex;align-items:center;justify-content:center;padding:18px">
+<div id="legal-modal" class="hidden" role="dialog" aria-modal="true" aria-label="სამართლებრივი დოკუმენტი" style="position:fixed;inset:0;z-index:100020;background:rgba(15,23,42,.65);display:flex;align-items:center;justify-content:center;padding:18px">
   <div class="card" style="width:100%;max-width:760px;max-height:88vh;overflow:auto;padding:24px;position:relative">
     <button type="button" onclick="closeLegalDocument()" aria-label="დახურვა" style="position:absolute;right:14px;top:12px;border:0;background:#f1f5f9;border-radius:8px;padding:6px 10px;cursor:pointer">✕</button>
     <div id="legal-modal-content" style="font-size:13px;line-height:1.65;color:#334155"></div>
@@ -583,10 +582,10 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
 </div>
 
 <!-- EXISTING STUDENT AGE VERIFICATION -->
-<div id="age-verification-modal" class="hidden" style="position:fixed;inset:0;z-index:100030;background:rgba(15,23,42,.72);display:flex;align-items:center;justify-content:center;padding:18px">
+<div id="age-verification-modal" class="hidden" role="dialog" aria-modal="true" aria-labelledby="age-verification-title" style="position:fixed;inset:0;z-index:100030;background:rgba(15,23,42,.72);display:flex;align-items:center;justify-content:center;padding:18px">
   <div class="card" style="width:100%;max-width:480px;padding:24px">
     <div style="font-size:11px;font-weight:700;color:#2563eb;margin-bottom:5px">ნაბიჯი 2 / 2</div>
-    <h3 style="font-size:18px;font-weight:800;margin-bottom:6px">დაასრულეთ პროფილი</h3>
+    <h3 id="age-verification-title" style="font-size:18px;font-weight:800;margin-bottom:6px">დაასრულეთ პროფილი</h3>
     <p style="font-size:12px;color:var(--gray);line-height:1.5;margin-bottom:14px">ელ-ფოსტა უკვე დადასტურებულია. ახლა შეავსეთ მხოლოდ სწავლისთვის აუცილებელი მონაცემები. ეს ინფორმაცია საჯაროდ არ გამოჩნდება.</p>
     <div class="fg"><div class="label">სახელი და გვარი</div><input id="age-verify-name" autocomplete="name" maxlength="100"/></div>
     <div class="fg"><div class="label">როლი</div><select id="age-verify-role" onchange="updateAgeVerificationUI()"><option value="student">მოსწავლე</option><option value="teacher">მასწავლებელი</option></select></div>
@@ -603,10 +602,10 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
 </div>
 
 <!-- UNDER-16 CHILD: PENDING GUARDIAN CONSENT -->
-<div id="guardian-pending-modal" class="hidden" style="position:fixed;inset:0;z-index:100031;background:rgba(15,23,42,.72);display:flex;align-items:center;justify-content:center;padding:18px">
+<div id="guardian-pending-modal" class="hidden" role="dialog" aria-modal="true" aria-labelledby="guardian-pending-title" style="position:fixed;inset:0;z-index:100031;background:rgba(15,23,42,.72);display:flex;align-items:center;justify-content:center;padding:18px">
   <div class="card" style="width:100%;max-width:480px;padding:24px;text-align:center">
     <div style="font-size:38px;margin-bottom:8px">🛡️</div>
-    <h3 style="font-size:18px;font-weight:800;margin-bottom:8px">მშობლის/წარმომადგენლის დადასტურება საჭიროა</h3>
+    <h3 id="guardian-pending-title" style="font-size:18px;font-weight:800;margin-bottom:8px">მშობლის/წარმომადგენლის დადასტურება საჭიროა</h3>
     <p style="font-size:12px;color:var(--gray);line-height:1.55">16 წლამდე მოსწავლის სასწავლო ისტორია და პერსონალიზებული ტესტები არ ჩაირთვება, სანამ წარმომადგენელი საკუთარ ელფოსტაზე მიღებული ბმულით არ დაადასტურებს თანხმობას.</p>
     <div id="guardian-pending-email" style="margin:14px 0;padding:9px;background:#f8fafc;border-radius:8px;font-size:12px"></div>
     <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="resendGuardianConsent()">📧 ბმულის ხელახლა გაგზავნა</button>
@@ -616,10 +615,24 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
   </div>
 </div>
 
+<!-- EMAIL VERIFICATION -->
+<div id="email-verification-modal" class="hidden" role="dialog" aria-modal="true" aria-labelledby="email-verification-title" style="position:fixed;inset:0;z-index:100032;background:rgba(15,23,42,.72);display:flex;align-items:center;justify-content:center;padding:18px">
+  <div class="card" style="width:100%;max-width:480px;padding:24px;text-align:center">
+    <div style="font-size:38px;margin-bottom:8px">📧</div>
+    <h3 id="email-verification-title" style="font-size:18px;font-weight:800;margin-bottom:8px">დაადასტურეთ ელ-ფოსტა</h3>
+    <p style="font-size:12px;color:var(--gray);line-height:1.55">ანგარიშის გასააქტიურებლად გახსენით თქვენს ელფოსტაზე გამოგზავნილი უსაფრთხო ბმული. შემდეგ დაბრუნდით აქ და შეამოწმეთ სტატუსი.</p>
+    <div id="email-verification-address" style="margin:14px 0;padding:9px;background:#f8fafc;border-radius:8px;font-size:12px"></div>
+    <div id="email-verification-error" class="hidden" role="alert" style="padding:8px;border-radius:8px;background:#fff7ed;color:#9a3412;font-size:12px;margin-bottom:10px"></div>
+    <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="resendEmailVerification()">📧 ბმულის ხელახლა გაგზავნა</button>
+    <button class="btn btn-outline" style="width:100%;justify-content:center;margin-top:6px" onclick="refreshEmailVerificationStatus()">🔄 სტატუსის შემოწმება</button>
+    <button class="btn btn-ghost" style="width:100%;justify-content:center;margin-top:6px" onclick="doLogout()">გასვლა</button>
+  </div>
+</div>
+
 <!-- GUARDIAN CONSENT REVIEW -->
-<div id="guardian-review-modal" class="hidden" style="position:fixed;inset:0;z-index:100040;background:rgba(15,23,42,.72);display:flex;align-items:center;justify-content:center;padding:18px">
+<div id="guardian-review-modal" class="hidden" role="dialog" aria-modal="true" aria-labelledby="guardian-review-title" style="position:fixed;inset:0;z-index:100040;background:rgba(15,23,42,.72);display:flex;align-items:center;justify-content:center;padding:18px">
   <div class="card" style="width:100%;max-width:620px;max-height:90vh;overflow:auto;padding:24px">
-    <h3 style="font-size:19px;font-weight:800;margin-bottom:6px">კანონიერი წარმომადგენლის თანხმობა</h3>
+    <h3 id="guardian-review-title" style="font-size:19px;font-weight:800;margin-bottom:6px">კანონიერი წარმომადგენლის თანხმობა</h3>
     <div id="guardian-review-summary" style="font-size:12px;color:#475569;line-height:1.55;margin-bottom:14px"></div>
     <div style="padding:12px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;font-size:12px;line-height:1.6;margin-bottom:12px">
       <b>რას ვადასტურებ:</b> ბავშვის ანგარიშის, კლასის/სკოლის (თუ მითითებულია), ტესტის შედეგებისა და სწავლის ისტორიის დამუშავებას EduTest-ის საგანმანათლებლო სერვისის, პერსონალიზებული კითხვების არჩევისა და პროგრესის ჩვენების მიზნით. ბავშვის სრული სახელი ლიდერბორდზე ნაგულისხმევად არ ქვეყნდება და peer-to-peer ჩატი არ არის ჩართული.
@@ -649,9 +662,9 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
 </div>
 
 <!-- PASSWORD RECOVERY MODAL -->
-<div id="password-recovery-modal" class="hidden" style="position:fixed;inset:0;z-index:99999;background:rgba(15,23,42,.58);display:flex;align-items:center;justify-content:center;padding:20px">
+<div id="password-recovery-modal" class="hidden" role="dialog" aria-modal="true" aria-labelledby="password-recovery-title" style="position:fixed;inset:0;z-index:99999;background:rgba(15,23,42,.58);display:flex;align-items:center;justify-content:center;padding:20px">
   <div class="card" style="width:100%;max-width:420px;padding:26px">
-    <h3 style="font-size:18px;font-weight:800;margin-bottom:6px">ახალი პაროლის დაყენება</h3>
+    <h3 id="password-recovery-title" style="font-size:18px;font-weight:800;margin-bottom:6px">ახალი პაროლის დაყენება</h3>
     <p style="font-size:12px;color:var(--gray);margin-bottom:16px">შეიყვანეთ ახალი პაროლი. მინიმუმ 10 სიმბოლო.</p>
     <div class="fg"><div class="label">ახალი პაროლი</div><input id="recovery-pass-1" type="password" autocomplete="new-password" placeholder="მინ. 10 სიმბოლო"/></div>
     <div class="fg"><div class="label">გაიმეორეთ პაროლი</div><input id="recovery-pass-2" type="password" autocomplete="new-password" placeholder="გაიმეორეთ პაროლი"/></div>
@@ -668,7 +681,7 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
       <div><div style="color:#fff;font-weight:700;font-size:14px">EduTest.ge</div><div style="font-size:10px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.05em" data-i18n="student_label">student</div></div>
     </div>
     <div class="snav">
-      <div class="ni act" onclick="sNav('s-home',this)" data-i18n="adm_dashboard">🏠 Dashboard</div>
+      <div class="ni act" onclick="sNav('s-home',this)" data-i18n="adm_dashboard">🏠 მთავარი</div>
       <div class="ni" onclick="sNav('s-tests',this)">📝 <span data-i18n="my_tests">ჩემი ტესტები</span></div>
       <div class="ni" onclick="sNav('s-results',this);renderStudentResults()">📊 <span data-i18n="my_results">შედეგები</span></div>
       <div class="ni" onclick="sNav('s-profile',this)">⚙️ <span data-i18n="profile">პროფილი</span></div>
@@ -680,7 +693,7 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
     </div>
   </div>
   <div style="flex:1;display:flex;flex-direction:column;overflow:auto">
-    <div class="topbar"><div style="display:flex;align-items:center;gap:8px"><button class="hamburger" aria-label="მენიუ" onclick="toggleSidebar('student')">☰</button><div><div style="display:flex;align-items:center;gap:8px"><button class="btn btn-ghost btn-sm" id="s-back-btn" onclick="sNav('s-home',document.querySelector('#p-student .ni'))" style="display:none;padding:4px 8px;font-size:12px">←</button><div style="font-weight:600" id="s-topbar-title">Dashboard</div></div><div style="font-size:11px;color:var(--gray)" id="s-topbar-sub">მოსწავლე</div></div></div><div style="display:flex;gap:8px"><span class="badge b-blue" id="s-topbar-badge">Student</span><span class="badge b-green" id="s-online-badge">✓ Online</span></div></div>
+    <div class="topbar"><div style="display:flex;align-items:center;gap:8px"><button class="hamburger" aria-label="მენიუ" onclick="toggleSidebar('student')">☰</button><div><div style="display:flex;align-items:center;gap:8px"><button class="btn btn-ghost btn-sm" id="s-back-btn" aria-label="მთავარ გვერდზე დაბრუნება" onclick="sNav('s-home',document.querySelector('#p-student .ni'))" style="display:none;padding:4px 8px;font-size:12px">←</button><div style="font-weight:600" id="s-topbar-title">მთავარი</div></div><div style="font-size:11px;color:var(--gray)" id="s-topbar-sub">მოსწავლე</div></div></div><div style="display:flex;gap:8px"><span class="badge b-blue" id="s-topbar-badge">მოსწავლე</span><span class="badge b-green" id="s-online-badge">✓ ონლაინ</span></div></div>
     <div class="main">
       <div id="s-home" class="fade">
         <div style="background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:14px;padding:18px;margin-bottom:16px;color:#fff">
@@ -723,7 +736,7 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
           <div class="stat" style="cursor:pointer" onclick="sNav('s-leaderboard',null);renderLeaderboard()"><div class="stat-ic" style="background:#fff7ed">🔥</div><div class="stat-v" style="color:#ea580c" id="sh-streak">0 დღე</div><div class="stat-l">Streak <span id="sh-freeze-badge" style="display:none;font-size:10px;background:#dbeafe;color:#1d4ed8;padding:1px 6px;border-radius:999px;cursor:pointer" onclick="useStreakFreeze()" title="Streak Freeze გამოყენება">🧊 <span id="sh-freeze-count">0</span></span></div></div>
           <div class="stat"><div class="stat-ic" style="background:#dcfce7">📊</div><div class="stat-v" style="color:#16a34a" id="sh-avg">—</div><div class="stat-l" data-i18n="avg_score">საშუალო ქულა</div></div>
           <div class="stat"><div class="stat-ic" style="background:#fef3c7">⭐</div><div class="stat-v" style="color:#d97706" id="sh-pts">0</div><div class="stat-l" data-i18n="total_pts_label">სულ ქულა</div></div>
-          <div class="stat"><div class="stat-ic" style="background:#ede9fe">🏆</div><div class="stat-v" style="color:#7c3aed" id="sh-exc">0</div><div class="stat-l" data-i18n="excellent_badge">Excellent ბეიჯი</div></div>
+          <div class="stat"><div class="stat-ic" style="background:#ede9fe">🏆</div><div class="stat-v" style="color:#7c3aed" id="sh-exc">0</div><div class="stat-l" data-i18n="excellent_badge">შესანიშნავი შედეგი</div></div>
         </div>
         <!-- Class Team Challenge -->
         <div id="s-class-challenge" class="card" style="margin-bottom:12px;padding:14px;background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:2px solid #16a34a;border-radius:14px;display:none">
@@ -790,7 +803,7 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
           <div style="width:64px;height:64px;background:#2563eb;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:22px;margin:0 auto 12px" id="s-prof-av">მ</div>
           <h2 style="font-weight:700;font-size:16px" id="s-prof-name">მოსწავლე</h2>
           <p style="color:var(--gray);font-size:12px;margin-bottom:10px" id="s-prof-email">—</p>
-          <div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap"><span class="badge b-blue" id="s-prof-grade">კლასი 3A</span><span class="badge b-green">Student</span><span class="badge b-amber" id="s-prof-premium" style="display:none">⭐ Premium</span></div>
+          <div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap"><span class="badge b-blue" id="s-prof-grade">კლასი 3A</span><span class="badge b-green">მოსწავლე</span><span class="badge b-amber" id="s-prof-premium" style="display:none">⭐ პრემიუმი</span></div>
           <div style="margin-top:12px;display:none" id="s-prof-premium-btn"><button class="btn btn-outline btn-sm" disabled>Premium გამორთულია</button></div>
         </div>
         <div class="card" style="padding:16px">
@@ -946,7 +959,7 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
     <div id="res-habit-nudge" style="margin-bottom:14px"></div>
     <div id="results-btns" style="display:flex;gap:10px;flex-wrap:wrap">
       <button class="btn btn-ghost" onclick="goBackToTests()" data-i18n="back_to_tests">← ტესტები</button>
-      <button class="btn btn-primary" onclick="go(curRole==='teacher'?'teacher':'student')">🏠 Dashboard</button>
+      <button class="btn btn-primary" onclick="go(curRole==='teacher'?'teacher':'student')">🏠 მთავარი</button>
       <button class="btn btn-outline" onclick="startTestById(curTest&&curTest.id)">🔄 <span data-i18n="try_again">კიდევ ერთხელ</span></button>
     </div>
   </div>
@@ -960,7 +973,7 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
       <div><div style="color:#fff;font-weight:700;font-size:14px">EduTest.ge</div><div style="font-size:10px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.05em">teacher</div></div>
     </div>
     <div class="snav">
-      <div class="ni act" onclick="tNav('t-home',this)">🏠 Dashboard</div>
+      <div class="ni act" onclick="tNav('t-home',this)">🏠 მთავარი</div>
       <div class="ni" onclick="tNav('t-tests',this)">📝 <span data-i18n="tests">ჩემი ტესტები</span></div>
       <div class="ni" onclick="tNav('t-students',this)">👥 <span data-i18n="students">მოსწავლეები</span></div>
       <div class="ni" onclick="tNav('t-assign',this);renderAssignPanel()">📋 დავალებები</div>
@@ -972,7 +985,7 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
     </div>
   </div>
   <div style="flex:1;display:flex;flex-direction:column;overflow:auto">
-    <div class="topbar"><div style="display:flex;align-items:center;gap:8px"><button class="hamburger" onclick="toggleSidebar('teacher')">☰</button><div><div style="display:flex;align-items:center;gap:8px"><button class="btn btn-ghost btn-sm" id="t-back-btn" onclick="tNav('t-home',document.querySelector('#p-teacher .ni'))" style="display:none;padding:4px 8px;font-size:12px">←</button><div style="font-weight:600" id="t-topbar-title">Dashboard</div></div><div style="font-size:11px;color:var(--gray)" id="t-topbar-sub">მასწავლებელი</div></div></div><button class="btn btn-primary btn-sm" id="t-new-btn" onclick="showBuilder()" style="display:none">+ ახალი ტესტი</button></div>
+    <div class="topbar"><div style="display:flex;align-items:center;gap:8px"><button class="hamburger" aria-label="მენიუ" onclick="toggleSidebar('teacher')">☰</button><div><div style="display:flex;align-items:center;gap:8px"><button class="btn btn-ghost btn-sm" id="t-back-btn" aria-label="მთავარ გვერდზე დაბრუნება" onclick="tNav('t-home',document.querySelector('#p-teacher .ni'))" style="display:none;padding:4px 8px;font-size:12px">←</button><div style="font-weight:600" id="t-topbar-title">მთავარი</div></div><div style="font-size:11px;color:var(--gray)" id="t-topbar-sub">მასწავლებელი</div></div></div><button class="btn btn-primary btn-sm" id="t-new-btn" onclick="showBuilder()" style="display:none">+ ახალი ტესტი</button></div>
     <div class="main">
       <div id="t-home" class="fade">
         <div class="stat-g">
@@ -986,17 +999,13 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
             <div style="font-weight:600;font-size:13px;margin-bottom:10px">📊 ყველაზე შეცდომიანი კითხვები</div>
             <div id="t-q-analytics"><div style="color:var(--gray);font-size:12px;text-align:center;padding:16px">ჯერ შედეგები არ არის</div></div>
           </div>
-          <div class="card" style="padding:16px">
-            <div style="font-weight:600;margin-bottom:12px;font-size:13px">⏳ გასაფასებელი submission-ები</div>
-            <div style="padding:8px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:12px;font-weight:500">მარიამ კ.</div><div style="font-size:11px;color:var(--gray)">ქართული · დღეს</div></div><button class="btn btn-outline btn-sm">შეფასება</button></div>
-            <div style="padding:8px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:12px;font-weight:500">გიორგი ნ.</div><div style="font-size:11px;color:var(--gray)">ქართული · გუშინ</div></div><button class="btn btn-outline btn-sm">შეფასება</button></div>
-            <div style="padding:8px 0;display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:12px;font-weight:500">სოფო მ.</div><div style="font-size:11px;color:var(--gray)">ქართული · გუშინ</div></div><button class="btn btn-outline btn-sm">შეფასება</button></div>
+          <div class="card" id="t-pending-work-card" style="padding:16px">
+            <div style="font-weight:600;margin-bottom:12px;font-size:13px">⏳ ხელით გასაფასებელი ნამუშევრები</div>
+            <div style="font-size:12px;color:var(--gray)">იტვირთება...</div>
           </div>
-          <div class="card" style="padding:16px">
-            <div style="font-weight:600;margin-bottom:12px;font-size:13px">📊 კლასი 3A სტატისტიკა</div>
-            <div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>მათემატიკა</span><span style="font-weight:600">78%</span></div><div class="pbar"><div class="pfill" style="width:78%;background:#2563eb"></div></div></div>
-            <div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>ქართული</span><span style="font-weight:600">65%</span></div><div class="pbar"><div class="pfill" style="width:65%;background:#d97706"></div></div></div>
-            <div><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>ბუნება</span><span style="font-weight:600">91%</span></div><div class="pbar"><div class="pfill" style="width:91%;background:#16a34a"></div></div></div>
+          <div class="card" id="t-class-summary-card" style="padding:16px">
+            <div style="font-weight:600;margin-bottom:12px;font-size:13px">📊 რეალური შედეგები საგნების მიხედვით</div>
+            <div style="font-size:12px;color:var(--gray)">იტვირთება...</div>
           </div>
         </div>
       </div>
@@ -1018,7 +1027,7 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
         </div>
         <div class="card" style="overflow:hidden">
           <table class="tbl" id="t-test-table">
-            <thead><tr><th>ტიტული</th><th>საგანი</th><th>კლ.</th><th>კ.</th><th>ფასი</th><th>ქმ.</th></tr></thead>
+            <thead><tr><th>სათაური</th><th>საგანი</th><th>კლ.</th><th>კ.</th><th>ტიპი</th><th>ქმედება</th></tr></thead>
             <tbody id="t-test-tbody"></tbody>
           </table>
         </div>
@@ -1037,12 +1046,12 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
       <div style="font-weight:600;margin-bottom:12px">+ ახალი დავალება</div>
       <div style="display:flex;flex-direction:column;gap:10px">
         <div>
-          <label class="label">ტესტი</label>
+          <label class="label" for="ta-test-sel">ტესტი</label>
           <select id="ta-test-sel" style="width:100%;padding:8px;border:1.5px solid var(--border);border-radius:var(--r);font-family:inherit;font-size:13px;background:var(--bg)"><option value="">— აირჩიეთ ტესტი —</option></select>
         </div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
           <div>
-            <label class="label">კლასი</label>
+            <label class="label" for="ta-grade-sel">კლასი</label>
             <select id="ta-grade-sel" style="width:100%;padding:8px;border:1.5px solid var(--border);border-radius:var(--r);font-family:inherit;font-size:13px;background:var(--bg)">
               <option value="1">1 კლასი</option><option value="2">2 კლასი</option><option value="3">3 კლასი</option>
               <option value="4">4 კლასი</option><option value="5">5 კლასი</option><option value="6">6 კლასი</option>
@@ -1051,12 +1060,12 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
             </select>
           </div>
           <div>
-            <label class="label">Deadline</label>
+            <label class="label" for="ta-deadline">ჩაბარების ვადა</label>
             <input type="date" id="ta-deadline" style="width:100%;padding:8px;border:1.5px solid var(--border);border-radius:var(--r);font-size:13px;font-family:inherit;background:var(--bg)">
           </div>
         </div>
         <div>
-          <label class="label">შენიშვნა (სურვილ.)</label>
+          <label class="label" for="ta-note">შენიშვნა (სურვილისამებრ)</label>
           <input type="text" id="ta-note" placeholder="მაგ: 5.3 პარ. შემდეგ..." style="width:100%;padding:8px;border:1.5px solid var(--border);border-radius:var(--r);font-size:13px;font-family:inherit;background:var(--bg)">
         </div>
         <button class="btn btn-primary" onclick="(()=>{const tid=document.getElementById('ta-test-sel').value;const g=document.getElementById('ta-grade-sel').value;const dl=document.getElementById('ta-deadline').value;const n=document.getElementById('ta-note').value;if(!tid)return;createAssignment(tid,g,dl,n);})()">📤 გაგზავნა</button>
@@ -1066,21 +1075,7 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
     <div id="t-assign-list"></div>
   </div>
 </div>
-<div id="t-analytics" class="hidden fade">
-        <div style="font-weight:600;margin-bottom:14px">ანალიტიკა</div>
-        <div class="g2">
-          <div class="card" style="padding:16px"><div style="font-weight:600;margin-bottom:14px;font-size:13px">📈 კლ. 3A — ტესტები</div>
-            <div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>მათ. — კლ.3</span><span style="font-weight:600">78%</span></div><div class="pbar"><div class="pfill" style="width:78%;background:#2563eb"></div></div></div>
-            <div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>ბუნება — კლ.3</span><span style="font-weight:600">91%</span></div><div class="pbar"><div class="pfill" style="width:91%;background:#16a34a"></div></div></div>
-            <div><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>ქართ. — კლ.5</span><span style="font-weight:600">65%</span></div><div class="pbar"><div class="pfill" style="width:65%;background:#d97706"></div></div></div>
-          </div>
-          <div class="card" style="padding:16px"><div style="font-weight:600;margin-bottom:14px;font-size:13px">👥 მოსწავლეების განაწილება</div>
-            <div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>🏆 Excellent (≥90%)</span><span style="color:#2563eb;font-weight:600">1 მოსწ.</span></div><div class="pbar"><div class="pfill" style="width:25%;background:#2563eb"></div></div></div>
-            <div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>✅ Good (≥70%)</span><span style="color:#16a34a;font-weight:600">2 მოსწ.</span></div><div class="pbar"><div class="pfill" style="width:50%;background:#16a34a"></div></div></div>
-            <div><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>📘 Pass (≥50%)</span><span style="color:#d97706;font-weight:600">1 მოსწ.</span></div><div class="pbar"><div class="pfill" style="width:25%;background:#d97706"></div></div></div>
-          </div>
-        </div>
-      </div>
+<div id="t-analytics" class="hidden fade"><div class="card" style="padding:24px;color:var(--gray);text-align:center">ანალიტიკა იტვირთება...</div></div>
     </div>
   </div>
 </div>
@@ -1088,9 +1083,9 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
 <!-- ADMIN -->
 <div id="p-admin" class="page fade" style="flex-direction:row">
   <div class="sidebar">
-    <div class="slogo"><div class="slogo-icon" style="background:#7c3aed" id="a-sidebar-av">A</div><div><div style="color:#fff;font-weight:700;font-size:14px" id="a-sidebar-name">Admin</div><div style="font-size:10px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.05em">admin</div></div></div>
+    <div class="slogo"><div class="slogo-icon" style="background:#7c3aed" id="a-sidebar-av">ა</div><div><div style="color:#fff;font-weight:700;font-size:14px" id="a-sidebar-name">ადმინისტრატორი</div><div style="font-size:10px;color:rgba(255,255,255,.35);letter-spacing:.05em">ადმინი</div></div></div>
     <div class="snav">
-      <div class="ni act" onclick="aNav('a-home',this)">🏠 Dashboard</div>
+      <div class="ni act" onclick="aNav('a-home',this)">🏠 მთავარი</div>
       <div class="ni" onclick="aNav('a-schools',this)" data-i18n="adm_schools">🏫 სკოლები</div>
       <div class="ni" onclick="aNav('a-users',this)" data-i18n="adm_users">👥 მომხმარებლები</div>
       <div class="ni" onclick="aNav('a-results',this)">📊 ყველა შედეგი</div>
@@ -1105,14 +1100,14 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
     </div>
   </div>
   <div style="flex:1;display:flex;flex-direction:column;overflow:auto">
-    <div class="topbar"><div style="display:flex;align-items:center;gap:8px"><button class="hamburger" onclick="toggleSidebar('admin')" style="color:#1a202c">☰</button><div><div style="display:flex;align-items:center;gap:8px"><button class="btn btn-ghost btn-sm" id="a-back-btn" onclick="aNav('a-home',document.querySelector('#p-admin .ni'))" style="display:none;padding:4px 8px;font-size:12px">←</button><div style="font-weight:600" data-i18n="adm_dashboard">Admin Dashboard</div></div><div style="font-size:11px;color:var(--gray)" data-i18n="adm_subtitle">ადმინ · პლატფორმის ადმინისტრატორი</div></div></div><span id="a-topbar-badge" class="badge b-red">⚠ Admin</span></div>
+    <div class="topbar"><div style="display:flex;align-items:center;gap:8px"><button class="hamburger" aria-label="მენიუ" onclick="toggleSidebar('admin')" style="color:#1a202c">☰</button><div><div style="display:flex;align-items:center;gap:8px"><button class="btn btn-ghost btn-sm" id="a-back-btn" aria-label="მთავარ გვერდზე დაბრუნება" onclick="aNav('a-home',document.querySelector('#p-admin .ni'))" style="display:none;padding:4px 8px;font-size:12px">←</button><div style="font-weight:600" data-i18n="adm_dashboard">ადმინისტრატორის მთავარი</div></div><div style="font-size:11px;color:var(--gray)" data-i18n="adm_subtitle">ადმინი · პლატფორმის ადმინისტრატორი</div></div></div><span id="a-topbar-badge" class="badge b-red">⚠ ადმინი</span></div>
     <div class="main">
       <div id="a-home" class="fade">
         <div class="stat-g">
           <div class="stat"><div class="stat-ic" style="background:#ede9fe">👥</div><div class="stat-v" style="color:#7c3aed" id="a-stat-users">—</div><div class="stat-l">მომხმარებელი</div></div>
           <div class="stat"><div class="stat-ic" style="background:#dbeafe">🎓</div><div class="stat-v" style="color:#2563eb" id="a-stat-students">—</div><div class="stat-l">მოსწავლე</div></div>
           <div class="stat"><div class="stat-ic" style="background:#dcfce7">📝</div><div class="stat-v" style="color:#16a34a" id="a-stat-tests">—</div><div class="stat-l">სულ ტესტი</div></div>
-          <div class="stat"><div class="stat-ic" style="background:#fef3c7">⭐</div><div class="stat-v" style="color:#d97706" id="a-stat-premium">—</div><div class="stat-l">Premium</div></div>
+          <div class="stat"><div class="stat-ic" style="background:#fef3c7">⭐</div><div class="stat-v" style="color:#d97706" id="a-stat-premium">—</div><div class="stat-l">პრემიუმი</div></div>
         </div>
         <div class="card" style="padding:16px">
           <div style="font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:6px;font-size:13px"><span style="color:#dc2626">🔴</span data-i18n="adm_pending_teachers">დასამტკიცებელი მასწავლებლები</div>
@@ -1139,11 +1134,7 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"><div style="font-weight:600" data-i18n="adm_users_title">მომხმარებლები</div><input data-i18n-placeholder="adm_search" placeholder="🔍 ძებნა..." style="width:180px;padding:6px 10px"/></div>
         <div class="card tbl-wrap"><table class="tbl" id="a-users-table"><thead><tr><th>სახელი</th><th>ელ-ფოსტა</th><th>როლი</th><th>კლ.</th><th>შედეგები</th><th>Premium</th><th>ქმ.</th></tr></thead><tbody id="a-users-tbody"><tr><td colspan="7" style="text-align:center;padding:20px;color:var(--gray)">იტვირთება...</td></tr></tbody></table></div>
       </div>
-      <div id="a-pending" class="hidden fade" style="max-width:560px">
-        <div style="font-weight:600;margin-bottom:14px" data-i18n="adm_awaiting">⏳ დამტკიცების მოლოდინში</div>
-        <div class="card" style="padding:18px;margin-bottom:10px"><div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px"><div><div style="font-weight:700;font-size:14px;margin-bottom:4px">ეკა ჯაფარიძე</div><div style="font-size:12px;color:var(--gray);margin-bottom:8px">eka@school.ge</div><div style="display:flex;gap:6px"><span class="chip">🏫 სკ. #5</span><span class="chip">📅 2026-06-30</span><span class="badge b-amber">მასწავლებელი</span></div></div><div style="display:flex;flex-direction:column;gap:6px"><button class="btn btn-green btn-sm">✓ დამტკიცება</button><button class="btn btn-danger btn-sm">✗ უარი</button></div></div></div>
-        <div class="card" style="padding:18px"><div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px"><div><div style="font-weight:700;font-size:14px;margin-bottom:4px">ზვიად ბეგიაშვილი</div><div style="font-size:12px;color:var(--gray);margin-bottom:8px">zviad@school.ge</div><div style="display:flex;gap:6px"><span class="chip">🏫 სკ. #12</span><span class="chip">📅 2026-06-29</span><span class="badge b-amber">მასწავლებელი</span></div></div><div style="display:flex;flex-direction:column;gap:6px"><button class="btn btn-green btn-sm">✓ დამტკიცება</button><button class="btn btn-danger btn-sm">✗ უარი</button></div></div></div>
-      </div>
+      <div id="a-pending" class="hidden fade" style="max-width:560px"><div class="card" style="padding:24px;color:var(--gray)">დასამტკიცებელი ანგარიშები გამოჩნდება სერვერიდან ჩატვირთვის შემდეგ.</div></div>
       <div id="a-results" class="hidden fade">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
           <div style="font-weight:600">📊 ყველა მოსწავლის შედეგები</div>
@@ -1346,7 +1337,7 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
 </div>
 
 <!-- MODALS -->
-<div id="pay-modal" class="overlay hidden">
+<div id="pay-modal" class="overlay hidden" role="dialog" aria-modal="true" aria-label="გადახდის ინფორმაცია">
   <div class="modal" style="max-width:420px">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px">
       <h3 style="font-weight:700">💳 წვდომის შეძენა</h3>
@@ -1391,9 +1382,9 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
   </div>
 </div>
 
-<div id="builder-modal" class="overlay hidden">
+<div id="builder-modal" class="overlay hidden" role="dialog" aria-modal="true" aria-label="ტესტის შექმნა">
   <div class="modal" style="max-width:540px">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px"><h3 style="font-weight:700">✨ ახალი ტესტი</h3><button class="btn btn-ghost btn-sm" onclick="hideBuilder()">✕</button></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px"><h3 style="font-weight:700">✨ ახალი ტესტი</h3><button class="btn btn-ghost btn-sm" aria-label="ტესტის შექმნის ფანჯრის დახურვა" onclick="hideBuilder()">✕</button></div>
     <div class="steps">
       <div class="step act" id="bstep-1">1</div><div style="font-size:11px;color:#1a202c">ინფო</div>
       <div class="sline" id="bline-1"></div>
@@ -1402,24 +1393,23 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
       <div class="step" id="bstep-3">3</div><div style="font-size:11px;color:var(--gray)">გავრცელება</div>
     </div>
     <div id="bstep-content-1">
-      <div class="fg"><div class="label">ტიტული</div><input placeholder="მაგ. მათემატიკა — 3 კლასი" id="b-title"/></div>
+      <div class="fg"><label class="label" for="b-title">სათაური</label><input placeholder="მაგ. მათემატიკა — III კლასი — I სემესტრი" id="b-title"/></div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-        <div class="fg"><div class="label">საგანი</div><select id="b-subj"><option>მათემატიკა</option><option>ქართული ენა და ლიტერატურა</option><option>ინგლისური</option><option>მეორე უცხოური — რუსული</option><option>ბუნება</option><option>მე და საზოგადოება</option><option>ჩვენი საქართველო</option><option>ისტორია</option><option>გეოგრაფია</option><option>ბიოლოგია</option><option>ფიზიკა</option><option>ქიმია</option><option>მოქალაქეობა</option><option>სამოქალაქო თავდაცვა და უსაფრთხოება</option></select></div>
-        <div class="fg"><div class="label">კლასი</div><select id="b-grade"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option></select></div>
+        <div class="fg"><label class="label" for="b-subj">საგანი</label><select id="b-subj"><option>მათემატიკა</option><option>ქართული ენა და ლიტერატურა</option><option>ინგლისური</option><option>მეორე უცხოური — რუსული</option><option>ბუნება</option><option>მე და საზოგადოება</option><option>ჩვენი საქართველო</option><option>ისტორია</option><option>გეოგრაფია</option><option>ბიოლოგია</option><option>ფიზიკა</option><option>ქიმია</option><option>მოქალაქეობა</option><option>სამოქალაქო თავდაცვა და უსაფრთხოება</option></select></div>
+        <div class="fg"><label class="label" for="b-grade">კლასი</label><select id="b-grade"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option></select></div>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-        <div class="fg"><div class="label">დრო (წთ)</div><input type="number" value="20" id="b-time"/></div>
-        <div class="fg"><div class="label">მცდელობები</div><input type="number" value="2" id="b-att"/></div>
+        <div class="fg"><label class="label" for="b-time">დრო (წთ)</label><input type="number" value="20" min="5" max="180" id="b-time"/></div>
+        <div class="fg"><label class="label" for="b-att">მცდელობები</label><input type="number" value="2" min="1" max="10" id="b-att"/></div>
       </div>
       <div style="display:flex;gap:16px;margin-bottom:14px">
-        <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px"><input type="checkbox" id="b-paid" style="width:auto"/>ფასიანი ტესტი</label>
         <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px"><input type="checkbox" id="b-pub" style="width:auto"/>გამოქვეყნება</label>
       </div>
     </div>
     <div id="bstep-content-2" class="hidden"><p style="font-size:12px;color:var(--gray);margin-bottom:10px">კითხვის ბაზიდან შეარჩიეთ:</p><div id="q-picker"></div><div style="font-size:12px;color:var(--gray);margin-top:8px">შერჩეულია: <strong id="sel-count">0</strong> კითხვა</div></div>
     <div id="bstep-content-3" class="hidden">
-      <div class="fg"><div class="label">გაავრცელე კლასზე</div><input id="b-audience" placeholder="მაგ. 3A (ცარიელი = ყველა შესაბამისი კლასის მოსწავლე)"/></div>
-      <div class="fg"><div class="label">Due Date</div><input id="b-due" type="date"/></div>
+      <div class="fg"><label class="label" for="b-audience">გაავრცელე კლასზე</label><input id="b-audience" placeholder="მაგ. 3A (ცარიელი = ყველა შესაბამისი კლასის მოსწავლე)"/></div>
+      <div class="fg"><label class="label" for="b-due">ჩაბარების ვადა</label><input id="b-due" type="date"/></div>
       <div style="padding:12px;background:var(--blue-l);border-radius:var(--r);font-size:12px;color:#1e40af" id="b-summary">შეჯამება...</div>
     </div>
     <div style="display:flex;justify-content:space-between;margin-top:18px">
@@ -1430,7 +1420,7 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
 </div>
 
 <!-- Premium modal -->
-<div class="overlay hidden" id="premium-modal">
+<div class="overlay hidden" id="premium-modal" role="dialog" aria-modal="true" aria-label="პრემიუმ ინფორმაცია">
   <div class="modal" style="max-width:440px;text-align:center;position:relative">
     <button class="btn btn-ghost btn-sm" onclick="document.getElementById('premium-modal').classList.add('hidden')" style="position:absolute;top:12px;right:12px">✕</button>
     <div style="font-size:48px;margin-bottom:10px">⭐</div>
@@ -1438,7 +1428,7 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
     <p style="color:var(--gray);font-size:13px;margin-bottom:16px">ყველა საგანი, ყველა კლასი, ულიმიტო მცდელობები</p>
     <div class="card" style="padding:14px;margin-bottom:14px;text-align:left">
       <div style="display:flex;flex-direction:column;gap:8px;font-size:13px">
-        <div>✅ ყველა 15 საგანი (I–XII კლასი)</div>
+        <div>✅ ყველა ხელმისაწვდომი სასკოლო საგანი (I–XII კლასი)</div>
         <div>✅ ულიმიტო მცდელობები ყველა ტესტზე</div>
         <div>✅ 5 ვარიანტი — ყოველ ჯერზე ახალი კითხვები</div>
         <div>✅ დეტალური შედეგები და სტატისტიკა</div>
@@ -1463,7 +1453,7 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
   </div>
 </div>
 
-<div id="report-modal" class="overlay hidden" onclick="if(event.target===this)closeReportModal()">
+<div id="report-modal" class="overlay hidden" role="dialog" aria-modal="true" aria-label="კითხვის პრობლემის შეტყობინება" onclick="if(event.target===this)closeReportModal()">
   <div class="modal" style="max-width:420px">
     <h3 style="font-weight:700;margin-bottom:14px">🚩 შეცდომის მოხსენება</h3>
     <div id="report-q-preview" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:10px 14px;font-size:13px;margin-bottom:14px;color:var(--gray)"></div>
@@ -1482,7 +1472,7 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
     </div>
   </div>
 </div>
-<div id="submit-modal" class="overlay hidden">
+<div id="submit-modal" class="overlay hidden" role="dialog" aria-modal="true" aria-label="ტესტის დასრულების დადასტურება">
   <div class="modal" style="max-width:360px;text-align:center">
     <div style="font-size:48px;margin-bottom:12px">📝</div>
     <h3 style="font-weight:700;margin-bottom:8px" data-i18n="submit">ტესტის გაგზავნა?</h3>
@@ -1495,7 +1485,7 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
 </div>
 
 <!-- Student Results Modal -->
-<div id="student-results-modal" class="overlay hidden" onclick="if(event.target===this)this.classList.add('hidden')">
+<div id="student-results-modal" class="overlay hidden" role="dialog" aria-modal="true" aria-label="მოსწავლის შედეგები" onclick="if(event.target===this)this.classList.add('hidden')">
   <div class="modal" style="max-width:560px;max-height:80vh;overflow-y:auto">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
       <h3 id="srm-name" style="font-weight:700;font-size:16px;margin:0"></h3>
@@ -1510,7 +1500,7 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
 </div>
 
 <!-- Question Editor Modal -->
-<div id="qeditor-modal" class="overlay hidden" onclick="if(event.target===this)closeQEditor()">
+<div id="qeditor-modal" class="overlay hidden" role="dialog" aria-modal="true" aria-label="კითხვის რედაქტირება" onclick="if(event.target===this)closeQEditor()">
   <div class="modal" style="max-width:620px;max-height:85vh;overflow-y:auto">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
       <h3 id="qeditor-title" style="font-weight:700;font-size:16px;margin:0">✏️ კითხვების რედაქტირება</h3>
@@ -1521,7 +1511,7 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
 </div>
 
 <!-- Grade Promotion Modal -->
-<div id="promote-modal" class="overlay hidden" onclick="if(event.target===this)this.classList.add('hidden')">
+<div id="promote-modal" class="overlay hidden" role="dialog" aria-modal="true" aria-label="კლასის გადაყვანა" onclick="if(event.target===this)this.classList.add('hidden')">
   <div class="modal" style="max-width:400px">
     <h3 style="font-weight:700;margin-bottom:16px">📈 კლასის გადაყვანა</h3>
     <div style="margin-bottom:12px">
@@ -1574,7 +1564,7 @@ const I18N={
     platform_stats:'პლატფორმის სტატისტიკა',
     hero_h1:'სატესტო პლატფორმა',
     hero_h1b:'ახალი თაობისთვის',
-    hero_desc:'შეამოწმე ცოდნა, მოიპოვე 🏆 Excellent ბეიჯი და გახდი კლასის საუკეთესო! I–XII კლასი · 15 საგანი · ავტომატური შეფასება.',
+    hero_desc:'შეამოწმე ცოდნა, მიიღე მიღწევის ბეიჯები და თვალყური ადევნე პროგრესს — I–XII კლასებისთვის.',
     hero_cta:'▶ დაწყება — უფასოდ',
     leaderboard:'ლიდერბორდი',rank:'ადგილი',class_lb:'კლასი',national_lb:'ეროვნული',
     streak_label:'Streak',daily_challenge:'დღის გამოწვევა',daily_bonus:'2× XP ბონუსი',
@@ -1598,14 +1588,14 @@ const I18N={
     password_ph:'პაროლი',
     name_ph:'სახელი',
     surname_ph:'გვარი',
-    adm_dashboard:'🏠 Dashboard',
+    adm_dashboard:'🏠 მთავარი',
     adm_schools:'🏫 სკოლები',
     adm_users:'👥 მომხმარებლები',
     adm_pending:'⚠️ დამტკიცება',
     completed_tests:'დასრულებული ტესტი',
     avg_score:'საშუალო ქულა',
     total_pts_label:'სულ ქულა',
-    excellent_badge:'Excellent ბეიჯი',
+    excellent_badge:'შესანიშნავი შედეგი',
     recent_results:'🏆 ბოლო შედეგები',
     no_test_taken:'ჯერ ტესტი არ გაქვს გავლილი',
     exit_test:'← გასვლა',edit_questions:'კითხვების რედ.',
@@ -1649,7 +1639,7 @@ const I18N={
     feat3_title:'ანალიტიკა',
     feat3_desc:'კლასის, მოსწავლის და საგნის მიხედვით დეტალური სტატისტიკა',
     feat4_title:'ბეიჯები',
-    feat4_desc:'Excellent, Good, Pass — მოტივაციისთვის',
+    feat4_desc:'შესანიშნავი, კარგი და ჩაბარებული შედეგები — მოტივაციისთვის',
     plans_title:'გეგმები',
     plans_sub:'BOG Pay / TBC Pay-ით — ლარით',
     plan_free:'უფასო',
@@ -2008,6 +1998,15 @@ const I18N={
 };
 
 function t(k){return(I18N[LANG]&&I18N[LANG][k])||I18N.ka[k]||k;}
+function performanceBadgeLabel(pct){
+  const score=Number(pct)||0;
+  const labels=LANG==='en'
+    ?['🏆 Excellent','✅ Good','📘 Passed','❌ Needs improvement']
+    :LANG==='ru'
+      ?['🏆 Отлично','✅ Хорошо','📘 Зачёт','❌ Нужно улучшить']
+      :['🏆 შესანიშნავი','✅ კარგი','📘 ჩაბარებული','❌ გასაუმჯობესებელი'];
+  return score>=90?labels[0]:score>=70?labels[1]:score>=50?labels[2]:labels[3];
+}
 
 function updateI18n(){
   document.querySelectorAll('[data-i18n]').forEach(function(el){
@@ -2567,12 +2566,12 @@ function saveAdminEditUser(){
 // ══════════════════════════════════════════════════════════════
 function renderAdminQuestions(){
   const w=document.getElementById('aq-questions-wrap');
-  if(w)w.innerHTML='<div class="card" style="padding:16px;color:var(--gray)">🔐 პასუხების გასაღები browser-ში არ იტვირთება. კითხვების არჩევისა და ტესტის შექმნისთვის გამოიყენეთ Server-side Builder.</div>';
+  if(w)w.innerHTML='<div class="card" style="padding:16px;color:var(--gray)">🔐 პასუხების გასაღები ბრაუზერში არ იტვირთება. კითხვების არჩევისა და ტესტის შექმნისთვის გამოიყენეთ უსაფრთხო ტესტის შემქმნელი.</div>';
 }
 function aqLoadTests(){renderAdminQuestions();}
 function aqLoadVersions(){renderAdminQuestions();}
 function aqLoadQuestions(){renderAdminQuestions();}
-function adminEditAnswer(){alert('უსაფრთხო build-ში სწორი პასუხები იცვლება მხოლოდ trusted server-side question bank-ში.');}
+function adminEditAnswer(){alert('სწორი პასუხები იცვლება მხოლოდ დაცულ სერვერულ კითხვების ბანკში.');}
 function adminResetAnswer(){alert('უსაფრთხო build-ში local answer override გამორთულია.');}
 
 // ══════════════════════════════════════════════════════════════
@@ -2593,7 +2592,7 @@ const ACHIEVEMENT_DEFS=[
   {id:'streak7',     icon:'💫', label:'7 დღე ზედიზედ'},
   {id:'streak14',    icon:'🌙', label:'14 დღე ზედიზედ'},
   {id:'streak30',    icon:'🏅', label:'30 დღე ზედიზედ'},
-  {id:'excellent',   icon:'🏆', label:'Excellent ბეიჯი'},
+  {id:'excellent',   icon:'🏆', label:'შესანიშნავი შედეგი'},
   {id:'tests5',      icon:'📚', label:'5 ტესტი'},
   {id:'tests20',     icon:'🎓', label:'20 ტესტი'},
   {id:'pct90',       icon:'⭐', label:'90%+ ტესტი'},
@@ -2679,7 +2678,7 @@ function getUserAchievements(email){
   if(results.length>=50) earned.push('tests50');
   if(results.some(r=>r.pct>=90)) earned.push('pct90');
   if(results.some(r=>r.pct===100)) earned.push('pct100');
-  if(results.some(r=>r.pct>=90&&r.badge==='🏆 Excellent')) earned.push('excellent');
+  if(results.some(r=>Number(r.pct)>=90)) earned.push('excellent');
   const subjects=new Set(results.map(r=>r.subject));
   if(subjects.size>=5) earned.push('allsubjects');
   // Comeback: 3 consecutive tests each improving on the previous
@@ -3040,10 +3039,13 @@ const GRADE_ROMAN=['I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII'
 // Generate translated test title on-the-fly
 function txTitle(tx){
   if(!tx) return '';
+  if(tx.isCustom&&tx.title)return tx.title;
   const subjKey=SUBJ_KEY[tx.subject]||'';
   const subjName=subjKey?t(subjKey):tx.subject;
   const gradeStr=tx.grade?GRADE_ROMAN[tx.grade-1]+' '+t('class_label'):'';
-  return gradeStr?subjName+' — '+gradeStr:subjName;
+  const semester=tx.semester===1?t('sem1'):tx.semester===2?t('sem2'):'';
+  const type=tx.testType==='sum'?t('test_sum'):tx.testType==='mid'?t('test_mid'):'';
+  return [subjName,gradeStr,semester,type].filter(Boolean).join(' — ');
 }
 
 // Get title from a result record (uses testId to look up tx in ALL_TESTS)
@@ -3971,22 +3973,48 @@ function updatePrivacyStatus(){
 }
 
 let EDUTEST_SERVER_AUTH_ACTIVE=false;
+let EDUTEST_STATE_SYNC_TIMER=null;
+let EDUTEST_STATE_SYNCING=false;
+const EDUTEST_DURABLE_PREFIXES=['adaptive_','coins_','shop_owned_','shop_equipped_','weekly_xp_','monthly_xp_','friends_','mistake_hist_','edutest_daily_','edutest_freeze_','edutest_onboard_','edutest_team_player_'];
+function isDurableLearningKey(key,email){return EDUTEST_DURABLE_PREFIXES.some(prefix=>key.startsWith(prefix))&&key.includes(email);}
+function collectDurableLearningState(email){
+  const state={};if(!email)return state;
+  try{for(let i=0;i<localStorage.length;i++){const key=localStorage.key(i);if(key&&isDurableLearningKey(key,email)){const value=localStorage.getItem(key);if(value!==null)state[key]=value;}}}catch(_){}
+  return state;
+}
+async function syncUserLearningState(){
+  if(EDUTEST_STATE_SYNCING||!CUR_USER||CUR_USER.authProvider!=='server'||!CUR_USER.emailVerified)return false;
+  EDUTEST_STATE_SYNCING=true;
+  try{const response=await fetch('/api/user-state',{method:'PUT',credentials:'include',headers:{'Content-Type':'application/json'},body:JSON.stringify({state:collectDurableLearningState(CUR_USER.email)}),keepalive:true});return response.ok;}catch(_){return false;}finally{EDUTEST_STATE_SYNCING=false;}
+}
+async function hydrateServerLearningState(appUser){
+  if(!appUser||!appUser.emailVerified)return;
+  try{
+    const [stateResponse,attemptResponse]=await Promise.all([fetch('/api/user-state',{credentials:'include',cache:'no-store'}),fetch('/api/attempts',{credentials:'include',cache:'no-store'})]);
+    if(stateResponse.ok){const payload=await stateResponse.json();Object.entries(payload.state||{}).forEach(([key,value])=>{if(isDurableLearningKey(key,appUser.email)&&typeof value==='string')localStorage.setItem(key,value);});}
+    if(attemptResponse.ok){const payload=await attemptResponse.json(),remote=(payload.attempts||[]).map(row=>Object.assign({},row.result||{},{userId:appUser.email,_serverAttemptId:row.id,verified:true}));const remoteIds=new Set(remote.map(row=>row._serverAttemptId)),local=SESSION_RESULTS.filter(row=>!row._serverAttemptId||!remoteIds.has(row._serverAttemptId));SESSION_RESULTS.splice(0,SESSION_RESULTS.length,...remote,...local);saveResults();}
+  }catch(e){console.warn('learning state restore',e);}
+  if(EDUTEST_STATE_SYNC_TIMER)clearInterval(EDUTEST_STATE_SYNC_TIMER);
+  EDUTEST_STATE_SYNC_TIMER=setInterval(syncUserLearningState,20000);
+}
 function appUserFromServer(user){
   const safeRole=['student','pending_teacher','teacher','admin'].includes(user&&user.role)?user.role:'student';
   return {
     cloudId:user.id,email:user.email||'',role:safeRole,name:user.name||user.email||'მოსწავლე',
     grade:user.grade||'',school:user.school||'',birthDate:user.birthDate||'',guardianEmail:user.guardianEmail||'',
     guardianVerifiedAt:user.guardianVerifiedAt||'',termsVersion:user.termsVersion||'',privacyVersion:user.privacyVersion||'',
-    profileCompletedAt:user.profileCompletedAt||'',accountStatus:user.accountStatus||'active',authProvider:'server',
+    profileCompletedAt:user.profileCompletedAt||'',accountStatus:user.accountStatus||'active',emailVerified:user.emailVerified===true,authProvider:'server',
     premium:false,paidSubjects:[],joinDate:new Date().toLocaleDateString('ka-GE')
   };
 }
 async function adoptServerUser(user,opts){
   opts=opts||{};const appUser=appUserFromServer(user);EDUTEST_SERVER_AUTH_ACTIVE=true;
+  if(appUser.emailVerified)await hydrateServerLearningState(appUser);
   mergeAppUserIntoLocal(appUser);curRole=appUser.role;setCloudStatus('უსაფრთხო სესია აქტიურია · '+appUser.email,true);
   const gate=studentPrivacyGate(appUser);
   if(opts.navigate){
-    if(curRole==='pending_teacher'&&!appUser.profileCompletedAt){go('login');showAgeVerificationModal();}
+    if(!appUser.emailVerified||appUser.accountStatus==='email_pending'){go('login');showEmailVerificationModal(appUser);}
+    else if(curRole==='pending_teacher'&&!appUser.profileCompletedAt){go('login');showAgeVerificationModal();}
     else if(curRole==='pending_teacher'){go('login');setLoginNotice('🕐 მასწავლებლის ანგარიში ჯერ დასამტკიცებელია.','success');}
     else if(curRole==='student'&&gate==='age_required'){go('login');showAgeVerificationModal();}
     else if(curRole==='student'&&gate==='guardian_required'){go('login');showGuardianPendingModal(appUser);}
@@ -4019,11 +4047,13 @@ async function initServerAuth(){
   await refreshSocialProviderButtons();
   const params=new URLSearchParams(location.search);
   const status=params.get('auth')||'';
+  const emailStatus=params.get('email')||'';
   const resetToken=params.get('reset')||'';
   if(resetToken){go('login');setTimeout(openPasswordRecoveryModal,0);}
   try{
     const response=await fetch('/api/auth/session',{credentials:'include',cache:'no-store'});
-    if(response.ok){const data=await response.json();if(data&&data.user){await adoptServerUser(data.user,{navigate:status==='success'&&!resetToken});if(status)clearOAuthStatusParam();return true;}}
+    if(response.ok){const data=await response.json();if(data&&data.user){await adoptServerUser(data.user,{navigate:(status==='success'||emailStatus==='verified')&&!resetToken});if(status)clearOAuthStatusParam();if(emailStatus){try{const clean=new URL(window.top.location.href);clean.searchParams.delete('email');window.top.history.replaceState({},'',clean.pathname+clean.search+clean.hash);}catch(_){} }return true;}}
+    if(emailStatus){go('login');setLoginNotice(emailStatus==='verified'?'ელ-ფოსტა დადასტურდა — ახლა შეგიძლიათ შეხვიდეთ.':'დადასტურების ბმული არასწორია ან ვადაგასულია.',emailStatus==='verified'?'success':'warn');}
     if(status){
       go('login');
       if(status==='registration-details-required'){loginMode='reg';loginTab('reg');}
@@ -4033,6 +4063,35 @@ async function initServerAuth(){
     }
   }catch(error){console.warn('Server session restore',error);if(status){go('login');setLoginNotice('უსაფრთხო სესიის აღდგენა ვერ მოხერხდა. სცადეთ ხელახლა.','warn');}}
   return false;
+}
+
+function showEmailVerificationModal(appUser){
+  const modal=document.getElementById('email-verification-modal');
+  const address=document.getElementById('email-verification-address');
+  const error=document.getElementById('email-verification-error');
+  if(address)address.textContent='დადასტურების მისამართი: '+maskEmail(appUser&&appUser.email||'');
+  if(error){error.textContent='';error.classList.add('hidden');}
+  if(modal){modal.classList.remove('hidden');modal.style.display='flex';setTimeout(()=>modal.querySelector('button')?.focus(),50);}
+}
+async function resendEmailVerification(){
+  const error=document.getElementById('email-verification-error');
+  try{
+    const response=await fetch('/api/auth/email/resend',{method:'POST',credentials:'include',headers:{Accept:'application/json'}});
+    const data=await response.json().catch(()=>({}));
+    if(!response.ok)throw new Error(data.error||'ბმული ვერ გაიგზავნა');
+    if(error){error.textContent=data.alreadyVerified?'ელ-ფოსტა უკვე დადასტურებულია. დააჭირეთ სტატუსის შემოწმებას.':'ახალი ბმული გამოგზავნილია.';error.style.color='#166534';error.style.background='#f0fdf4';error.classList.remove('hidden');}
+  }catch(e){if(error){error.textContent=(e&&e.message)||'ბმული ვერ გაიგზავნა';error.style.color='#9a3412';error.style.background='#fff7ed';error.classList.remove('hidden');}}
+}
+async function refreshEmailVerificationStatus(){
+  try{
+    const response=await fetch('/api/auth/session',{credentials:'include',cache:'no-store'});
+    const data=await response.json().catch(()=>({}));
+    if(!response.ok||!data.user)throw new Error('სესია დასრულდა');
+    const appUser=appUserFromServer(data.user);
+    if(!appUser.emailVerified)throw new Error('ელ-ფოსტა ჯერ არ არის დადასტურებული.');
+    const modal=document.getElementById('email-verification-modal');if(modal){modal.classList.add('hidden');modal.style.display='none';}
+    await adoptServerUser(data.user,{navigate:true});
+  }catch(e){const error=document.getElementById('email-verification-error');if(error){error.textContent=(e&&e.message)||'სტატუსის შემოწმება ვერ მოხერხდა';error.classList.remove('hidden');}}
 }
 
 async function initEduTestCloud(){
@@ -4676,8 +4735,12 @@ async function saveProfile(){
   const newName=(nameInput?.value||'').trim();
   const newPass=(passInput?.value||'').trim();
   try{
-    if(newPass&&newPass.length<8)throw new Error('ახალი პაროლი მინიმუმ 8 სიმბოლო უნდა იყოს.');
-    if(EDUTEST_CLOUD.client&&EDUTEST_CLOUD.user){
+    if(newPass&&newPass.length<10)throw new Error('ახალი პაროლი მინიმუმ 10 სიმბოლო უნდა იყოს.');
+    if(CUR_USER.authProvider==='server'){
+      const response=await fetch('/api/auth/profile',{method:'PATCH',credentials:'include',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({name:newName||CUR_USER.name,password:newPass||undefined})});
+      const data=await response.json().catch(()=>({}));if(!response.ok)throw new Error(data.error||'პროფილის შენახვა ვერ შესრულდა.');
+      CUR_USER=Object.assign(CUR_USER,appUserFromServer(data.user));
+    }else if(EDUTEST_CLOUD.client&&EDUTEST_CLOUD.user){
       if(newName){const pr=await EDUTEST_CLOUD.client.from(EDUTEST_SUPABASE_CONFIG.profilesTable).update({name:newName}).eq('id',EDUTEST_CLOUD.user.id);if(pr.error)throw pr.error;CUR_USER.name=newName;}
       if(newPass){const ar=await EDUTEST_CLOUD.client.auth.updateUser({password:newPass});if(ar.error)throw ar.error;}
       EDUTEST_CLOUD.profile=await fetchCloudProfile(EDUTEST_CLOUD.user);
@@ -4754,18 +4817,10 @@ function renderPendingTeachers(){
   if(!cont)return;
   const pending=USER_DB.filter(u=>u.role==='pending_teacher');
   if(pending.length===0){
-    cont.innerHTML='<div style="color:var(--gray);font-size:13px;padding:8px 0">დასამტკიცებელი მასწავლებელი არ არის.</div>';
+    const empty=document.createElement('div');empty.style.cssText='color:var(--gray);font-size:13px;padding:8px 0';empty.textContent='დასამტკიცებელი მასწავლებელი არ არის.';cont.replaceChildren(empty);
     return;
   }
-  cont.innerHTML=pending.map(u=>`
-    <div style="padding:12px;background:var(--amber-l);border-radius:var(--r);margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
-      <div><div style="font-weight:600;font-size:13px">${u.name||u.email}</div>
-      <div style="font-size:11px;color:var(--gray)">${u.email} · ${u.school||'—'} · ${u.joinDate||''}</div></div>
-      <div style="display:flex;gap:6px">
-        <button class="btn btn-green btn-sm" onclick="approveTeacher('${u.email}')">✓ დამტკიცება</button>
-        <button class="btn btn-danger btn-sm" onclick="rejectTeacher('${u.email}')">✗ უარი</button>
-      </div>
-    </div>`).join('');
+  cont.replaceChildren();pending.forEach(user=>{const card=document.createElement('div');card.style.cssText='padding:12px;background:var(--amber-l);border-radius:var(--r);margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px';const info=document.createElement('div'),name=document.createElement('div'),meta=document.createElement('div'),actions=document.createElement('div');name.style.cssText='font-weight:600;font-size:13px';name.textContent=String(user.name||user.email||'');meta.style.cssText='font-size:11px;color:var(--gray)';meta.textContent=[user.email,user.school||'—',user.joinDate||''].filter(Boolean).join(' · ');actions.style.cssText='display:flex;gap:6px';[['✓ დამტკიცება','btn btn-green btn-sm',approveTeacher],['✗ უარი','btn btn-danger btn-sm',rejectTeacher]].forEach(([label,className,handler])=>{const button=document.createElement('button');button.type='button';button.className=className;button.textContent=label;button.addEventListener('click',()=>handler(user.email));actions.appendChild(button);});info.append(name,meta);card.append(info,actions);cont.appendChild(card);});
 }
 
 // ══════════════════════════════════════════════════════════════
@@ -4869,7 +4924,7 @@ function renderAdminResults(){
     const testName=tx?txTitle(tx):(r.subject?r.subject+' '+r.grade+'კლ.':'—');
     const pct=r.pct||0;
     const badgeColor=pct>=90?'b-blue':pct>=70?'b-green':pct>=50?'b-amber':'b-red';
-    const badgeText=pct>=90?'🏆 Excellent':pct>=70?'✅ Good':pct>=50?'📘 Pass':'❌ Fail';
+    const badgeText=pct>=90?'🏆 შესანიშნავი':pct>=70?'✅ კარგი':pct>=50?'📘 ჩაბარებული':'❌ გასაუმჯობესებელი';
     return `<tr>
       <td style="font-weight:500;font-size:13px">${userName}</td>
       <td style="font-size:12px">${testName}</td>
@@ -5034,7 +5089,7 @@ function openStudentResults(email){
       var statsHtml='<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px">'+
         '<div class="card" style="padding:12px;text-align:center"><div style="font-size:20px;font-weight:800;color:#2563eb">'+results.length+'</div><div style="font-size:11px;color:var(--gray)">ჩაბარებული</div></div>'+
         '<div class="card" style="padding:12px;text-align:center"><div style="font-size:20px;font-weight:800;color:'+(avg2>=70?'#16a34a':'#d97706')+'">'+avg2+'%</div><div style="font-size:11px;color:var(--gray)">საშ. ქულა</div></div>'+
-        '<div class="card" style="padding:12px;text-align:center"><div style="font-size:20px;font-weight:800;color:#7c3aed">'+results.filter(function(r){return r.pct>=90;}).length+'</div><div style="font-size:11px;color:var(--gray)">🏆 Excellent</div></div>'+
+        '<div class="card" style="padding:12px;text-align:center"><div style="font-size:20px;font-weight:800;color:#7c3aed">'+results.filter(function(r){return r.pct>=90;}).length+'</div><div style="font-size:11px;color:var(--gray)">🏆 შესანიშნავი</div></div>'+
         '</div>';
       var listHtml='<div style="display:flex;flex-direction:column;gap:8px">';
       results.forEach(function(r){
@@ -5180,15 +5235,11 @@ async function doLogin(){
       if(under16&&(!guardianEmail||!guardianEmail.includes('@')||guardianEmail===email))throw new Error('16 წლამდე მოსწავლისთვის მიუთითეთ მშობლის/კანონიერი წარმომადგენლის განსხვავებული სწორი ელფოსტა.');
     }
 
-    const registerResponse=await fetch('/api/auth/register',{method:'POST',credentials:'include',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({email,password:pass,name,role:requestedRole,grade,school})});
+    const registerResponse=await fetch('/api/auth/register',{method:'POST',credentials:'include',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({email,password:pass,name,role:requestedRole,grade,school,birthDate,guardianEmail,termsVersion:EDUTEST_PRIVACY_CONFIG.termsVersion,privacyVersion:EDUTEST_PRIVACY_CONFIG.privacyVersion})});
     const registered=await registerResponse.json().catch(()=>({}));
     if(!registerResponse.ok)throw new Error(registered.error||'რეგისტრაცია ვერ დასრულდა');
-    const profilePayload={name,grade,school,requestedRole,termsVersion:EDUTEST_PRIVACY_CONFIG.termsVersion,privacyVersion:EDUTEST_PRIVACY_CONFIG.privacyVersion};
-    if(requestedRole==='student'){profilePayload.birthDate=birthDate;profilePayload.guardianEmail=guardianEmail;}
-    const profileResponse=await fetch('/api/auth/profile',{method:'PATCH',credentials:'include',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(profilePayload)});
-    const profiled=await profileResponse.json().catch(()=>({}));
-    if(!profileResponse.ok)throw new Error(profiled.error||'პროფილის შევსება ვერ დასრულდა');
-    const appUser=await adoptServerUser(profiled.user,{navigate:true});
+    const appUser=await adoptServerUser(registered.user,{navigate:true});
+    if(!registered.emailSent){const notice=document.getElementById('email-verification-error');if(notice){notice.textContent='ანგარიში შეიქმნა, მაგრამ წერილი დროებით ვერ გაიგზავნა. დააჭირეთ „ბმულის ხელახლა გაგზავნას“.';notice.classList.remove('hidden');}}
     logAuditEvent('REGISTER_SERVER',appUser.email+' ('+appUser.role+')');
   }catch(e){
     if(errEl){errEl.textContent=(e&&e.message)||String(e);errEl.classList.remove('hidden');}
@@ -5252,6 +5303,8 @@ function renderAdminUsers(){
 }
 async function doLogout(){
   if(timerInt)clearInterval(timerInt);timerInt=null;
+  if(EDUTEST_STATE_SYNC_TIMER){clearInterval(EDUTEST_STATE_SYNC_TIMER);EDUTEST_STATE_SYNC_TIMER=null;}
+  await syncUserLearningState();
   try{await fetch('/api/auth/logout',{method:'POST',credentials:'include'});}catch(e){console.warn(e);}
   try{if(EDUTEST_CLOUD.client&&EDUTEST_CLOUD.user)await EDUTEST_CLOUD.client.auth.signOut();}catch(e){console.warn(e);}
   EDUTEST_SERVER_AUTH_ACTIVE=false;EDUTEST_CLOUD.user=null;EDUTEST_CLOUD.profile=null;CUR_USER=null;go('landing');
@@ -5313,18 +5366,40 @@ function updateStudentHomeStats(){
   const rec=document.getElementById('s-home-recent');
   if(rec){
     if(!mine.length){rec.innerHTML='<div style="color:var(--gray);font-size:13px;text-align:center;padding:20px">'+t('no_test_taken')+'</div>';}
-    else{rec.innerHTML=mine.slice(0,3).map(r=>`<div style="padding:8px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:12px;font-weight:500">${rTitle(r)}</div><div style="font-size:11px;color:var(--gray)">${r.date}</div></div><span class="badge ${r.bc}">${r.pct>=90?'🏆 Excellent':r.pct>=70?'✅ Good':r.pct>=50?'📘 Pass':'❌ '+t('failed_short')}</span></div>`).join('');}
+    else{rec.innerHTML=mine.slice(0,3).map(r=>`<div style="padding:8px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:12px;font-weight:500">${esc(rTitle(r))}</div><div style="font-size:11px;color:var(--gray)">${esc(String(r.date||''))}</div></div><span class="badge ${Number(r.pct)>=90?'b-blue':Number(r.pct)>=70?'b-green':Number(r.pct)>=50?'b-amber':'b-red'}">${performanceBadgeLabel(Number(r.pct))}</span></div>`).join('');}
   }
 }
 
 // ── Student Tests List ────────────────────────────────────────────────────────
+const SCHOOL_SUBJECTS_BY_GRADE={
+  1:['მათემატიკა','ქართული','ინგლისური','ბუნება'],2:['მათემატიკა','ქართული','ინგლისური','ბუნება'],
+  3:['მათემატიკა','ქართული','ინგლისური','ბუნება','მე და საზოგადოება'],4:['მათემატიკა','ქართული','ინგლისური','ბუნება','მე და საზოგადოება'],
+  5:['მათემატიკა','ქართული','ინგლისური','რუსული','ბუნება','ჩვენი საქართველო'],6:['მათემატიკა','ქართული','ინგლისური','რუსული','ბუნება','ჩვენი საქართველო'],
+  7:['მათემატიკა','ქართული ენა და ლიტერატურა','ინგლისური','რუსული','ისტორია','გეოგრაფია','ბიოლოგია','ფიზიკა','მოქალაქეობა'],
+  8:['მათემატიკა','ქართული ენა და ლიტერატურა','ინგლისური','რუსული','ისტორია','გეოგრაფია','ბიოლოგია','ფიზიკა','ქიმია','მოქალაქეობა'],
+  9:['მათემატიკა','ქართული ენა და ლიტერატურა','ინგლისური','რუსული','ისტორია','გეოგრაფია','ბიოლოგია','ფიზიკა','ქიმია','მოქალაქეობა'],
+  10:['მათემატიკა','ქართული ენა და ლიტერატურა','ინგლისური','რუსული','ისტორია','გეოგრაფია','ბიოლოგია','ფიზიკა','ქიმია','მოქალაქეობა'],
+  11:['მათემატიკა','ქართული ენა და ლიტერატურა','ინგლისური','რუსული','ისტორია','გეოგრაფია','ბიოლოგია','ფიზიკა','ქიმია','მოქალაქეობა'],
+  12:['მათემატიკა','ქართული ენა და ლიტერატურა','ინგლისური','ისტორია','სამოქალაქო თავდაცვა და უსაფრთხოება']
+};
+function subjectFamily(value){
+  const subject=String(value||'').trim();
+  if(['ალგებრა','გეომეტრია'].includes(subject))return 'მათემატიკა';
+  if(['ქართული ენა','ქართული ლიტ.','ქართული ლიტერატურა'].includes(subject))return 'ქართული ენა და ლიტერატურა';
+  if(['ინგლ. ლიტ.','ინგლ. გრამ.','ინგლისური ლიტერატურა','ინგლისური გრამატიკა'].includes(subject))return 'ინგლისური';
+  if(['რუს. გრამ.','მეორე უცხოური — რუსული'].includes(subject))return 'რუსული';
+  return subject;
+}
+function subjectsForGrade(grade){return (SCHOOL_SUBJECTS_BY_GRADE[Number(grade)]||[]).slice();}
+function populateBuilderSubjects(){
+  const select=document.getElementById('b-subj'),grade=Number(document.getElementById('b-grade')?.value||1);if(!select)return;
+  const current=subjectFamily(select.value),allowed=subjectsForGrade(grade);select.replaceChildren(...allowed.map(subject=>new Option(subject,subject,false,subject===current)));
+}
 function populateSubjectDropdown(selId){
-  const subjectNames=[t('math'),t('georgian'),t('geo_lit'),t('geo_lang'),t('english'),t('eng_lit'),t('eng_gram'),t('russian'),t('rus_gram'),t('nature'),t('history'),t('geography'),t('biology'),t('chemistry'),t('physics')];
-  const subjectValues=['მათემატიკა','ქართული','ქართული ლიტ.','ქართული ენა','ინგლისური','ინგლ. ლიტ.','ინგლ. გრამ.','რუსული','რუს. გრამ.','ბუნება','ისტორია','გეოგრაფია','ბიოლოგია','ქიმია','ფიზიკა'];
   const sel=document.getElementById(selId);if(!sel)return;
-  const curVal=sel.dataset.realVal||sel.value;
-  sel.innerHTML='<option value="">'+t('all_subjects')+'</option>'+
-    subjectValues.map((v,i)=>'<option value="'+v+'"'+(curVal===v?' selected':'')+'>'+subjectNames[i]+'</option>').join('');
+  const curVal=subjectFamily(sel.dataset.realVal||sel.value),catalogSubjects=[...new Set(ALL_TESTS.filter(test=>test&&test.serverBacked===true).map(test=>subjectFamily(test.subject)).filter(Boolean))];
+  const fallbackGrade=Number(CUR_USER?.grade||0),values=(catalogSubjects.length?catalogSubjects:(fallbackGrade?subjectsForGrade(fallbackGrade):[...new Set(Object.values(SCHOOL_SUBJECTS_BY_GRADE).flat())])).sort((a,b)=>a.localeCompare(b,'ka'));
+  sel.replaceChildren(new Option(t('all_subjects'),''),...values.map(value=>new Option(value,value,false,value===curVal)));
 }
 function renderStudentTests(){
   populateSubjectDropdown('s-filter-subject');
@@ -5354,7 +5429,7 @@ function renderStudentTests(){
   let tests=ALL_TESTS.filter(tx=>tx&&tx.serverBacked===true);
   // Also filter: non-premium students can't see higher grades
   if(!userPremium&&userGradeNum) tests=tests.filter(tx=>tx.grade<=userGradeNum);
-  if(subj)tests=tests.filter(t=>t.subject===subj);
+  if(subj)tests=tests.filter(test=>subjectFamily(test.subject)===subjectFamily(subj));
   if(grade)tests=tests.filter(t=>t.grade===parseInt(grade));
   if(semFilter)tests=tests.filter(t=>String(t.semester)===semFilter);
   if(typeFilter)tests=tests.filter(t=>t.testType===typeFilter);
@@ -5369,7 +5444,7 @@ function renderStudentTests(){
   list.innerHTML=tests.map(tx=>`
     <div class="card" style="padding:16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:10px">
       <div style="width:44px;height:44px;border-radius:10px;background:${SUBJ_COLORS[tx.subject]||'#6366f1'};display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">${SUBJ_ICONS[tx.subject]||'📝'}</div>
-      <div style="flex:1"><div style="font-weight:600;margin-bottom:6px">${txTitle(tx)}<span class="ver-badge">🔐 Smart Selection</span></div><div style="display:flex;gap:6px;flex-wrap:wrap"><span class="chip">⏱ ${tx.time} ${t('min_abbr')}</span><span class="chip">❓ ${tx.count} ${t('q_label')}</span>${tx.semester?`<span class="chip" style="background:#ede9fe;color:#5b21b6">📅 ${tx.semester===1?t('sem1'):tx.semester===2?t('sem2'):''}</span>`:''}${tx.testType==='sum'?`<span class="chip" style="background:#fef3c7;color:#92400e">📋 ${t('test_sum')}</span>`:''}${(()=>{const a=getTestAccess(CUR_USER?.email||'',tx.id);if(a==='free')return'<span class="chip" style="background:#d1fae5;color:#065f46">🆓 უფასო ტესტი</span>';if(a==='locked')return`<span class="chip" style="background:#fef3c7;color:#92400e">💳 ${fmtPrice('perSubject')}</span>`;if(a==='premium')return'<span class="chip" style="background:#ede9fe;color:#5b21b6">⭐ Premium</span>';return'<span class="chip" style="background:#dbeafe;color:#1e40af">✅ შეძენილი</span>';})()}</div></div>
+      <div style="flex:1"><div style="font-weight:600;margin-bottom:6px">${esc(txTitle(tx))}<span class="ver-badge">🔐 გონივრული შერჩევა</span></div><div style="display:flex;gap:6px;flex-wrap:wrap"><span class="chip">⏱ ${Number(tx.time)||0} ${t('min_abbr')}</span><span class="chip">❓ ${Number(tx.count)||0} ${t('q_label')}</span>${tx.semester?`<span class="chip" style="background:#ede9fe;color:#5b21b6">📅 ${tx.semester===1?t('sem1'):tx.semester===2?t('sem2'):''}</span>`:''}${tx.testType==='sum'?`<span class="chip" style="background:#fef3c7;color:#92400e">📋 ${t('test_sum')}</span>`:''}${(()=>{const a=getTestAccess(CUR_USER?.email||'',tx.id);if(a==='free')return'<span class="chip" style="background:#d1fae5;color:#065f46">🆓 უფასო ტესტი</span>';if(a==='locked')return`<span class="chip" style="background:#fef3c7;color:#92400e">💳 ${fmtPrice('perSubject')}</span>`;if(a==='premium')return'<span class="chip" style="background:#ede9fe;color:#5b21b6">⭐ Premium</span>';return'<span class="chip" style="background:#dbeafe;color:#1e40af">✅ შეძენილი</span>';})()}</div></div>
       ${(()=>{const acc=getTestAccess(CUR_USER?.email||'',tx.id);if(acc==='locked')return`<button class="btn btn-sm" style="background:#f59e0b;color:#fff;border:none;cursor:pointer" onclick="showPayModal('${tx.id}')">💳 ${fmtPrice('perSubject')}</button>`;if(acc==='free')return`<button class="btn btn-sm" style="background:#10b981;color:#fff;border:none;cursor:pointer" onclick="startTestById('${tx.id}')">🆓 ${t('start_test')}</button>`;return`<button class="btn btn-primary btn-sm" onclick="startTestById('${tx.id}')">🚀 ${t('start_test')}</button>`;})()}
     </div>`).join('');
 }
@@ -5381,17 +5456,17 @@ function renderTeacherTests(){
   const grade=document.getElementById('t-filter-grade')?.value||'';
   const tbody=document.getElementById('t-test-tbody');if(!tbody)return;
   let tests=ALL_TESTS.filter(tx=>tx&&tx.serverBacked===true);
-  if(subj)tests=tests.filter(t=>t.subject===subj);
+  if(subj)tests=tests.filter(test=>subjectFamily(test.subject)===subjectFamily(subj));
   if(grade)tests=tests.filter(t=>t.grade===parseInt(grade));
   if(!tests.length){tbody.innerHTML='<tr><td colspan="6" style="text-align:center;color:var(--gray);padding:24px">'+t('no_tests')+'</td></tr>';return;}
   tbody.innerHTML=tests.map(tx=>`
     <tr>
-      <td style="font-weight:500">${txTitle(tx)}</td>
-      <td><span class="chip">${SUBJ_ICONS[tx.subject]||''} ${tx.subject.slice(0,4)}.</span></td>
+      <td style="font-weight:500">${esc(txTitle(tx))}</td>
+      <td><span class="chip">${SUBJ_ICONS[subjectFamily(tx.subject)]||''} ${esc(subjectFamily(tx.subject))}</span></td>
       <td><span style="display:inline-flex;width:26px;height:26px;border-radius:50%;background:#dbeafe;color:#1d4ed8;align-items:center;justify-content:center;font-weight:700;font-size:11px">${tx.grade}</span></td>
       <td>${tx.count}</td>
       <td>${tx.paid?'<span class="badge b-amber">💳 '+t('paid')+'</span>':'<span class="badge b-green">'+t('plan_free')+'</span>'}</td>
-      <td style="display:flex;gap:4px"><button class="btn btn-ghost btn-sm" onclick="startTestById('${tx.id}')">▶</button><button class="btn btn-ghost btn-sm" onclick="showBuilder()" title="Server-side Builder">✨</button><button class="btn btn-ghost btn-sm" style="color:var(--red)" onclick="adminDeleteTest('${tx.id}')">🗑</button></td>
+      <td style="display:flex;gap:4px"><button class="btn btn-ghost btn-sm" aria-label="ტესტის წინასწარი ნახვა" onclick="startTestById('${tx.id}')">▶</button><button class="btn btn-ghost btn-sm" aria-label="უსაფრთხო ტესტის შექმნა" onclick="showBuilder()" title="უსაფრთხო ტესტის შექმნა">✨</button><button class="btn btn-ghost btn-sm" aria-label="ტესტის წაშლა" style="color:var(--red)" onclick="adminDeleteTest('${tx.id}')">🗑</button></td>
     </tr>`).join('');
 }
 
@@ -5404,8 +5479,8 @@ function renderStudentResults(){
   el.innerHTML=mine.map(r=>`
     <div class="card" style="padding:16px;margin-bottom:10px">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
-        <div><div style="font-weight:600">${rTitle(r)}</div><div style="font-size:11px;color:var(--gray)">${r.date}</div></div>
-        <span class="badge ${r.bc}">${r.pct>=90?'🏆 Excellent':r.pct>=70?'✅ Good':r.pct>=50?'📘 Pass':'❌ '+t('failed_short')}</span>
+        <div><div style="font-weight:600">${esc(rTitle(r))}</div><div style="font-size:11px;color:var(--gray)">${esc(String(r.date||''))}</div></div>
+        <span class="badge ${r.bc}">${performanceBadgeLabel(r.pct)}</span>
       </div>
       <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>${r.earned}/${r.totalPts} ${t('pts_label')} · ${r.correct}/${r.total} ${t('correct')}</span><span style="font-weight:600;color:var(--blue)">${r.pct}%</span></div>
       <div class="pbar"><div class="pfill" style="width:${r.pct}%;background:${r.pct>=90?'#2563eb':r.pct>=70?'#16a34a':r.pct>=50?'#d97706':'#dc2626'}"></div></div>
@@ -5417,14 +5492,14 @@ function renderStudentResults(){
 let ASSIGNMENTS=[];
 function saveAssignments(){}
 function getMyAssignments(){return [];}
-function createAssignment(){alert('🔐 დავალება შექმენით Server-side Builder-იდან — იქვე მიუთითეთ კლასი და ვადა.');showBuilder();}
-function deleteAssignment(){alert('Server-side დავალების წასაშლელად გამოიყენეთ Builder-ის ტესტების სია.');}
+function createAssignment(){alert('🔐 დავალება შექმენით უსაფრთხო ტესტის შემქმნელიდან — იქვე მიუთითეთ კლასი და ვადა.');showBuilder();}
+function deleteAssignment(){alert('სერვერული დავალების წასაშლელად გამოიყენეთ ტესტების სია.');}
 async function renderAssignmentsList(){
   const el=document.getElementById('t-assign-list');if(!el)return;
   try{const d=await invokeAssessment(EDUTEST_ASSESSMENT_CONFIG.builderFunction,{action:'list_mine'});const rows=d.tests||[];
-    if(!rows.length){el.innerHTML='<div style="color:var(--gray);text-align:center;padding:20px">Server-side დავალებები არ არის</div>';return;}
+    if(!rows.length){el.innerHTML='<div style="color:var(--gray);text-align:center;padding:20px">სერვერული დავალებები არ არის</div>';return;}
     el.innerHTML=rows.map(a=>`<div style="padding:10px 14px;border:1px solid var(--border);border-radius:var(--r);margin-bottom:8px;display:flex;align-items:center;gap:12px"><div style="flex:1"><div style="font-weight:600;font-size:13px">${esc(a.title||a.id)}</div><div style="font-size:11px;color:var(--gray)">📚 ${esc(a.subject||'')} · ${esc(String(a.grade||''))} კლ.${a.dueAt?' · ⏰ '+esc(a.dueAt.slice(0,10)):''}</div><div style="font-size:10px;color:#1d4ed8;margin-top:2px">🔐 server-verified</div></div><button class="btn btn-sm" style="background:#fee2e2;color:#991b1b;border:none" onclick="adminDeleteTest('${a.id}')">🗑</button></div>`).join('');
-  }catch(e){el.innerHTML='<div style="color:var(--gray);text-align:center;padding:20px">Server-side დავალებების ჩატვირთვა ვერ მოხერხდა</div>';}
+  }catch(e){el.innerHTML='<div style="color:var(--gray);text-align:center;padding:20px">სერვერული დავალებების ჩატვირთვა ვერ მოხერხდა</div>';}
 }
 function renderAssignPanel(){renderAssignmentsList();}
 
@@ -5549,7 +5624,7 @@ function renderQ(){
   // Read-aloud button
   if(window.isTTSOn&&isTTSOn()){
     const _raBtn=document.createElement('button');
-    _raBtn.className='read-aloud-btn';_raBtn.textContent=' 🔊';_raBtn.title='მოსმენა';
+    _raBtn.className='read-aloud-btn';_raBtn.textContent=' 🔊';_raBtn.title='მოსმენა';_raBtn.setAttribute('aria-label','კითხვის ხმამაღლა მოსმენა');
     _raBtn.onclick=function(e){e.stopPropagation();speakText(qTransText(q));};
     _qtEl.appendChild(_raBtn);
   }
@@ -5657,8 +5732,9 @@ function renderQ(){
   }else{
     const dispOpts=(q.type==='true_false')?[t('true_ans'),t('false_ans')]:q.opts.map((_,i)=>qTransOpt(q,i));
     dispOpts.forEach((o,i)=>{
-      const d=document.createElement('div');d.className='qopt'+(qAnswers[q.id]===i?' sel':'');
-      d.innerHTML='<div class="radio'+(qAnswers[q.id]===i?' sel':'')+'">'+(qAnswers[q.id]===i?'<span style="color:#fff;font-size:9px">✓</span>':'')+' </div><span>'+o+'</span>';
+      const selected=qAnswers[q.id]===i,d=document.createElement('button');d.type='button';d.className='qopt'+(selected?' sel':'');d.style.width='100%';d.style.textAlign='left';d.setAttribute('aria-pressed',String(selected));
+      const radio=document.createElement('span');radio.className='radio'+(selected?' sel':'');radio.setAttribute('aria-hidden','true');if(selected){const check=document.createElement('span');check.textContent='✓';check.style.cssText='color:#fff;font-size:9px';radio.appendChild(check);}
+      const optionText=document.createElement('span');optionText.textContent=String(o);d.append(radio,optionText);
       d.onclick=()=>{qAnswers[q.id]=i;renderQ();updateDots();};opts.appendChild(d);
     });
   }  const prevBtn=document.getElementById('q-prev');if(prevBtn){prevBtn.textContent='← '+t('prev');prevBtn.disabled=qIdx===0;}
@@ -5688,7 +5764,7 @@ function hideSubmitModal(){document.getElementById('submit-modal').classList.add
 async function finishTest(){
   if(timerInt)clearInterval(timerInt);hideSubmitModal();if(!curAssessmentSessionId){if(document.getElementById('p-results')?.classList.contains('active'))return;alert('უსაფრთხო სესია ვერ მოიძებნა.');return;}
   setTestLoading('🔐 პასუხები სერვერზე მოწმდება…');
-  try{const data=await invokeAssessment(EDUTEST_ASSESSMENT_CONFIG.submitFunction,{session_id:curAssessmentSessionId,answers:qAnswers,tab_switch_count:_tabSwitchCount});const sr=data.result||{};const pct=Number(sr.pct||0);const badge=pct>=90?'🏆 Excellent':pct>=70?'✅ Good':pct>=50?'📘 Pass':'❌ Fail';const bc=pct>=90?'b-blue':pct>=70?'b-green':pct>=50?'b-amber':'b-red';const result={userId:CUR_USER?.email||'',testId:sr.testId||curTest.id,title:sr.title||curTest.title,subject:sr.subject||curTest.subject,grade:sr.grade||curTest.grade,earned:Number(sr.earned||0),totalPts:Number(sr.totalPts||0),correct:Number(sr.correct||0),total:Number(sr.total||curTestQs.length),pct,badge,bc,date:sr.date||new Date().toLocaleDateString('ka-GE'),verified:true,serverSessionId:sr.sessionId||curAssessmentSessionId,reviewed:data.review||[]};SESSION_RESULTS.unshift(result);saveResults();_lastResult=result;curAssessmentSessionId=null;try{if(EDUTEST_CLOUD.user)await syncAdaptiveFromCloud(CUR_USER.email,EDUTEST_CLOUD.user.id);}catch(_){}
+  try{const data=await invokeAssessment(EDUTEST_ASSESSMENT_CONFIG.submitFunction,{session_id:curAssessmentSessionId,answers:qAnswers,tab_switch_count:_tabSwitchCount});const sr=data.result||{};const pct=Number(sr.pct||0);const badge=pct>=90?'🏆 შესანიშნავი':pct>=70?'✅ კარგი':pct>=50?'📘 ჩაბარებული':'❌ გასაუმჯობესებელი';const bc=pct>=90?'b-blue':pct>=70?'b-green':pct>=50?'b-amber':'b-red';const result={userId:CUR_USER?.email||'',testId:sr.testId||curTest.id,title:sr.title||curTest.title,subject:sr.subject||curTest.subject,grade:sr.grade||curTest.grade,earned:Number(sr.earned||0),totalPts:Number(sr.totalPts||0),correct:Number(sr.correct||0),total:Number(sr.total||curTestQs.length),pct,badge,bc,date:sr.date||new Date().toLocaleDateString('ka-GE'),verified:true,serverSessionId:sr.sessionId||curAssessmentSessionId,reviewed:data.review||[]};SESSION_RESULTS.unshift(result);saveResults();_lastResult=result;curAssessmentSessionId=null;try{if(EDUTEST_CLOUD.user)await syncAdaptiveFromCloud(CUR_USER.email,EDUTEST_CLOUD.user.id);}catch(_){}
     if(CUR_USER){const g=parseInt(CUR_USER.grade)||parseInt(curTest.grade)||1;let xpEarned=calcXP(pct,g);if(_isDailyBonus){xpEarned*=2;markDailyDone(CUR_USER.email);_isDailyBonus=false;}result.xpEarned=xpEarned;saveResults();showXpToast(xpEarned,null);}logAuditEvent('TEST_DONE_VERIFIED',(CUR_USER?CUR_USER.email:'')+' | '+result.testId+' | '+pct+'%');renderResultsPage(result);go('results');
   }catch(e){alert('შეფასება ვერ დასრულდა: '+assessmentErrorMessage(e&&e.message));go('student');}
 }
@@ -5700,11 +5776,11 @@ function renderResultsPage(r){
       sumEl.innerHTML=`
         <div style="font-size:52px;margin-bottom:10px">🎊</div>
         <h2 style="font-weight:800;font-size:22px;margin-bottom:6px;color:#1d4ed8">${t('bravo_perfect')}</h2>
-        <p style="color:var(--gray);margin-bottom:16px;font-size:13px">${rTitle(r)}</p>
+        <p style="color:var(--gray);margin-bottom:16px;font-size:13px">${esc(rTitle(r))}</p>
         <div style="background:linear-gradient(135deg,#dbeafe,#ede9fe);border-radius:12px;padding:14px;margin-bottom:16px">
           <p style="color:#1d4ed8;font-weight:600;font-size:14px">${t('bravo_msg')}</p>
         </div>
-        <div style="display:inline-flex;align-items:center;gap:6px;padding:6px 20px;border-radius:999px;font-weight:700;font-size:15px;margin-bottom:18px" class="badge ${r.bc}">${r.pct>=90?'🏆 Excellent':r.pct>=70?'✅ Good':r.pct>=50?'📘 Pass':'❌ '+t('failed_short')} — ${r.pct}%</div>
+        <div style="display:inline-flex;align-items:center;gap:6px;padding:6px 20px;border-radius:999px;font-weight:700;font-size:15px;margin-bottom:18px" class="badge ${r.bc}">${performanceBadgeLabel(r.pct)} — ${r.pct}%</div>
         <div style="display:flex;justify-content:center;gap:28px">
           <div><div style="font-size:28px;font-weight:800;color:var(--blue)">${r.pct}%</div><div style="font-size:11px;color:var(--gray)">${t('percentage')}</div></div>
           <div style="width:1px;background:var(--border)"></div>
@@ -5716,8 +5792,8 @@ function renderResultsPage(r){
       sumEl.innerHTML=`
         <div style="font-size:52px;margin-bottom:10px">${r.pct>=90?'🌟':r.pct>=70?'🎉':r.pct>=50?'👍':'💪'}</div>
         <h2 style="font-weight:800;font-size:20px;margin-bottom:6px">${t('test_done')}</h2>
-        <p style="color:var(--gray);margin-bottom:16px;font-size:13px">${rTitle(r)}</p>
-        <div style="display:inline-flex;align-items:center;gap:6px;padding:6px 20px;border-radius:999px;font-weight:700;font-size:15px;margin-bottom:18px" class="badge ${r.bc}">${r.pct>=90?'🏆 Excellent':r.pct>=70?'✅ Good':r.pct>=50?'📘 Pass':'❌ '+t('failed_short')} — ${r.pct}%</div>
+        <p style="color:var(--gray);margin-bottom:16px;font-size:13px">${esc(rTitle(r))}</p>
+        <div style="display:inline-flex;align-items:center;gap:6px;padding:6px 20px;border-radius:999px;font-weight:700;font-size:15px;margin-bottom:18px" class="badge ${r.bc}">${performanceBadgeLabel(r.pct)} — ${r.pct}%</div>
         <div style="display:flex;justify-content:center;gap:28px">
           <div><div style="font-size:28px;font-weight:800;color:var(--blue)">${r.pct}%</div><div style="font-size:11px;color:var(--gray)">${t('percentage')}</div></div>
           <div style="width:1px;background:var(--border)"></div>
@@ -5811,6 +5887,7 @@ function payComplete(){
 loadPersistedData();
 // Restore the secure HttpOnly server session first, then initialize optional Supabase email/cloud features.
 initServerAuth().then(function(){return initEduTestCloud();}).catch(function(e){console.warn('Cloud init',e);});
+window.addEventListener('edutest-supabase-ready',function(){if(!EDUTEST_CLOUD.ready)initEduTestCloud();},{once:true});
 loadPrices();
 loadCustomQuestions();
 loadReports();
@@ -5819,32 +5896,39 @@ updateI18n();
 // ── Accessibility modes ─────────────────
 (function(){
   const MODES=['large','contrast','dyslexia','tts'];
+  let cloudSpeechAudio=null,cloudSpeechUrl='';
   function loadAcc(){
     try{
       MODES.forEach(m=>{
         const on=localStorage.getItem('edutest_acc_'+m)==='1';
         if(on&&m!=='tts')document.body.classList.add('acc-'+m);
         const btn=document.getElementById('acc-'+m);
-        if(btn&&on)btn.classList.add('on');
+        if(btn){if(on)btn.classList.add('on');btn.setAttribute('aria-pressed',String(on));}
       });
     }catch(e){}
   }
   window.toggleAcc=function(mode){
     const btn=document.getElementById('acc-'+mode);
     const isOn=btn&&btn.classList.contains('on');
-    if(btn){if(isOn)btn.classList.remove('on');else btn.classList.add('on');}
+    if(btn){if(isOn)btn.classList.remove('on');else btn.classList.add('on');btn.setAttribute('aria-pressed',String(!isOn));}
     if(mode!=='tts'){if(isOn)document.body.classList.remove('acc-'+mode);else document.body.classList.add('acc-'+mode);}
     try{localStorage.setItem('edutest_acc_'+mode,isOn?'0':'1');}catch(e){}
   };
   window.isTTSOn=function(){
     try{return localStorage.getItem('edutest_acc_tts')==='1';}catch(e){return false;}
   };
-  window.speakText=function(text){
-    if(!isTTSOn()||!window.speechSynthesis)return;
-    window.speechSynthesis.cancel();
-    const u=new SpeechSynthesisUtterance(text);
-    u.lang='ka-GE';u.rate=0.9;
-    window.speechSynthesis.speak(u);
+  window.speakText=async function(text){
+    if(!isTTSOn())return;
+    const clean=String(text||'').replace(/\s+/g,' ').trim();if(!clean)return;
+    const lang=/[ა-ჰ]/u.test(clean)?'ka':/[А-Яа-яЁё]/u.test(clean)?'ru':LANG==='ru'?'ru':LANG==='en'?'en':'ka';
+    try{
+      if(cloudSpeechAudio){cloudSpeechAudio.pause();cloudSpeechAudio=null;}if(cloudSpeechUrl){URL.revokeObjectURL(cloudSpeechUrl);cloudSpeechUrl='';}
+      const response=await fetch('/api/tts',{method:'POST',credentials:'include',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:clean,lang})});
+      if(!response.ok)throw new Error('cloud speech unavailable');
+      cloudSpeechUrl=URL.createObjectURL(await response.blob());cloudSpeechAudio=new Audio(cloudSpeechUrl);cloudSpeechAudio.addEventListener('ended',()=>{if(cloudSpeechUrl)URL.revokeObjectURL(cloudSpeechUrl);cloudSpeechUrl='';cloudSpeechAudio=null;},{once:true});await cloudSpeechAudio.play();return;
+    }catch(_){
+      if(!window.speechSynthesis)return;window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(clean);u.lang=lang==='ru'?'ru-RU':lang==='en'?'en-US':'ka-GE';u.rate=0.9;window.speechSynthesis.speak(u);
+    }
   };
   // Add read-aloud buttons to question text when rendered
   window.addReadAloudBtn=function(el){
@@ -5852,32 +5936,13 @@ updateI18n();
     const h3=el.querySelector('h3');
     if(!h3||h3.querySelector('.read-aloud-btn'))return;
     const btn=document.createElement('button');
-    btn.className='read-aloud-btn';btn.textContent='🔊';btn.title='მოსმენა';
+    btn.className='read-aloud-btn';btn.textContent='🔊';btn.title='მოსმენა';btn.setAttribute('aria-label','ტექსტის ხმამაღლა მოსმენა');
     btn.onclick=function(e){e.stopPropagation();speakText(h3.textContent.replace('🔊','').trim());};
     h3.appendChild(btn);
   };
   document.addEventListener('DOMContentLoaded',loadAcc);
 })();
 
-// ── Landing page count-up animation ──────────────────────────────────────────
-function runLpCounters(){
-  document.querySelectorAll('.lp-counter').forEach(el=>{
-    const target=parseInt(el.dataset.target||'0');
-    const duration=1800;
-    const step=Math.max(1,Math.floor(target/60));
-    let cur=0;
-    const timer=setInterval(()=>{
-      cur=Math.min(cur+step,target);
-      el.textContent=cur.toLocaleString('ka-GE');
-      if(cur>=target)clearInterval(timer);
-    },duration/60);
-  });
-}
-// Run when landing page is visible
-document.addEventListener('DOMContentLoaded',()=>{
-  const lp=document.getElementById('p-landing');
-  if(lp&&lp.classList.contains('active'))runLpCounters();
-});
 // Also run when navigating to landing
 const _origGo=window.go;
 
@@ -6417,12 +6482,24 @@ document.addEventListener('click',function(e){
   setTimeout(function(){r.remove();},500);
 });
 
+// Keep keyboard focus inside the currently open dialog.
+document.addEventListener('keydown',function(event){
+  if(event.key!=='Tab')return;
+  const dialogs=[...document.querySelectorAll('[role="dialog"]')].filter(dialog=>!dialog.classList.contains('hidden')&&getComputedStyle(dialog).display!=='none');
+  const dialog=dialogs[dialogs.length-1];if(!dialog)return;
+  const items=[...dialog.querySelectorAll('button:not([disabled]),a[href],input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])')].filter(item=>item.offsetParent!==null);
+  if(!items.length){event.preventDefault();dialog.setAttribute('tabindex','-1');dialog.focus();return;}
+  const first=items[0],last=items[items.length-1];
+  if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}
+  else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}
+});
+
 </script>
 <script src="/management-overrides.js"></script>
 <script src="/server-assessments.js"></script>
 
 <!-- EDIT USER MODAL -->
-<div id="modal-edit-user" class="overlay hidden" onclick="if(event.target===this)this.classList.add('hidden')">
+<div id="modal-edit-user" class="overlay hidden" role="dialog" aria-modal="true" aria-label="მომხმარებლის რედაქტირება" onclick="if(event.target===this)this.classList.add('hidden')">
   <div class="modal" style="max-width:400px;width:100%">
     <div style="font-weight:700;font-size:16px;margin-bottom:16px">✎ მომხმარებლის რედაქტირება</div>
     <input type="hidden" id="aeu-orig-email"/>
@@ -6450,22 +6527,22 @@ document.addEventListener('click',function(e){
     <div style="font-weight:700;font-size:12px;color:var(--gray);margin-bottom:8px;text-transform:uppercase;letter-spacing:.05em">♿ ხელმისაწვდომობა</div>
     <div class="acc-toggle">
       <span>🔡 დიდი შრიფტი</span>
-      <button class="acc-switch" id="acc-large" onclick="toggleAcc('large')"></button>
+      <button class="acc-switch" id="acc-large" aria-label="დიდი შრიფტის ჩართვა" aria-pressed="false" onclick="toggleAcc('large')"></button>
     </div>
     <div class="acc-toggle">
       <span>🌓 მაღალი კონტრასტი</span>
-      <button class="acc-switch" id="acc-contrast" onclick="toggleAcc('contrast')"></button>
+      <button class="acc-switch" id="acc-contrast" aria-label="მაღალი კონტრასტის ჩართვა" aria-pressed="false" onclick="toggleAcc('contrast')"></button>
     </div>
     <div class="acc-toggle">
       <span>📖 დისლექსიის რეჟიმი</span>
-      <button class="acc-switch" id="acc-dyslexia" onclick="toggleAcc('dyslexia')"></button>
+      <button class="acc-switch" id="acc-dyslexia" aria-label="დისლექსიის რეჟიმის ჩართვა" aria-pressed="false" onclick="toggleAcc('dyslexia')"></button>
     </div>
     <div class="acc-toggle" style="margin-top:4px">
       <span>🔊 ხმოვანი კითხვა</span>
-      <button class="acc-switch" id="acc-tts" onclick="toggleAcc('tts')"></button>
+      <button class="acc-switch" id="acc-tts" aria-label="ხმოვანი კითხვის ჩართვა" aria-pressed="false" onclick="toggleAcc('tts')"></button>
     </div>
   </div>
-  <button class="acc-fab" onclick="document.getElementById('acc-dropdown').classList.toggle('open')" title="ხელმისაწვდომობა">♿</button>
+  <button class="acc-fab" aria-label="ხელმისაწვდომობის პარამეტრები" aria-expanded="false" onclick="const menu=document.getElementById('acc-dropdown');menu.classList.toggle('open');this.setAttribute('aria-expanded',String(menu.classList.contains('open')))" title="ხელმისაწვდომობა">♿</button>
 </div>
 </body>
 </html>

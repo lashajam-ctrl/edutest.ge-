@@ -4,6 +4,7 @@ import { canonicalAssessmentSubject, gradeAssessmentAnswer, parsePublicPayload, 
 import { correctKnownAnswerKey, correctKnownQuestionExplanation } from "@/lib/assessment-selection";
 import { getSessionUser } from "@/lib/auth";
 import { consumeRateLimit } from "@/lib/rate-limit";
+import { sendAssessmentResultEmail } from "@/lib/result-email";
 
 type SessionRow = { id: string; user_id: string; test_id: string; question_ids_json: string; presentation_json: string; status: string; expires_at: number };
 type QuestionWithKey = StoredAssessmentQuestion & { answer_key_json: string; explanation: string };
@@ -68,5 +69,7 @@ export async function POST(request: Request) {
       .bind(crypto.randomUUID(), current.user.id, id, `server:${resultSubject}:${test?.grade ?? ""}`, now));
   }
   await env.DB.batch(statements);
-  return Response.json({ result }, { status: 201, headers: { "Cache-Control": "no-store" } });
+  let resultEmailSent = false;
+  try { resultEmailSent = await sendAssessmentResultEmail(current.user, result); } catch { resultEmailSent = false; }
+  return Response.json({ result, resultEmailSent }, { status: 201, headers: { "Cache-Control": "no-store" } });
 }

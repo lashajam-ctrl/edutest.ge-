@@ -109,10 +109,10 @@ test("reveals tutoring explanations only after server-side grading", async () =>
 });
 
 test("accepts class-section labels and exposes one unified senior mathematics subject", async () => {
-  const [assessment, start, catalog, client, html, importer, reportText] = await Promise.all([
+  const [assessment, start, catalog, html, importer, reportText] = await Promise.all([
     source("lib/assessment.ts"), source("app/api/assessments/start/route.ts"),
-    source("app/api/assessments/catalog/route.ts"), source("public/server-assessments.js"),
-    source("public/app.html"), source("scripts/import-assessment-bank.mjs"),
+    source("app/api/assessments/catalog/route.ts"), source("public/app.html"),
+    source("scripts/import-assessment-bank.mjs"),
     source("reports/assessment-import-report.json"),
   ]);
   const report = JSON.parse(reportText);
@@ -122,7 +122,7 @@ test("accepts class-section labels and exposes one unified senior mathematics su
   assert.match(catalog, /preferredSeniorMath/);
   assert.doesNotMatch(html, /subject:'(?:ალგებრა|გეომეტრია)'/);
   assert.match(html, /id:'math-g12-s1'.*subject:'მათემატიკა'/);
-  assert.match(html, /15 საგანი/);
+  assert.doesNotMatch(html, /15 საგანი/);
   assert.doesNotMatch(importer, /status: "split"/);
   assert.equal(report.importedTests, 336);
   assert.equal(report.subjectMapping.split, undefined);

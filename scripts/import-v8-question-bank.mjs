@@ -39,8 +39,6 @@ const normalize = value => String(value ?? "")
   .replace(/\s+/gu, " ")
   .trim();
 const sql = value => value == null ? "NULL" : typeof value === "number" ? String(value) : `'${String(value).replaceAll("'", "''")}'`;
-const bool = value => value ? 1 : 0;
-
 async function jsonl(file) {
   const text = await readFile(file, "utf8");
   return text.split(/\r?\n/u).filter(Boolean).map((line, index) => {

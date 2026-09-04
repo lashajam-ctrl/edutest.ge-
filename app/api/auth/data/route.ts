@@ -10,6 +10,7 @@ import {
   identities,
   issueReports,
   questionHistory,
+  userLearningState,
   users,
 } from "@/db/schema";
 import { destroySession, getSessionUser, publicUser, sha256 } from "@/lib/auth";
@@ -33,7 +34,7 @@ export async function GET(request: Request) {
   await ensureSchema();
   const db = getDb();
   const userId = current.user.id;
-  const [linkedIdentities, attemptRows, historyRows, guardianRows, assignmentRows, reportRows, customRows, sessionRows, adaptiveRows] = await Promise.all([
+  const [linkedIdentities, attemptRows, historyRows, guardianRows, assignmentRows, reportRows, customRows, sessionRows, adaptiveRows, learningStateRows] = await Promise.all([
     db.select({ provider: identities.provider, createdAt: identities.createdAt }).from(identities).where(eq(identities.userId, userId)),
     db.select().from(attempts).where(eq(attempts.userId, userId)),
     db.select().from(questionHistory).where(eq(questionHistory.userId, userId)),
@@ -45,6 +46,7 @@ export async function GET(request: Request) {
     db.select({ id: assessmentSessions.id, testId: assessmentSessions.testId, status: assessmentSessions.status, startedAt: assessmentSessions.startedAt, expiresAt: assessmentSessions.expiresAt, submittedAt: assessmentSessions.submittedAt })
       .from(assessmentSessions).where(eq(assessmentSessions.userId, userId)),
     db.select().from(assessmentQuestionHistory).where(eq(assessmentQuestionHistory.userId, userId)),
+    db.select().from(userLearningState).where(eq(userLearningState.userId, userId)),
   ]);
   return noStore({
     exportedAt: new Date().toISOString(),
@@ -58,6 +60,7 @@ export async function GET(request: Request) {
     customTests: customRows.map(row => ({ ...row, questions: parsed(row.questionsJson), questionsJson: undefined })),
     assessmentSessions: sessionRows,
     adaptiveHistory: adaptiveRows,
+    learningState: learningStateRows.map(row => parsed(row.stateJson)),
   });
 }
 

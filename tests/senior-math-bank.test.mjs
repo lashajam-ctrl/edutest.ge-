@@ -6,10 +6,10 @@ const root = new URL("../", import.meta.url);
 const source = path => readFile(new URL(path, root), "utf8");
 
 test("senior mathematics is one catalog subject backed by mixed strands", async () => {
-  const [legacy, assessment, start, catalog, client, html, reportText] = await Promise.all([
+  const [legacy, assessment, start, catalog, html, reportText] = await Promise.all([
     source("public/senior-math-bank.js"), source("lib/assessment.ts"),
     source("app/api/assessments/start/route.ts"), source("app/api/assessments/catalog/route.ts"),
-    source("public/server-assessments.js"), source("public/app.html"),
+    source("public/app.html"),
     source("reports/assessment-import-report.json"),
   ]);
   const report = JSON.parse(reportText);
@@ -17,11 +17,12 @@ test("senior mathematics is one catalog subject backed by mixed strands", async 
   assert.match(assessment, /canonicalAssessmentSubject/);
   assert.match(assessment, /return "მათემატიკა"/);
   assert.match(start, /geometry_space/);
-  assert.match(start, /Math\.floor\(test\.question_count \* 0\.4\)/);
+  assert.match(start, /Math\.floor\(targetCount \* 0\.4\)/);
   assert.match(catalog, /preferredSeniorMath/);
-  assert.doesNotMatch(client, /7:\['ალგებრა','გეომეტრია'/);
-  assert.match(client, /7:\['მათემატიკა','ქართული ენა და ლიტერატურა'/);
-  assert.match(html, /'ალგებრა':'მათემატიკა','გეომეტრია':'მათემატიკა'/);
+  assert.doesNotMatch(html, /7:\['ალგებრა','გეომეტრია'/);
+  assert.match(html, /7:\['მათემატიკა','ქართული ენა და ლიტერატურა'/);
+  assert.match(html, /function subjectFamily\(value\)/);
+  assert.match(html, /\['ალგებრა','გეომეტრია'\]\.includes\(subject\)/);
   assert.equal(report.importedTests, 336);
   for (const grade of [7, 8, 9, 10, 11, 12]) {
     assert.equal(report.gradeSubjectSemester[`${grade}|მათემატიკა|1`], 75);

@@ -1,5 +1,6 @@
 import { env } from "cloudflare:workers";
 import { getSessionUser } from "@/lib/auth";
+import { consumeRateLimit } from "@/lib/rate-limit";
 
 type SpeechLanguage = "ka" | "en" | "ru";
 
@@ -9,7 +10,6 @@ const voices: Record<SpeechLanguage, { locale: string; name: string }> = {
   ru: { locale: "ru-RU", name: "ru-RU-SvetlanaNeural" },
 };
 
-const recentRequests = new Map<string, number[]>();
 const MAX_REQUESTS_PER_MINUTE = 30;
 
 function escapeXml(value: string) {
@@ -27,10 +27,8 @@ export async function POST(request: Request) {
     return Response.json({ enabled: false, reason: "Cloud speech is not configured" }, { status: 503 });
   }
 
-  const now = Date.now();
-  const timestamps = (recentRequests.get(current.user.id) ?? []).filter(value => value > now - 60_000);
-  if (timestamps.length >= MAX_REQUESTS_PER_MINUTE) return Response.json({ error: "ცოტა ხნით მოიცადეთ და ისევ სცადეთ" }, { status: 429 });
-  timestamps.push(now); recentRequests.set(current.user.id, timestamps);
+  const rate = await consumeRateLimit(`tts:${current.user.id}`, MAX_REQUESTS_PER_MINUTE, 60_000);
+  if (!rate.allowed) return Response.json({ error: "ცოტა ხნით მოიცადეთ და ისევ სცადეთ" }, { status: 429, headers: { "Retry-After": String(rate.retryAfter) } });
 
   const body = await request.json() as { text?: unknown; lang?: unknown };
   const text = typeof body.text === "string" ? body.text.replace(/\s+/g, " ").trim().slice(0, 1_400) : "";
