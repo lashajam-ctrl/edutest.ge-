@@ -13,6 +13,7 @@ const eslintConfig = defineConfig([
     "build/**",
     "dist/**",
     "work/**",
+    "outputs/**",
     ".openai/**",
     "supabase/functions/**",
     ".wrangler/**",

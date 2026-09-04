@@ -115,7 +115,7 @@ test("loads the server management bridge before the assessment client", async ()
 });
 
 test("ships valid legal pages, icons and accessible dialog/input labels", async () => {
-  const html = await source("public/app.html");
+  const [html, terms, privacy] = await Promise.all([source("public/app.html"), source("app/terms/page.tsx"), source("app/privacy/page.tsx")]);
   await Promise.all([
     access(new URL("public/privacy.html", root)), access(new URL("public/terms.html", root)),
     access(new URL("public/og-v2.png", root)), access(new URL("public/favicon.svg", root)),
@@ -124,4 +124,7 @@ test("ships valid legal pages, icons and accessible dialog/input labels", async 
   assert.match(html, /<label class="label" for="l-email"/);
   assert.match(html, /<label class="label" for="l-pass"/);
   assert.match(html, /Keep keyboard focus inside/);
+  assert.match(terms, /გადახდის ფუნქცია და ფასიანი გამოწერები გამორთულია/);
+  assert.match(privacy, /კონფიდენციალურობის პოლიტიკა/);
+  assert.match(privacy, /მონაცემების ასლი/);
 });
