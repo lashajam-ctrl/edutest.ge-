@@ -1,6 +1,6 @@
 (function(){
   'use strict';
-  REPORTS=[];ADMIN_AUDIT_LOG=[];ANSWER_OVERRIDES={};_qeCustom={};
+  REPORTS=[];ADMIN_AUDIT_LOG=[];
   try{['edutest_reports','edutest_audit','edutest_ans_overrides','edutest_custom_q','teams_webhook','notif_settings'].forEach(key=>localStorage.removeItem(key));}catch{}
   function element(tag,text,className){const node=document.createElement(tag);if(className)node.className=className;if(text!==undefined&&text!==null)node.textContent=String(text);return node;}
   function tableCell(row,text,style){const cell=element('td',text);if(style)cell.style.cssText=style;row.appendChild(cell);return cell;}
@@ -9,20 +9,98 @@
   function average(results){return results.length?Math.round(results.reduce((sum,result)=>sum+(Number(result.pct)||0),0)/results.length):null;}
   function testLabel(result){const test=ALL_TESTS.find(item=>item.id===result.testId);return test?txTitle(test):(result.subject?result.subject+' '+(result.grade||'')+' კლ.':'ტესტი');}
   function actionButton(label,className,aria,handler){const button=element('button',label,className);button.type='button';button.setAttribute('aria-label',aria);button.addEventListener('click',handler);return button;}
+  function managementUserKey(){return CUR_USER?String(CUR_USER.email)+'|'+String(CUR_USER.role):'';}
+  function isCurriculumEligible(test){return test?.curriculumVerified===true;}
+  function testCompositionLabel(test){
+    const labels={algebra:'ალგებრა',geometry:'გეომეტრია',language:'ენა',literature:'ლიტერატურა',grammar:'გრამატიკა',vocabulary:'ლექსიკა',reading:'წაკითხულის გაგება',use_of_language:'ენის გამოყენება'};
+    return Object.entries(test?.componentCounts||{}).filter(([key,count])=>labels[key]&&Number(count)>0).map(([key,count])=>labels[key]+' '+Number(count)).join(' · ');
+  }
 
-  globalThis.saveAnswerOverrides=function(){saveAdminContent('answer-overrides',ANSWER_OVERRIDES).catch(error=>alert(error.message));};
-  globalThis.saveCustomQuestions=function(){return saveAdminContent('custom-questions',_qeCustom);};
+  async function requestJson(url,options={}){
+    const response=await fetch(url,{credentials:'include',cache:'no-store',...options,headers:{Accept:'application/json',...(options.headers||{})}});
+    const data=await response.json().catch(()=>({}));
+    if(!response.ok)throw new Error(data.error||'მონაცემები ვერ ჩაიტვირთა.');
+    return data;
+  }
+  function managedUser(user){
+    const createdAt=user&&user.createdAt?new Date(user.createdAt):null;
+    return {...user,joinDate:createdAt&&!Number.isNaN(createdAt.getTime())?createdAt.toLocaleDateString('ka-GE'):'—'};
+  }
+  function managedAttempt(entry){
+    const result=entry&&entry.result&&typeof entry.result==='object'?entry.result:{};
+    const submittedAt=entry.submittedAt||result.submittedAt||null;
+    return {...result,id:entry.id||result.id,userId:entry.userEmail||result.userId||'',userName:entry.userName||result.userName||'',userGrade:entry.userGrade||result.userGrade||'',testId:entry.testId||result.testId||'',earned:Number(entry.score??result.earned??0),totalPts:Number(entry.maxScore??result.totalPts??0),pct:Number(entry.percentage??result.pct??0),submittedAt,date:result.date||(submittedAt?new Date(submittedAt).toLocaleDateString('ka-GE'):'—')};
+  }
+  globalThis.loadAdminUsers=async function(){
+    if(CUR_USER?.role!=='admin')return USER_DB;
+    const userKey=managementUserKey();
+    const data=await requestJson('/api/admin/users');
+    if(userKey!==managementUserKey())return USER_DB;
+    USER_DB.splice(0,USER_DB.length,...(data.users||[]).map(managedUser));
+    renderAdminUsers();renderAdminHome();renderPendingTeachers();
+    return USER_DB;
+  };
+  globalThis.loadManagementData=async function(){
+    if(!CUR_USER||!['teacher','admin'].includes(CUR_USER.role))return;
+    const userKey=managementUserKey();
+    const jobs=[requestJson('/api/management/students'),requestJson('/api/attempts?scope=managed'),requestJson('/api/assignments')];
+    if(CUR_USER.role==='admin')jobs.push(requestJson('/api/admin/users'));
+    const [studentData,attemptData,assignmentData,userData]=await Promise.all(jobs);
+    if(userKey!==managementUserKey())return;
+    const users=(CUR_USER.role==='admin'?(userData?.users||[]):[CUR_USER,...(studentData.students||[]).map(user=>({...user,role:'student'}))]).map(managedUser);
+    USER_DB.splice(0,USER_DB.length,...users);
+    SESSION_RESULTS.splice(0,SESSION_RESULTS.length,...(attemptData.attempts||[]).map(managedAttempt));
+    const testById=new Map(ALL_TESTS.map(test=>[String(test.id),test]));
+    ASSIGNMENTS=(assignmentData.assignments||[]).map(assignment=>{const test=testById.get(String(assignment.testId));return {...assignment,testTitle:test?txTitle(test):assignment.testId,subject:test?.subject||''};});
+    if(CUR_USER.role==='admin'){renderAdminHome();renderAdminUsers();renderAdminSchools();renderAdminResults();}
+    else{renderTeacherHome();renderTeacherStudents();renderTeacherAnalytics();}
+    renderAssignmentsList();renderAssignPanel();
+  };
+  globalThis.loadAdminContent=async function(key,fallback){
+    if(CUR_USER?.role!=='admin')return fallback;
+    try{const data=await requestJson('/api/admin/content?key='+encodeURIComponent(key));return data.value??fallback;}catch{return fallback;}
+  };
+  globalThis.saveAdminContent=async function(key,value){
+    if(CUR_USER?.role!=='admin')throw new Error('ადმინისტრატორის წვდომაა საჭირო.');
+    return requestJson('/api/admin/content',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({key,value})});
+  };
+  globalThis.hydrateAdminContent=async function(){
+    if(CUR_USER?.role!=='admin')return;
+    await Promise.all([renderAdminPrizeForm(),renderEnterprisePanel()]);
+  };
+  globalThis.loadCustomTestsFromServer=async function(){
+    if(typeof globalThis.refreshAssessmentCatalog!=='function')return false;
+    return globalThis.refreshAssessmentCatalog(false);
+  };
+  globalThis.getMyAssignments=function(email,grade){
+    return ASSIGNMENTS.filter(assignment=>String(assignment.grade)===String(grade||CUR_USER?.grade||''));
+  };
+  globalThis.loadStudentAssignments=async function(){
+    if(CUR_USER?.role!=='student')return;
+    const userKey=managementUserKey();
+    try{
+      const data=await requestJson('/api/assignments');
+      if(userKey!==managementUserKey())return;
+      const testById=new Map(ALL_TESTS.map(test=>[String(test.id),test]));
+      ASSIGNMENTS=(data.assignments||[]).map(assignment=>{const test=testById.get(String(assignment.testId));return {...assignment,testTitle:test?txTitle(test):assignment.testId,subject:test?.subject||''};});
+      renderAssignedTests();
+    }catch{if(userKey===managementUserKey()){ASSIGNMENTS=[];renderAssignedTests();}}
+  };
+
+  globalThis.saveAnswerOverrides=function(){alert('პასუხების გასაღებები უსაფრთხოების გამო მხოლოდ სერვერზე ინახება.');};
+  globalThis.saveCustomQuestions=function(){showBuilder();return Promise.resolve();};
   globalThis.adminDeleteTest=async function(testId){
     const test=ALL_TESTS.find(item=>item.id===testId);if(!test)return;
     if(!test.teacherCreated){alert('სტანდარტული კურიკულუმის ტესტი ვერ წაიშლება.');return;}
     if(!confirm('წაიშალოს ტესტი?'))return;
-    const response=await fetch('/api/custom-tests?id='+encodeURIComponent(testId),{method:'DELETE'});if(!response.ok){alert('ტესტი ვერ წაიშალა.');return;}
-    const index=ALL_TESTS.findIndex(item=>item.id===testId);if(index>=0)ALL_TESTS.splice(index,1);MANAGEMENT_TEST_IDS.delete(testId);renderTeacherTests();
+    try{await requestJson('/api/assessments/builder?id='+encodeURIComponent(testId),{method:'DELETE'});}catch(error){alert(error.message||'ტესტი ვერ წაიშალა.');return;}
+    const index=ALL_TESTS.findIndex(item=>item.id===testId);if(index>=0)ALL_TESTS.splice(index,1);renderTeacherTests();
   };
 
   globalThis.loadAuditLog=async function(){
     if(CUR_USER?.role!=='admin')return;
-    try{const response=await fetch('/api/admin/audit');if(!response.ok)return;const data=await response.json();ADMIN_AUDIT_LOG=(data.events||[]).map(event=>({ts:event.createdAt,admin:event.adminEmail,action:event.action,details:event.details}));}catch{}
+    const userKey=managementUserKey();
+    try{const response=await fetch('/api/admin/audit');if(!response.ok)return;const data=await response.json();if(userKey!==managementUserKey())return;ADMIN_AUDIT_LOG=(data.events||[]).map(event=>({ts:event.createdAt,admin:event.adminEmail,action:event.action,details:event.details}));}catch{}
   };
   globalThis.saveAuditLog=function(){};
   globalThis.logAudit=globalThis.logAuditEvent=function(action,details){
@@ -40,6 +118,17 @@
     const container=document.getElementById('a-pending-teachers-list');if(!container)return;container.replaceChildren();const pending=USER_DB.filter(user=>user.role==='pending_teacher');
     if(!pending.length){const message=element('div','დასამტკიცებელი მასწავლებელი არ არის.');message.style.cssText='color:var(--gray);font-size:13px;padding:8px 0';container.appendChild(message);return;}
     pending.forEach(user=>{const card=element('div');card.style.cssText='padding:12px;background:var(--amber-l);border-radius:var(--r);margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px';const info=element('div');const name=element('div',user.name||user.email);name.style.cssText='font-weight:600;font-size:13px';const meta=element('div',[user.email,user.school||'—',user.joinDate||''].filter(Boolean).join(' · '));meta.style.cssText='font-size:11px;color:var(--gray)';info.append(name,meta);const actions=element('div');actions.style.cssText='display:flex;gap:6px';actions.append(actionButton('✓ დამტკიცება','btn btn-green btn-sm','მასწავლებლის დამტკიცება',()=>approveTeacher(user.email)),actionButton('✗ უარი','btn btn-danger btn-sm','მასწავლებლის განაცხადის უარყოფა',()=>rejectTeacher(user.email)));card.append(info,actions);container.appendChild(card);});
+  };
+  globalThis.approveTeacher=async function(email){
+    try{await requestJson('/api/admin/users',{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,role:'teacher'})});await loadAdminUsers();await loadManagementData();}catch(error){alert(error.message);}
+  };
+  globalThis.rejectTeacher=async function(email){
+    if(!confirm('უარყოფა და ანგარიშის წაშლა: '+email+'?'))return;
+    try{await requestJson('/api/admin/users?email='+encodeURIComponent(email),{method:'DELETE'});await loadAdminUsers();await loadManagementData();}catch(error){alert(error.message);}
+  };
+  globalThis.adminDeleteUser=async function(email){
+    if(!confirm('წაიშალოს მომხმარებელი '+email+'?'))return;
+    try{await requestJson('/api/admin/users?email='+encodeURIComponent(email),{method:'DELETE'});await loadAdminUsers();await loadManagementData();}catch(error){alert(error.message);}
   };
 
   globalThis.saveAdminEditUser=async function(){
@@ -68,7 +157,7 @@
     if(!rows.length){emptyRow(tbody,6,'შედეგები არ არის');return;}tbody.replaceChildren();rows.forEach(result=>{const row=element('tr'),user=USER_DB.find(item=>item.email===result.userId),pct=Number(result.pct)||0;tableCell(row,user?.name||result.userName||result.userId,'font-weight:500;font-size:13px');tableCell(row,testLabel(result),'font-size:12px');tableCell(row,pct+'%','font-weight:700;color:'+(pct>=70?'#16a34a':pct>=50?'#d97706':'#dc2626'));tableCell(row,(result.earned||0)+'/'+(result.totalPts||0),'font-size:12px');const status=tableCell(row,'');status.appendChild(element('span',performanceBadgeLabel(pct),'badge '+(pct>=90?'b-blue':pct>=70?'b-green':pct>=50?'b-amber':'b-red')));tableCell(row,result.date||'—','font-size:11px;color:var(--gray)');tbody.appendChild(row);});
   };
 
-  globalThis.loadReports=async function(){if(CUR_USER?.role!=='admin')return;try{const response=await fetch('/api/reports');if(!response.ok)return;const data=await response.json();REPORTS=data.reports||[];}catch{}};
+  globalThis.loadReports=async function(){if(CUR_USER?.role!=='admin')return;const userKey=managementUserKey();try{const response=await fetch('/api/reports');if(!response.ok)return;const data=await response.json();if(userKey!==managementUserKey())return;REPORTS=data.reports||[];}catch{}};
   globalThis.saveReports=function(){};
   globalThis.submitReport=async function(){
     const question=curTestQs&&curTestQs[qIdx],type=document.getElementById('report-type')?.value||'other',comment=document.getElementById('report-comment')?.value||'';if(!question||!CUR_USER){alert('რეპორტის გასაგზავნად ავტორიზაცია აუცილებელია.');return;}
@@ -110,7 +199,7 @@
   };
 
   globalThis.renderTeacherTests=function(){
-    populateSubjectDropdown('t-filter-subject');const subject=document.getElementById('t-filter-subject')?.value||'',grade=document.getElementById('t-filter-grade')?.value||'',tbody=document.getElementById('t-test-tbody');if(!tbody)return;let tests=ALL_TESTS.filter(test=>!test.catalogHidden);if(subject)tests=tests.filter(test=>subjectFamily(test.subject)===subject);if(grade)tests=tests.filter(test=>Number(test.grade)===Number(grade));if(!tests.length){emptyRow(tbody,6,t('no_tests'));return;}tbody.replaceChildren();tests.forEach(test=>{const row=element('tr');const title=tableCell(row,'','font-weight:500');title.appendChild(element('div',txTitle(test)));const composition=testCompositionLabel(test);if(composition){const detail=element('div','🧩 '+composition);detail.style.cssText='font-size:11px;color:var(--gray);margin-top:4px';title.appendChild(detail);}if(!isCurriculumEligible(test)){const warning=element('div','⚠ სასწავლო გეგმასთან შესადარებელია','badge b-amber');warning.style.marginTop='4px';title.appendChild(warning);}tableCell(row,(SUBJ_ICONS[test.subject]||'📝')+' '+subjectFamily(test.subject));tableCell(row,test.grade);tableCell(row,test.count);tableCell(row,'სავარჯიშო');const actions=tableCell(row,'','display:flex;gap:4px');actions.append(actionButton('▶','btn btn-ghost btn-sm','ტესტის წინასწარი ნახვა',()=>startTestById(test.id)),actionButton('✏️','btn btn-ghost btn-sm','ტესტის კითხვების რედაქტირება',()=>openQEditor(test.id)));if(test.teacherCreated)actions.appendChild(actionButton('🗑','btn btn-ghost btn-sm','ტესტის წაშლა',()=>adminDeleteTest(test.id)));tbody.appendChild(row);});
+populateSubjectDropdown('t-filter-subject');const subject=document.getElementById('t-filter-subject')?.value||'',grade=document.getElementById('t-filter-grade')?.value||'',tbody=document.getElementById('t-test-tbody');if(!tbody)return;let tests=ALL_TESTS.filter(test=>!test.catalogHidden);if(subject)tests=tests.filter(test=>subjectFamily(test.subject)===subject);if(grade)tests=tests.filter(test=>Number(test.grade)===Number(grade));if(!tests.length){emptyRow(tbody,6,t('no_tests'));return;}tbody.replaceChildren();tests.forEach(test=>{const row=element('tr');const title=tableCell(row,'','font-weight:500');title.appendChild(element('div',txTitle(test)));const composition=testCompositionLabel(test);if(composition){const detail=element('div','🧩 '+composition);detail.style.cssText='font-size:11px;color:var(--gray);margin-top:4px';title.appendChild(detail);}if(!isCurriculumEligible(test)){const warning=element('div','⚠ სასწავლო გეგმასთან შესადარებელია','badge b-amber');warning.style.marginTop='4px';title.appendChild(warning);}tableCell(row,(SUBJ_ICONS[test.subject]||'📝')+' '+subjectFamily(test.subject));tableCell(row,test.grade);tableCell(row,test.count);tableCell(row,'სავარჯიშო');const actions=tableCell(row,'','display:flex;gap:4px');actions.append(actionButton('▶','btn btn-ghost btn-sm','ტესტის წინასწარი ნახვა',()=>startTestById(test.id)),actionButton('✨','btn btn-ghost btn-sm','ამ ბანკიდან ახალი უსაფრთხო ტესტის შექმნა',()=>showBuilder()));if(test.teacherCreated&&(CUR_USER?.role==='admin'||test.createdBy===CUR_USER?.cloudId))actions.appendChild(actionButton('🗑','btn btn-ghost btn-sm','ტესტის წაშლა',()=>adminDeleteTest(test.id)));tbody.appendChild(row);});
   };
 
   globalThis.renderAssignmentsList=function(){const container=document.getElementById('t-assign-list');if(!container)return;container.replaceChildren();if(!ASSIGNMENTS.length){const empty=element('div','დავალებები არ არის');empty.style.cssText='color:var(--gray);text-align:center;padding:20px';container.appendChild(empty);return;}ASSIGNMENTS.slice().reverse().forEach(assignment=>{const card=element('div');card.style.cssText='padding:10px 14px;border:1px solid var(--border);border-radius:var(--r);margin-bottom:8px;display:flex;align-items:center;gap:12px';const info=element('div');info.style.flex='1';const title=element('div',assignment.testTitle||assignment.testId);title.style.cssText='font-weight:600;font-size:13px';const meta=element('div',[assignment.subject,assignment.grade+' კლ.',assignment.deadline?'ვადა: '+assignment.deadline:null].filter(Boolean).join(' · '));meta.style.cssText='font-size:11px;color:var(--gray)';info.append(title,meta);if(assignment.note){const note=element('div',assignment.note);note.style.cssText='font-size:11px;color:#6b7280;margin-top:2px';info.appendChild(note);}card.append(info,actionButton('🗑','btn btn-sm','დავალების წაშლა',()=>deleteAssignment(assignment.id)));container.appendChild(card);});};
@@ -142,12 +231,13 @@
   globalThis.renderEnterprisePanel=async function(){const value=await loadAdminContent('notification-settings',{});['notif-test-done','notif-teacher-assign','notif-weekly-report','notif-parent'].forEach(id=>{const input=document.getElementById(id);if(input)input.checked=!!value[id];});const webhook=document.getElementById('teams-webhook');if(webhook){webhook.value='';webhook.disabled=true;webhook.placeholder='უსაფრთხო სერვერული კონფიგურაციაა საჭირო';}};
   globalThis.saveTeamsWebhook=function(){alert('Teams Webhook ბრაუზერში აღარ ინახება. მისი დამატება მხოლოდ დაშიფრული სერვერული Secret-ით შეიძლება.');};
 
-  globalThis.renderQEditorBody=function(){const body=document.getElementById('qeditor-body');if(!body||!_qeTestId)return;body.replaceChildren();const questions=_qeCustom[_qeTestId]||[];if(!questions.length){const empty=element('div','დამატებული კითხვები არ არის.');empty.style.cssText='text-align:center;color:var(--gray);padding:20px;font-size:13px';body.appendChild(empty);return;}questions.forEach((question,index)=>{const card=element('div');card.className='card';card.style.cssText='padding:14px;position:relative;margin-bottom:8px';const bar=element('div');bar.style.cssText='display:flex;justify-content:space-between;align-items:center;margin-bottom:10px';bar.append(element('strong','კითხვა '+(index+1)),actionButton('✕','btn btn-ghost btn-sm','კითხვის წაშლა',()=>removeCustomQ(index)));const text=element('input');text.id='qe-text-'+index;text.value=question.text||'';text.style.width='100%';card.append(bar,text);const grid=element('div');grid.style.cssText='display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:8px 0';(question.opts||[]).forEach((option,optionIndex)=>{const input=element('input');input.id='qe-opt-'+index+'-'+optionIndex;input.value=option;input.setAttribute('aria-label','პასუხი '+String.fromCharCode(65+optionIndex));grid.appendChild(input);});card.appendChild(grid);const correct=element('select');correct.id='qe-correct-'+index;(question.opts||[]).forEach((option,optionIndex)=>correct.add(new Option(String.fromCharCode(65+optionIndex)+': '+option.slice(0,30),String(optionIndex),false,Number(question.correct)===optionIndex)));card.appendChild(correct);body.appendChild(card);});};
-  globalThis.aqLoadQuestions=function(){const testId=document.getElementById('aq-test')?.value||'',version=Number(document.getElementById('aq-version')?.value),wrap=document.getElementById('aq-questions-wrap');if(!wrap)return;wrap.replaceChildren();const test=ALL_TESTS.find(item=>item.id===testId),poolKey=test?.pool+'-'+version,questions=Q_POOL[poolKey];if(!test||!version||!questions?.length){if(testId&&version){const empty=element('div','კითხვები ვერ მოიძებნა.','card');empty.style.cssText='padding:16px;color:var(--gray)';wrap.appendChild(empty);}return;}const card=element('div');card.className='card';const heading=element('div',txTitle(test)+' · ვერსია '+version);heading.style.cssText='padding:10px 14px;border-bottom:1px solid var(--border);font-weight:600;font-size:13px';card.appendChild(heading);questions.forEach((question,index)=>{const row=element('div');row.style.cssText='padding:12px;border-bottom:1px solid var(--border)';const prompt=element('div',(index+1)+'. '+(question.text||question.q||''));prompt.style.cssText='font-size:13px;margin-bottom:8px';row.appendChild(prompt);const choices=element('div');choices.style.cssText='display:flex;flex-wrap:wrap;gap:6px';const key=poolKey+'|'+index,current=ANSWER_OVERRIDES[key]!==undefined?ANSWER_OVERRIDES[key]:question.correct,values=question.type==='tf'?[true,false]:(question.opts||[]).map((_,optionIndex)=>optionIndex);values.forEach(value=>{const label=value===true?'✓ სწორია':value===false?'✗ მცდარია':String.fromCharCode(65+value)+'. '+question.opts[value];choices.appendChild(actionButton(label,'btn btn-sm '+(current===value?'btn-green':'btn-outline'),'სწორი პასუხის არჩევა',()=>adminEditAnswer(poolKey,index,value)));});row.appendChild(choices);if(ANSWER_OVERRIDES[key]!==undefined)row.appendChild(actionButton('↩ ცვლილების გაუქმება','btn btn-outline btn-sm','ორიგინალი პასუხის აღდგენა',()=>adminResetAnswer(poolKey,index)));card.appendChild(row);});wrap.appendChild(card);};
-  globalThis.saveQEditor=async function(){if(!_qeTestId)return;const questions=_qeCustom[_qeTestId]||[];for(let index=0;index<questions.length;index++){const text=(document.getElementById('qe-text-'+index)?.value||'').trim(),options=(questions[index].opts||[]).map((value,optionIndex)=>(document.getElementById('qe-opt-'+index+'-'+optionIndex)?.value||value).trim()),correct=Number(document.getElementById('qe-correct-'+index)?.value);if(!text||options.some(value=>!value)||new Set(options).size!==options.length||!Number.isInteger(correct)||correct<0||correct>=options.length){alert('კითხვა '+(index+1)+' არასრულადაა შევსებული ან პასუხები მეორდება.');return;}questions[index]={...questions[index],text,opts:options,correct};}_qeCustom[_qeTestId]=questions;try{await saveCustomQuestions();closeQEditor();alert('✅ '+questions.length+' კითხვა სერვერზე შენახულია.');}catch(error){alert(error.message);}};
+  globalThis.openQEditor=function(){showBuilder();};
+  globalThis.renderQEditorBody=function(){const body=document.getElementById('qeditor-body');if(!body)return;body.replaceChildren();const notice=element('div','კითხვების რედაქტირება გადატანილია უსაფრთხო სერვერულ ტესტის კონსტრუქტორში.','card');notice.style.cssText='padding:20px;color:var(--gray)';body.appendChild(notice);};
+  globalThis.aqLoadQuestions=function(){const wrap=document.getElementById('aq-questions-wrap');if(!wrap)return;wrap.replaceChildren();const notice=element('div','სწორი პასუხების გასაღებები ბრაუზერში არ ქვეყნდება. ახალი ან პირადი ტესტისთვის გამოიყენეთ უსაფრთხო ტესტის კონსტრუქტორი.','card');notice.style.cssText='padding:16px;color:var(--gray)';wrap.appendChild(notice);};
+  globalThis.saveQEditor=function(){closeQEditor();showBuilder();};
 
   const previousGo=globalThis.go;
-  globalThis.go=function(page){previousGo(page);if(CUR_USER){loadCustomTestsFromServer();if(page==='teacher'||page==='admin')setTimeout(()=>loadManagementData(),0);if(page==='admin')setTimeout(()=>{hydrateAdminContent();loadReports().then(renderAdminReports);loadAuditLog().then(renderAdminAudit);},0);}};
+  globalThis.go=function(page){previousGo(page);if(CUR_USER){const catalog=loadCustomTestsFromServer();if(page==='student')setTimeout(()=>catalog.then(loadStudentAssignments).catch(error=>console.warn('student assignments',error)),0);if(page==='teacher'||page==='admin')setTimeout(()=>catalog.then(loadManagementData).catch(error=>console.warn('management data',error)),0);if(page==='admin')setTimeout(()=>{hydrateAdminContent().catch(error=>console.warn('admin settings',error));loadReports().then(renderAdminReports);loadAuditLog().then(renderAdminAudit);},0);}};
   const previousANav=globalThis.aNav;
   globalThis.aNav=function(id,node){previousANav(id,node);if(id==='a-reports')loadReports().then(renderAdminReports);if(id==='a-audit')loadAuditLog().then(renderAdminAudit);if(id==='a-settings')hydrateAdminContent();if(id==='a-prizes')renderAdminPrizeForm();};
   const previousTNav=globalThis.tNav;

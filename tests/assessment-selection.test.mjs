@@ -49,6 +49,21 @@ test("v8 variants share the archive semantic group instead of repeating a concep
   assert.equal(distinctSelectionGroupCount([first, second]), 1);
 });
 
+test("v11 variants share the curated semantic family even when wording changes", () => {
+  const first = { ...makeCandidate("V11-EN-001", "Complete: I ___ a student."), pool_prefix: "v11", semantic_group_id: "CG-EN-BE-01" };
+  const second = { ...makeCandidate("V11-EN-101", "Choose the correct form: I ___ a pupil."), pool_prefix: "v11", semantic_group_id: "CG-EN-BE-01" };
+  assert.equal(assessmentSelectionKey(first), assessmentSelectionKey(second));
+  assert.equal(distinctSelectionGroupCount([first, second]), 1);
+});
+
+test("v11 history blocks every wording variant in the same semantic family", () => {
+  const now = Date.now();
+  const seen = { ...makeCandidate("V11-MA-001", "გამოთვალე 12 + 8.", { history_id: "h-v11", last_correct: 1, next_review_at: now + 86_400_000, last_answered_at: now }), pool_prefix: "v11", semantic_group_id: "CG-MA-ADD-01" };
+  const variant = { ...makeCandidate("V11-MA-002", "რა არის 8-ისა და 12-ის ჯამი?"), pool_prefix: "v11", semantic_group_id: "CG-MA-ADD-01" };
+  const fresh = { ...makeCandidate("V11-MA-003", "გამოთვალე 20 - 7."), pool_prefix: "v11", semantic_group_id: "CG-MA-SUB-01" };
+  assert.deepEqual(eligibleCandidatesBySelectionHistory([seen, variant, fresh], now).map(row => row.id), ["V11-MA-003"]);
+});
+
 test("collapses live English cosmetic variants even when legacy semantic groups differ", () => {
   const variants = [
     ["GE2-G03-EN-S2-112", "consider a likely mistake and choose the correct solution: “Cats” is plural.", "v8_86862a11d9a0c7"],
@@ -154,6 +169,17 @@ test("server start route enforces semantic selection and language blueprints", a
   assert.match(source, /reusedGroups/);
   assert.match(source, /distinctBankGroups/);
   assert.doesNotMatch(source, /semanticGroups\.has\(question\.semantic_group_id\)/);
+});
+
+test("catalog and builder apply the same eligibility and semantic rules as test start", async () => {
+  const [catalog, builder] = await Promise.all([
+    readFile(new URL("../app/api/assessments/catalog/route.ts", import.meta.url), "utf8"),
+    readFile(new URL("../app/api/assessments/builder/route.ts", import.meta.url), "utf8"),
+  ]);
+  assert.match(catalog, /subjectAllowedForGrade/);
+  assert.match(catalog, /eligibleRows = rows\.filter/);
+  assert.match(builder, /assessmentSelectionKey/);
+  assert.doesNotMatch(builder, /new Set\(selected\.map\(question => question\.semantic_group_id\)\)/);
 });
 
 test("the learner is told when oldest-seen semantic groups are recycled", async () => {

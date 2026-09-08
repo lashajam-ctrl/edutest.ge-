@@ -46,6 +46,7 @@ export type StoredAssessmentQuestion = {
   public_payload_json: string;
   points: number;
   semantic_group_id: string;
+  pool_prefix?: string | null;
   strand?: string | null;
   difficulty?: string | null;
 };
@@ -149,16 +150,21 @@ export function gradeAssessmentAnswer(args: {
 export function assessmentTestJson(row: Record<string, unknown>) {
   const grade = Number(row.grade), internalSubject = String(row.subject), subject = canonicalAssessmentSubject(internalSubject, grade);
   const standardSeniorMath = !Boolean(row.is_custom) && grade >= 7 && subject === "მათემატიკა";
-  const title = standardSeniorMath
+  const canonicalTitle = standardSeniorMath
     ? String(row.title).replace(/^(?:ალგებრა|გეომეტრია|მათემატიკა)/u, "მათემატიკა")
     : String(row.title);
+  const testType = String(row.test_type);
+  const titleSuffix = testType === "sum" ? "შემაჯამებელი" : testType === "mid" ? "სავარჯიშო" : "";
+  const title = titleSuffix && !canonicalTitle.toLocaleLowerCase("ka-GE").includes(titleSuffix)
+    ? `${canonicalTitle} — ${titleSuffix}`
+    : canonicalTitle;
   const languageComponents = !Boolean(row.is_custom) ? componentCountsForTest(subject, grade, Number(row.question_count)) : null;
   return {
     id: String(row.id), title, subject, grade,
     semester: row.semester == null ? null : Number(row.semester), pool: `server:${subject}:${grade}`,
     count: Number(row.question_count), time: Number(row.time_minutes), attempts: Number(row.attempts_allowed),
-    testType: String(row.test_type), difficulty: row.difficulty ? String(row.difficulty) : null,
-    paid: false, serverBacked: true, curriculumVerified: !["v8", "v11"].includes(String(row.source_pool)), structuralVerified: true,
+    testType, difficulty: row.difficulty ? String(row.difficulty) : null,
+    paid: false, serverBacked: true, curriculumVerified: !Boolean(row.is_custom) && !["v8", "v11"].includes(String(row.source_pool)), structuralVerified: true,
     teacherCreated: Boolean(row.is_custom), createdBy: row.created_by ? String(row.created_by) : null,
     published: Boolean(row.published),
     componentCounts: standardSeniorMath

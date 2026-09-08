@@ -1,6 +1,6 @@
 import { and, desc, eq } from "drizzle-orm";
 import { getDb } from "@/db";
-import { assignments, users } from "@/db/schema";
+import { assignments, assessmentTests, users } from "@/db/schema";
 import { getSessionUser } from "@/lib/auth";
 
 export async function GET(request: Request) {
@@ -27,6 +27,10 @@ export async function POST(request: Request) {
   const deadline = String(body.deadline ?? "").trim();
   const note = String(body.note ?? "").trim().replace(/[\u0000-\u001f\u007f]/g, "").slice(0, 500);
   if (!testId || !/^([1-9]|1[0-2])$/.test(grade) || (deadline && !/^\d{4}-\d{2}-\d{2}$/.test(deadline))) return Response.json({ error: "ტესტი, კლასი ან ვადა არასწორია" }, { status: 400 });
+  const [test] = await getDb().select().from(assessmentTests).where(eq(assessmentTests.id, testId)).limit(1);
+  if (!test) return Response.json({ error: "ტესტი ვერ მოიძებნა" }, { status: 404 });
+  if (current.user.role === "teacher" && !test.published && test.createdBy !== current.user.id) return Response.json({ error: "ამ ტესტის დავალებად გაზიარების უფლება არ გაქვთ" }, { status: 403 });
+  if (Number(grade) !== Number(test.grade)) return Response.json({ error: "დავალების კლასი ტესტის კლასს უნდა ემთხვეოდეს" }, { status: 400 });
   const row = { id: crypto.randomUUID(), createdBy: current.user.id, testId, grade, deadline: deadline || null, note: note || null, createdAt: new Date() };
   await getDb().insert(assignments).values(row);
   return Response.json({ assignment: row }, { status: 201 });

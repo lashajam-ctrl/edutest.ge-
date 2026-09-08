@@ -8,6 +8,7 @@ export type SelectionCandidate = {
   topic: string;
   public_payload_json: string;
   semantic_group_id: string;
+  pool_prefix?: string | null;
   history_id?: string | null;
   last_correct?: number | null;
   next_review_at?: number | null;
@@ -31,8 +32,11 @@ function generatedFamilyKey(id: string) {
   return match ? match[1].toLocaleLowerCase() : "";
 }
 
-export function assessmentSelectionKey(question: Pick<SelectionCandidate, "id" | "grade" | "subject" | "semester" | "topic" | "public_payload_json" | "semantic_group_id">) {
+export function assessmentSelectionKey(question: Pick<SelectionCandidate, "id" | "grade" | "subject" | "semester" | "topic" | "public_payload_json" | "semantic_group_id" | "pool_prefix">) {
   const scope = `${question.grade}|${normalize(question.subject)}|${question.semester}`;
+  if (question.pool_prefix === "v11" && question.semantic_group_id) {
+    return `${scope}|semantic:${question.semantic_group_id}`;
+  }
   if (question.semantic_group_id.startsWith("v8f_")) {
     return `${scope}|semantic:${question.semantic_group_id}`;
   }

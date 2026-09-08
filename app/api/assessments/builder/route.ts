@@ -1,6 +1,7 @@
 import { env } from "cloudflare:workers";
 import { ensureSchema } from "@/db";
 import { assessmentSubjectComponents, assessmentTestJson, subjectAllowedForGrade } from "@/lib/assessment";
+import { assessmentSelectionKey, type SelectionCandidate } from "@/lib/assessment-selection";
 import { getSessionUser } from "@/lib/auth";
 
 const clean = (value: unknown, max: number) => typeof value === "string" ? value.trim().replace(/[\u0000-\u001f\u007f]/g, "").slice(0, max) : "";
@@ -19,9 +20,9 @@ export async function POST(request: Request) {
   }
   const placeholders = questionIds.map(() => "?").join(",");
   const subjectComponents = assessmentSubjectComponents(subject, grade), subjectPlaceholders = subjectComponents.map(() => "?").join(",");
-  const selected = (await env.DB.prepare(`SELECT id,semantic_group_id FROM assessment_questions WHERE active=1 AND grade=? AND subject IN (${subjectPlaceholders}) AND id IN (${placeholders})`).bind(grade, ...subjectComponents, ...questionIds).all<{ id: string; semantic_group_id: string }>()).results ?? [];
+  const selected = (await env.DB.prepare(`SELECT id,grade,subject,semester,topic,public_payload_json,semantic_group_id,pool_prefix FROM assessment_questions WHERE active=1 AND grade=? AND subject IN (${subjectPlaceholders}) AND id IN (${placeholders})`).bind(grade, ...subjectComponents, ...questionIds).all<SelectionCandidate>()).results ?? [];
   if (selected.length !== questionIds.length) return Response.json({ error: "ზოგი კითხვა ამ კლასსა და საგანს არ ეკუთვნის" }, { status: 400 });
-  if (new Set(selected.map(question => question.semantic_group_id)).size !== selected.length) return Response.json({ error: "ტესტში ერთი და იგივე შინაარსის კითხვა ვერ განმეორდება" }, { status: 400 });
+  if (new Set(selected.map(assessmentSelectionKey)).size !== selected.length) return Response.json({ error: "ტესტში ერთი და იგივე შინაარსის კითხვა ვერ განმეორდება" }, { status: 400 });
   const id = `sv-custom-${crypto.randomUUID()}`, now = Date.now(), published = current.user.role === "admin" && body.published === true ? 1 : 0;
   const test = { id, source_test_id: null, title, subject, grade, semester: null, source_pool: "teacher-builder", question_count: questionIds.length, time_minutes: durationMinutes, attempts_allowed: attemptsAllowed, test_type: "teacher", published, is_custom: 1, created_by: current.user.id, created_at: now, updated_at: now };
   const statements = [env.DB.prepare("INSERT INTO assessment_tests (id,source_test_id,title,subject,grade,semester,source_pool,question_count,time_minutes,attempts_allowed,test_type,published,is_custom,created_by,created_at,updated_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)")

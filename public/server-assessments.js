@@ -6,6 +6,7 @@
   let catalogUserKey='';
   let catalogReady=false;
   let catalogLoading=null;
+  function currentCatalogUserKey(){return CUR_USER?String(CUR_USER.email)+'|'+String(CUR_USER.role):'public';}
   window.EDUTEST_CATALOG_STATE='loading';
 
   function announce(message,tone='error'){
@@ -52,18 +53,24 @@
   }
 
   async function loadServerCatalog(force){
-    const userKey=CUR_USER&&CUR_USER.email||'public';
+    const userKey=currentCatalogUserKey();
     if(!force&&catalogReady&&catalogUserKey===userKey)return true;
-    if(catalogLoading)return catalogLoading;
+    if(catalogLoading){
+      if(catalogUserKey===userKey)return catalogLoading;
+      await catalogLoading;
+      return loadServerCatalog(force);
+    }
     catalogUserKey=userKey;
     window.EDUTEST_CATALOG_STATE='loading';
     catalogLoading=(async()=>{try{
       const response=await fetch('/api/assessments/catalog',{credentials:'include',cache:'no-store',headers:{Accept:'application/json'}});
       const data=await response.json().catch(()=>({}));
       if(!response.ok)throw new Error(data.error||'ტესტების კატალოგი ვერ ჩაიტვირთა');
+      if(userKey!==currentCatalogUserKey())return false;
       installCatalog(data.tests||[],true);
       return true;
     }catch(error){
+      if(userKey!==currentCatalogUserKey())return false;
       catalogReady=false;
       window.EDUTEST_CATALOG_STATE='error';
       setCatalogMessage(catalogErrorMessage(error));
@@ -71,6 +78,7 @@
     }finally{catalogLoading=null;}})();
     return catalogLoading;
   }
+  globalThis.refreshAssessmentCatalog=loadServerCatalog;
 
   function adaptQuestion(question){
     const q=Object.assign({},question,{_kaText:question.text,_kaOpts:Array.isArray(question.opts)?question.opts.slice():[]});

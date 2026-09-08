@@ -17,6 +17,6 @@ export async function GET(request: Request) {
   const grades = [...new Set(owned.map(row => String(row.grade)).filter(Boolean))];
   const school = String(current.user.school ?? "").trim();
   if (!grades.length || !school) return Response.json({ students: [] }, { headers: { "Cache-Control": "no-store" } });
-  const rows = await getDb().select(selection).from(users).where(and(inArray(users.grade, grades), eq(users.school, school))).orderBy(asc(users.name));
+  const rows = await getDb().select(selection).from(users).where(and(eq(users.role, "student"), inArray(users.grade, grades), eq(users.school, school))).orderBy(asc(users.name));
   return Response.json({ students: rows }, { headers: { "Cache-Control": "no-store" } });
 }

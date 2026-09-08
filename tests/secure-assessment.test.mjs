@@ -1,16 +1,49 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import { DatabaseSync } from "node:sqlite";
 
 const root = new URL("../", import.meta.url);
 const source = path => readFile(new URL(path, root), "utf8");
 
+test("private assignments are limited to the student's school in catalog and start", async () => {
+  const [catalog, start] = await Promise.all([source('app/api/assessments/catalog/route.ts'), source('app/api/assessments/start/route.ts')]);
+  const catalogSql = catalog.match(/sql = "(SELECT \* FROM assessment_tests WHERE published = 1 OR id IN \(SELECT a\.test_id[^"\n]+)"/)[1];
+  const startSql = start.match(/prepare\("(SELECT a\.id FROM assignments a[^"\n]+)"\)/)[1];
+  const db = new DatabaseSync(':memory:');
+  try {
+    db.exec("CREATE TABLE users(id TEXT,school TEXT); CREATE TABLE assignments(id TEXT,test_id TEXT,grade TEXT,created_by TEXT); CREATE TABLE assessment_tests(id TEXT,published INTEGER); INSERT INTO users VALUES('teacher-a','School A'),('teacher-b','School B'); INSERT INTO assessment_tests VALUES('public',1),('private-a',0),('private-b',0); INSERT INTO assignments VALUES('a','private-a','4','teacher-a'),('b','private-b','4','teacher-b');");
+    assert.deepEqual(db.prepare(catalogSql).all('4','School A').map(row=>row.id), ['public','private-a']);
+    assert.equal(db.prepare(startSql).get('private-a','4','School B'), undefined);
+    assert.equal(db.prepare(startSql).get('private-a','3','School A'), undefined);
+    assert.equal(db.prepare(startSql).get('private-a','4','School A').id, 'a');
+    for (const route of [catalog,start]) assert.match(route, /current\.user\.school\?\.trim\(\)/);
+  } finally { db.close(); }
+});
+
+test("student grade filters follow the server's adjacent-grade policy without a premium bypass", async () => {
+  const html = await source('public/app.html');
+  const render = html.slice(html.indexOf('function renderStudentTests(){'), html.indexOf('function renderTeacherTests(){'));
+  assert.match(render, /Math\.max\(1,userGradeNum-1\).*Math\.min\(12,userGradeNum\+1\)/);
+  assert.match(render, /Math\.abs\(Number\(tx\.grade\)-userGradeNum\)<=1/);
+  assert.doesNotMatch(render, /userPremium|isPremium/);
+});
+
+test("assignment creation checks existence, ownership and matching grade before insert", async () => {
+  const route=await source('app/api/assignments/route.ts');
+  const insert=route.indexOf('getDb().insert(assignments)');
+  assert.ok(route.indexOf('if (!test)')<insert);
+  assert.match(route,/if \(!test\).*status: 404/);
+  assert.match(route,/current\.user\.role === "teacher" && !test\.published && test\.createdBy !== current\.user\.id.*status: 403/);
+  assert.match(route,/Number\(grade\) !== Number\(test\.grade\).*status: 400/);
+});
+
 test("keeps active answer keys out of public assets", async () => {
-  const [html, client, expanded, senior, language] = await Promise.all([
-    source("public/app.html"), source("public/server-assessments.js"), source("public/expanded-question-bank.js"),
-    source("public/senior-math-bank.js"), source("public/language-blueprint-bank.js"),
+  const [html, client, management, expanded, senior, language] = await Promise.all([
+    source("public/app.html"), source("public/server-assessments.js"), source("public/management-overrides.js"),
+    source("public/expanded-question-bank.js"), source("public/senior-math-bank.js"), source("public/language-blueprint-bank.js"),
   ]);
-  const publicText = [html, client, expanded, senior, language].join("\n");
+  const publicText = [html, client, management, expanded, senior, language].join("\n");
   assert.doesNotMatch(publicText, /g1m1_01/);
   assert.doesNotMatch(publicText, /assessment_answer_keys|answer_key_json/);
   assert.doesNotMatch(html, /\bQ_POOL\b/);
@@ -18,6 +51,12 @@ test("keeps active answer keys out of public assets", async () => {
   assert.match(html, /submitFunction:'assessment-submit'/);
   assert.match(client, /\/api\/assessments\/start/);
   assert.match(client, /\/api\/assessments\/submit/);
+});
+
+test("catalog titles distinguish practice and summative tests and custom tests are not curriculum-certified", async () => {
+  const assessment = await source("lib/assessment.ts");
+  assert.match(assessment, /testType === "sum" \? "შემაჯამებელი" : testType === "mid" \? "სავარჯიშო"/);
+  assert.match(assessment, /curriculumVerified: !Boolean\(row\.is_custom\)/);
 });
 
 test("connects every sign-in method to the cookie-authenticated assessment client", async () => {

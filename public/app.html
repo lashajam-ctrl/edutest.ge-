@@ -2466,18 +2466,18 @@ function loadPersistedData(){
   const storedUsers=_ls('edutest_users')||[];
   // Merge: default users first, then any extra registered users
   const merged=[...DEFAULT_USERS];
-  storedUsers.forEach(u=>{const clean={...u};delete clean.password;if(!merged.find(d=>d.email===clean.email))merged.push(clean);});
+  storedUsers.filter(u=>CUR_USER&&u.email===CUR_USER.email).forEach(u=>{const clean={...u};delete clean.password;if(!merged.find(d=>d.email===clean.email))merged.push(clean);});
   USER_DB.length=0; merged.forEach(u=>USER_DB.push(u));
 
   const storedResults=_ls('edutest_results')||[];
-  SESSION_RESULTS.length=0; storedResults.forEach(r=>SESSION_RESULTS.push(r));
+  SESSION_RESULTS.length=0; storedResults.filter(r=>CUR_USER&&r.userId===CUR_USER.email).forEach(r=>SESSION_RESULTS.push(r));
 
   const storedVers=_ls('edutest_vers')||{};
   Object.assign(USER_VERS,storedVers);
 }
 
-function saveUsers(){_lsSet('edutest_users',USER_DB.filter(u=>!DEFAULT_USERS.find(d=>d.email===u.email)));}
-function saveResults(){_lsSet('edutest_results',SESSION_RESULTS);}
+function saveUsers(){_lsSet('edutest_users',USER_DB.filter(u=>CUR_USER&&u.email===CUR_USER.email));}
+function saveResults(){_lsSet('edutest_results',SESSION_RESULTS.filter(r=>CUR_USER&&r.userId===CUR_USER.email));}
 function saveVers(){_lsSet('edutest_vers',USER_VERS);}
 
 // Admin: delete one user's results
@@ -3045,7 +3045,7 @@ const GRADE_ROMAN=['I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII'
 // Generate translated test title on-the-fly
 function txTitle(tx){
   if(!tx) return '';
-  if(tx.isCustom&&tx.title)return tx.title;
+  if((tx.isCustom||tx.teacherCreated)&&tx.title)return tx.title;
   const subjKey=SUBJ_KEY[tx.subject]||'';
   const subjName=subjKey?t(subjKey):tx.subject;
   const gradeStr=tx.grade?GRADE_ROMAN[tx.grade-1]+' '+t('class_label'):'';
@@ -3252,6 +3252,8 @@ function teacherResults(){return SERVER_VERIFIED_RESULTS||[];}
 
 // ── Navigation ───────────────────────────────────────────────────────────────
 function go(p){
+  const role=CUR_USER?.role;
+  if((p==='admin'&&role!=='admin')||(p==='teacher'&&!['teacher','admin'].includes(role))||(p==='student'&&role!=='student'))p='landing';
   if(p!=='take-test'&&timerInt){clearInterval(timerInt);timerInt=null;}
   if(p!=='take-test')document.body.classList.remove('test-age-theme');
   if(['landing','login','teacher','admin'].includes(p))clearGradeTheme();
@@ -3994,13 +3996,25 @@ async function syncUserLearningState(){
   EDUTEST_STATE_SYNCING=true;
   try{const response=await fetch('/api/user-state',{method:'PUT',credentials:'include',headers:{'Content-Type':'application/json'},body:JSON.stringify({state:collectDurableLearningState(CUR_USER.email)}),keepalive:true});return response.ok;}catch(_){return false;}finally{EDUTEST_STATE_SYNCING=false;}
 }
-async function hydrateServerLearningState(appUser){
+let EDUTEST_AUTH_GENERATION=0;
+async function hydrateServerLearningState(appUser,generation){
   if(!appUser||!appUser.emailVerified)return;
   try{
     const [stateResponse,attemptResponse]=await Promise.all([fetch('/api/user-state',{credentials:'include',cache:'no-store'}),fetch('/api/attempts',{credentials:'include',cache:'no-store'})]);
-    if(stateResponse.ok){const payload=await stateResponse.json();Object.entries(payload.state||{}).forEach(([key,value])=>{if(isDurableLearningKey(key,appUser.email)&&typeof value==='string')localStorage.setItem(key,value);});}
-    if(attemptResponse.ok){const payload=await attemptResponse.json(),remote=(payload.attempts||[]).map(row=>Object.assign({},row.result||{},{userId:appUser.email,_serverAttemptId:row.id,verified:true}));const remoteIds=new Set(remote.map(row=>row._serverAttemptId)),local=SESSION_RESULTS.filter(row=>!row._serverAttemptId||!remoteIds.has(row._serverAttemptId));SESSION_RESULTS.splice(0,SESSION_RESULTS.length,...remote,...local);saveResults();}
+    const [statePayload,attemptPayload]=await Promise.all([stateResponse.ok?stateResponse.json():null,attemptResponse.ok?attemptResponse.json():null]);
+    if(generation!==EDUTEST_AUTH_GENERATION)return;
+    if(statePayload)Object.entries(statePayload.state||{}).forEach(([key,value])=>{if(isDurableLearningKey(key,appUser.email)&&typeof value==='string')localStorage.setItem(key,value);});
+    if(attemptPayload){
+      const remote=(attemptPayload.attempts||[]).map(row=>Object.assign({},row.result||{},{userId:appUser.email,_serverAttemptId:row.id,verified:true}));
+      const remoteIds=new Set(remote.map(row=>row._serverAttemptId)),seen=new Set();
+      const local=[...SESSION_RESULTS,...(_ls('edutest_results')||[])].filter(row=>{
+        if(row.userId!==appUser.email||(row._serverAttemptId&&remoteIds.has(row._serverAttemptId)))return false;
+        const key=JSON.stringify(row);if(seen.has(key))return false;seen.add(key);return true;
+      });
+      SESSION_RESULTS.splice(0,SESSION_RESULTS.length,...remote,...local);_lsSet('edutest_results',SESSION_RESULTS);
+    }
   }catch(e){console.warn('learning state restore',e);}
+  if(generation!==EDUTEST_AUTH_GENERATION)return;
   if(EDUTEST_STATE_SYNC_TIMER)clearInterval(EDUTEST_STATE_SYNC_TIMER);
   EDUTEST_STATE_SYNC_TIMER=setInterval(syncUserLearningState,20000);
 }
@@ -4016,7 +4030,9 @@ function appUserFromServer(user){
 }
 async function adoptServerUser(user,opts){
   opts=opts||{};const appUser=appUserFromServer(user);EDUTEST_SERVER_AUTH_ACTIVE=true;
-  if(appUser.emailVerified)await hydrateServerLearningState(appUser);
+  const generation=++EDUTEST_AUTH_GENERATION;
+  if(appUser.emailVerified)await hydrateServerLearningState(appUser,generation);
+  if(generation!==EDUTEST_AUTH_GENERATION)return;
   mergeAppUserIntoLocal(appUser);curRole=appUser.role;setCloudStatus('უსაფრთხო სესია აქტიურია · '+appUser.email,true);
   const gate=studentPrivacyGate(appUser);
   if(opts.navigate){
@@ -4102,6 +4118,7 @@ async function refreshEmailVerificationStatus(){
 }
 
 async function initEduTestCloud(){
+  if(EDUTEST_CLOUD.ready&&EDUTEST_CLOUD.client)return true;
   if(!isSupabaseConfigured()){
     setCloudStatus('Cloud sync გამორთულია — ჩასვი Supabase URL და publishable key',false);
     return false;
@@ -5317,12 +5334,16 @@ function renderAdminUsers(){
   }).join('');
 }
 async function doLogout(){
+  EDUTEST_AUTH_GENERATION++;
   if(timerInt)clearInterval(timerInt);timerInt=null;
   if(EDUTEST_STATE_SYNC_TIMER){clearInterval(EDUTEST_STATE_SYNC_TIMER);EDUTEST_STATE_SYNC_TIMER=null;}
   await syncUserLearningState();
   try{await fetch('/api/auth/logout',{method:'POST',credentials:'include'});}catch(e){console.warn(e);}
   try{if(EDUTEST_CLOUD.client&&EDUTEST_CLOUD.user)await EDUTEST_CLOUD.client.auth.signOut();}catch(e){console.warn(e);}
-  EDUTEST_SERVER_AUTH_ACTIVE=false;EDUTEST_CLOUD.user=null;EDUTEST_CLOUD.profile=null;CUR_USER=null;go('landing');
+  EDUTEST_SERVER_AUTH_ACTIVE=false;EDUTEST_CLOUD.user=null;EDUTEST_CLOUD.profile=null;CUR_USER=null;
+  USER_DB.splice(0,USER_DB.length);SESSION_RESULTS.splice(0,SESSION_RESULTS.length);ASSIGNMENTS=[];REPORTS=[];ADMIN_AUDIT_LOG=[];ALL_TESTS.splice(0,ALL_TESTS.length);
+  try{localStorage.removeItem('edutest_users');localStorage.removeItem('edutest_results');}catch(_){}
+  go('landing');if(typeof refreshAssessmentCatalog==='function')refreshAssessmentCatalog(true);
 }
 
 // ── Update UI after login ─────────────────────────────────────────────────────
@@ -5423,27 +5444,27 @@ function renderStudentTests(){
   const semFilter=document.getElementById('s-filter-semester')?.value||'';
   const typeFilter=document.getElementById('s-filter-testtype')?.value||'';
   const userGradeNum=CUR_USER?.grade?parseInt(CUR_USER.grade):null;
-  const userPremium=isPremium(CUR_USER?.email||'');
-  // Restrict grade filter dropdown to student's grade and below (unless premium)
+  // Match the server policy: own grade and one adjacent grade in either direction.
   const gradeDropdown=document.getElementById('s-filter-grade');
   if(gradeDropdown&&userGradeNum){
     const curVal=gradeDropdown.value;
     gradeDropdown.innerHTML='<option value="">'+t('all_grades')+'</option>';
-    const maxGrade=userPremium?12:userGradeNum;
-    for(let g=1;g<=maxGrade;g++){
+    const minGrade=Math.max(1,userGradeNum-1),maxGrade=Math.min(12,userGradeNum+1);
+    for(let g=minGrade;g<=maxGrade;g++){
       const opt=document.createElement('option');
       opt.value=g; opt.textContent=g+' '+t('class_label');
       if(String(g)===curVal)opt.selected=true;
       gradeDropdown.appendChild(opt);
     }
-    if(!userPremium&&gradeDropdown.value&&parseInt(gradeDropdown.value)>userGradeNum)
+    if(grade&&Math.abs(parseInt(grade)-userGradeNum)>1){
       gradeDropdown.value=String(userGradeNum);
+      grade=String(userGradeNum);
+    }
   }
   if(!grade&&userGradeNum)grade=String(userGradeNum);
   const list=document.getElementById('s-test-list');if(!list)return;
   let tests=ALL_TESTS.filter(tx=>tx&&tx.serverBacked===true);
-  // Also filter: non-premium students can't see higher grades
-  if(!userPremium&&userGradeNum) tests=tests.filter(tx=>tx.grade<=userGradeNum);
+  if(userGradeNum) tests=tests.filter(tx=>Math.abs(Number(tx.grade)-userGradeNum)<=1);
   if(subj)tests=tests.filter(test=>subjectFamily(test.subject)===subjectFamily(subj));
   if(grade)tests=tests.filter(t=>t.grade===parseInt(grade));
   if(semFilter)tests=tests.filter(t=>String(t.semester)===semFilter);

@@ -21,8 +21,8 @@ export async function POST(request: Request) {
   if (!test) return Response.json({ error: "ტესტი ვერ მოიძებნა" }, { status: 404 });
 
   let allowed = Boolean(test.published) || current.user.role === "admin" || (current.user.role === "teacher" && test.created_by === current.user.id);
-  if (!allowed && current.user.role === "student") {
-    const assignment = await env.DB.prepare("SELECT id FROM assignments WHERE test_id = ? AND grade = ? LIMIT 1").bind(test.id, String(current.user.grade ?? "")).first();
+  if (!allowed && current.user.role === "student" && current.user.school?.trim()) {
+    const assignment = await env.DB.prepare("SELECT a.id FROM assignments a INNER JOIN users teacher ON teacher.id = a.created_by WHERE a.test_id = ? AND a.grade = ? AND teacher.school = ? LIMIT 1").bind(test.id, String(current.user.grade ?? ""), current.user.school).first();
     allowed = Boolean(assignment);
   }
   if (!allowed) return Response.json({ error: "ამ ტესტზე წვდომა არ გაქვთ" }, { status: 403 });
