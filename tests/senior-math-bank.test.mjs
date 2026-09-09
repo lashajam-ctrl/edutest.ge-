@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import { canonicalAssessmentSubject, ASSESSMENT_SUBJECTS_BY_GRADE } from '../lib/school-policy.mjs';
 
 const root = new URL("../", import.meta.url);
 const source = path => readFile(new URL(path, root), "utf8");
@@ -15,12 +16,14 @@ test("senior mathematics is one catalog subject backed by mixed strands", async 
   const report = JSON.parse(reportText);
   assert.match(legacy, /RETIRED = true/);
   assert.match(assessment, /canonicalAssessmentSubject/);
-  assert.match(assessment, /return "მათემატიკა"/);
+  assert.equal(canonicalAssessmentSubject('ალგებრა',7),'მათემატიკა');
+  assert.equal(canonicalAssessmentSubject('გეომეტრია',12),'მათემატიკა');
   assert.match(start, /geometry_space/);
   assert.match(start, /Math\.floor\(targetCount \* 0\.4\)/);
   assert.match(catalog, /preferredSeniorMath/);
   assert.doesNotMatch(html, /7:\['ალგებრა','გეომეტრია'/);
-  assert.match(html, /7:\['მათემატიკა','ქართული ენა და ლიტერატურა'/);
+  assert.deepEqual(ASSESSMENT_SUBJECTS_BY_GRADE[7].slice(0,2),['მათემატიკა','ქართული ენა და ლიტერატურა']);
+  assert.match(html,/SCHOOL_SUBJECTS_BY_GRADE=globalThis\.EduTestSchoolRules\.subjectsByGrade/);
   assert.match(html, /function subjectFamily\(value\)/);
   assert.match(html, /\['ალგებრა','გეომეტრია'\]\.includes\(subject\)/);
   assert.equal(report.importedTests, 336);

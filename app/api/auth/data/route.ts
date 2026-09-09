@@ -8,6 +8,7 @@ import {
   customTests,
   guardianConsentRequests,
   identities,
+  learningPracticeSessions,
   issueReports,
   questionHistory,
   userLearningState,
@@ -34,7 +35,7 @@ export async function GET(request: Request) {
   await ensureSchema();
   const db = getDb();
   const userId = current.user.id;
-  const [linkedIdentities, attemptRows, historyRows, guardianRows, assignmentRows, reportRows, customRows, sessionRows, adaptiveRows, learningStateRows] = await Promise.all([
+  const [linkedIdentities, attemptRows, historyRows, guardianRows, assignmentRows, reportRows, customRows, sessionRows, adaptiveRows, learningStateRows, practiceRows] = await Promise.all([
     db.select({ provider: identities.provider, createdAt: identities.createdAt }).from(identities).where(eq(identities.userId, userId)),
     db.select().from(attempts).where(eq(attempts.userId, userId)),
     db.select().from(questionHistory).where(eq(questionHistory.userId, userId)),
@@ -47,6 +48,7 @@ export async function GET(request: Request) {
       .from(assessmentSessions).where(eq(assessmentSessions.userId, userId)),
     db.select().from(assessmentQuestionHistory).where(eq(assessmentQuestionHistory.userId, userId)),
     db.select().from(userLearningState).where(eq(userLearningState.userId, userId)),
+    db.select({id:learningPracticeSessions.id,questionId:learningPracticeSessions.questionId,sourceQuestionId:learningPracticeSessions.sourceQuestionId,status:learningPracticeSessions.status,startedAt:learningPracticeSessions.startedAt,submittedAt:learningPracticeSessions.submittedAt,resultJson:learningPracticeSessions.resultJson}).from(learningPracticeSessions).where(eq(learningPracticeSessions.userId,userId)),
   ]);
   return noStore({
     exportedAt: new Date().toISOString(),
@@ -61,6 +63,7 @@ export async function GET(request: Request) {
     assessmentSessions: sessionRows,
     adaptiveHistory: adaptiveRows,
     learningState: learningStateRows.map(row => parsed(row.stateJson)),
+    learningPractice: practiceRows.map(row => ({...row,result:row.resultJson?parsed(row.resultJson):null,resultJson:undefined})),
   });
 }
 

@@ -1,0 +1,115 @@
+<div id="p-teacher" class="page fade" style="flex-direction:row">
+  <div class="sidebar">
+    <div class="slogo">
+      <div class="slogo-icon" style="background:#16a34a">E</div>
+      <div><div style="color:#fff;font-weight:700;font-size:14px">EduTest.ge</div><div style="font-size:10px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.05em">teacher</div></div>
+    </div>
+    <div class="snav">
+      <div class="ni act" onclick="tNav('t-home',this)">🏠 მთავარი</div>
+      <div class="ni" onclick="tNav('t-tests',this)">📝 <span data-i18n="tests">ჩემი ტესტები</span></div>
+      <div class="ni" onclick="tNav('t-students',this)">👥 <span data-i18n="students">მოსწავლეები</span></div>
+      <div class="ni" onclick="tNav('t-assign',this);renderAssignPanel()">📋 დავალებები</div>
+      <div class="ni" onclick="tNav('t-analytics',this)">📊 ანალიტიკა</div>
+    </div>
+    <div class="sfoot">
+      <div class="susr"><div class="sav" style="background:#16a34a" id="t-sidebar-av">მ</div><div><div style="color:#fff;font-size:12px;font-weight:500" id="t-sidebar-name">მასწავლებელი</div><div style="color:rgba(255,255,255,.35);font-size:11px" id="t-sidebar-email">—</div></div></div>
+      <div class="ni" onclick="doLogout()" style="border-radius:var(--r)">🚪 <span data-i18n="logout">გასვლა</span></div>
+    </div>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;overflow:auto">
+    <div class="topbar"><div style="display:flex;align-items:center;gap:8px"><button class="hamburger" aria-label="მენიუ" onclick="toggleSidebar('teacher')">☰</button><div><div style="display:flex;align-items:center;gap:8px"><button class="btn btn-ghost btn-sm" id="t-back-btn" aria-label="მთავარ გვერდზე დაბრუნება" onclick="tNav('t-home',document.querySelector('#p-teacher .ni'))" style="display:none;padding:4px 8px;font-size:12px">←</button><div style="font-weight:600" id="t-topbar-title">მთავარი</div></div><div style="font-size:11px;color:var(--gray)" id="t-topbar-sub">მასწავლებელი</div></div></div><button class="btn btn-primary btn-sm" id="t-new-btn" onclick="showBuilder()" style="display:none">+ ახალი ტესტი</button></div>
+    <div class="main">
+      <div id="t-home" class="fade">
+        <div class="stat-g">
+          <div class="stat"><div class="stat-ic" style="background:#dbeafe">📝</div><div class="stat-v" style="color:#2563eb" id="t-stat-tests">—</div><div class="stat-l">ტესტი სისტემაში</div></div>
+          <div class="stat"><div class="stat-ic" style="background:#dcfce7">👥</div><div class="stat-v" style="color:#16a34a" id="t-stat-students">—</div><div class="stat-l">მოსწავლე</div></div>
+          <div class="stat"><div class="stat-ic" style="background:#fef3c7">📊</div><div class="stat-v" style="color:#d97706" id="t-stat-results">—</div><div class="stat-l">ჩაბარებული ტესტი</div></div>
+          <div class="stat"><div class="stat-ic" style="background:#ede9fe">📈</div><div class="stat-v" style="color:#7c3aed" id="t-stat-avg">—%</div><div class="stat-l">საშ. ქულა</div></div>
+        </div>
+        <div class="g2">
+          <div class="card" style="padding:16px;margin-bottom:14px">
+            <div style="font-weight:600;font-size:13px;margin-bottom:10px">📊 ყველაზე შეცდომიანი კითხვები</div>
+            <div id="t-q-analytics"><div style="color:var(--gray);font-size:12px;text-align:center;padding:16px">ჯერ შედეგები არ არის</div></div>
+          </div>
+          <div class="card" id="t-pending-work-card" style="padding:16px">
+            <div style="font-weight:600;margin-bottom:12px;font-size:13px">⏳ ხელით გასაფასებელი ნამუშევრები</div>
+            <div style="font-size:12px;color:var(--gray)">იტვირთება...</div>
+          </div>
+          <div class="card" id="t-class-summary-card" style="padding:16px">
+            <div style="font-weight:600;margin-bottom:12px;font-size:13px">📊 რეალური შედეგები საგნების მიხედვით</div>
+            <div style="font-size:12px;color:var(--gray)">იტვირთება...</div>
+          </div>
+        </div>
+      </div>
+      <div id="t-tests" class="hidden fade">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+          <div style="font-weight:600">ყველა ტესტი</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <select id="t-filter-subject" onchange="renderTeacherTests()" style="width:auto;padding:6px 10px">
+              <option value="" data-i18n="all_subjects">ყველა საგანი</option>
+              <option data-i18n="math">მათემატიკა</option><option data-i18n="georgian">ქართული</option><option data-i18n="english">ინგლისური</option><option data-i18n="russian">რუსული</option><option data-i18n="nature">ბუნება</option><option>მე და საზოგადოება</option><option data-i18n="history">ისტორია</option><option data-i18n="geography">გეოგრაფია</option><option data-i18n="biology">ბიოლოგია</option><option data-i18n="chemistry">ქიმია</option><option data-i18n="physics">ფიზიკა</option>
+            </select>
+            <select id="t-filter-grade" onchange="renderTeacherTests()" style="width:auto;padding:6px 10px">
+              <option value="" data-i18n="all_grades">ყველა კლასი</option>
+              <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option>
+              <option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option>
+            </select>
+            <button class="btn btn-primary btn-sm" onclick="showBuilder()">+ ახალი ტესტი</button>
+          </div>
+        </div>
+        <div class="card" style="overflow:hidden">
+          <table class="tbl" id="t-test-table">
+            <thead><tr><th>სათაური</th><th>საგანი</th><th>კლ.</th><th>კ.</th><th>ტიპი</th><th>ქმედება</th></tr></thead>
+            <tbody id="t-test-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+      <div id="t-students" class="hidden fade">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px"><span style="font-weight:600" id="t-students-hdr">მოსწავლეები</span><button class="btn btn-sm" style="font-size:12px;padding:6px 12px;background:#e0f2fe;color:#0369a1;border:none" onclick="exportResultsCSV()">📥 CSV გადმოტვირთვა</button></div>
+        <div class="card" style="overflow:hidden">
+          <div class="tbl-wrap"><table class="tbl"><thead><tr><th>მოსწავლე</th><th>კლ.</th><th>ელ-ფოსტა</th><th>ტესტები</th><th>საშ. ქულა</th><th>ბოლო</th><th>სტატუსი</th><th>ტრენდი</th></tr></thead>
+          <tbody id="t-students-tbody"><tr><td colspan="7" style="text-align:center;padding:20px;color:var(--gray)">მოსწავლეები არ არის</td></tr></tbody></table></div>
+        </div>
+      </div>
+      <div id="t-assign" class="hidden">
+  <div style="padding:20px">
+    <div style="font-weight:700;font-size:16px;margin-bottom:16px">📋 დავალებების მართვა</div>
+    <div class="card" style="padding:16px;margin-bottom:16px">
+      <div style="font-weight:600;margin-bottom:12px">+ ახალი დავალება</div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div>
+          <label class="label" for="ta-test-sel">ტესტი</label>
+          <select id="ta-test-sel" style="width:100%;padding:8px;border:1.5px solid var(--border);border-radius:var(--r);font-family:inherit;font-size:13px;background:var(--bg)"><option value="">— აირჩიეთ ტესტი —</option></select>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div>
+            <label class="label" for="ta-grade-sel">კლასი</label>
+            <select id="ta-grade-sel" style="width:100%;padding:8px;border:1.5px solid var(--border);border-radius:var(--r);font-family:inherit;font-size:13px;background:var(--bg)">
+              <option value="1">1 კლასი</option><option value="2">2 კლასი</option><option value="3">3 კლასი</option>
+              <option value="4">4 კლასი</option><option value="5">5 კლასი</option><option value="6">6 კლასი</option>
+              <option value="7">7 კლასი</option><option value="8">8 კლასი</option><option value="9">9 კლასი</option>
+              <option value="10">10 კლასი</option><option value="11">11 კლასი</option><option value="12">12 კლასი</option>
+            </select>
+          </div>
+          <div>
+            <label class="label" for="ta-deadline">ჩაბარების ვადა</label>
+            <input type="date" id="ta-deadline" style="width:100%;padding:8px;border:1.5px solid var(--border);border-radius:var(--r);font-size:13px;font-family:inherit;background:var(--bg)">
+          </div>
+        </div>
+        <div>
+          <label class="label" for="ta-note">შენიშვნა (სურვილისამებრ)</label>
+          <input type="text" id="ta-note" placeholder="მაგ: 5.3 პარ. შემდეგ..." style="width:100%;padding:8px;border:1.5px solid var(--border);border-radius:var(--r);font-size:13px;font-family:inherit;background:var(--bg)">
+        </div>
+        <button class="btn btn-primary" onclick="(()=>{const tid=document.getElementById('ta-test-sel').value;const g=document.getElementById('ta-grade-sel').value;const dl=document.getElementById('ta-deadline').value;const n=document.getElementById('ta-note').value;if(!tid)return;createAssignment(tid,g,dl,n);})()">📤 გაგზავნა</button>
+      </div>
+    </div>
+    <div style="font-weight:600;margin-bottom:10px">გაგზავნილი დავალებები</div>
+    <div id="t-assign-list"></div>
+  </div>
+</div>
+<div id="t-analytics" class="hidden fade"><div class="card" style="padding:24px;color:var(--gray);text-align:center">ანალიტიკა იტვირთება...</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN -->

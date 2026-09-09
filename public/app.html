@@ -653,14 +653,15 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
 <!-- ADMIN MFA ENROLLMENT / CHALLENGE -->
 <div id="admin-mfa-modal" class="hidden" role="dialog" aria-modal="true" aria-labelledby="admin-mfa-title" style="position:fixed;inset:0;z-index:100050;background:rgba(15,23,42,.76);display:flex;align-items:center;justify-content:center;padding:18px">
   <div class="card" style="width:100%;max-width:470px;max-height:92vh;overflow:auto;padding:24px">
-    <h3 id="admin-mfa-title" style="font-size:19px;font-weight:800;margin-bottom:7px">ადმინისტრატორის ორფაქტორიანი დაცვა</h3>
+    <h3 id="admin-mfa-title" style="font-size:19px;font-weight:800;margin-bottom:7px">ადმინისტრატორის შესვლის დადასტურება</h3>
     <p id="admin-mfa-help" style="font-size:12px;color:var(--gray);line-height:1.55;margin-bottom:14px"></p>
     <div id="admin-mfa-enroll" class="hidden">
       <div style="display:flex;justify-content:center;margin:8px 0 12px"><img id="admin-mfa-qr" alt="TOTP QR კოდი" style="width:190px;height:190px;border:1px solid #e2e8f0;border-radius:12px;background:#fff;padding:8px"/></div>
       <div style="font-size:11px;color:var(--gray);margin-bottom:4px">თუ QR კოდის წაკითხვა ვერ ხერხდება, შეიყვანეთ ეს კოდი Authenticator აპში:</div>
       <div id="admin-mfa-secret" style="font-family:ui-monospace,monospace;word-break:break-all;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:9px;font-size:12px;margin-bottom:12px"></div>
     </div>
-    <div class="fg"><div class="label">Authenticator-ის 6-ნიშნა კოდი</div><input id="admin-mfa-code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]{6}" placeholder="000000" onkeydown="if(event.key==='Enter')verifyAdminMFA()"/></div>
+    <button id="admin-mfa-email-send" class="btn btn-outline hidden" style="width:100%;justify-content:center;margin-bottom:14px" onclick="sendAdminMFAEmail()">კოდის ელფოსტაზე გაგზავნა</button>
+    <div class="fg"><label class="label" id="admin-mfa-code-label" for="admin-mfa-code">Authenticator-ის 6-ნიშნა კოდი</label><input id="admin-mfa-code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]{6}" placeholder="000000" onkeydown="if(event.key==='Enter')verifyAdminMFA()"/></div>
     <div id="admin-mfa-error" class="hidden" role="alert" style="padding:8px;border-radius:8px;background:#fff7ed;color:#9a3412;font-size:12px;margin-bottom:10px"></div>
     <button id="admin-mfa-verify" class="btn btn-primary" style="width:100%;justify-content:center" onclick="verifyAdminMFA()">დადასტურება</button>
     <button class="btn btn-ghost" style="width:100%;justify-content:center;margin-top:6px" onclick="cancelAdminMFA()">გასვლა</button>
@@ -793,7 +794,7 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
             </select>
             <select id="s-filter-testtype" onchange="renderStudentTests()" style="width:auto;padding:6px 10px">
               <option value="" data-i18n="all_types">ყველა სახეობა</option>
-              <option value="mid" data-i18n="test_mid">შუალედური</option>
+              <option value="practice">სავარჯიშო</option>
               <option value="sum" data-i18n="test_sum">შემაჯამებელი</option>
             </select>
           </div>
@@ -1535,8 +1536,8 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
 </div>
 
 
+<script src="/school-rules.js?v=20260909"></script>
 <script>
-
 // ===== I18N =====
 let LANG='ka';
 let _lastResult=null;
@@ -2981,7 +2982,7 @@ function buildReviewHTML(reviewed){
     const explainDiv=(q.ok&&q.explain)?
       `<div style="margin-top:5px;font-size:11px;color:#6b7280">💡 ${esc(q.explain)}</div>`:'';
     const hiddenDiv=(answerHidden&&!q.ok)?'<div style="margin-top:6px;font-size:11px;color:#64748b">🔒 სწორი პასუხი ამ შეფასების რეჟიმში არ ქვეყნდება.</div>':'';
-    const aiDiv=(!q.ok&&q.type!=='short_answer'&&!answerHidden)?`<div style="margin-top:8px"><button type="button" class="btn btn-outline btn-sm" data-ai-review-index="${i}" onclick="requestAiExplanation(${i},this)">🤖 ამიხსენი შეცდომა</button><div id="ai-feedback-${i}" role="status" aria-live="polite" style="margin-top:8px"></div></div>`:'';
+    const aiDiv=(!q.ok&&q.type!=='short_answer'&&!answerHidden)?`<div style="margin-top:8px"><button type="button" class="btn btn-outline btn-sm" data-ai-review-index="${i}" onclick="requestAiExplanation(${i},this)">🤖 ამიხსენი შეცდომა</button>${_lastResult?.verified===true?` <button type="button" class="btn btn-outline btn-sm" onclick="practiceReviewQuestion(${i})">სხვა სავარჯიშო ამ თემაზე</button>`:''}<div id="ai-feedback-${i}" role="status" aria-live="polite" style="margin-top:8px"></div></div>`:'';
     return `<div style="padding:10px;background:#${col};border:1px solid #${bc2};border-radius:8px;margin-bottom:6px">
       <div style="display:flex;justify-content:space-between;margin-bottom:4px">
         <span style="font-size:12px;font-weight:600">${t('q_num_label')}${i+1}: ${esc(qTransText(q))}</span>
@@ -3829,6 +3830,7 @@ async function submitAgeVerification(){
 }
 let ADMIN_MFA_FACTOR_ID='';
 let ADMIN_MFA_PENDING=null;
+let ADMIN_MFA_METHOD='totp';
 function setAdminMFAError(message){
   const el=document.getElementById('admin-mfa-error');if(!el)return;
   el.textContent=message||'';el.classList.toggle('hidden',!message);
@@ -3839,8 +3841,12 @@ function showAdminMFAModal(mode,totp){
   const help=document.getElementById('admin-mfa-help');
   if(!modal||!enroll||!help)throw new Error('MFA ინტერფეისი მიუწვდომელია.');
   const isEnroll=mode==='enroll';
+  ADMIN_MFA_METHOD=mode==='email'?'email':'totp';
+  const sendButton=document.getElementById('admin-mfa-email-send');
+  if(sendButton){sendButton.classList.toggle('hidden',mode!=='email');sendButton.disabled=false;sendButton.textContent='კოდის ელფოსტაზე გაგზავნა';}
+  const codeLabel=document.getElementById('admin-mfa-code-label');if(codeLabel)codeLabel.textContent=mode==='email'?'ელფოსტაზე მიღებული 6-ნიშნა კოდი':'Authenticator-ის 6-ნიშნა კოდი';
   enroll.classList.toggle('hidden',!isEnroll);
-  help.textContent=isEnroll
+  help.textContent=mode==='email'?'დააჭირეთ კოდის გაგზავნას. წერილი მივა '+String(totp?.maskedEmail||'დაკავშირებულ ელფოსტაზე')+'-ზე. კოდი მოქმედებს 5 წუთი. შეამოწმეთ სპამის საქაღალდეც.':isEnroll
     ? 'გახსენით Google Authenticator, Microsoft Authenticator ან სხვა TOTP აპი, დაამატეთ ანგარიში ქვემოთ მოცემული საიდუმლო კოდით და შეიყვანეთ მიღებული 6-ნიშნა კოდი.'
     : 'შეიყვანეთ თქვენს Authenticator აპში ნაჩვენები მიმდინარე 6-ნიშნა კოდი.';
   if(isEnroll){
@@ -3853,6 +3859,21 @@ function showAdminMFAModal(mode,totp){
 }
 function hideAdminMFAModal(){
   const modal=document.getElementById('admin-mfa-modal');if(modal){modal.classList.add('hidden');modal.style.display='none';}
+  const secret=document.getElementById('admin-mfa-secret'),code=document.getElementById('admin-mfa-code');if(secret)secret.textContent='';if(code)code.value='';
+}
+async function sendAdminMFAEmail(){
+  const button=document.getElementById('admin-mfa-email-send'),userId=CUR_USER?.cloudId;
+  if(!button||button.disabled||ADMIN_MFA_METHOD!=='email')return;
+  button.disabled=true;button.textContent='იგზავნება…';setAdminMFAError('');
+  try{
+    const response=await fetch('/api/auth/mfa',{method:'POST',credentials:'include',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'email_send'})});
+    const data=await response.json().catch(()=>({}));if(CUR_USER?.cloudId!==userId)return;
+    if(!response.ok)throw new Error(data.error||'კოდი ვერ გაიგზავნა.');
+    document.getElementById('admin-mfa-help').textContent='კოდი გაიგზავნა '+data.maskedEmail+'-ზე. შეიყვანეთ 5 წუთის განმავლობაში. თუ წერილი არ ჩანს, შეამოწმეთ სპამი.';
+    button.textContent='ხელახლა გაგზავნა — 1 წუთში';
+    setTimeout(()=>{if(CUR_USER?.cloudId===userId){button.disabled=false;button.textContent='კოდის ხელახლა გაგზავნა';}},60000);
+    document.getElementById('admin-mfa-code')?.focus();
+  }catch(error){if(CUR_USER?.cloudId===userId){setAdminMFAError(error.message);button.disabled=false;button.textContent='კოდის გაგზავნის ხელახლა ცდა';}}
 }
 async function beginAdminMFA(){
   if(CUR_USER&&CUR_USER.authProvider==='server'){
@@ -3860,7 +3881,8 @@ async function beginAdminMFA(){
     const status=await statusResponse.json().catch(()=>({}));
     if(!statusResponse.ok)throw new Error(status.error||'MFA სტატუსის მიღება ვერ მოხერხდა.');
     if(status.verified)return true;
-    if(status.enrolled)showAdminMFAModal('challenge');
+    if(status.method==='email')showAdminMFAModal('email',status);
+    else if(status.enrolled)showAdminMFAModal('challenge');
     else{
       const enrollResponse=await fetch('/api/auth/mfa',{method:'POST',credentials:'include',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'enroll'})});
       const enrolled=await enrollResponse.json().catch(()=>({}));
@@ -3887,11 +3909,11 @@ async function beginAdminMFA(){
 }
 async function verifyAdminMFA(){
   const code=(document.getElementById('admin-mfa-code')?.value||'').replace(/\D/g,'');
-  if(!/^\d{6}$/.test(code)){setAdminMFAError('შეიყვანეთ Authenticator-ის სწორი 6-ნიშნა კოდი.');return;}
+  if(!/^\d{6}$/.test(code)){setAdminMFAError('შეიყვანეთ სწორი 6-ნიშნა კოდი.');return;}
   const button=document.getElementById('admin-mfa-verify');if(button)button.disabled=true;
   try{
     if(CUR_USER&&CUR_USER.authProvider==='server'){
-      const response=await fetch('/api/auth/mfa',{method:'POST',credentials:'include',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'verify',code})});
+      const response=await fetch('/api/auth/mfa',{method:'POST',credentials:'include',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:ADMIN_MFA_METHOD==='email'?'email_verify':'verify',code})});
       const verified=await response.json().catch(()=>({}));
       if(!response.ok)throw new Error(verified.error||'კოდის დადასტურება ვერ შესრულდა.');
     }else{
@@ -5407,17 +5429,7 @@ function updateStudentHomeStats(){
 }
 
 // ── Student Tests List ────────────────────────────────────────────────────────
-const SCHOOL_SUBJECTS_BY_GRADE={
-  1:['მათემატიკა','ქართული','ინგლისური','ბუნება'],2:['მათემატიკა','ქართული','ინგლისური','ბუნება'],
-  3:['მათემატიკა','ქართული','ინგლისური','ბუნება','მე და საზოგადოება'],4:['მათემატიკა','ქართული','ინგლისური','ბუნება','მე და საზოგადოება'],
-  5:['მათემატიკა','ქართული','ინგლისური','რუსული','ბუნება','ჩვენი საქართველო'],6:['მათემატიკა','ქართული','ინგლისური','რუსული','ბუნება','ჩვენი საქართველო'],
-  7:['მათემატიკა','ქართული ენა და ლიტერატურა','ინგლისური','რუსული','ისტორია','გეოგრაფია','ბიოლოგია','ფიზიკა','მოქალაქეობა'],
-  8:['მათემატიკა','ქართული ენა და ლიტერატურა','ინგლისური','რუსული','ისტორია','გეოგრაფია','ბიოლოგია','ფიზიკა','ქიმია','მოქალაქეობა'],
-  9:['მათემატიკა','ქართული ენა და ლიტერატურა','ინგლისური','რუსული','ისტორია','გეოგრაფია','ბიოლოგია','ფიზიკა','ქიმია','მოქალაქეობა'],
-  10:['მათემატიკა','ქართული ენა და ლიტერატურა','ინგლისური','რუსული','ისტორია','გეოგრაფია','ბიოლოგია','ფიზიკა','ქიმია','მოქალაქეობა'],
-  11:['მათემატიკა','ქართული ენა და ლიტერატურა','ინგლისური','რუსული','ისტორია','გეოგრაფია','ბიოლოგია','ფიზიკა','ქიმია','მოქალაქეობა'],
-  12:['მათემატიკა','ქართული ენა და ლიტერატურა','ინგლისური','ისტორია','სამოქალაქო თავდაცვა და უსაფრთხოება']
-};
+const SCHOOL_SUBJECTS_BY_GRADE=globalThis.EduTestSchoolRules.subjectsByGrade;
 function subjectFamily(value){
   const subject=String(value||'').trim();
   if(['ალგებრა','გეომეტრია'].includes(subject))return 'მათემატიკა';
@@ -5468,13 +5480,27 @@ function renderStudentTests(){
   if(subj)tests=tests.filter(test=>subjectFamily(test.subject)===subjectFamily(subj));
   if(grade)tests=tests.filter(t=>t.grade===parseInt(grade));
   if(semFilter)tests=tests.filter(t=>String(t.semester)===semFilter);
-  if(typeFilter)tests=tests.filter(t=>t.testType===typeFilter);
+  const availableTypes=[...new Set(tests.map(tx=>globalThis.EduTestSchoolRules.canonicalTestType(tx.testType)))];
+  const typeSelect=document.getElementById('s-filter-testtype');
+  if(typeSelect){
+    const requested=globalThis.EduTestSchoolRules.canonicalTestType(typeFilter);
+    const labels={practice:'სავარჯიშო',sum:'შემაჯამებელი'};
+    typeSelect.replaceChildren(new Option('ყველა ტიპი',''),...availableTypes.map(value=>new Option(labels[value]||value,value,false,value===requested)));
+    if(requested&&!availableTypes.includes(requested)){const unavailable=new Option((labels[requested]||requested)+' — ამ ფილტრით არ არის',requested,true,true);unavailable.disabled=true;typeSelect.append(unavailable);}
+  }
+  if(typeFilter)tests=tests.filter(tx=>globalThis.EduTestSchoolRules.canonicalTestType(tx.testType)===globalThis.EduTestSchoolRules.canonicalTestType(typeFilter));
   const hdr=document.querySelector('#s-tests > div > div:first-child');
   if(hdr){const gN=['I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII'];hdr.textContent=userGradeNum?t('tests_label')+' — '+gN[userGradeNum-1]+' '+t('class_label'):t('grade_label_roman');}
   if(!tests.length){
     const state=window.EDUTEST_CATALOG_STATE||'loading';
     const message=state==='loading'?'ტესტების კატალოგი იტვირთება…':state==='error'?'ტესტების კატალოგი დროებით ვერ ჩაიტვირთა. განაახლეთ გვერდი და სცადეთ ხელახლა.':t('no_tests');
-    list.innerHTML='<div style="text-align:center;color:var(--gray);padding:40px 20px">'+message+'</div>';
+    list.replaceChildren();const empty=document.createElement('div');empty.style.cssText='text-align:center;color:var(--gray);padding:40px 20px';empty.setAttribute('role','status');
+    empty.textContent=state==='ready'?'არჩეული ფილტრების კომბინაციით ტესტი არ არის. ეს არ ნიშნავს, რომ კითხვების ბანკი ცარიელია.':message;list.append(empty);
+    if(state==='ready'){
+      const reset=document.createElement('button');reset.type='button';reset.className='btn btn-outline';
+      reset.textContent=typeFilter&&availableTypes.length?'ამ საგნის ხელმისაწვდომი ტიპების ჩვენება':'ფილტრების გასუფთავება';
+      reset.addEventListener('click',()=>{if(typeFilter&&availableTypes.length){if(typeSelect)typeSelect.value='';}else{['s-filter-subject','s-filter-semester','s-filter-testtype'].forEach(id=>{const control=document.getElementById(id);if(control)control.value='';});}renderStudentTests();});empty.append(document.createElement('br'),reset);
+    }
     return;
   }
   list.innerHTML=tests.map(tx=>`
@@ -6531,8 +6557,10 @@ document.addEventListener('keydown',function(event){
 });
 
 </script>
+<link rel="stylesheet" href="/learning-hub.css?v=20260909">
 <script src="/management-overrides.js"></script>
 <script src="/server-assessments.js"></script>
+<script src="/learning-hub.js?v=20260909"></script>
 
 <!-- EDIT USER MODAL -->
 <div id="modal-edit-user" class="overlay hidden" role="dialog" aria-modal="true" aria-label="მომხმარებლის რედაქტირება" onclick="if(event.target===this)this.classList.add('hidden')">

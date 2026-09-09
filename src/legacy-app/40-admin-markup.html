@@ -1,0 +1,448 @@
+<div id="p-admin" class="page fade" style="flex-direction:row">
+  <div class="sidebar">
+    <div class="slogo"><div class="slogo-icon" style="background:#7c3aed" id="a-sidebar-av">ა</div><div><div style="color:#fff;font-weight:700;font-size:14px" id="a-sidebar-name">ადმინისტრატორი</div><div style="font-size:10px;color:rgba(255,255,255,.35);letter-spacing:.05em">ადმინი</div></div></div>
+    <div class="snav">
+      <div class="ni act" onclick="aNav('a-home',this)">🏠 მთავარი</div>
+      <div class="ni" onclick="aNav('a-schools',this)" data-i18n="adm_schools">🏫 სკოლები</div>
+      <div class="ni" onclick="aNav('a-users',this)" data-i18n="adm_users">👥 მომხმარებლები</div>
+      <div class="ni" onclick="aNav('a-results',this)">📊 ყველა შედეგი</div>
+      <div class="ni" onclick="aNav('a-reports',this)">🚩 რეპორტები <span class="badge b-red" style="margin-left:4px" id="a-reports-badge"></span></div>
+      <div class="ni" onclick="aNav('a-questions',this)">✏️ ტესტების რედ.</div>
+      <div class="ni" onclick="aNav('a-audit',this)">📋 ჟურნალი</div>
+      <div class="ni" onclick="aNav('a-settings',this)">⚙️ პარამეტრები</div>
+    </div>
+    <div class="sfoot">
+      <div class="susr"><div class="sav" style="background:#7c3aed">ა</div><div><div style="color:#fff;font-size:12px;font-weight:500" data-i18n="adm_role_label">ადმინ</div><div id="a-sidebar-email" style="color:rgba(255,255,255,.35);font-size:11px">—</div></div></div>
+      <div class="ni" onclick="doLogout()" style="border-radius:var(--r)">🚪 <span data-i18n="logout">გასვლა</span></div>
+    </div>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;overflow:auto">
+    <div class="topbar"><div style="display:flex;align-items:center;gap:8px"><button class="hamburger" aria-label="მენიუ" onclick="toggleSidebar('admin')" style="color:#1a202c">☰</button><div><div style="display:flex;align-items:center;gap:8px"><button class="btn btn-ghost btn-sm" id="a-back-btn" aria-label="მთავარ გვერდზე დაბრუნება" onclick="aNav('a-home',document.querySelector('#p-admin .ni'))" style="display:none;padding:4px 8px;font-size:12px">←</button><div style="font-weight:600" data-i18n="adm_dashboard">ადმინისტრატორის მთავარი</div></div><div style="font-size:11px;color:var(--gray)" data-i18n="adm_subtitle">ადმინი · პლატფორმის ადმინისტრატორი</div></div></div><span id="a-topbar-badge" class="badge b-red">⚠ ადმინი</span></div>
+    <div class="main">
+      <div id="a-home" class="fade">
+        <div class="stat-g">
+          <div class="stat"><div class="stat-ic" style="background:#ede9fe">👥</div><div class="stat-v" style="color:#7c3aed" id="a-stat-users">—</div><div class="stat-l">მომხმარებელი</div></div>
+          <div class="stat"><div class="stat-ic" style="background:#dbeafe">🎓</div><div class="stat-v" style="color:#2563eb" id="a-stat-students">—</div><div class="stat-l">მოსწავლე</div></div>
+          <div class="stat"><div class="stat-ic" style="background:#dcfce7">📝</div><div class="stat-v" style="color:#16a34a" id="a-stat-tests">—</div><div class="stat-l">სულ ტესტი</div></div>
+          <div class="stat"><div class="stat-ic" style="background:#fef3c7">⭐</div><div class="stat-v" style="color:#d97706" id="a-stat-premium">—</div><div class="stat-l">პრემიუმი</div></div>
+        </div>
+        <div class="card" style="padding:16px">
+          <div style="font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:6px;font-size:13px"><span style="color:#dc2626">🔴</span data-i18n="adm_pending_teachers">დასამტკიცებელი მასწავლებლები</div>
+          <div id="a-pending-teachers-list"><!-- populated by renderAdminHome() --></div>
+        </div>
+      </div>
+      <div id="a-schools" class="hidden fade">
+        <div style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;align-items:center">
+          <div style="font-weight:600;flex:1">🏫 სკოლები და კლასები</div>
+          <select id="a-sch-filter" onchange="renderAdminSchools()" style="padding:6px 10px;width:auto"><option value="">ყველა სკოლა</option></select>
+          <select id="a-cls-filter" onchange="renderAdminSchools()" style="padding:6px 10px;width:auto"><option value="">ყველა კლასი</option></select>
+        </div>
+        <div id="a-schools-cards" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:16px"></div>
+        <div class="card" style="overflow:hidden">
+          <div style="padding:10px 14px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center">
+            <div style="font-weight:600;font-size:13px" id="a-sch-table-title">მოსწავლეები</div>
+            <button class="btn btn-outline btn-sm" onclick="showPromoteModal()" id="a-promote-btn" style="display:none">🎓 კლასის დამთავრება</button>
+          </div>
+          <table class="tbl"><thead><tr><th>მოსწავლე</th><th>ელ-ფოსტა</th><th>სკოლა</th><th>კლ.</th><th>შედ.</th><th>საშ.%</th><th>რეგ.</th><th>ქმ.</th></tr></thead>
+          <tbody id="a-schools-tbody"><tr><td colspan="8" style="text-align:center;padding:20px;color:var(--gray)">აირჩიე სკოლა ან კლასი</td></tr></tbody></table>
+        </div>
+      </div>
+      <div id="a-users" class="hidden fade">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"><div style="font-weight:600" data-i18n="adm_users_title">მომხმარებლები</div><input data-i18n-placeholder="adm_search" placeholder="🔍 ძებნა..." style="width:180px;padding:6px 10px"/></div>
+        <div class="card tbl-wrap"><table class="tbl" id="a-users-table"><thead><tr><th>სახელი</th><th>ელ-ფოსტა</th><th>როლი</th><th>კლ.</th><th>შედეგები</th><th>Premium</th><th>ქმ.</th></tr></thead><tbody id="a-users-tbody"><tr><td colspan="7" style="text-align:center;padding:20px;color:var(--gray)">იტვირთება...</td></tr></tbody></table></div>
+      </div>
+      <div id="a-pending" class="hidden fade" style="max-width:560px"><div class="card" style="padding:24px;color:var(--gray)">დასამტკიცებელი ანგარიშები გამოჩნდება სერვერიდან ჩატვირთვის შემდეგ.</div></div>
+      <div id="a-results" class="hidden fade">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+          <div style="font-weight:600">📊 ყველა მოსწავლის შედეგები</div>
+          <button class="btn btn-primary btn-sm" onclick="exportResultsCSV()">📥 CSV გადმოტვირთვა</button>
+        </div>
+        <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">
+          <select id="a-res-user" onchange="renderAdminResults()" style="width:auto;padding:6px 10px"><option value="">ყველა მოსწავლე</option></select>
+          <select id="a-res-subj" onchange="renderAdminResults()" style="width:auto;padding:6px 10px"><option value="">ყველა საგანი</option><option>მათემატიკა</option><option>ქართული</option><option>ინგლისური</option><option>რუსული</option><option>ბუნება</option><option>მე და საზოგადოება</option><option>ისტორია</option><option>გეოგრაფია</option></select>
+        </div>
+        <div class="card" style="overflow:hidden">
+          <table class="tbl"><thead><tr><th>მოსწავლე</th><th>ტესტი</th><th>შედეგი</th><th>ქულა</th><th>ბეიჯი</th><th>თარიღი</th></tr></thead>
+          <tbody id="a-results-tbody"><tr><td colspan="6" style="text-align:center;padding:20px;color:var(--gray)">იტვირთება...</td></tr></tbody></table>
+        </div>
+      </div>
+
+      <div id="a-reports" class="hidden fade">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+          <div style="font-weight:600">🚩 მოხსენებული ხარვეზები</div>
+          <button class="btn btn-outline btn-sm" onclick="loadReports().then(renderAdminReports)">↻ განახლება</button>
+        </div>
+        <div class="card" style="overflow:hidden">
+          <table class="tbl"><thead><tr><th>თარიღი</th><th>მომხმარებელი</th><th>ტესტი</th><th>კითხვა</th><th>ტიპი</th><th>კომენტარი</th></tr></thead>
+          <tbody id="a-reports-tbody"><tr><td colspan="6" style="text-align:center;padding:20px;color:var(--gray)">რეპორტები არ არის</td></tr></tbody></table>
+        </div>
+      </div>
+
+      <div id="a-settings" class="hidden fade" style="max-width:480px">
+        <div class="card" style="padding:18px;margin-bottom:12px"><div style="font-weight:600;margin-bottom:14px">⚙️ პლატფორმის პარამეტრები</div>
+          <div class="fg"><div class="label">პლატფ. სახელი</div><input value="EduTest.ge"/></div>
+          <div class="fg"><div class="label">კონტაქტ ელ-ფოსტა</div><input value="results@edutest.ge"/></div>
+          <div class="fg"><div class="label">JWT ვადა (დღე)</div><input type="number" value="7"/></div>
+          <button class="btn btn-primary btn-sm">💾 შენახვა</button>
+        </div>
+        <div class="card" style="padding:18px;margin-bottom:12px;background:#fffbeb;border-color:#fde68a"><div style="font-weight:600;margin-bottom:6px">💳 გადახდები გამორთულია</div><div style="font-size:12px;color:#92400e;line-height:1.5">სატესტო ეტაპზე ფასები, Premium გამოწერა, BOG Pay და TBC Pay არ მუშაობს. ეს პარამეტრები მეორე ეტაპზე დაემატება.</div></div>
+        <div class="card" style="padding:18px;margin-bottom:12px">
+          <div style="font-weight:600;margin-bottom:14px">🏆 სამოტივაციო ჯილდოები</div>
+          <div class="fg">
+            <div class="label">კონკურსი აქტიურია</div>
+            <select id="prize-active" style="padding:8px;width:100%">
+              <option value="true">✅ დიახ — ჩართული</option>
+              <option value="false">❌ არა — გამორთული</option>
+            </select>
+          </div>
+          <div class="fg">
+            <div class="label">პერიოდი / ვადა</div>
+            <input id="prize-period" placeholder="მაგ: 2026 სექტემბერი — ივნისი" style="width:100%"/>
+          </div>
+          <div class="fg">
+            <div class="label">პირობა (რა ითვლება)</div>
+            <select id="prize-condition" style="padding:8px;width:100%">
+              <option value="xp">XP — ყველა ტესტიდან დაგროვილი</option>
+              <option value="avg">საშუალო % — ყველა ტესტის</option>
+              <option value="count">ჩაბარებული ტესტების რაოდენობა</option>
+            </select>
+          </div>
+          <div style="font-weight:600;font-size:12px;margin:12px 0 8px">ჯილდოები</div>
+          <div style="display:grid;grid-template-columns:auto 1fr 1fr;gap:6px;align-items:center;font-size:12px;margin-bottom:10px">
+            <span>🥇 I ადგილი</span>
+            <input id="prize-1-reward" placeholder="მაგ: 1000 ₾" style="padding:6px"/>
+            <input id="prize-1-desc" placeholder="აღწერა (სურვ.)" style="padding:6px"/>
+            <span>🥈 II ადგილი</span>
+            <input id="prize-2-reward" placeholder="მაგ: 700 ₾" style="padding:6px"/>
+            <input id="prize-2-desc" placeholder="აღწერა (სურვ.)" style="padding:6px"/>
+            <span>🥉 III ადგილი</span>
+            <input id="prize-3-reward" placeholder="მაგ: 500 ₾" style="padding:6px"/>
+            <input id="prize-3-desc" placeholder="აღწერა (სურვ.)" style="padding:6px"/>
+          </div>
+          <div class="fg">
+            <div class="label">დამატებითი შენიშვნა (ნებაყოფლობითი)</div>
+            <textarea id="prize-note" rows="2" placeholder="მაგ: გამარჯვებული გამოვლინდება ივნისში, სკოლის ბოლო ზარის ცერემონიაზე." style="width:100%;padding:8px;border:1px solid var(--border);border-radius:6px;font-family:inherit;font-size:13px"></textarea>
+          </div>
+          <div id="prize-saved" style="display:none;color:#059669;font-size:12px;margin-bottom:8px">✅ ჯილდოები შენახულია</div>
+          <button class="btn btn-primary btn-sm" onclick="adminSavePrizes()">💾 ჯილდოების შენახვა</button>
+        </div>
+      </div>
+      </div>
+      <!-- QUESTIONS EDITOR -->
+      <div id="a-questions" class="hidden fade">
+        <div style="font-weight:600;margin-bottom:14px">✏️ ტესტის პასუხების რედაქტირება</div>
+        <div class="card" style="padding:16px;margin-bottom:12px">
+          <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+            <select id="aq-subject" onchange="aqLoadTests()" style="padding:6px 10px">
+              <option value="">-- საგანი --</option>
+              <option value="მათემატიკა">📐 მათემატიკა</option>
+              <option value="ქართული">📚 ქართული</option>
+              <option value="ინგლისური">🇬🇧 ინგლისური</option>
+              <option value="რუსული">🇷🇺 რუსული</option>
+              <option value="ბუნება">🌿 ბუნება</option>
+              <option value="მე და საზოგადოება">🤝 მე და საზოგადოება</option>
+              <option value="ისტორია">🏛️ ისტორია</option>
+              <option value="გეოგრაფია">🌍 გეოგრაფია</option>
+              <option value="ბიოლოგია">🧬 ბიოლოგია</option>
+              <option value="ქიმია">⚗️ ქიმია</option>
+              <option value="ფიზიკა">⚡ ფიზიკა</option>
+            </select>
+            <select id="aq-test" onchange="aqLoadVersions()" style="padding:6px 10px"><option value="">-- ტესტი --</option></select>
+            <select id="aq-version" onchange="aqLoadQuestions()" style="padding:6px 10px"><option value="">-- ვერსია --</option></select>
+          </div>
+        </div>
+        <div id="aq-questions-wrap"></div>
+      </div>
+      <!-- AUDIT LOG -->
+      <div id="a-audit" class="hidden fade">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+          <div style="font-weight:600">📋 ცვლილებების ჟურნალი</div>
+          <button class="btn btn-outline btn-sm" onclick="if(confirm('გასუფთავდეს ჟურნალი?')){ADMIN_AUDIT_LOG=[];saveAuditLog();renderAdminAudit();}">🗑 გასუფთავება</button>
+        </div>
+        <div class="card tbl-wrap">
+          <table class="tbl" id="a-audit-table">
+            <thead><tr><th>თარიღი</th><th>ადმინი</th><th>მოქმედება</th><th>დეტალი</th></tr></thead>
+            <tbody id="a-audit-tbody"><tr><td colspan="4" style="text-align:center;padding:20px;color:var(--gray)">ჩანაწერი არ არის</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+      <!-- CSV IMPORT -->
+      <div id="a-import" class="hidden fade">
+        <div style="font-weight:700;font-size:16px;margin-bottom:16px">📥 სტუდენტების CSV იმპორტი</div>
+        <div class="card" style="padding:18px;margin-bottom:12px;background:#f0fdf4;border:1px solid #86efac">
+          <div style="font-weight:600;font-size:13px;margin-bottom:8px">📋 CSV ფორმატი:</div>
+          <code style="font-size:12px;color:#166534;display:block;line-height:1.8">email,name,grade,className<br>test1@example.invalid,სატესტო მოსწავლე 1,7,7ა<br>test2@example.invalid,სატესტო მოსწავლე 2,8,8ბ</code>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:14px">
+          <label class="btn btn-outline" style="cursor:pointer;text-align:center">
+            📂 CSV ფაილის არჩევა
+            <input type="file" accept=".csv,.txt" id="a-csv-file" style="display:none" onchange="previewCSV(this)"/>
+          </label>
+        </div>
+        <div id="a-csv-preview" style="margin-bottom:12px"></div>
+        <button class="btn btn-primary" id="a-csv-import-btn" style="display:none" onclick="importCSV()">✅ იმპორტი</button>
+      </div>
+
+      <!-- ENTERPRISE -->
+      <div id="a-enterprise" class="hidden fade">
+        <div style="font-weight:700;font-size:16px;margin-bottom:16px">🏢 Enterprise ინტეგრაციები</div>
+
+        <!-- Email Notifications -->
+        <div class="card" style="padding:18px;margin-bottom:12px">
+          <div style="font-weight:600;font-size:14px;margin-bottom:12px">📧 Email შეტყობინებები</div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <label style="display:flex;align-items:center;gap:10px;font-size:13px">
+              <input type="checkbox" id="notif-test-done" style="width:16px;height:16px"> ტესტის დასრულებისას მოსწავლეს ეგზავნება შედეგი
+            </label>
+            <label style="display:flex;align-items:center;gap:10px;font-size:13px">
+              <input type="checkbox" id="notif-teacher-assign" style="width:16px;height:16px"> მასწავლებლის დავალებისას მოსწავლეს ეცნობება
+            </label>
+            <label style="display:flex;align-items:center;gap:10px;font-size:13px">
+              <input type="checkbox" id="notif-weekly-report" style="width:16px;height:16px"> კვირის შემაჯამებელი ანგარიში მასწავლებელს
+            </label>
+            <label style="display:flex;align-items:center;gap:10px;font-size:13px">
+              <input type="checkbox" id="notif-parent" style="width:16px;height:16px"> მშობლის ანგარიში (კვირეული)
+            </label>
+          </div>
+          <div style="margin-top:12px;padding:10px;background:#fef3c7;border-radius:8px;font-size:12px;color:#92400e">
+            ⚠️ Email გაგზავნა საჭიროებს backend-ს (SMTP). დასაყენებლად დაუკავშირდი: results@edutest.ge
+          </div>
+          <button class="btn btn-primary btn-sm" style="margin-top:10px" onclick="saveNotifSettings()">💾 შენახვა</button>
+        </div>
+
+        <!-- Google Classroom -->
+        <div class="card" style="padding:18px;margin-bottom:12px">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+            <div style="font-size:24px">🎓</div>
+            <div>
+              <div style="font-weight:600;font-size:14px">Google Classroom</div>
+              <div style="font-size:12px;color:var(--gray)">ტესტები პირდაპირ Classroom-ში</div>
+            </div>
+          </div>
+          <button class="btn btn-outline btn-sm" onclick="alert('Google Classroom ინტეგრაცია საჭიროებს OAuth2 კონფიგურაციას. დეტალებისთვის: results@edutest.ge')">🔗 კავშირის დაყენება</button>
+        </div>
+
+        <!-- Microsoft Teams -->
+        <div class="card" style="padding:18px;margin-bottom:12px">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+            <div style="font-size:24px">💼</div>
+            <div>
+              <div style="font-weight:600;font-size:14px">Microsoft Teams</div>
+              <div style="font-size:12px;color:var(--gray)">შედეგების ავტომატური გაზიარება Teams-ში</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
+            <input id="teams-webhook" type="url" placeholder="Teams Webhook URL..." style="flex:1;padding:7px 10px;border:1px solid var(--border);border-radius:8px;font-size:12px;font-family:inherit"/>
+            <button class="btn btn-primary btn-sm" onclick="saveTeamsWebhook()">💾</button>
+          </div>
+          <div style="font-size:11px;color:var(--gray)">Incoming Webhook URL Teams-ის channel-ისთვის</div>
+        </div>
+
+        <!-- Enhanced Export -->
+        <div class="card" style="padding:18px">
+          <div style="font-weight:600;font-size:14px;margin-bottom:12px">📊 Excel ექსპორტი</div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <button class="btn btn-outline btn-sm" onclick="exportAllResultsExcel()">📥 სრული შედეგების ექსპორტი (CSV/Excel)</button>
+            <button class="btn btn-outline btn-sm" onclick="exportStudentProgress()">📥 სტუდენტების პროგრესი</button>
+            <button class="btn btn-outline btn-sm" onclick="exportAuditLogCSV()">📥 Audit Log ექსპორტი</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- MODALS -->
+<div id="pay-modal" class="overlay hidden" role="dialog" aria-modal="true" aria-label="გადახდის ინფორმაცია">
+  <div class="modal" style="max-width:420px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px">
+      <h3 style="font-weight:700">💳 წვდომის შეძენა</h3>
+      <button class="btn btn-ghost btn-sm" onclick="hidePayModal()">✕</button>
+    </div>
+    <div id="pay-step-1">
+      <!-- Free trial info -->
+      <div style="background:#fef3c7;border:1px solid #fbbf24;border-radius:var(--r);padding:12px;margin-bottom:16px;font-size:13px">
+        <div style="font-weight:700;color:#92400e;margin-bottom:4px">🆓 უფასო ტესტი უკვე გამოყენებულია</div>
+        <div style="color:#78350f">ამ საგანში უფასო ტესტი უკვე ჩაბარე. გააგრძელე ვარჯიში გადახდით.</div>
+      </div>
+      <!-- Plan choice -->
+      <div style="font-weight:600;margin-bottom:10px;font-size:14px">აირჩიე პლანი:</div>
+      <!-- Single subject -->
+      <div id="pay-plan-single" onclick="selectPayPlan('single')" style="border:2px solid var(--blue);border-radius:var(--r);padding:14px;margin-bottom:10px;cursor:pointer;background:var(--blue-l)">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div><div style="font-weight:700;font-size:14px" id="pay-subj-name">საგანი</div><div style="font-size:12px;color:var(--gray);margin-top:2px">ულიმიტო მცდელობები · 1 საგანი</div></div>
+          <div style="font-size:20px;font-weight:800;color:#1e3a8a"><span id="pay-price-single">9.99₾</span></div>
+        </div>
+      </div>
+      <!-- Premium monthly -->
+      <div id="pay-plan-premium" onclick="selectPayPlan('premium')" style="border:2px solid var(--border);border-radius:var(--r);padding:14px;margin-bottom:16px;cursor:pointer">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div><div style="font-weight:700;font-size:14px">⭐ Premium — ყველა საგანი</div><div style="font-size:12px;color:var(--gray);margin-top:2px">ყველა კლასი · ყველა საგანი · ულიმიტო</div></div>
+          <div style="font-size:20px;font-weight:800;color:#1e3a8a"><span id="pay-price-monthly">19.99₾</span><span style="font-size:11px;font-weight:400">/თვე</span></div>
+        </div>
+      </div>
+      <!-- Payment methods -->
+      <div style="font-weight:600;margin-bottom:8px;font-size:13px">გადახდის მეთოდი:</div>
+      <div style="display:flex;gap:8px;margin-bottom:16px">
+        <button onclick="payStep2('bog')" style="flex:1;padding:10px;border:1.5px solid var(--border);border-radius:var(--r);cursor:pointer;background:#fff;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:6px;font-size:13px"><span>🏦</span> BOG Pay</button>
+        <button onclick="payStep2('tbc')" style="flex:1;padding:10px;border:1.5px solid var(--border);border-radius:var(--r);cursor:pointer;background:#fff;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:6px;font-size:13px"><span>💳</span> TBC Pay</button>
+      </div>
+      <div style="font-size:11px;color:var(--gray);text-align:center">უსაფრთხო გადახდა SSL დაშიფვრით</div>
+    </div>
+    <div id="pay-step-2" class="hidden" style="text-align:center;padding:24px 0">
+      <div style="font-size:56px;margin-bottom:12px">✅</div>
+      <div style="font-weight:700;font-size:18px;margin-bottom:8px;color:#059669">გადახდა წარმატებული!</div>
+      <p style="color:var(--gray);font-size:13px;margin-bottom:20px">წვდომა გახსნილია. შეგიძლია ახლავე დაიწყო ტესტი.</p>
+      <button class="btn btn-green" onclick="payComplete()">🚀 ტესტის დაწყება</button>
+    </div>
+  </div>
+</div>
+
+<div id="builder-modal" class="overlay hidden" role="dialog" aria-modal="true" aria-label="ტესტის შექმნა">
+  <div class="modal" style="max-width:540px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px"><h3 style="font-weight:700">✨ ახალი ტესტი</h3><button class="btn btn-ghost btn-sm" aria-label="ტესტის შექმნის ფანჯრის დახურვა" onclick="hideBuilder()">✕</button></div>
+    <div class="steps">
+      <div class="step act" id="bstep-1">1</div><div style="font-size:11px;color:#1a202c">ინფო</div>
+      <div class="sline" id="bline-1"></div>
+      <div class="step" id="bstep-2">2</div><div style="font-size:11px;color:var(--gray)">კითხვები</div>
+      <div class="sline" id="bline-2"></div>
+      <div class="step" id="bstep-3">3</div><div style="font-size:11px;color:var(--gray)">გავრცელება</div>
+    </div>
+    <div id="bstep-content-1">
+      <div class="fg"><label class="label" for="b-title">სათაური</label><input placeholder="მაგ. მათემატიკა — III კლასი — I სემესტრი" id="b-title"/></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <div class="fg"><label class="label" for="b-subj">საგანი</label><select id="b-subj"><option>მათემატიკა</option><option>ქართული ენა და ლიტერატურა</option><option>ინგლისური</option><option>მეორე უცხოური — რუსული</option><option>ბუნება</option><option>მე და საზოგადოება</option><option>ჩვენი საქართველო</option><option>ისტორია</option><option>გეოგრაფია</option><option>ბიოლოგია</option><option>ფიზიკა</option><option>ქიმია</option><option>მოქალაქეობა</option><option>სამოქალაქო თავდაცვა და უსაფრთხოება</option></select></div>
+        <div class="fg"><label class="label" for="b-grade">კლასი</label><select id="b-grade"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option></select></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <div class="fg"><label class="label" for="b-time">დრო (წთ)</label><input type="number" value="20" min="5" max="180" id="b-time"/></div>
+        <div class="fg"><label class="label" for="b-att">მცდელობები</label><input type="number" value="2" min="1" max="10" id="b-att"/></div>
+      </div>
+      <div style="display:flex;gap:16px;margin-bottom:14px">
+        <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px"><input type="checkbox" id="b-pub" style="width:auto"/>გამოქვეყნება</label>
+      </div>
+    </div>
+    <div id="bstep-content-2" class="hidden"><p style="font-size:12px;color:var(--gray);margin-bottom:10px">კითხვის ბაზიდან შეარჩიეთ:</p><div id="q-picker"></div><div style="font-size:12px;color:var(--gray);margin-top:8px">შერჩეულია: <strong id="sel-count">0</strong> კითხვა</div></div>
+    <div id="bstep-content-3" class="hidden">
+      <div class="fg"><label class="label" for="b-audience">გაავრცელე კლასზე</label><input id="b-audience" placeholder="მაგ. 3A (ცარიელი = ყველა შესაბამისი კლასის მოსწავლე)"/></div>
+      <div class="fg"><label class="label" for="b-due">ჩაბარების ვადა</label><input id="b-due" type="date"/></div>
+      <div style="padding:12px;background:var(--blue-l);border-radius:var(--r);font-size:12px;color:#1e40af" id="b-summary">შეჯამება...</div>
+    </div>
+    <div style="display:flex;justify-content:space-between;margin-top:18px">
+      <button class="btn btn-ghost" id="b-prev" onclick="bNav(-1)">← <span data-i18n="back">უკან</span></button>
+      <button class="btn btn-primary" id="b-next" onclick="bNav(1)"><span data-i18n="next">შემდეგი</span> →</button>
+    </div>
+  </div>
+</div>
+
+<!-- Premium modal -->
+<div class="overlay hidden" id="premium-modal" role="dialog" aria-modal="true" aria-label="პრემიუმ ინფორმაცია">
+  <div class="modal" style="max-width:440px;text-align:center;position:relative">
+    <button class="btn btn-ghost btn-sm" onclick="document.getElementById('premium-modal').classList.add('hidden')" style="position:absolute;top:12px;right:12px">✕</button>
+    <div style="font-size:48px;margin-bottom:10px">⭐</div>
+    <h2 style="font-weight:800;font-size:20px;margin-bottom:6px;color:#1e3a8a">EduTest Premium</h2>
+    <p style="color:var(--gray);font-size:13px;margin-bottom:16px">ყველა საგანი, ყველა კლასი, ულიმიტო მცდელობები</p>
+    <div class="card" style="padding:14px;margin-bottom:14px;text-align:left">
+      <div style="display:flex;flex-direction:column;gap:8px;font-size:13px">
+        <div>✅ ყველა ხელმისაწვდომი სასკოლო საგანი (I–XII კლასი)</div>
+        <div>✅ ულიმიტო მცდელობები ყველა ტესტზე</div>
+        <div>✅ 5 ვარიანტი — ყოველ ჯერზე ახალი კითხვები</div>
+        <div>✅ დეტალური შედეგები და სტატისტიკა</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;margin-bottom:14px">
+      <div style="flex:1;background:#1e3a8a;color:#fff;border-radius:10px;padding:12px;text-align:center">
+        <div style="font-size:11px;opacity:.7;margin-bottom:4px">ყოველთვიური</div>
+        <div style="font-size:22px;font-weight:800"><span id="prem-price-monthly">19.99₾</span><span style="font-size:11px;font-weight:400">/თვე</span></div>
+      </div>
+      <div style="flex:1;background:#065f46;color:#fff;border-radius:10px;padding:12px;text-align:center;position:relative">
+        <div style="font-size:9px;background:#fbbf24;color:#78350f;border-radius:4px;padding:2px 6px;position:absolute;top:-8px;left:50%;transform:translateX(-50%);white-space:nowrap;font-weight:700">💰 30% ფასდაკლება</div>
+        <div style="font-size:11px;opacity:.7;margin-bottom:4px">წლიური</div>
+        <div style="font-size:22px;font-weight:800"><span id="prem-price-yearly">169₾</span><span style="font-size:11px;font-weight:400">/წელი</span></div>
+      </div>
+    </div>
+    <div style="font-size:12px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:10px;margin-bottom:14px;color:#065f46">
+      💡 <strong>1 საგნის შეძენა — <span id="prem-price-subject">9.99₾</span></strong> (ულიმიტო, ამ საგანში)
+    </div>
+    <p style="font-size:11px;color:var(--gray)">✉️ გამოწერისთვის: <strong>results@edutest.ge</strong></p>
+    <p style="font-size:11px;color:var(--gray);margin-top:4px">ადმინისტრატორი გაააქტიურებს შენს ანგარიშზე</p>
+  </div>
+</div>
+
+<div id="report-modal" class="overlay hidden" role="dialog" aria-modal="true" aria-label="კითხვის პრობლემის შეტყობინება" onclick="if(event.target===this)closeReportModal()">
+  <div class="modal" style="max-width:420px">
+    <h3 style="font-weight:700;margin-bottom:14px">🚩 შეცდომის მოხსენება</h3>
+    <div id="report-q-preview" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:10px 14px;font-size:13px;margin-bottom:14px;color:var(--gray)"></div>
+    <label class="label">პრობლემის ტიპი</label>
+    <select id="report-type" style="width:100%;padding:10px;border:1.5px solid var(--border);border-radius:var(--r);font-family:inherit;font-size:13px;margin-bottom:12px;background:var(--bg)">
+      <option value="wrong_answer">❌ მცდარი სწორი პასუხი</option>
+      <option value="bad_question">📝 გაუგებარი კითხვა</option>
+      <option value="typo">✏️ მართლწერის შეცდომა</option>
+      <option value="other">🔖 სხვა</option>
+    </select>
+    <label class="label">კომენტარი (სურვილისამებრ)</label>
+    <textarea id="report-comment" rows="3" placeholder="დამატებითი ინფო..." style="width:100%;padding:10px;border:1.5px solid var(--border);border-radius:var(--r);font-family:inherit;font-size:13px;resize:vertical;margin-bottom:16px"></textarea>
+    <div style="display:flex;gap:10px">
+      <button class="btn btn-outline" onclick="closeReportModal()" style="flex:1">გაუქმება</button>
+      <button class="btn btn-primary" id="report-submit-btn" onclick="submitReport()" style="flex:1">📤 გაგზავნა</button>
+    </div>
+  </div>
+</div>
+<div id="submit-modal" class="overlay hidden" role="dialog" aria-modal="true" aria-label="ტესტის დასრულების დადასტურება">
+  <div class="modal" style="max-width:360px;text-align:center">
+    <div style="font-size:48px;margin-bottom:12px">📝</div>
+    <h3 style="font-weight:700;margin-bottom:8px" data-i18n="submit">ტესტის გაგზავნა?</h3>
+    <p style="color:var(--gray);font-size:13px;margin-bottom:18px" id="submit-msg">პასუხი გაცემულია... კითხვაზე.</p>
+    <div style="display:flex;gap:10px;justify-content:center">
+      <button class="btn btn-ghost" onclick="hideSubmitModal()">გაგრძელება</button>
+      <button class="btn btn-green" onclick="finishTest()">✉ <span data-i18n="submit">გაგზავნა</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- Student Results Modal -->
+<div id="student-results-modal" class="overlay hidden" role="dialog" aria-modal="true" aria-label="მოსწავლის შედეგები" onclick="if(event.target===this)this.classList.add('hidden')">
+  <div class="modal" style="max-width:560px;max-height:80vh;overflow-y:auto">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+      <h3 id="srm-name" style="font-weight:700;font-size:16px;margin:0"></h3>
+      <button class="btn btn-ghost btn-sm" onclick="document.getElementById('student-results-modal').classList.add('hidden')">✕</button>
+    </div>
+    <div id="srm-meta" style="font-size:12px;color:var(--gray);margin-bottom:12px"></div>
+    <div id="srm-body"></div>
+    <div style="margin-top:14px;text-align:right">
+      <button id="srm-del-btn" class="btn btn-sm" style="background:#fee2e2;color:#b91c1c;border:none" onclick="adminDeleteResults(_srmEmail)">🗑 შედეგების წაშლა</button>
+    </div>
+  </div>
+</div>
+
+<!-- Question Editor Modal -->
+<div id="qeditor-modal" class="overlay hidden" role="dialog" aria-modal="true" aria-label="კითხვის რედაქტირება" onclick="if(event.target===this)closeQEditor()">
+  <div class="modal" style="max-width:620px;max-height:85vh;overflow-y:auto">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+      <h3 id="qeditor-title" style="font-weight:700;font-size:16px;margin:0">✏️ კითხვების რედაქტირება</h3>
+      <button class="btn btn-ghost btn-sm" onclick="closeQEditor()">✕</button>
+    </div>
+    <div id="qeditor-body"></div>
+  </div>
+</div>
+
+<!-- Grade Promotion Modal -->
+<div id="promote-modal" class="overlay hidden" role="dialog" aria-modal="true" aria-label="კლასის გადაყვანა" onclick="if(event.target===this)this.classList.add('hidden')">
+  <div class="modal" style="max-width:400px">
+    <h3 style="font-weight:700;margin-bottom:16px">📈 კლასის გადაყვანა</h3>
+    <div style="margin-bottom:12px">
+      <label style="font-size:13px;font-weight:600;display:block;margin-bottom:6px">კლასი:</label>
+      <select id="promote-from" class="input" onchange="updatePromotePreview()" style="width:100%">
+        <option value="">-- კლასი --</option>
+      </select>
+    </div>
+    <div id="promote-preview" style="font-size:13px;color:var(--gray);margin-bottom:16px;min-height:20px"></div>
+    <div style="display:flex;gap:10px;justify-content:flex-end">
+      <button class="btn btn-ghost" onclick="document.getElementById('promote-modal').classList.add('hidden')">გაუქმება</button>
+      <button class="btn btn-primary" onclick="executePromotion()">✅ გადაყვანა</button>
+    </div>
+  </div>
+</div>
+
+

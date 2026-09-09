@@ -1,0 +1,20 @@
+{
+  "format": 1,
+  "html": [
+    "00-shared.html",
+    "10-auth-markup.html",
+    "20-student-markup.html",
+    "30-teacher-markup.html",
+    "40-admin-markup.html",
+    "50-runtime-loader.html"
+  ],
+  "runtime": [
+    "00-shared.js",
+    "10-student-progress.js",
+    "20-results-tutoring.js",
+    "30-state-navigation.js",
+    "40-authentication.js",
+    "50-adaptive-learning.js",
+    "60-catalog-assessments.js"
+  ]
+}

@@ -54,6 +54,28 @@ export const sessionMfaVerifications = sqliteTable("session_mfa_verifications", 
   expiresAt: integer("expires_at", { mode: "timestamp_ms" }).notNull(),
 }, (table) => [index("idx_session_mfa_expires").on(table.expiresAt)]);
 
+/** Owner-provisioned recipients; confirmed only by successful code verification. */
+export const adminMfaEmailFactors = sqliteTable("admin_mfa_email_factors", {
+  userId: text("user_id").primaryKey().references(() => users.id, { onDelete: "cascade" }),
+  recipientEmail: text("recipient_email").notNull(),
+  confirmedAt: integer("confirmed_at", { mode: "timestamp_ms" }),
+  createdAt: integer("created_at", { mode: "timestamp_ms" }).notNull(),
+  updatedAt: integer("updated_at", { mode: "timestamp_ms" }).notNull(),
+});
+
+export const adminMfaEmailChallenges = sqliteTable("admin_mfa_email_challenges", {
+  userId: text("user_id").primaryKey().references(() => users.id, { onDelete: "cascade" }),
+  id: text("id").notNull(),
+  sessionId: text("session_id").notNull().references(() => sessions.id, { onDelete: "cascade" }),
+  recipientEmail: text("recipient_email").notNull(),
+  factorUpdatedAt: integer("factor_updated_at", { mode: "timestamp_ms" }).notNull(),
+  codeHash: text("code_hash").notNull(),
+  attempts: integer("attempts").notNull().default(0),
+  createdAt: integer("created_at", { mode: "timestamp_ms" }).notNull(),
+  expiresAt: integer("expires_at", { mode: "timestamp_ms" }).notNull(),
+  usedAt: integer("used_at", { mode: "timestamp_ms" }),
+});
+
 export const oauthLinkRequests = sqliteTable("oauth_link_requests", {
   id: text("id").primaryKey(),
   userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
@@ -301,3 +323,16 @@ export const assessmentImportRuns = sqliteTable("assessment_import_runs", {
   reportJson: text("report_json").notNull(),
   importedAt: integer("imported_at", { mode: "timestamp_ms" }).notNull(),
 }, (table) => [uniqueIndex("assessment_import_source_unique").on(table.sourceHash)]);
+
+export const learningPracticeSessions = sqliteTable("learning_practice_sessions", {
+  id: text("id").primaryKey(),
+  userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  sourceQuestionId: text("source_question_id").notNull().references(() => assessmentQuestions.id, { onDelete: "restrict" }),
+  questionId: text("question_id").notNull().references(() => assessmentQuestions.id, { onDelete: "restrict" }),
+  presentationJson: text("presentation_json").notNull(),
+  status: text("status").notNull().default("started"),
+  startedAt: integer("started_at", { mode: "timestamp_ms" }).notNull(),
+  expiresAt: integer("expires_at", { mode: "timestamp_ms" }).notNull(),
+  submittedAt: integer("submitted_at", { mode: "timestamp_ms" }),
+  resultJson: text("result_json"),
+}, table => [index("idx_learning_practice_user").on(table.userId, table.startedAt)]);

@@ -21,7 +21,11 @@ export async function POST(request: Request) {
   if (!sessionId || JSON.stringify(answers).length > 100_000) return Response.json({ error: "არასწორი პასუხების პაკეტი" }, { status: 400 });
   const session = await env.DB.prepare("SELECT * FROM assessment_sessions WHERE id = ? AND user_id = ?").bind(sessionId, current.user.id).first<SessionRow>();
   if (!session) return Response.json({ error: "ტესტის სესია ვერ მოიძებნა" }, { status: 404 });
-  if (session.status !== "started") return Response.json({ error: "ტესტი უკვე ჩაბარებულია" }, { status: 409 });
+  if (session.status !== "started") {
+    const saved=await env.DB.prepare("SELECT answers_json FROM attempts WHERE id=? AND user_id=?").bind(session.id,current.user.id).first<{answers_json:string}>();
+    if(saved)return Response.json({result:JSON.parse(saved.answers_json),replayed:true},{headers:{"Cache-Control":"no-store"}});
+    return Response.json({ error: "ტესტი უკვე ჩაბარებულია" }, { status: 409 });
+  }
   if (Number(session.expires_at) < Date.now()) return Response.json({ error: "ტესტის დრო ამოიწურა" }, { status: 410 });
   const questionIds = JSON.parse(session.question_ids_json) as string[];
   if (!questionIds.length || questionIds.length > 100) return Response.json({ error: "სესიის კითხვები არასწორია" }, { status: 409 });
@@ -42,7 +46,7 @@ export async function POST(request: Request) {
     if (question.question_type === "multiple_choice" && Number.isInteger(Number(submittedAnswer)) && presentation[id]?.optionOrder) {
       submittedAnswer = presentation[id].optionOrder?.[Number(submittedAnswer)] ?? submittedAnswer;
     }
-    return { ...publicPayload, ua: submittedAnswer, ok: result.correct, correctDisplay: result.correctDisplay, explain: correctKnownQuestionExplanation(question.id, question.explanation) };
+    return { ...publicPayload, id: question.id, ua: submittedAnswer, ok: result.correct, correctDisplay: result.correctDisplay, explain: correctKnownQuestionExplanation(question.id, question.explanation) };
   });
   const percentage = maxScore ? Math.round(score / maxScore * 100) : 0, now = Date.now();
   const test = await env.DB.prepare("SELECT title,subject,grade FROM assessment_tests WHERE id = ?").bind(session.test_id).first<{ title: string; subject: string; grade: number }>();
@@ -52,23 +56,28 @@ export async function POST(request: Request) {
     : test?.title ?? "ტესტი";
   const result = { testId: session.test_id, title: resultTitle, subject: resultSubject, grade: test?.grade ?? null, earned: score, totalPts: maxScore, correct: correctCount, total: questionIds.length, pct: percentage, reviewed, assessmentMode: "verified", verified: true, date: new Date(now).toLocaleDateString("ka-GE") };
   const statements = [
-    env.DB.prepare("INSERT INTO attempts (id,user_id,test_id,score,max_score,percentage,answers_json,submitted_at) VALUES (?,?,?,?,?,?,?,?)")
-      .bind(crypto.randomUUID(), current.user.id, session.test_id, score, maxScore, percentage, JSON.stringify(result), now),
-    env.DB.prepare("UPDATE assessment_sessions SET status = 'submitted', submitted_at = ? WHERE id = ? AND status = 'started'").bind(now, session.id),
+    env.DB.prepare("UPDATE assessment_sessions SET status = 'submitted', submitted_at = ? WHERE id = ? AND user_id = ? AND status = 'started' AND expires_at >= ?").bind(now, session.id,current.user.id,now),
+    env.DB.prepare("INSERT INTO attempts (id,user_id,test_id,score,max_score,percentage,answers_json,submitted_at) SELECT ?,?,?,?,?,?,?,? WHERE changes()=1")
+      .bind(session.id, current.user.id, session.test_id, score, maxScore, percentage, JSON.stringify(result), now),
   ];
   for (const id of questionIds) {
     const question = byId.get(id)!, item = reviewed.find(row => row.id === id)!;
     const nextReviewAt = now + (item.ok ? 7 : 1) * 86_400_000;
     statements.push(env.DB.prepare(`INSERT INTO assessment_question_history
       (user_id,question_id,semantic_group_id,answered_count,correct_count,last_correct,last_answered_at,next_review_at)
-      VALUES (?,?,?,1,?,?,?,?) ON CONFLICT(user_id,question_id) DO UPDATE SET
+      SELECT ?,?,?,1,?,?,?,? WHERE changes()=1 ON CONFLICT(user_id,question_id) DO UPDATE SET
       semantic_group_id=excluded.semantic_group_id, answered_count=answered_count+1, correct_count=correct_count+excluded.correct_count,
       last_correct=excluded.last_correct, last_answered_at=excluded.last_answered_at, next_review_at=excluded.next_review_at`)
       .bind(current.user.id, id, question.semantic_group_id, item.ok ? 1 : 0, item.ok ? 1 : 0, now, nextReviewAt));
-    statements.push(env.DB.prepare("INSERT INTO question_history (id,user_id,question_id,pool_key,answered_at) VALUES (?,?,?,?,?) ON CONFLICT(user_id,question_id) DO UPDATE SET answered_at=excluded.answered_at,pool_key=excluded.pool_key")
+    statements.push(env.DB.prepare("INSERT INTO question_history (id,user_id,question_id,pool_key,answered_at) SELECT ?,?,?,?,? WHERE changes()=1 ON CONFLICT(user_id,question_id) DO UPDATE SET answered_at=excluded.answered_at,pool_key=excluded.pool_key")
       .bind(crypto.randomUUID(), current.user.id, id, `server:${resultSubject}:${test?.grade ?? ""}`, now));
   }
-  await env.DB.batch(statements);
+  const writes=await env.DB.batch(statements);
+  if(Number(writes[0]?.meta?.changes)!==1){
+    const saved=await env.DB.prepare("SELECT answers_json FROM attempts WHERE id=? AND user_id=?").bind(session.id,current.user.id).first<{answers_json:string}>();
+    if(saved)return Response.json({result:JSON.parse(saved.answers_json),replayed:true},{headers:{"Cache-Control":"no-store"}});
+    return Response.json({error:"ტესტის დრო ამოიწურა ან სესია შეიცვალა."},{status:409});
+  }
   let resultEmailSent = false;
   try { resultEmailSent = await sendAssessmentResultEmail(current.user, result); } catch { resultEmailSent = false; }
   return Response.json({ result, resultEmailSent }, { status: 201, headers: { "Cache-Control": "no-store" } });

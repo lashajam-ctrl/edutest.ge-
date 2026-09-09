@@ -55,8 +55,8 @@ test("keeps active answer keys out of public assets", async () => {
 
 test("catalog titles distinguish practice and summative tests and custom tests are not curriculum-certified", async () => {
   const assessment = await source("lib/assessment.ts");
-  assert.match(assessment, /testType === "sum" \? "შემაჯამებელი" : testType === "mid" \? "სავარჯიშო"/);
-  assert.match(assessment, /curriculumVerified: !Boolean\(row\.is_custom\)/);
+  assert.match(assessment, /testType === "sum" \? "შემაჯამებელი" : \["mid", "practice"\]\.includes\(testType\) \? "სავარჯიშო"/);
+  assert.match(assessment, /curriculumVerified: false, humanReviewStatus: "not_tracked"/);
 });
 
 test("connects every sign-in method to the cookie-authenticated assessment client", async () => {
@@ -155,7 +155,7 @@ test("accepts class-section labels and exposes one unified senior mathematics su
     source("reports/assessment-import-report.json"),
   ]);
   const report = JSON.parse(reportText);
-  assert.match(assessment, /function schoolGradeNumber/);
+  assert.match(assessment, /schoolGradeNumber.*from "\.\/school-policy\.mjs"/);
   assert.match(start, /schoolGradeNumber\(current\.user\.grade\)/);
   assert.match(start, /assessmentSubjectComponents/);
   assert.match(catalog, /preferredSeniorMath/);

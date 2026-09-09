@@ -219,6 +219,7 @@
       if(typeof showXpToast==='function'&&xpEarned)showXpToast(xpEarned,null);
       if(typeof logAuditEvent==='function')logAuditEvent('TEST_DONE_VERIFIED',(CUR_USER&&CUR_USER.email||'')+' | '+result.testId+' | '+result.pct+'%');
       renderResultsPage(result);go('results');
+      if(typeof refreshLearningPlan==='function')refreshLearningPlan(true);
       if(typeof maybeAutoSpeakResult==='function')setTimeout(()=>maybeAutoSpeakResult(result),120);
     }catch(error){
       announce(catalogErrorMessage(error)+' პასუხები შენარჩუნებულია და შეგიძლიათ ხელახლა გაგზავნოთ.');

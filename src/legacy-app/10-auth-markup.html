@@ -1,0 +1,173 @@
+<div id="p-login" data-page="login" class="page fade" style="background:linear-gradient(135deg,#f0f4ff,#e0e7ff);align-items:center;justify-content:center;padding:20px">
+  <div class="card" style="width:100%;max-width:420px;padding:28px">
+    <div style="text-align:center;margin-bottom:22px">
+      <div style="width:48px;height:48px;background:#1d4ed8;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;font-size:18px;margin:0 auto 10px">E</div>
+      <h2 style="font-weight:800;font-size:18px">შესვლა ან რეგისტრაცია</h2>
+      <p style="color:var(--gray);font-size:12px">აირჩიეთ თქვენთვის მოსახერხებელი გზა</p>
+    </div>
+    <div class="lang-switcher" id="langSwitcherLogin" style="margin-bottom:12px;justify-content:flex-end">
+  <button onclick="setLang('ka')" id="ll-ka" class="lang-btn lang-btn-dark active">🇬🇪 ქარ</button>
+  <button onclick="setLang('en')" id="ll-en" class="lang-btn lang-btn-dark">🇬🇧 Eng</button>
+  <button onclick="setLang('ru')" id="ll-ru" class="lang-btn lang-btn-dark">🇷🇺 Рус</button>
+</div>
+    <div style="padding:9px 11px;margin-bottom:10px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;color:#1e3a8a;font-size:11px;line-height:1.45;text-align:center">
+      უკვე გაქვთ ანგარიში? ერთი დაჭერით შედით. ახალი მომხმარებელი იმავე ღილაკით დარეგისტრირდება.
+    </div>
+    <div style="display:grid;grid-template-columns:1fr;gap:8px;margin-bottom:10px">
+      <button id="oauth-google" type="button" class="btn btn-outline" disabled onclick="doSocialLogin('google')" aria-label="Google-ით შესვლა ან რეგისტრაცია" style="justify-content:space-between;opacity:.55;font-weight:700;padding:11px 14px"><span aria-hidden="true" style="font-size:17px;color:#4285f4">G</span><span class="oauth-label">Google-ით გაგრძელება</span><span aria-hidden="true">→</span></button>
+      <button id="oauth-azure" type="button" class="btn btn-outline" disabled onclick="doSocialLogin('azure')" aria-label="Microsoft-ით შესვლა ან რეგისტრაცია" style="justify-content:space-between;opacity:.55;font-weight:700;padding:11px 14px"><span aria-hidden="true" style="font-size:16px">▦</span><span class="oauth-label">Microsoft-ით გაგრძელება</span><span aria-hidden="true">→</span></button>
+      <button id="oauth-facebook" type="button" class="btn btn-outline" disabled onclick="doSocialLogin('facebook')" aria-label="Facebook-ით შესვლა ან რეგისტრაცია" style="justify-content:space-between;opacity:.55;font-weight:700;padding:11px 14px"><span aria-hidden="true" style="font-size:18px;color:#1877f2">f</span><span class="oauth-label">Facebook-ით გაგრძელება</span><span aria-hidden="true">→</span></button>
+    </div>
+    <p id="oauth-provider-status" style="font-size:10px;color:#64748b;text-align:center;margin:4px 0 12px">სოციალური შესვლის ხელმისაწვდომობა მოწმდება…</p>
+    <button id="email-auth-toggle" type="button" class="btn btn-ghost" onclick="toggleEmailAuth()" aria-expanded="false" aria-controls="email-auth-panel" style="width:100%;justify-content:center;margin-bottom:10px;color:#334155">✉️ ელფოსტით და პაროლით გაგრძელება</button>
+    <div id="email-auth-panel" class="hidden" style="padding-top:2px">
+    <div style="display:flex;align-items:center;gap:8px;margin:2px 0 12px;color:#64748b;font-size:11px"><span style="height:1px;background:#e2e8f0;flex:1"></span><strong>ელფოსტით</strong><span style="height:1px;background:#e2e8f0;flex:1"></span></div>
+    <div class="tab-row" style="margin-bottom:14px">
+      <button class="tab act" id="ltab-login" onclick="loginTab('login')">შესვლა</button>
+      <button class="tab" id="ltab-reg" onclick="loginTab('reg')">ახალი ანგარიშის შექმნა</button>
+    </div>
+    <div class="fg hidden" id="email-role-field">
+      <div class="label" data-i18n="role_label">როლი</div>
+      <div style="display:flex;gap:6px">
+        <button class="role-btn" id="rb-student" style="border:2px solid #2563eb;background:#dbeafe;color:#1d4ed8" onclick="setRole('student')" data-i18n="student_role">მოსწავლე</button>
+        <button class="role-btn" id="rb-teacher" style="border:2px solid var(--border);background:#fff;color:var(--gray)" onclick="setRole('teacher')" data-i18n="teacher_role">მასწავლებელი</button>
+      </div>
+    </div>
+    <div class="fg" id="email-address-field"><label class="label" for="l-email" data-i18n="email">ელ-ფოსტა</label><input id="l-email" type="email" autocomplete="email" data-i18n-placeholder="email_ph" placeholder="თქვენი ელ-ფოსტა"/></div>
+    <div class="fg" id="email-password-field"><label class="label" for="l-pass" data-i18n="password">პაროლი</label><input id="l-pass" type="password" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()" data-i18n-placeholder="password_ph" placeholder="პაროლი"/></div>
+    <div id="auth-email-actions" style="display:flex;gap:10px;justify-content:flex-end;align-items:center;margin:-4px 0 12px;flex-wrap:wrap">
+      <button type="button" onclick="requestPasswordReset()" style="border:0;background:transparent;color:#1d4ed8;font-size:12px;font-weight:600;cursor:pointer;padding:0">დაგავიწყდა პაროლი?</button>
+    </div>
+    <div id="reg-fields" class="hidden">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <div class="fg"><label class="label" for="r-name" data-i18n="name">სახელი</label><input id="r-name" autocomplete="given-name" placeholder="სახელი"/></div>
+        <div class="fg"><label class="label" for="r-surname" data-i18n="surname">გვარი</label><input id="r-surname" autocomplete="family-name" placeholder="გვარი"/></div>
+      </div>
+      <div class="fg"><label class="label" for="r-school">სკოლა <span style="color:var(--gray);font-weight:400">(სურვილისამებრ)</span></label><input id="r-school" autocomplete="organization" placeholder="მაგ. სკოლა №1"/></div>
+      <div id="student-reg-only">
+        <div class="fg"><label class="label" for="r-grade" data-i18n="grade">კლასი</label><select id="r-grade"><option>1A</option><option>1B</option><option>2A</option><option>2B</option><option>3A</option><option>3B</option><option>4A</option><option>4B</option><option>5A</option><option>5B</option><option>6A</option><option>6B</option><option>7A</option><option>7B</option><option>8A</option><option>8B</option><option>9A</option><option>9B</option><option>10A</option><option>10B</option><option>11A</option><option>11B</option><option>12A</option><option>12B</option></select></div>
+        <div class="fg"><label class="label" for="r-dob">დაბადების თარიღი</label><input id="r-dob" type="date" autocomplete="bday" oninput="updateMinorRegistrationUI()"/></div>
+        <div id="guardian-fields" class="hidden" style="padding:12px;background:#fff7ed;border:1px solid #fed7aa;border-radius:10px;margin-bottom:12px">
+          <div style="font-size:12px;font-weight:700;color:#9a3412;margin-bottom:5px">👨‍👩‍👧 16 წლამდე მოსწავლისთვის საჭიროა მშობლის/კანონიერი წარმომადგენლის დადასტურება</div>
+          <div style="font-size:11px;color:#7c2d12;margin-bottom:8px">წარმომადგენელი მიიღებს უსაფრთხო magic-link-ს საკუთარ ელფოსტაზე. ბავშვის ანგარიში მანამდე სასწავლო მონაცემებს ვერ დაამუშავებს.</div>
+          <div class="fg" style="margin-bottom:0"><label class="label" for="r-guardian-email">მშობლის/კანონიერი წარმომადგენლის ელ-ფოსტა</label><input id="r-guardian-email" type="email" autocomplete="email" placeholder="guardian@example.com"/></div>
+        </div>
+      </div>
+      <div style="padding:11px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;margin-bottom:12px;font-size:11px;line-height:1.5;color:#475569">
+        <label style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px"><input id="r-terms" type="checkbox" style="width:16px;margin-top:2px"> <span>ვეთანხმები <button type="button" onclick="openLegalDocument('terms')" style="border:0;background:none;color:#1d4ed8;text-decoration:underline;cursor:pointer;padding:0;font:inherit">წესებსა და პირობებს</button>.</span></label>
+        <label style="display:flex;gap:8px;align-items:flex-start"><input id="r-privacy" type="checkbox" style="width:16px;margin-top:2px"> <span>გავეცანი <button type="button" onclick="openLegalDocument('privacy')" style="border:0;background:none;color:#1d4ed8;text-decoration:underline;cursor:pointer;padding:0;font:inherit">კონფიდენციალურობის პოლიტიკას</button> და მონაცემთა სუბიექტის უფლებებს.</span></label>
+      </div>
+    </div>
+    <div id="teacher-note" class="hidden" style="padding:10px;background:var(--amber-l);border-radius:var(--r);font-size:12px;color:#92400e;margin-bottom:12px" data-i18n="teacher_note">
+      ⚠️ მასწავლებლის ანგარიში ადმინის დამტკიცებას საჭიროებს.
+    </div>
+    <button class="btn btn-primary" style="width:100%;justify-content:center;padding:11px" id="l-btn" onclick="doLogin()" data-i18n="login">შესვლა</button>
+    </div>
+    <div id="login-error" class="hidden" style="margin-top:8px;padding:8px;background:var(--red-l);border-radius:var(--r);font-size:12px;color:var(--red);text-align:center"></div>
+    <div id="cloud-auth-status" style="display:none">Cloud auth status</div>
+    <button class="btn btn-ghost" style="width:100%;justify-content:center;margin-top:6px" onclick="go('landing')" data-i18n="back">← მთავარ გვერდზე</button>
+  </div>
+</div>
+
+<!-- LEGAL / CHILD SAFETY MODAL -->
+<div id="legal-modal" class="hidden" role="dialog" aria-modal="true" aria-label="სამართლებრივი დოკუმენტი" style="position:fixed;inset:0;z-index:100020;background:rgba(15,23,42,.65);display:flex;align-items:center;justify-content:center;padding:18px">
+  <div class="card" style="width:100%;max-width:760px;max-height:88vh;overflow:auto;padding:24px;position:relative">
+    <button type="button" onclick="closeLegalDocument()" aria-label="დახურვა" style="position:absolute;right:14px;top:12px;border:0;background:#f1f5f9;border-radius:8px;padding:6px 10px;cursor:pointer">✕</button>
+    <div id="legal-modal-content" style="font-size:13px;line-height:1.65;color:#334155"></div>
+  </div>
+</div>
+
+<!-- EXISTING STUDENT AGE VERIFICATION -->
+<div id="age-verification-modal" class="hidden" role="dialog" aria-modal="true" aria-labelledby="age-verification-title" style="position:fixed;inset:0;z-index:100030;background:rgba(15,23,42,.72);display:flex;align-items:center;justify-content:center;padding:18px">
+  <div class="card" style="width:100%;max-width:480px;padding:24px">
+    <div style="font-size:11px;font-weight:700;color:#2563eb;margin-bottom:5px">ნაბიჯი 2 / 2</div>
+    <h3 id="age-verification-title" style="font-size:18px;font-weight:800;margin-bottom:6px">დაასრულეთ პროფილი</h3>
+    <p style="font-size:12px;color:var(--gray);line-height:1.5;margin-bottom:14px">ელ-ფოსტა უკვე დადასტურებულია. ახლა შეავსეთ მხოლოდ სწავლისთვის აუცილებელი მონაცემები. ეს ინფორმაცია საჯაროდ არ გამოჩნდება.</p>
+    <div class="fg"><div class="label">სახელი და გვარი</div><input id="age-verify-name" autocomplete="name" maxlength="100"/></div>
+    <div class="fg"><div class="label">როლი</div><select id="age-verify-role" onchange="updateAgeVerificationUI()"><option value="student">მოსწავლე</option><option value="teacher">მასწავლებელი</option></select></div>
+    <div id="age-verify-grade-wrap" class="fg"><div class="label">კლასი</div><select id="age-verify-grade"><option value="">აირჩიეთ კლასი</option><option value="1">I</option><option value="2">II</option><option value="3">III</option><option value="4">IV</option><option value="5">V</option><option value="6">VI</option><option value="7">VII</option><option value="8">VIII</option><option value="9">IX</option><option value="10">X</option><option value="11">XI</option><option value="12">XII</option></select></div>
+    <div class="fg"><div class="label">სკოლა <span style="font-weight:400;color:var(--gray)">(სურვილისამებრ)</span></div><input id="age-verify-school" maxlength="120"/></div>
+    <div class="fg"><div class="label">დაბადების თარიღი</div><input id="age-verify-dob" type="date" oninput="updateAgeVerificationUI()"/></div>
+    <div id="age-verify-guardian-wrap" class="hidden"><div class="fg"><div class="label">მშობლის/კანონიერი წარმომადგენლის ელ-ფოსტა</div><input id="age-verify-guardian" type="email" placeholder="guardian@example.com"/></div></div>
+    <label style="display:flex;gap:8px;font-size:11px;line-height:1.45;margin-bottom:8px"><input id="age-verify-terms" type="checkbox" style="width:16px"> <span>ვეთანხმები <button type="button" onclick="openLegalDocument('terms')" style="border:0;background:none;color:#1d4ed8;text-decoration:underline;cursor:pointer;padding:0;font:inherit">წესებსა და პირობებს</button>.</span></label>
+    <label style="display:flex;gap:8px;font-size:11px;line-height:1.45;margin-bottom:14px"><input id="age-verify-privacy" type="checkbox" style="width:16px"> <span>გავეცანი <button type="button" onclick="openLegalDocument('privacy')" style="border:0;background:none;color:#1d4ed8;text-decoration:underline;cursor:pointer;padding:0;font:inherit">კონფიდენციალურობის პოლიტიკას</button>.</span></label>
+    <div id="age-verify-error" class="hidden" style="padding:8px;border-radius:8px;background:#fff7ed;color:#9a3412;font-size:12px;margin-bottom:10px"></div>
+    <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="submitAgeVerification()">გაგრძელება</button>
+    <button class="btn btn-ghost" style="width:100%;justify-content:center;margin-top:6px" onclick="doLogout()">გასვლა</button>
+  </div>
+</div>
+
+<!-- UNDER-16 CHILD: PENDING GUARDIAN CONSENT -->
+<div id="guardian-pending-modal" class="hidden" role="dialog" aria-modal="true" aria-labelledby="guardian-pending-title" style="position:fixed;inset:0;z-index:100031;background:rgba(15,23,42,.72);display:flex;align-items:center;justify-content:center;padding:18px">
+  <div class="card" style="width:100%;max-width:480px;padding:24px;text-align:center">
+    <div style="font-size:38px;margin-bottom:8px">🛡️</div>
+    <h3 id="guardian-pending-title" style="font-size:18px;font-weight:800;margin-bottom:8px">მშობლის/წარმომადგენლის დადასტურება საჭიროა</h3>
+    <p style="font-size:12px;color:var(--gray);line-height:1.55">16 წლამდე მოსწავლის სასწავლო ისტორია და პერსონალიზებული ტესტები არ ჩაირთვება, სანამ წარმომადგენელი საკუთარ ელფოსტაზე მიღებული ბმულით არ დაადასტურებს თანხმობას.</p>
+    <div id="guardian-pending-email" style="margin:14px 0;padding:9px;background:#f8fafc;border-radius:8px;font-size:12px"></div>
+    <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="resendGuardianConsent()">📧 ბმულის ხელახლა გაგზავნა</button>
+    <button class="btn btn-outline" style="width:100%;justify-content:center;margin-top:6px" onclick="refreshGuardianConsentStatus()">🔄 სტატუსის შემოწმება</button>
+    <button class="btn btn-danger" style="width:100%;justify-content:center;margin-top:6px" onclick="deleteMyAccount()">🗑 ანგარიშის წაშლა</button>
+    <button class="btn btn-ghost" style="width:100%;justify-content:center;margin-top:6px" onclick="doLogout()">გასვლა</button>
+  </div>
+</div>
+
+<!-- EMAIL VERIFICATION -->
+<div id="email-verification-modal" class="hidden" role="dialog" aria-modal="true" aria-labelledby="email-verification-title" style="position:fixed;inset:0;z-index:100032;background:rgba(15,23,42,.72);display:flex;align-items:center;justify-content:center;padding:18px">
+  <div class="card" style="width:100%;max-width:480px;padding:24px;text-align:center">
+    <div style="font-size:38px;margin-bottom:8px">📧</div>
+    <h3 id="email-verification-title" style="font-size:18px;font-weight:800;margin-bottom:8px">დაადასტურეთ ელ-ფოსტა</h3>
+    <p style="font-size:12px;color:var(--gray);line-height:1.55">ანგარიშის გასააქტიურებლად გახსენით თქვენს ელფოსტაზე გამოგზავნილი უსაფრთხო ბმული. შემდეგ დაბრუნდით აქ და შეამოწმეთ სტატუსი.</p>
+    <div id="email-verification-address" style="margin:14px 0;padding:9px;background:#f8fafc;border-radius:8px;font-size:12px"></div>
+    <div id="email-verification-error" class="hidden" role="alert" style="padding:8px;border-radius:8px;background:#fff7ed;color:#9a3412;font-size:12px;margin-bottom:10px"></div>
+    <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="resendEmailVerification()">📧 ბმულის ხელახლა გაგზავნა</button>
+    <button class="btn btn-outline" style="width:100%;justify-content:center;margin-top:6px" onclick="refreshEmailVerificationStatus()">🔄 სტატუსის შემოწმება</button>
+    <button class="btn btn-ghost" style="width:100%;justify-content:center;margin-top:6px" onclick="doLogout()">გასვლა</button>
+  </div>
+</div>
+
+<!-- GUARDIAN CONSENT REVIEW -->
+<div id="guardian-review-modal" class="hidden" role="dialog" aria-modal="true" aria-labelledby="guardian-review-title" style="position:fixed;inset:0;z-index:100040;background:rgba(15,23,42,.72);display:flex;align-items:center;justify-content:center;padding:18px">
+  <div class="card" style="width:100%;max-width:620px;max-height:90vh;overflow:auto;padding:24px">
+    <h3 id="guardian-review-title" style="font-size:19px;font-weight:800;margin-bottom:6px">კანონიერი წარმომადგენლის თანხმობა</h3>
+    <div id="guardian-review-summary" style="font-size:12px;color:#475569;line-height:1.55;margin-bottom:14px"></div>
+    <div style="padding:12px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;font-size:12px;line-height:1.6;margin-bottom:12px">
+      <b>რას ვადასტურებ:</b> ბავშვის ანგარიშის, კლასის/სკოლის (თუ მითითებულია), ტესტის შედეგებისა და სწავლის ისტორიის დამუშავებას EduTest-ის საგანმანათლებლო სერვისის, პერსონალიზებული კითხვების არჩევისა და პროგრესის ჩვენების მიზნით. ბავშვის სრული სახელი ლიდერბორდზე ნაგულისხმევად არ ქვეყნდება და peer-to-peer ჩატი არ არის ჩართული.
+    </div>
+    <label style="display:flex;gap:8px;align-items:flex-start;font-size:12px;line-height:1.5;margin-bottom:14px"><input id="guardian-consent-check" type="checkbox" style="width:16px;margin-top:2px"> <span>მე ვარ ამ ბავშვის მშობელი ან სხვა კანონიერი წარმომადგენელი, გავეცანი <button type="button" onclick="openLegalDocument('privacy')" style="border:0;background:none;color:#1d4ed8;text-decoration:underline;cursor:pointer;padding:0;font:inherit">კონფიდენციალურობის პოლიტიკას</button> და ვაძლევ თანხმობას მითითებული მიზნით მონაცემების დამუშავებაზე.</span></label>
+    <div id="guardian-review-error" class="hidden" style="padding:8px;border-radius:8px;background:#fff7ed;color:#9a3412;font-size:12px;margin-bottom:10px"></div>
+    <div id="guardian-pending-actions" style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-primary" style="flex:1;justify-content:center" onclick="submitGuardianConsent(true)">✅ ვადასტურებ</button><button class="btn btn-danger" style="flex:1;justify-content:center" onclick="submitGuardianConsent(false)">უარი</button></div>
+    <button id="guardian-withdraw-btn" class="btn btn-danger hidden" style="width:100%;justify-content:center" onclick="withdrawGuardianConsent()">თანხმობის უკან წაღება</button>
+  </div>
+</div>
+
+<!-- ADMIN MFA ENROLLMENT / CHALLENGE -->
+<div id="admin-mfa-modal" class="hidden" role="dialog" aria-modal="true" aria-labelledby="admin-mfa-title" style="position:fixed;inset:0;z-index:100050;background:rgba(15,23,42,.76);display:flex;align-items:center;justify-content:center;padding:18px">
+  <div class="card" style="width:100%;max-width:470px;max-height:92vh;overflow:auto;padding:24px">
+    <h3 id="admin-mfa-title" style="font-size:19px;font-weight:800;margin-bottom:7px">ადმინისტრატორის შესვლის დადასტურება</h3>
+    <p id="admin-mfa-help" style="font-size:12px;color:var(--gray);line-height:1.55;margin-bottom:14px"></p>
+    <div id="admin-mfa-enroll" class="hidden">
+      <div style="display:flex;justify-content:center;margin:8px 0 12px"><img id="admin-mfa-qr" alt="TOTP QR კოდი" style="width:190px;height:190px;border:1px solid #e2e8f0;border-radius:12px;background:#fff;padding:8px"/></div>
+      <div style="font-size:11px;color:var(--gray);margin-bottom:4px">თუ QR კოდის წაკითხვა ვერ ხერხდება, შეიყვანეთ ეს კოდი Authenticator აპში:</div>
+      <div id="admin-mfa-secret" style="font-family:ui-monospace,monospace;word-break:break-all;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:9px;font-size:12px;margin-bottom:12px"></div>
+    </div>
+    <button id="admin-mfa-email-send" class="btn btn-outline hidden" style="width:100%;justify-content:center;margin-bottom:14px" onclick="sendAdminMFAEmail()">კოდის ელფოსტაზე გაგზავნა</button>
+    <div class="fg"><label class="label" id="admin-mfa-code-label" for="admin-mfa-code">Authenticator-ის 6-ნიშნა კოდი</label><input id="admin-mfa-code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]{6}" placeholder="000000" onkeydown="if(event.key==='Enter')verifyAdminMFA()"/></div>
+    <div id="admin-mfa-error" class="hidden" role="alert" style="padding:8px;border-radius:8px;background:#fff7ed;color:#9a3412;font-size:12px;margin-bottom:10px"></div>
+    <button id="admin-mfa-verify" class="btn btn-primary" style="width:100%;justify-content:center" onclick="verifyAdminMFA()">დადასტურება</button>
+    <button class="btn btn-ghost" style="width:100%;justify-content:center;margin-top:6px" onclick="cancelAdminMFA()">გასვლა</button>
+  </div>
+</div>
+
+<!-- PASSWORD RECOVERY MODAL -->
+<div id="password-recovery-modal" class="hidden" role="dialog" aria-modal="true" aria-labelledby="password-recovery-title" style="position:fixed;inset:0;z-index:99999;background:rgba(15,23,42,.58);display:flex;align-items:center;justify-content:center;padding:20px">
+  <div class="card" style="width:100%;max-width:420px;padding:26px">
+    <h3 id="password-recovery-title" style="font-size:18px;font-weight:800;margin-bottom:6px">ახალი პაროლის დაყენება</h3>
+    <p style="font-size:12px;color:var(--gray);margin-bottom:16px">შეიყვანეთ ახალი პაროლი. მინიმუმ 10 სიმბოლო.</p>
+    <div class="fg"><div class="label">ახალი პაროლი</div><input id="recovery-pass-1" type="password" autocomplete="new-password" placeholder="მინ. 10 სიმბოლო"/></div>
+    <div class="fg"><div class="label">გაიმეორეთ პაროლი</div><input id="recovery-pass-2" type="password" autocomplete="new-password" placeholder="გაიმეორეთ პაროლი"/></div>
+    <div id="recovery-error" class="hidden" style="margin-bottom:10px;padding:8px;border-radius:var(--r);font-size:12px;text-align:center"></div>
+    <button id="recovery-save-btn" class="btn btn-primary" style="width:100%;justify-content:center" onclick="completePasswordRecovery()">პაროლის განახლება</button>
+  </div>
+</div>
+
+<!-- STUDENT -->

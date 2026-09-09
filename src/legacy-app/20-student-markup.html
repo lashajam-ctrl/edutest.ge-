@@ -1,0 +1,292 @@
+<div id="p-student" class="page fade" style="flex-direction:row">
+  <div class="sidebar">
+    <div class="slogo">
+      <div class="slogo-icon" style="background:#2563eb">E</div>
+      <div><div style="color:#fff;font-weight:700;font-size:14px">EduTest.ge</div><div style="font-size:10px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.05em" data-i18n="student_label">student</div></div>
+    </div>
+    <div class="snav">
+      <div class="ni act" onclick="sNav('s-home',this)" data-i18n="adm_dashboard">🏠 მთავარი</div>
+      <div class="ni" onclick="sNav('s-tests',this)">📝 <span data-i18n="my_tests">ჩემი ტესტები</span></div>
+      <div class="ni" onclick="sNav('s-results',this);renderStudentResults()">📊 <span data-i18n="my_results">შედეგები</span></div>
+      <div class="ni" onclick="sNav('s-profile',this)">⚙️ <span data-i18n="profile">პროფილი</span></div>
+      <div class="ni" onclick="sNav('s-leaderboard',this);renderLeaderboard()">🏆 ლიდერბორდი</div>
+    </div>
+    <div class="sfoot">
+      <div class="susr"><div class="sav" style="background:#2563eb" id="s-sidebar-av">მ</div><div style="overflow:hidden"><div style="color:#fff;font-size:12px;font-weight:500" id="s-sidebar-name">მოსწავლე</div><div style="color:rgba(255,255,255,.35);font-size:11px" id="s-sidebar-email">—</div></div></div>
+      <div class="ni" onclick="doLogout()" style="border-radius:var(--r)">🚪 <span data-i18n="logout">გასვლა</span></div>
+    </div>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;overflow:auto">
+    <div class="topbar"><div style="display:flex;align-items:center;gap:8px"><button class="hamburger" aria-label="მენიუ" onclick="toggleSidebar('student')">☰</button><div><div style="display:flex;align-items:center;gap:8px"><button class="btn btn-ghost btn-sm" id="s-back-btn" aria-label="მთავარ გვერდზე დაბრუნება" onclick="sNav('s-home',document.querySelector('#p-student .ni'))" style="display:none;padding:4px 8px;font-size:12px">←</button><div style="font-weight:600" id="s-topbar-title">მთავარი</div></div><div style="font-size:11px;color:var(--gray)" id="s-topbar-sub">მოსწავლე</div></div></div><div style="display:flex;gap:8px"><span class="badge b-blue" id="s-topbar-badge">მოსწავლე</span><span class="badge b-green" id="s-online-badge">✓ ონლაინ</span></div></div>
+    <div class="main">
+      <div id="s-home" class="fade">
+        <div style="background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:14px;padding:18px;margin-bottom:16px;color:#fff">
+          <div style="font-size:20px;margin-bottom:4px" id="s-home-greeting">👋 გამარჯობა!</div>
+          <p style="opacity:.85;font-size:13px">ტესტები გელოდება. წარმატებები! 🌟</p>
+          <button class="btn" style="margin-top:10px;background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.75)" onclick="sNav('s-tests',document.querySelectorAll('#p-student .ni')[1])" data-i18n="tests">ტესტების ნახვა →</button>
+        </div>
+        <div class="stat-g" id="s-home-stats">
+          <div class="stat"><div class="stat-ic" style="background:#dbeafe">📝</div><div class="stat-v" style="color:#2563eb" id="sh-tests">0</div><div class="stat-l" data-i18n="completed_tests">დასრულებული ტესტი</div></div>
+          <div class="stat" style="cursor:pointer" onclick="sNav('s-leaderboard',null);renderLeaderboard()"><div class="stat-ic" style="background:#e0e7ff">⚡</div><div class="stat-v" style="color:#4f46e5" id="sh-xp">0 XP</div>
+            <div class="stat-l" id="sh-level">🥚 Rookie</div>
+            <div style="margin-top:4px;background:#e0e7ff;border-radius:4px;height:5px;overflow:hidden;width:100%">
+              <div id="sh-xp-bar" style="height:100%;background:#6366f1;border-radius:4px;transition:width .4s;width:0%"></div>
+            </div>
+          </div>
+          </div>
+          <!-- Daily Challenge Card -->
+          <!-- Enhanced Daily Mission Card -->
+          <div id="s-daily-card" class="card" style="margin-bottom:14px;padding:16px;background:linear-gradient(135deg,#fdf4ff,#fae8ff);border:2px solid #d946ef;border-radius:14px;display:none">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+              <div style="display:flex;align-items:center;gap:8px">
+                <div style="font-size:22px">🎯</div>
+                <div>
+                  <div style="font-weight:800;color:#7e22ce;font-size:13px;letter-spacing:.02em">დღის მისია</div>
+                  <div style="font-size:10px;color:#a21caf;display:flex;align-items:center;gap:4px">⏱ ~5 წუთი &nbsp;·&nbsp; <span id="s-daily-xp-badge" style="background:#f3e8ff;color:#7e22ce;padding:1px 7px;border-radius:999px;font-weight:700">+30 XP</span></div>
+                </div>
+              </div>
+              <div style="text-align:right;font-size:10px;color:#a21caf" id="s-daily-countdown"></div>
+            </div>
+            <div id="s-daily-title" style="font-size:14px;font-weight:700;color:#581c87;margin-bottom:10px"></div>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+              <div style="display:flex;gap:6px;flex-wrap:wrap">
+                <span style="font-size:11px;background:#f3e8ff;color:#7e22ce;padding:3px 8px;border-radius:999px">🔥 <span id="s-daily-streak-label">streak</span></span>
+                <span style="font-size:11px;background:#fce7f3;color:#be185d;padding:3px 8px;border-radius:999px">2× XP ბონუსი</span>
+              </div>
+              <button id="s-daily-btn" class="btn btn-sm" style="background:linear-gradient(135deg,#d946ef,#a855f7);color:#fff;white-space:nowrap;font-weight:700;border:none" onclick="startDailyChallenge()">▶ დაწყება</button>
+            </div>
+          </div>
+          <div style="display:none">
+          <div class="stat" style="cursor:pointer" onclick="sNav('s-leaderboard',null);renderLeaderboard()"><div class="stat-ic" style="background:#fff7ed">🔥</div><div class="stat-v" style="color:#ea580c" id="sh-streak">0 დღე</div><div class="stat-l">Streak <span id="sh-freeze-badge" style="display:none;font-size:10px;background:#dbeafe;color:#1d4ed8;padding:1px 6px;border-radius:999px;cursor:pointer" onclick="useStreakFreeze()" title="Streak Freeze გამოყენება">🧊 <span id="sh-freeze-count">0</span></span></div></div>
+          <div class="stat"><div class="stat-ic" style="background:#dcfce7">📊</div><div class="stat-v" style="color:#16a34a" id="sh-avg">—</div><div class="stat-l" data-i18n="avg_score">საშუალო ქულა</div></div>
+          <div class="stat"><div class="stat-ic" style="background:#fef3c7">⭐</div><div class="stat-v" style="color:#d97706" id="sh-pts">0</div><div class="stat-l" data-i18n="total_pts_label">სულ ქულა</div></div>
+          <div class="stat"><div class="stat-ic" style="background:#ede9fe">🏆</div><div class="stat-v" style="color:#7c3aed" id="sh-exc">0</div><div class="stat-l" data-i18n="excellent_badge">შესანიშნავი შედეგი</div></div>
+        </div>
+        <!-- Class Team Challenge -->
+        <div id="s-class-challenge" class="card" style="margin-bottom:12px;padding:14px;background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:2px solid #16a34a;border-radius:14px;display:none">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+            <div style="font-weight:800;color:#15803d;font-size:13px">🤝 კლასის გამოწვევა</div>
+            <span id="s-class-goal-label" style="font-size:11px;color:#16a34a;font-weight:700"></span>
+          </div>
+          <div id="s-class-challenge-desc" style="font-size:12px;color:#166534;margin-bottom:10px"></div>
+          <div style="background:#bbf7d0;border-radius:6px;height:10px;overflow:hidden;margin-bottom:6px">
+            <div id="s-class-bar" style="height:100%;background:#16a34a;border-radius:6px;transition:width .5s;width:0%"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:11px;color:#15803d">
+            <span id="s-class-xp-done">0 XP</span>
+            <span id="s-class-xp-goal"></span>
+          </div>
+        </div>
+        <!-- Weak Topics Quick Panel -->
+        <div class="card" style="padding:14px;margin-bottom:12px" id="s-weak-panel">
+          <div style="font-weight:700;font-size:13px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center">
+            <span>📊 საგნების პროგრესი</span>
+            <span style="font-size:10px;color:var(--gray)">✅≥75% &nbsp;⚠️45–74% &nbsp;❌&lt;45%</span>
+          </div>
+          <div id="s-mastery-home"></div>
+        </div>
+        <div class="card" style="padding:16px">
+          <div style="font-weight:600;margin-bottom:14px;font-size:13px" data-i18n="recent_results">🏆 ბოლო შედეგები</div>
+          <div id="s-assigned-tests"></div>
+          <div id="s-home-recent"><div style="color:var(--gray);font-size:13px;text-align:center;padding:20px" data-i18n="no_test_taken">ჯერ ტესტი არ გაქვს გავლილი</div></div>
+        </div>
+      </div>
+      <div id="s-tests" class="hidden fade">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+          <div style="font-weight:600" data-i18n="grade_label_roman">ტესტები (I–XII კლასი)</div>
+          <div id="s-test-filters" style="display:flex;gap:8px;flex-wrap:wrap">
+            <select id="s-filter-subject" onchange="renderStudentTests()" style="width:auto;padding:6px 10px">
+              <option value="" data-i18n="all_subjects">ყველა საგანი</option>
+              <option data-i18n="math">მათემატიკა</option><option data-i18n="georgian">ქართული</option><option data-i18n="english">ინგლისური</option><option data-i18n="russian">რუსული</option><option data-i18n="nature">ბუნება</option><option>მე და საზოგადოება</option><option data-i18n="history">ისტორია</option><option data-i18n="geography">გეოგრაფია</option><option data-i18n="biology">ბიოლოგია</option><option data-i18n="chemistry">ქიმია</option><option data-i18n="physics">ფიზიკა</option>
+            </select>
+            <select id="s-filter-grade" onchange="renderStudentTests()" style="width:auto;padding:6px 10px">
+              <option value="" data-i18n="all_grades">ყველა კლასი</option>
+              <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option>
+              <option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option>
+            </select>
+            <select id="s-filter-semester" onchange="renderStudentTests()" style="width:auto;padding:6px 10px">
+              <option value="" data-i18n="all_sems">ყველა სემ.</option>
+              <option value="1" data-i18n="sem1">I სემ.</option>
+              <option value="2" data-i18n="sem2">II სემ.</option>
+            </select>
+            <select id="s-filter-testtype" onchange="renderStudentTests()" style="width:auto;padding:6px 10px">
+              <option value="" data-i18n="all_types">ყველა სახეობა</option>
+              <option value="practice">სავარჯიშო</option>
+              <option value="sum" data-i18n="test_sum">შემაჯამებელი</option>
+            </select>
+          </div>
+        </div>
+        <div id="s-test-list"></div>
+      </div>
+      <div id="s-results" class="hidden fade">
+        <div style="font-weight:600;margin-bottom:14px">ჩემი შედეგები</div>
+        <div id="s-results-list"></div>
+      </div>
+      <div id="s-profile" class="hidden fade" style="max-width:480px">
+        <div class="card" style="padding:24px;text-align:center;margin-bottom:12px">
+          <div style="width:64px;height:64px;background:#2563eb;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:22px;margin:0 auto 12px" id="s-prof-av">მ</div>
+          <h2 style="font-weight:700;font-size:16px" id="s-prof-name">მოსწავლე</h2>
+          <p style="color:var(--gray);font-size:12px;margin-bottom:10px" id="s-prof-email">—</p>
+          <div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap"><span class="badge b-blue" id="s-prof-grade">კლასი 3A</span><span class="badge b-green">მოსწავლე</span><span class="badge b-amber" id="s-prof-premium" style="display:none">⭐ პრემიუმი</span></div>
+          <div style="margin-top:12px;display:none" id="s-prof-premium-btn"><button class="btn btn-outline btn-sm" disabled>Premium გამორთულია</button></div>
+        </div>
+        <div class="card" style="padding:16px">
+          <div style="font-weight:600;margin-bottom:12px" data-i18n="profile_settings">⚙️ პარამეტრები</div>
+          <div class="fg"><div class="label" data-i18n="name">სახელი</div><input id="s-prof-name-input" value=""/></div>
+          <div class="fg"><div class="label" data-i18n="email">ელ-ფოსტა</div><input id="s-prof-email-input" value="" readonly style="background:#f8fafc"/></div>
+          <div class="fg"><div class="label" data-i18n="new_password">ახალი პაროლი</div><input type="password" data-i18n-placeholder="change_pass_ph" placeholder="შეცვალეთ პაროლი"/></div>
+          <button class="btn btn-primary btn-sm" onclick="saveProfile()" data-i18n="save_profile">💾 შენახვა</button>
+        </div>
+        <div class="card" style="padding:16px;margin-top:12px">
+          <div style="font-weight:700;margin-bottom:6px">🛡️ კონფიდენციალურობა და ჩემი მონაცემები</div>
+          <div id="s-privacy-status" style="font-size:11px;color:var(--gray);line-height:1.5;margin-bottom:10px"></div>
+          <div style="display:flex;gap:7px;flex-wrap:wrap">
+            <button class="btn btn-outline btn-sm" onclick="exportMyData()">⬇️ ჩემი მონაცემების ჩამოტვირთვა</button>
+            <button class="btn btn-outline btn-sm" onclick="openLegalDocument('privacy')">კონფიდენციალურობის პოლიტიკა</button>
+            <button class="btn btn-outline btn-sm" onclick="openLegalDocument('child')">ბავშვთა უსაფრთხოება</button>
+            <button class="btn btn-danger btn-sm" onclick="deleteMyAccount()">🗑 ანგარიშის წაშლა</button>
+          </div>
+          <div style="font-size:10px;color:#64748b;margin-top:9px;line-height:1.45">ლიდერბორდში მონაწილეობა ნაგულისხმევად გამორთულია. სხვა მოსწავლეებისთვის სრული სახელი არ ქვეყნდება.</div>
+        </div>
+      </div>
+    </div>
+      <!-- LEADERBOARD -->
+      <div id="s-leaderboard" class="hidden fade">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+          <div style="font-weight:700;font-size:16px">🏆 ლიდერბორდი</div>
+          <div id="lb-period-badge" style="display:none;font-size:11px;background:#fef3c7;color:#92400e;padding:3px 8px;border-radius:12px;border:1px solid #fde68a"></div>
+        </div>
+        <div style="color:var(--gray);font-size:13px;margin-bottom:12px">კლასის საუკეთესო მოსწავლეები</div>
+        <div id="lb-prize-banner" style="display:none;background:linear-gradient(135deg,#fef3c7,#fde68a);border:1.5px solid #f59e0b;border-radius:12px;padding:14px;margin-bottom:14px">
+          <div style="font-weight:700;font-size:14px;margin-bottom:8px;color:#92400e">🎁 ჯილდოები — კლასის ლიდერებს</div>
+          <div id="lb-prize-rows" style="display:flex;flex-direction:column;gap:6px"></div>
+          <div id="lb-prize-note" style="font-size:11px;color:#78350f;margin-top:8px;font-style:italic"></div>
+        </div>
+        <!-- XP Card -->
+        <div id="lb-my-card" class="card" style="padding:16px;margin-bottom:16px;background:linear-gradient(135deg,#1e3a8a,#2563eb);color:#fff;border-radius:12px">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <div style="font-size:12px;opacity:.8;margin-bottom:2px">შენი სტატუსი</div>
+              <div id="lb-my-level" style="font-size:20px;font-weight:800">🥚 Rookie</div>
+              <div id="lb-my-xp" style="font-size:13px;opacity:.85;margin-top:2px">0 XP</div>
+            </div>
+            <div style="text-align:right">
+              <div style="font-size:12px;opacity:.8">კლასში ადგილი</div>
+              <div id="lb-my-rank" style="font-size:32px;font-weight:900">#—</div>
+              <div id="lb-my-streak" style="font-size:12px;opacity:.85">🔥 0 დღე streak</div>
+            </div>
+          </div>
+          <div style="margin-top:12px;background:rgba(255,255,255,.2);border-radius:6px;height:8px;overflow:hidden">
+            <div id="lb-xp-bar" style="height:100%;background:#fff;border-radius:6px;transition:width .5s;width:0%"></div>
+          </div>
+          <div id="lb-xp-next" style="font-size:11px;opacity:.7;margin-top:4px">შემდეგი დონე: 100 XP</div>
+        </div>
+        <!-- Badges row -->
+        <div id="lb-badges" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px"></div>
+        <!-- Tab: class / national -->
+        <div class="tab-row" style="margin-bottom:12px">
+          <button class="tab act" id="lb-tab-class" onclick="lbSetTab('class')" data-i18n="class_lb">კლასი</button>
+          <button class="tab" id="lb-tab-national" onclick="lbSetTab('national')" data-i18n="national_lb">ეროვნული</button>
+        </div>
+        <div class="card" style="overflow:hidden">
+          <table class="tbl" id="lb-table">
+            <thead><tr><th style="width:40px">#</th><th>მოსწავლე</th><th>XP</th><th>დონე</th><th>ტ.</th><th>საშ.%</th></tr></thead>
+            <tbody id="lb-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- LEAGUE -->
+      <div id="s-league" class="hidden fade">
+        <div style="font-weight:700;font-size:16px;margin-bottom:16px">⚡ ლიგა</div>
+        <div id="s-league-content"><div style="text-align:center;color:var(--gray);padding:40px">იტვირთება...</div></div>
+      </div>
+
+      <!-- ACHIEVEMENTS -->
+      <div id="s-achievements" class="hidden fade">
+        <div style="font-weight:700;font-size:16px;margin-bottom:16px">🎖 მიღწევები და კოლექცია</div>
+        <div id="s-achievements-content"></div>
+      </div>
+
+      <!-- SHOP -->
+      <div id="s-shop" class="hidden fade">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+          <div style="font-weight:700;font-size:16px">🛒 Avatar მაღაზია</div>
+          <div style="font-size:13px;font-weight:600;color:#d97706">🪙 <span id="s-shop-coins">0</span> მონეტა</div>
+        </div>
+        <div id="s-shop-content"></div>
+      </div>
+
+      <!-- FRIENDS -->
+      <div id="s-friends" class="hidden fade">
+        <div style="font-weight:700;font-size:16px;margin-bottom:16px">👥 მეგობრები</div>
+        <div style="display:flex;gap:8px;margin-bottom:16px">
+          <input id="s-friend-input" type="email" placeholder="მეგობრის ელ.ფოსტა..." style="flex:1;padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:13px"/>
+          <button class="btn btn-primary" style="padding:8px 16px;font-size:13px" onclick="addFriend()">+ დამატება</button>
+        </div>
+        <div id="s-friends-content"></div>
+      </div>
+
+  </div>
+</div>
+
+<!-- TEST TAKING -->
+<div id="p-take-test" class="page fade" style="background:linear-gradient(135deg,#f0f4ff,#faf5ff);align-items:center;padding:12px 12px 20px;flex-direction:column">
+  <div style="width:100%;max-width:680px;margin-bottom:12px">
+    <div id="tt-topbar" class="card" style="padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:8px">
+      <div id="tt-topbar-left" style="display:flex;align-items:center;gap:10px">
+        <button class="btn btn-ghost btn-sm" onclick="confirmExitTest()" style="padding:6px 10px;font-size:12px;flex-shrink:0" data-i18n="exit_test">← გასვლა</button>
+        <div><div style="font-weight:700;font-size:13px" id="tt-title" data-i18n="tests">ტესტი</div><div style="font-size:11px;color:var(--gray)" id="q-counter">კითხვა 1/20</div></div>
+      </div>
+      <div id="tt-topbar-right" style="display:flex;align-items:center;gap:10px">
+        <div id="tt-progress-label" style="font-size:12px;color:var(--gray)" data-i18n="progress_label">პროგრესი:</div>
+        <div id="tt-progress-bar" style="width:80px"><div class="pbar"><div class="pfill" id="q-prog" style="width:5%;background:#2563eb"></div></div></div>
+        <span id="tt-practice-badge" class="hidden" style="background:#d1fae5;color:#065f46;font-size:11px;font-weight:700;padding:3px 10px;border-radius:999px;border:1px solid #6ee7b7;margin-right:8px">✏️ პრაქტიკის რეჟიმი</span>
+        <div class="timer" id="timer">20:00</div>
+        <button class="btn btn-ghost btn-sm" onclick="openReportModal()" title="შეცდომის შეტყობინება" style="padding:4px 8px;font-size:14px;color:var(--gray)">🚩</button>
+      </div>
+    </div>
+  </div>
+  <div class="card" style="width:100%;max-width:680px;padding:20px;flex:1;overflow-y:auto" id="q-card">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="width:34px;height:34px;background:#1d4ed8;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:13px" id="q-num">1</div>
+        <span class="badge b-blue" id="q-type-badge">MCQ</span>
+        <span class="badge b-amber" id="q-pts-badge">2 ქ.</span>
+      </div>
+    </div>
+    <div id="q-grade-guide" aria-live="polite">
+      <div class="grade-guide-mascot" id="q-grade-mascot">✨</div>
+      <div class="grade-guide-copy"><strong id="q-grade-title">შენ ეს შეგიძლია!</strong><span id="q-grade-hint">ყურადღებით წაიკითხე და აირჩიე პასუხი.</span></div>
+    </div>
+    <div id="q-rotation-note" class="hidden" aria-live="polite" style="margin:0 0 14px;padding:9px 12px;border-radius:12px;background:#fff7ed;border:1px solid #fdba74;color:#9a3412;font-size:12px"></div>
+    <h3 style="font-size:16px;font-weight:600;margin-bottom:18px;line-height:1.5;color:#1a202c" id="q-text">კითხვა...</h3>
+    <div id="q-opts"></div>
+    <div id="q-nav-btns" style="display:flex;justify-content:space-between;margin-top:22px">
+      <button class="btn btn-ghost" id="q-prev" onclick="qNav(-1)">← <span data-i18n="prev">წინა</span></button>
+      <button class="btn btn-primary" id="q-next" onclick="qNav(1)"><span data-i18n="next">შემდეგი</span> →</button>
+    </div>
+  </div>
+  <div class="dot-nav" id="q-dots"></div>
+</div>
+
+<!-- RESULTS -->
+<div id="p-results" class="page fade" style="background:linear-gradient(135deg,#f0f4ff,#faf5ff);justify-content:center;padding:20px">
+  <div style="width:100%;max-width:640px">
+    <div class="card" style="padding:28px;text-align:center;margin-bottom:14px" id="res-summary"></div>
+    <!-- AI Mistake Analysis Card -->
+    <div id="res-ai-analysis" style="margin-bottom:14px"></div>
+    <div class="card" style="padding:16px;margin-bottom:14px" id="res-review"></div>
+    <div id="res-adaptive"></div>
+    <div id="res-study-plan" style="margin-bottom:14px"></div>
+    <!-- Daily habit nudge -->
+    <div id="res-habit-nudge" style="margin-bottom:14px"></div>
+    <div id="results-btns" style="display:flex;gap:10px;flex-wrap:wrap">
+      <button class="btn btn-ghost" onclick="goBackToTests()" data-i18n="back_to_tests">← ტესტები</button>
+      <button class="btn btn-primary" onclick="go(curRole==='teacher'?'teacher':'student')">🏠 მთავარი</button>
+      <button class="btn btn-outline" onclick="startTestById(curTest&&curTest.id)">🔄 <span data-i18n="try_again">კიდევ ერთხელ</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- TEACHER -->

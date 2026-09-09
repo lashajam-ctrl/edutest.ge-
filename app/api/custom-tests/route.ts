@@ -3,15 +3,9 @@ import { ensureSchema, getDb } from "@/db";
 import { adminAuditEvents, customTests } from "@/db/schema";
 import { getSessionUser } from "@/lib/auth";
 
-const allowedSubjects = new Set(["მათემატიკა", "ქართული", "ქართული ენა და ლიტერატურა", "ინგლისური", "რუსული", "ბუნება", "ისტორია", "გეოგრაფია", "ბიოლოგია", "ქიმია", "ფიზიკა", "ალგებრა", "გეომეტრია"]);
+import { ASSESSMENT_SUBJECTS_BY_GRADE, subjectAllowedForGrade } from "@/lib/school-policy.mjs";
+const allowedSubjects = new Set([...Object.values(ASSESSMENT_SUBJECTS_BY_GRADE).flat(), "ალგებრა", "გეომეტრია"]);
 const clean = (value: unknown, max: number) => typeof value === "string" ? value.trim().replace(/[\u0000-\u001f\u007f]/g, "").slice(0, max) : "";
-const subjectAllowedForGrade = (subject: string, grade: number) => {
-  if (grade <= 4) return ["მათემატიკა", "ქართული", "ინგლისური", "ბუნება"].includes(subject);
-  if (grade <= 6) return ["მათემატიკა", "ქართული", "ინგლისური", "რუსული", "ბუნება"].includes(subject);
-  const senior = ["ალგებრა", "გეომეტრია", "ქართული ენა და ლიტერატურა", "ინგლისური", "რუსული", "ისტორია", "გეოგრაფია", "ბიოლოგია", "ფიზიკა"];
-  if (grade >= 8) senior.push("ქიმია");
-  return senior.includes(subject);
-};
 
 function publicTest(row: typeof customTests.$inferSelect) {
   return { id: row.id, createdBy: row.createdBy, title: row.title, subject: row.subject, grade: row.grade, durationMinutes: row.durationMinutes, attemptsAllowed: row.attemptsAllowed, published: row.published, createdAt: row.createdAt, updatedAt: row.updatedAt, deprecated: true };

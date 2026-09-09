@@ -13,6 +13,7 @@ const eslintConfig = defineConfig([
     "build/**",
     "dist/**",
     "work/**",
+    "src/legacy-app/**", // Ordered classic fragments are syntax-checked as one delivered script.
     "outputs/**",
     ".openai/**",
     "supabase/functions/**",
@@ -20,6 +21,7 @@ const eslintConfig = defineConfig([
     ".wrangler-config/**",
     "node_modules/**",
     "next-env.d.ts",
+    "worker-configuration.d.ts", // Generated Cloudflare runtime declarations.
   ]),
 ]);
 

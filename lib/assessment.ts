@@ -1,40 +1,7 @@
 import { componentCountsForTest, correctKnownQuestionPayload } from "./assessment-selection";
 
-export const ASSESSMENT_SUBJECTS_BY_GRADE: Record<number, string[]> = {
-  1: ["მათემატიკა", "ქართული", "ინგლისური", "ბუნება"],
-  2: ["მათემატიკა", "ქართული", "ინგლისური", "ბუნება"],
-  3: ["მათემატიკა", "ქართული", "ინგლისური", "ბუნება", "მე და საზოგადოება"],
-  4: ["მათემატიკა", "ქართული", "ინგლისური", "ბუნება", "მე და საზოგადოება"],
-  5: ["მათემატიკა", "ქართული", "ინგლისური", "რუსული", "ბუნება", "ჩვენი საქართველო"],
-  6: ["მათემატიკა", "ქართული", "ინგლისური", "რუსული", "ბუნება", "ჩვენი საქართველო"],
-  7: ["მათემატიკა", "ქართული ენა და ლიტერატურა", "ინგლისური", "რუსული", "ისტორია", "გეოგრაფია", "ბიოლოგია", "ფიზიკა", "მოქალაქეობა"],
-  8: ["მათემატიკა", "ქართული ენა და ლიტერატურა", "ინგლისური", "რუსული", "ისტორია", "გეოგრაფია", "ბიოლოგია", "ფიზიკა", "ქიმია", "მოქალაქეობა"],
-  9: ["მათემატიკა", "ქართული ენა და ლიტერატურა", "ინგლისური", "რუსული", "ისტორია", "გეოგრაფია", "ბიოლოგია", "ფიზიკა", "ქიმია", "მოქალაქეობა"],
-  10: ["მათემატიკა", "ქართული ენა და ლიტერატურა", "ინგლისური", "რუსული", "ისტორია", "გეოგრაფია", "ბიოლოგია", "ფიზიკა", "ქიმია", "მოქალაქეობა"],
-  11: ["მათემატიკა", "ქართული ენა და ლიტერატურა", "ინგლისური", "რუსული", "ისტორია", "გეოგრაფია", "ბიოლოგია", "ფიზიკა", "ქიმია", "მოქალაქეობა"],
-  12: ["მათემატიკა", "ქართული ენა და ლიტერატურა", "ინგლისური", "ისტორია", "სამოქალაქო თავდაცვა და უსაფრთხოება"],
-};
-
-export function canonicalAssessmentSubject(subject: unknown, grade: unknown) {
-  const value = String(subject ?? "").trim();
-  const numericGrade = Number(grade);
-  if (numericGrade >= 7 && ["ალგებრა", "გეომეტრია", "მათემატიკა"].includes(value)) return "მათემატიკა";
-  return value;
-}
-
-export function assessmentSubjectComponents(subject: unknown, grade: unknown) {
-  const canonical = canonicalAssessmentSubject(subject, grade);
-  return canonical === "მათემატიკა" && Number(grade) >= 7 ? ["მათემატიკა", "ალგებრა", "გეომეტრია"] : [canonical];
-}
-
-export function schoolGradeNumber(value: unknown) {
-  const match = String(value ?? "").trim().match(/^(1[0-2]|[1-9])/u);
-  return match ? Number(match[1]) : null;
-}
-
-export function subjectAllowedForGrade(subject: string, grade: number) {
-  return ASSESSMENT_SUBJECTS_BY_GRADE[grade]?.includes(canonicalAssessmentSubject(subject, grade)) ?? false;
-}
+import { canonicalAssessmentSubject } from "./school-policy.mjs";
+export { ASSESSMENT_SUBJECTS_BY_GRADE, canonicalAssessmentSubject, assessmentSubjectComponents, schoolGradeNumber, subjectAllowedForGrade } from "./school-policy.mjs";
 
 export type StoredAssessmentQuestion = {
   id: string;
@@ -121,12 +88,12 @@ export function gradeAssessmentAnswer(args: {
     const originalIndex = question.question_type === "multiple_choice" && presentation.optionOrder
       ? presentation.optionOrder[selected]
       : selected;
-    correct = Number.isInteger(selected) && originalIndex === Number(answerKey.correct);
+    correct = userAnswer !== null && userAnswer !== undefined && typeof userAnswer !== 'boolean' && String(userAnswer).trim() !== '' && Number.isInteger(selected) && selected >= 0 && originalIndex === Number(answerKey.correct);
     const options = Array.isArray(publicPayload.opts) ? publicPayload.opts : [];
     correctDisplay = options[Number(answerKey.correct)] ?? null;
   } else if (question.question_type === "calc") {
     const expected = Number(answerKey.correct), actual = Number(userAnswer), tolerance = Math.max(0, Number(answerKey.tolerance) || 0);
-    correct = Number.isFinite(actual) && Number.isFinite(expected) && Math.abs(actual - expected) <= tolerance;
+    correct = userAnswer !== null && userAnswer !== undefined && typeof userAnswer !== 'boolean' && String(userAnswer).trim() !== '' && Number.isFinite(actual) && Number.isFinite(expected) && Math.abs(actual - expected) <= tolerance;
     correctDisplay = expected;
   } else if (question.question_type === "order") {
     const expected = Array.isArray(answerKey.correct) ? answerKey.correct : [];
@@ -154,7 +121,7 @@ export function assessmentTestJson(row: Record<string, unknown>) {
     ? String(row.title).replace(/^(?:ალგებრა|გეომეტრია|მათემატიკა)/u, "მათემატიკა")
     : String(row.title);
   const testType = String(row.test_type);
-  const titleSuffix = testType === "sum" ? "შემაჯამებელი" : testType === "mid" ? "სავარჯიშო" : "";
+  const titleSuffix = testType === "sum" ? "შემაჯამებელი" : ["mid", "practice"].includes(testType) ? "სავარჯიშო" : "";
   const title = titleSuffix && !canonicalTitle.toLocaleLowerCase("ka-GE").includes(titleSuffix)
     ? `${canonicalTitle} — ${titleSuffix}`
     : canonicalTitle;
@@ -164,7 +131,7 @@ export function assessmentTestJson(row: Record<string, unknown>) {
     semester: row.semester == null ? null : Number(row.semester), pool: `server:${subject}:${grade}`,
     count: Number(row.question_count), time: Number(row.time_minutes), attempts: Number(row.attempts_allowed),
     testType, difficulty: row.difficulty ? String(row.difficulty) : null,
-    paid: false, serverBacked: true, curriculumVerified: !Boolean(row.is_custom) && !["v8", "v11"].includes(String(row.source_pool)), structuralVerified: true,
+    paid: false, serverBacked: true, curriculumVerified: false, humanReviewStatus: "not_tracked", structuralVerified: true,
     teacherCreated: Boolean(row.is_custom), createdBy: row.created_by ? String(row.created_by) : null,
     published: Boolean(row.published),
     componentCounts: standardSeniorMath

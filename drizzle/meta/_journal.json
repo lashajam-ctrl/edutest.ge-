@@ -78,6 +78,20 @@
       "when": 1788424061349,
       "tag": "0010_account_verification_and_learning_state",
       "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "6",
+      "when": 1788869046326,
+      "tag": "0011_admin_email_mfa",
+      "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "6",
+      "when": 1788932780525,
+      "tag": "0012_violet_shockwave",
+      "breakpoints": true
     }
   ]
 }

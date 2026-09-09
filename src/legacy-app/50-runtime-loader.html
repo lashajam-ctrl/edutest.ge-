@@ -1,0 +1,56 @@
+<script src="/school-rules.js?v=20260909"></script>
+<script>
+@@EDUTEST_RUNTIME@@</script>
+<link rel="stylesheet" href="/learning-hub.css?v=20260909">
+<script src="/management-overrides.js"></script>
+<script src="/server-assessments.js"></script>
+<script src="/learning-hub.js?v=20260909"></script>
+
+<!-- EDIT USER MODAL -->
+<div id="modal-edit-user" class="overlay hidden" role="dialog" aria-modal="true" aria-label="მომხმარებლის რედაქტირება" onclick="if(event.target===this)this.classList.add('hidden')">
+  <div class="modal" style="max-width:400px;width:100%">
+    <div style="font-weight:700;font-size:16px;margin-bottom:16px">✎ მომხმარებლის რედაქტირება</div>
+    <input type="hidden" id="aeu-orig-email"/>
+    <div class="fg" style="margin-bottom:10px"><div class="label">სახელი</div><input id="aeu-name" style="width:100%"/></div>
+    <div class="fg" style="margin-bottom:10px"><div class="label">ელ-ფოსტა</div><input id="aeu-email" type="email" style="width:100%"/></div>
+    <div class="fg" style="margin-bottom:10px"><div class="label">როლი</div>
+      <select id="aeu-role" style="width:100%;padding:8px">
+        <option value="student">მოსწავლე</option>
+        <option value="teacher">მასწავლებელი</option>
+        <option value="admin">Admin</option>
+      </select>
+    </div>
+    <div class="fg" style="margin-bottom:10px"><div class="label">კლასი (1-12)</div><input id="aeu-grade" type="number" min="1" max="12" style="width:100%"/></div>
+    <div class="fg" style="margin-bottom:16px"><div class="label">სკოლა</div><input id="aeu-school" style="width:100%"/></div>
+    <div style="display:flex;gap:8px;justify-content:flex-end">
+      <button class="btn btn-outline" onclick="document.getElementById('modal-edit-user').classList.add('hidden')">გაუქმება</button>
+      <button class="btn btn-primary" onclick="saveAdminEditUser()">💾 შენახვა</button>
+    </div>
+  </div>
+</div>
+
+<!-- Accessibility Panel -->
+<div class="acc-panel" id="acc-panel">
+  <div class="acc-dropdown" id="acc-dropdown">
+    <div style="font-weight:700;font-size:12px;color:var(--gray);margin-bottom:8px;text-transform:uppercase;letter-spacing:.05em">♿ ხელმისაწვდომობა</div>
+    <div class="acc-toggle">
+      <span>🔡 დიდი შრიფტი</span>
+      <button class="acc-switch" id="acc-large" aria-label="დიდი შრიფტის ჩართვა" aria-pressed="false" onclick="toggleAcc('large')"></button>
+    </div>
+    <div class="acc-toggle">
+      <span>🌓 მაღალი კონტრასტი</span>
+      <button class="acc-switch" id="acc-contrast" aria-label="მაღალი კონტრასტის ჩართვა" aria-pressed="false" onclick="toggleAcc('contrast')"></button>
+    </div>
+    <div class="acc-toggle">
+      <span>📖 დისლექსიის რეჟიმი</span>
+      <button class="acc-switch" id="acc-dyslexia" aria-label="დისლექსიის რეჟიმის ჩართვა" aria-pressed="false" onclick="toggleAcc('dyslexia')"></button>
+    </div>
+    <div class="acc-toggle" style="margin-top:4px">
+      <span>🔊 ხმოვანი კითხვა</span>
+      <button class="acc-switch" id="acc-tts" aria-label="ხმოვანი კითხვის ჩართვა" aria-pressed="false" onclick="toggleAcc('tts')"></button>
+    </div>
+  </div>
+  <button class="acc-fab" aria-label="ხელმისაწვდომობის პარამეტრები" aria-expanded="false" onclick="const menu=document.getElementById('acc-dropdown');menu.classList.toggle('open');this.setAttribute('aria-expanded',String(menu.classList.contains('open')))" title="ხელმისაწვდომობა">♿</button>
+</div>
+</body>
+</html>
