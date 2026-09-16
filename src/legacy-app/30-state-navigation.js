@@ -216,10 +216,10 @@ function teacherResults(){return SERVER_VERIFIED_RESULTS||[];}
 // ── Navigation ───────────────────────────────────────────────────────────────
 function go(p){
   const role=CUR_USER?.role;
-  if((p==='admin'&&role!=='admin')||(p==='teacher'&&!['teacher','admin'].includes(role))||(p==='student'&&role!=='student'))p='landing';
+  if((p==='admin'&&role!=='admin')||(p==='teacher'&&!['teacher','admin'].includes(role))||(p==='student'&&role!=='student')||(p==='parent'&&role!=='parent'))p='landing';
   if(p!=='take-test'&&timerInt){clearInterval(timerInt);timerInt=null;}
   if(p!=='take-test')document.body.classList.remove('test-age-theme');
-  if(['landing','login','teacher','admin'].includes(p))clearGradeTheme();
+  if(['landing','login','teacher','admin','parent'].includes(p))clearGradeTheme();
   document.querySelectorAll('.page').forEach(x=>{x.classList.remove('active');});
   const el=document.getElementById('p-'+p);
   if(el){el.classList.add('active');el.classList.add('fade');}
@@ -661,7 +661,7 @@ function showAgeVerificationModal(){
   const grade=document.getElementById('age-verify-grade');
   const school=document.getElementById('age-verify-school');
   if(name&&!name.value)name.value=CUR_USER?.name||metadata.name||metadata.full_name||'';
-  if(role)role.value=CUR_USER?.role==='pending_teacher'?'teacher':'student';
+  if(role)role.value=CUR_USER?.role==='pending_teacher'?'teacher':CUR_USER?.role==='parent'?'parent':'student';
   if(grade&&!grade.value)grade.value=String(CUR_USER?.grade||'').replace(/[^0-9].*$/,'');
   if(school&&!school.value)school.value=CUR_USER?.school||metadata.school||'';
   updateAgeVerificationUI();m.classList.remove('hidden');m.style.display='flex';
@@ -769,7 +769,7 @@ async function submitAgeVerification(){
   const err=document.getElementById('age-verify-error');const fail=m=>{if(err){err.textContent=m;err.classList.remove('hidden');}};
   if(name.length<2||name.length>100)return fail('შეიყვანეთ სახელი და გვარი.');
   if(role==='student'&&!/^(?:[1-9]|1[0-2])$/.test(grade))return fail('აირჩიეთ კლასი.');
-  const age=calculateAge(dob);if(age===null||age<(role==='teacher'?18:5)||age>100)return fail(role==='teacher'?'მასწავლებლის ანგარიში სრულწლოვან პირს ეკუთვნის.':'შეიყვანეთ სწორი დაბადების თარიღი.');
+  const age=calculateAge(dob);if(age===null||age<(role!=='student'?18:5)||age>100)return fail('შეიყვანეთ სწორი დაბადების თარიღი. მშობელი/მასწავლებელი სრულწლოვანი უნდა იყოს.');
   if(!document.getElementById('age-verify-terms')?.checked||!document.getElementById('age-verify-privacy')?.checked)return fail('გაგრძელებამდე გაეცანით და დაადასტურეთ წესები/კონფიდენციალურობა.');
   if(role==='student'&&age<16&&(!g||!g.includes('@')||g===String(CUR_USER?.email||EDUTEST_CLOUD.user?.email||'').toLowerCase()))return fail('16 წლამდე მოსწავლისთვის მიუთითეთ წარმომადგენლის განსხვავებული სწორი ელფოსტა.');
   try{
@@ -1003,7 +1003,7 @@ async function hydrateServerLearningState(appUser,generation){
   EDUTEST_STATE_SYNC_TIMER=setInterval(syncUserLearningState,20000);
 }
 function appUserFromServer(user){
-  const safeRole=['student','pending_teacher','teacher','admin'].includes(user&&user.role)?user.role:'student';
+  const safeRole=['student','pending_teacher','teacher','admin','parent'].includes(user&&user.role)?user.role:'student';
   return {
     cloudId:user.id,email:user.email||'',role:safeRole,name:user.name||user.email||'მოსწავლე',
     grade:user.grade||'',school:user.school||'',birthDate:user.birthDate||'',guardianEmail:user.guardianEmail||'',
@@ -1026,7 +1026,8 @@ async function adoptServerUser(user,opts){
     else if(curRole==='student'&&gate==='age_required'){go('login');showAgeVerificationModal();}
     else if(curRole==='student'&&gate==='guardian_required'){go('login');showGuardianPendingModal(appUser);}
     else if(curRole==='student'&&gate==='blocked'){go('login');setLoginNotice('ანგარიში დროებით დაბლოკილია.','warn');}
-    else if(['student','teacher','admin'].includes(curRole)){
+    else if(curRole==='parent'&&!appUser.profileCompletedAt){go('login');showAgeVerificationModal();}
+    else if(['student','teacher','admin','parent'].includes(curRole)){
       if(curRole==='admin')await ensureAdminMFA(appUser);
       go(curRole);
     }

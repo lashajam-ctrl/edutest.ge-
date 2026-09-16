@@ -31,6 +31,7 @@
       <div style="display:flex;gap:6px">
         <button class="role-btn" id="rb-student" style="border:2px solid #2563eb;background:#dbeafe;color:#1d4ed8" onclick="setRole('student')" data-i18n="student_role">მოსწავლე</button>
         <button class="role-btn" id="rb-teacher" style="border:2px solid var(--border);background:#fff;color:var(--gray)" onclick="setRole('teacher')" data-i18n="teacher_role">მასწავლებელი</button>
+        <button class="role-btn" id="rb-parent" type="button" onclick="setRole('parent')">მშობელი</button>
       </div>
     </div>
     <div class="fg" id="email-address-field"><label class="label" for="l-email" data-i18n="email">ელ-ფოსტა</label><input id="l-email" type="email" autocomplete="email" data-i18n-placeholder="email_ph" placeholder="თქვენი ელ-ფოსტა"/></div>
@@ -44,6 +45,7 @@
         <div class="fg"><label class="label" for="r-surname" data-i18n="surname">გვარი</label><input id="r-surname" autocomplete="family-name" placeholder="გვარი"/></div>
       </div>
       <div class="fg"><label class="label" for="r-school">სკოლა <span style="color:var(--gray);font-weight:400">(სურვილისამებრ)</span></label><input id="r-school" autocomplete="organization" placeholder="მაგ. სკოლა №1"/></div>
+      <div class="fg hidden" id="parent-reg-only"><label class="label" for="r-parent-dob">მშობლის დაბადების თარიღი</label><input id="r-parent-dob" type="date" autocomplete="bday"/></div>
       <div id="student-reg-only">
         <div class="fg"><label class="label" for="r-grade" data-i18n="grade">კლასი</label><select id="r-grade"><option>1A</option><option>1B</option><option>2A</option><option>2B</option><option>3A</option><option>3B</option><option>4A</option><option>4B</option><option>5A</option><option>5B</option><option>6A</option><option>6B</option><option>7A</option><option>7B</option><option>8A</option><option>8B</option><option>9A</option><option>9B</option><option>10A</option><option>10B</option><option>11A</option><option>11B</option><option>12A</option><option>12B</option></select></div>
         <div class="fg"><label class="label" for="r-dob">დაბადების თარიღი</label><input id="r-dob" type="date" autocomplete="bday" oninput="updateMinorRegistrationUI()"/></div>
@@ -84,7 +86,7 @@
     <h3 id="age-verification-title" style="font-size:18px;font-weight:800;margin-bottom:6px">დაასრულეთ პროფილი</h3>
     <p style="font-size:12px;color:var(--gray);line-height:1.5;margin-bottom:14px">ელ-ფოსტა უკვე დადასტურებულია. ახლა შეავსეთ მხოლოდ სწავლისთვის აუცილებელი მონაცემები. ეს ინფორმაცია საჯაროდ არ გამოჩნდება.</p>
     <div class="fg"><div class="label">სახელი და გვარი</div><input id="age-verify-name" autocomplete="name" maxlength="100"/></div>
-    <div class="fg"><div class="label">როლი</div><select id="age-verify-role" onchange="updateAgeVerificationUI()"><option value="student">მოსწავლე</option><option value="teacher">მასწავლებელი</option></select></div>
+    <div class="fg"><label class="label" for="age-verify-role">როლი</label><select id="age-verify-role" onchange="updateAgeVerificationUI()"><option value="student">მოსწავლე</option><option value="teacher">მასწავლებელი</option><option value="parent">მშობელი</option></select></div>
     <div id="age-verify-grade-wrap" class="fg"><div class="label">კლასი</div><select id="age-verify-grade"><option value="">აირჩიეთ კლასი</option><option value="1">I</option><option value="2">II</option><option value="3">III</option><option value="4">IV</option><option value="5">V</option><option value="6">VI</option><option value="7">VII</option><option value="8">VIII</option><option value="9">IX</option><option value="10">X</option><option value="11">XI</option><option value="12">XII</option></select></div>
     <div class="fg"><div class="label">სკოლა <span style="font-weight:400;color:var(--gray)">(სურვილისამებრ)</span></div><input id="age-verify-school" maxlength="120"/></div>
     <div class="fg"><div class="label">დაბადების თარიღი</div><input id="age-verify-dob" type="date" oninput="updateAgeVerificationUI()"/></div>

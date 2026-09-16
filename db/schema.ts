@@ -335,4 +335,24 @@ export const learningPracticeSessions = sqliteTable("learning_practice_sessions"
   expiresAt: integer("expires_at", { mode: "timestamp_ms" }).notNull(),
   submittedAt: integer("submitted_at", { mode: "timestamp_ms" }),
   resultJson: text("result_json"),
-}, table => [index("idx_learning_practice_user").on(table.userId, table.startedAt)]);
+}, table => [index("idx_learning_practice_user").on(table.userId, table.startedAt),index("idx_learning_practice_remediation").on(table.userId,table.sourceQuestionId,table.startedAt)]);
+
+export const assessmentSessionDrafts = sqliteTable("assessment_session_drafts", {
+  sessionId: text("session_id").primaryKey().references(() => assessmentSessions.id, { onDelete: "cascade" }),
+  snapshotJson: text("snapshot_json").notNull(),
+  answersJson: text("answers_json").notNull().default("{}"),
+  questionIndex: integer("question_index").notNull().default(0),
+  revision: integer("revision").notNull().default(0),
+  deadlineAt: integer("deadline_at").notNull(),
+  updatedAt: integer("updated_at").notNull(),
+});
+
+export const questionReviewEvents = sqliteTable('question_review_events', {
+  id: text('id').primaryKey(),
+  questionId: text('question_id').notNull().references(()=>assessmentQuestions.id,{onDelete:'cascade'}),
+  contentVersion: text('content_version').notNull(),
+  reviewerId: text('reviewer_id').references(()=>users.id,{onDelete:'set null'}),
+  decision: text('decision').notNull(),
+  note: text('note').notNull(),
+  reviewedAt: integer('reviewed_at').notNull(),
+},t=>[index('idx_question_review_version').on(t.questionId,t.reviewedAt)]);

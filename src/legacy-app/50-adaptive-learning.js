@@ -733,6 +733,7 @@ function loginTab(tab){
   document.getElementById('ltab-login').classList.toggle('act',tab==='login');
   document.getElementById('ltab-reg').classList.toggle('act',tab==='reg');
   const so=document.getElementById('student-reg-only');if(so)so.classList.toggle('hidden',curRole!=='student');
+  document.getElementById('parent-reg-only')?.classList.toggle('hidden',curRole!=='parent');
   const btn=document.getElementById('l-btn');
   if(btn)btn.textContent=tab==='login'?t('login'):t('register');
   applyAuthModeLayout();
@@ -748,7 +749,7 @@ function openAuth(mode){
 
 function setRole(r){
   curRole=r;
-  ['student','teacher'].forEach(x=>{
+  ['student','teacher','parent'].forEach(x=>{
     const b=document.getElementById('rb-'+x);if(!b)return;
     if(x===r){b.style.borderColor=r==='teacher'?'#16a34a':r==='admin'?'#7c3aed':'#2563eb';b.style.background=r==='teacher'?'#dcfce7':r==='admin'?'#ede9fe':'#dbeafe';b.style.color=r==='teacher'?'#16a34a':r==='admin'?'#7c3aed':'#1d4ed8';}
     else{b.style.borderColor='var(--border)';b.style.background='#fff';b.style.color='var(--gray)';}
@@ -757,6 +758,7 @@ function setRole(r){
   if(loginMode==='reg'){if(em)em.value='';if(ps)ps.value='';}
   const rf=document.getElementById('reg-fields');if(rf)rf.classList.toggle('hidden',loginMode!=='reg'||!emailRegistrationExpanded);
   const so=document.getElementById('student-reg-only');if(so)so.classList.toggle('hidden',r!=='student');
+  document.getElementById('parent-reg-only')?.classList.toggle('hidden',r!=='parent');
   const tn=document.getElementById('teacher-note');if(tn)tn.classList.toggle('hidden',r!=='teacher'||loginMode!=='reg'||!emailRegistrationExpanded);
 }
 
@@ -790,9 +792,13 @@ async function doLogin(){
     const name=(rname+' '+surname).trim();
     const grade=curRole==='student'?(document.getElementById('r-grade')?.value||''):'';
     const school=(document.getElementById('r-school')?.value||'').trim();
-    const requestedRole=(curRole==='teacher')?'teacher':'student'; // self-registration can never create admin
+    const requestedRole=['teacher','parent'].includes(curRole)?curRole:'student'; // self-registration can never create admin
     if(!document.getElementById('r-terms')?.checked||!document.getElementById('r-privacy')?.checked)throw new Error('რეგისტრაციამდე გაეცანით და დაადასტურეთ წესები და კონფიდენციალურობის პოლიტიკა.');
     let birthDate='',guardianEmail='',under16=false;
+    if(requestedRole==='parent'){
+      birthDate=document.getElementById('r-parent-dob')?.value||'';const age=calculateAge(birthDate);
+      if(age===null||age<18||age>100)throw new Error('მშობლის ანგარიში სრულწლოვან პირს ეკუთვნის.');
+    }
     if(requestedRole==='student'){
       birthDate=document.getElementById('r-dob')?.value||'';const age=calculateAge(birthDate);
       if(age===null||age<5||age>100)throw new Error('შეიყვანეთ სწორი დაბადების თარიღი.');

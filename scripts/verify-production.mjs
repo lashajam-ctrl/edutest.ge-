@@ -7,8 +7,9 @@ assert.match(html,/learning-hub\.js/);assert.match(html,/s-filter-testtype/);ass
 const assets=[...html.matchAll(/(?:src|href)=["'](\/[^"']+\.(?:js|css)(?:\?[^"']*)?)["']/g)].map(m=>m[1]);
 for(const path of new Set(assets)){const response=await check(path),mime=response.headers.get('content-type')||'';assert.match(mime,path.split('?')[0].endsWith('.js')?/javascript/:/text\/css/);assert.doesNotMatch((await response.text()).slice(0,150),/<!doctype html/i);}
 for(const path of ['/privacy','/terms'])await check(path);
-for(const path of ['/api/auth/mfa','/api/learning/plan','/api/learning/weekly'])await check(path,401);
+for(const path of ['/api/auth/mfa','/api/learning/plan','/api/learning/weekly','/api/assessments/draft'])await check(path,401);
 await check('/api/admin/question-bank-health?grade=3',403);
+await check('/api/admin/question-reviews?grade=3',403);
 for(const path of ['/api/assessments/start','/api/assessments/submit','/api/learning/practice','/api/ai/feedback'])await check(path,401,{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'});
 const catalog=await (await check('/api/assessments/catalog')).json();
 const georgian=catalog.tests.filter(t=>t.grade===3&&t.subject==='ქართული'&&t.semester===2);

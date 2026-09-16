@@ -541,6 +541,7 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
       <div style="display:flex;gap:6px">
         <button class="role-btn" id="rb-student" style="border:2px solid #2563eb;background:#dbeafe;color:#1d4ed8" onclick="setRole('student')" data-i18n="student_role">მოსწავლე</button>
         <button class="role-btn" id="rb-teacher" style="border:2px solid var(--border);background:#fff;color:var(--gray)" onclick="setRole('teacher')" data-i18n="teacher_role">მასწავლებელი</button>
+        <button class="role-btn" id="rb-parent" type="button" onclick="setRole('parent')">მშობელი</button>
       </div>
     </div>
     <div class="fg" id="email-address-field"><label class="label" for="l-email" data-i18n="email">ელ-ფოსტა</label><input id="l-email" type="email" autocomplete="email" data-i18n-placeholder="email_ph" placeholder="თქვენი ელ-ფოსტა"/></div>
@@ -554,6 +555,7 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
         <div class="fg"><label class="label" for="r-surname" data-i18n="surname">გვარი</label><input id="r-surname" autocomplete="family-name" placeholder="გვარი"/></div>
       </div>
       <div class="fg"><label class="label" for="r-school">სკოლა <span style="color:var(--gray);font-weight:400">(სურვილისამებრ)</span></label><input id="r-school" autocomplete="organization" placeholder="მაგ. სკოლა №1"/></div>
+      <div class="fg hidden" id="parent-reg-only"><label class="label" for="r-parent-dob">მშობლის დაბადების თარიღი</label><input id="r-parent-dob" type="date" autocomplete="bday"/></div>
       <div id="student-reg-only">
         <div class="fg"><label class="label" for="r-grade" data-i18n="grade">კლასი</label><select id="r-grade"><option>1A</option><option>1B</option><option>2A</option><option>2B</option><option>3A</option><option>3B</option><option>4A</option><option>4B</option><option>5A</option><option>5B</option><option>6A</option><option>6B</option><option>7A</option><option>7B</option><option>8A</option><option>8B</option><option>9A</option><option>9B</option><option>10A</option><option>10B</option><option>11A</option><option>11B</option><option>12A</option><option>12B</option></select></div>
         <div class="fg"><label class="label" for="r-dob">დაბადების თარიღი</label><input id="r-dob" type="date" autocomplete="bday" oninput="updateMinorRegistrationUI()"/></div>
@@ -594,7 +596,7 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
     <h3 id="age-verification-title" style="font-size:18px;font-weight:800;margin-bottom:6px">დაასრულეთ პროფილი</h3>
     <p style="font-size:12px;color:var(--gray);line-height:1.5;margin-bottom:14px">ელ-ფოსტა უკვე დადასტურებულია. ახლა შეავსეთ მხოლოდ სწავლისთვის აუცილებელი მონაცემები. ეს ინფორმაცია საჯაროდ არ გამოჩნდება.</p>
     <div class="fg"><div class="label">სახელი და გვარი</div><input id="age-verify-name" autocomplete="name" maxlength="100"/></div>
-    <div class="fg"><div class="label">როლი</div><select id="age-verify-role" onchange="updateAgeVerificationUI()"><option value="student">მოსწავლე</option><option value="teacher">მასწავლებელი</option></select></div>
+    <div class="fg"><label class="label" for="age-verify-role">როლი</label><select id="age-verify-role" onchange="updateAgeVerificationUI()"><option value="student">მოსწავლე</option><option value="teacher">მასწავლებელი</option><option value="parent">მშობელი</option></select></div>
     <div id="age-verify-grade-wrap" class="fg"><div class="label">კლასი</div><select id="age-verify-grade"><option value="">აირჩიეთ კლასი</option><option value="1">I</option><option value="2">II</option><option value="3">III</option><option value="4">IV</option><option value="5">V</option><option value="6">VI</option><option value="7">VII</option><option value="8">VIII</option><option value="9">IX</option><option value="10">X</option><option value="11">XI</option><option value="12">XII</option></select></div>
     <div class="fg"><div class="label">სკოლა <span style="font-weight:400;color:var(--gray)">(სურვილისამებრ)</span></div><input id="age-verify-school" maxlength="120"/></div>
     <div class="fg"><div class="label">დაბადების თარიღი</div><input id="age-verify-dob" type="date" oninput="updateAgeVerificationUI()"/></div>
@@ -1536,6 +1538,23 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
 </div>
 
 
+<div id="p-parent" data-page="parent" class="page fade">
+  <main class="parent-surface">
+    <header class="learning-filters"><h1>ოჯახის გვერდი</h1><button class="btn btn-outline" onclick="doLogout()">გასვლა</button></header>
+    <p>ბავშვის პროგრესი და შემდეგი სასწავლო ნაბიჯები — ერთ ადგილას.</p>
+    <section id="parent-summary" class="card learning-panel" aria-live="polite"></section>
+    <section class="card learning-panel"><h2>როგორ დავაკავშირო ბავშვის ანგარიში?</h2>
+      <ol><li>ბავშვის პროფილში წარმომადგენლის მისამართად მიუთითეთ თქვენი ამ ანგარიშის ელფოსტა.</li><li>თქვენს ელფოსტაზე მიღებული ბმულით დაადასტურეთ თანხმობა.</li><li>დაბრუნდით აქ და დააჭირეთ „განახლება“.</li></ol>
+      <p>მხოლოდ ბავშვის სახელის ან ელფოსტის ცოდნა მის მონაცემებზე წვდომას არ იძლევა.</p>
+      <button class="btn btn-outline" onclick="loadParentHome()">განახლება</button>
+    </section>
+    <section class="card learning-panel"><h2>ჩემი მონაცემები</h2>
+      <button class="btn btn-outline" onclick="exportMyData()">ჩემი მონაცემების ჩამოტვირთვა</button>
+      <button class="btn btn-outline" onclick="openLegalDocument('privacy')">კონფიდენციალურობა</button>
+      <button class="btn btn-outline" onclick="deleteMyAccount()">ჩემი ანგარიშის წაშლა</button>
+    </section>
+  </main>
+</div>
 <script src="/school-rules.js?v=20260909"></script>
 <script>
 // ===== I18N =====
@@ -3254,10 +3273,10 @@ function teacherResults(){return SERVER_VERIFIED_RESULTS||[];}
 // ── Navigation ───────────────────────────────────────────────────────────────
 function go(p){
   const role=CUR_USER?.role;
-  if((p==='admin'&&role!=='admin')||(p==='teacher'&&!['teacher','admin'].includes(role))||(p==='student'&&role!=='student'))p='landing';
+  if((p==='admin'&&role!=='admin')||(p==='teacher'&&!['teacher','admin'].includes(role))||(p==='student'&&role!=='student')||(p==='parent'&&role!=='parent'))p='landing';
   if(p!=='take-test'&&timerInt){clearInterval(timerInt);timerInt=null;}
   if(p!=='take-test')document.body.classList.remove('test-age-theme');
-  if(['landing','login','teacher','admin'].includes(p))clearGradeTheme();
+  if(['landing','login','teacher','admin','parent'].includes(p))clearGradeTheme();
   document.querySelectorAll('.page').forEach(x=>{x.classList.remove('active');});
   const el=document.getElementById('p-'+p);
   if(el){el.classList.add('active');el.classList.add('fade');}
@@ -3699,7 +3718,7 @@ function showAgeVerificationModal(){
   const grade=document.getElementById('age-verify-grade');
   const school=document.getElementById('age-verify-school');
   if(name&&!name.value)name.value=CUR_USER?.name||metadata.name||metadata.full_name||'';
-  if(role)role.value=CUR_USER?.role==='pending_teacher'?'teacher':'student';
+  if(role)role.value=CUR_USER?.role==='pending_teacher'?'teacher':CUR_USER?.role==='parent'?'parent':'student';
   if(grade&&!grade.value)grade.value=String(CUR_USER?.grade||'').replace(/[^0-9].*$/,'');
   if(school&&!school.value)school.value=CUR_USER?.school||metadata.school||'';
   updateAgeVerificationUI();m.classList.remove('hidden');m.style.display='flex';
@@ -3807,7 +3826,7 @@ async function submitAgeVerification(){
   const err=document.getElementById('age-verify-error');const fail=m=>{if(err){err.textContent=m;err.classList.remove('hidden');}};
   if(name.length<2||name.length>100)return fail('შეიყვანეთ სახელი და გვარი.');
   if(role==='student'&&!/^(?:[1-9]|1[0-2])$/.test(grade))return fail('აირჩიეთ კლასი.');
-  const age=calculateAge(dob);if(age===null||age<(role==='teacher'?18:5)||age>100)return fail(role==='teacher'?'მასწავლებლის ანგარიში სრულწლოვან პირს ეკუთვნის.':'შეიყვანეთ სწორი დაბადების თარიღი.');
+  const age=calculateAge(dob);if(age===null||age<(role!=='student'?18:5)||age>100)return fail('შეიყვანეთ სწორი დაბადების თარიღი. მშობელი/მასწავლებელი სრულწლოვანი უნდა იყოს.');
   if(!document.getElementById('age-verify-terms')?.checked||!document.getElementById('age-verify-privacy')?.checked)return fail('გაგრძელებამდე გაეცანით და დაადასტურეთ წესები/კონფიდენციალურობა.');
   if(role==='student'&&age<16&&(!g||!g.includes('@')||g===String(CUR_USER?.email||EDUTEST_CLOUD.user?.email||'').toLowerCase()))return fail('16 წლამდე მოსწავლისთვის მიუთითეთ წარმომადგენლის განსხვავებული სწორი ელფოსტა.');
   try{
@@ -4041,7 +4060,7 @@ async function hydrateServerLearningState(appUser,generation){
   EDUTEST_STATE_SYNC_TIMER=setInterval(syncUserLearningState,20000);
 }
 function appUserFromServer(user){
-  const safeRole=['student','pending_teacher','teacher','admin'].includes(user&&user.role)?user.role:'student';
+  const safeRole=['student','pending_teacher','teacher','admin','parent'].includes(user&&user.role)?user.role:'student';
   return {
     cloudId:user.id,email:user.email||'',role:safeRole,name:user.name||user.email||'მოსწავლე',
     grade:user.grade||'',school:user.school||'',birthDate:user.birthDate||'',guardianEmail:user.guardianEmail||'',
@@ -4064,7 +4083,8 @@ async function adoptServerUser(user,opts){
     else if(curRole==='student'&&gate==='age_required'){go('login');showAgeVerificationModal();}
     else if(curRole==='student'&&gate==='guardian_required'){go('login');showGuardianPendingModal(appUser);}
     else if(curRole==='student'&&gate==='blocked'){go('login');setLoginNotice('ანგარიში დროებით დაბლოკილია.','warn');}
-    else if(['student','teacher','admin'].includes(curRole)){
+    else if(curRole==='parent'&&!appUser.profileCompletedAt){go('login');showAgeVerificationModal();}
+    else if(['student','teacher','admin','parent'].includes(curRole)){
       if(curRole==='admin')await ensureAdminMFA(appUser);
       go(curRole);
     }
@@ -4097,7 +4117,7 @@ async function initServerAuth(){
   if(resetToken){go('login');setTimeout(openPasswordRecoveryModal,0);}
   try{
     const response=await fetch('/api/auth/session',{credentials:'include',cache:'no-store'});
-    if(response.ok){const data=await response.json();if(data&&data.user){await adoptServerUser(data.user,{navigate:(status==='success'||emailStatus==='verified')&&!resetToken});if(status)clearOAuthStatusParam();if(emailStatus){try{const clean=new URL(window.top.location.href);clean.searchParams.delete('email');window.top.history.replaceState({},'',clean.pathname+clean.search+clean.hash);}catch(_){} }return true;}}
+    if(response.ok){const data=await response.json();if(data&&data.user){await adoptServerUser(data.user,{navigate:!resetToken});if(status)clearOAuthStatusParam();if(emailStatus){try{const clean=new URL(window.top.location.href);clean.searchParams.delete('email');window.top.history.replaceState({},'',clean.pathname+clean.search+clean.hash);}catch(_){} }return true;}}
     if(emailStatus){go('login');setLoginNotice(emailStatus==='verified'?'ელ-ფოსტა დადასტურდა — ახლა შეგიძლიათ შეხვიდეთ.':'დადასტურების ბმული არასწორია ან ვადაგასულია.',emailStatus==='verified'?'success':'warn');}
     if(status){
       go('login');
@@ -5222,6 +5242,7 @@ function loginTab(tab){
   document.getElementById('ltab-login').classList.toggle('act',tab==='login');
   document.getElementById('ltab-reg').classList.toggle('act',tab==='reg');
   const so=document.getElementById('student-reg-only');if(so)so.classList.toggle('hidden',curRole!=='student');
+  document.getElementById('parent-reg-only')?.classList.toggle('hidden',curRole!=='parent');
   const btn=document.getElementById('l-btn');
   if(btn)btn.textContent=tab==='login'?t('login'):t('register');
   applyAuthModeLayout();
@@ -5237,7 +5258,7 @@ function openAuth(mode){
 
 function setRole(r){
   curRole=r;
-  ['student','teacher'].forEach(x=>{
+  ['student','teacher','parent'].forEach(x=>{
     const b=document.getElementById('rb-'+x);if(!b)return;
     if(x===r){b.style.borderColor=r==='teacher'?'#16a34a':r==='admin'?'#7c3aed':'#2563eb';b.style.background=r==='teacher'?'#dcfce7':r==='admin'?'#ede9fe':'#dbeafe';b.style.color=r==='teacher'?'#16a34a':r==='admin'?'#7c3aed':'#1d4ed8';}
     else{b.style.borderColor='var(--border)';b.style.background='#fff';b.style.color='var(--gray)';}
@@ -5246,6 +5267,7 @@ function setRole(r){
   if(loginMode==='reg'){if(em)em.value='';if(ps)ps.value='';}
   const rf=document.getElementById('reg-fields');if(rf)rf.classList.toggle('hidden',loginMode!=='reg'||!emailRegistrationExpanded);
   const so=document.getElementById('student-reg-only');if(so)so.classList.toggle('hidden',r!=='student');
+  document.getElementById('parent-reg-only')?.classList.toggle('hidden',r!=='parent');
   const tn=document.getElementById('teacher-note');if(tn)tn.classList.toggle('hidden',r!=='teacher'||loginMode!=='reg'||!emailRegistrationExpanded);
 }
 
@@ -5279,9 +5301,13 @@ async function doLogin(){
     const name=(rname+' '+surname).trim();
     const grade=curRole==='student'?(document.getElementById('r-grade')?.value||''):'';
     const school=(document.getElementById('r-school')?.value||'').trim();
-    const requestedRole=(curRole==='teacher')?'teacher':'student'; // self-registration can never create admin
+    const requestedRole=['teacher','parent'].includes(curRole)?curRole:'student'; // self-registration can never create admin
     if(!document.getElementById('r-terms')?.checked||!document.getElementById('r-privacy')?.checked)throw new Error('რეგისტრაციამდე გაეცანით და დაადასტურეთ წესები და კონფიდენციალურობის პოლიტიკა.');
     let birthDate='',guardianEmail='',under16=false;
+    if(requestedRole==='parent'){
+      birthDate=document.getElementById('r-parent-dob')?.value||'';const age=calculateAge(birthDate);
+      if(age===null||age<18||age>100)throw new Error('მშობლის ანგარიში სრულწლოვან პირს ეკუთვნის.');
+    }
     if(requestedRole==='student'){
       birthDate=document.getElementById('r-dob')?.value||'';const age=calculateAge(birthDate);
       if(age===null||age<5||age>100)throw new Error('შეიყვანეთ სწორი დაბადების თარიღი.');

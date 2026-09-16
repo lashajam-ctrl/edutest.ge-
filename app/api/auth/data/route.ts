@@ -3,6 +3,7 @@ import { ensureSchema, getDb } from "@/db";
 import {
   assessmentQuestionHistory,
   assessmentSessions,
+  assessmentSessionDrafts,
   assignments,
   attempts,
   customTests,
@@ -35,7 +36,7 @@ export async function GET(request: Request) {
   await ensureSchema();
   const db = getDb();
   const userId = current.user.id;
-  const [linkedIdentities, attemptRows, historyRows, guardianRows, assignmentRows, reportRows, customRows, sessionRows, adaptiveRows, learningStateRows, practiceRows] = await Promise.all([
+  const [linkedIdentities, attemptRows, historyRows, guardianRows, assignmentRows, reportRows, customRows, sessionRows, adaptiveRows, learningStateRows, practiceRows, draftRows] = await Promise.all([
     db.select({ provider: identities.provider, createdAt: identities.createdAt }).from(identities).where(eq(identities.userId, userId)),
     db.select().from(attempts).where(eq(attempts.userId, userId)),
     db.select().from(questionHistory).where(eq(questionHistory.userId, userId)),
@@ -49,6 +50,7 @@ export async function GET(request: Request) {
     db.select().from(assessmentQuestionHistory).where(eq(assessmentQuestionHistory.userId, userId)),
     db.select().from(userLearningState).where(eq(userLearningState.userId, userId)),
     db.select({id:learningPracticeSessions.id,questionId:learningPracticeSessions.questionId,sourceQuestionId:learningPracticeSessions.sourceQuestionId,status:learningPracticeSessions.status,startedAt:learningPracticeSessions.startedAt,submittedAt:learningPracticeSessions.submittedAt,resultJson:learningPracticeSessions.resultJson}).from(learningPracticeSessions).where(eq(learningPracticeSessions.userId,userId)),
+    db.select({sessionId:assessmentSessionDrafts.sessionId,answersJson:assessmentSessionDrafts.answersJson,questionIndex:assessmentSessionDrafts.questionIndex,updatedAt:assessmentSessionDrafts.updatedAt}).from(assessmentSessionDrafts).innerJoin(assessmentSessions,eq(assessmentSessions.id,assessmentSessionDrafts.sessionId)).where(eq(assessmentSessions.userId,userId)),
   ]);
   return noStore({
     exportedAt: new Date().toISOString(),
@@ -61,6 +63,7 @@ export async function GET(request: Request) {
     issueReports: reportRows,
     customTests: customRows.map(row => ({ ...row, questions: parsed(row.questionsJson), questionsJson: undefined })),
     assessmentSessions: sessionRows,
+    unfinishedTestAnswers: draftRows.map(row=>({...row,answers:parsed(row.answersJson),answersJson:undefined})),
     adaptiveHistory: adaptiveRows,
     learningState: learningStateRows.map(row => parsed(row.stateJson)),
     learningPractice: practiceRows.map(row => ({...row,result:row.resultJson?parsed(row.resultJson):null,resultJson:undefined})),

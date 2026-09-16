@@ -1,0 +1,21 @@
+name: Production health
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 */6 * * *'
+permissions:
+  contents: read
+concurrency:
+  group: production-health
+  cancel-in-progress: true
+jobs:
+  public-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      # No credentials, student submissions, or private data are used.
+      - run: node scripts/verify-production.mjs https://edutest.ge

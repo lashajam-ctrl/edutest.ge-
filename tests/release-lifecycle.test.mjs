@@ -4,6 +4,7 @@ import {readFileSync} from 'node:fs';
 import {stripTypeScriptTypes} from 'node:module';
 import {DatabaseSync} from 'node:sqlite';
 import * as selection from '../lib/assessment-selection.ts';
+import {createDraftService} from '../lib/assessment-drafts-core.mjs';
 const read=path=>readFileSync(new URL('../'+path,import.meta.url),'utf8');
 const assessmentSource=stripTypeScriptTypes(read('lib/assessment.ts').replaceAll('"./assessment-selection"',JSON.stringify(new URL('../lib/assessment-selection.ts',import.meta.url).href)).replaceAll('"./school-policy.mjs"',JSON.stringify(new URL('../lib/school-policy.mjs',import.meta.url).href)));
 const assessment=await import('data:text/javascript,'+encodeURIComponent(assessmentSource));
@@ -19,6 +20,8 @@ test('release gate runs real start/submit handlers against isolated SQLite: auth
       CREATE TABLE attempts(id TEXT PRIMARY KEY,user_id TEXT,test_id TEXT,score INTEGER,max_score INTEGER,percentage INTEGER,answers_json TEXT,submitted_at INTEGER);
       CREATE TABLE question_history(id TEXT,user_id TEXT,question_id TEXT,pool_key TEXT,answered_at INTEGER,UNIQUE(user_id,question_id));`);
     db.exec(read('drizzle/0005_secure_assessment_bank.sql'));
+    db.exec(read('drizzle/0012_violet_shockwave.sql'));
+    db.exec(read('drizzle/0013_learning_reliability.sql'));
     db.exec('ALTER TABLE assessment_tests ADD COLUMN difficulty TEXT');
     db.exec("INSERT INTO assessment_tests(id,title,subject,grade,semester,source_pool,question_count,time_minutes,attempts_allowed,test_type,published,is_custom,created_at,updated_at) VALUES('grade3-georgian','ქართული','ქართული',3,2,'v11',5,15,20,'practice',1,0,1,1)");
     for(let n=0;n<6;n++){
@@ -39,15 +42,27 @@ test('release gate runs real start/submit handlers against isolated SQLite: auth
     assert.equal(new Set(data.questions.map(q=>q.id)).size,5);
     assert.equal((await submit(request({sessionId:data.sessionId,answers:{}},'fixture=other'))).status,404);
     const answers=Object.fromEntries(data.questions.map(q=>[q.id,q.opts.indexOf('B')]));
-    const responses=await Promise.all([submit(request({sessionId:data.sessionId,answers})),submit(request({sessionId:data.sessionId,answers}))]);
+    await createDraftService({db:DB}).save('learner',data.sessionId,{answers,questionIndex:0,revision:0});
+    const stale=await submit(request({sessionId:data.sessionId,answers:{},draftRevision:0}));assert.equal(stale.status,409);assert.equal((await stale.json()).code,'DRAFT_CONFLICT');
+    const responses=await Promise.all([submit(request({sessionId:data.sessionId,answers,draftRevision:1})),submit(request({sessionId:data.sessionId,answers,draftRevision:1}))]);
     for(const response of responses){assert.ok([200,201].includes(response.status));assert.equal((await response.json()).result.pct,100);}
     assert.equal(db.prepare('SELECT COUNT(*) AS n FROM attempts').get().n,1);assert.equal(emails,1);
     assert.equal(db.prepare('SELECT MAX(answered_count) AS n FROM assessment_question_history').get().n,1);
     const saved=db.prepare('SELECT answers_json FROM attempts WHERE id=? AND user_id=?').get(data.sessionId,'learner');assert.equal(JSON.parse(saved.answers_json).verified,true);
     const retry=await submit(request({sessionId:data.sessionId,answers:{}}));assert.equal((await retry.json()).result.pct,100);assert.equal(emails,1);
+    const expired=await (await start(request({testId:'grade3-georgian'}))).json();
+    const savedAnswers=Object.fromEntries(expired.questions.map(q=>[q.id,q.opts.indexOf('B')]));
+    await createDraftService({db:DB}).save('learner',expired.sessionId,{answers:savedAnswers,questionIndex:0,revision:0});
+    db.prepare('UPDATE assessment_session_drafts SET deadline_at=? WHERE session_id=?').run(Date.now()-10000,expired.sessionId);
+    const lostSave=await submit(request({sessionId:expired.sessionId,answers:{},draftRevision:1}));assert.equal(lostSave.status,409);assert.equal((await lostSave.json()).code,'DRAFT_EXPIRED_UNSAVED');
+    assert.equal(db.prepare('SELECT status FROM assessment_sessions WHERE id=?').get(expired.sessionId).status,'started','a delayed autosave must not silently finalize older answers');
+    assert.equal(db.prepare('SELECT COUNT(*) AS n FROM attempts WHERE id=?').get(expired.sessionId).n,0);
+    const timed=await submit(request({sessionId:expired.sessionId,answers:savedAnswers,draftRevision:1}));assert.equal((await timed.json()).result.pct,100,'explicitly reopened saved answers remain submittable after the deadline');
   }finally{db.close();}
 });
 test('login/session release checks retain password verification, HttpOnly cookie and admin second factor boundaries',()=>{
   const login=read('app/api/auth/login/route.ts'),auth=read('lib/auth.ts');
   assert.match(login,/verifyPassword/);assert.match(login,/createSession/);assert.match(auth,/HttpOnly.*SameSite=Lax/);assert.match(auth,/user\.role === "admin"/);assert.match(auth,/!mfaVerified && !mfaSetupRoute/);
+  assert.match(read('public/server-assessments.js'),/Math\.min\(15000,Math\.ceil\(deadlineMs-Date\.now\(\)-clockOffset\)\)/);
+  assert.match(read('src/legacy-app/40-authentication.js'),/navigate:!resetToken/);
 });

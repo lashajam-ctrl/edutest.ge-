@@ -9,7 +9,7 @@ import { consumeRateLimit } from "@/lib/rate-limit";
 function ageFrom(value: string) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return null;
   const dob = new Date(`${value}T00:00:00Z`);
-  if (Number.isNaN(dob.getTime())) return null;
+  if (Number.isNaN(dob.getTime()) || dob.toISOString().slice(0,10)!==value) return null;
   const now = new Date();
   let age = now.getUTCFullYear() - dob.getUTCFullYear();
   const month = now.getUTCMonth() - dob.getUTCMonth();
@@ -28,7 +28,7 @@ export async function POST(request: Request) {
   const limit = await consumeRateLimit(`auth-register:${await sha256(`${ip}|${email}`)}`, 5, 60 * 60_000);
   if (!limit.allowed) return Response.json({ error: "რეგისტრაციის ბევრი მცდელობაა. ცოტა ხანში ისევ სცადეთ." }, { status: 429, headers: { "Retry-After": String(limit.retryAfter), "Cache-Control": "no-store" } });
 
-  const role = body.role === "teacher" ? "pending_teacher" as const : "student" as const;
+  const role = body.role === "teacher" ? "pending_teacher" as const : body.role === "parent" ? "parent" as const : "student" as const;
   const grade = (body.grade ?? "").trim();
   const school = (body.school ?? "").trim().slice(0, 120) || null;
   const birthDate = (body.birthDate ?? "").trim();
@@ -37,6 +37,10 @@ export async function POST(request: Request) {
   const privacyVersion = (body.privacyVersion ?? "").trim().slice(0, 100);
   if (!termsVersion || !privacyVersion) return Response.json({ error: "წესებისა და კონფიდენციალურობის დადასტურება აუცილებელია" }, { status: 400 });
   let age: number | null = null;
+  if(role==='parent'){
+    age=ageFrom(birthDate);
+    if(age===null||age<18||age>100)return Response.json({error:'მშობლის ანგარიში სრულწლოვან პირს ეკუთვნის. მიუთითეთ დაბადების თარიღი.'},{status:400});
+  }
   if (role === "student") {
     if (!/^(?:[1-9]|1[0-2])[A-Za-zა-ჰ]?$/.test(grade)) return Response.json({ error: "აირჩიეთ სწორი კლასი" }, { status: 400 });
     age = ageFrom(birthDate);
@@ -51,7 +55,7 @@ export async function POST(request: Request) {
   const now = new Date();
   const user = {
     id: crypto.randomUUID(), email, name, role, grade: role === "student" ? grade : null, school,
-    birthDate: role === "student" ? birthDate : null,
+    birthDate: role === "student" || role === "parent" ? birthDate : null,
     guardianEmail: role === "student" && age !== null && age < 16 ? guardianEmail : null,
     guardianVerifiedAt: role === "student" && age !== null && age < 16 ? null : now,
     termsVersion, privacyVersion, profileCompletedAt: now,

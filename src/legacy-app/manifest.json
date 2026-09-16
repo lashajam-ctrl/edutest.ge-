@@ -6,6 +6,7 @@
     "20-student-markup.html",
     "30-teacher-markup.html",
     "40-admin-markup.html",
+    "45-parent-markup.html",
     "50-runtime-loader.html"
   ],
   "runtime": [

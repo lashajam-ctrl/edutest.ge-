@@ -68,6 +68,8 @@ export async function getSessionUser(request: Request) {
     if (!emailPendingRoute) return null;
   }
   if (!row) return null;
+  // Revoked/blocked accounts cannot retain API access through an old cookie.
+  if (!['active','onboarding','email_pending'].includes(row.user.accountStatus) && !['/api/auth/session','/api/auth/logout','/api/auth/data'].includes(path)) return null;
   let mfaVerified = true;
   if (row.user.role === "admin") {
     const verified = await env.DB.prepare("SELECT session_id FROM session_mfa_verifications WHERE session_id = ? AND expires_at > ?")

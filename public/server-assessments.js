@@ -3,6 +3,57 @@
 
   let serverSessionId=null;
   let serverSubmitting=false;
+  let pendingResume=null,draftRevision=0,draftOwner='',deadlineMs=0,clockOffset=0;
+  let draftPromise=null,draftTimer=null,lastDraft='',draftConflict=false;
+  const owner=()=>CUR_USER?String(CUR_USER.id||CUR_USER.email)+'|'+String(typeof EDUTEST_AUTH_GENERATION==='number'?EDUTEST_AUTH_GENERATION:0):'';
+  function draftStatus(message,reload=false){
+    let box=document.getElementById('assessment-save-status');
+    if(!box){const host=document.getElementById('q-opts')?.parentElement;if(!host)return;box=document.createElement('div');box.id='assessment-save-status';box.setAttribute('role','status');box.style.cssText='padding:10px 0;font-size:14px;';host.append(box);}
+    box.replaceChildren(document.createTextNode(message));
+    if(reload){const b=document.createElement('button');b.className='btn btn-outline btn-sm';b.textContent='შენახული ვერსიის გახსნა';b.onclick=()=>resumeSavedAssessment(serverSessionId);box.append(b);}
+  }
+  function draftBody(){return {sessionId:serverSessionId,answers:qAnswers,questionIndex:qIdx,revision:draftRevision};}
+  async function saveDraft(){
+    if(draftPromise){await draftPromise;return saveDraft();}
+    if(!serverSessionId||owner()!==draftOwner||draftConflict)return !draftConflict;
+    const data=draftBody(),signature=JSON.stringify([data.answers,data.questionIndex]);
+    if(signature===lastDraft)return true;
+    if(Date.now()+clockOffset>deadlineMs)return true;
+    const id=serverSessionId,identity=draftOwner;
+    draftStatus('პასუხები ინახება…');
+    draftPromise=(async()=>{try{
+      // Never let an autosave consume the final-submit transport allowance.
+      const saveTimeout=Math.max(250,Math.min(15000,Math.ceil(deadlineMs-Date.now()-clockOffset)));
+      const response=await fetch('/api/assessments/draft',{method:'POST',credentials:'include',signal:AbortSignal.timeout(saveTimeout),headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
+      const result=await response.json().catch(()=>({}));
+      if(id!==serverSessionId||identity!==owner())return false;
+      if(response.status===409){draftConflict=true;draftStatus('ტესტი სხვა ჩანართში შეიცვალა. გახსენი შენახული ვერსია.',true);return false;}
+      if(!response.ok)throw new Error('save');
+      draftRevision=result.revision;lastDraft=signature;draftStatus('✓ პასუხები შენახულია');return true;
+    }catch{if(id===serverSessionId&&identity===owner())draftStatus('პასუხები ჯერ ვერ შეინახა. არ დახურო გვერდი — კავშირის აღდგენისას კვლავ ვცდით.');return false;}
+    finally{draftPromise=null;}})();
+    return draftPromise;
+  }
+  document.addEventListener('input',()=>{clearTimeout(draftTimer);draftTimer=setTimeout(saveDraft,600);});
+  document.addEventListener('change',()=>{clearTimeout(draftTimer);draftTimer=setTimeout(saveDraft,300);});
+  document.addEventListener('click',event=>{if(event.target.closest?.('#p-take-test')){clearTimeout(draftTimer);draftTimer=setTimeout(saveDraft,300);}});
+  setInterval(()=>{if(document.getElementById('p-take-test')?.classList.contains('active')&&!serverSubmitting)saveDraft();},10000);
+  window.addEventListener('online',saveDraft);
+  window.addEventListener('beforeunload',event=>{if(serverSessionId&&owner()===draftOwner&&JSON.stringify([qAnswers,qIdx])!==lastDraft){event.preventDefault();event.returnValue='';}});
+  window.resumeSavedAssessment=async function(id){
+    const identity=owner();
+    try{const r=await fetch('/api/assessments/draft?sessionId='+encodeURIComponent(id),{credentials:'include',cache:'no-store'});const data=await r.json();if(identity!==owner())return;
+      if(!r.ok)throw new Error(data.error);pendingResume=data;curTest=data.test;go('take-test');
+    }catch(error){announce(error.message||'ტესტი ვერ აღდგა.');}
+  };
+  window.refreshSavedAssessments=async function(){
+    const identity=owner(),home=document.getElementById('s-home');if(!identity||!home||CUR_USER.role!=='student')return;
+    let box=document.getElementById('saved-assessments');if(!box){box=document.createElement('section');box.id='saved-assessments';box.className='card learning-panel';box.setAttribute('aria-live','polite');home.prepend(box);}
+    try{const r=await fetch('/api/assessments/draft',{credentials:'include',cache:'no-store'}),data=await r.json();if(identity!==owner())return;if(!r.ok)throw new Error('load');box.replaceChildren();
+      for(const item of data.sessions||[]){const title=document.createElement('h3');title.textContent='გააგრძელე: '+item.test.title;const text=document.createElement('p');text.textContent='კითხვები და შენახული პასუხები შენარჩუნებულია. დრო გვერდის დახურვით არ ჩერდება.';const b=document.createElement('button');b.className='btn btn-primary';b.textContent=Date.now()>item.deadlineAt?'შენახული პასუხების გაგზავნა':'ტესტის გაგრძელება';b.onclick=()=>resumeSavedAssessment(item.sessionId);box.append(title,text,b);}
+      box.hidden=!(data.sessions||[]).length;
+    }catch{if(identity===owner()){box.hidden=false;box.textContent='დაწყებული ტესტების შემოწმება ვერ მოხერხდა. ';const b=document.createElement('button');b.className='btn btn-outline';b.textContent='ხელახლა ცდა';b.onclick=refreshSavedAssessments;box.append(b);}}
+  };
   let catalogUserKey='';
   let catalogReady=false;
   let catalogLoading=null;
@@ -131,13 +182,15 @@
     const previousRotationNote=document.getElementById('q-rotation-note');
     if(previousRotationNote){previousRotationNote.classList.add('hidden');previousRotationNote.textContent='';}
     setTestLoading('ტესტი იტვირთება…');
+    const identity=owner(),resumed=pendingResume;pendingResume=null;
     try{
-      const response=await fetch('/api/assessments/start',{
+      const response=resumed?null:await fetch('/api/assessments/start',{
         method:'POST',credentials:'include',headers:{'Content-Type':'application/json',Accept:'application/json'},
         body:JSON.stringify({testId:String(requestedId)})
       });
-      const data=await response.json().catch(()=>({}));
-      if(!response.ok){
+      const data=resumed||await response.json().catch(()=>({}));
+      if(identity!==owner())return;
+      if(response&&!response.ok){
         if(response.status===404){
           await loadServerCatalog(true);
           throw new Error('ტესტების კატალოგი განახლდა. გთხოვთ, აირჩიოთ ტესტი ხელახლა.');
@@ -145,8 +198,11 @@
         throw new Error(data.error||'ტესტი ვერ დაიწყო');
       }
       serverSessionId=data.sessionId;
+      draftOwner=identity;draftRevision=data.revision||0;draftConflict=false;
+      clockOffset=Number(data.serverNow||Date.now())-Date.now();deadlineMs=Number(data.deadlineAt||Date.now()+Number(data.test?.time||20)*60000);
       curTestQs=(data.questions||[]).map(adaptQuestion);
-      qIdx=0;qAnswers={};_tabSwitchCount=0;
+      qIdx=Number(data.questionIndex||0);qAnswers=data.answers||{};_tabSwitchCount=0;
+      lastDraft=JSON.stringify([qAnswers,qIdx]);draftStatus(data.resumed?'✓ ტესტი აღდგენილია':'✓ პასუხები ავტომატურად შეინახება');
       if(!curTestQs.length)throw new Error('ტესტისთვის კითხვები ვერ მოიძებნა');
       if(data.test){
         curTest.count=Number(data.test.count||curTestQs.length);
@@ -161,11 +217,12 @@
           : '';
       }
       if(timerInt)clearInterval(timerInt);
-      timerSec=Number(curTest.time||data.test&&data.test.time||20)*60;
+      timerSec=Math.max(0,Math.ceil((deadlineMs-Date.now()-clockOffset)/1000));
       const timer=document.getElementById('timer');if(timer)timer.style.display='';
       const title=document.getElementById('tt-title');if(title)title.textContent=curTest.title||txTitle(curTest);
       renderQ();buildDots();updateTimer();
-      timerInt=setInterval(()=>{timerSec--;updateTimer();if(timerSec<=0){clearInterval(timerInt);finishTest();}},1000);
+      timerInt=setInterval(()=>{timerSec=Math.max(0,Math.ceil((deadlineMs-Date.now()-clockOffset)/1000));updateTimer();if(timerSec<=0){clearInterval(timerInt);finishTest();}},1000);
+      if(timerSec<=0){clearInterval(timerInt);finishTest();}
     }catch(error){
       serverSessionId=null;
       announce(catalogErrorMessage(error));
@@ -196,13 +253,25 @@
       announce('უსაფრთხო ტესტის სესია ვერ მოიძებნა.');return;
     }
     serverSubmitting=true;
+    const submittingOwner=owner(),submittingSession=serverSessionId;
+    if(draftConflict){draftStatus('ჯერ გახსენი სხვა ჩანართში შენახული ვერსია.',true);serverSubmitting=false;return;}
+    await saveDraft();
+    if(owner()!==submittingOwner||serverSessionId!==submittingSession){serverSubmitting=false;return;}
+    if(draftConflict){serverSubmitting=false;return;}
     setTestLoading('პასუხები სერვერზე მოწმდება…');
     try{
       const response=await fetch('/api/assessments/submit',{
-        method:'POST',credentials:'include',headers:{'Content-Type':'application/json',Accept:'application/json'},
-        body:JSON.stringify({sessionId:serverSessionId,answers:qAnswers})
+        method:'POST',credentials:'include',signal:AbortSignal.timeout(20000),headers:{'Content-Type':'application/json',Accept:'application/json'},
+        body:JSON.stringify({sessionId:serverSessionId,answers:qAnswers,draftRevision})
       });
       const data=await response.json().catch(()=>({}));
+      if(owner()!==submittingOwner||serverSessionId!==submittingSession)return;
+      if(data.code==='DRAFT_CONFLICT'){draftConflict=true;draftStatus('ტესტი სხვა ჩანართში შეიცვალა. გახსენი შენახული ვერსია.',true);return;}
+      if(data.code==='DRAFT_EXPIRED_UNSAVED'){
+        if(timerInt)clearInterval(timerInt);
+        draftStatus('დრო ამოიწურა, მაგრამ ბოლო ცვლილებები სერვერზე არ შენახულა. შედეგი არ დაფიქსირებულა. შენახული ვერსიის გახსნით მხოლოდ დროულად შენახული პასუხები გაიგზავნება.',true);
+        return;
+      }
       if(!response.ok)throw new Error(data.error||'პასუხები ვერ ჩაიბარა სერვერმა');
       if(timerInt)clearInterval(timerInt);
       const result=Object.assign({},data.result||{});
@@ -215,6 +284,7 @@
       if(typeof _isDailyBonus!=='undefined'&&_isDailyBonus){xpEarned*=2;if(typeof markDailyDone==='function')markDailyDone(CUR_USER.email);_isDailyBonus=false;}
       result.xpEarned=xpEarned;
       SESSION_RESULTS.unshift(result);saveResults();_lastResult=result;serverSessionId=null;
+      draftOwner='';lastDraft='';
       if(typeof syncUserLearningState==='function')syncUserLearningState();
       if(typeof showXpToast==='function'&&xpEarned)showXpToast(xpEarned,null);
       if(typeof logAuditEvent==='function')logAuditEvent('TEST_DONE_VERIFIED',(CUR_USER&&CUR_USER.email||'')+' | '+result.testId+' | '+result.pct+'%');
@@ -222,6 +292,10 @@
       if(typeof refreshLearningPlan==='function')refreshLearningPlan(true);
       if(typeof maybeAutoSpeakResult==='function')setTimeout(()=>maybeAutoSpeakResult(result),120);
     }catch(error){
+      if(owner()!==submittingOwner||serverSessionId!==submittingSession)return;
+      if(Date.now()+clockOffset<deadlineMs){renderQ();buildDots();}
+      const box=document.getElementById('q-opts');
+      if(box){const retry=document.createElement('button');retry.className='btn btn-primary';retry.textContent='პასუხების ხელახლა გაგზავნა';retry.onclick=()=>finishTest();box.append(retry);}
       announce(catalogErrorMessage(error)+' პასუხები შენარჩუნებულია და შეგიძლიათ ხელახლა გაგზავნოთ.');
     }finally{serverSubmitting=false;}
   };

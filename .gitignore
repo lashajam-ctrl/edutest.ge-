@@ -53,3 +53,4 @@ next-env.d.ts
 /.openai/edutest-db-before-*.sql
 /.openai/legacy-client-question-bank/
 /.openai/*.log
+/.openai/qa-*

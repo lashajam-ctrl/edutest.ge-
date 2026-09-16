@@ -5,12 +5,13 @@ import { allocateByWeight, assessmentSelectionKey, distinctSelectionGroupCount, 
 import { getSessionUser } from "@/lib/auth";
 import { consumeRateLimit } from "@/lib/rate-limit";
 
-type TestRow = { id: string; subject: string; grade: number; semester: number | null; source_pool: string; difficulty: string | null; question_count: number; time_minutes: number; attempts_allowed: number; published: number; is_custom: number; created_by: string | null };
+type TestRow = { id: string; title: string; subject: string; grade: number; semester: number | null; source_pool: string; difficulty: string | null; question_count: number; time_minutes: number; attempts_allowed: number; published: number; is_custom: number; created_by: string | null };
 type Candidate = StoredAssessmentQuestion & { history_id: string | null; answered_count: number | null; last_correct: number | null; next_review_at: number | null; last_answered_at: number | null };
 
 export async function POST(request: Request) {
   const current = await getSessionUser(request);
   if (!current) return Response.json({ error: "ავტორიზაცია აუცილებელია" }, { status: 401 });
+  if (!['student','teacher','admin'].includes(current.user.role)) return Response.json({error:'ამ ანგარიშიდან ტესტის შესრულება ხელმისაწვდომი არ არის.'},{status:403});
   await ensureSchema();
   const rate = await consumeRateLimit(`assessment-start:${current.user.id}`, 20, 60_000);
   if (!rate.allowed) return Response.json({ error: "ძალიან ბევრი მოთხოვნაა. სცადეთ ცოტა ხანში." }, { status: 429, headers: { "Retry-After": String(rate.retryAfter) } });
@@ -132,8 +133,6 @@ export async function POST(request: Request) {
     return prepared.payload;
   });
   const sessionId = crypto.randomUUID(), startedAt = Date.now(), expiresAt = startedAt + Math.max(30, Number(test.time_minutes) + 30) * 60_000;
-  await env.DB.prepare("INSERT INTO assessment_sessions (id,user_id,test_id,question_ids_json,presentation_json,status,started_at,expires_at) VALUES (?,?,?,?,?,'started',?,?)")
-    .bind(sessionId, current.user.id, test.id, JSON.stringify(selected.map(question => question.id)), JSON.stringify(presentation), startedAt, expiresAt).run();
   const componentCounts: Record<string, number> = {};
   for (const question of selected) {
     let text = "";
@@ -148,5 +147,14 @@ export async function POST(request: Request) {
     reusedGroups,
     distinctBankGroups: allDistinct,
   };
-  return Response.json({ sessionId, test: { id: test.id, time: test.time_minutes, count: questions.length, requestedCount: test.question_count, difficulty: test.difficulty, componentCounts }, rotation, questions }, { status: 201, headers: { "Cache-Control": "no-store" } });
+  const safeTest={id:test.id,title:test.title,subject:canonicalAssessmentSubject(test.subject,test.grade),grade:test.grade,semester:test.semester,
+    time:test.time_minutes,count:questions.length,requestedCount:test.question_count,difficulty:test.difficulty,componentCounts,serverBacked:true};
+  const snapshot={test:safeTest,rotation,questions},deadlineAt=startedAt+Math.max(1,Number(test.time_minutes))*60_000;
+  await env.DB.batch([
+    env.DB.prepare("INSERT INTO assessment_sessions (id,user_id,test_id,question_ids_json,presentation_json,status,started_at,expires_at) VALUES (?,?,?,?,?,'started',?,?)")
+      .bind(sessionId,current.user.id,test.id,JSON.stringify(selected.map(question=>question.id)),JSON.stringify(presentation),startedAt,expiresAt),
+    env.DB.prepare('INSERT INTO assessment_session_drafts (session_id,snapshot_json,deadline_at,updated_at) VALUES (?,?,?,?)')
+      .bind(sessionId,JSON.stringify(snapshot),deadlineAt,startedAt),
+  ]);
+  return Response.json({sessionId,...snapshot,deadlineAt,serverNow:startedAt,revision:0}, { status: 201, headers: { "Cache-Control": "no-store" } });
 }

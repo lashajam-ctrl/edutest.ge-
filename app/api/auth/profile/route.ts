@@ -7,7 +7,7 @@ import { createAndSendGuardianConsent } from "@/lib/guardian-consent";
 function ageFrom(value: string) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return null;
   const dob = new Date(`${value}T00:00:00Z`);
-  if (Number.isNaN(dob.getTime())) return null;
+  if (Number.isNaN(dob.getTime()) || dob.toISOString().slice(0,10)!==value) return null;
   const now = new Date();
   let age = now.getUTCFullYear() - dob.getUTCFullYear();
   const month = now.getUTCMonth() - dob.getUTCMonth();
@@ -29,7 +29,7 @@ export async function PATCH(request: Request) {
     changes.passwordHash = passwordData.hash;
     changes.passwordSalt = passwordData.salt;
   }
-  const requestedRole = body.requestedRole === "teacher" ? "pending_teacher" : "student";
+  const requestedRole = body.requestedRole === "teacher" ? "pending_teacher" : body.requestedRole === "parent" ? "parent" : "student";
   const completingProfile = !current.user.profileCompletedAt;
   if (completingProfile && (current.user.role === "student" || current.user.role === "pending_teacher")) changes.role = requestedRole;
   const effectiveRole = (changes.role ?? current.user.role) as string;
@@ -41,8 +41,8 @@ export async function PATCH(request: Request) {
     changes.grade = null;
   }
   if (body.school !== undefined) changes.school = body.school.trim().slice(0, 120) || null;
-  if (body.birthDate !== undefined || (completingProfile && effectiveRole === "student")) {
-    const birthDate = (body.birthDate ?? "").trim();
+  if (body.birthDate !== undefined || (completingProfile && ['student','parent'].includes(effectiveRole))) {
+    const birthDate = (body.birthDate ?? current.user.birthDate ?? "").trim();
     const age = ageFrom(birthDate);
     if (age === null || age < (effectiveRole === "student" ? 5 : 18) || age > 100) return Response.json({ error: "დაბადების თარიღი არასწორია" }, { status: 400 });
     const guardianEmail = (body.guardianEmail ?? "").trim().toLowerCase();

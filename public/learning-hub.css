@@ -1,4 +1,5 @@
 .learning-panel{padding:18px;margin:16px 0;border:1px solid var(--border);background:linear-gradient(120deg,#fff6e7,#edf7ee)}
+.parent-surface{width:min(980px,100%);margin:auto;padding:24px;box-sizing:border-box}.parent-surface h1{font-size:26px;flex:1}.parent-surface p,.parent-surface li{font-size:16px;line-height:1.8}.parent-surface ol{padding-left:24px}.parent-surface button{min-height:44px;margin:4px}.parent-surface .learning-note{font-size:14px}
 .learning-panel h2{font-size:20px;margin-bottom:10px}.learning-panel p,.learning-dialog p{line-height:1.7;margin:8px 0}
 .learning-actions{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px;margin:12px 0}
 .learning-action{background:#ffffffb8;border:1px solid var(--border);border-radius:14px;padding:14px}.learning-action h3{font-size:15px;line-height:1.6}

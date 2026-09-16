@@ -7,7 +7,7 @@ async function initServerAuth(){
   if(resetToken){go('login');setTimeout(openPasswordRecoveryModal,0);}
   try{
     const response=await fetch('/api/auth/session',{credentials:'include',cache:'no-store'});
-    if(response.ok){const data=await response.json();if(data&&data.user){await adoptServerUser(data.user,{navigate:(status==='success'||emailStatus==='verified')&&!resetToken});if(status)clearOAuthStatusParam();if(emailStatus){try{const clean=new URL(window.top.location.href);clean.searchParams.delete('email');window.top.history.replaceState({},'',clean.pathname+clean.search+clean.hash);}catch(_){} }return true;}}
+    if(response.ok){const data=await response.json();if(data&&data.user){await adoptServerUser(data.user,{navigate:!resetToken});if(status)clearOAuthStatusParam();if(emailStatus){try{const clean=new URL(window.top.location.href);clean.searchParams.delete('email');window.top.history.replaceState({},'',clean.pathname+clean.search+clean.hash);}catch(_){} }return true;}}
     if(emailStatus){go('login');setLoginNotice(emailStatus==='verified'?'ელ-ფოსტა დადასტურდა — ახლა შეგიძლიათ შეხვიდეთ.':'დადასტურების ბმული არასწორია ან ვადაგასულია.',emailStatus==='verified'?'success':'warn');}
     if(status){
       go('login');
