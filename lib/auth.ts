@@ -70,6 +70,21 @@ export async function getSessionUser(request: Request) {
   if (!row) return null;
   // Revoked/blocked accounts cannot retain API access through an old cookie.
   if (!['active','onboarding','email_pending'].includes(row.user.accountStatus) && !['/api/auth/session','/api/auth/logout','/api/auth/data'].includes(path)) return null;
+  if (row.user.role === 'student' && row.user.accountStatus === 'active') {
+    const recoveryRoute = path === '/api/auth/session' || path === '/api/auth/profile' || path === '/api/auth/logout'
+      || path === '/api/auth/data' || path === '/api/auth/guardian/resend' || path.startsWith('/api/auth/oauth/');
+    const birthDate = String(row.user.birthDate ?? '');
+    const parsed = /^\d{4}-\d{2}-\d{2}$/.test(birthDate) ? new Date(`${birthDate}T00:00:00Z`) : null;
+    const validBirthDate = parsed && Number.isFinite(parsed.getTime()) && parsed.toISOString().slice(0, 10) === birthDate;
+    let age: number | null = null;
+    if (validBirthDate) {
+      const today = new Date();
+      age = today.getUTCFullYear() - parsed.getUTCFullYear();
+      if (today.getUTCMonth() < parsed.getUTCMonth() || (today.getUTCMonth() === parsed.getUTCMonth() && today.getUTCDate() < parsed.getUTCDate())) age--;
+    }
+    const learningAllowed = row.user.emailVerified === true && age !== null && age >= 5 && (age >= 16 || Boolean(row.user.guardianVerifiedAt));
+    if (!learningAllowed && !recoveryRoute) return null;
+  }
   let mfaVerified = true;
   if (row.user.role === "admin") {
     const verified = await env.DB.prepare("SELECT session_id FROM session_mfa_verifications WHERE session_id = ? AND expires_at > ?")

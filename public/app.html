@@ -4072,10 +4072,10 @@ function appUserFromServer(user){
 async function adoptServerUser(user,opts){
   opts=opts||{};const appUser=appUserFromServer(user);EDUTEST_SERVER_AUTH_ACTIVE=true;
   const generation=++EDUTEST_AUTH_GENERATION;
-  if(appUser.emailVerified)await hydrateServerLearningState(appUser,generation);
+  const gate=studentPrivacyGate(appUser);
+  if(appUser.emailVerified&&(appUser.role!=='student'||gate==='ok'))await hydrateServerLearningState(appUser,generation);
   if(generation!==EDUTEST_AUTH_GENERATION)return;
   mergeAppUserIntoLocal(appUser);curRole=appUser.role;setCloudStatus('უსაფრთხო სესია აქტიურია · '+appUser.email,true);
-  const gate=studentPrivacyGate(appUser);
   if(opts.navigate){
     if(!appUser.emailVerified||appUser.accountStatus==='email_pending'){go('login');showEmailVerificationModal(appUser);}
     else if(curRole==='pending_teacher'&&!appUser.profileCompletedAt){go('login');showAgeVerificationModal();}
@@ -5391,6 +5391,7 @@ async function doLogout(){
   EDUTEST_SERVER_AUTH_ACTIVE=false;EDUTEST_CLOUD.user=null;EDUTEST_CLOUD.profile=null;CUR_USER=null;
   USER_DB.splice(0,USER_DB.length);SESSION_RESULTS.splice(0,SESSION_RESULTS.length);ASSIGNMENTS=[];REPORTS=[];ADMIN_AUDIT_LOG=[];ALL_TESTS.splice(0,ALL_TESTS.length);
   try{localStorage.removeItem('edutest_users');localStorage.removeItem('edutest_results');}catch(_){}
+  ['age-verification-modal','guardian-pending-modal','email-verification-modal','admin-mfa-modal'].forEach(id=>document.getElementById(id)?.classList.add('hidden'));
   go('landing');if(typeof refreshAssessmentCatalog==='function')refreshAssessmentCatalog(true);
 }
 

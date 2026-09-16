@@ -73,5 +73,27 @@ test('parent onboarding and route boundaries remain explicit; no self-assigned t
  assert.match(reg,/body.role === "parent"/);assert.match(reg,/age<18/);assert.match(reg,/pending_teacher/);assert.match(profile,/completingProfile &&/);assert.match(profile,/\['student','parent'\]/);
  assert.match(nav,/p==='parent'&&role!=='parent'/);assert.match(ui,/loadParentHome/);assert.match(ui,/refreshSavedAssessments/);assert.doesNotMatch(ui,/\.innerHTML\s*=/);
  for(const route of ['start','submit','draft'])assert.match(read('app/api/assessments/'+route+'/route.ts'),/\['student','teacher','admin'\]/);
- assert.match(read('app/api/admin/question-reviews/route.ts'),/user.role!=='admin'/);
+  assert.match(read('app/api/admin/question-reviews/route.ts'),/user.role!=='admin'/);
+});
+test('active minors need guardian consent at the shared server session boundary',async()=>{
+ const source=stripTypeScriptTypes(read('lib/auth.ts')).replace(/^import\s+[\s\S]*?from\s+["'][^"']+["'];?\s*$/gm,'').replaceAll('export ','');
+ let user={id:'child',role:'student',grade:'3ა',birthDate:'2014-01-01',guardianVerifiedAt:null,emailVerified:true,accountStatus:'active'};
+ const db={select:()=>({from:()=>({innerJoin:()=>({where:()=>({limit:async()=>[{user,sessionId:'s'}]})})})})};
+ const getSessionUser=new Function('env','and','eq','gt','ensureSchema','getDb','sessions','users',source+'\nreturn getSessionUser;')
+   ({DB:{}},()=>({}),()=>({}),()=>({}),async()=>{},()=>db,{id:'id',tokenHash:'token',userId:'uid',expiresAt:'expires'},{id:'id'});
+ const request=path=>new Request('https://example.test'+path,{headers:{cookie:'edutest_session=fixture'}});
+ assert.equal(await getSessionUser(request('/api/assessments/start')),null);
+ assert.ok(await getSessionUser(request('/api/auth/session')),'recovery/session status remains available');
+ user={...user,guardianVerifiedAt:new Date()};assert.ok(await getSessionUser(request('/api/assessments/start')));
+ user={...user,birthDate:'1990-01-01',guardianVerifiedAt:null};assert.ok(await getSessionUser(request('/api/attempts')));
+});
+test('account recovery, logout overlays and assignment scoping retain functional boundaries',()=>{
+ const reset=read('app/api/auth/password/complete/route.ts'),confirm=read('app/api/auth/email/confirm/route.ts');
+ const assignmentsRoute=read('app/api/assignments/route.ts'),studentsRoute=read('app/api/management/students/route.ts');
+ assert.match(reset,/account_status='email_pending'/);assert.match(reset,/profile_completed_at IS NULL/);assert.match(reset,/account_status IN \('active','onboarding','email_pending'\)/);
+ assert.match(confirm,/account_status IN \('active','onboarding','email_pending'\)/);assert.doesNotMatch(confirm,/accountStatus: "active"/);
+ assert.match(assignmentsRoute,/eq\(assignments\.createdBy,current\.user\.id\)/);assert.match(assignmentsRoute,/eq\(users\.school,school\)/);assert.match(assignmentsRoute,/schoolGradeNumber/);
+ assert.match(studentsRoute,/gradeNumbers\.has\(schoolGradeNumber\(row\.grade\)\)/);
+ const logout=read('src/legacy-app/50-adaptive-learning.js');for(const id of ['age-verification-modal','guardian-pending-modal','email-verification-modal','admin-mfa-modal'])assert.match(logout,new RegExp(id));
+ const navigation=read('src/legacy-app/30-state-navigation.js');assert.match(navigation,/appUser\.role!=='student'\|\|gate==='ok'/);
 });

@@ -882,6 +882,7 @@ async function doLogout(){
   EDUTEST_SERVER_AUTH_ACTIVE=false;EDUTEST_CLOUD.user=null;EDUTEST_CLOUD.profile=null;CUR_USER=null;
   USER_DB.splice(0,USER_DB.length);SESSION_RESULTS.splice(0,SESSION_RESULTS.length);ASSIGNMENTS=[];REPORTS=[];ADMIN_AUDIT_LOG=[];ALL_TESTS.splice(0,ALL_TESTS.length);
   try{localStorage.removeItem('edutest_users');localStorage.removeItem('edutest_results');}catch(_){}
+  ['age-verification-modal','guardian-pending-modal','email-verification-modal','admin-mfa-modal'].forEach(id=>document.getElementById(id)?.classList.add('hidden'));
   go('landing');if(typeof refreshAssessmentCatalog==='function')refreshAssessmentCatalog(true);
 }
 

@@ -1,7 +1,8 @@
-import { and, asc, eq, inArray } from "drizzle-orm";
+import { and, asc, eq } from "drizzle-orm";
 import { ensureSchema, getDb } from "@/db";
 import { assignments, users } from "@/db/schema";
 import { getSessionUser } from "@/lib/auth";
+import { schoolGradeNumber } from "@/lib/school-policy.mjs";
 
 export async function GET(request: Request) {
   const current = await getSessionUser(request);
@@ -17,6 +18,7 @@ export async function GET(request: Request) {
   const grades = [...new Set(owned.map(row => String(row.grade)).filter(Boolean))];
   const school = String(current.user.school ?? "").trim();
   if (!grades.length || !school) return Response.json({ students: [] }, { headers: { "Cache-Control": "no-store" } });
-  const rows = await getDb().select(selection).from(users).where(and(eq(users.role, "student"), inArray(users.grade, grades), eq(users.school, school))).orderBy(asc(users.name));
-  return Response.json({ students: rows }, { headers: { "Cache-Control": "no-store" } });
+  const gradeNumbers=new Set(grades.map(schoolGradeNumber).filter(Boolean));
+  const rows = await getDb().select(selection).from(users).where(and(eq(users.role, "student"), eq(users.school, school))).orderBy(asc(users.name));
+  return Response.json({ students: rows.filter(row=>gradeNumbers.has(schoolGradeNumber(row.grade))) }, { headers: { "Cache-Control": "no-store" } });
 }

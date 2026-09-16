@@ -2,17 +2,19 @@ import { and, desc, eq } from "drizzle-orm";
 import { getDb } from "@/db";
 import { assignments, assessmentTests, users } from "@/db/schema";
 import { getSessionUser } from "@/lib/auth";
+import { schoolGradeNumber } from "@/lib/school-policy.mjs";
 
 export async function GET(request: Request) {
   const current = await getSessionUser(request);
   if (!current) return Response.json({ error: "ავტორიზაცია აუცილებელია" }, { status: 401 });
-  const rows = await getDb().select({ assignment: assignments, teacherSchool: users.school })
-    .from(assignments).innerJoin(users, eq(assignments.createdBy, users.id)).orderBy(desc(assignments.createdAt)).limit(250);
-  const visible = current.user.role === "student"
-    ? rows.filter(row => String(row.assignment.grade) === String(current.user.grade) && !!current.user.school && row.teacherSchool === current.user.school).map(row => row.assignment)
-    : current.user.role === "teacher"
-      ? rows.filter(row => row.assignment.createdBy === current.user.id).map(row => row.assignment)
-      : current.user.role === "admin" ? rows.map(row => row.assignment) : [];
+  const db=getDb();
+  let visible: typeof assignments.$inferSelect[]=[];
+  if(current.user.role==='student'){
+    const grade=schoolGradeNumber(current.user.grade),school=String(current.user.school??'').trim();
+    if(grade&&school)visible=(await db.select({assignment:assignments}).from(assignments).innerJoin(users,eq(assignments.createdBy,users.id))
+      .where(and(eq(assignments.grade,String(grade)),eq(users.school,school))).orderBy(desc(assignments.createdAt)).limit(250)).map(row=>row.assignment);
+  }else if(current.user.role==='teacher')visible=await db.select().from(assignments).where(eq(assignments.createdBy,current.user.id)).orderBy(desc(assignments.createdAt)).limit(250);
+  else if(current.user.role==='admin')visible=await db.select().from(assignments).orderBy(desc(assignments.createdAt)).limit(250);
   return Response.json({ assignments: visible });
 }
 

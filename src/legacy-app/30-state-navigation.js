@@ -1015,10 +1015,10 @@ function appUserFromServer(user){
 async function adoptServerUser(user,opts){
   opts=opts||{};const appUser=appUserFromServer(user);EDUTEST_SERVER_AUTH_ACTIVE=true;
   const generation=++EDUTEST_AUTH_GENERATION;
-  if(appUser.emailVerified)await hydrateServerLearningState(appUser,generation);
+  const gate=studentPrivacyGate(appUser);
+  if(appUser.emailVerified&&(appUser.role!=='student'||gate==='ok'))await hydrateServerLearningState(appUser,generation);
   if(generation!==EDUTEST_AUTH_GENERATION)return;
   mergeAppUserIntoLocal(appUser);curRole=appUser.role;setCloudStatus('უსაფრთხო სესია აქტიურია · '+appUser.email,true);
-  const gate=studentPrivacyGate(appUser);
   if(opts.navigate){
     if(!appUser.emailVerified||appUser.accountStatus==='email_pending'){go('login');showEmailVerificationModal(appUser);}
     else if(curRole==='pending_teacher'&&!appUser.profileCompletedAt){go('login');showAgeVerificationModal();}

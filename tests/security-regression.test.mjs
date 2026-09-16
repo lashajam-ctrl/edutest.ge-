@@ -31,7 +31,8 @@ test("enforces server RBAC for student, teacher and administrator data", async (
   assert.match(admin, /current\?\.user\.role === "admin"/);
   assert.match(attempts, /current\.user\.role !== "teacher" && current\.user\.role !== "admin"/);
   assert.match(attempts, /assignments\.createdBy, current\.user\.id/);
-  assert.match(assignments, /row\.assignment\.createdBy === current\.user\.id/);
+  assert.match(assignments, /eq\(assignments\.createdBy,current\.user\.id\)/);
+  assert.match(assignments, /eq\(users\.school,school\)/);
   assert.match(ai, /current\.user\.role !== "student"/);
   assert.match(ai, /\/auth\/v1\/user/);
   assert.match(ai, /\/rest\/v1\/profiles/);
@@ -237,7 +238,8 @@ test("keeps payments disabled and uses secure server OAuth sessions for configur
   assert.match(resetRequest, /RESEND_API_KEY/);
   assert.match(resetRequest, /passwordResetRequests/);
   assert.match(resetComplete, /isNull\(passwordResetRequests\.usedAt\)/);
-  assert.match(resetComplete, /delete\(sessions\)/);
+  assert.match(resetComplete, /DELETE FROM sessions WHERE user_id=/);
+  assert.match(resetComplete, /account_status IN \('active','onboarding','email_pending'\)/);
 });
 
 test("offers one clear authentication surface without exposing backend terminology", async () => {
@@ -273,8 +275,9 @@ test("registers a complete validated profile atomically and requires email verif
   assert.match(register, /accountStatus: "email_pending"/);
   assert.match(register, /createAndSendEmailVerification/);
   assert.match(auth, /row\?\.user\.accountStatus === "email_pending"/);
-  assert.match(confirm, /emailVerified: true/);
-  assert.match(confirm, /accountStatus: "active"/);
+  assert.match(confirm, /email_verified=1/);
+  assert.match(confirm, /account_status='email_pending'/);
+  assert.match(confirm, /account_status IN \('active','onboarding','email_pending'\)/);
   assert.match(resend, /consumeRateLimit/);
   assert.match(schema, /email_verification_requests/);
   assert.match(html, /id="email-verification-modal"/);
