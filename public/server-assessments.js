@@ -278,6 +278,7 @@
       result.reviewed=(result.reviewed||[]).map(adaptReviewed);
       result.userId=CUR_USER&&CUR_USER.email||'guest';
       result.userGrade=Number(CUR_USER&&CUR_USER.grade||result.grade||1);
+      result._serverAttemptId=submittingSession;
       Object.assign(result,resultBadge(Number(result.pct||0)));
       const grade=parseInt(CUR_USER&&CUR_USER.grade)||parseInt(result.grade)||1;
       let xpEarned=typeof calcXP==='function'?calcXP(Number(result.pct||0),grade):0;

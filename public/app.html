@@ -4038,6 +4038,11 @@ async function syncUserLearningState(){
   try{const response=await fetch('/api/user-state',{method:'PUT',credentials:'include',headers:{'Content-Type':'application/json'},body:JSON.stringify({state:collectDurableLearningState(CUR_USER.email)}),keepalive:true});return response.ok;}catch(_){return false;}finally{EDUTEST_STATE_SYNCING=false;}
 }
 let EDUTEST_AUTH_GENERATION=0;
+function learningResultFingerprint(row){
+  if(!row||typeof row!=='object')return '';
+  const reviewed=Array.isArray(row.reviewed)?row.reviewed.map(item=>String(item&&item.id||'')).join('|'):'';
+  return JSON.stringify([String(row.userId||''),String(row.testId||''),String(row.date||''),Number(row.earned||0),Number(row.totalPts||0),Number(row.correct||0),Number(row.total||0),Number(row.pct||0),reviewed]);
+}
 async function hydrateServerLearningState(appUser,generation){
   if(!appUser||!appUser.emailVerified)return;
   try{
@@ -4047,9 +4052,9 @@ async function hydrateServerLearningState(appUser,generation){
     if(statePayload)Object.entries(statePayload.state||{}).forEach(([key,value])=>{if(isDurableLearningKey(key,appUser.email)&&typeof value==='string')localStorage.setItem(key,value);});
     if(attemptPayload){
       const remote=(attemptPayload.attempts||[]).map(row=>Object.assign({},row.result||{},{userId:appUser.email,_serverAttemptId:row.id,verified:true}));
-      const remoteIds=new Set(remote.map(row=>row._serverAttemptId)),seen=new Set();
+      const remoteIds=new Set(remote.map(row=>row._serverAttemptId)),remoteFingerprints=new Set(remote.map(learningResultFingerprint)),seen=new Set();
       const local=[...SESSION_RESULTS,...(_ls('edutest_results')||[])].filter(row=>{
-        if(row.userId!==appUser.email||(row._serverAttemptId&&remoteIds.has(row._serverAttemptId)))return false;
+        if(row.userId!==appUser.email||(row._serverAttemptId&&remoteIds.has(row._serverAttemptId))||remoteFingerprints.has(learningResultFingerprint(row)))return false;
         const key=JSON.stringify(row);if(seen.has(key))return false;seen.add(key);return true;
       });
       SESSION_RESULTS.splice(0,SESSION_RESULTS.length,...remote,...local);_lsSet('edutest_results',SESSION_RESULTS);

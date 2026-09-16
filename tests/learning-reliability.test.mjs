@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {DatabaseSync} from 'node:sqlite';
 import {readFileSync} from 'node:fs';
 import {stripTypeScriptTypes} from 'node:module';
+import {runInNewContext} from 'node:vm';
 import {createDraftService,cleanDraftAnswers} from '../lib/assessment-drafts-core.mjs';
 import {createReviewService,questionVersion} from '../lib/question-review-core.mjs';
 import {makeLearningPlan,DAY_MS} from '../lib/learning-core.mjs';
@@ -96,4 +97,14 @@ test('account recovery, logout overlays and assignment scoping retain functional
  assert.match(studentsRoute,/gradeNumbers\.has\(schoolGradeNumber\(row\.grade\)\)/);
  const logout=read('src/legacy-app/50-adaptive-learning.js');for(const id of ['age-verification-modal','guardian-pending-modal','email-verification-modal','admin-mfa-modal'])assert.match(logout,new RegExp(id));
  const navigation=read('src/legacy-app/30-state-navigation.js');assert.match(navigation,/appUser\.role!=='student'\|\|gate==='ok'/);
+});
+test('server-backed results remain single after learning-state hydration',()=>{
+ const navigation=read('src/legacy-app/30-state-navigation.js');
+ const helper=navigation.slice(navigation.indexOf('function learningResultFingerprint'),navigation.indexOf('async function hydrateServerLearningState'));
+ const context={};runInNewContext(helper,context);
+ const local={userId:'student@example.test',testId:'english-3',date:'9/16/2026',earned:18,totalPts:18,correct:10,total:10,pct:100,reviewed:[{id:'q1'},{id:'q2'}],xpEarned:50};
+ const remote={...local,_serverAttemptId:'session-1',verified:true};
+ assert.equal(context.learningResultFingerprint(local),context.learningResultFingerprint(remote));
+ assert.match(navigation,/remoteFingerprints\.has\(learningResultFingerprint\(row\)\)/);
+ assert.match(read('public/server-assessments.js'),/result\._serverAttemptId=submittingSession/);
 });
