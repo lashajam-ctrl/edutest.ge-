@@ -57,6 +57,13 @@ test("centers results and keeps actions usable on a 360px-wide screen", async ()
   assert.match(html, /min-height:44px/);
 });
 
+test("keeps the mobile sidebar above its dismiss overlay", async () => {
+  const html = await source("public/app.html");
+  assert.match(html, /\.page\.active\{[^}]*animation:none!important;transform:none!important/);
+  assert.match(html, /#sidebar-overlay\{[^}]*z-index:199/);
+  assert.match(html, /\.sidebar\.open\{[^}]*z-index:200/);
+});
+
 test("publishes live counters instead of frozen marketing totals", async () => {
   const [html, client, stats] = await Promise.all([source("public/app.html"), source("public/server-assessments.js"), source("app/api/public/stats/route.ts")]);
   for (const id of ["lp-question-count", "lp-test-count", "lp-subject-count", "lp-today-tests", "lp-excellent", "lp-average-score"]) {
