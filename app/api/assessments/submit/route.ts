@@ -5,6 +5,7 @@ import { correctKnownAnswerKey, correctKnownQuestionExplanation } from "@/lib/as
 import { getSessionUser } from "@/lib/auth";
 import { consumeRateLimit } from "@/lib/rate-limit";
 import { sendAssessmentResultEmail } from "@/lib/result-email";
+import { gradeOpenResponseWithAi } from "@/lib/ai-grading";
 
 type SessionRow = { id: string; user_id: string; test_id: string; question_ids_json: string; presentation_json: string; status: string; expires_at: number };
 type QuestionWithKey = StoredAssessmentQuestion & { answer_key_json: string; explanation: string };
@@ -50,26 +51,55 @@ export async function POST(request: Request) {
   const byId = new Map(rows.map(row => [row.id, row]));
   if (byId.size !== questionIds.length) return Response.json({ error: "სერვერის პასუხების გასაღები არასრულია" }, { status: 500 });
   const presentation = JSON.parse(session.presentation_json) as Record<string, Presentation>;
-  let score = 0, maxScore = 0, correctCount = 0;
-  const reviewed = questionIds.map(id => {
+  const reviewed = await Promise.all(questionIds.map(async id => {
     const question = byId.get(id)!;
     const publicPayload = parsePublicPayload(question);
     const answerKey = correctKnownAnswerKey(question.id, JSON.parse(question.answer_key_json) as Record<string, unknown>);
-    const result = gradeAssessmentAnswer({ question, answerKey, userAnswer: answers[id], presentation: presentation[id], publicPayload });
-    maxScore += Number(question.points); if (result.correct) { score += Number(question.points); correctCount++; }
+    const deterministic = gradeAssessmentAnswer({ question, answerKey, userAnswer: answers[id], presentation: presentation[id], publicPayload });
+    let gradingStatus: "graded" | "pending" = "graded";
+    let correct = deterministic.correct;
+    let correctDisplay = deterministic.correctDisplay;
+    let awardedPoints = correct ? Number(question.points) : 0;
+    let gradingFeedback = "";
+    let gradingConfidence: number | null = null;
+    if (question.question_type === "short_answer" && answerKey.mode === "ai") {
+      const aiGrade = await gradeOpenResponseWithAi({
+        runtime: env as unknown as Record<string, string | undefined>,
+        userId: current.user.id,
+        grade: Number(question.grade),
+        subject: question.subject,
+        questionText: String(publicPayload.text ?? ""),
+        userAnswer: answers[id],
+        referenceAnswer: String(answerKey.referenceAnswer ?? ""),
+        rationale: String(answerKey.rubric ?? question.explanation ?? ""),
+        points: Number(question.points),
+      });
+      gradingStatus = aiGrade.status;
+      correct = aiGrade.correct;
+      correctDisplay = null;
+      awardedPoints = aiGrade.awardedPoints;
+      gradingFeedback = aiGrade.feedback;
+      gradingConfidence = aiGrade.confidence;
+    }
     let submittedAnswer = answers[id] ?? null;
     if (question.question_type === "multiple_choice" && Number.isInteger(Number(submittedAnswer)) && presentation[id]?.optionOrder) {
       submittedAnswer = presentation[id].optionOrder?.[Number(submittedAnswer)] ?? submittedAnswer;
     }
-    return { ...publicPayload, id: question.id, ua: submittedAnswer, ok: result.correct, correctDisplay: result.correctDisplay, explain: correctKnownQuestionExplanation(question.id, question.explanation) };
-  });
+    const explain = gradingFeedback || (answerKey.mode === "ai" ? "" : correctKnownQuestionExplanation(question.id, question.explanation));
+    return { ...publicPayload, id: question.id, pts: Number(question.points), ua: submittedAnswer, ok: correct, correctDisplay, explain, gradingStatus, awardedPoints, gradingConfidence, reveal: answerKey.mode === "ai" ? false : undefined };
+  }));
+  const score = reviewed.reduce((sum, row) => sum + Number(row.awardedPoints || 0), 0);
+  const graded = reviewed.filter(row => row.gradingStatus === "graded");
+  const maxScore = graded.reduce((sum, row) => sum + Number(row.pts || 0), 0);
+  const correctCount = graded.filter(row => row.ok).length;
+  const pendingCount = reviewed.length - graded.length;
   const percentage = maxScore ? Math.round(score / maxScore * 100) : 0, now = Date.now();
   const test = await env.DB.prepare("SELECT title,subject,grade FROM assessment_tests WHERE id = ?").bind(session.test_id).first<{ title: string; subject: string; grade: number }>();
   const resultSubject = canonicalAssessmentSubject(test?.subject ?? "", test?.grade ?? null);
   const resultTitle = resultSubject === "მათემატიკა" && Number(test?.grade) >= 7
     ? String(test?.title ?? "ტესტი").replace(/^(?:ალგებრა|გეომეტრია|მათემატიკა)/u, "მათემატიკა")
     : test?.title ?? "ტესტი";
-  const result = { testId: session.test_id, title: resultTitle, subject: resultSubject, grade: test?.grade ?? null, earned: score, totalPts: maxScore, correct: correctCount, total: questionIds.length, pct: percentage, reviewed, assessmentMode: "verified", verified: true, date: new Date(now).toLocaleDateString("ka-GE") };
+  const result = { testId: session.test_id, title: resultTitle, subject: resultSubject, grade: test?.grade ?? null, earned: score, totalPts: maxScore, correct: correctCount, total: questionIds.length, gradedTotal: graded.length, pending: pendingCount, pct: percentage, reviewed, assessmentMode: "verified", verified: true, date: new Date(now).toLocaleDateString("ka-GE") };
   const statements = [
     env.DB.prepare(`UPDATE assessment_sessions SET status = 'submitted', submitted_at = ? WHERE id = ? AND user_id = ? AND status = 'started' AND expires_at >= ?
       AND NOT EXISTS (SELECT 1 FROM assessment_session_drafts d WHERE d.session_id=assessment_sessions.id AND d.revision<>?)`).bind(now, session.id,current.user.id,now,expectedRevision),
@@ -78,13 +108,14 @@ export async function POST(request: Request) {
   ];
   for (const id of questionIds) {
     const question = byId.get(id)!, item = reviewed.find(row => row.id === id)!;
-    const nextReviewAt = now + (item.ok ? 7 : 1) * 86_400_000;
+    const pending = item.gradingStatus === "pending";
+    const nextReviewAt = now + (pending || item.ok ? 7 : 1) * 86_400_000;
     statements.push(env.DB.prepare(`INSERT INTO assessment_question_history
       (user_id,question_id,semantic_group_id,answered_count,correct_count,last_correct,last_answered_at,next_review_at)
       SELECT ?,?,?,1,?,?,?,? WHERE changes()=1 ON CONFLICT(user_id,question_id) DO UPDATE SET
       semantic_group_id=excluded.semantic_group_id, answered_count=answered_count+1, correct_count=correct_count+excluded.correct_count,
       last_correct=excluded.last_correct, last_answered_at=excluded.last_answered_at, next_review_at=excluded.next_review_at`)
-      .bind(current.user.id, id, question.semantic_group_id, item.ok ? 1 : 0, item.ok ? 1 : 0, now, nextReviewAt));
+      .bind(current.user.id, id, question.semantic_group_id, item.ok ? 1 : 0, pending || item.ok ? 1 : 0, now, nextReviewAt));
     statements.push(env.DB.prepare("INSERT INTO question_history (id,user_id,question_id,pool_key,answered_at) SELECT ?,?,?,?,? WHERE changes()=1 ON CONFLICT(user_id,question_id) DO UPDATE SET answered_at=excluded.answered_at,pool_key=excluded.pool_key")
       .bind(crypto.randomUUID(), current.user.id, id, `server:${resultSubject}:${test?.grade ?? ""}`, now));
   }

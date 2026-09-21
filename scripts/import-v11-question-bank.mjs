@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { classifyOpenAnswer } from "../lib/short-answer-core.mjs";
 
 const QUESTION_FILES = ["IMPORT/questions_canonical_40320.jsonl", "IMPORT/questions_extension.jsonl"];
 const ANSWER_FILES = ["SERVER-ONLY/answer_keys_40320.jsonl", "SERVER-ONLY/answer_keys_extension.jsonl"];
@@ -120,7 +121,12 @@ export function answerKeyFor(question, answerRow) {
     if (expected.some(item => !item) || [...expected].map(normalize).sort().join("|") !== [...right].map(normalize).sort().join("|")) return { error: "match_answer_mismatch" };
     return { type: "match", payload: { leftItems: left, rightOptions: right }, key: { correct: expected, pairs: left.map((item, index) => [item, expected[index]]) } };
   }
-  if (type === "OPEN") return { error: "open_response_requires_grading" };
+  if (type === "OPEN") {
+    const key = classifyOpenAnswer(answer);
+    if (!key) return { error: "invalid_open" };
+    if (key.mode === "ai") key.rubric = String(answerRow.rationale || "შეადარე მოსწავლის პასუხი ეტალონს აზრობრივი სისწორის მიხედვით.");
+    return { type: "short_answer", payload: {}, key };
+  }
   if (type === "FILL") {
     const blanks = Array.isArray(answer) ? answer.map(String) : [String(answer)];
     if (!blanks.length || blanks.some(item => !item.trim()) || blanks.some(item => item.length > 160)) return { error: "invalid_fill" };
@@ -154,7 +160,7 @@ async function main() {
   const sourcePrefix = `${args.version}:`;
   const questions = (await Promise.all(QUESTION_FILES.map(file => readJsonLines(join(args.source, file))))).flat();
   const answers = new Map((await Promise.all(ANSWER_FILES.map(file => readJsonLines(join(args.source, file))))).flat().map(row => [row.question_id, row]));
-  const subjectFixes = await approvedSubjectFixes(args.source), rows = [], excluded = {}, byBucket = new Map(), byType = {}, remapped = [];
+  const subjectFixes = await approvedSubjectFixes(args.source), rows = [], excluded = {}, byBucket = new Map(), byType = {}, openGradingModes = {}, remapped = [];
   const exclude = reason => { excluded[reason] = (excluded[reason] ?? 0) + 1; };
   for (const question of questions) {
     if (question.status !== "active" || String(question.deliverable) !== "1") { exclude(`source_${question.status}`); continue; }
@@ -179,6 +185,7 @@ async function main() {
       answerKey: answer.key, explanation: String(answers.get(question.question_id)?.rationale || "პასუხი შემოწმებულია სერვერზე."), now,
     };
     rows.push(row); byType[row.type] = (byType[row.type] ?? 0) + 1;
+    if (question.question_type === "OPEN") openGradingModes[answer.key.mode] = (openGradingModes[answer.key.mode] ?? 0) + 1;
     const bucket = `${grade}|${subject}|${semester}`;
     if (!byBucket.has(bucket)) byBucket.set(bucket, { rows: 0, groups: new Set() });
     byBucket.get(bucket).rows++; byBucket.get(bucket).groups.add(row.semanticGroupId);
@@ -195,10 +202,10 @@ async function main() {
     generatedAt: new Date(now).toISOString(), sourceVersion: args.version, sourceQuestions: questions.length,
     sourceActiveDeliverable: questions.filter(row => row.status === "active" && String(row.deliverable) === "1").length,
     importedQuestions: rows.length, importedTests: tests.length, answerKeysServerOnly: rows.length,
-    excluded, questionTypes: byType, confirmedFixes: { biologyRetags: remapped.length, missingContextBlocked: excluded.confirmed_missing_context ?? 0, missingAnswerBlocked: excluded.missing_answer ?? 0 },
+    excluded, questionTypes: byType, openGradingModes, confirmedFixes: { biologyRetags: remapped.length, missingContextBlocked: excluded.confirmed_missing_context ?? 0, missingAnswerBlocked: excluded.missing_answer ?? 0 },
     capacity, validations: { activeOnly: "pass", answerPresence: "pass", uniqueOptions: "pass", exactlyOneMcqAnswer: "pass", contextBlocklist: "pass", catalogRules: "pass", semanticRotationCapacity: "pass" },
     retainedLegacySubjects: ["რუსული"],
-    compatibility: { matchDictionaryAndListAnswers: "pass", openResponses: "excluded_until_manual_or_model_grading_exists", versionedIdsAndPools: "pass", legacyProgressMigration: "included" },
+    compatibility: { matchDictionaryAndListAnswers: "pass", openResponses: "deterministic_or_structured_ai_grading", versionedIdsAndPools: "pass", legacyProgressMigration: "included" },
     humanReview: "not_performed; imported rows are algorithmically validated, not independently SME-approved",
   };
   await mkdir(dirname(args.report), { recursive: true }); await writeFile(args.report, `${JSON.stringify(report, null, 2)}\n`, "utf8");

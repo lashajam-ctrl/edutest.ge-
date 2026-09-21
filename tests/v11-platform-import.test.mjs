@@ -20,16 +20,19 @@ test("generated v23 report passes server-only answer and semantic capacity gates
   assert.equal(report.confirmedFixes.biologyRetags, 42);
   assert.equal(report.confirmedFixes.missingContextBlocked, 18);
   assert.equal(report.confirmedFixes.missingAnswerBlocked, 0);
-  assert.equal(report.excluded.open_response_requires_grading, 3138);
+  assert.equal(report.importedQuestions, 23455);
+  assert.equal(report.questionTypes.short_answer, 3138);
+  assert.deepEqual(report.openGradingModes, { numeric: 2592, text: 388, ai: 158 });
+  assert.equal(report.excluded.open_response_requires_grading, undefined);
   assert.equal(report.answerKeysServerOnly, report.importedQuestions);
   assert.equal(report.capacity.every(row => row.semanticGroups >= row.testQuestions), true);
   assert.equal(Object.values(report.validations).every(value => value === "pass"), true);
   assert.equal(report.compatibility.matchDictionaryAndListAnswers, "pass");
-  assert.match(report.compatibility.openResponses, /excluded/);
+  assert.equal(report.compatibility.openResponses, "deterministic_or_structured_ai_grading");
   assert.match(report.humanReview, /not_performed/);
 });
 
-test("v23 importer supports both match answer encodings and rejects manually graded open responses", () => {
+test("v23 importer supports both match encodings and routes open responses to the right grader", () => {
   const question = {
     question_type: "MATCH",
     options_json: JSON.stringify({ left: ["ა", "ბ"], right: ["1", "2"] }),
@@ -44,8 +47,10 @@ test("v23 importer supports both match answer encodings and rejects manually gra
     payload: { leftItems: ["ა", "ბ"], rightOptions: ["1", "2"] },
     key: { correct: ["2", "1"], pairs: [["ა", "2"], ["ბ", "1"]] },
   });
-  assert.deepEqual(
-    answerKeyFor({ question_type: "OPEN", options_json: "{}" }, { answer_json: JSON.stringify("4"), scoring_rule: "requires_manual_or_model_grading" }),
-    { error: "open_response_requires_grading" },
-  );
+  assert.equal(answerKeyFor({ question_type: "OPEN", options_json: "{}" }, { answer_json: JSON.stringify("3/2") }).key.mode, "numeric");
+  assert.deepEqual(answerKeyFor({ question_type: "OPEN", options_json: "{}" }, { answer_json: JSON.stringify("თბილისი") }).key, { mode: "text", accepted: ["თბილისი"] });
+  const ai = answerKeyFor({ question_type: "OPEN", options_json: "{}" }, { answer_json: JSON.stringify("ეს არის ორმოცზე მეტი სიმბოლოს მქონე აზრობრივი პასუხი, რომელიც რუბრიკით უნდა შეფასდეს."), rationale: "შეაფასე მიზეზი." });
+  assert.equal(ai.type, "short_answer");
+  assert.equal(ai.key.mode, "ai");
+  assert.equal(ai.key.rubric, "შეაფასე მიზეზი.");
 });

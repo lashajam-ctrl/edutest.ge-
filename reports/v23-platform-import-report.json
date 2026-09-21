@@ -1,15 +1,14 @@
 {
-  "generatedAt": "2026-09-21T06:46:08.048Z",
+  "generatedAt": "2026-09-21T07:28:45.816Z",
   "sourceVersion": "v23",
   "sourceQuestions": 45003,
   "sourceActiveDeliverable": 32488,
-  "importedQuestions": 20317,
+  "importedQuestions": 23455,
   "importedTests": 154,
-  "answerKeysServerOnly": 20317,
+  "answerKeysServerOnly": 23455,
   "excluded": {
     "source_quarantined": 6374,
     "source_duplicate": 6141,
-    "open_response_requires_grading": 3138,
     "outside_live_catalog": 9015,
     "confirmed_missing_context": 18
   },
@@ -18,7 +17,13 @@
     "true_false": 2284,
     "match": 2424,
     "order": 2146,
-    "fill": 1425
+    "fill": 1425,
+    "short_answer": 3138
+  },
+  "openGradingModes": {
+    "numeric": 2592,
+    "text": 388,
+    "ai": 158
   },
   "confirmedFixes": {
     "biologyRetags": 42,
@@ -48,8 +53,8 @@
       "grade": 10,
       "subject": "გეოგრაფია",
       "semester": 1,
-      "questions": 58,
-      "semanticGroups": 43,
+      "questions": 64,
+      "semanticGroups": 47,
       "testQuestions": 10,
       "dailyFullFreshTests": 4
     },
@@ -57,8 +62,8 @@
       "grade": 10,
       "subject": "გეოგრაფია",
       "semester": 2,
-      "questions": 52,
-      "semanticGroups": 41,
+      "questions": 58,
+      "semanticGroups": 46,
       "testQuestions": 10,
       "dailyFullFreshTests": 4
     },
@@ -66,26 +71,26 @@
       "grade": 10,
       "subject": "ინგლისური",
       "semester": 1,
-      "questions": 179,
-      "semanticGroups": 66,
+      "questions": 194,
+      "semanticGroups": 79,
       "testQuestions": 10,
-      "dailyFullFreshTests": 6
+      "dailyFullFreshTests": 7
     },
     {
       "grade": 10,
       "subject": "ინგლისური",
       "semester": 2,
-      "questions": 179,
-      "semanticGroups": 66,
+      "questions": 184,
+      "semanticGroups": 71,
       "testQuestions": 10,
-      "dailyFullFreshTests": 6
+      "dailyFullFreshTests": 7
     },
     {
       "grade": 10,
       "subject": "ისტორია",
       "semester": 1,
-      "questions": 62,
-      "semanticGroups": 47,
+      "questions": 64,
+      "semanticGroups": 48,
       "testQuestions": 10,
       "dailyFullFreshTests": 4
     },
@@ -102,71 +107,71 @@
       "grade": 10,
       "subject": "მათემატიკა",
       "semester": 1,
-      "questions": 99,
-      "semanticGroups": 29,
+      "questions": 185,
+      "semanticGroups": 60,
       "testQuestions": 10,
-      "dailyFullFreshTests": 2
+      "dailyFullFreshTests": 6
     },
     {
       "grade": 10,
       "subject": "მათემატიკა",
       "semester": 2,
-      "questions": 108,
-      "semanticGroups": 30,
-      "testQuestions": 10,
-      "dailyFullFreshTests": 3
-    },
-    {
-      "grade": 10,
-      "subject": "მოქალაქეობა",
-      "semester": 1,
-      "questions": 53,
-      "semanticGroups": 39,
-      "testQuestions": 10,
-      "dailyFullFreshTests": 3
-    },
-    {
-      "grade": 10,
-      "subject": "მოქალაქეობა",
-      "semester": 2,
-      "questions": 51,
-      "semanticGroups": 39,
-      "testQuestions": 10,
-      "dailyFullFreshTests": 3
-    },
-    {
-      "grade": 10,
-      "subject": "ფიზიკა",
-      "semester": 1,
-      "questions": 28,
-      "semanticGroups": 21,
-      "testQuestions": 10,
-      "dailyFullFreshTests": 2
-    },
-    {
-      "grade": 10,
-      "subject": "ფიზიკა",
-      "semester": 2,
-      "questions": 36,
-      "semanticGroups": 30,
-      "testQuestions": 10,
-      "dailyFullFreshTests": 3
-    },
-    {
-      "grade": 10,
-      "subject": "ქართული ენა და ლიტერატურა",
-      "semester": 1,
-      "questions": 162,
-      "semanticGroups": 72,
-      "testQuestions": 10,
-      "dailyFullFreshTests": 7
-    },
-    {
-      "grade": 10,
-      "subject": "ქართული ენა და ლიტერატურა",
-      "semester": 2,
-      "questions": 170,
+      "questions": 206,
       "semanticGroups": 61,
+      "testQuestions": 10,
+      "dailyFullFreshTests": 6
+    },
+    {
+      "grade": 10,
+      "subject": "მოქალაქეობა",
+      "semester": 1,
+      "questions": 55,
+      "semanticGroups": 40,
+      "testQuestions": 10,
+      "dailyFullFreshTests": 4
+    },
+    {
+      "grade": 10,
+      "subject": "მოქალაქეობა",
+      "semester": 2,
+      "questions": 52,
+      "semanticGroups": 40,
+      "testQuestions": 10,
+      "dailyFullFreshTests": 4
+    },
+    {
+      "grade": 10,
+      "subject": "ფიზიკა",
+      "semester": 1,
+      "questions": 61,
+      "semanticGroups": 42,
+      "testQuestions": 10,
+      "dailyFullFreshTests": 4
+    },
+    {
+      "grade": 10,
+      "subject": "ფიზიკა",
+      "semester": 2,
+      "questions": 58,
+      "semanticGroups": 41,
+      "testQuestions": 10,
+      "dailyFullFreshTests": 4
+    },
+    {
+      "grade": 10,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "semester": 1,
+      "questions": 177,
+      "semanticGroups": 87,
+      "testQuestions": 10,
+      "dailyFullFreshTests": 8
+    },
+    {
+      "grade": 10,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "semester": 2,
+      "questions": 178,
+      "semanticGroups": 69,
       "testQuestions": 10,
       "dailyFullFreshTests": 6
     },
@@ -174,10 +179,10 @@
       "grade": 10,
       "subject": "ქიმია",
       "semester": 1,
-      "questions": 47,
-      "semanticGroups": 33,
+      "questions": 54,
+      "semanticGroups": 40,
       "testQuestions": 10,
-      "dailyFullFreshTests": 3
+      "dailyFullFreshTests": 4
     },
     {
       "grade": 10,
@@ -210,8 +215,8 @@
       "grade": 11,
       "subject": "გეოგრაფია",
       "semester": 1,
-      "questions": 61,
-      "semanticGroups": 46,
+      "questions": 64,
+      "semanticGroups": 47,
       "testQuestions": 10,
       "dailyFullFreshTests": 4
     },
@@ -219,8 +224,8 @@
       "grade": 11,
       "subject": "გეოგრაფია",
       "semester": 2,
-      "questions": 56,
-      "semanticGroups": 45,
+      "questions": 58,
+      "semanticGroups": 46,
       "testQuestions": 10,
       "dailyFullFreshTests": 4
     },
@@ -228,17 +233,17 @@
       "grade": 11,
       "subject": "ინგლისური",
       "semester": 1,
-      "questions": 178,
-      "semanticGroups": 65,
+      "questions": 193,
+      "semanticGroups": 78,
       "testQuestions": 10,
-      "dailyFullFreshTests": 6
+      "dailyFullFreshTests": 7
     },
     {
       "grade": 11,
       "subject": "ინგლისური",
       "semester": 2,
-      "questions": 180,
-      "semanticGroups": 65,
+      "questions": 183,
+      "semanticGroups": 68,
       "testQuestions": 10,
       "dailyFullFreshTests": 6
     },
@@ -246,8 +251,8 @@
       "grade": 11,
       "subject": "ისტორია",
       "semester": 1,
-      "questions": 62,
-      "semanticGroups": 47,
+      "questions": 64,
+      "semanticGroups": 48,
       "testQuestions": 10,
       "dailyFullFreshTests": 4
     },
@@ -264,23 +269,41 @@
       "grade": 11,
       "subject": "მათემატიკა",
       "semester": 1,
-      "questions": 99,
-      "semanticGroups": 28,
+      "questions": 180,
+      "semanticGroups": 50,
       "testQuestions": 10,
-      "dailyFullFreshTests": 2
+      "dailyFullFreshTests": 5
     },
     {
       "grade": 11,
       "subject": "მათემატიკა",
       "semester": 2,
-      "questions": 93,
-      "semanticGroups": 21,
+      "questions": 196,
+      "semanticGroups": 48,
       "testQuestions": 10,
-      "dailyFullFreshTests": 2
+      "dailyFullFreshTests": 4
     },
     {
       "grade": 11,
       "subject": "მოქალაქეობა",
+      "semester": 1,
+      "questions": 62,
+      "semanticGroups": 42,
+      "testQuestions": 10,
+      "dailyFullFreshTests": 4
+    },
+    {
+      "grade": 11,
+      "subject": "მოქალაქეობა",
+      "semester": 2,
+      "questions": 58,
+      "semanticGroups": 42,
+      "testQuestions": 10,
+      "dailyFullFreshTests": 4
+    },
+    {
+      "grade": 11,
+      "subject": "ფიზიკა",
       "semester": 1,
       "questions": 60,
       "semanticGroups": 41,
@@ -289,28 +312,10 @@
     },
     {
       "grade": 11,
-      "subject": "მოქალაქეობა",
-      "semester": 2,
-      "questions": 57,
-      "semanticGroups": 41,
-      "testQuestions": 10,
-      "dailyFullFreshTests": 4
-    },
-    {
-      "grade": 11,
-      "subject": "ფიზიკა",
-      "semester": 1,
-      "questions": 37,
-      "semanticGroups": 30,
-      "testQuestions": 10,
-      "dailyFullFreshTests": 3
-    },
-    {
-      "grade": 11,
       "subject": "ფიზიკა",
       "semester": 2,
-      "questions": 41,
-      "semanticGroups": 33,
+      "questions": 58,
+      "semanticGroups": 39,
       "testQuestions": 10,
       "dailyFullFreshTests": 3
     },
@@ -318,19 +323,19 @@
       "grade": 11,
       "subject": "ქართული ენა და ლიტერატურა",
       "semester": 1,
-      "questions": 163,
-      "semanticGroups": 72,
+      "questions": 178,
+      "semanticGroups": 87,
+      "testQuestions": 10,
+      "dailyFullFreshTests": 8
+    },
+    {
+      "grade": 11,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "semester": 2,
+      "questions": 180,
+      "semanticGroups": 71,
       "testQuestions": 10,
       "dailyFullFreshTests": 7
-    },
-    {
-      "grade": 11,
-      "subject": "ქართული ენა და ლიტერატურა",
-      "semester": 2,
-      "questions": 171,
-      "semanticGroups": 62,
-      "testQuestions": 10,
-      "dailyFullFreshTests": 6
     },
     {
       "grade": 11,
@@ -354,17 +359,17 @@
       "grade": 12,
       "subject": "ინგლისური",
       "semester": 1,
-      "questions": 182,
-      "semanticGroups": 69,
+      "questions": 195,
+      "semanticGroups": 82,
       "testQuestions": 10,
-      "dailyFullFreshTests": 6
+      "dailyFullFreshTests": 8
     },
     {
       "grade": 12,
       "subject": "ინგლისური",
       "semester": 2,
-      "questions": 184,
-      "semanticGroups": 70,
+      "questions": 188,
+      "semanticGroups": 74,
       "testQuestions": 10,
       "dailyFullFreshTests": 7
     },
@@ -372,8 +377,8 @@
       "grade": 12,
       "subject": "ისტორია",
       "semester": 1,
-      "questions": 66,
-      "semanticGroups": 47,
+      "questions": 68,
+      "semanticGroups": 48,
       "testQuestions": 10,
       "dailyFullFreshTests": 4
     },
@@ -381,8 +386,8 @@
       "grade": 12,
       "subject": "ისტორია",
       "semester": 2,
-      "questions": 69,
-      "semanticGroups": 47,
+      "questions": 71,
+      "semanticGroups": 48,
       "testQuestions": 10,
       "dailyFullFreshTests": 4
     },
@@ -390,62 +395,62 @@
       "grade": 12,
       "subject": "მათემატიკა",
       "semester": 1,
-      "questions": 88,
-      "semanticGroups": 17,
+      "questions": 205,
+      "semanticGroups": 59,
       "testQuestions": 10,
-      "dailyFullFreshTests": 1
+      "dailyFullFreshTests": 5
     },
     {
       "grade": 12,
       "subject": "მათემატიკა",
       "semester": 2,
-      "questions": 97,
-      "semanticGroups": 19,
-      "testQuestions": 10,
-      "dailyFullFreshTests": 1
-    },
-    {
-      "grade": 12,
-      "subject": "სამოქალაქო თავდაცვა და უსაფრთხოება",
-      "semester": 1,
-      "questions": 37,
-      "semanticGroups": 37,
-      "testQuestions": 10,
-      "dailyFullFreshTests": 3
-    },
-    {
-      "grade": 12,
-      "subject": "სამოქალაქო თავდაცვა და უსაფრთხოება",
-      "semester": 2,
-      "questions": 37,
-      "semanticGroups": 37,
-      "testQuestions": 10,
-      "dailyFullFreshTests": 3
-    },
-    {
-      "grade": 12,
-      "subject": "ქართული ენა და ლიტერატურა",
-      "semester": 1,
-      "questions": 163,
-      "semanticGroups": 71,
-      "testQuestions": 10,
-      "dailyFullFreshTests": 7
-    },
-    {
-      "grade": 12,
-      "subject": "ქართული ენა და ლიტერატურა",
-      "semester": 2,
-      "questions": 174,
-      "semanticGroups": 65,
+      "questions": 211,
+      "semanticGroups": 60,
       "testQuestions": 10,
       "dailyFullFreshTests": 6
+    },
+    {
+      "grade": 12,
+      "subject": "სამოქალაქო თავდაცვა და უსაფრთხოება",
+      "semester": 1,
+      "questions": 37,
+      "semanticGroups": 37,
+      "testQuestions": 10,
+      "dailyFullFreshTests": 3
+    },
+    {
+      "grade": 12,
+      "subject": "სამოქალაქო თავდაცვა და უსაფრთხოება",
+      "semester": 2,
+      "questions": 37,
+      "semanticGroups": 37,
+      "testQuestions": 10,
+      "dailyFullFreshTests": 3
+    },
+    {
+      "grade": 12,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "semester": 1,
+      "questions": 178,
+      "semanticGroups": 86,
+      "testQuestions": 10,
+      "dailyFullFreshTests": 8
+    },
+    {
+      "grade": 12,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "semester": 2,
+      "questions": 182,
+      "semanticGroups": 73,
+      "testQuestions": 10,
+      "dailyFullFreshTests": 7
     },
     {
       "grade": 1,
       "subject": "ბუნება",
       "semester": 1,
-      "questions": 208,
-      "semanticGroups": 103,
+      "questions": 221,
+      "semanticGroups": 108,
       "testQuestions": 10,
       "dailyFullFreshTests": 10
     },
@@ -453,80 +458,80 @@
       "grade": 1,
       "subject": "ბუნება",
       "semester": 2,
-      "questions": 198,
-      "semanticGroups": 89,
+      "questions": 207,
+      "semanticGroups": 91,
       "testQuestions": 10,
-      "dailyFullFreshTests": 8
+      "dailyFullFreshTests": 9
     },
     {
       "grade": 1,
       "subject": "ინგლისური",
       "semester": 1,
-      "questions": 185,
-      "semanticGroups": 70,
-      "testQuestions": 10,
-      "dailyFullFreshTests": 7
-    },
-    {
-      "grade": 1,
-      "subject": "ინგლისური",
-      "semester": 2,
-      "questions": 181,
-      "semanticGroups": 61,
-      "testQuestions": 10,
-      "dailyFullFreshTests": 6
-    },
-    {
-      "grade": 1,
-      "subject": "მათემატიკა",
-      "semester": 1,
-      "questions": 214,
-      "semanticGroups": 81,
-      "testQuestions": 10,
-      "dailyFullFreshTests": 8
-    },
-    {
-      "grade": 1,
-      "subject": "მათემატიკა",
-      "semester": 2,
-      "questions": 206,
-      "semanticGroups": 50,
-      "testQuestions": 10,
-      "dailyFullFreshTests": 5
-    },
-    {
-      "grade": 1,
-      "subject": "ქართული",
-      "semester": 1,
-      "questions": 198,
-      "semanticGroups": 89,
-      "testQuestions": 10,
-      "dailyFullFreshTests": 8
-    },
-    {
-      "grade": 1,
-      "subject": "ქართული",
-      "semester": 2,
-      "questions": 205,
-      "semanticGroups": 81,
-      "testQuestions": 10,
-      "dailyFullFreshTests": 8
-    },
-    {
-      "grade": 2,
-      "subject": "ბუნება",
-      "semester": 1,
-      "questions": 194,
+      "questions": 196,
       "semanticGroups": 80,
       "testQuestions": 10,
       "dailyFullFreshTests": 8
     },
     {
+      "grade": 1,
+      "subject": "ინგლისური",
+      "semester": 2,
+      "questions": 190,
+      "semanticGroups": 69,
+      "testQuestions": 10,
+      "dailyFullFreshTests": 6
+    },
+    {
+      "grade": 1,
+      "subject": "მათემატიკა",
+      "semester": 1,
+      "questions": 258,
+      "semanticGroups": 107,
+      "testQuestions": 10,
+      "dailyFullFreshTests": 10
+    },
+    {
+      "grade": 1,
+      "subject": "მათემატიკა",
+      "semester": 2,
+      "questions": 257,
+      "semanticGroups": 76,
+      "testQuestions": 10,
+      "dailyFullFreshTests": 7
+    },
+    {
+      "grade": 1,
+      "subject": "ქართული",
+      "semester": 1,
+      "questions": 205,
+      "semanticGroups": 93,
+      "testQuestions": 10,
+      "dailyFullFreshTests": 9
+    },
+    {
+      "grade": 1,
+      "subject": "ქართული",
+      "semester": 2,
+      "questions": 217,
+      "semanticGroups": 90,
+      "testQuestions": 10,
+      "dailyFullFreshTests": 9
+    },
+    {
+      "grade": 2,
+      "subject": "ბუნება",
+      "semester": 1,
+      "questions": 206,
+      "semanticGroups": 84,
+      "testQuestions": 10,
+      "dailyFullFreshTests": 8
+    },
+    {
       "grade": 2,
       "subject": "ბუნება",
       "semester": 2,
-      "questions": 177,
-      "semanticGroups": 54,
+      "questions": 187,
+      "semanticGroups": 57,
       "testQuestions": 10,
       "dailyFullFreshTests": 5
     },
@@ -534,17 +539,17 @@
       "grade": 2,
       "subject": "ინგლისური",
       "semester": 1,
-      "questions": 163,
-      "semanticGroups": 43,
+      "questions": 178,
+      "semanticGroups": 56,
       "testQuestions": 10,
-      "dailyFullFreshTests": 4
+      "dailyFullFreshTests": 5
     },
     {
       "grade": 2,
       "subject": "ინგლისური",
       "semester": 2,
-      "questions": 169,
-      "semanticGroups": 43,
+      "questions": 172,
+      "semanticGroups": 46,
       "testQuestions": 10,
       "dailyFullFreshTests": 4
     },
@@ -552,26 +557,26 @@
       "grade": 2,
       "subject": "მათემატიკა",
       "semester": 1,
-      "questions": 181,
-      "semanticGroups": 51,
+      "questions": 236,
+      "semanticGroups": 77,
       "testQuestions": 10,
-      "dailyFullFreshTests": 5
+      "dailyFullFreshTests": 7
     },
     {
       "grade": 2,
       "subject": "მათემატიკა",
       "semester": 2,
-      "questions": 211,
-      "semanticGroups": 50,
+      "questions": 265,
+      "semanticGroups": 75,
       "testQuestions": 10,
-      "dailyFullFreshTests": 5
+      "dailyFullFreshTests": 7
     },
     {
       "grade": 2,
       "subject": "ქართული",
       "semester": 1,
-      "questions": 179,
-      "semanticGroups": 71,
+      "questions": 186,
+      "semanticGroups": 75,
       "testQuestions": 10,
       "dailyFullFreshTests": 7
     },
@@ -579,8 +584,8 @@
       "grade": 2,
       "subject": "ქართული",
       "semester": 2,
-      "questions": 184,
-      "semanticGroups": 62,
+      "questions": 192,
+      "semanticGroups": 66,
       "testQuestions": 10,
       "dailyFullFreshTests": 6
     },
@@ -588,71 +593,71 @@
       "grade": 3,
       "subject": "ბუნება",
       "semester": 1,
-      "questions": 181,
+      "questions": 192,
+      "semanticGroups": 73,
+      "testQuestions": 10,
+      "dailyFullFreshTests": 7
+    },
+    {
+      "grade": 3,
+      "subject": "ბუნება",
+      "semester": 2,
+      "questions": 188,
+      "semanticGroups": 60,
+      "testQuestions": 10,
+      "dailyFullFreshTests": 6
+    },
+    {
+      "grade": 3,
+      "subject": "ინგლისური",
+      "semester": 1,
+      "questions": 184,
+      "semanticGroups": 61,
+      "testQuestions": 10,
+      "dailyFullFreshTests": 6
+    },
+    {
+      "grade": 3,
+      "subject": "ინგლისური",
+      "semester": 2,
+      "questions": 173,
+      "semanticGroups": 49,
+      "testQuestions": 10,
+      "dailyFullFreshTests": 4
+    },
+    {
+      "grade": 3,
+      "subject": "მათემატიკა",
+      "semester": 1,
+      "questions": 268,
       "semanticGroups": 69,
       "testQuestions": 10,
       "dailyFullFreshTests": 6
     },
     {
       "grade": 3,
-      "subject": "ბუნება",
+      "subject": "მათემატიკა",
       "semester": 2,
-      "questions": 177,
-      "semanticGroups": 56,
-      "testQuestions": 10,
-      "dailyFullFreshTests": 5
-    },
-    {
-      "grade": 3,
-      "subject": "ინგლისური",
-      "semester": 1,
-      "questions": 171,
-      "semanticGroups": 48,
+      "questions": 262,
+      "semanticGroups": 46,
       "testQuestions": 10,
       "dailyFullFreshTests": 4
     },
     {
       "grade": 3,
-      "subject": "ინგლისური",
-      "semester": 2,
-      "questions": 169,
-      "semanticGroups": 45,
+      "subject": "მე და საზოგადოება",
+      "semester": 1,
+      "questions": 156,
+      "semanticGroups": 41,
       "testQuestions": 10,
       "dailyFullFreshTests": 4
     },
     {
       "grade": 3,
-      "subject": "მათემატიკა",
-      "semester": 1,
-      "questions": 199,
-      "semanticGroups": 54,
-      "testQuestions": 10,
-      "dailyFullFreshTests": 5
-    },
-    {
-      "grade": 3,
-      "subject": "მათემატიკა",
-      "semester": 2,
-      "questions": 173,
-      "semanticGroups": 32,
-      "testQuestions": 10,
-      "dailyFullFreshTests": 3
-    },
-    {
-      "grade": 3,
-      "subject": "მე და საზოგადოება",
-      "semester": 1,
-      "questions": 151,
-      "semanticGroups": 37,
-      "testQuestions": 10,
-      "dailyFullFreshTests": 3
-    },
-    {
-      "grade": 3,
       "subject": "მე და საზოგადოება",
       "semester": 2,
-      "questions": 149,
-      "semanticGroups": 24,
+      "questions": 152,
+      "semanticGroups": 27,
       "testQuestions": 10,
       "dailyFullFreshTests": 2
     },
@@ -660,8 +665,8 @@
       "grade": 3,
       "subject": "ქართული",
       "semester": 1,
-      "questions": 180,
-      "semanticGroups": 72,
+      "questions": 188,
+      "semanticGroups": 76,
       "testQuestions": 10,
       "dailyFullFreshTests": 7
     },
@@ -669,8 +674,8 @@
       "grade": 3,
       "subject": "ქართული",
       "semester": 2,
-      "questions": 173,
-      "semanticGroups": 60,
+      "questions": 180,
+      "semanticGroups": 64,
       "testQuestions": 10,
       "dailyFullFreshTests": 6
     },
@@ -678,8 +683,8 @@
       "grade": 4,
       "subject": "ბუნება",
       "semester": 1,
-      "questions": 171,
-      "semanticGroups": 63,
+      "questions": 184,
+      "semanticGroups": 69,
       "testQuestions": 10,
       "dailyFullFreshTests": 6
     },
@@ -687,170 +692,170 @@
       "grade": 4,
       "subject": "ბუნება",
       "semester": 2,
-      "questions": 163,
-      "semanticGroups": 47,
-      "testQuestions": 10,
-      "dailyFullFreshTests": 4
-    },
-    {
-      "grade": 4,
-      "subject": "ინგლისური",
-      "semester": 1,
-      "questions": 176,
-      "semanticGroups": 57,
+      "questions": 174,
+      "semanticGroups": 51,
       "testQuestions": 10,
       "dailyFullFreshTests": 5
     },
     {
       "grade": 4,
       "subject": "ინგლისური",
-      "semester": 2,
-      "questions": 166,
-      "semanticGroups": 46,
-      "testQuestions": 10,
-      "dailyFullFreshTests": 4
-    },
-    {
-      "grade": 4,
-      "subject": "მათემატიკა",
       "semester": 1,
-      "questions": 167,
-      "semanticGroups": 26,
-      "testQuestions": 10,
-      "dailyFullFreshTests": 2
-    },
-    {
-      "grade": 4,
-      "subject": "მათემატიკა",
-      "semester": 2,
-      "questions": 193,
-      "semanticGroups": 37,
-      "testQuestions": 10,
-      "dailyFullFreshTests": 3
-    },
-    {
-      "grade": 4,
-      "subject": "მე და საზოგადოება",
-      "semester": 1,
-      "questions": 156,
-      "semanticGroups": 33,
-      "testQuestions": 10,
-      "dailyFullFreshTests": 3
-    },
-    {
-      "grade": 4,
-      "subject": "მე და საზოგადოება",
-      "semester": 2,
-      "questions": 148,
-      "semanticGroups": 24,
-      "testQuestions": 10,
-      "dailyFullFreshTests": 2
-    },
-    {
-      "grade": 4,
-      "subject": "ქართული",
-      "semester": 1,
-      "questions": 164,
+      "questions": 191,
       "semanticGroups": 70,
       "testQuestions": 10,
       "dailyFullFreshTests": 7
     },
     {
       "grade": 4,
-      "subject": "ქართული",
-      "semester": 2,
-      "questions": 187,
-      "semanticGroups": 69,
-      "testQuestions": 10,
-      "dailyFullFreshTests": 6
-    },
-    {
-      "grade": 5,
-      "subject": "ბუნება",
-      "semester": 1,
-      "questions": 176,
-      "semanticGroups": 67,
-      "testQuestions": 10,
-      "dailyFullFreshTests": 6
-    },
-    {
-      "grade": 5,
-      "subject": "ბუნება",
-      "semester": 2,
-      "questions": 170,
-      "semanticGroups": 52,
-      "testQuestions": 10,
-      "dailyFullFreshTests": 5
-    },
-    {
-      "grade": 5,
-      "subject": "ინგლისური",
-      "semester": 1,
-      "questions": 170,
-      "semanticGroups": 46,
-      "testQuestions": 10,
-      "dailyFullFreshTests": 4
-    },
-    {
-      "grade": 5,
       "subject": "ინგლისური",
       "semester": 2,
-      "questions": 168,
-      "semanticGroups": 42,
-      "testQuestions": 10,
-      "dailyFullFreshTests": 4
-    },
-    {
-      "grade": 5,
-      "subject": "მათემატიკა",
-      "semester": 1,
-      "questions": 189,
+      "questions": 171,
       "semanticGroups": 51,
       "testQuestions": 10,
       "dailyFullFreshTests": 5
     },
     {
+      "grade": 4,
+      "subject": "მათემატიკა",
+      "semester": 1,
+      "questions": 242,
+      "semanticGroups": 45,
+      "testQuestions": 10,
+      "dailyFullFreshTests": 4
+    },
+    {
+      "grade": 4,
+      "subject": "მათემატიკა",
+      "semester": 2,
+      "questions": 273,
+      "semanticGroups": 49,
+      "testQuestions": 10,
+      "dailyFullFreshTests": 4
+    },
+    {
+      "grade": 4,
+      "subject": "მე და საზოგადოება",
+      "semester": 1,
+      "questions": 161,
+      "semanticGroups": 37,
+      "testQuestions": 10,
+      "dailyFullFreshTests": 3
+    },
+    {
+      "grade": 4,
+      "subject": "მე და საზოგადოება",
+      "semester": 2,
+      "questions": 151,
+      "semanticGroups": 27,
+      "testQuestions": 10,
+      "dailyFullFreshTests": 2
+    },
+    {
+      "grade": 4,
+      "subject": "ქართული",
+      "semester": 1,
+      "questions": 171,
+      "semanticGroups": 74,
+      "testQuestions": 10,
+      "dailyFullFreshTests": 7
+    },
+    {
+      "grade": 4,
+      "subject": "ქართული",
+      "semester": 2,
+      "questions": 194,
+      "semanticGroups": 73,
+      "testQuestions": 10,
+      "dailyFullFreshTests": 7
+    },
+    {
+      "grade": 5,
+      "subject": "ბუნება",
+      "semester": 1,
+      "questions": 188,
+      "semanticGroups": 72,
+      "testQuestions": 10,
+      "dailyFullFreshTests": 7
+    },
+    {
+      "grade": 5,
+      "subject": "ბუნება",
+      "semester": 2,
+      "questions": 183,
+      "semanticGroups": 58,
+      "testQuestions": 10,
+      "dailyFullFreshTests": 5
+    },
+    {
+      "grade": 5,
+      "subject": "ინგლისური",
+      "semester": 1,
+      "questions": 185,
+      "semanticGroups": 59,
+      "testQuestions": 10,
+      "dailyFullFreshTests": 5
+    },
+    {
+      "grade": 5,
+      "subject": "ინგლისური",
+      "semester": 2,
+      "questions": 171,
+      "semanticGroups": 45,
+      "testQuestions": 10,
+      "dailyFullFreshTests": 4
+    },
+    {
+      "grade": 5,
+      "subject": "მათემატიკა",
+      "semester": 1,
+      "questions": 266,
+      "semanticGroups": 68,
+      "testQuestions": 10,
+      "dailyFullFreshTests": 6
+    },
+    {
       "grade": 5,
       "subject": "მათემატიკა",
       "semester": 2,
-      "questions": 170,
-      "semanticGroups": 31,
+      "questions": 251,
+      "semanticGroups": 44,
       "testQuestions": 10,
-      "dailyFullFreshTests": 3
+      "dailyFullFreshTests": 4
     },
     {
       "grade": 5,
       "subject": "ქართული",
       "semester": 1,
-      "questions": 159,
-      "semanticGroups": 64,
+      "questions": 174,
+      "semanticGroups": 79,
       "testQuestions": 10,
-      "dailyFullFreshTests": 6
+      "dailyFullFreshTests": 7
     },
     {
       "grade": 5,
       "subject": "ქართული",
       "semester": 2,
-      "questions": 181,
-      "semanticGroups": 63,
+      "questions": 188,
+      "semanticGroups": 70,
       "testQuestions": 10,
-      "dailyFullFreshTests": 6
+      "dailyFullFreshTests": 7
     },
     {
       "grade": 5,
       "subject": "ჩვენი საქართველო",
       "semester": 1,
-      "questions": 147,
-      "semanticGroups": 38,
+      "questions": 160,
+      "semanticGroups": 43,
       "testQuestions": 10,
-      "dailyFullFreshTests": 3
+      "dailyFullFreshTests": 4
     },
     {
       "grade": 5,
       "subject": "ჩვენი საქართველო",
       "semester": 2,
-      "questions": 134,
-      "semanticGroups": 24,
+      "questions": 142,
+      "semanticGroups": 27,
       "testQuestions": 10,
       "dailyFullFreshTests": 2
     },
@@ -858,8 +863,8 @@
       "grade": 6,
       "subject": "ბუნება",
       "semester": 1,
-      "questions": 172,
-      "semanticGroups": 62,
+      "questions": 184,
+      "semanticGroups": 67,
       "testQuestions": 10,
       "dailyFullFreshTests": 6
     },
@@ -867,80 +872,80 @@
       "grade": 6,
       "subject": "ბუნება",
       "semester": 2,
-      "questions": 160,
-      "semanticGroups": 45,
-      "testQuestions": 10,
-      "dailyFullFreshTests": 4
-    },
-    {
-      "grade": 6,
-      "subject": "ინგლისური",
-      "semester": 1,
-      "questions": 172,
-      "semanticGroups": 53,
+      "questions": 173,
+      "semanticGroups": 51,
       "testQuestions": 10,
       "dailyFullFreshTests": 5
     },
     {
       "grade": 6,
       "subject": "ინგლისური",
-      "semester": 2,
-      "questions": 170,
-      "semanticGroups": 46,
-      "testQuestions": 10,
-      "dailyFullFreshTests": 4
-    },
-    {
-      "grade": 6,
-      "subject": "მათემატიკა",
       "semester": 1,
-      "questions": 218,
-      "semanticGroups": 59,
-      "testQuestions": 10,
-      "dailyFullFreshTests": 5
-    },
-    {
-      "grade": 6,
-      "subject": "მათემატიკა",
-      "semester": 2,
-      "questions": 209,
-      "semanticGroups": 46,
-      "testQuestions": 10,
-      "dailyFullFreshTests": 4
-    },
-    {
-      "grade": 6,
-      "subject": "ქართული",
-      "semester": 1,
-      "questions": 166,
+      "questions": 185,
       "semanticGroups": 66,
       "testQuestions": 10,
       "dailyFullFreshTests": 6
     },
     {
       "grade": 6,
-      "subject": "ქართული",
+      "subject": "ინგლისური",
       "semester": 2,
-      "questions": 169,
-      "semanticGroups": 52,
+      "questions": 174,
+      "semanticGroups": 50,
       "testQuestions": 10,
       "dailyFullFreshTests": 5
     },
     {
       "grade": 6,
+      "subject": "მათემატიკა",
+      "semester": 1,
+      "questions": 297,
+      "semanticGroups": 76,
+      "testQuestions": 10,
+      "dailyFullFreshTests": 7
+    },
+    {
+      "grade": 6,
+      "subject": "მათემატიკა",
+      "semester": 2,
+      "questions": 301,
+      "semanticGroups": 62,
+      "testQuestions": 10,
+      "dailyFullFreshTests": 6
+    },
+    {
+      "grade": 6,
+      "subject": "ქართული",
+      "semester": 1,
+      "questions": 181,
+      "semanticGroups": 81,
+      "testQuestions": 10,
+      "dailyFullFreshTests": 8
+    },
+    {
+      "grade": 6,
+      "subject": "ქართული",
+      "semester": 2,
+      "questions": 177,
+      "semanticGroups": 60,
+      "testQuestions": 10,
+      "dailyFullFreshTests": 6
+    },
+    {
+      "grade": 6,
       "subject": "ჩვენი საქართველო",
       "semester": 1,
-      "questions": 143,
-      "semanticGroups": 35,
+      "questions": 156,
+      "semanticGroups": 40,
       "testQuestions": 10,
-      "dailyFullFreshTests": 3
+      "dailyFullFreshTests": 4
     },
     {
       "grade": 6,
       "subject": "ჩვენი საქართველო",
       "semester": 2,
-      "questions": 134,
-      "semanticGroups": 23,
+      "questions": 142,
+      "semanticGroups": 26,
       "testQuestions": 10,
       "dailyFullFreshTests": 2
     },
@@ -948,8 +953,8 @@
       "grade": 7,
       "subject": "ბიოლოგია",
       "semester": 1,
-      "questions": 105,
-      "semanticGroups": 62,
+      "questions": 116,
+      "semanticGroups": 66,
       "testQuestions": 10,
       "dailyFullFreshTests": 6
     },
@@ -957,8 +962,8 @@
       "grade": 7,
       "subject": "ბიოლოგია",
       "semester": 2,
-      "questions": 106,
-      "semanticGroups": 60,
+      "questions": 116,
+      "semanticGroups": 63,
       "testQuestions": 10,
       "dailyFullFreshTests": 6
     },
@@ -966,17 +971,17 @@
       "grade": 7,
       "subject": "გეოგრაფია",
       "semester": 1,
-      "questions": 225,
-      "semanticGroups": 200,
+      "questions": 240,
+      "semanticGroups": 211,
       "testQuestions": 10,
-      "dailyFullFreshTests": 20
+      "dailyFullFreshTests": 21
     },
     {
       "grade": 7,
       "subject": "გეოგრაფია",
       "semester": 2,
-      "questions": 158,
-      "semanticGroups": 136,
+      "questions": 163,
+      "semanticGroups": 138,
       "testQuestions": 10,
       "dailyFullFreshTests": 13
     },
@@ -984,17 +989,17 @@
       "grade": 7,
       "subject": "ინგლისური",
       "semester": 1,
-      "questions": 171,
-      "semanticGroups": 48,
+      "questions": 186,
+      "semanticGroups": 61,
       "testQuestions": 10,
-      "dailyFullFreshTests": 4
+      "dailyFullFreshTests": 6
     },
     {
       "grade": 7,
       "subject": "ინგლისური",
       "semester": 2,
-      "questions": 173,
-      "semanticGroups": 43,
+      "questions": 178,
+      "semanticGroups": 48,
       "testQuestions": 10,
       "dailyFullFreshTests": 4
     },
@@ -1002,8 +1007,8 @@
       "grade": 7,
       "subject": "ისტორია",
       "semester": 1,
-      "questions": 146,
-      "semanticGroups": 121,
+      "questions": 148,
+      "semanticGroups": 122,
       "testQuestions": 10,
       "dailyFullFreshTests": 12
     },
@@ -1020,71 +1025,71 @@
       "grade": 7,
       "subject": "მათემატიკა",
       "semester": 1,
-      "questions": 169,
-      "semanticGroups": 47,
+      "questions": 265,
+      "semanticGroups": 67,
       "testQuestions": 10,
-      "dailyFullFreshTests": 4
+      "dailyFullFreshTests": 6
     },
     {
       "grade": 7,
       "subject": "მათემატიკა",
       "semester": 2,
-      "questions": 172,
-      "semanticGroups": 29,
+      "questions": 271,
+      "semanticGroups": 45,
+      "testQuestions": 10,
+      "dailyFullFreshTests": 4
+    },
+    {
+      "grade": 7,
+      "subject": "მოქალაქეობა",
+      "semester": 1,
+      "questions": 51,
+      "semanticGroups": 20,
       "testQuestions": 10,
       "dailyFullFreshTests": 2
     },
     {
       "grade": 7,
       "subject": "მოქალაქეობა",
-      "semester": 1,
-      "questions": 49,
-      "semanticGroups": 19,
-      "testQuestions": 10,
-      "dailyFullFreshTests": 1
-    },
-    {
-      "grade": 7,
-      "subject": "მოქალაქეობა",
       "semester": 2,
-      "questions": 46,
-      "semanticGroups": 18,
+      "questions": 51,
+      "semanticGroups": 20,
       "testQuestions": 10,
-      "dailyFullFreshTests": 1
+      "dailyFullFreshTests": 2
     },
     {
       "grade": 7,
       "subject": "ფიზიკა",
       "semester": 1,
-      "questions": 163,
-      "semanticGroups": 137,
+      "questions": 203,
+      "semanticGroups": 159,
       "testQuestions": 10,
-      "dailyFullFreshTests": 13
+      "dailyFullFreshTests": 15
     },
     {
       "grade": 7,
       "subject": "ფიზიკა",
       "semester": 2,
-      "questions": 197,
-      "semanticGroups": 177,
+      "questions": 240,
+      "semanticGroups": 204,
       "testQuestions": 10,
-      "dailyFullFreshTests": 17
+      "dailyFullFreshTests": 20
     },
     {
       "grade": 7,
       "subject": "ქართული ენა და ლიტერატურა",
       "semester": 1,
-      "questions": 168,
-      "semanticGroups": 64,
+      "questions": 183,
+      "semanticGroups": 79,
       "testQuestions": 10,
-      "dailyFullFreshTests": 6
+      "dailyFullFreshTests": 7
     },
     {
       "grade": 7,
       "subject": "ქართული ენა და ლიტერატურა",
       "semester": 2,
-      "questions": 175,
-      "semanticGroups": 60,
+      "questions": 182,
+      "semanticGroups": 67,
       "testQuestions": 10,
       "dailyFullFreshTests": 6
     },
@@ -1110,8 +1115,8 @@
       "grade": 8,
       "subject": "გეოგრაფია",
       "semester": 1,
-      "questions": 138,
-      "semanticGroups": 113,
+      "questions": 148,
+      "semanticGroups": 116,
       "testQuestions": 10,
       "dailyFullFreshTests": 11
     },
@@ -1119,8 +1124,8 @@
       "grade": 8,
       "subject": "გეოგრაფია",
       "semester": 2,
-      "questions": 104,
-      "semanticGroups": 87,
+      "questions": 106,
+      "semanticGroups": 88,
       "testQuestions": 10,
       "dailyFullFreshTests": 8
     },
@@ -1128,17 +1133,17 @@
       "grade": 8,
       "subject": "ინგლისური",
       "semester": 1,
-      "questions": 170,
-      "semanticGroups": 51,
+      "questions": 185,
+      "semanticGroups": 64,
       "testQuestions": 10,
-      "dailyFullFreshTests": 5
+      "dailyFullFreshTests": 6
     },
     {
       "grade": 8,
       "subject": "ინგლისური",
       "semester": 2,
-      "questions": 164,
-      "semanticGroups": 45,
+      "questions": 167,
+      "semanticGroups": 48,
       "testQuestions": 10,
       "dailyFullFreshTests": 4
     },
@@ -1146,8 +1151,8 @@
       "grade": 8,
       "subject": "ისტორია",
       "semester": 1,
-      "questions": 115,
-      "semanticGroups": 94,
+      "questions": 117,
+      "semanticGroups": 95,
       "testQuestions": 10,
       "dailyFullFreshTests": 9
     },
@@ -1164,71 +1169,71 @@
       "grade": 8,
       "subject": "მათემატიკა",
       "semester": 1,
-      "questions": 162,
-      "semanticGroups": 24,
+      "questions": 243,
+      "semanticGroups": 39,
       "testQuestions": 10,
-      "dailyFullFreshTests": 2
+      "dailyFullFreshTests": 3
     },
     {
       "grade": 8,
       "subject": "მათემატიკა",
       "semester": 2,
-      "questions": 157,
-      "semanticGroups": 27,
+      "questions": 249,
+      "semanticGroups": 42,
+      "testQuestions": 10,
+      "dailyFullFreshTests": 4
+    },
+    {
+      "grade": 8,
+      "subject": "მოქალაქეობა",
+      "semester": 1,
+      "questions": 45,
+      "semanticGroups": 20,
       "testQuestions": 10,
       "dailyFullFreshTests": 2
     },
     {
       "grade": 8,
       "subject": "მოქალაქეობა",
-      "semester": 1,
-      "questions": 43,
-      "semanticGroups": 19,
-      "testQuestions": 10,
-      "dailyFullFreshTests": 1
-    },
-    {
-      "grade": 8,
-      "subject": "მოქალაქეობა",
       "semester": 2,
-      "questions": 36,
-      "semanticGroups": 19,
+      "questions": 37,
+      "semanticGroups": 20,
       "testQuestions": 10,
-      "dailyFullFreshTests": 1
+      "dailyFullFreshTests": 2
     },
     {
       "grade": 8,
       "subject": "ფიზიკა",
       "semester": 1,
+      "questions": 222,
+      "semanticGroups": 183,
+      "testQuestions": 10,
+      "dailyFullFreshTests": 18
+    },
+    {
+      "grade": 8,
+      "subject": "ფიზიკა",
+      "semester": 2,
+      "questions": 222,
+      "semanticGroups": 202,
+      "testQuestions": 10,
+      "dailyFullFreshTests": 20
+    },
+    {
+      "grade": 8,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "semester": 1,
+      "questions": 175,
+      "semanticGroups": 75,
+      "testQuestions": 10,
+      "dailyFullFreshTests": 7
+    },
+    {
+      "grade": 8,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "semester": 2,
       "questions": 174,
-      "semanticGroups": 155,
-      "testQuestions": 10,
-      "dailyFullFreshTests": 15
-    },
-    {
-      "grade": 8,
-      "subject": "ფიზიკა",
-      "semester": 2,
-      "questions": 185,
-      "semanticGroups": 176,
-      "testQuestions": 10,
-      "dailyFullFreshTests": 17
-    },
-    {
-      "grade": 8,
-      "subject": "ქართული ენა და ლიტერატურა",
-      "semester": 1,
-      "questions": 160,
-      "semanticGroups": 60,
-      "testQuestions": 10,
-      "dailyFullFreshTests": 6
-    },
-    {
-      "grade": 8,
-      "subject": "ქართული ენა და ლიტერატურა",
-      "semester": 2,
-      "questions": 168,
-      "semanticGroups": 53,
+      "semanticGroups": 59,
       "testQuestions": 10,
       "dailyFullFreshTests": 5
     },
@@ -1236,19 +1241,19 @@
       "grade": 8,
       "subject": "ქიმია",
       "semester": 1,
-      "questions": 210,
-      "semanticGroups": 188,
+      "questions": 234,
+      "semanticGroups": 212,
       "testQuestions": 10,
-      "dailyFullFreshTests": 18
+      "dailyFullFreshTests": 21
     },
     {
       "grade": 8,
       "subject": "ქიმია",
       "semester": 2,
-      "questions": 198,
-      "semanticGroups": 181,
+      "questions": 222,
+      "semanticGroups": 205,
       "testQuestions": 10,
-      "dailyFullFreshTests": 18
+      "dailyFullFreshTests": 20
     },
     {
       "grade": 9,
@@ -1272,8 +1277,8 @@
       "grade": 9,
       "subject": "გეოგრაფია",
       "semester": 1,
-      "questions": 61,
-      "semanticGroups": 46,
+      "questions": 64,
+      "semanticGroups": 47,
       "testQuestions": 10,
       "dailyFullFreshTests": 4
     },
@@ -1281,35 +1286,35 @@
       "grade": 9,
       "subject": "გეოგრაფია",
       "semester": 2,
-      "questions": 50,
-      "semanticGroups": 39,
+      "questions": 52,
+      "semanticGroups": 40,
       "testQuestions": 10,
-      "dailyFullFreshTests": 3
+      "dailyFullFreshTests": 4
     },
     {
       "grade": 9,
       "subject": "ინგლისური",
       "semester": 1,
-      "questions": 185,
-      "semanticGroups": 72,
+      "questions": 198,
+      "semanticGroups": 85,
       "testQuestions": 10,
-      "dailyFullFreshTests": 7
+      "dailyFullFreshTests": 8
     },
     {
       "grade": 9,
       "subject": "ინგლისური",
       "semester": 2,
-      "questions": 179,
-      "semanticGroups": 67,
+      "questions": 183,
+      "semanticGroups": 71,
       "testQuestions": 10,
-      "dailyFullFreshTests": 6
+      "dailyFullFreshTests": 7
     },
     {
       "grade": 9,
       "subject": "ისტორია",
       "semester": 1,
-      "questions": 57,
-      "semanticGroups": 42,
+      "questions": 59,
+      "semanticGroups": 43,
       "testQuestions": 10,
       "dailyFullFreshTests": 4
     },
@@ -1326,26 +1331,26 @@
       "grade": 9,
       "subject": "მათემატიკა",
       "semester": 1,
-      "questions": 172,
-      "semanticGroups": 79,
+      "questions": 260,
+      "semanticGroups": 109,
       "testQuestions": 10,
-      "dailyFullFreshTests": 7
+      "dailyFullFreshTests": 10
     },
     {
       "grade": 9,
       "subject": "მათემატიკა",
       "semester": 2,
-      "questions": 166,
-      "semanticGroups": 55,
+      "questions": 261,
+      "semanticGroups": 81,
       "testQuestions": 10,
-      "dailyFullFreshTests": 5
+      "dailyFullFreshTests": 8
     },
     {
       "grade": 9,
       "subject": "მოქალაქეობა",
       "semester": 1,
-      "questions": 48,
-      "semanticGroups": 34,
+      "questions": 50,
+      "semanticGroups": 35,
       "testQuestions": 10,
       "dailyFullFreshTests": 3
     },
@@ -1353,8 +1358,8 @@
       "grade": 9,
       "subject": "მოქალაქეობა",
       "semester": 2,
-      "questions": 38,
-      "semanticGroups": 26,
+      "questions": 39,
+      "semanticGroups": 27,
       "testQuestions": 10,
       "dailyFullFreshTests": 2
     },
@@ -1362,37 +1367,37 @@
       "grade": 9,
       "subject": "ფიზიკა",
       "semester": 1,
-      "questions": 28,
-      "semanticGroups": 21,
+      "questions": 57,
+      "semanticGroups": 36,
       "testQuestions": 10,
-      "dailyFullFreshTests": 2
+      "dailyFullFreshTests": 3
     },
     {
       "grade": 9,
       "subject": "ფიზიკა",
       "semester": 2,
-      "questions": 26,
-      "semanticGroups": 15,
+      "questions": 52,
+      "semanticGroups": 30,
       "testQuestions": 10,
-      "dailyFullFreshTests": 1
+      "dailyFullFreshTests": 3
     },
     {
       "grade": 9,
       "subject": "ქართული ენა და ლიტერატურა",
       "semester": 1,
-      "questions": 159,
-      "semanticGroups": 68,
-      "testQuestions": 10,
-      "dailyFullFreshTests": 6
-    },
-    {
-      "grade": 9,
-      "subject": "ქართული ენა და ლიტერატურა",
-      "semester": 2,
       "questions": 174,
-      "semanticGroups": 65,
+      "semanticGroups": 83,
       "testQuestions": 10,
-      "dailyFullFreshTests": 6
+      "dailyFullFreshTests": 8
+    },
+    {
+      "grade": 9,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "semester": 2,
+      "questions": 181,
+      "semanticGroups": 72,
+      "testQuestions": 10,
+      "dailyFullFreshTests": 7
     },
     {
       "grade": 9,
@@ -1427,7 +1432,7 @@
   ],
   "compatibility": {
     "matchDictionaryAndListAnswers": "pass",
-    "openResponses": "excluded_until_manual_or_model_grading_exists",
+    "openResponses": "deterministic_or_structured_ai_grading",
     "versionedIdsAndPools": "pass",
     "legacyProgressMigration": "included"
   },

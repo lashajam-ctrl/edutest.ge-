@@ -2964,10 +2964,13 @@ function practiceWeakSubject(subject){
 function buildReviewHTML(reviewed){
   return reviewed.map((q,i)=>{
     const answerHidden=q.reveal===false;
-    const col=q.type==='short_answer'?'fffbeb':q.ok?'f0fdf4':'fff1f2';
-    const bc2=q.type==='short_answer'?'fde68a':q.ok?'bbf7d0':'fecaca';
-    const pts=q.type==='short_answer'?t('pending_pts'):q.ok?'✓ '+q.pts+'/'+q.pts+' '+t('pts_label'):'✗ 0/'+q.pts+' '+t('pts_label');
-    const ptsCol=q.type==='short_answer'?'#d97706':q.ok?'#16a34a':'#dc2626';
+    const pending=q.gradingStatus==='pending';
+    const earned=Number(q.awardedPoints!==undefined?q.awardedPoints:(q.ok?q.pts:0));
+    const partial=!pending&&!q.ok&&earned>0;
+    const col=(pending||partial)?'fffbeb':q.ok?'f0fdf4':'fff1f2';
+    const bc2=(pending||partial)?'fde68a':q.ok?'bbf7d0':'fecaca';
+    const pts=pending?t('pending_pts'):q.ok?'✓ '+earned+'/'+q.pts+' '+t('pts_label'):(earned>0?'◐ '+earned+'/'+q.pts+' '+t('pts_label'):'✗ 0/'+q.pts+' '+t('pts_label'));
+    const ptsCol=(pending||partial)?'#d97706':q.ok?'#16a34a':'#dc2626';
     // Build user answer display for all types
     let userAnsText='— ('+t('skipped')+')';
     let corrExtra='';
@@ -2998,8 +3001,10 @@ function buildReviewHTML(reviewed){
         <strong>✓ ${t('correct_ans_was')}:</strong> ${corrExtra}
         ${q.explain?'<br><span style="color:#15803d;margin-top:4px;display:block">💡 '+esc(q.explain)+'</span>':''}
        </div>`:'';
-    const explainDiv=(q.ok&&q.explain)?
+    const explainDiv=(q.ok&&q.explain&&q.type!=='short_answer')?
       `<div style="margin-top:5px;font-size:11px;color:#6b7280">💡 ${esc(q.explain)}</div>`:'';
+    const shortFeedbackDiv=(q.type==='short_answer'&&q.explain)?
+      `<div style="margin-top:6px;padding:8px 10px;background:${pending?'#fffbeb':'#eef6ff'};border-radius:6px;font-size:11px;color:${pending?'#92400e':'#1e3a5f'}">${pending?'⏳ ':'💡 '}${esc(q.explain)}</div>`:'';
     const hiddenDiv=(answerHidden&&!q.ok)?'<div style="margin-top:6px;font-size:11px;color:#64748b">🔒 სწორი პასუხი ამ შეფასების რეჟიმში არ ქვეყნდება.</div>':'';
     const aiDiv=(!q.ok&&q.type!=='short_answer'&&!answerHidden)?`<div style="margin-top:8px"><button type="button" class="btn btn-outline btn-sm" data-ai-review-index="${i}" onclick="requestAiExplanation(${i},this)">🤖 ამიხსენი შეცდომა</button>${_lastResult?.verified===true?` <button type="button" class="btn btn-outline btn-sm" onclick="practiceReviewQuestion(${i})">სხვა სავარჯიშო ამ თემაზე</button>`:''}<div id="ai-feedback-${i}" role="status" aria-live="polite" style="margin-top:8px"></div></div>`:'';
     return `<div style="padding:10px;background:#${col};border:1px solid #${bc2};border-radius:8px;margin-bottom:6px">
@@ -3008,7 +3013,7 @@ function buildReviewHTML(reviewed){
         <span style="font-size:11px;color:${ptsCol};flex-shrink:0;margin-left:8px">${pts}</span>
       </div>
       <div style="font-size:11px;color:var(--gray)">${t('your_ans_label')} <strong>${esc(String(userAnsText))}</strong></div>
-      ${wrongDiv}${explainDiv}${hiddenDiv}${aiDiv}
+      ${wrongDiv}${explainDiv}${shortFeedbackDiv}${hiddenDiv}${aiDiv}
     </div>`;
   }).join('');
 }
@@ -3054,7 +3059,6 @@ async function requestAiExplanation(index,button){
   }catch(error){container.replaceChildren();container.style.cssText='margin-top:8px;padding:10px;border-radius:8px;background:#fff1f2;border:1px solid #fecaca';appendAiText(container,'div',error&&error.message||'AI ახსნა დროებით მიუწვდომელია','font-size:12px;color:#b91c1c');const retry=document.createElement('button');retry.type='button';retry.className='btn btn-outline btn-sm';retry.style.marginTop='8px';retry.textContent='↻ ხელახლა ცდა';retry.addEventListener('click',()=>requestAiExplanation(index,retry));container.appendChild(retry);
   }finally{button.disabled=false;if(button.isConnected)button.textContent='🤖 ამიხსენი შეცდომა';}
 }
-
 const USER_DB=[...DEFAULT_USERS];
 
 
@@ -4732,7 +4736,7 @@ function renderTeacherQAnalytics(){
   teacherResults().forEach(r=>{
     if(!r.reviewed)return;
     r.reviewed.forEach(q=>{
-      if(q.type==='short_answer')return;
+      if(q.gradingStatus==='pending')return;
       if(!qStats[q.id])qStats[q.id]={text:q._kaText||q.text||q.id,wrong:0,total:0};
       qStats[q.id].total++;
       if(!q.ok)qStats[q.id].wrong++;

@@ -1,4 +1,5 @@
 import { componentCountsForTest, correctKnownQuestionPayload } from "./assessment-selection";
+import { gradeDeterministicShortAnswer } from "./short-answer-core.mjs";
 
 import { canonicalAssessmentSubject } from "./school-policy.mjs";
 export { ASSESSMENT_SUBJECTS_BY_GRADE, canonicalAssessmentSubject, assessmentSubjectComponents, schoolGradeNumber, subjectAllowedForGrade } from "./school-policy.mjs";
@@ -110,6 +111,10 @@ export function gradeAssessmentAnswer(args: {
     const expected = Array.isArray(answerKey.blanks) ? answerKey.blanks : [];
     correct = Array.isArray(userAnswer) && sameArray(userAnswer, expected);
     correctDisplay = expected;
+  } else if (question.question_type === "short_answer") {
+    const result = gradeDeterministicShortAnswer(answerKey, userAnswer);
+    correct = result.correct;
+    correctDisplay = result.correctDisplay;
   }
   return { correct, correctDisplay };
 }

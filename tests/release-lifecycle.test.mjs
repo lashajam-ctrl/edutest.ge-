@@ -6,7 +6,7 @@ import {DatabaseSync} from 'node:sqlite';
 import * as selection from '../lib/assessment-selection.ts';
 import {createDraftService} from '../lib/assessment-drafts-core.mjs';
 const read=path=>readFileSync(new URL('../'+path,import.meta.url),'utf8');
-const assessmentSource=stripTypeScriptTypes(read('lib/assessment.ts').replaceAll('"./assessment-selection"',JSON.stringify(new URL('../lib/assessment-selection.ts',import.meta.url).href)).replaceAll('"./school-policy.mjs"',JSON.stringify(new URL('../lib/school-policy.mjs',import.meta.url).href)));
+const assessmentSource=stripTypeScriptTypes(read('lib/assessment.ts').replaceAll('"./assessment-selection"',JSON.stringify(new URL('../lib/assessment-selection.ts',import.meta.url).href)).replaceAll('"./school-policy.mjs"',JSON.stringify(new URL('../lib/school-policy.mjs',import.meta.url).href)).replaceAll('"./short-answer-core.mjs"',JSON.stringify(new URL('../lib/short-answer-core.mjs',import.meta.url).href)));
 const assessment=await import('data:text/javascript,'+encodeURIComponent(assessmentSource));
 function loadPost(path,dependencies){
   const source=stripTypeScriptTypes(read(path)).replace(/^import\s+[\s\S]*?from\s+["'][^"']+["'];?\s*$/gm,'').replace('export async function POST','async function POST');

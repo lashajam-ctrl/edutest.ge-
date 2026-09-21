@@ -261,7 +261,7 @@
     setTestLoading('პასუხები სერვერზე მოწმდება…');
     try{
       const response=await fetch('/api/assessments/submit',{
-        method:'POST',credentials:'include',signal:AbortSignal.timeout(20000),headers:{'Content-Type':'application/json',Accept:'application/json'},
+        method:'POST',credentials:'include',signal:AbortSignal.timeout(60000),headers:{'Content-Type':'application/json',Accept:'application/json'},
         body:JSON.stringify({sessionId:serverSessionId,answers:qAnswers,draftRevision})
       });
       const data=await response.json().catch(()=>({}));

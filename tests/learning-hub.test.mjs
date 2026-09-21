@@ -11,7 +11,7 @@ import {bankHealth} from '../lib/bank-health-core.mjs';
 import {assessmentSelectionKey} from '../lib/assessment-selection.ts';
 
 const read=path=>readFileSync(new URL('../'+path,import.meta.url),'utf8');
-const assessmentCode=stripTypeScriptTypes(read('lib/assessment.ts').replaceAll('"./assessment-selection"',JSON.stringify(new URL('../lib/assessment-selection.ts',import.meta.url).href)).replaceAll('"./school-policy.mjs"',JSON.stringify(new URL('../lib/school-policy.mjs',import.meta.url).href)));
+const assessmentCode=stripTypeScriptTypes(read('lib/assessment.ts').replaceAll('"./assessment-selection"',JSON.stringify(new URL('../lib/assessment-selection.ts',import.meta.url).href)).replaceAll('"./school-policy.mjs"',JSON.stringify(new URL('../lib/school-policy.mjs',import.meta.url).href)).replaceAll('"./short-answer-core.mjs"',JSON.stringify(new URL('../lib/short-answer-core.mjs',import.meta.url).href)));
 const {prepareQuestion,parsePublicPayload,gradeAssessmentAnswer,assessmentTestJson}=await import('data:text/javascript,'+encodeURIComponent(assessmentCode));
 const now=Date.parse('2026-09-09T10:00:00Z');
 const student={id:'learner',role:'student',accountStatus:'active',emailVerified:true,grade:'3ა',birthDate:'2017-01-01',guardianVerifiedAt:1};

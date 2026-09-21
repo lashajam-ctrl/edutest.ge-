@@ -34,7 +34,7 @@ function generatedFamilyKey(id: string) {
 
 export function assessmentSelectionKey(question: Pick<SelectionCandidate, "id" | "grade" | "subject" | "semester" | "topic" | "public_payload_json" | "semantic_group_id" | "pool_prefix">) {
   const scope = `${question.grade}|${normalize(question.subject)}|${question.semester}`;
-  if (question.pool_prefix === "v11" && question.semantic_group_id) {
+  if (["v11", "v23"].includes(String(question.pool_prefix)) && question.semantic_group_id) {
     return `${scope}|semantic:${question.semantic_group_id}`;
   }
   if (question.semantic_group_id.startsWith("v8f_")) {

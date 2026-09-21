@@ -218,7 +218,7 @@ function renderTeacherQAnalytics(){
   teacherResults().forEach(r=>{
     if(!r.reviewed)return;
     r.reviewed.forEach(q=>{
-      if(q.type==='short_answer')return;
+      if(q.gradingStatus==='pending')return;
       if(!qStats[q.id])qStats[q.id]={text:q._kaText||q.text||q.id,wrong:0,total:0};
       qStats[q.id].total++;
       if(!q.ok)qStats[q.id].wrong++;

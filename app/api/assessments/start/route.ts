@@ -46,7 +46,7 @@ export async function POST(request: Request) {
       WHERE tq.test_id = ? AND q.active = 1 ORDER BY tq.position LIMIT 100`).bind(current.user.id, test.id);
   } else {
     const semesterClause = test.semester == null ? "" : " AND q.semester = ?";
-    const serverPool = ["v8", "v11"].includes(String(test.source_pool)) ? String(test.source_pool) : "";
+    const serverPool = ["v8", "v11", "v23"].includes(String(test.source_pool)) ? String(test.source_pool) : "";
     const poolClause = serverPool ? " AND q.pool_prefix = ?" : "";
     const difficultyClause = test.difficulty ? " AND q.difficulty = ?" : "";
     const subjects = assessmentSubjectComponents(test.subject, test.grade);
