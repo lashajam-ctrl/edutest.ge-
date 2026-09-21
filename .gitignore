@@ -50,6 +50,7 @@ next-env.d.ts
 /.openai/d1-assessment-import/
 /.openai/d1-v8-import/
 /.openai/d1-v11-import/
+/.openai/d1-v23-import/
 /.openai/edutest-db-before-*.sql
 /.openai/legacy-client-question-bank/
 /.openai/*.log
