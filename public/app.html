@@ -411,11 +411,15 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
   #results-btns{flex-direction:column;padding:0 6px}
   #results-btns .btn{width:100%;justify-content:center}
 }
+#auth-boot-screen{display:none;min-height:100vh;align-items:center;justify-content:center;background:linear-gradient(135deg,#fff7ed,#ecfdf5);color:#4338ca;font-weight:700;text-align:center;padding:24px}
+body.auth-restoring #auth-boot-screen{display:flex}
+body.auth-restoring .page{display:none!important}
 </style>
 <!-- Supabase JS v2: browser client for Auth + cloud learning history. -->
 <script async src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" onload="window.dispatchEvent(new Event('edutest-supabase-ready'))"></script>
 </head>
-<body>
+<body class="auth-restoring">
+<div id="auth-boot-screen" role="status" aria-live="polite">EduTest იტვირთება…</div>
 <div id="global-spinner"></div>
 <div id="sidebar-overlay" onclick="closeSidebar()"></div>
 
@@ -920,7 +924,7 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
   <div style="width:100%;max-width:680px;margin-bottom:12px">
     <div id="tt-topbar" class="card" style="padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:8px">
       <div id="tt-topbar-left" style="display:flex;align-items:center;gap:10px">
-        <button class="btn btn-ghost btn-sm" onclick="confirmExitTest()" style="padding:6px 10px;font-size:12px;flex-shrink:0" data-i18n="exit_test">← გასვლა</button>
+        <button type="button" class="btn btn-ghost btn-sm" onclick="confirmExitTest()" style="padding:6px 10px;font-size:12px;flex-shrink:0" data-i18n="exit_test">← გასვლა</button>
         <div><div style="font-weight:700;font-size:13px" id="tt-title" data-i18n="tests">ტესტი</div><div style="font-size:11px;color:var(--gray)" id="q-counter">კითხვა 1/20</div></div>
       </div>
       <div id="tt-topbar-right" style="display:flex;align-items:center;gap:10px">
@@ -1625,7 +1629,7 @@ const I18N={
     recent_results:'🏆 ბოლო შედეგები',
     no_test_taken:'ჯერ ტესტი არ გაქვს გავლილი',
     exit_test:'← გასვლა',edit_questions:'კითხვების რედ.',
-    exit_test_confirm:'ნამდვილად გასვლა? პროგრესი წაიშლება.',
+    exit_test_confirm:'ტესტიდან გახვიდეთ? შევსებული პასუხები შენახულია და ტესტის გაგრძელებას მოგვიანებით შეძლებთ.',
     back_to_tests:'← ტესტები',
     profile_settings:'⚙️ პარამეტრები',
     new_password:'ახალი პაროლი',
@@ -1778,7 +1782,7 @@ const I18N={
     recent_results:'🏆 Recent Results',
     no_test_taken:'No tests taken yet',
     exit_test:'← Exit Test',edit_questions:'Edit Questions',
-    exit_test_confirm:'Exit test? Your progress will be lost.',
+    exit_test_confirm:'Exit the test? Your answers are saved and you can continue later.',
     back_to_tests:'← Tests',
     profile_settings:'⚙️ Settings',
     new_password:'New Password',
@@ -1931,7 +1935,7 @@ const I18N={
     recent_results:'🏆 Последние результаты',
     no_test_taken:'Тестов ещё нет',
     exit_test:'← Выйти',edit_questions:'Ред. вопросов',
-    exit_test_confirm:'Выйти из теста? Прогресс будет потерян.',
+    exit_test_confirm:'Выйти из теста? Ответы сохранены, и вы сможете продолжить позже.',
     back_to_tests:'← Тесты',
     profile_settings:'⚙️ Настройки',
     new_password:'Новый пароль',
@@ -2923,7 +2927,10 @@ function renderSubjectMastery(containerId){
     if(!subjTests.length)return null;
     const subjRes=myResults.filter(r=>r.subject===subj);
     const doneIds=new Set(subjRes.map(r=>r.testId));
-    const coverPct=Math.round(doneIds.size/subjTests.length*100);
+    // Historical releases used a new id for the same catalog slot. Keep those
+    // attempts, but never present more completed tests than currently exist.
+    const completedCount=Math.min(doneIds.size,subjTests.length);
+    const coverPct=Math.round(completedCount/subjTests.length*100);
     const avgPct=subjRes.length?Math.round(subjRes.reduce((s,r)=>s+r.pct,0)/subjRes.length):null;
     let status,color,barColor;
     if(avgPct===null){status='—';color='#9ca3af';barColor='#e5e7eb';}
@@ -2942,7 +2949,7 @@ function renderSubjectMastery(containerId){
       <div style="background:#f3f4f6;border-radius:6px;height:7px;overflow:hidden">
         <div style="width:${coverPct}%;height:100%;background:${barColor};border-radius:6px;transition:width .5s"></div>
       </div>
-      ${doneIds.size>0?`<div style="font-size:10px;color:#9ca3af;margin-top:2px">${doneIds.size}/${subjTests.length} ტესტი გავლილი</div>`:''}
+      ${completedCount>0?`<div style="font-size:10px;color:#9ca3af;margin-top:2px">${completedCount}/${subjTests.length} ტესტი გავლილი</div>`:''}
     </div>`;
   }).filter(Boolean);
   if(!rows.length){el.innerHTML='<div style="color:var(--gray);font-size:13px">ამ კლასის ტესტები ჯერ არ არის</div>';return;}
@@ -5335,20 +5342,21 @@ async function doLogin(){
   }finally{if(btn)btn.disabled=false;}
 }
 
-function confirmExitTest(){
-  if(confirm(t('exit_test_confirm'))){
-    if(timerInt)clearInterval(timerInt);
-    _isDailyBonus=false;window._practiceMode=false;
-    const dest=curRole==='teacher'?'teacher':'student';
-    go(dest);
-    setTimeout(()=>{
-      const navEl=curRole==='teacher'
-        ?document.querySelectorAll('#p-teacher .ni')[1]
-        :document.querySelectorAll('#p-student .ni')[1];
-      if(curRole==='teacher')tNav('t-tests',navEl);
-      else sNav('s-tests',navEl);
-    },100);
-  }
+async function confirmExitTest(){
+  if(!confirm(t('exit_test_confirm')))return false;
+  if(typeof window.flushAssessmentDraft==='function')await window.flushAssessmentDraft();
+  if(timerInt)clearInterval(timerInt);
+  _isDailyBonus=false;window._practiceMode=false;
+  const dest=curRole==='teacher'?'teacher':'student';
+  go(dest);
+  setTimeout(()=>{
+    const navEl=curRole==='teacher'
+      ?document.querySelectorAll('#p-teacher .ni')[1]
+      :document.querySelectorAll('#p-student .ni')[1];
+    if(curRole==='teacher')tNav('t-tests',navEl);
+    else sNav('s-tests',navEl);
+  },100);
+  return true;
 }
 function goBackToTests(){
   const dest=curRole==='teacher'?'teacher':'student';
@@ -5479,15 +5487,15 @@ function populateBuilderSubjects(){
   const select=document.getElementById('b-subj'),grade=Number(document.getElementById('b-grade')?.value||1);if(!select)return;
   const current=subjectFamily(select.value),allowed=subjectsForGrade(grade);select.replaceChildren(...allowed.map(subject=>new Option(subject,subject,false,subject===current)));
 }
-function populateSubjectDropdown(selId){
+function populateSubjectDropdown(selId,grade){
   const sel=document.getElementById(selId);if(!sel)return;
-  const curVal=subjectFamily(sel.dataset.realVal||sel.value),catalogSubjects=[...new Set(ALL_TESTS.filter(test=>test&&test.serverBacked===true).map(test=>subjectFamily(test.subject)).filter(Boolean))];
-  const fallbackGrade=Number(CUR_USER?.grade||0),values=(catalogSubjects.length?catalogSubjects:(fallbackGrade?subjectsForGrade(fallbackGrade):[...new Set(Object.values(SCHOOL_SUBJECTS_BY_GRADE).flat())])).sort((a,b)=>a.localeCompare(b,'ka'));
+  const requestedGrade=Number(grade||0);
+  const eligibleCatalog=ALL_TESTS.filter(test=>test&&test.serverBacked===true&&(!requestedGrade||Number(test.grade)===requestedGrade));
+  const curVal=subjectFamily(sel.dataset.realVal||sel.value),catalogSubjects=[...new Set(eligibleCatalog.map(test=>subjectFamily(test.subject)).filter(Boolean))];
+  const fallbackGrade=requestedGrade||Number(CUR_USER?.grade||0),values=(catalogSubjects.length?catalogSubjects:(fallbackGrade?subjectsForGrade(fallbackGrade):[...new Set(Object.values(SCHOOL_SUBJECTS_BY_GRADE).flat())])).sort((a,b)=>a.localeCompare(b,'ka'));
   sel.replaceChildren(new Option(t('all_subjects'),''),...values.map(value=>new Option(value,value,false,value===curVal)));
 }
 function renderStudentTests(){
-  populateSubjectDropdown('s-filter-subject');
-  const subj=document.getElementById('s-filter-subject')?.value||'';
   let grade=document.getElementById('s-filter-grade')?.value||'';
   const semFilter=document.getElementById('s-filter-semester')?.value||'';
   const typeFilter=document.getElementById('s-filter-testtype')?.value||'';
@@ -5510,6 +5518,8 @@ function renderStudentTests(){
     }
   }
   if(!grade&&userGradeNum)grade=String(userGradeNum);
+  populateSubjectDropdown('s-filter-subject',grade);
+  const subj=document.getElementById('s-filter-subject')?.value||'';
   const list=document.getElementById('s-test-list');if(!list)return;
   let tests=ALL_TESTS.filter(tx=>tx&&tx.serverBacked===true);
   if(userGradeNum) tests=tests.filter(tx=>Math.abs(Number(tx.grade)-userGradeNum)<=1);
@@ -5983,8 +5993,10 @@ function payComplete(){
   if(badge&&isPremium(email))badge.style.display='';
 }
 loadPersistedData();
-// Restore the secure HttpOnly server session first, then initialize optional Supabase email/cloud features.
-initServerAuth().then(function(){return initEduTestCloud();}).catch(function(e){console.warn('Cloud init',e);});
+// Restore the secure HttpOnly server session before revealing a route. This
+// prevents a signed-in learner from briefly seeing the public landing page.
+function revealAppAfterAuth(){document.body.classList.remove('auth-restoring');const boot=document.getElementById('auth-boot-screen');if(boot)boot.remove();}
+initServerAuth().catch(function(e){console.warn('Server auth init',e);return false;}).finally(revealAppAfterAuth).then(function(){return initEduTestCloud();}).catch(function(e){console.warn('Cloud init',e);});
 window.addEventListener('edutest-supabase-ready',function(){if(!EDUTEST_CLOUD.ready)initEduTestCloud();},{once:true});
 loadPrices();
 loadCustomQuestions();
@@ -6591,7 +6603,6 @@ document.addEventListener('keydown',function(event){
   if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}
   else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}
 });
-
 </script>
 <link rel="stylesheet" href="/learning-hub.css?v=20260909">
 <script src="/management-overrides.js"></script>

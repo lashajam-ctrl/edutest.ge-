@@ -411,11 +411,15 @@ body.grade-band-early.test-age-theme .radio{width:30px;height:30px;flex:0 0 30px
   #results-btns{flex-direction:column;padding:0 6px}
   #results-btns .btn{width:100%;justify-content:center}
 }
+#auth-boot-screen{display:none;min-height:100vh;align-items:center;justify-content:center;background:linear-gradient(135deg,#fff7ed,#ecfdf5);color:#4338ca;font-weight:700;text-align:center;padding:24px}
+body.auth-restoring #auth-boot-screen{display:flex}
+body.auth-restoring .page{display:none!important}
 </style>
 <!-- Supabase JS v2: browser client for Auth + cloud learning history. -->
 <script async src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" onload="window.dispatchEvent(new Event('edutest-supabase-ready'))"></script>
 </head>
-<body>
+<body class="auth-restoring">
+<div id="auth-boot-screen" role="status" aria-live="polite">EduTest იტვირთება…</div>
 <div id="global-spinner"></div>
 <div id="sidebar-overlay" onclick="closeSidebar()"></div>
 

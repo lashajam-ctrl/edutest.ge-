@@ -34,6 +34,7 @@
     finally{draftPromise=null;}})();
     return draftPromise;
   }
+  window.flushAssessmentDraft=saveDraft;
   document.addEventListener('input',()=>{clearTimeout(draftTimer);draftTimer=setTimeout(saveDraft,600);});
   document.addEventListener('change',()=>{clearTimeout(draftTimer);draftTimer=setTimeout(saveDraft,300);});
   document.addEventListener('click',event=>{if(event.target.closest?.('#p-take-test')){clearTimeout(draftTimer);draftTimer=setTimeout(saveDraft,300);}});

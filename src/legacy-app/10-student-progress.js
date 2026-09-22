@@ -46,7 +46,10 @@ function renderSubjectMastery(containerId){
     if(!subjTests.length)return null;
     const subjRes=myResults.filter(r=>r.subject===subj);
     const doneIds=new Set(subjRes.map(r=>r.testId));
-    const coverPct=Math.round(doneIds.size/subjTests.length*100);
+    // Historical releases used a new id for the same catalog slot. Keep those
+    // attempts, but never present more completed tests than currently exist.
+    const completedCount=Math.min(doneIds.size,subjTests.length);
+    const coverPct=Math.round(completedCount/subjTests.length*100);
     const avgPct=subjRes.length?Math.round(subjRes.reduce((s,r)=>s+r.pct,0)/subjRes.length):null;
     let status,color,barColor;
     if(avgPct===null){status='—';color='#9ca3af';barColor='#e5e7eb';}
@@ -65,7 +68,7 @@ function renderSubjectMastery(containerId){
       <div style="background:#f3f4f6;border-radius:6px;height:7px;overflow:hidden">
         <div style="width:${coverPct}%;height:100%;background:${barColor};border-radius:6px;transition:width .5s"></div>
       </div>
-      ${doneIds.size>0?`<div style="font-size:10px;color:#9ca3af;margin-top:2px">${doneIds.size}/${subjTests.length} ტესტი გავლილი</div>`:''}
+      ${completedCount>0?`<div style="font-size:10px;color:#9ca3af;margin-top:2px">${completedCount}/${subjTests.length} ტესტი გავლილი</div>`:''}
     </div>`;
   }).filter(Boolean);
   if(!rows.length){el.innerHTML='<div style="color:var(--gray);font-size:13px">ამ კლასის ტესტები ჯერ არ არის</div>';return;}

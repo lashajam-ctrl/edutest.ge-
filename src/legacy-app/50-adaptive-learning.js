@@ -817,20 +817,21 @@ async function doLogin(){
   }finally{if(btn)btn.disabled=false;}
 }
 
-function confirmExitTest(){
-  if(confirm(t('exit_test_confirm'))){
-    if(timerInt)clearInterval(timerInt);
-    _isDailyBonus=false;window._practiceMode=false;
-    const dest=curRole==='teacher'?'teacher':'student';
-    go(dest);
-    setTimeout(()=>{
-      const navEl=curRole==='teacher'
-        ?document.querySelectorAll('#p-teacher .ni')[1]
-        :document.querySelectorAll('#p-student .ni')[1];
-      if(curRole==='teacher')tNav('t-tests',navEl);
-      else sNav('s-tests',navEl);
-    },100);
-  }
+async function confirmExitTest(){
+  if(!confirm(t('exit_test_confirm')))return false;
+  if(typeof window.flushAssessmentDraft==='function')await window.flushAssessmentDraft();
+  if(timerInt)clearInterval(timerInt);
+  _isDailyBonus=false;window._practiceMode=false;
+  const dest=curRole==='teacher'?'teacher':'student';
+  go(dest);
+  setTimeout(()=>{
+    const navEl=curRole==='teacher'
+      ?document.querySelectorAll('#p-teacher .ni')[1]
+      :document.querySelectorAll('#p-student .ni')[1];
+    if(curRole==='teacher')tNav('t-tests',navEl);
+    else sNav('s-tests',navEl);
+  },100);
+  return true;
 }
 function goBackToTests(){
   const dest=curRole==='teacher'?'teacher':'student';

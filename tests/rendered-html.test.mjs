@@ -48,6 +48,29 @@ test("uses warm grade-aware layouts and a child-friendly early-grade test view",
   assert.match(html, /@media\(max-width:640px\)/);
 });
 
+test("restores auth before revealing a route and keeps test exit cancellable with a saved draft", async () => {
+  const [html, assessmentClient] = await Promise.all([source("public/app.html"), source("public/server-assessments.js")]);
+  assert.match(html, /<body class="auth-restoring">/);
+  assert.match(html, /id="auth-boot-screen" role="status"/);
+  assert.match(html, /body\.auth-restoring \.page\{display:none!important\}/);
+  assert.match(html, /\.finally\(revealAppAfterAuth\)/);
+  assert.match(html, /<button type="button" class="btn btn-ghost btn-sm" onclick="confirmExitTest\(\)"/);
+  const exit = html.slice(html.indexOf("async function confirmExitTest"), html.indexOf("function goBackToTests"));
+  assert.match(exit, /if\(!confirm\(t\('exit_test_confirm'\)\)\)return false/);
+  assert.match(exit, /await window\.flushAssessmentDraft\(\)/);
+  assert.match(html, /პასუხები შენახულია/);
+  assert.doesNotMatch(html, /პროგრესი წაიშლება|progress will be lost|Прогресс будет потерян/);
+  assert.match(assessmentClient, /window\.flushAssessmentDraft=saveDraft/);
+});
+
+test("student progress is bounded by the current catalog and subjects follow the selected grade", async () => {
+  const html = await source("public/app.html");
+  assert.match(html, /const completedCount=Math\.min\(doneIds\.size,subjTests\.length\)/);
+  assert.match(html, /const coverPct=Math\.round\(completedCount\/subjTests\.length\*100\)/);
+  assert.match(html, /populateSubjectDropdown\('s-filter-subject',grade\)/);
+  assert.match(html, /Number\(test\.grade\)===requestedGrade/);
+});
+
 test("centers results and keeps actions usable on a 360px-wide screen", async () => {
   const html = await source("public/app.html");
   assert.match(html, /#p-results\{background:[^}]+align-items:center!important;justify-content:flex-start!important/);

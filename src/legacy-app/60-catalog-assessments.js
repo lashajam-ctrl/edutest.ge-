@@ -12,15 +12,15 @@ function populateBuilderSubjects(){
   const select=document.getElementById('b-subj'),grade=Number(document.getElementById('b-grade')?.value||1);if(!select)return;
   const current=subjectFamily(select.value),allowed=subjectsForGrade(grade);select.replaceChildren(...allowed.map(subject=>new Option(subject,subject,false,subject===current)));
 }
-function populateSubjectDropdown(selId){
+function populateSubjectDropdown(selId,grade){
   const sel=document.getElementById(selId);if(!sel)return;
-  const curVal=subjectFamily(sel.dataset.realVal||sel.value),catalogSubjects=[...new Set(ALL_TESTS.filter(test=>test&&test.serverBacked===true).map(test=>subjectFamily(test.subject)).filter(Boolean))];
-  const fallbackGrade=Number(CUR_USER?.grade||0),values=(catalogSubjects.length?catalogSubjects:(fallbackGrade?subjectsForGrade(fallbackGrade):[...new Set(Object.values(SCHOOL_SUBJECTS_BY_GRADE).flat())])).sort((a,b)=>a.localeCompare(b,'ka'));
+  const requestedGrade=Number(grade||0);
+  const eligibleCatalog=ALL_TESTS.filter(test=>test&&test.serverBacked===true&&(!requestedGrade||Number(test.grade)===requestedGrade));
+  const curVal=subjectFamily(sel.dataset.realVal||sel.value),catalogSubjects=[...new Set(eligibleCatalog.map(test=>subjectFamily(test.subject)).filter(Boolean))];
+  const fallbackGrade=requestedGrade||Number(CUR_USER?.grade||0),values=(catalogSubjects.length?catalogSubjects:(fallbackGrade?subjectsForGrade(fallbackGrade):[...new Set(Object.values(SCHOOL_SUBJECTS_BY_GRADE).flat())])).sort((a,b)=>a.localeCompare(b,'ka'));
   sel.replaceChildren(new Option(t('all_subjects'),''),...values.map(value=>new Option(value,value,false,value===curVal)));
 }
 function renderStudentTests(){
-  populateSubjectDropdown('s-filter-subject');
-  const subj=document.getElementById('s-filter-subject')?.value||'';
   let grade=document.getElementById('s-filter-grade')?.value||'';
   const semFilter=document.getElementById('s-filter-semester')?.value||'';
   const typeFilter=document.getElementById('s-filter-testtype')?.value||'';
@@ -43,6 +43,8 @@ function renderStudentTests(){
     }
   }
   if(!grade&&userGradeNum)grade=String(userGradeNum);
+  populateSubjectDropdown('s-filter-subject',grade);
+  const subj=document.getElementById('s-filter-subject')?.value||'';
   const list=document.getElementById('s-test-list');if(!list)return;
   let tests=ALL_TESTS.filter(tx=>tx&&tx.serverBacked===true);
   if(userGradeNum) tests=tests.filter(tx=>Math.abs(Number(tx.grade)-userGradeNum)<=1);
@@ -516,8 +518,10 @@ function payComplete(){
   if(badge&&isPremium(email))badge.style.display='';
 }
 loadPersistedData();
-// Restore the secure HttpOnly server session first, then initialize optional Supabase email/cloud features.
-initServerAuth().then(function(){return initEduTestCloud();}).catch(function(e){console.warn('Cloud init',e);});
+// Restore the secure HttpOnly server session before revealing a route. This
+// prevents a signed-in learner from briefly seeing the public landing page.
+function revealAppAfterAuth(){document.body.classList.remove('auth-restoring');const boot=document.getElementById('auth-boot-screen');if(boot)boot.remove();}
+initServerAuth().catch(function(e){console.warn('Server auth init',e);return false;}).finally(revealAppAfterAuth).then(function(){return initEduTestCloud();}).catch(function(e){console.warn('Cloud init',e);});
 window.addEventListener('edutest-supabase-ready',function(){if(!EDUTEST_CLOUD.ready)initEduTestCloud();},{once:true});
 loadPrices();
 loadCustomQuestions();
@@ -1124,4 +1128,3 @@ document.addEventListener('keydown',function(event){
   if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}
   else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}
 });
-

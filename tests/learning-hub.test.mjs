@@ -123,10 +123,12 @@ test('screenshot regression: Georgian grade 3 semester 2 practice is offered aft
   const controls=Object.fromEntries(['s-filter-grade','s-filter-subject','s-filter-semester','s-filter-testtype','s-test-list'].map(id=>[id,new Element(id==='s-test-list'?'div':'select')]));
   Object.entries({'s-filter-grade':'3','s-filter-subject':'ქართული','s-filter-semester':'2','s-filter-testtype':'sum'}).forEach(([id,v])=>{controls[id].value=v;});
   const html=read('public/app.html');const code=html.slice(html.indexOf('function renderStudentTests(){'),html.indexOf('// ── Teacher Tests Table'));
+  let populatedGrade=null;
   const sandbox={CUR_USER:{grade:'3',email:'test@example.test'},ALL_TESTS:[{id:'v11-ge3s2',serverBacked:true,subject:'ქართული',grade:3,semester:2,testType:'practice',count:10,time:15}],USER_DB:[],
-    document:{getElementById:id=>controls[id]||null,createElement:tag=>new Element(tag),querySelector:()=>null},populateSubjectDropdown(){},subjectFamily:s=>s,t:s=>s,esc:s=>s,txTitle:t=>t.id,
+    document:{getElementById:id=>controls[id]||null,createElement:tag=>new Element(tag),querySelector:()=>null},populateSubjectDropdown(_id,grade){populatedGrade=grade;},subjectFamily:s=>s,t:s=>s,esc:s=>s,txTitle:t=>t.id,
     Option:function(text,value,def,selected){return {textContent:text,value,selected};},EduTestSchoolRules:globalThis.EduTestSchoolRules,EDUTEST_CATALOG_STATE:'ready',SUBJ_COLORS:{},SUBJ_ICONS:{},getTestAccess:()=> 'free'};
   sandbox.window=sandbox;vm.createContext(sandbox);vm.runInContext(code,sandbox);sandbox.renderStudentTests();
+  assert.equal(populatedGrade,'3');
   const empty=controls['s-test-list'].children[0];assert.match(empty.textContent,/ფილტრების კომბინაციით/);
   assert.ok(controls['s-filter-testtype'].children.some(o=>o.value==='practice'));
   const reset=empty.children.find(n=>n.tag==='button');assert.match(reset.textContent,/ხელმისაწვდომი ტიპების/);reset.events.click();
