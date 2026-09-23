@@ -25,6 +25,18 @@
           <p style="opacity:.85;font-size:13px">ტესტები გელოდება. წარმატებები! 🌟</p>
           <button class="btn" style="margin-top:10px;background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.75)" onclick="sNav('s-tests',document.querySelectorAll('#p-student .ni')[1])" data-i18n="tests">ტესტების ნახვა →</button>
         </div>
+        <section id="student-quick-start" class="card student-quick-start" aria-labelledby="student-quick-title">
+          <div class="student-quick-head">
+            <div><h2 id="student-quick-title">დაიწყე აქ</h2><p>აირჩიე ერთი მოქმედება — კლასსა და შესაბამის ტესტებს სისტემა თავად გაითვალისწინებს.</p></div>
+            <span id="student-quick-status" role="status" aria-live="polite">პირადი გეგმა იტვირთება…</span>
+          </div>
+          <div class="student-quick-grid">
+            <button type="button" id="quick-daily-test" class="student-quick-action quick-daily" onclick="startQuickDailyTest()" disabled><strong>🎯 დღევანდელი ტესტი</strong><span>რეკომენდაცია ჯერ იტვირთება</span></button>
+            <button type="button" id="quick-resume-test" class="student-quick-action quick-resume" onclick="continueQuickAssessment()" disabled><strong>▶ გააგრძელე დაწყებული</strong><span>დაწყებული ტესტი არ არის</span></button>
+            <button type="button" id="quick-mistake-practice" class="student-quick-action quick-mistake" onclick="startQuickMistakePractice()" disabled><strong>🧠 შეცდომებზე ვარჯიში</strong><span>გასამეორებელი საკითხები იტვირთება</span></button>
+            <button type="button" id="quick-choose-subject" class="student-quick-action quick-subject" onclick="openQuickSubjectPicker()"><strong>📚 აირჩიე საგანი</strong><span>ნახე მხოლოდ შენი კლასისთვის ხელმისაწვდომი ტესტები</span></button>
+          </div>
+        </section>
         <div class="stat-g" id="s-home-stats">
           <div class="stat"><div class="stat-ic" style="background:#dbeafe">📝</div><div class="stat-v" style="color:#2563eb" id="sh-tests">0</div><div class="stat-l" data-i18n="completed_tests">დასრულებული ტესტი</div></div>
           <div class="stat" style="cursor:pointer" onclick="sNav('s-leaderboard',null);renderLeaderboard()"><div class="stat-ic" style="background:#e0e7ff">⚡</div><div class="stat-v" style="color:#4f46e5" id="sh-xp">0 XP</div>

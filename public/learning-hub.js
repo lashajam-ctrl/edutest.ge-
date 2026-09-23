@@ -99,6 +99,24 @@
     start();
   };
   window.practiceReviewQuestion=function(index){const q=_lastResult?.reviewed?.[index];if(q&&!q.ok&&_lastResult?.verified===true)startLearningPractice(q.id);};
+  let savedAssessments=Array.isArray(window.EDUTEST_SAVED_ASSESSMENTS)?window.EDUTEST_SAVED_ASSESSMENTS:[];
+  function quickAction(id,enabled,detail){
+    const control=document.getElementById(id);if(!control)return;
+    control.disabled=!enabled;const description=control.querySelector('span');if(description)description.textContent=detail;
+  }
+  function quickPlanAction(kind){return (planData?.actions||[]).find(action=>kind==='practice'?action.kind==='practice':action.kind!=='practice'&&/დღის ტესტი/.test(action.label||''))||(kind==='test'?(planData?.actions||[]).find(action=>action.kind!=='practice'):null);}
+  function renderQuickStart(){
+    const daily=quickPlanAction('test'),practice=quickPlanAction('practice'),saved=savedAssessments[0];
+    quickAction('quick-daily-test',!!daily,daily?(daily.title||[daily.subject,daily.topic].filter(Boolean).join(' · ')):'დღევანდელი რეკომენდაცია ჯერ არ არის');
+    quickAction('quick-resume-test',!!saved,saved?String(saved.test?.title||'შენახული ტესტი'):'დაწყებული ტესტი არ არის');
+    quickAction('quick-mistake-practice',!!practice,practice?(practice.title||[practice.subject,practice.topic].filter(Boolean).join(' · ')):'ამ დროისთვის გასამეორებელი შეცდომა არ არის');
+    const status=document.getElementById('student-quick-status');if(status)status.textContent=(daily?1:0)+(saved?1:0)+(practice?1:0)+' პირადი მოქმედება მზადაა';
+  }
+  window.startQuickDailyTest=function(){const action=quickPlanAction('test');if(action?.testId)startTestById(action.testId);};
+  window.continueQuickAssessment=function(){const saved=savedAssessments[0];if(saved?.sessionId&&typeof resumeSavedAssessment==='function')resumeSavedAssessment(saved.sessionId);};
+  window.startQuickMistakePractice=function(){const action=quickPlanAction('practice');if(action?.sourceQuestionId)startLearningPractice(action.sourceQuestionId);};
+  window.openQuickSubjectPicker=function(){sNav('s-tests',document.querySelectorAll('#p-student .ni')[1]);};
+  window.addEventListener('edutest-saved-assessments',event=>{savedAssessments=Array.isArray(event.detail)?event.detail:[];renderQuickStart();});
   function planView(box,data){
     box.replaceChildren(element('h2','დღეს რა ვისწავლო?'),element('p','დღეს შესრულებულია '+data.completedToday+' სრული ტესტი. გასამეორებელია '+data.dueQuestions+' საკითხი.'));
     if(data.reinforcedMistakes)box.append(element('p',data.reinforcedMistakes+' შეცდომის შემდეგ დამატებითი სავარჯიშო სწორად შეასრულე. მათ მოგვიანებით დავუბრუნდებით.'));
@@ -106,7 +124,7 @@
     const list=element('div',undefined,'learning-actions');
     data.actions.forEach((action,index)=>{const card=element('section',undefined,'learning-action');card.append(element('h3',(index+1)+'. '+action.label),element('p',action.title||[action.subject,action.topic].filter(Boolean).join(' · ')));
       card.append(button('დაწყება',()=>action.kind==='practice'?startLearningPractice(action.sourceQuestionId):startTestById(action.testId)));list.append(card);});
-    box.append(list,element('p',data.note,'learning-note'),button('კვირის / ბავშვის შეჯამება',openWeeklySummary));
+    box.append(list,element('p',data.note,'learning-note'),button('კვირის / ბავშვის შეჯამება',openWeeklySummary));renderQuickStart();
   }
   window.refreshLearningPlan=async function(force=false){
     const box=document.getElementById('learning-plan');if(!box||CUR_USER?.role!=='student')return;
@@ -114,7 +132,7 @@
     if(planOwner!==owner){planData=null;planLoadedAt=0;planPromise=null;planOwner=owner;}
     if(!force&&planData&&Date.now()-planLoadedAt<60000){planView(box,planData);return;}
     if(planPromise&&!force)return planPromise;
-    box.replaceChildren(element('h2','დღეს რა ვისწავლო?'),element('p','პირადი გეგმა იტვირთება…'));
+    box.replaceChildren(element('h2','დღეს რა ვისწავლო?'),element('p','პირადი გეგმა იტვირთება…'));renderQuickStart();
     const pending=(async()=>{try{const data=await api('/api/learning/plan');if(owner!==identity())return;planData=data;planLoadedAt=Date.now();planView(box,data);}
       catch(error){if(owner===identity())errorState(box,error,()=>refreshLearningPlan(true));}finally{if(planPromise===pending)planPromise=null;}})();
     planPromise=pending;return pending;
@@ -148,7 +166,7 @@
     if(page==='parent'&&CUR_USER?.role==='parent')loadParentHome();
     if(page==='student'&&CUR_USER?.role==='student'){
       const home=document.getElementById('s-home');if(home&&!document.getElementById('learning-plan')){const box=element('section',undefined,'card learning-panel');box.id='learning-plan';box.setAttribute('aria-live','polite');home.insertBefore(box,home.children[1]||null);}
-      refreshLearningPlan();
+      renderQuickStart();refreshLearningPlan();
       if(typeof refreshSavedAssessments==='function')refreshSavedAssessments();
     }
     if(['teacher','admin'].includes(page)&&CUR_USER?.role===page){const home=document.getElementById(page==='admin'?'a-home':'t-home');

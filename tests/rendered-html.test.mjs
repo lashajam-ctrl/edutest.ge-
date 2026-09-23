@@ -48,6 +48,16 @@ test("uses warm grade-aware layouts and a child-friendly early-grade test view",
   assert.match(html, /@media\(max-width:640px\)/);
 });
 
+test("offers four state-backed learner shortcuts without inventing unavailable work", async () => {
+  const [html, hub, assessments, css] = await Promise.all([source("public/app.html"), source("public/learning-hub.js"), source("public/server-assessments.js"), source("public/learning-hub.css")]);
+  for(const id of ["quick-daily-test","quick-resume-test","quick-mistake-practice","quick-choose-subject"])assert.match(html,new RegExp(`id="${id}"`));
+  assert.match(html,/quick-daily-test[^>]+disabled/);assert.match(html,/quick-resume-test[^>]+disabled/);assert.match(html,/quick-mistake-practice[^>]+disabled/);
+  assert.match(hub,/quickPlanAction\('test'\)/);assert.match(hub,/quickPlanAction\('practice'\)/);assert.match(hub,/resumeSavedAssessment\(saved\.sessionId\)/);
+  assert.match(assessments,/EDUTEST_SAVED_ASSESSMENTS/);assert.match(assessments,/edutest-saved-assessments/);
+  assert.match(css,/@media\(max-width:640px\)\{\.student-quick-head/);
+  assert.doesNotMatch(hub.slice(hub.indexOf('function quickAction'),hub.indexOf('function planView')),/innerHTML|insertAdjacentHTML/);
+});
+
 test("restores auth before revealing a route and keeps test exit cancellable with a saved draft", async () => {
   const [html, assessmentClient] = await Promise.all([source("public/app.html"), source("public/server-assessments.js")]);
   assert.match(html, /<body class="auth-restoring">/);
