@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /app.html
+
+Host: https://edutest.ge
+Sitemap: https://edutest.ge/sitemap.xml

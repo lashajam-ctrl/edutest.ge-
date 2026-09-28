@@ -32,3 +32,37 @@ test("homepage metadata declares favicon and organization logo", async () => {
     assert.match(source, /https:\/\/edutest\.ge\/#organization/);
   }
 });
+
+test("installable web app metadata uses existing brand assets", async () => {
+  const [manifestText, appHtml, register, serviceWorker, offline] = await Promise.all([
+    readFile("public/manifest.webmanifest", "utf8"),
+    readFile("public/app.html", "utf8"),
+    readFile("public/pwa-register.js", "utf8"),
+    readFile("public/sw.js", "utf8"),
+    readFile("public/offline.html", "utf8"),
+  ]);
+  const manifest = JSON.parse(manifestText);
+  assert.equal(manifest.start_url, "/?source=pwa");
+  assert.equal(manifest.scope, "/");
+  assert.equal(manifest.display, "standalone");
+  assert.deepEqual(manifest.icons.map(icon => icon.src), ["/favicon-192.png", "/meta-app-icon-1024.png"]);
+  assert.match(appHtml, /<link rel="manifest" href="\/manifest\.webmanifest"\/>/);
+  assert.match(appHtml, /<script src="\/pwa-register\.js" defer><\/script>/);
+  assert.match(register, /updateViaCache:\s*"none"/);
+  assert.match(serviceWorker, /url\.pathname\.startsWith\("\/api\/"\)/);
+  assert.doesNotMatch(serviceWorker, /cache\.put\(request|caches\.match\(request/);
+  assert.match(offline, /ტესტებს offline რეჟიმში არ აფასებს/);
+});
+
+test("crawler routes expose only public pages", async () => {
+  const [robots, sitemap] = await Promise.all([
+    readFile("public/robots.txt", "utf8"),
+    readFile("public/sitemap.xml", "utf8"),
+  ]);
+  assert.match(robots, /Disallow: \/api\//);
+  assert.match(robots, /Disallow: \/app\.html/);
+  assert.match(robots, /Sitemap: https:\/\/edutest\.ge\/sitemap\.xml/);
+  assert.match(sitemap, /https:\/\/edutest\.ge\/terms/);
+  assert.match(sitemap, /https:\/\/edutest\.ge\/privacy/);
+  assert.doesNotMatch(sitemap, /\/api\//);
+});

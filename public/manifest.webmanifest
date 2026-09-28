@@ -1,0 +1,38 @@
+{
+  "id": "/",
+  "name": "EduTest.ge — სასკოლო ტესტები",
+  "short_name": "EduTest.ge",
+  "description": "კლასზე მორგებული სასკოლო ტესტები, გასაგები ახსნა და პროგრესის ანალიზი I–XII კლასისთვის.",
+  "lang": "ka",
+  "dir": "ltr",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#fffaf5",
+  "theme_color": "#5f3348",
+  "categories": ["education", "kids"],
+  "icons": [
+    {
+      "src": "/favicon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/meta-app-icon-1024.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "ტესტების გახსნა",
+      "short_name": "ტესტები",
+      "description": "EduTest.ge-ზე შესვლა და ტესტის არჩევა",
+      "url": "/?source=pwa-shortcut",
+      "icons": [{ "src": "/favicon-192.png", "sizes": "192x192", "type": "image/png" }]
+    }
+  ]
+}

@@ -9,7 +9,7 @@
     "dev": "vinext dev",
     "build": "node scripts/assemble-app.mjs --check && vinext build",
     "build:cloudflare": "node scripts/build-cloudflare.mjs",
-    "deploy:cloudflare": "npm run build:cloudflare && wrangler deploy --config dist/server/wrangler.json",
+    "deploy:cloudflare": "node scripts/build-cloudflare.mjs && wrangler deploy --config dist/server/wrangler.json",
     "start": "vinext start",
     "test": "node scripts/release-gate.mjs",
     "release:check": "node scripts/release-gate.mjs",

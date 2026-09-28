@@ -19,7 +19,7 @@ interface ExecutionContext {
   passThroughOnException(): void;
 }
 
-function secureResponse(response: Response): Response {
+function secureResponse(response: Response, pathname = ""): Response {
   const secured = new Response(response.body, response);
   secured.headers.set("X-Content-Type-Options", "nosniff");
   secured.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
@@ -41,11 +41,16 @@ function secureResponse(response: Response): Response {
     "media-src 'self' data: blob:",
     "connect-src 'self' https://rlvxujpwoooxprhzgysj.supabase.co https://cloudflareinsights.com",
     "worker-src 'self' blob:",
+    "manifest-src 'self'",
     "upgrade-insecure-requests",
   ].join("; "));
   if ((secured.headers.get("Content-Type") ?? "").includes("text/html")) {
     secured.headers.set("Cache-Control", "no-store");
     secured.headers.set("CDN-Cache-Control", "no-store");
+  }
+  if (pathname === "/sw.js") {
+    secured.headers.set("Cache-Control", "no-cache, no-store, must-revalidate");
+    secured.headers.set("Service-Worker-Allowed", "/");
   }
   return secured;
 }
@@ -63,7 +68,7 @@ const worker = {
     if (url.pathname === "/" && (request.method === "GET" || request.method === "HEAD")) {
       const appUrl = new URL(request.url);
       appUrl.pathname = "/app.html";
-      return secureResponse(await handler.fetch(new Request(appUrl, request), env, ctx));
+      return secureResponse(await handler.fetch(new Request(appUrl, request), env, ctx), url.pathname);
     }
 
     if (url.pathname === "/_vinext/image") {
@@ -77,7 +82,7 @@ const worker = {
       }, allowedWidths);
     }
 
-    return secureResponse(await handler.fetch(request, env, ctx));
+    return secureResponse(await handler.fetch(request, env, ctx), url.pathname);
   },
 };
 

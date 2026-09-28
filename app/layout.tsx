@@ -3,6 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://edutest.ge"),
+  manifest: "/manifest.webmanifest",
   title: "EduTest.ge — სკოლის ონლაინ ტესტები I–XII კლასისთვის",
   description: "კლასზე მორგებული სასკოლო ტესტები, გასაგები ახსნა და რეალური პროგრესის ანალიზი საქართველოს სკოლებისთვის.",
   icons: {
@@ -30,6 +31,11 @@ export const metadata: Metadata = {
     title: "EduTest.ge — ისწავლე თამაშით. გაიზარდე ცოდნით.",
     description: "კლასზე მორგებული ტესტები, გასაგები ახსნა და პროგრესის შემდეგი ნაბიჯი.",
     images: ["/og-v2.png"],
+  },
+  appleWebApp: {
+    capable: true,
+    title: "EduTest.ge",
+    statusBarStyle: "default",
   },
 };
 
