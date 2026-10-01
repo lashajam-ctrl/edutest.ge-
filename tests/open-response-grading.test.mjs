@@ -33,7 +33,7 @@ test("AI grading is structured, server-only, confidence-gated and non-destructiv
   assert.match(submit, /await gradeOpenResponseWithAi/);
   assert.match(submit, /row\.gradingStatus === "graded"/);
   assert.match(submit, /pending: pendingCount/);
-  assert.match(start, /"v8", "v11", "v23"/);
-  assert.match(selection, /\["v11", "v23"\]/);
+  assert.match(start, /"v8", "v11", "v23", "v28"/);
+  assert.match(selection, /\["v11", "v23", "v28"\]/);
   assert.match(client, /AbortSignal\.timeout\(60000\)/);
 });

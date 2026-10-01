@@ -3,6 +3,8 @@ import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { classifyOpenAnswer } from "../lib/short-answer-core.mjs";
+import { parseNumericShortAnswer } from "../lib/short-answer-core.mjs";
+import { directMathResult } from "./import-v8-question-bank.mjs";
 
 const QUESTION_FILES = ["IMPORT/questions_canonical_40320.jsonl", "IMPORT/questions_extension.jsonl"];
 const ANSWER_FILES = ["SERVER-ONLY/answer_keys_40320.jsonl", "SERVER-ONLY/answer_keys_extension.jsonl"];
@@ -17,6 +19,9 @@ const BROKEN_CONTEXT_IDS = new Set([
 import { ASSESSMENT_SUBJECTS_BY_GRADE } from "../lib/school-policy.mjs";
 // Source capability: this archive has no Russian. School availability is unchanged.
 const SUBJECTS_BY_GRADE = Object.fromEntries(Object.entries(ASSESSMENT_SUBJECTS_BY_GRADE).map(([grade, subjects]) => [grade, subjects.filter(subject => subject !== "რუსული")]));
+// These pre-versioned English pools are fully replaced by the current archive.
+// Russian remains separate because the archive intentionally does not contain it.
+const REPLACED_LEGACY_POOLS = ["eng-g1", "eng-g2"];
 
 const sha = value => createHash("sha256").update(value).digest("hex");
 const normalize = value => String(value ?? "").normalize("NFKC").toLocaleLowerCase("ka-GE").replace(/\s+/gu, " ").trim();
@@ -135,6 +140,15 @@ export function answerKeyFor(question, answerRow) {
   return { error: "unsupported_type" };
 }
 
+function numericAnswerValue(answer) {
+  let raw = null;
+  if (answer.type === "multiple_choice" || answer.type === "true_false") raw = answer.payload?.opts?.[answer.key?.correct];
+  else if (answer.type === "fill") raw = answer.key?.blanks?.[0];
+  else if (answer.type === "short_answer" && answer.key?.mode === "numeric") raw = answer.key.expected;
+  const parsed = parseNumericShortAnswer(raw);
+  return parsed?.value ?? null;
+}
+
 function questionInsert(row) {
   const columns = ["id","source_id","pool_key","pool_prefix","grade","subject","source_subject","semester","topic","strand","question_type","public_payload_json","points","difficulty","review_status","mapping_status","semantic_group_id","content_hash","active","imported_at","updated_at"];
   const values = [row.id,row.sourceId,row.poolKey,row.poolPrefix,row.grade,row.subject,row.sourceSubject,row.semester,row.topic,row.strand,row.type,JSON.stringify(row.payload),row.points,row.difficulty,"algorithmically_validated",row.mappingStatus,row.semanticGroupId,row.contentHash,1,row.now,row.now];
@@ -160,12 +174,13 @@ async function main() {
   const sourcePrefix = `${args.version}:`;
   const questions = (await Promise.all(QUESTION_FILES.map(file => readJsonLines(join(args.source, file))))).flat();
   const answers = new Map((await Promise.all(ANSWER_FILES.map(file => readJsonLines(join(args.source, file))))).flat().map(row => [row.question_id, row]));
-  const subjectFixes = await approvedSubjectFixes(args.source), rows = [], excluded = {}, byBucket = new Map(), byType = {}, openGradingModes = {}, remapped = [];
+  const subjectFixes = await approvedSubjectFixes(args.source), rows = [], excluded = {}, byBucket = new Map(), byType = {}, openGradingModes = {}, remapped = [], directMathBlocked = [];
+  let importedMediaTextFallback = 0;
   const exclude = reason => { excluded[reason] = (excluded[reason] ?? 0) + 1; };
   for (const question of questions) {
     if (question.status !== "active" || String(question.deliverable) !== "1") { exclude(`source_${question.status}`); continue; }
     if (BROKEN_CONTEXT_IDS.has(question.question_id)) { exclude("confirmed_missing_context"); continue; }
-    if (String(question.media_required) === "1") { exclude("media_asset_not_in_archive"); continue; }
+    if (String(question.media_required) === "1" && !String(question.stimulus || "").trim()) { exclude("media_without_text_equivalent"); continue; }
     const fixedSubsubject = subjectFixes.get(question.question_id) || String(question.subsubject);
     if (fixedSubsubject !== question.subsubject) remapped.push({ id: question.question_id, from: question.subsubject, to: fixedSubsubject });
     const subject = mappedSubject(question, fixedSubsubject), grade = Number(question.grade), semester = Number(question.semester);
@@ -175,6 +190,11 @@ async function main() {
     let text = [String(question.stimulus || "").trim(), String(question.stem || "").trim()].filter(Boolean).join("\n\n");
     if (answer.appendBlank) text += "\n\nპასუხი: ___";
     if (text.length < 3) { exclude("empty_prompt"); continue; }
+    const computed = directMathResult(text), supplied = numericAnswerValue(answer);
+    if (computed !== null && (supplied === null || Math.abs(computed - supplied) > 1e-9)) {
+      directMathBlocked.push({ id: question.question_id, computed, supplied, text: text.slice(0, 300) });
+      exclude("direct_math_answer_mismatch"); continue;
+    }
     const id = `${args.version}-${question.question_id}`, topic = topicFor(question, fixedSubsubject), payload = { id, text, type: answer.type, pts: pointsFor(question), grade, subject, semester, topic, ...answer.payload, difficulty: question.difficulty };
     const row = {
       id, sourceId: `${sourcePrefix}${question.question_id}`, poolKey: `${question.bank_id}|${semester}|${fixedSubsubject}`, poolPrefix: args.version, grade, subject,
@@ -185,6 +205,7 @@ async function main() {
       answerKey: answer.key, explanation: String(answers.get(question.question_id)?.rationale || "პასუხი შემოწმებულია სერვერზე."), now,
     };
     rows.push(row); byType[row.type] = (byType[row.type] ?? 0) + 1;
+    if (String(question.media_required) === "1") importedMediaTextFallback++;
     if (question.question_type === "OPEN") openGradingModes[answer.key.mode] = (openGradingModes[answer.key.mode] ?? 0) + 1;
     const bucket = `${grade}|${subject}|${semester}`;
     if (!byBucket.has(bucket)) byBucket.set(bucket, { rows: 0, groups: new Set() });
@@ -202,8 +223,8 @@ async function main() {
     generatedAt: new Date(now).toISOString(), sourceVersion: args.version, sourceQuestions: questions.length,
     sourceActiveDeliverable: questions.filter(row => row.status === "active" && String(row.deliverable) === "1").length,
     importedQuestions: rows.length, importedTests: tests.length, answerKeysServerOnly: rows.length,
-    excluded, questionTypes: byType, openGradingModes, confirmedFixes: { biologyRetags: remapped.length, missingContextBlocked: excluded.confirmed_missing_context ?? 0, missingAnswerBlocked: excluded.missing_answer ?? 0 },
-    capacity, validations: { activeOnly: "pass", answerPresence: "pass", uniqueOptions: "pass", exactlyOneMcqAnswer: "pass", contextBlocklist: "pass", catalogRules: "pass", semanticRotationCapacity: "pass" },
+    excluded, questionTypes: byType, openGradingModes, importedMediaTextFallback, directMathBlocked, confirmedFixes: { biologyRetags: remapped.length, missingContextBlocked: excluded.confirmed_missing_context ?? 0, missingAnswerBlocked: excluded.missing_answer ?? 0 },
+    capacity, validations: { activeOnly: "pass", answerPresence: "pass", uniqueOptions: "pass", exactlyOneMcqAnswer: "pass", directMathRecomputation: "pass", contextBlocklist: "pass", catalogRules: "pass", semanticRotationCapacity: "pass", mediaTextFallback: "pass" },
     retainedLegacySubjects: ["რუსული"],
     compatibility: { matchDictionaryAndListAnswers: "pass", openResponses: "deterministic_or_structured_ai_grading", versionedIdsAndPools: "pass", legacyProgressMigration: "included" },
     humanReview: "not_performed; imported rows are algorithmically validated, not independently SME-approved",
@@ -216,12 +237,11 @@ async function main() {
       const chunk = rows.slice(offset, offset + chunkSize), statements = ["PRAGMA foreign_keys=ON;", ...chunk.flatMap(row => [questionInsert(row), answerInsert(row)])];
       await writeFile(join(args.out, `questions-${String(offset / chunkSize + 1).padStart(3, "0")}.sql`), `${statements.join("\n")}\n`, "utf8");
     }
-    const covered = new Set(tests.map(test => `${test.grade}|${test.subject}`));
-    const unpublish = [...covered].map(key => { const [grade, subject] = key.split("|"); return `(grade=${Number(grade)} AND subject=${sql(subject)})`; }).join(" OR ");
     const manifest = ["PRAGMA foreign_keys=ON;",
-      `INSERT INTO assessment_question_history (user_id,question_id,semantic_group_id,answered_count,correct_count,last_correct,last_answered_at,next_review_at) SELECT h.user_id,n.id,n.semantic_group_id,h.answered_count,h.correct_count,h.last_correct,h.last_answered_at,h.next_review_at FROM assessment_question_history h JOIN assessment_questions o ON o.id=h.question_id JOIN assessment_questions n ON n.source_id=(${sql(sourcePrefix)} || substr(o.source_id,instr(o.source_id,':')+1)) WHERE n.pool_prefix=${sql(args.version)} AND o.pool_prefix IN ('v8','v11') ON CONFLICT(user_id,question_id) DO UPDATE SET answered_count=MAX(assessment_question_history.answered_count,excluded.answered_count),correct_count=MAX(assessment_question_history.correct_count,excluded.correct_count),last_correct=excluded.last_correct,last_answered_at=MAX(assessment_question_history.last_answered_at,excluded.last_answered_at),next_review_at=MAX(assessment_question_history.next_review_at,excluded.next_review_at);`,
-      `UPDATE assessment_questions SET active=0,updated_at=${now} WHERE pool_prefix IN ('v8','v11');`,
-      `UPDATE assessment_tests SET published=0,updated_at=${now} WHERE is_custom=0 AND (${unpublish});`, ...tests.map(testInsert),
+      `INSERT INTO assessment_question_history (user_id,question_id,semantic_group_id,answered_count,correct_count,last_correct,last_answered_at,next_review_at) SELECT h.user_id,n.id,n.semantic_group_id,h.answered_count,h.correct_count,h.last_correct,h.last_answered_at,h.next_review_at FROM assessment_question_history h JOIN assessment_questions o ON o.id=h.question_id JOIN assessment_questions n ON n.source_id=(${sql(sourcePrefix)} || substr(o.source_id,instr(o.source_id,':')+1)) WHERE n.pool_prefix=${sql(args.version)} AND o.pool_prefix GLOB 'v[0-9]*' AND o.pool_prefix<>${sql(args.version)} ON CONFLICT(user_id,question_id) DO UPDATE SET answered_count=MAX(assessment_question_history.answered_count,excluded.answered_count),correct_count=MAX(assessment_question_history.correct_count,excluded.correct_count),last_correct=excluded.last_correct,last_answered_at=MAX(assessment_question_history.last_answered_at,excluded.last_answered_at),next_review_at=MAX(assessment_question_history.next_review_at,excluded.next_review_at);`,
+      `UPDATE assessment_questions SET active=0,updated_at=${now} WHERE pool_prefix GLOB 'v[0-9]*' AND pool_prefix<>${sql(args.version)};`,
+      `UPDATE assessment_questions SET active=0,updated_at=${now} WHERE pool_prefix IN (${REPLACED_LEGACY_POOLS.map(sql).join(",")});`,
+      `UPDATE assessment_tests SET published=0,updated_at=${now} WHERE is_custom=0 AND source_pool GLOB 'v[0-9]*' AND source_pool<>${sql(args.version)};`, ...tests.map(testInsert),
       `INSERT INTO assessment_import_runs (id,source_hash,source_questions,imported_questions,imported_tests,report_json,imported_at) VALUES (${sql(`${args.version}-${sha(JSON.stringify(report)).slice(0, 16)}`)},${sql(sha(JSON.stringify(report)))},${questions.length},${rows.length},${tests.length},${sql(JSON.stringify(report))},${now}) ON CONFLICT(source_hash) DO UPDATE SET imported_questions=excluded.imported_questions,imported_tests=excluded.imported_tests,report_json=excluded.report_json,imported_at=excluded.imported_at;`];
     await writeFile(join(args.out, "999-tests-and-manifest.sql"), `${manifest.join("\n")}\n`, "utf8");
   }

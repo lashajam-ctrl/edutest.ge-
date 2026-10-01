@@ -9,7 +9,11 @@ test("v11 platform importer blocks the three confirmed defect classes", async ()
   assert.match(source, /sme_prefilled_physics_biology\.csv/);
   assert.match(source, /answerRow\.answer_json === "null"/);
   assert.match(source, /review_status.*algorithmically_validated/s);
-  assert.match(source, /media_asset_not_in_archive/);
+  assert.match(source, /media_without_text_equivalent/);
+  assert.match(source, /direct_math_answer_mismatch/);
+  assert.match(source, /pool_prefix GLOB 'v\[0-9\]\*'/);
+  assert.match(source, /source_pool GLOB 'v\[0-9\]\*'/);
+  assert.match(source, /REPLACED_LEGACY_POOLS = \["eng-g1", "eng-g2"\]/);
   assert.match(source, /dailyFullFreshTests/);
   assert.doesNotMatch(source, /curriculum_reviewed/);
 });
@@ -30,6 +34,22 @@ test("generated v23 report passes server-only answer and semantic capacity gates
   assert.equal(report.compatibility.matchDictionaryAndListAnswers, "pass");
   assert.equal(report.compatibility.openResponses, "deterministic_or_structured_ai_grading");
   assert.match(report.humanReview, /not_performed/);
+});
+
+test("generated v28 report adds validated concepts without exposing answers", async () => {
+  const report = JSON.parse(await readFile(new URL("../reports/v28-platform-import-report.json", import.meta.url), "utf8"));
+  assert.equal(report.sourceVersion, "v28");
+  assert.equal(report.sourceQuestions, 46756);
+  assert.equal(report.sourceActiveDeliverable, 34241);
+  assert.equal(report.importedQuestions, 24147);
+  assert.equal(report.importedTests, 154);
+  assert.equal(report.answerKeysServerOnly, report.importedQuestions);
+  assert.equal(report.importedMediaTextFallback, 195);
+  assert.deepEqual(report.directMathBlocked, []);
+  assert.equal(report.excluded.media_without_text_equivalent, undefined);
+  assert.equal(report.capacity.reduce((sum, row) => sum + row.semanticGroups, 0), 10638);
+  assert.equal(report.capacity.every(row => row.semanticGroups >= row.testQuestions), true);
+  assert.equal(Object.values(report.validations).every(value => value === "pass"), true);
 });
 
 test("v23 importer supports both match encodings and routes open responses to the right grader", () => {

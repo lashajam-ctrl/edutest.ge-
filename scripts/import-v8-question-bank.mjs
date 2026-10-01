@@ -85,7 +85,10 @@ function recoverMissingScalarAnswer(question, key) {
 
 function directMathResult(stem) {
   const compact = String(stem ?? "").normalize("NFKC").replace(/[−–—]/gu, "-");
-  const match = compact.match(/(?:^|\s|\()(-?\d+(?:[.,]\d+)?)\s*([+\-×*÷:])\s*\(?(-?\d+(?:[.,]\d+)?)\)?\s*=\s*(?:\?|___)/u);
+  // Recompute only a complete one-operation equation. Anchoring prevents a
+  // valid remainder-division or multi-step expression from being mistaken for
+  // a wrong answer merely because it contains one binary operation.
+  const match = compact.match(/^(?:[^\d\n]*[:：]\s*)?\(?(-?\d+(?:[.,]\d+)?)\)?\s*([+\-×*÷:])\s*\(?(-?\d+(?:[.,]\d+)?)\)?\s*=\s*(?:\?|___)\s*[.!?]?$/u);
   if (!match) return null;
   const left = Number(match[1].replace(",", ".")), right = Number(match[3].replace(",", "."));
   if (!Number.isFinite(left) || !Number.isFinite(right)) return null;
