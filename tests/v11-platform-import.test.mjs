@@ -15,6 +15,9 @@ test("v11 platform importer blocks the three confirmed defect classes", async ()
   assert.match(source, /source_pool GLOB 'v\[0-9\]\*'/);
   assert.match(source, /REPLACED_LEGACY_POOLS = \["eng-g1", "eng-g2"\]/);
   assert.match(source, /dailyFullFreshTests/);
+  assert.match(source, /cross_grade_exact_repeat/);
+  assert.match(source, /998-active-membership\.sql/);
+  assert.match(source, /Subject-tag review is incomplete/);
   assert.doesNotMatch(source, /curriculum_reviewed/);
 });
 
@@ -41,14 +44,19 @@ test("generated v28 report adds validated concepts without exposing answers", as
   assert.equal(report.sourceVersion, "v28");
   assert.equal(report.sourceQuestions, 46756);
   assert.equal(report.sourceActiveDeliverable, 34241);
-  assert.equal(report.importedQuestions, 24147);
+  assert.equal(report.importedQuestions, 20320);
   assert.equal(report.importedTests, 154);
   assert.equal(report.answerKeysServerOnly, report.importedQuestions);
   assert.equal(report.importedMediaTextFallback, 195);
   assert.deepEqual(report.directMathBlocked, []);
   assert.equal(report.excluded.media_without_text_equivalent, undefined);
-  assert.equal(report.capacity.reduce((sum, row) => sum + row.semanticGroups, 0), 10638);
+  assert.equal(report.crossGradeExactRepeatsBlocked, 3815);
+  assert.equal(report.confirmedFixes.flaggedSubjectCandidatesReviewed, 79);
+  assert.equal(report.confirmedFixes.flaggedSubjectCandidatesRetagged, 79);
+  assert.equal(report.confirmedFixes.curatedSubjectRetags, 76);
+  assert.equal(report.capacity.reduce((sum, row) => sum + row.semanticGroups, 0), 9579);
   assert.equal(report.capacity.every(row => row.semanticGroups >= row.testQuestions), true);
+  assert.equal(report.capacity.every(row => row.testQuestions === 10), true);
   assert.equal(Object.values(report.validations).every(value => value === "pass"), true);
 });
 

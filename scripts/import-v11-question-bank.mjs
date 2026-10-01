@@ -22,6 +22,23 @@ const SUBJECTS_BY_GRADE = Object.fromEntries(Object.entries(ASSESSMENT_SUBJECTS_
 // These pre-versioned English pools are fully replaced by the current archive.
 // Russian remains separate because the archive intentionally does not contain it.
 const REPLACED_LEGACY_POOLS = ["eng-g1", "eng-g2"];
+const REVIEWED_SUBJECT_OVERRIDES = new Map([
+  ["GE-G10-SO-S1-113", "მოქალაქეობა"],
+  ["GE-G11-SO-S1-110", "მოქალაქეობა"],
+  ["GE-G11-SO-S1-120", "მოქალაქეობა"],
+  ["GE-G12-SC-S1-056", "ბიოლოგია"],
+  ["GE-G12-SC-S1-058", "ქიმია"],
+  ["GE-G12-SC-S1-059", "ბიოლოგია"],
+  ["GE-G12-SC-S2-179", "ბიოლოგია"],
+  ["GE-G12-SO-S2-121", "მოქალაქეობა"],
+  ["GE-G12-SO-S2-131", "მოქალაქეობა"],
+  ["GE-G12-SO-S2-141", "მოქალაქეობა"],
+  ["GE-G12-SO-S2-161", "მოქალაქეობა"],
+  ["GE2-G10-SO-S1-003", "მოქალაქეობა"],
+  ["GE2-G10-SO-S1-013", "მოქალაქეობა"],
+  ["GE2-G11-SO-S1-020", "მოქალაქეობა"],
+  ["GE2-G11-SO-S1-030", "მოქალაქეობა"],
+]);
 
 const sha = value => createHash("sha256").update(value).digest("hex");
 const normalize = value => String(value ?? "").normalize("NFKC").toLocaleLowerCase("ka-GE").replace(/\s+/gu, " ").trim();
@@ -67,6 +84,19 @@ async function approvedSubjectFixes(source) {
     if (cells[0] && cells[6]) fixes.set(cells[0], cells[6]);
   }
   return fixes;
+}
+
+async function flaggedSubjectCandidateIds(source) {
+  const text = await readFile(join(source, "QA/subject_tag_candidates.csv"), "utf8");
+  return new Set(text.split(/\r?\n/u).slice(1).filter(Boolean).map(line => csvCells(line)[0]).filter(Boolean));
+}
+
+function reviewedSubjectOverride(question) {
+  const explicit = REVIEWED_SUBJECT_OVERRIDES.get(String(question.question_id));
+  if (explicit) return explicit;
+  const isReviewedScaleFamily = /^GE2-G(?:07|08|09|10|11|12)-SO-S[12]-\d+$/u.test(String(question.question_id))
+    && String(question.stem).includes("მასშტაბი 1:100 000 ნიშნავს, რომ რუკაზე 1 სმ არის:");
+  return isReviewedScaleFamily ? "გეოგრაფია" : "";
 }
 
 function mappedSubject(question, fixedSubsubject) {
@@ -149,6 +179,12 @@ function numericAnswerValue(answer) {
   return parsed?.value ?? null;
 }
 
+function exactTaskSignature(row) {
+  const { id, pts, grade, subject, semester, topic, difficulty, ...task } = row.payload;
+  const text = String(task.text ?? "").normalize("NFKC").replace(/\s+/gu, " ").trim();
+  return sha(JSON.stringify({ type: row.type, ...task, text, answer: row.answerKey }));
+}
+
 function questionInsert(row) {
   const columns = ["id","source_id","pool_key","pool_prefix","grade","subject","source_subject","semester","topic","strand","question_type","public_payload_json","points","difficulty","review_status","mapping_status","semantic_group_id","content_hash","active","imported_at","updated_at"];
   const values = [row.id,row.sourceId,row.poolKey,row.poolPrefix,row.grade,row.subject,row.sourceSubject,row.semester,row.topic,row.strand,row.type,JSON.stringify(row.payload),row.points,row.difficulty,"algorithmically_validated",row.mappingStatus,row.semanticGroupId,row.contentHash,1,row.now,row.now];
@@ -174,15 +210,16 @@ async function main() {
   const sourcePrefix = `${args.version}:`;
   const questions = (await Promise.all(QUESTION_FILES.map(file => readJsonLines(join(args.source, file))))).flat();
   const answers = new Map((await Promise.all(ANSWER_FILES.map(file => readJsonLines(join(args.source, file))))).flat().map(row => [row.question_id, row]));
-  const subjectFixes = await approvedSubjectFixes(args.source), rows = [], excluded = {}, byBucket = new Map(), byType = {}, openGradingModes = {}, remapped = [], directMathBlocked = [];
-  let importedMediaTextFallback = 0;
+  const subjectFixes = await approvedSubjectFixes(args.source), flaggedSubjectIds = await flaggedSubjectCandidateIds(args.source);
+  const rows = [], excluded = {}, remapped = [], directMathBlocked = [];
   const exclude = reason => { excluded[reason] = (excluded[reason] ?? 0) + 1; };
   for (const question of questions) {
     if (question.status !== "active" || String(question.deliverable) !== "1") { exclude(`source_${question.status}`); continue; }
     if (BROKEN_CONTEXT_IDS.has(question.question_id)) { exclude("confirmed_missing_context"); continue; }
     if (String(question.media_required) === "1" && !String(question.stimulus || "").trim()) { exclude("media_without_text_equivalent"); continue; }
-    const fixedSubsubject = subjectFixes.get(question.question_id) || String(question.subsubject);
-    if (fixedSubsubject !== question.subsubject) remapped.push({ id: question.question_id, from: question.subsubject, to: fixedSubsubject });
+    const sourceApproved = subjectFixes.get(question.question_id), codexReviewed = reviewedSubjectOverride(question);
+    const fixedSubsubject = sourceApproved || codexReviewed || String(question.subsubject);
+    if (fixedSubsubject !== question.subsubject) remapped.push({ id: question.question_id, from: question.subsubject, to: fixedSubsubject, review: sourceApproved ? "source_approved" : "codex_reviewed" });
     const subject = mappedSubject(question, fixedSubsubject), grade = Number(question.grade), semester = Number(question.semester);
     if (!subject || !SUBJECTS_BY_GRADE[grade]?.includes(subject)) { exclude("outside_live_catalog"); continue; }
     const answer = answerKeyFor(question, answers.get(question.question_id));
@@ -202,11 +239,37 @@ async function main() {
       type: answer.type, payload, points: pointsFor(question), difficulty: question.difficulty, mappingStatus: `${args.version}_platform_rule`,
       semanticGroupId: String(question.concept_group || `${args.version}_${question.semantic_signature}`),
       contentHash: sha(JSON.stringify({ payload, answer: answer.key, rationale: answers.get(question.question_id)?.rationale })),
-      answerKey: answer.key, explanation: String(answers.get(question.question_id)?.rationale || "პასუხი შემოწმებულია სერვერზე."), now,
+      answerKey: answer.key, explanation: String(answers.get(question.question_id)?.rationale || "პასუხი შემოწმებულია სერვერზე."), mediaTextFallback: String(question.media_required) === "1", now,
     };
-    rows.push(row); byType[row.type] = (byType[row.type] ?? 0) + 1;
-    if (String(question.media_required) === "1") importedMediaTextFallback++;
-    if (question.question_type === "OPEN") openGradingModes[answer.key.mode] = (openGradingModes[answer.key.mode] ?? 0) + 1;
+    rows.push(row);
+  }
+  const exactGroups = new Map();
+  for (const row of rows) {
+    const signature = exactTaskSignature(row);
+    if (!exactGroups.has(signature)) exactGroups.set(signature, []);
+    exactGroups.get(signature).push(row);
+  }
+  const crossGradeBlocked = [];
+  for (const group of exactGroups.values()) {
+    const minGrade = Math.min(...group.map(row => row.grade)), maxGrade = Math.max(...group.map(row => row.grade));
+    if (maxGrade - minGrade < 3) continue;
+    crossGradeBlocked.push(...group.filter(row => row.grade - minGrade >= 3));
+  }
+  const blockedIds = new Set(crossGradeBlocked.map(row => row.id));
+  const liveRows = rows.filter(row => !blockedIds.has(row.id));
+  if (crossGradeBlocked.length) excluded.cross_grade_exact_repeat = crossGradeBlocked.length;
+  const remappedIds = new Set(remapped.map(row => row.id));
+  const reviewedFlaggedSubjectIds = [...flaggedSubjectIds].filter(id => remappedIds.has(id));
+  if (reviewedFlaggedSubjectIds.length !== flaggedSubjectIds.size) {
+    throw new Error(`Subject-tag review is incomplete: ${reviewedFlaggedSubjectIds.length}/${flaggedSubjectIds.size}`);
+  }
+  const byBucket = new Map(), byType = {}, openGradingModes = {};
+  let importedMediaTextFallback = 0;
+  for (const row of liveRows) {
+    byType[row.type] = (byType[row.type] ?? 0) + 1;
+    if (row.mediaTextFallback) importedMediaTextFallback++;
+    if (row.type === "short_answer") openGradingModes[row.answerKey.mode] = (openGradingModes[row.answerKey.mode] ?? 0) + 1;
+    const { grade, subject, semester } = row;
     const bucket = `${grade}|${subject}|${semester}`;
     if (!byBucket.has(bucket)) byBucket.set(bucket, { rows: 0, groups: new Set() });
     byBucket.get(bucket).rows++; byBucket.get(bucket).groups.add(row.semanticGroupId);
@@ -222,30 +285,44 @@ async function main() {
   const report = {
     generatedAt: new Date(now).toISOString(), sourceVersion: args.version, sourceQuestions: questions.length,
     sourceActiveDeliverable: questions.filter(row => row.status === "active" && String(row.deliverable) === "1").length,
-    importedQuestions: rows.length, importedTests: tests.length, answerKeysServerOnly: rows.length,
-    excluded, questionTypes: byType, openGradingModes, importedMediaTextFallback, directMathBlocked, confirmedFixes: { biologyRetags: remapped.length, missingContextBlocked: excluded.confirmed_missing_context ?? 0, missingAnswerBlocked: excluded.missing_answer ?? 0 },
-    capacity, validations: { activeOnly: "pass", answerPresence: "pass", uniqueOptions: "pass", exactlyOneMcqAnswer: "pass", directMathRecomputation: "pass", contextBlocklist: "pass", catalogRules: "pass", semanticRotationCapacity: "pass", mediaTextFallback: "pass" },
+    importedQuestions: liveRows.length, importedTests: tests.length, answerKeysServerOnly: liveRows.length,
+    excluded, questionTypes: byType, openGradingModes, importedMediaTextFallback, directMathBlocked,
+    crossGradeExactRepeatsBlocked: crossGradeBlocked.length,
+    confirmedFixes: {
+      biologyRetags: remapped.filter(row => row.review === "source_approved").length,
+      curatedSubjectRetags: remapped.filter(row => row.review === "codex_reviewed").length,
+      flaggedSubjectCandidatesReviewed: flaggedSubjectIds.size,
+      flaggedSubjectCandidatesRetagged: reviewedFlaggedSubjectIds.length,
+      missingContextBlocked: excluded.confirmed_missing_context ?? 0,
+      missingAnswerBlocked: excluded.missing_answer ?? 0,
+    },
+    capacity, validations: { activeOnly: "pass", answerPresence: "pass", uniqueOptions: "pass", exactlyOneMcqAnswer: "pass", directMathRecomputation: "pass", contextBlocklist: "pass", catalogRules: "pass", semanticRotationCapacity: "pass", mediaTextFallback: "pass", flaggedSubjectReview: "pass", wideExactRepeatBlock: "pass" },
     retainedLegacySubjects: ["რუსული"],
     compatibility: { matchDictionaryAndListAnswers: "pass", openResponses: "deterministic_or_structured_ai_grading", versionedIdsAndPools: "pass", legacyProgressMigration: "included" },
-    humanReview: "not_performed; imported rows are algorithmically validated, not independently SME-approved",
+    humanReview: "flagged subject families and exact cross-grade repeats were curated; the remaining full bank is algorithmically validated, not independently SME-approved",
   };
   await mkdir(dirname(args.report), { recursive: true }); await writeFile(args.report, `${JSON.stringify(report, null, 2)}\n`, "utf8");
   if (!args.dryRun) {
     await rm(args.out, { recursive: true, force: true }); await mkdir(args.out, { recursive: true });
     const chunkSize = 500;
-    for (let offset = 0; offset < rows.length; offset += chunkSize) {
-      const chunk = rows.slice(offset, offset + chunkSize), statements = ["PRAGMA foreign_keys=ON;", ...chunk.flatMap(row => [questionInsert(row), answerInsert(row)])];
+    for (let offset = 0; offset < liveRows.length; offset += chunkSize) {
+      const chunk = liveRows.slice(offset, offset + chunkSize), statements = ["PRAGMA foreign_keys=ON;", ...chunk.flatMap(row => [questionInsert(row), answerInsert(row)])];
       await writeFile(join(args.out, `questions-${String(offset / chunkSize + 1).padStart(3, "0")}.sql`), `${statements.join("\n")}\n`, "utf8");
     }
+    const membership = ["PRAGMA foreign_keys=ON;", `UPDATE assessment_questions SET active=0,updated_at=${now} WHERE pool_prefix=${sql(args.version)};`];
+    for (let offset = 0; offset < liveRows.length; offset += chunkSize) {
+      membership.push(`UPDATE assessment_questions SET active=1,updated_at=${now} WHERE pool_prefix=${sql(args.version)} AND id IN (${liveRows.slice(offset, offset + chunkSize).map(row => sql(row.id)).join(",")});`);
+    }
+    await writeFile(join(args.out, "998-active-membership.sql"), `${membership.join("\n")}\n`, "utf8");
     const manifest = ["PRAGMA foreign_keys=ON;",
       `INSERT INTO assessment_question_history (user_id,question_id,semantic_group_id,answered_count,correct_count,last_correct,last_answered_at,next_review_at) SELECT h.user_id,n.id,n.semantic_group_id,h.answered_count,h.correct_count,h.last_correct,h.last_answered_at,h.next_review_at FROM assessment_question_history h JOIN assessment_questions o ON o.id=h.question_id JOIN assessment_questions n ON n.source_id=(${sql(sourcePrefix)} || substr(o.source_id,instr(o.source_id,':')+1)) WHERE n.pool_prefix=${sql(args.version)} AND o.pool_prefix GLOB 'v[0-9]*' AND o.pool_prefix<>${sql(args.version)} ON CONFLICT(user_id,question_id) DO UPDATE SET answered_count=MAX(assessment_question_history.answered_count,excluded.answered_count),correct_count=MAX(assessment_question_history.correct_count,excluded.correct_count),last_correct=excluded.last_correct,last_answered_at=MAX(assessment_question_history.last_answered_at,excluded.last_answered_at),next_review_at=MAX(assessment_question_history.next_review_at,excluded.next_review_at);`,
       `UPDATE assessment_questions SET active=0,updated_at=${now} WHERE pool_prefix GLOB 'v[0-9]*' AND pool_prefix<>${sql(args.version)};`,
       `UPDATE assessment_questions SET active=0,updated_at=${now} WHERE pool_prefix IN (${REPLACED_LEGACY_POOLS.map(sql).join(",")});`,
       `UPDATE assessment_tests SET published=0,updated_at=${now} WHERE is_custom=0 AND source_pool GLOB 'v[0-9]*' AND source_pool<>${sql(args.version)};`, ...tests.map(testInsert),
-      `INSERT INTO assessment_import_runs (id,source_hash,source_questions,imported_questions,imported_tests,report_json,imported_at) VALUES (${sql(`${args.version}-${sha(JSON.stringify(report)).slice(0, 16)}`)},${sql(sha(JSON.stringify(report)))},${questions.length},${rows.length},${tests.length},${sql(JSON.stringify(report))},${now}) ON CONFLICT(source_hash) DO UPDATE SET imported_questions=excluded.imported_questions,imported_tests=excluded.imported_tests,report_json=excluded.report_json,imported_at=excluded.imported_at;`];
+      `INSERT INTO assessment_import_runs (id,source_hash,source_questions,imported_questions,imported_tests,report_json,imported_at) VALUES (${sql(`${args.version}-${sha(JSON.stringify(report)).slice(0, 16)}`)},${sql(sha(JSON.stringify(report)))},${questions.length},${liveRows.length},${tests.length},${sql(JSON.stringify(report))},${now}) ON CONFLICT(source_hash) DO UPDATE SET imported_questions=excluded.imported_questions,imported_tests=excluded.imported_tests,report_json=excluded.report_json,imported_at=excluded.imported_at;`];
     await writeFile(join(args.out, "999-tests-and-manifest.sql"), `${manifest.join("\n")}\n`, "utf8");
   }
-  console.log(JSON.stringify({ ok: true, questions: rows.length, tests: tests.length, fixes: report.confirmedFixes, excluded: report.excluded, out: args.dryRun ? null : args.out, report: args.report }));
+  console.log(JSON.stringify({ ok: true, questions: liveRows.length, tests: tests.length, fixes: report.confirmedFixes, excluded: report.excluded, out: args.dryRun ? null : args.out, report: args.report }));
 }
 
 if (resolve(process.argv[1] ?? "") === fileURLToPath(import.meta.url)) {
