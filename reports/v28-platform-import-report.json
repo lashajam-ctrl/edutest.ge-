@@ -1,12 +1,14 @@
 {
-  "generatedAt": "2026-10-02T07:33:51.703Z",
+  "generatedAt": "2026-10-02T07:47:53.945Z",
   "sourceVersion": "v28",
   "sourceQuestions": 46756,
   "sourceActiveDeliverable": 34241,
-  "importedQuestions": 20417,
+  "importedQuestions": 20579,
   "importedTests": 154,
-  "answerKeysServerOnly": 20417,
-  "supplementalQuestionsAdded": 97,
+  "answerKeysServerOnly": 20579,
+  "supplementalQuestionsAdded": 259,
+  "civicsSupplementalQuestionsAdded": 97,
+  "weakBankSupplementalQuestionsAdded": 162,
   "excluded": {
     "source_quarantined": 6374,
     "source_duplicate": 6141,
@@ -15,7 +17,7 @@
     "cross_grade_exact_repeat": 3815
   },
   "questionTypes": {
-    "multiple_choice": 11349,
+    "multiple_choice": 11511,
     "true_false": 1910,
     "match": 1833,
     "order": 1684,
@@ -43,19 +45,19 @@
       "grade": 10,
       "subject": "ბიოლოგია",
       "semester": 1,
-      "questions": 43,
-      "semanticGroups": 26,
+      "questions": 57,
+      "semanticGroups": 40,
       "testQuestions": 10,
-      "dailyFullFreshTests": 2
+      "dailyFullFreshTests": 4
     },
     {
       "grade": 10,
       "subject": "ბიოლოგია",
       "semester": 2,
-      "questions": 40,
-      "semanticGroups": 24,
+      "questions": 56,
+      "semanticGroups": 40,
       "testQuestions": 10,
-      "dailyFullFreshTests": 2
+      "dailyFullFreshTests": 4
     },
     {
       "grade": 10,
@@ -862,10 +864,10 @@
       "grade": 5,
       "subject": "ჩვენი საქართველო",
       "semester": 2,
-      "questions": 142,
-      "semanticGroups": 27,
+      "questions": 155,
+      "semanticGroups": 40,
       "testQuestions": 10,
-      "dailyFullFreshTests": 2
+      "dailyFullFreshTests": 4
     },
     {
       "grade": 6,
@@ -952,10 +954,10 @@
       "grade": 6,
       "subject": "ჩვენი საქართველო",
       "semester": 2,
-      "questions": 137,
-      "semanticGroups": 25,
+      "questions": 152,
+      "semanticGroups": 40,
       "testQuestions": 10,
-      "dailyFullFreshTests": 2
+      "dailyFullFreshTests": 4
     },
     {
       "grade": 7,
@@ -997,19 +999,19 @@
       "grade": 7,
       "subject": "ინგლისური",
       "semester": 1,
-      "questions": 78,
-      "semanticGroups": 29,
+      "questions": 89,
+      "semanticGroups": 40,
       "testQuestions": 10,
-      "dailyFullFreshTests": 2
+      "dailyFullFreshTests": 4
     },
     {
       "grade": 7,
       "subject": "ინგლისური",
       "semester": 2,
-      "questions": 77,
-      "semanticGroups": 25,
+      "questions": 92,
+      "semanticGroups": 40,
       "testQuestions": 10,
-      "dailyFullFreshTests": 2
+      "dailyFullFreshTests": 4
     },
     {
       "grade": 7,
@@ -1150,10 +1152,10 @@
       "grade": 8,
       "subject": "ინგლისური",
       "semester": 2,
-      "questions": 71,
-      "semanticGroups": 28,
+      "questions": 83,
+      "semanticGroups": 40,
       "testQuestions": 10,
-      "dailyFullFreshTests": 2
+      "dailyFullFreshTests": 4
     },
     {
       "grade": 8,
@@ -1267,19 +1269,19 @@
       "grade": 9,
       "subject": "ბიოლოგია",
       "semester": 1,
-      "questions": 47,
-      "semanticGroups": 26,
+      "questions": 61,
+      "semanticGroups": 40,
       "testQuestions": 10,
-      "dailyFullFreshTests": 2
+      "dailyFullFreshTests": 4
     },
     {
       "grade": 9,
       "subject": "ბიოლოგია",
       "semester": 2,
-      "questions": 47,
-      "semanticGroups": 29,
+      "questions": 58,
+      "semanticGroups": 40,
       "testQuestions": 10,
-      "dailyFullFreshTests": 2
+      "dailyFullFreshTests": 4
     },
     {
       "grade": 9,
@@ -1357,19 +1359,19 @@
       "grade": 9,
       "subject": "მოქალაქეობა",
       "semester": 1,
-      "questions": 36,
-      "semanticGroups": 29,
+      "questions": 47,
+      "semanticGroups": 40,
       "testQuestions": 10,
-      "dailyFullFreshTests": 2
+      "dailyFullFreshTests": 4
     },
     {
       "grade": 9,
       "subject": "მოქალაქეობა",
       "semester": 2,
-      "questions": 27,
-      "semanticGroups": 21,
+      "questions": 46,
+      "semanticGroups": 40,
       "testQuestions": 10,
-      "dailyFullFreshTests": 2
+      "dailyFullFreshTests": 4
     },
     {
       "grade": 9,
@@ -1420,10 +1422,10 @@
       "grade": 9,
       "subject": "ქიმია",
       "semester": 2,
-      "questions": 41,
-      "semanticGroups": 29,
+      "questions": 52,
+      "semanticGroups": 40,
       "testQuestions": 10,
-      "dailyFullFreshTests": 2
+      "dailyFullFreshTests": 4
     }
   ],
   "validations": {
