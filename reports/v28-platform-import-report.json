@@ -1,11 +1,12 @@
 {
-  "generatedAt": "2026-10-01T12:55:24.116Z",
+  "generatedAt": "2026-10-02T07:33:51.703Z",
   "sourceVersion": "v28",
   "sourceQuestions": 46756,
   "sourceActiveDeliverable": 34241,
-  "importedQuestions": 20320,
+  "importedQuestions": 20417,
   "importedTests": 154,
-  "answerKeysServerOnly": 20320,
+  "answerKeysServerOnly": 20417,
+  "supplementalQuestionsAdded": 97,
   "excluded": {
     "source_quarantined": 6374,
     "source_duplicate": 6141,
@@ -14,7 +15,7 @@
     "cross_grade_exact_repeat": 3815
   },
   "questionTypes": {
-    "multiple_choice": 11252,
+    "multiple_choice": 11349,
     "true_false": 1910,
     "match": 1833,
     "order": 1684,
@@ -1050,19 +1051,19 @@
       "grade": 7,
       "subject": "მოქალაქეობა",
       "semester": 1,
-      "questions": 49,
-      "semanticGroups": 19,
+      "questions": 73,
+      "semanticGroups": 43,
       "testQuestions": 10,
-      "dailyFullFreshTests": 1
+      "dailyFullFreshTests": 4
     },
     {
       "grade": 7,
       "subject": "მოქალაქეობა",
       "semester": 2,
-      "questions": 48,
-      "semanticGroups": 19,
+      "questions": 72,
+      "semanticGroups": 43,
       "testQuestions": 10,
-      "dailyFullFreshTests": 1
+      "dailyFullFreshTests": 4
     },
     {
       "grade": 7,
@@ -1194,19 +1195,19 @@
       "grade": 8,
       "subject": "მოქალაქეობა",
       "semester": 1,
-      "questions": 36,
-      "semanticGroups": 16,
+      "questions": 60,
+      "semanticGroups": 40,
       "testQuestions": 10,
-      "dailyFullFreshTests": 1
+      "dailyFullFreshTests": 4
     },
     {
       "grade": 8,
       "subject": "მოქალაქეობა",
       "semester": 2,
-      "questions": 28,
-      "semanticGroups": 16,
+      "questions": 53,
+      "semanticGroups": 41,
       "testQuestions": 10,
-      "dailyFullFreshTests": 1
+      "dailyFullFreshTests": 4
     },
     {
       "grade": 8,

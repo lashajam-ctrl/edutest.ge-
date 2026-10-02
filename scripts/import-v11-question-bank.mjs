@@ -4,6 +4,7 @@ import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { classifyOpenAnswer } from "../lib/short-answer-core.mjs";
 import { parseNumericShortAnswer } from "../lib/short-answer-core.mjs";
+import { CIVICS_SUPPLEMENT, CIVICS_SUPPLEMENT_BLUEPRINT } from "../data/civics-supplement-v1.mjs";
 import { directMathResult } from "./import-v8-question-bank.mjs";
 
 const QUESTION_FILES = ["IMPORT/questions_canonical_40320.jsonl", "IMPORT/questions_extension.jsonl"];
@@ -185,6 +186,39 @@ function exactTaskSignature(row) {
   return sha(JSON.stringify({ type: row.type, ...task, text, answer: row.answerKey }));
 }
 
+export function curatedCivicsRows(version, now, existingRows = []) {
+  if (version !== "v28") return [];
+  const counts = {}, ids = new Set(), texts = new Set(existingRows.map(row => `${row.grade}|${row.semester}|${normalize(row.payload?.text)}`));
+  const rows = CIVICS_SUPPLEMENT.map(item => {
+    const bucket = `${item.grade}|${item.semester}`;
+    counts[bucket] = (counts[bucket] ?? 0) + 1;
+    const ordinal = counts[bucket], id = `v28-civics-g${item.grade}-s${item.semester}-${String(ordinal).padStart(3, "0")}`;
+    if (!CIVICS_SUPPLEMENT_BLUEPRINT[bucket]) throw new Error(`Unsupported civics supplement bucket: ${bucket}`);
+    if (ids.has(id)) throw new Error(`Duplicate civics supplement id: ${id}`);
+    ids.add(id);
+    if (typeof item.text !== "string" || item.text.trim().length < 20 || /<[^>]+>/u.test(item.text)) throw new Error(`Invalid civics prompt: ${id}`);
+    if (!Array.isArray(item.options) || item.options.length !== 4 || item.options.some(option => typeof option !== "string" || !option.trim()) || new Set(item.options.map(normalize)).size !== 4) throw new Error(`Invalid civics options: ${id}`);
+    if (!Number.isInteger(item.correct) || item.correct < 0 || item.correct >= item.options.length) throw new Error(`Invalid civics answer: ${id}`);
+    if (typeof item.explanation !== "string" || item.explanation.trim().length < 30 || /<[^>]+>/u.test(item.explanation)) throw new Error(`Invalid civics explanation: ${id}`);
+    const textKey = `${item.grade}|${item.semester}|${normalize(item.text)}`;
+    if (texts.has(textKey)) throw new Error(`Duplicate civics prompt in live bucket: ${id}`);
+    texts.add(textKey);
+    const topic = `მოქალაქეობა · ${item.topic}`, answerKey = { correct: item.correct };
+    const payload = { id, text: item.text, type: "multiple_choice", pts: 2, grade: item.grade, subject: "მოქალაქეობა", semester: item.semester, topic, opts: item.options, difficulty: "core" };
+    return {
+      id, sourceId: `v28-supplement:${id}`, poolKey: `G${String(item.grade).padStart(2, "0")}-CIV-S${item.semester}|${item.semester}|${item.topic}`,
+      poolPrefix: "v28", grade: item.grade, subject: "მოქალაქეობა", sourceSubject: "კურირებული მოქალაქეობის დამატება", semester: item.semester,
+      topic, strand: item.topic, type: "multiple_choice", payload, points: 2, difficulty: "core", mappingStatus: "v28_curated_supplement",
+      semanticGroupId: id, contentHash: sha(JSON.stringify({ payload, answer: answerKey, rationale: item.explanation })),
+      answerKey, explanation: item.explanation, mediaTextFallback: false, now,
+    };
+  });
+  for (const [bucket, expected] of Object.entries(CIVICS_SUPPLEMENT_BLUEPRINT)) {
+    if ((counts[bucket] ?? 0) !== expected) throw new Error(`Civics supplement coverage mismatch for ${bucket}: ${counts[bucket] ?? 0}/${expected}`);
+  }
+  return rows;
+}
+
 function questionInsert(row) {
   const columns = ["id","source_id","pool_key","pool_prefix","grade","subject","source_subject","semester","topic","strand","question_type","public_payload_json","points","difficulty","review_status","mapping_status","semantic_group_id","content_hash","active","imported_at","updated_at"];
   const values = [row.id,row.sourceId,row.poolKey,row.poolPrefix,row.grade,row.subject,row.sourceSubject,row.semester,row.topic,row.strand,row.type,JSON.stringify(row.payload),row.points,row.difficulty,"algorithmically_validated",row.mappingStatus,row.semanticGroupId,row.contentHash,1,row.now,row.now];
@@ -243,6 +277,8 @@ async function main() {
     };
     rows.push(row);
   }
+  const supplementalRows = curatedCivicsRows(args.version, now, rows);
+  rows.push(...supplementalRows);
   const exactGroups = new Map();
   for (const row of rows) {
     const signature = exactTaskSignature(row);
@@ -286,6 +322,7 @@ async function main() {
     generatedAt: new Date(now).toISOString(), sourceVersion: args.version, sourceQuestions: questions.length,
     sourceActiveDeliverable: questions.filter(row => row.status === "active" && String(row.deliverable) === "1").length,
     importedQuestions: liveRows.length, importedTests: tests.length, answerKeysServerOnly: liveRows.length,
+    supplementalQuestionsAdded: supplementalRows.length,
     excluded, questionTypes: byType, openGradingModes, importedMediaTextFallback, directMathBlocked,
     crossGradeExactRepeatsBlocked: crossGradeBlocked.length,
     confirmedFixes: {
@@ -308,6 +345,10 @@ async function main() {
     for (let offset = 0; offset < liveRows.length; offset += chunkSize) {
       const chunk = liveRows.slice(offset, offset + chunkSize), statements = ["PRAGMA foreign_keys=ON;", ...chunk.flatMap(row => [questionInsert(row), answerInsert(row)])];
       await writeFile(join(args.out, `questions-${String(offset / chunkSize + 1).padStart(3, "0")}.sql`), `${statements.join("\n")}\n`, "utf8");
+    }
+    if (supplementalRows.length) {
+      const supplementStatements = ["PRAGMA foreign_keys=ON;", ...supplementalRows.flatMap(row => [questionInsert(row), answerInsert(row)])];
+      await writeFile(join(args.out, "997-civics-supplement.sql"), `${supplementStatements.join("\n")}\n`, "utf8");
     }
     const membership = ["PRAGMA foreign_keys=ON;", `UPDATE assessment_questions SET active=0,updated_at=${now} WHERE pool_prefix=${sql(args.version)};`];
     for (let offset = 0; offset < liveRows.length; offset += chunkSize) {

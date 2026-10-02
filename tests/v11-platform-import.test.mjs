@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
-import { answerKeyFor } from "../scripts/import-v11-question-bank.mjs";
+import { answerKeyFor, curatedCivicsRows } from "../scripts/import-v11-question-bank.mjs";
 
 test("v11 platform importer blocks the three confirmed defect classes", async () => {
   const source = await readFile(new URL("../scripts/import-v11-question-bank.mjs", import.meta.url), "utf8");
@@ -17,6 +17,7 @@ test("v11 platform importer blocks the three confirmed defect classes", async ()
   assert.match(source, /dailyFullFreshTests/);
   assert.match(source, /cross_grade_exact_repeat/);
   assert.match(source, /998-active-membership\.sql/);
+  assert.match(source, /997-civics-supplement\.sql/);
   assert.match(source, /Subject-tag review is incomplete/);
   assert.doesNotMatch(source, /curriculum_reviewed/);
 });
@@ -44,20 +45,32 @@ test("generated v28 report adds validated concepts without exposing answers", as
   assert.equal(report.sourceVersion, "v28");
   assert.equal(report.sourceQuestions, 46756);
   assert.equal(report.sourceActiveDeliverable, 34241);
-  assert.equal(report.importedQuestions, 20320);
+  assert.equal(report.importedQuestions, 20417);
   assert.equal(report.importedTests, 154);
   assert.equal(report.answerKeysServerOnly, report.importedQuestions);
   assert.equal(report.importedMediaTextFallback, 195);
   assert.deepEqual(report.directMathBlocked, []);
   assert.equal(report.excluded.media_without_text_equivalent, undefined);
   assert.equal(report.crossGradeExactRepeatsBlocked, 3815);
+  assert.equal(report.supplementalQuestionsAdded, 97);
   assert.equal(report.confirmedFixes.flaggedSubjectCandidatesReviewed, 79);
   assert.equal(report.confirmedFixes.flaggedSubjectCandidatesRetagged, 79);
   assert.equal(report.confirmedFixes.curatedSubjectRetags, 76);
-  assert.equal(report.capacity.reduce((sum, row) => sum + row.semanticGroups, 0), 9579);
+  assert.equal(report.capacity.reduce((sum, row) => sum + row.semanticGroups, 0), 9676);
   assert.equal(report.capacity.every(row => row.semanticGroups >= row.testQuestions), true);
   assert.equal(report.capacity.every(row => row.testQuestions === 10), true);
   assert.equal(Object.values(report.validations).every(value => value === "pass"), true);
+});
+
+test("curated civics supplement raises every weak grade 7-8 semester to four fresh papers", () => {
+  const rows = curatedCivicsRows("v28", 1, []);
+  assert.equal(rows.length, 97);
+  assert.equal(new Set(rows.map(row => row.id)).size, 97);
+  assert.equal(new Set(rows.map(row => `${row.grade}|${row.semester}|${row.payload.text}`)).size, 97);
+  for (const bucket of ["7|1", "7|2", "8|1"]) assert.equal(rows.filter(row => `${row.grade}|${row.semester}` === bucket).length, 24);
+  assert.equal(rows.filter(row => `${row.grade}|${row.semester}` === "8|2").length, 25);
+  assert.equal(rows.every(row => row.type === "multiple_choice" && row.payload.opts.length === 4), true);
+  assert.equal(rows.every(row => Number.isInteger(row.answerKey.correct) && row.explanation.length >= 30), true);
 });
 
 test("v23 importer supports both match encodings and routes open responses to the right grader", () => {
