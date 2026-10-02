@@ -6,6 +6,7 @@ import { classifyOpenAnswer } from "../lib/short-answer-core.mjs";
 import { parseNumericShortAnswer } from "../lib/short-answer-core.mjs";
 import { CIVICS_SUPPLEMENT, CIVICS_SUPPLEMENT_BLUEPRINT } from "../data/civics-supplement-v1.mjs";
 import { WEAK_BANK_SUPPLEMENT, WEAK_BANK_SUPPLEMENT_BLUEPRINT } from "../data/weak-bank-supplement-v1.mjs";
+import { QUALITY_EXPANSION_V2, QUALITY_EXPANSION_V2_BLUEPRINT } from "../data/quality-expansion-v2.mjs";
 import { directMathResult } from "./import-v8-question-bank.mjs";
 
 const QUESTION_FILES = ["IMPORT/questions_canonical_40320.jsonl", "IMPORT/questions_extension.jsonl"];
@@ -253,6 +254,39 @@ export function curatedWeakBankRows(version, now, existingRows = []) {
   return rows;
 }
 
+export function curatedQualityExpansionRows(version, now, existingRows = []) {
+  if (version !== "v28") return [];
+  const counts = {}, ids = new Set(), texts = new Set(existingRows.map(row => `${row.grade}|${row.subject}|${row.semester}|${normalize(row.payload?.text)}`));
+  const rows = QUALITY_EXPANSION_V2.map(item => {
+    const bucket = `${item.grade}|${item.subject}|${item.semester}`;
+    counts[bucket] = (counts[bucket] ?? 0) + 1;
+    const id = String(item.id ?? "").trim();
+    if (!QUALITY_EXPANSION_V2_BLUEPRINT[bucket]) throw new Error(`Unsupported quality-expansion bucket: ${bucket}`);
+    if (!id || ids.has(id)) throw new Error(`Duplicate or empty quality-expansion id: ${id}`);
+    ids.add(id);
+    if (typeof item.text !== "string" || item.text.trim().length < 20 || /<[^>]+>/u.test(item.text)) throw new Error(`Invalid quality-expansion prompt: ${id}`);
+    if (!Array.isArray(item.options) || item.options.length !== 4 || item.options.some(option => typeof option !== "string" || !option.trim()) || new Set(item.options.map(normalize)).size !== 4) throw new Error(`Invalid quality-expansion options: ${id}`);
+    if (!Number.isInteger(item.correct) || item.correct < 0 || item.correct >= item.options.length) throw new Error(`Invalid quality-expansion answer: ${id}`);
+    if (typeof item.explanation !== "string" || item.explanation.trim().length < 30 || /<[^>]+>/u.test(item.explanation)) throw new Error(`Invalid quality-expansion explanation: ${id}`);
+    const textKey = `${item.grade}|${item.subject}|${item.semester}|${normalize(item.text)}`;
+    if (texts.has(textKey)) throw new Error(`Duplicate quality-expansion prompt in live bucket: ${id}`);
+    texts.add(textKey);
+    const topic = `${item.subject} · ${item.topic}`, answerKey = { correct: item.correct };
+    const payload = { id, text: item.text, type: "multiple_choice", pts: 2, grade: item.grade, subject: item.subject, semester: item.semester, topic, opts: item.options, difficulty: "core" };
+    return {
+      id, sourceId: `v28-supplement:${id}`, poolKey: `G${String(item.grade).padStart(2, "0")}-Q2-S${item.semester}|${item.semester}|${item.topic}`,
+      poolPrefix: "v28", grade: item.grade, subject: item.subject, sourceSubject: "კურირებული ხარისხობრივი გაფართოება", semester: item.semester,
+      topic, strand: item.topic, type: "multiple_choice", payload, points: 2, difficulty: "core", mappingStatus: "v28_curated_quality_expansion_v2",
+      semanticGroupId: id, contentHash: sha(JSON.stringify({ payload, answer: answerKey, rationale: item.explanation })),
+      answerKey, explanation: item.explanation, mediaTextFallback: false, now,
+    };
+  });
+  for (const [bucket, expected] of Object.entries(QUALITY_EXPANSION_V2_BLUEPRINT)) {
+    if ((counts[bucket] ?? 0) !== expected) throw new Error(`Quality-expansion coverage mismatch for ${bucket}: ${counts[bucket] ?? 0}/${expected}`);
+  }
+  return rows;
+}
+
 function questionInsert(row) {
   const columns = ["id","source_id","pool_key","pool_prefix","grade","subject","source_subject","semester","topic","strand","question_type","public_payload_json","points","difficulty","review_status","mapping_status","semantic_group_id","content_hash","active","imported_at","updated_at"];
   const values = [row.id,row.sourceId,row.poolKey,row.poolPrefix,row.grade,row.subject,row.sourceSubject,row.semester,row.topic,row.strand,row.type,JSON.stringify(row.payload),row.points,row.difficulty,"algorithmically_validated",row.mappingStatus,row.semanticGroupId,row.contentHash,1,row.now,row.now];
@@ -315,7 +349,9 @@ async function main() {
   rows.push(...civicsSupplementalRows);
   const weakBankSupplementalRows = curatedWeakBankRows(args.version, now, rows);
   rows.push(...weakBankSupplementalRows);
-  const supplementalRows = [...civicsSupplementalRows, ...weakBankSupplementalRows];
+  const qualityExpansionRows = curatedQualityExpansionRows(args.version, now, rows);
+  rows.push(...qualityExpansionRows);
+  const supplementalRows = [...civicsSupplementalRows, ...weakBankSupplementalRows, ...qualityExpansionRows];
   const exactGroups = new Map();
   for (const row of rows) {
     const signature = exactTaskSignature(row);
@@ -362,6 +398,7 @@ async function main() {
     supplementalQuestionsAdded: supplementalRows.length,
     civicsSupplementalQuestionsAdded: civicsSupplementalRows.length,
     weakBankSupplementalQuestionsAdded: weakBankSupplementalRows.length,
+    qualityExpansionV2QuestionsAdded: qualityExpansionRows.length,
     excluded, questionTypes: byType, openGradingModes, importedMediaTextFallback, directMathBlocked,
     crossGradeExactRepeatsBlocked: crossGradeBlocked.length,
     confirmedFixes: {
@@ -392,6 +429,10 @@ async function main() {
     if (weakBankSupplementalRows.length) {
       const supplementStatements = ["PRAGMA foreign_keys=ON;", ...weakBankSupplementalRows.flatMap(row => [questionInsert(row), answerInsert(row)])];
       await writeFile(join(args.out, "996-weak-bank-supplement.sql"), `${supplementStatements.join("\n")}\n`, "utf8");
+    }
+    if (qualityExpansionRows.length) {
+      const supplementStatements = ["PRAGMA foreign_keys=ON;", ...qualityExpansionRows.flatMap(row => [questionInsert(row), answerInsert(row)])];
+      await writeFile(join(args.out, "995-quality-expansion-v2.sql"), `${supplementStatements.join("\n")}\n`, "utf8");
     }
     const membership = ["PRAGMA foreign_keys=ON;", `UPDATE assessment_questions SET active=0,updated_at=${now} WHERE pool_prefix=${sql(args.version)};`];
     for (let offset = 0; offset < liveRows.length; offset += chunkSize) {

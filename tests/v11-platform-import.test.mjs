@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
-import { answerKeyFor, curatedCivicsRows, curatedWeakBankRows } from "../scripts/import-v11-question-bank.mjs";
+import { answerKeyFor, curatedCivicsRows, curatedQualityExpansionRows, curatedWeakBankRows } from "../scripts/import-v11-question-bank.mjs";
 
 test("v11 platform importer blocks the three confirmed defect classes", async () => {
   const source = await readFile(new URL("../scripts/import-v11-question-bank.mjs", import.meta.url), "utf8");
@@ -19,6 +19,7 @@ test("v11 platform importer blocks the three confirmed defect classes", async ()
   assert.match(source, /998-active-membership\.sql/);
   assert.match(source, /997-civics-supplement\.sql/);
   assert.match(source, /996-weak-bank-supplement\.sql/);
+  assert.match(source, /995-quality-expansion-v2\.sql/);
   assert.match(source, /Subject-tag review is incomplete/);
   assert.doesNotMatch(source, /curriculum_reviewed/);
 });
@@ -46,20 +47,21 @@ test("generated v28 report adds validated concepts without exposing answers", as
   assert.equal(report.sourceVersion, "v28");
   assert.equal(report.sourceQuestions, 46756);
   assert.equal(report.sourceActiveDeliverable, 34241);
-  assert.equal(report.importedQuestions, 20579);
+  assert.equal(report.importedQuestions, 20688);
   assert.equal(report.importedTests, 154);
   assert.equal(report.answerKeysServerOnly, report.importedQuestions);
   assert.equal(report.importedMediaTextFallback, 195);
   assert.deepEqual(report.directMathBlocked, []);
   assert.equal(report.excluded.media_without_text_equivalent, undefined);
   assert.equal(report.crossGradeExactRepeatsBlocked, 3815);
-  assert.equal(report.supplementalQuestionsAdded, 259);
+  assert.equal(report.supplementalQuestionsAdded, 368);
   assert.equal(report.civicsSupplementalQuestionsAdded, 97);
   assert.equal(report.weakBankSupplementalQuestionsAdded, 162);
+  assert.equal(report.qualityExpansionV2QuestionsAdded, 109);
   assert.equal(report.confirmedFixes.flaggedSubjectCandidatesReviewed, 79);
   assert.equal(report.confirmedFixes.flaggedSubjectCandidatesRetagged, 79);
   assert.equal(report.confirmedFixes.curatedSubjectRetags, 76);
-  assert.equal(report.capacity.reduce((sum, row) => sum + row.semanticGroups, 0), 9838);
+  assert.equal(report.capacity.reduce((sum, row) => sum + row.semanticGroups, 0), 9947);
   assert.equal(report.capacity.every(row => row.semanticGroups >= row.testQuestions), true);
   assert.equal(report.capacity.every(row => row.testQuestions === 10), true);
   const strengthened = new Set([
@@ -70,6 +72,7 @@ test("generated v28 report adds validated concepts without exposing answers", as
   const strengthenedCapacity = report.capacity.filter(row => strengthened.has(`${row.grade}|${row.subject}|${row.semester}`));
   assert.equal(strengthenedCapacity.length, strengthened.size);
   assert.equal(strengthenedCapacity.every(row => row.semanticGroups >= 40 && row.dailyFullFreshTests >= 4), true);
+  assert.equal(report.capacity.every(row => row.dailyFullFreshTests >= 4), true);
   assert.equal(Object.values(report.validations).every(value => value === "pass"), true);
 });
 
@@ -99,6 +102,22 @@ test("curated weak-bank supplement raises all twelve target buckets to four fres
   for (const [bucket, count] of Object.entries(expected)) {
     assert.equal(rows.filter(row => `${row.grade}|${row.subject}|${row.semester}` === bucket).length, count, bucket);
   }
+});
+
+test("quality expansion supplies distinct validated tasks for every remaining sub-four-paper bucket", () => {
+  const rows = curatedQualityExpansionRows("v28", 1, []);
+  assert.equal(rows.length, 109);
+  assert.equal(new Set(rows.map(row => row.id)).size, 109);
+  assert.equal(new Set(rows.map(row => `${row.grade}|${row.subject}|${row.semester}|${row.payload.text}`)).size, 109);
+  assert.equal(rows.every(row => row.type === "multiple_choice" && row.payload.opts.length === 4 && new Set(row.payload.opts).size === 4), true);
+  assert.equal(rows.every(row => Number.isInteger(row.answerKey.correct) && row.answerKey.correct >= 0 && row.answerKey.correct < 4 && row.explanation.length >= 30), true);
+  const counts = new Map();
+  for (const row of rows) {
+    const bucket = `${row.grade}|${row.subject}|${row.semester}`;
+    counts.set(bucket, (counts.get(bucket) ?? 0) + 1);
+  }
+  assert.equal(counts.size, 25);
+  assert.equal([...counts.values()].reduce((sum, count) => sum + count, 0), 109);
 });
 
 test("v23 importer supports both match encodings and routes open responses to the right grader", () => {
