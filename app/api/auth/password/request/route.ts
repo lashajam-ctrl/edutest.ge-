@@ -6,6 +6,18 @@ import { appOrigin, randomToken, sha256 } from "@/lib/auth";
 import { consumeRateLimit } from "@/lib/rate-limit";
 
 const genericResponse = { message: "თუ ეს ანგარიში არსებობს, პაროლის აღდგენის ბმული ელფოსტაზე გაიგზავნა." };
+const d1QuotaMessage = "მონაცემთა ბაზის დღიური ლიმიტი დროებით ამოიწურა. პაროლის აღდგენა განახლდება თბილისის დროით 04:00-ზე.";
+
+function isD1DailyWriteLimit(error: unknown) {
+  const message = error instanceof Error ? error.message : String(error ?? "");
+  return /exceeded D1's free tier daily row write limit/i.test(message);
+}
+
+function secondsUntilNextD1Reset() {
+  const now = new Date();
+  const reset = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1);
+  return Math.max(1, Math.ceil((reset - now.getTime()) / 1000));
+}
 
 function escapeHtml(value: string) {
   return value.replace(/[&<>"']/g, char => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char] ?? char);
@@ -41,7 +53,7 @@ async function requestLegacySupabaseReset(request: Request, email: string) {
   });
 }
 
-export async function POST(request: Request) {
+async function handlePasswordResetRequest(request: Request) {
   await ensureSchema();
   const body = await request.json() as { email?: string };
   const email = (body.email ?? "").trim().toLowerCase();
@@ -70,4 +82,18 @@ export async function POST(request: Request) {
     // Never disclose whether an account or a delivery failure exists.
   }
   return Response.json(genericResponse, { headers: { "Cache-Control": "no-store" } });
+}
+
+export async function POST(request: Request) {
+  try {
+    return await handlePasswordResetRequest(request);
+  } catch (error) {
+    if (isD1DailyWriteLimit(error)) {
+      return Response.json({ error: d1QuotaMessage }, {
+        status: 503,
+        headers: { "Cache-Control": "no-store", "Retry-After": String(secondsUntilNextD1Reset()) },
+      });
+    }
+    throw error;
+  }
 }

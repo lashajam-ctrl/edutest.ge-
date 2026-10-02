@@ -17,6 +17,9 @@ test("v11 platform importer blocks the three confirmed defect classes", async ()
   assert.match(source, /dailyFullFreshTests/);
   assert.match(source, /cross_grade_exact_repeat/);
   assert.match(source, /998-active-membership\.sql/);
+  assert.match(source, /active<>0 AND updated_at<>/);
+  assert.doesNotMatch(source, /SET active=0,updated_at=\$\{now\} WHERE pool_prefix=\$\{sql\(args\.version\)\};/);
+  assert.match(source, /WHERE active<>0 AND pool_prefix GLOB/);
   assert.match(source, /997-civics-supplement\.sql/);
   assert.match(source, /996-weak-bank-supplement\.sql/);
   assert.match(source, /995-quality-expansion-v2\.sql/);

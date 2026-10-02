@@ -434,16 +434,15 @@ async function main() {
       const supplementStatements = ["PRAGMA foreign_keys=ON;", ...qualityExpansionRows.flatMap(row => [questionInsert(row), answerInsert(row)])];
       await writeFile(join(args.out, "995-quality-expansion-v2.sql"), `${supplementStatements.join("\n")}\n`, "utf8");
     }
-    const membership = ["PRAGMA foreign_keys=ON;", `UPDATE assessment_questions SET active=0,updated_at=${now} WHERE pool_prefix=${sql(args.version)};`];
-    for (let offset = 0; offset < liveRows.length; offset += chunkSize) {
-      membership.push(`UPDATE assessment_questions SET active=1,updated_at=${now} WHERE pool_prefix=${sql(args.version)} AND id IN (${liveRows.slice(offset, offset + chunkSize).map(row => sql(row.id)).join(",")});`);
-    }
+    // Run after every questions-*.sql file. Those upserts stamp the complete desired
+    // membership with `now`, so only genuinely stale active rows need a write.
+    const membership = ["PRAGMA foreign_keys=ON;", `UPDATE assessment_questions SET active=0,updated_at=${now} WHERE pool_prefix=${sql(args.version)} AND active<>0 AND updated_at<>${now};`];
     await writeFile(join(args.out, "998-active-membership.sql"), `${membership.join("\n")}\n`, "utf8");
     const manifest = ["PRAGMA foreign_keys=ON;",
       `INSERT INTO assessment_question_history (user_id,question_id,semantic_group_id,answered_count,correct_count,last_correct,last_answered_at,next_review_at) SELECT h.user_id,n.id,n.semantic_group_id,h.answered_count,h.correct_count,h.last_correct,h.last_answered_at,h.next_review_at FROM assessment_question_history h JOIN assessment_questions o ON o.id=h.question_id JOIN assessment_questions n ON n.source_id=(${sql(sourcePrefix)} || substr(o.source_id,instr(o.source_id,':')+1)) WHERE n.pool_prefix=${sql(args.version)} AND o.pool_prefix GLOB 'v[0-9]*' AND o.pool_prefix<>${sql(args.version)} ON CONFLICT(user_id,question_id) DO UPDATE SET answered_count=MAX(assessment_question_history.answered_count,excluded.answered_count),correct_count=MAX(assessment_question_history.correct_count,excluded.correct_count),last_correct=excluded.last_correct,last_answered_at=MAX(assessment_question_history.last_answered_at,excluded.last_answered_at),next_review_at=MAX(assessment_question_history.next_review_at,excluded.next_review_at);`,
-      `UPDATE assessment_questions SET active=0,updated_at=${now} WHERE pool_prefix GLOB 'v[0-9]*' AND pool_prefix<>${sql(args.version)};`,
-      `UPDATE assessment_questions SET active=0,updated_at=${now} WHERE pool_prefix IN (${REPLACED_LEGACY_POOLS.map(sql).join(",")});`,
-      `UPDATE assessment_tests SET published=0,updated_at=${now} WHERE is_custom=0 AND source_pool GLOB 'v[0-9]*' AND source_pool<>${sql(args.version)};`, ...tests.map(testInsert),
+      `UPDATE assessment_questions SET active=0,updated_at=${now} WHERE active<>0 AND pool_prefix GLOB 'v[0-9]*' AND pool_prefix<>${sql(args.version)};`,
+      `UPDATE assessment_questions SET active=0,updated_at=${now} WHERE active<>0 AND pool_prefix IN (${REPLACED_LEGACY_POOLS.map(sql).join(",")});`,
+      `UPDATE assessment_tests SET published=0,updated_at=${now} WHERE published<>0 AND is_custom=0 AND source_pool GLOB 'v[0-9]*' AND source_pool<>${sql(args.version)};`, ...tests.map(testInsert),
       `INSERT INTO assessment_import_runs (id,source_hash,source_questions,imported_questions,imported_tests,report_json,imported_at) VALUES (${sql(`${args.version}-${sha(JSON.stringify(report)).slice(0, 16)}`)},${sql(sha(JSON.stringify(report)))},${questions.length},${liveRows.length},${tests.length},${sql(JSON.stringify(report))},${now}) ON CONFLICT(source_hash) DO UPDATE SET imported_questions=excluded.imported_questions,imported_tests=excluded.imported_tests,report_json=excluded.report_json,imported_at=excluded.imported_at;`];
     await writeFile(join(args.out, "999-tests-and-manifest.sql"), `${manifest.join("\n")}\n`, "utf8");
   }

@@ -237,6 +237,11 @@ test("keeps payments disabled and uses secure server OAuth sessions for configur
   assert.match(loginRoute, /providerLinked/);
   assert.match(resetRequest, /RESEND_API_KEY/);
   assert.match(resetRequest, /passwordResetRequests/);
+  assert.match(resetRequest, /exceeded D1's free tier daily row write limit/);
+  assert.match(resetRequest, /status: 503/);
+  assert.match(resetRequest, /Retry-After/);
+  assert.match(html, /message\.slice\(0,240\)/);
+  assert.doesNotMatch(html, /პაროლის აღდგენის მოთხოვნა ვერ გაიგზავნა\. შეამოწმეთ Cloud\/SMTP/);
   assert.match(resetComplete, /isNull\(passwordResetRequests\.usedAt\)/);
   assert.match(resetComplete, /DELETE FROM sessions WHERE user_id=/);
   assert.match(resetComplete, /account_status IN \('active','onboarding','email_pending'\)/);

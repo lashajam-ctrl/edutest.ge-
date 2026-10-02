@@ -528,7 +528,9 @@ async function requestPasswordReset(){
     setLoginNotice(data.message||'თუ ეს ანგარიში არსებობს, პაროლის აღდგენის ბმული ელ-ფოსტაზე გაიგზავნა.','success');
   }catch(e){
     console.warn(e);
-    setLoginNotice('პაროლის აღდგენის მოთხოვნა ვერ გაიგზავნა. შეამოწმეთ Cloud/SMTP კონფიგურაცია და სცადეთ მოგვიანებით.','warn');
+    const fallback='პაროლის აღდგენის მოთხოვნა დროებით ვერ გაიგზავნა. სცადეთ მოგვიანებით.';
+    const message=(e&&typeof e.message==='string'&&e.message&&e.message!=='Failed to fetch')?e.message:fallback;
+    setLoginNotice(message.slice(0,240),'warn');
   }
 }
 async function resendSignupConfirmation(){
