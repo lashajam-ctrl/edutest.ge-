@@ -8,7 +8,20 @@ import { consumeRateLimit } from "@/lib/rate-limit";
 type TestRow = { id: string; title: string; subject: string; grade: number; semester: number | null; source_pool: string; difficulty: string | null; question_count: number; time_minutes: number; attempts_allowed: number; published: number; is_custom: number; created_by: string | null };
 type Candidate = StoredAssessmentQuestion & { history_id: string | null; answered_count: number | null; last_correct: number | null; next_review_at: number | null; last_answered_at: number | null };
 
-export async function POST(request: Request) {
+const d1QuotaMessage = "მონაცემთა ბაზის დღიური ლიმიტი დროებით ამოიწურა. ტესტის დაწყება განახლდება თბილისის დროით 04:00-ზე.";
+
+function isD1DailyWriteLimit(error: unknown) {
+  const message = error instanceof Error ? error.message : String(error ?? "");
+  return /exceeded D1's free tier daily row write limit/i.test(message);
+}
+
+function secondsUntilNextD1Reset() {
+  const now = new Date();
+  const reset = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1);
+  return Math.max(1, Math.ceil((reset - now.getTime()) / 1000));
+}
+
+async function handleAssessmentStart(request: Request) {
   const current = await getSessionUser(request);
   if (!current) return Response.json({ error: "ავტორიზაცია აუცილებელია" }, { status: 401 });
   if (!['student','teacher','admin'].includes(current.user.role)) return Response.json({error:'ამ ანგარიშიდან ტესტის შესრულება ხელმისაწვდომი არ არის.'},{status:403});
@@ -157,4 +170,18 @@ export async function POST(request: Request) {
       .bind(sessionId,JSON.stringify(snapshot),deadlineAt,startedAt),
   ]);
   return Response.json({sessionId,...snapshot,deadlineAt,serverNow:startedAt,revision:0}, { status: 201, headers: { "Cache-Control": "no-store" } });
+}
+
+export async function POST(request: Request) {
+  try {
+    return await handleAssessmentStart(request);
+  } catch (error) {
+    if (isD1DailyWriteLimit(error)) {
+      return Response.json({ error: d1QuotaMessage }, {
+        status: 503,
+        headers: { "Cache-Control": "no-store", "Retry-After": String(secondsUntilNextD1Reset()) },
+      });
+    }
+    throw error;
+  }
 }

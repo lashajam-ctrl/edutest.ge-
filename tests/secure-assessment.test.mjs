@@ -29,6 +29,24 @@ test("student grade filters follow the server's adjacent-grade policy without a 
   assert.doesNotMatch(render, /userPremium|isPremium/);
 });
 
+test("student catalog cards cannot create horizontal overflow on narrow screens", async () => {
+  const html = await source('public/app.html');
+  assert.match(html, /\.main\{flex:1;min-width:0;padding:20px;overflow-y:auto;overflow-x:hidden\}/);
+  assert.match(html, /\.student-test-card__summary\{flex:1 1 260px;min-width:0\}/);
+  assert.match(html, /\.student-test-card__title-text\{[^}]*overflow-wrap:anywhere/);
+  assert.match(html, /class="card student-test-card"/);
+  assert.match(html, /class="student-test-card__title-text"/);
+  assert.match(html, /\.student-test-card>button\{width:100%;justify-content:center\}/);
+});
+
+test("assessment start explains the temporary D1 write-quota outage", async () => {
+  const start = await source('app/api/assessments/start/route.ts');
+  assert.match(start, /exceeded D1's free tier daily row write limit/);
+  assert.match(start, /ტესტის დაწყება განახლდება თბილისის დროით 04:00-ზე/);
+  assert.match(start, /status: 503/);
+  assert.match(start, /Retry-After/);
+});
+
 test("assignment creation checks existence, ownership and matching grade before insert", async () => {
   const route=await source('app/api/assignments/route.ts');
   const insert=route.indexOf('getDb().insert(assignments)');
