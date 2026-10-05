@@ -7,6 +7,7 @@ import { parseNumericShortAnswer } from "../lib/short-answer-core.mjs";
 import { CIVICS_SUPPLEMENT, CIVICS_SUPPLEMENT_BLUEPRINT } from "../data/civics-supplement-v1.mjs";
 import { WEAK_BANK_SUPPLEMENT, WEAK_BANK_SUPPLEMENT_BLUEPRINT } from "../data/weak-bank-supplement-v1.mjs";
 import { QUALITY_EXPANSION_V2, QUALITY_EXPANSION_V2_BLUEPRINT } from "../data/quality-expansion-v2.mjs";
+import { FIFTH_PAPER_EXPANSION_V3, FIFTH_PAPER_EXPANSION_V3_BLUEPRINT, validateFifthPaperExpansionV3 } from "../data/fifth-paper-expansion-v3.mjs";
 import { directMathResult } from "./import-v8-question-bank.mjs";
 
 const QUESTION_FILES = ["IMPORT/questions_canonical_40320.jsonl", "IMPORT/questions_extension.jsonl"];
@@ -41,6 +42,17 @@ const REVIEWED_SUBJECT_OVERRIDES = new Map([
   ["GE2-G10-SO-S1-013", "მოქალაქეობა"],
   ["GE2-G11-SO-S1-020", "მოქალაქეობა"],
   ["GE2-G11-SO-S1-030", "მოქალაქეობა"],
+]);
+
+export const CURATED_PROMPT_CORRECTIONS = new Map([
+  ["GE3-E64442E0431E", [
+    "სკოლის ეზოში სხვადასხვა ფერის მანქანები დათვალეს:",
+    "თეთრი — 7 მანქანა",
+    "შავი — 10 მანქანა",
+    "ლურჯი — 1 მანქანა",
+    "",
+    "დაალაგე ფერები მანქანების რაოდენობის მიხედვით, ყველაზე ცოტადან ყველაზე მეტისკენ.",
+  ].join("\n")],
 ]);
 
 const sha = value => createHash("sha256").update(value).digest("hex");
@@ -287,6 +299,40 @@ export function curatedQualityExpansionRows(version, now, existingRows = []) {
   return rows;
 }
 
+export function curatedFifthPaperRows(version, now, existingRows = []) {
+  if (version !== "v28") return [];
+  validateFifthPaperExpansionV3();
+  const counts = {}, ids = new Set(), texts = new Set(existingRows.map(row => `${row.grade}|${row.subject}|${row.semester}|${normalize(row.payload?.text)}`));
+  const rows = FIFTH_PAPER_EXPANSION_V3.map(item => {
+    const bucket = `${item.grade}|${item.subject}|${item.semester}`;
+    counts[bucket] = (counts[bucket] ?? 0) + 1;
+    const id = String(item.id ?? "").trim();
+    if (!FIFTH_PAPER_EXPANSION_V3_BLUEPRINT[bucket]) throw new Error(`Unsupported fifth-paper bucket: ${bucket}`);
+    if (!id || ids.has(id)) throw new Error(`Duplicate or empty fifth-paper id: ${id}`);
+    ids.add(id);
+    if (typeof item.text !== "string" || item.text.trim().length < 20 || /<[^>]+>/u.test(item.text)) throw new Error(`Invalid fifth-paper prompt: ${id}`);
+    if (!Array.isArray(item.options) || item.options.length !== 4 || item.options.some(option => typeof option !== "string" || !option.trim()) || new Set(item.options.map(normalize)).size !== 4) throw new Error(`Invalid fifth-paper options: ${id}`);
+    if (!Number.isInteger(item.correct) || item.correct < 0 || item.correct >= item.options.length) throw new Error(`Invalid fifth-paper answer: ${id}`);
+    if (typeof item.explanation !== "string" || item.explanation.trim().length < 30 || /<[^>]+>/u.test(item.explanation)) throw new Error(`Invalid fifth-paper explanation: ${id}`);
+    const textKey = `${item.grade}|${item.subject}|${item.semester}|${normalize(item.text)}`;
+    if (texts.has(textKey)) throw new Error(`Duplicate fifth-paper prompt in live bucket: ${id}`);
+    texts.add(textKey);
+    const topic = `${item.subject} · ${item.topic}`, answerKey = { correct: item.correct };
+    const payload = { id, text: item.text, type: "multiple_choice", pts: 2, grade: item.grade, subject: item.subject, semester: item.semester, topic, opts: item.options, difficulty: "core" };
+    return {
+      id, sourceId: `v28-supplement:${id}`, poolKey: `G${String(item.grade).padStart(2, "0")}-Q3-S${item.semester}|${item.semester}|${item.topic}`,
+      poolPrefix: "v28", grade: item.grade, subject: item.subject, sourceSubject: "მეხუთე სრულად ახალი ვარიანტის ხარისხობრივი გაფართოება", semester: item.semester,
+      topic, strand: item.topic, type: "multiple_choice", payload, points: 2, difficulty: "core", mappingStatus: "v28_algorithmically_validated_fifth_paper_v3",
+      semanticGroupId: `${id}:${normalize(item.concept)}`, contentHash: sha(JSON.stringify({ payload, answer: answerKey, rationale: item.explanation })),
+      answerKey, explanation: item.explanation, mediaTextFallback: false, now,
+    };
+  });
+  for (const [bucket, expected] of Object.entries(FIFTH_PAPER_EXPANSION_V3_BLUEPRINT)) {
+    if ((counts[bucket] ?? 0) !== expected) throw new Error(`Fifth-paper coverage mismatch for ${bucket}: ${counts[bucket] ?? 0}/${expected}`);
+  }
+  return rows;
+}
+
 function questionInsert(row) {
   const columns = ["id","source_id","pool_key","pool_prefix","grade","subject","source_subject","semester","topic","strand","question_type","public_payload_json","points","difficulty","review_status","mapping_status","semantic_group_id","content_hash","active","imported_at","updated_at"];
   const values = [row.id,row.sourceId,row.poolKey,row.poolPrefix,row.grade,row.subject,row.sourceSubject,row.semester,row.topic,row.strand,row.type,JSON.stringify(row.payload),row.points,row.difficulty,"algorithmically_validated",row.mappingStatus,row.semanticGroupId,row.contentHash,1,row.now,row.now];
@@ -313,7 +359,7 @@ async function main() {
   const questions = (await Promise.all(QUESTION_FILES.map(file => readJsonLines(join(args.source, file))))).flat();
   const answers = new Map((await Promise.all(ANSWER_FILES.map(file => readJsonLines(join(args.source, file))))).flat().map(row => [row.question_id, row]));
   const subjectFixes = await approvedSubjectFixes(args.source), flaggedSubjectIds = await flaggedSubjectCandidateIds(args.source);
-  const rows = [], excluded = {}, remapped = [], directMathBlocked = [];
+  const rows = [], excluded = {}, remapped = [], directMathBlocked = [], promptCorrections = [];
   const exclude = reason => { excluded[reason] = (excluded[reason] ?? 0) + 1; };
   for (const question of questions) {
     if (question.status !== "active" || String(question.deliverable) !== "1") { exclude(`source_${question.status}`); continue; }
@@ -328,6 +374,11 @@ async function main() {
     if (answer.error) { exclude(answer.error); continue; }
     let text = [String(question.stimulus || "").trim(), String(question.stem || "").trim()].filter(Boolean).join("\n\n");
     if (answer.appendBlank) text += "\n\nპასუხი: ___";
+    const correctedText = CURATED_PROMPT_CORRECTIONS.get(String(question.question_id));
+    if (correctedText) {
+      text = correctedText;
+      promptCorrections.push(String(question.question_id));
+    }
     if (text.length < 3) { exclude("empty_prompt"); continue; }
     const computed = directMathResult(text), supplied = numericAnswerValue(answer);
     if (computed !== null && (supplied === null || Math.abs(computed - supplied) > 1e-9)) {
@@ -351,7 +402,9 @@ async function main() {
   rows.push(...weakBankSupplementalRows);
   const qualityExpansionRows = curatedQualityExpansionRows(args.version, now, rows);
   rows.push(...qualityExpansionRows);
-  const supplementalRows = [...civicsSupplementalRows, ...weakBankSupplementalRows, ...qualityExpansionRows];
+  const fifthPaperRows = curatedFifthPaperRows(args.version, now, rows);
+  rows.push(...fifthPaperRows);
+  const supplementalRows = [...civicsSupplementalRows, ...weakBankSupplementalRows, ...qualityExpansionRows, ...fifthPaperRows];
   const exactGroups = new Map();
   for (const row of rows) {
     const signature = exactTaskSignature(row);
@@ -399,6 +452,7 @@ async function main() {
     civicsSupplementalQuestionsAdded: civicsSupplementalRows.length,
     weakBankSupplementalQuestionsAdded: weakBankSupplementalRows.length,
     qualityExpansionV2QuestionsAdded: qualityExpansionRows.length,
+    fifthPaperExpansionV3QuestionsAdded: fifthPaperRows.length,
     excluded, questionTypes: byType, openGradingModes, importedMediaTextFallback, directMathBlocked,
     crossGradeExactRepeatsBlocked: crossGradeBlocked.length,
     confirmedFixes: {
@@ -408,6 +462,8 @@ async function main() {
       flaggedSubjectCandidatesRetagged: reviewedFlaggedSubjectIds.length,
       missingContextBlocked: excluded.confirmed_missing_context ?? 0,
       missingAnswerBlocked: excluded.missing_answer ?? 0,
+      promptCorrections: promptCorrections.length,
+      promptCorrectionIds: promptCorrections,
     },
     capacity, validations: { activeOnly: "pass", answerPresence: "pass", uniqueOptions: "pass", exactlyOneMcqAnswer: "pass", directMathRecomputation: "pass", contextBlocklist: "pass", catalogRules: "pass", semanticRotationCapacity: "pass", mediaTextFallback: "pass", flaggedSubjectReview: "pass", wideExactRepeatBlock: "pass" },
     retainedLegacySubjects: ["რუსული"],
@@ -433,6 +489,15 @@ async function main() {
     if (qualityExpansionRows.length) {
       const supplementStatements = ["PRAGMA foreign_keys=ON;", ...qualityExpansionRows.flatMap(row => [questionInsert(row), answerInsert(row)])];
       await writeFile(join(args.out, "995-quality-expansion-v2.sql"), `${supplementStatements.join("\n")}\n`, "utf8");
+    }
+    if (fifthPaperRows.length) {
+      const supplementStatements = ["PRAGMA foreign_keys=ON;", ...fifthPaperRows.flatMap(row => [questionInsert(row), answerInsert(row)])];
+      await writeFile(join(args.out, "994-fifth-paper-expansion-v3.sql"), `${supplementStatements.join("\n")}\n`, "utf8");
+    }
+    const correctedRows = liveRows.filter(row => promptCorrections.includes(String(row.sourceId).slice(sourcePrefix.length)));
+    if (correctedRows.length) {
+      const correctionStatements = ["PRAGMA foreign_keys=ON;", ...correctedRows.flatMap(row => [questionInsert(row), answerInsert(row)])];
+      await writeFile(join(args.out, "993-curated-prompt-corrections.sql"), `${correctionStatements.join("\n")}\n`, "utf8");
     }
     // Run after every questions-*.sql file. Those upserts stamp the complete desired
     // membership with `now`, so only genuinely stale active rows need a write.
