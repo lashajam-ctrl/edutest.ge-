@@ -1,0 +1,86 @@
+{
+  "generatedAt": "2026-10-05T06:23:24.823Z",
+  "status": "pass_with_documented_limitations",
+  "scope": {
+    "outputsChecked": 615,
+    "catalogBuckets": 73,
+    "subjects": 12,
+    "distinctLearningTemplates": 129,
+    "computationalOutputs": 97,
+    "curatedRuleTableOutputs": 518
+  },
+  "checks": {
+    "structuralFailures": 0,
+    "duplicateIds": 0,
+    "duplicateOrEmptyOptions": 0,
+    "invalidCorrectAnswers": 0,
+    "missingOrThinExplanations": 0,
+    "exactPromptDuplicatesWithinBucket": 0,
+    "stageSubjectViolations": 0,
+    "knownLanguageRegressionHits": 0,
+    "answerPositions": {
+      "0": 155,
+      "1": 153,
+      "2": 155,
+      "3": 152
+    }
+  },
+  "diversity": {
+    "uniquePromptTextsGlobally": 278,
+    "globalExactDuplicatePromptGroups": 214,
+    "rowsInGlobalExactDuplicateGroups": 551,
+    "sameGradeCrossSemesterExactGroups": 178,
+    "note": "Cross-grade and cross-semester reuse is not a same-test collision, but it is not counted as globally new pedagogy."
+  },
+  "bySubject": {
+    "ბუნება": 5,
+    "ინგლისური": 92,
+    "მათემატიკა": 41,
+    "ჩვენი საქართველო": 37,
+    "მოქალაქეობა": 93,
+    "ბიოლოგია": 80,
+    "ქართული ენა და ლიტერატურა": 4,
+    "გეოგრაფია": 55,
+    "ისტორია": 72,
+    "ფიზიკა": 56,
+    "ქიმია": 60,
+    "სამოქალაქო თავდაცვა და უსაფრთხოება": 20
+  },
+  "distinctTemplatesBySubject": {
+    "ბუნება": 4,
+    "ინგლისური": 25,
+    "მათემატიკა": 17,
+    "ჩვენი საქართველო": 10,
+    "მოქალაქეობა": 10,
+    "ბიოლოგია": 10,
+    "ქართული ენა და ლიტერატურა": 3,
+    "გეოგრაფია": 10,
+    "ისტორია": 10,
+    "ფიზიკა": 10,
+    "ქიმია": 10,
+    "სამოქალაქო თავდაცვა და უსაფრთხოება": 10
+  },
+  "curriculumAlignment": {
+    "stageBoundaryCheck": "pass",
+    "semesterClaim": "not_asserted",
+    "note": "The national curriculum defines many outcomes at stage level; exact school-year and semester sequencing remains a school curriculum decision.",
+    "references": [
+      "https://mes.gov.ge/content.php?id=12552&lang=geo",
+      "https://mes.gov.ge/uploads/files/2022/gzamkvlevi.pdf",
+      "https://mes.gov.ge/content.php?id=9422&lang=geo"
+    ]
+  },
+  "reviewStatus": {
+    "algorithmicValidation": "complete",
+    "aiContentFamilyReview": "complete",
+    "humanTeacherValidation": "not_performed",
+    "permittedLabel": "AI-validated provisional practice content",
+    "forbiddenLabel": "teacher-approved"
+  },
+  "blockers": {
+    "count": 0,
+    "structuralFailures": [],
+    "stageSubjectViolations": [],
+    "knownCopyFailures": []
+  }
+}

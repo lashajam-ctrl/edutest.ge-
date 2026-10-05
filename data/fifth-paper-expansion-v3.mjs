@@ -81,11 +81,11 @@ function mathQuestion(grade, semester, slot) {
     const [topic, text, answer, distractors, explanation] = senior[slot % senior.length]();
     return question({ grade, semester, subject: "მათემატიკა", slot, topic, text, answer, distractors, explanation });
   }
-  const a = 12 + seed % 8, b = 3 + seed % 4;
+  const a = 12 + seed % 8, b = 3 + seed % 4, percent = 10 + (seed % 4) * 10;
   const basic = [
     ["წილადები", `რა არის ${b}/${a} წილადის მრიცხველი?`, b, [a, a - b, b + 1], `წილადში ${b}/${a} ზედა რიცხვი ${b} არის მრიცხველი.`],
     ["განტოლება", `რომელი რიცხვია x, თუ x + ${b} = ${a}?`, a - b, [a + b, a, b], `ორივე მხარეს ${b}-ის გამოკლებით მივიღებთ x=${a - b}.`],
-    ["პროცენტი", `100-ის ${10 + (seed % 4) * 10}% რამდენია?`, 10 + (seed % 4) * 10, [seed % 4 + 1, 100 - (10 + (seed % 4) * 10), 100], "100-ის p პროცენტი რიცხობრივად p-ის ტოლია."],
+    ["პროცენტი", `100-ის ${percent}% რამდენია?`, percent, [seed % 4 + 1, 100 - percent, 100], `100-ის ${percent}% არის 100·${percent}/100=${percent}.`],
     ["მართკუთხედის პერიმეტრი", `მართკუთხედის გვერდებია ${b} სმ და ${b + 2} სმ. იპოვე პერიმეტრი.`, 4 * b + 4, [2 * b + 2, b * (b + 2), 4 * b], `პერიმეტრია 2·(${b}+${b + 2})=${4 * b + 4} სმ.`],
     ["შეფარდება", `კლასში ${2 * b} გოგო და ${b} ბიჭია. გოგოების რაოდენობის შეფარდება ბიჭებთან რამდენია გამარტივებული სახით?`, "2:1", ["1:2", "3:1", `${2 * b}:${b + 1}`], `შეფარდება ${2 * b}:${b} ორივე წევრის ${b}-ზე გაყოფით არის 2:1.`],
     ["საშუალო არითმეტიკული", `იპოვე ${b}, ${b + 2} და ${b + 4}-ის საშუალო არითმეტიკული.`, b + 2, [b + 3, b + 4, 3 * b + 6], `ჯამი არის ${3 * b + 6}; სამზე გაყოფით საშუალო გამოდის ${b + 2}.`],
@@ -111,7 +111,7 @@ const ENGLISH_BANKS = {
     ["reading detail", "Text: Ana takes an umbrella because dark clouds are gathering. Why does she take it?", "She expects rain.", ["She wants shade indoors.", "She lost her schoolbag.", "She is going swimming."], "Dark clouds and an umbrella support the inference that Ana expects rain."],
   ],
   middle: [
-    ["past continuous", "At eight o'clock, I ___ my homework.", "was doing", ["did every day", "am do", "have do"], "An action in progress at a specific past time uses the past continuous: was doing."],
+    ["past continuous", "Yesterday at eight o'clock, I ___ my homework.", "was doing", ["did every day", "am do", "have do"], "An action in progress at a specific past time uses the past continuous: was doing."],
     ["present perfect", "She ___ this book twice, so she knows the story well.", "has read", ["read now", "is reading yesterday", "has reads"], "An experience connected with the present is expressed with has read."],
     ["first conditional", "If it rains tomorrow, we ___ at home.", "will stay", ["stayed", "would stayed", "stay yesterday"], "The first conditional uses present simple after if and will plus base verb in the result clause."],
     ["comparatives", "This route is ___ than the old one.", "shorter", ["more short", "shortest", "the shorter"], "The one-syllable adjective short forms its comparative with -er: shorter."],
@@ -123,7 +123,7 @@ const ENGLISH_BANKS = {
     ["reading inference", "Text: The path was wet, and droplets still hung from the leaves. What most likely happened?", "It had recently rained.", ["The weather had been dry for weeks.", "The path was indoors.", "The leaves had been painted."], "A wet path and droplets on leaves are evidence of recent rain."],
   ],
   upper: [
-    ["mixed conditional", "If the team had checked the data, it ___ the error now.", "would not be correcting", ["will not correct", "did not corrected", "would not have correct"], "A past unreal condition with a present consequence takes if + past perfect and would + be + -ing here."],
+    ["mixed conditional", "If the team had checked the data carefully, it ___ the error now.", "would not have to correct", ["will not correct", "did not corrected", "would not had corrected"], "A past unreal condition with a present consequence takes if + past perfect and would plus the base construction: would not have to correct."],
     ["inversion", "Only after the results arrived ___ the researchers revise the conclusion.", "did", ["do", "had been", "were"], "A restrictive initial phrase triggers subject-auxiliary inversion: did the researchers revise."],
     ["reported speech", "Maya said, “I am preparing the report.” Choose the accurate reported form.", "Maya said that she was preparing the report.", ["Maya said that I am preparing the report.", "Maya says she prepared tomorrow.", "Maya told that she is prepare the report."], "With a past reporting verb, am preparing normally backshifts to was preparing and the pronoun changes to she."],
     ["passive reporting", "Choose the grammatically correct sentence.", "The new policy is expected to reduce waste.", ["The new policy expects reduce waste.", "It is expect that waste reducing.", "The new policy is expecting reduce."], "The passive reporting pattern is subject + is expected + to-infinitive."],
@@ -214,7 +214,7 @@ function geographyQuestion(grade, semester, slot) {
 }
 
 const HISTORY_BANK = [
-  ["პირველწყარო", "რომელი მასალა არის ისტორიული მოვლენის პირველწყარო?", "მოვლენის მონაწილის იმდროინდელი დღიური", ["ასი წლის შემდეგ დაწერილი სასკოლო სახელმძღვანელო", "თანამედროვე მხატვრული ფილმი წყაროს მითითების გარეშე", "მოგვიანებით შედგენილი ენციკლოპედიის მოკლე სტატია"], "პირველწყარო შექმნილია შესასწავლი პერიოდის უშუალო მონაწილეს ან დამკვირვებელს მიერ; დღიური სწორედ ასეთ მასალას წარმოადგენს."],
+  ["პირველწყარო", "რომელი მასალა არის ისტორიული მოვლენის პირველწყარო?", "მოვლენის მონაწილის იმდროინდელი დღიური", ["ასი წლის შემდეგ დაწერილი სასკოლო სახელმძღვანელო", "თანამედროვე მხატვრული ფილმი წყაროს მითითების გარეშე", "მოგვიანებით შედგენილი ენციკლოპედიის მოკლე სტატია"], "პირველწყარო შექმნილია შესასწავლი პერიოდის უშუალო მონაწილის ან დამკვირვებლის მიერ; დღიური სწორედ ასეთ მასალას წარმოადგენს."],
   ["წყაროს კრიტიკა", "ისტორიული წერილის სანდოობის შეფასებისას რომელი კითხვა უნდა დაისვას პირველ რიგში?", "ვინ, როდის, რა მიზნით და რა ვითარებაში დაწერა წერილი?", ["რამდენად ლამაზია ხელწერა?", "რამდენ გვერდზე ეტევა ტექსტი?", "ემთხვევა თუ არა ავტორის აზრი ჩვენს სურვილს?"], "ავტორის, დროის, მიზნისა და კონტექსტის დადგენა წყაროს შესაძლო მიკერძოებისა და ინფორმირებულობის შეფასებაში გვეხმარება."],
   ["ქრონოლოგია", "რომელი მეთოდი გვეხმარება მოვლენებს შორის დროითი თანმიმდევრობის დადგენაში?", "თარიღების შედარება და დროის ხაზზე განლაგება", ["მოვლენების ანბანური დალაგება", "მხოლოდ რუკის ფერის ნახვა", "ყველა თარიღის უგულებელყოფა"], "დროის ხაზი თარიღებს თანმიმდევრულად აწყობს და წინმსწრები თუ მომდევნო მოვლენის დანახვას ამარტივებს."],
   ["მიზეზი და შედეგი", "რომელი მტკიცება აჩვენებს მიზეზობრივ კავშირს და არა მხოლოდ დროით დამთხვევას?", "მექანიზმითაა ახსნილი, როგორ გამოიწვია ერთმა ცვლილებამ მეორე", ["ორი მოვლენა ერთ წელს მოხდა", "ორივე მოვლენის სახელი ერთ ასოზე იწყება", "მოვლენები სხვადასხვა წიგნში წერია"], "მიზეზობრივი მტკიცება საჭიროებს გავლენის მექანიზმსა და მტკიცებულებას; დროითი მიმდევრობა მარტო საკმარისი არ არის."],
@@ -297,7 +297,7 @@ const GEORGIAN_BANK = [
   ["პუნქტუაცია", "რომელ წინადადებაშია მიმართვა სწორად გამოყოფილი?", "ნინო, გთხოვ, ფანჯარა დახურე.", ["ნინო გთხოვ ფანჯარა, დახურე.", "ნინო გთხოვ ფანჯარა დახურე.", "ნინო, გთხოვ ფანჯარა დახურე"], "მიმართვა „ნინო“ მძიმით გამოიყოფა; ჩართული სიტყვა „გთხოვ“ ორივე მხრიდან მძიმით არის გამოყოფილი."],
   ["სინტაქსი", "რომელ წინადადებაშია მიზეზი ნათლად გამოხატული?", "გაკვეთილი გადაიდო, რადგან ელექტროენერგია გაითიშა.", ["გაკვეთილი გადაიდო, თუმცა ელექტროენერგია გაითიშა.", "გაკვეთილი გადაიდო, ან ელექტროენერგია გაითიშა.", "გაკვეთილი გადაიდო, მაგრამ ამიტომ."], "კავშირი „რადგან“ მთავარ მოქმედებას მის გამომწვევ მიზეზთან აკავშირებს."],
   ["ტექსტის რედაქტირება", "რომელი ვარიანტია ყველაზე მკაფიო და ზედმეტი გამეორების გარეშე?", "მოსწავლეებმა ანგარიში შეადგინეს და მასწავლებელს წარუდგინეს.", ["მოსწავლეებმა ანგარიში შეადგინეს და ანგარიში მასწავლებელს წარუდგინეს.", "მოსწავლეები ანგარიში შეადგინეს და მასწავლებელი წარუდგინა.", "ანგარიში მოსწავლეებმა შეადგინა და წარადგინეს მასწავლებლები."], "ნაცვალსახელი „მას“ ზედმეტ გამეორებას ცვლის, ხოლო ქვემდებარე და შემასმენელი რიცხვში შეთანხმებულია."],
-  ["ლექსიკა", "რომელი სიტყვაა „ზუსტი“-სთან მნიშვნელობით ყველაზე ახლოს მოცემულ კონტექსტში: „ზუსტი გაზომვა“?", "სწორი", ["ბუნდოვანი", "შემთხვევითი", "ხმამაღალი"], "გაზომვის კონტექსტში „ზუსტი“ ნიშნავს სწორ და სანდო შედეგთან ახლოს მყოფს."],
+  ["ლექსიკა", "რომელი სიტყვაა მნიშვნელობით ყველაზე ახლოს სიტყვასთან „ზუსტი“ მოცემულ კონტექსტში: „ზუსტი გაზომვა“?", "სწორი", ["ბუნდოვანი", "შემთხვევითი", "ხმამაღალი"], "გაზომვის კონტექსტში „ზუსტი“ ნიშნავს სწორ და სანდო შედეგთან ახლოს მყოფს."],
   ["მხატვრული ხერხი", "წინადადებაში „ქარი ფანჯარას ჩურჩულით ესაუბრებოდა“ რომელი ხერხია გამოყენებული?", "გაპიროვნება", ["ჰიპერბოლა", "ირონია", "ტერმინოლოგიური განმარტება"], "ქარს ადამიანის მოქმედება — საუბარი — მიეწერება, ამიტომ ეს გაპიროვნებაა."],
   ["ჟანრი", "რა განასხვავებს არგუმენტირებულ ესეს უბრალო აღწერისგან?", "თეზისი მტკიცებულებებითა და მსჯელობით არის დასაბუთებული", ["ტექსტში მხოლოდ ზედსართავი სახელებია", "ავტორი ყოველთვის გამოგონილ გმირს ქმნის", "ტექსტს დასკვნა არ აქვს"], "არგუმენტირებულ ესეში ცენტრალური პოზიცია მიზეზებით, მაგალითებითა და მტკიცებულებებით უნდა გამყარდეს."],
   ["თემა და იდეა", "რა არის ტექსტის იდეა?", "მთავარი აზრი, რომლის გააზრებაც ავტორს მკითხველისთვის სურს", ["მხოლოდ მოქმედების ადგილი", "ყველა პერსონაჟის სახელების სია", "ტექსტში სიტყვების რაოდენობა"], "თემა გვიჩვენებს, რაზეა ტექსტი, ხოლო იდეა — რა მთავარ აზრს აყალიბებს ავტორი ამ თემაზე."],

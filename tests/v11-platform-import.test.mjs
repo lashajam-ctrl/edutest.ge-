@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 import { answerKeyFor, curatedCivicsRows, curatedFifthPaperRows, curatedQualityExpansionRows, curatedWeakBankRows, CURATED_PROMPT_CORRECTIONS } from "../scripts/import-v11-question-bank.mjs";
+import { auditFifthPaperExpansion } from "../scripts/audit-fifth-paper-expansion.mjs";
 
 test("v11 platform importer blocks the three confirmed defect classes", async () => {
   const source = await readFile(new URL("../scripts/import-v11-question-bank.mjs", import.meta.url), "utf8");
@@ -93,6 +94,19 @@ test("fifth-paper expansion closes every measured v28 capacity gap with distinct
   assert.equal(rows.every(row => Number.isInteger(row.answerKey.correct) && row.answerKey.correct >= 0 && row.answerKey.correct < 4), true);
   assert.equal(rows.every(row => row.payload.opts[row.answerKey.correct] && row.explanation.length >= 30), true);
   assert.equal(new Set(rows.map(row => `${row.grade}|${row.subject}|${row.semester}`)).size, 73);
+});
+
+test("fifth-paper content audit blocks structural, answer, language, and same-test duplicate regressions", () => {
+  const report = auditFifthPaperExpansion();
+  assert.equal(report.status, "pass_with_documented_limitations");
+  assert.equal(report.scope.outputsChecked, 615);
+  assert.equal(report.scope.distinctLearningTemplates, 129);
+  assert.equal(report.checks.structuralFailures, 0);
+  assert.equal(report.checks.invalidCorrectAnswers, 0);
+  assert.equal(report.checks.exactPromptDuplicatesWithinBucket, 0);
+  assert.equal(report.checks.stageSubjectViolations, 0);
+  assert.equal(report.checks.knownLanguageRegressionHits, 0);
+  assert.equal(report.reviewStatus.humanTeacherValidation, "not_performed");
 });
 
 test("grade 1 car-order prompt states every count unambiguously and keeps the verified order", () => {
