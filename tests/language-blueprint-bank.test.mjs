@@ -14,7 +14,7 @@ test("retires public language answer banks and keeps selection server-side", asy
   ]);
   assert.match(legacy, /EDUTEST_LANGUAGE_BANK_RETIRED = true/);
   assert.doesNotMatch(legacy, /correct|answer|blanks|opts/);
-  assert.match(start, /languageBlueprintFor/);
+  assert.match(start, /selectAssessmentCandidates/);
   assert.match(start, /languageBucketFor/);
   assert.match(start, /componentCounts/);
   assert.match(submit, /answer_key_json/);

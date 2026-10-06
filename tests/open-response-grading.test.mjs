@@ -8,6 +8,7 @@ const source = path => readFile(new URL(path, import.meta.url), "utf8");
 test("open answers are classified into deterministic and AI grading modes", () => {
   assert.equal(classifyOpenAnswer("3/2").mode, "numeric");
   assert.equal(classifyOpenAnswer("თბილისი").mode, "text");
+  assert.equal(classifyOpenAnswer("He helps his grandmother.").mode, "ai");
   assert.equal(classifyOpenAnswer("ეს პასუხი ორმოცზე მეტი სიმბოლოსგან შედგება და აზრობრივ შეფასებას მოითხოვს.").mode, "ai");
 });
 

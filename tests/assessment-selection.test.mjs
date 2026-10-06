@@ -13,6 +13,7 @@ import {
   eligibleCandidatesBySelectionHistory,
   languageBlueprintFor,
   languageBucketFor,
+  selectAssessmentCandidates,
 } from "../lib/assessment-selection.ts";
 import { cleanDecorativePrompt } from "../lib/assessment-selection-core.mjs";
 
@@ -159,16 +160,41 @@ test("rewrites ambiguous grade-one comparison and fill prompts", () => {
 
 test("server start route enforces semantic selection and language blueprints", async () => {
   const source = await readFile(new URL("../app/api/assessments/start/route.ts", import.meta.url), "utf8");
-  assert.match(source, /assessmentSelectionKey/);
-  assert.match(source, /eligibleCandidatesBySelectionHistory/);
+  assert.match(source, /selectAssessmentCandidates/);
   assert.match(source, /recentlyPresented/);
   assert.match(source, /assessment_sessions/);
-  assert.match(source, /languageBlueprintFor/);
   assert.match(source, /languageBucketFor/);
-  assert.match(source, /rankedCandidates\.filter\(question => !freshIds\.has\(question\.id\)\)/);
+  assert.match(source, /selection\.selected/);
   assert.match(source, /reusedGroups/);
   assert.match(source, /distinctBankGroups/);
   assert.doesNotMatch(source, /semanticGroups\.has\(question\.semantic_group_id\)/);
+});
+
+test('different semantic labels cannot admit the same task twice or bypass history', () => {
+  const rows = Array.from({length:12},(_,i)=>makeCandidate(`v28-${i}`,`Different task ${i}`,{pool_prefix:'v28',semantic_group_id:`sg${i}`}));
+  rows.push({...rows[0],id:'v28-copy',semantic_group_id:'incorrect-label',history_id:'seen',last_correct:1,last_answered_at:100});
+  const result=selectAssessmentCandidates(rows,'სამოქალაქო თავდაცვა და უსაფრთხოება',12,10,200);
+  assert.equal(result.distinct,12);
+  assert.equal(result.selected.some(q=>['v28-0','v28-copy'].includes(q.id)),false);
+  assert.equal(result.rotation.reusedGroups,0);
+});
+
+test('exhausted grammar does not repeat while unseen vocabulary remains; rotation is exact', () => {
+  const rows=Array.from({length:15},(_,i)=>({...makeCandidate(`v28-en-${i}`,`Question ${i}`),grade:3,subject:'ინგლისური',topic:i<3?'Grammar':'Vocabulary',pool_prefix:'v28',history_id:i<3?'seen':null,last_correct:1,last_answered_at:100}));
+  const first=selectAssessmentCandidates(rows,'ინგლისური',3,10,200);
+  assert.equal(first.rotation.reusedGroups,0);
+  assert.equal(first.selected.every(q=>!q.history_id),true);
+  const allSeen=rows.map(q=>({...q,history_id:'seen'}));
+  const recycled=selectAssessmentCandidates(allSeen,'ინგლისური',3,10,200);
+  assert.equal(recycled.rotation.reusedGroups,10);
+  assert.equal(recycled.rotation.freshGroups,0);
+  assert.equal(recycled.rotation.mode,'recycled');
+});
+
+test('explicit geometry metadata supplies four geometry tasks in a fresh ten-question paper', () => {
+  const rows=Array.from({length:15},(_,i)=>({...makeCandidate(`v28-m-${i}`,`Math ${i}`),subject:'მათემატიკა',pool_prefix:'v28',strand:i<5?'geometry_space':'patterns_algebra'}));
+  const result=selectAssessmentCandidates(rows,'მათემატიკა',12,10,200);
+  assert.equal(result.selected.filter(q=>q.strand==='geometry_space').length,4);
 });
 
 test("catalog and builder apply the same eligibility and semantic rules as test start", async () => {

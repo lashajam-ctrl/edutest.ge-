@@ -33,6 +33,7 @@ function generatedFamilyKey(id: string) {
 }
 
 export function assessmentSelectionKey(question: Pick<SelectionCandidate, "id" | "grade" | "subject" | "semester" | "topic" | "public_payload_json" | "semantic_group_id" | "pool_prefix">) {
+  if (question.semantic_group_id.startsWith("resolved:")) return question.semantic_group_id;
   const scope = `${question.grade}|${normalize(question.subject)}|${question.semester}`;
   if (["v11", "v23", "v28"].includes(String(question.pool_prefix)) && question.semantic_group_id) {
     return `${scope}|semantic:${question.semantic_group_id}`;
@@ -49,6 +50,56 @@ export function assessmentSelectionKey(question: Pick<SelectionCandidate, "id" |
   const family = generatedFamilyKey(question.id);
   if (family) return `${scope}|family:${family}`;
   return core ? `${scope}|prompt:${core}` : `${scope}|semantic:${question.semantic_group_id}`;
+}
+
+// Union BOTH identities. Using only semantic tags lets mislabeled identical
+// tasks bypass rotation; using only text splits genuine parallel variants.
+export function coalesceSelectionGroups<T extends SelectionCandidate>(rows: T[]): T[] {
+  const parent = rows.map((_, i) => i), owners = new Map<string, number>();
+  const root = (i: number): number => parent[i] === i ? i : (parent[i] = root(parent[i]));
+  rows.forEach((q, i) => {
+    const scope = `${q.grade}|${normalize(q.subject)}|${q.semester}`;
+    for (const key of [assessmentSelectionKey(q), `${scope}|core:${canonicalPublicTaskCore(publicPayload(q))}`]) {
+      const previous = owners.get(key);
+      if (previous !== undefined) parent[root(i)] = root(previous);
+      else owners.set(key, i);
+    }
+  });
+  return rows.map((q, i) => ({ ...q, semantic_group_id: `resolved:${assessmentSelectionKey(rows[root(i)])}` }));
+}
+
+export function selectAssessmentCandidates<T extends SelectionCandidate & { strand?: string | null }>(rows: T[], subject: string, grade: number, count: number, now: number) {
+  const candidates = rankCandidatesBySelectionHistory(coalesceSelectionGroups(rows), now);
+  const seen = new Set(candidates.filter(q => q.history_id).map(assessmentSelectionKey));
+  const unseen = candidates.filter(q => !seen.has(assessmentSelectionKey(q)));
+  const distinct = distinctSelectionGroupCount(candidates), target = Math.min(count, distinct);
+  const selected: T[] = [], used = new Set<string>();
+  const bucket = (q: T) => {
+    if (subject === "მათემატიკა" && grade >= 7) return q.strand === "geometry_space" || q.strand === "გეომეტრია" || q.subject === "გეომეტრია" ? "geometry" : "algebra";
+    return languageBucketFor(subject, q.topic, publicPayload(q).text) ?? "all";
+  };
+  const weights = languageBlueprintFor(subject, grade);
+  const allocation: Record<string, number> = subject === "მათემატიკა" && grade >= 7
+    ? { algebra: target - Math.floor(target * .4), geometry: Math.floor(target * .4) }
+    : weights ? allocateByWeight(target, weights) : { all: target };
+  const add = (pool: T[], maximum: number) => {
+    let added = 0;
+    for (const q of pool) {
+      const key = assessmentSelectionKey(q);
+      if (selected.length >= target || added >= maximum || used.has(key)) continue;
+      selected.push(q); used.add(key); added++;
+    }
+  };
+  for (const [key, n] of Object.entries(allocation)) add(unseen.filter(q => bucket(q) === key), n);
+  // Do not repeat an exhausted component while genuinely unseen tasks remain.
+  add(unseen, target - selected.length);
+  for (const [key, n] of Object.entries(allocation)) add(candidates.filter(q => bucket(q) === key), Math.max(0, n - selected.filter(q => bucket(q) === key).length));
+  add(candidates, target - selected.length);
+  const reusedGroups = selected.filter(q => seen.has(assessmentSelectionKey(q))).length;
+  return { selected, distinct, target, rotation: {
+    mode: reusedGroups === 0 ? "fresh" : reusedGroups === selected.length ? "recycled" : "mixed",
+    freshGroups: selected.length - reusedGroups, reusedGroups, distinctBankGroups: distinct,
+  } };
 }
 
 export function rankCandidatesBySelectionHistory<T extends SelectionCandidate>(candidates: T[], now: number) {
@@ -127,6 +178,7 @@ export function allocateByWeight(total: number, weights: Partial<Record<Language
 export function languageBucketFor(subject: unknown, topic: unknown, text: unknown): LanguageBucket | null {
   const value = normalize(subject), haystack = normalize(`${topic ?? ""} ${text ?? ""}`);
   if (value === "ქართული" || value === "ქართული ენა და ლიტერატურა") {
+    if (haystack.startsWith("ქართული ·") && /წაკითხულის|ტექსტის გაგება|ტექსტის გააზრება|კითხვა და გაგება/u.test(haystack)) return "literature";
     if (haystack.startsWith("ქართული ·")) return "language";
     if (haystack.startsWith("ლიტერატურა ·")) return "literature";
     if (/გრამატ|მართლწერ|პუნქტუ|სინტაქ|ლექსიკ|რედაქტ|მორფოლოგ|ბრუნ|ზმნ|არსებით|ზედსართავ|ნაცვალსახელ|მეტყველების ნაწილ|წინადადებ/u.test(haystack)) return "language";
@@ -139,7 +191,7 @@ export function languageBucketFor(subject: unknown, topic: unknown, text: unknow
     return "use_of_language";
   }
   if (value === "რუსული") {
-    if (/граммат|орфограф|пунктуац|синтак|косвенная речь|союз|относительн|условн|склон|спряж|части речи|смысловые отношения/u.test(haystack)) return "grammar";
+    if (/граммат|орфограф|пунктуац|синтак|косвенная речь|союз|относительн|условн|склон|спряж|части речи|смысловые отношения|прошедшее время|настоящее время|будущее время|падеж|местоимен|прилагательн|существительн|глагол/u.test(haystack)) return "grammar";
     if (/лексик|синоним|антоним|словообраз/u.test(haystack)) return "vocabulary";
     if (/чтени|понимани|источник|анализ текста|аргументац|контраргумент|главная мысль/u.test(haystack)) return "reading";
     return "use_of_language";

@@ -18,8 +18,10 @@ test("senior mathematics is one catalog subject backed by mixed strands", async 
   assert.match(assessment, /canonicalAssessmentSubject/);
   assert.equal(canonicalAssessmentSubject('ალგებრა',7),'მათემატიკა');
   assert.equal(canonicalAssessmentSubject('გეომეტრია',12),'მათემატიკა');
-  assert.match(start, /geometry_space/);
-  assert.match(start, /Math\.floor\(targetCount \* 0\.4\)/);
+  assert.match(start, /selectAssessmentCandidates/);
+  const selector = await source('lib/assessment-selection.ts');
+  assert.match(selector, /geometry_space/);
+  assert.match(selector, /Math\.floor\(target \* \.4\)/);
   assert.match(catalog, /preferredSeniorMath/);
   assert.doesNotMatch(html, /7:\['ალგებრა','გეომეტრია'/);
   assert.deepEqual(ASSESSMENT_SUBJECTS_BY_GRADE[7].slice(0,2),['მათემატიკა','ქართული ენა და ლიტერატურა']);

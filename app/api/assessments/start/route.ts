@@ -1,7 +1,7 @@
 import { env } from "cloudflare:workers";
 import { ensureSchema } from "@/db";
 import { assessmentSubjectComponents, canonicalAssessmentSubject, prepareQuestion, schoolGradeNumber, StoredAssessmentQuestion, subjectAllowedForGrade } from "@/lib/assessment";
-import { allocateByWeight, assessmentSelectionKey, distinctSelectionGroupCount, eligibleCandidatesBySelectionHistory, languageBlueprintFor, languageBucketFor, rankCandidatesBySelectionHistory } from "@/lib/assessment-selection";
+import { languageBucketFor, selectAssessmentCandidates } from "@/lib/assessment-selection";
 import { getSessionUser } from "@/lib/auth";
 import { consumeRateLimit } from "@/lib/rate-limit";
 
@@ -96,48 +96,11 @@ async function handleAssessmentStart(request: Request) {
       }
     }
   }
-  const rankedCandidates = test.is_custom ? rawCandidates : rankCandidatesBySelectionHistory(rawCandidates, selectionNow);
-  const freshCandidates = test.is_custom ? rankedCandidates : eligibleCandidatesBySelectionHistory(rankedCandidates, selectionNow);
-  const allDistinct = distinctSelectionGroupCount(rankedCandidates);
+  const selection = selectAssessmentCandidates(rawCandidates, canonicalAssessmentSubject(test.subject, test.grade), test.grade, Number(test.question_count), selectionNow);
+  const allDistinct = test.is_custom ? rawCandidates.length : selection.distinct;
   if (allDistinct < 5) return Response.json({ error: "ამ კლასისა და საგნის ბანკში ტესტისთვის საკმარისი განსხვავებული საკითხები ჯერ არ არის." }, { status: 409 });
   const targetCount = Math.min(Number(test.question_count), allDistinct);
-  const freshIds = new Set(freshCandidates.map(question => question.id));
-  // Start with unseen/due semantic groups. If that pool is exhausted, recycle
-  // the oldest-seen groups; option shuffling alone never makes a question new.
-  const candidates = test.is_custom
-    ? rankedCandidates
-    : [...freshCandidates, ...rankedCandidates.filter(question => !freshIds.has(question.id))];
-  const freshDistinct = distinctSelectionGroupCount(freshCandidates);
-  const selected: Candidate[] = [], selectionGroups = new Set<string>();
-  const addQuestions = (rows: Candidate[], count: number) => {
-    let added = 0;
-    for (const question of rows) {
-      const key = assessmentSelectionKey(question);
-      if (selected.length >= targetCount || added >= count || selectionGroups.has(key)) continue;
-      selectionGroups.add(key); selected.push(question); added++;
-    }
-  };
-  const combinedSeniorMath = !test.is_custom && test.grade >= 7 && canonicalAssessmentSubject(test.subject, test.grade) === "მათემატიკა";
-  if (combinedSeniorMath) {
-    const geometryTarget = Math.floor(targetCount * 0.4), algebraTarget = targetCount - geometryTarget;
-    const geometry = candidates.filter(question => question.subject === "გეომეტრია" || question.strand === "geometry_space" || question.strand === "გეომეტრია");
-    const geometryIds = new Set(geometry.map(question => question.id));
-    addQuestions(candidates.filter(question => !geometryIds.has(question.id)), algebraTarget);
-    addQuestions(geometry, geometryTarget);
-  } else if (!test.is_custom) {
-    const blueprint = languageBlueprintFor(test.subject, test.grade);
-    if (blueprint) {
-      const allocation = allocateByWeight(targetCount, blueprint);
-      for (const [bucket, count] of Object.entries(allocation)) {
-        addQuestions(candidates.filter(question => {
-          let text = "";
-          try { text = String((JSON.parse(question.public_payload_json) as Record<string, unknown>).text ?? ""); } catch {}
-          return languageBucketFor(test.subject, question.topic, text) === bucket;
-        }), Number(count));
-      }
-    }
-  }
-  addQuestions(candidates, targetCount - selected.length);
+  const selected = test.is_custom ? rawCandidates.slice(0, targetCount) : selection.selected;
   if (selected.length < targetCount) return Response.json({ error: "ტესტისთვის საკმარისი განსხვავებული კითხვა ვერ მოიძებნა" }, { status: 409 });
 
   const presentation: Record<string, unknown> = {}, questions = selected.map(question => {
@@ -153,13 +116,7 @@ async function handleAssessmentStart(request: Request) {
     const bucket = languageBucketFor(test.subject, question.topic, text);
     if (bucket) componentCounts[bucket] = (componentCounts[bucket] ?? 0) + 1;
   }
-  const reusedGroups = Math.max(0, targetCount - Math.min(targetCount, freshDistinct));
-  const rotation = {
-    mode: reusedGroups === 0 ? "fresh" : freshDistinct === 0 ? "recycled" : "mixed",
-    freshGroups: Math.min(targetCount, freshDistinct),
-    reusedGroups,
-    distinctBankGroups: allDistinct,
-  };
+  const rotation = test.is_custom ? { mode: "assigned", freshGroups: 0, reusedGroups: 0, distinctBankGroups: allDistinct } : selection.rotation;
   const safeTest={id:test.id,title:test.title,subject:canonicalAssessmentSubject(test.subject,test.grade),grade:test.grade,semester:test.semester,
     time:test.time_minutes,count:questions.length,requestedCount:test.question_count,difficulty:test.difficulty,componentCounts,serverBacked:true};
   const snapshot={test:safeTest,rotation,questions},deadlineAt=startedAt+Math.max(1,Number(test.time_minutes))*60_000;

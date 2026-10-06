@@ -9,6 +9,7 @@ import { WEAK_BANK_SUPPLEMENT, WEAK_BANK_SUPPLEMENT_BLUEPRINT } from "../data/we
 import { QUALITY_EXPANSION_V2, QUALITY_EXPANSION_V2_BLUEPRINT } from "../data/quality-expansion-v2.mjs";
 import { FIFTH_PAPER_EXPANSION_V3, FIFTH_PAPER_EXPANSION_V3_BLUEPRINT, validateFifthPaperExpansionV3 } from "../data/fifth-paper-expansion-v3.mjs";
 import { directMathResult } from "./import-v8-question-bank.mjs";
+import { correctBankRow } from "../data/bank-quality-corrections-v29.mjs";
 
 const QUESTION_FILES = ["IMPORT/questions_canonical_40320.jsonl", "IMPORT/questions_extension.jsonl"];
 const ANSWER_FILES = ["SERVER-ONLY/answer_keys_40320.jsonl", "SERVER-ONLY/answer_keys_extension.jsonl"];
@@ -394,6 +395,15 @@ async function main() {
       contentHash: sha(JSON.stringify({ payload, answer: answer.key, rationale: answers.get(question.question_id)?.rationale })),
       answerKey: answer.key, explanation: String(answers.get(question.question_id)?.rationale || "პასუხი შემოწმებულია სერვერზე."), mediaTextFallback: String(question.media_required) === "1", now,
     };
+    const corrected = correctBankRow({ ...row, question_type: row.type,
+      public_payload_json: JSON.stringify(row.payload), answer_key_json: JSON.stringify(row.answerKey) }).row;
+    row.payload = JSON.parse(corrected.public_payload_json);
+    row.answerKey = JSON.parse(corrected.answer_key_json);
+    row.explanation = corrected.explanation;
+    row.subject = corrected.subject;
+    row.topic = corrected.topic;
+    if (question.curriculum_domain === "გეომეტრია და გაზომვა" && row.subject === "მათემატიკა") row.strand = "geometry_space";
+    row.contentHash = sha(JSON.stringify({ payload: row.payload, answer: row.answerKey, rationale: row.explanation }));
     rows.push(row);
   }
   const civicsSupplementalRows = curatedCivicsRows(args.version, now, rows);

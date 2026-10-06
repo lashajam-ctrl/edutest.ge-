@@ -34,6 +34,7 @@ debug.jsonl
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
 
 # vercel
 .vercel
@@ -55,3 +56,6 @@ next-env.d.ts
 /.openai/legacy-client-question-bank/
 /.openai/*.log
 /.openai/qa-*
+/.openai/v29-*/
+/.openai/v29-*.sql
+/reports/v29-delta-review.json
