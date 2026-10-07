@@ -1,5 +1,7 @@
+import {applyHeldReview,heldReviewForId} from './bank-quality-corrections-v29-held.mjs';
 // Reviewed corrections, applied to stable question IDs (never delete history).
 export function correctBankRow(input) {
+  const reviewed=applyHeldReview(input);if(reviewed)return reviewed;
   const row = { ...input }, p = JSON.parse(row.public_payload_json), a = JSON.parse(row.answer_key_json), fixes = [];
   const set = (text, options, correct, explanation, reason) => {
     p.text = text; if (options) p.opts = options;
@@ -63,6 +65,7 @@ export const V29_ENGLISH_REVIEW_HOLD = new Set([
  '0EDB68464262','4EEC71C955EA','AFC207C08AE8',
 ]);
 export function v29AdditionDecision(q) {
+  if(heldReviewForId(q.id))return 'reviewed_held';
   if(q.subject!=='ინგლისური')return 'pending_subject_content_review';
   if(q.grade===1)return 'pending_grade_one_reading_simplification';
   if(V29_ENGLISH_REVIEW_HOLD.has(q.id.split('-').at(-1)))return 'pending_prompt_disambiguation';

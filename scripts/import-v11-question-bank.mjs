@@ -398,6 +398,7 @@ async function main() {
     const corrected = correctBankRow({ ...row, question_type: row.type,
       public_payload_json: JSON.stringify(row.payload), answer_key_json: JSON.stringify(row.answerKey) }).row;
     row.payload = JSON.parse(corrected.public_payload_json);
+    row.type = corrected.question_type;
     row.answerKey = JSON.parse(corrected.answer_key_json);
     row.explanation = corrected.explanation;
     row.subject = corrected.subject;

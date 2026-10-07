@@ -59,3 +59,6 @@ next-env.d.ts
 /.openai/v29-*/
 /.openai/v29-*.sql
 /reports/v29-delta-review.json
+/data/v29-held-reviewed.json
+/scripts/v29-held-curation.mjs
+/.openai/v29-*.mjs
