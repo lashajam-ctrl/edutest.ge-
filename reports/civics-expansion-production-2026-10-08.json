@@ -1,0 +1,14 @@
+{
+  "verifiedAt": "2026-10-08T13:21:55.044Z",
+  "baselineActive": 23433,
+  "afterActive": 23473,
+  "added": 40,
+  "allAddedPayloadsKeysAndMetadataMatch": true,
+  "existingCivicsRowsUnchanged": 660,
+  "backupSha256": "3b7d70e0043cdc8edf059cecdd5329ce6c93521fec8601338c8664ccdc1d903e",
+  "patchSha256": "320369a52e7e209d5765671b544c1c460cf694122318fa20709b975528aecfdb",
+  "oldDataOperation": "Additive INSERT ON CONFLICT DO NOTHING; no existing rows updated or deleted",
+  "learnerBrowserFlow": "not tested in this bank-only release",
+  "releaseChecks": {"regressionTestsPassed":179,"regressionTestsFailed":0,"cloudflareBuild":"passed","privatePayloadVerification":"40/40","publicSmoke":{"origin":"https://edutest.ge","assets":6,"catalogTests":182,"anonymousAccessBlocked":true,"checks":"passed"}},
+  "deploymentScope":"D1 bank-only additive release; no application runtime changes or Worker redeployment required"
+}
