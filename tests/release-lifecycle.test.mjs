@@ -31,7 +31,8 @@ test('release gate runs real start/submit handlers against isolated SQLite: auth
       db.prepare('INSERT INTO assessment_answer_keys VALUES(?,?,?,1)').run('q'+n,JSON.stringify({correct:1}),'სწორი პასუხია B');
     }
     const DB={prepare(sql){return {sql,args:[],bind(...args){this.args=args;return this;},async first(){return db.prepare(sql).get(...this.args)??null;},async all(){return {results:db.prepare(sql).all(...this.args)};},async run(){return {meta:{changes:db.prepare(sql).run(...this.args).changes}};}};},async batch(statements){db.exec('BEGIN');try{const results=statements.map(s=>({meta:{changes:db.prepare(s.sql).run(...s.args).changes}}));db.exec('COMMIT');return results;}catch(error){db.exec('ROLLBACK');throw error;}}};
-    const dependencies={...selection,...assessment,env:{DB},ensureSchema:async()=>{},consumeRateLimit:async()=>({allowed:true}),sendAssessmentResultEmail:async()=>{emails++;return true;},
+    const background=[];
+    const dependencies={...selection,...assessment,env:{DB},ensureSchema:async()=>{},consumeRateLimit:async()=>({allowed:true}),after:task=>background.push(task),sendAssessmentResultEmail:async()=>{emails++;return true;},
       getSessionUser:async request=>{const cookie=request.headers.get('cookie');return cookie==='fixture=learner'?{user:{id:'learner',role:'student',grade:'3ა',school:'School'}}:cookie==='fixture=other'?{user:{id:'other',role:'student',grade:3,school:'Other'}}:cookie==='fixture=senior'?{user:{id:'learner',role:'student',grade:12}}:null;}};
     const start=loadPost('app/api/assessments/start/route.ts',dependencies),submit=loadPost('app/api/assessments/submit/route.ts',dependencies);
     const request=(body,cookie='fixture=learner')=>new Request('https://example.test/api/assessments/test',{method:'POST',headers:{'Content-Type':'application/json',...(cookie?{cookie}:{})},body:JSON.stringify(body)});
@@ -46,7 +47,9 @@ test('release gate runs real start/submit handlers against isolated SQLite: auth
     const stale=await submit(request({sessionId:data.sessionId,answers:{},draftRevision:0}));assert.equal(stale.status,409);assert.equal((await stale.json()).code,'DRAFT_CONFLICT');
     const responses=await Promise.all([submit(request({sessionId:data.sessionId,answers,draftRevision:1})),submit(request({sessionId:data.sessionId,answers,draftRevision:1}))]);
     for(const response of responses){assert.ok([200,201].includes(response.status));assert.equal((await response.json()).result.pct,100);}
-    assert.equal(db.prepare('SELECT COUNT(*) AS n FROM attempts').get().n,1);assert.equal(emails,1);
+    assert.equal(db.prepare('SELECT COUNT(*) AS n FROM attempts').get().n,1);assert.equal(emails,0,'response must not await email');
+    assert.equal(background.length,1,'only the first successful submit schedules email');
+    await background[0]();assert.equal(emails,1);
     assert.equal(db.prepare('SELECT MAX(answered_count) AS n FROM assessment_question_history').get().n,1);
     const saved=db.prepare('SELECT answers_json FROM attempts WHERE id=? AND user_id=?').get(data.sessionId,'learner');assert.equal(JSON.parse(saved.answers_json).verified,true);
     const retry=await submit(request({sessionId:data.sessionId,answers:{}}));assert.equal((await retry.json()).result.pct,100);assert.equal(emails,1);

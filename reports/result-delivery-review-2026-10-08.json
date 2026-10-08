@@ -1,0 +1,46 @@
+{
+  "date": "2026-10-08",
+  "scope": "Assessment result delivery; read-only production metadata and isolated synthetic regression fixtures. No learner answers or identities exported.",
+  "productionObservation": {
+    "windowHours": 48,
+    "grade": 1,
+    "subject": "ბუნება",
+    "matchingSessions": 1,
+    "status": "submitted",
+    "savedResults": 1,
+    "reviewedQuestions": 10,
+    "pendingQuestions": 0,
+    "attribution": "The metadata matches the reported class and likely subject, but the learner identity was not established."
+  },
+  "findings": [
+    {
+      "id": "blocking-result-email",
+      "status": "confirmed-source-defect",
+      "before": "Submit waited for external result email after the attempt was already committed. The mail request had no timeout.",
+      "fix": "Schedule optional email with next/server after, backed by the existing Worker execution context, and bound its fetch to 10 seconds. Return the persisted result without waiting for email.",
+      "test": "Real start/submit handlers against isolated SQLite return with one saved attempt while email has not run; only the winning submission queues email."
+    },
+    {
+      "id": "swallowed-result-render-failure",
+      "status": "confirmed-source-defect",
+      "before": "Client cleared its session before rendering. A renderer or optional callback exception then failed the catch guard and disappeared silently.",
+      "fix": "Keep the session until navigation succeeds, isolate optional callbacks, provide a text-only verified-result fallback, deduplicate replayed results, and retain visible retry on failure.",
+      "test": "Injected rendering, persistence, XP, async learning-state, autosave, loading and navigation failures; invalid JSON result; account switch; hidden and pending answers."
+    }
+  ],
+  "limits": [
+    "The exact browser exception from the user's occurrence was not captured, so these defects are not asserted to be its proven root cause.",
+    "Synthetic regression tests are not a signed-in production learner end-to-end test.",
+    "Background email remains best-effort, not a durable delivery queue."
+  ],
+  "bankStatusSource": "capacity-release-summary-2026-10-07.json",
+  "bankPlan": {
+    "publishedAdditions": 395,
+    "activeRowsAfterExpansion": 23433,
+    "gradeSubjectSemesterBuckets": 168,
+    "bucketsBelow100SelectionGroups": 128,
+    "firstTarget": 100,
+    "subsequentTarget": 200,
+    "targetMeaning": "Planning targets, not official curriculum requirements. Topic/component allocation and genuine content diversity must be verified separately."
+  }
+}

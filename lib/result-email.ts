@@ -14,6 +14,7 @@ export async function sendAssessmentResultEmail(user: typeof users.$inferSelect,
   const summary = `${result.title}: ${result.correct}/${result.total} სწორი პასუხი — ${result.pct}%`;
   const response = await fetch("https://api.resend.com/emails", {
     method: "POST",
+    signal: AbortSignal.timeout(10000),
     headers: { Authorization: `Bearer ${runtime.RESEND_API_KEY}`, "Content-Type": "application/json" },
     body: JSON.stringify({
       from: "EduTest.ge <results@edutest.ge>",

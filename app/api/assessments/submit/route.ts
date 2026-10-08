@@ -1,4 +1,5 @@
 import { env } from "cloudflare:workers";
+import { after } from "next/server";
 import { ensureSchema } from "@/db";
 import { canonicalAssessmentSubject, gradeAssessmentAnswer, parsePublicPayload, Presentation, StoredAssessmentQuestion } from "@/lib/assessment";
 import { correctKnownAnswerKey, correctKnownQuestionExplanation } from "@/lib/assessment-selection";
@@ -125,7 +126,14 @@ export async function POST(request: Request) {
     if(saved)return Response.json({result:JSON.parse(saved.answers_json),replayed:true},{headers:{"Cache-Control":"no-store"}});
     return Response.json({error:"ტესტის დრო ამოიწურა ან სესია შეიცვალა."},{status:409});
   }
-  let resultEmailSent = false;
-  try { resultEmailSent = await sendAssessmentResultEmail(current.user, result); } catch { resultEmailSent = false; }
-  return Response.json({ result, resultEmailSent }, { status: 201, headers: { "Cache-Control": "no-store" } });
+  // The persisted assessment is authoritative; optional mail must never delay it.
+  let resultEmailQueued = false;
+  try {
+    after(async () => {
+      try { await sendAssessmentResultEmail(current.user, result); }
+      catch { console.warn("assessment_result_email_failed"); }
+    });
+    resultEmailQueued = true;
+  } catch { console.warn("assessment_result_email_not_scheduled"); }
+  return Response.json({ result, resultEmailSent: false, resultEmailQueued }, { status: 201, headers: { "Cache-Control": "no-store" } });
 }

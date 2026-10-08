@@ -247,6 +247,46 @@
     return previousStartTestById(target.id,practice);
   };
 
+  function resultSideEffect(task){
+    try{Promise.resolve(task()).catch(()=>console.warn('assessment_result_optional_step_failed'));}
+    catch{console.warn('assessment_result_optional_step_failed');}
+  }
+
+  function showVerifiedResult(result){
+    try{renderResultsPage(result);}
+    catch{
+      // A presentation error must not hide an already verified, saved result.
+      console.warn('assessment_result_display_fallback');
+      const summary=document.getElementById('res-summary'),review=document.getElementById('res-review');
+      if(!summary||!review)throw new Error('შედეგის ეკრანი ვერ ჩაიტვირთა');
+      summary.replaceChildren();review.replaceChildren();
+      const title=document.createElement('h2');title.textContent=String(result.title||'ტესტის შედეგი');summary.append(title);
+      const score=document.createElement('p');
+      score.textContent=result.pending>0?'შედეგი შენახულია. შეფასების მოლოდინში: '+result.pending+' კითხვა.':String(result.pct)+'% — '+result.correct+'/'+result.total+' სწორი პასუხი';
+      summary.append(score);
+      const notice=document.createElement('p');notice.textContent='შედეგი შენახულია. ნაჩვენებია გამარტივებული ვერსია.';summary.append(notice);
+      result.reviewed.forEach((q,i)=>{
+        const item=document.createElement('section');item.style.cssText='padding:12px;margin:8px 0;border:1px solid var(--border);border-radius:12px';
+        const text=document.createElement('p');text.textContent=(i+1)+'. '+String(q.text||'');item.append(text);
+        const answerText=value=>{
+          if(value===undefined||value===null||value==='')return 'პასუხი არ არის მონიშნული';
+          if(Array.isArray(value))return value.join(' → ');
+          if(typeof value==='object')return Object.values(value).join(' | ');
+          if(['mcq','tf','multiple_choice','true_false'].includes(q.type)&&Array.isArray(q.opts))return String(q.opts[Number(value)]??value);
+          return String(value);
+        };
+        const userAnswer=document.createElement('p');userAnswer.textContent='შენი პასუხი: '+answerText(q.ua);item.append(userAnswer);
+        const status=document.createElement('p');status.textContent=q.gradingStatus==='pending'?'შეფასების მოლოდინში':(q.ok?'სწორია':'ქულა: '+Number(q.awardedPoints||0)+'/'+Number(q.pts||0));item.append(status);
+        if(q.reveal!==false&&q.gradingStatus!=='pending'&&q.type!=='short_answer'){
+          const correct=document.createElement('p');correct.textContent='სწორი პასუხი: '+answerText(q.type==='fill'?q.blanks:q.correct);item.append(correct);
+        }
+        if(q.explain&&q.reveal!==false){const explanation=document.createElement('p');explanation.textContent=String(q.explain);item.append(explanation);}
+        review.append(item);
+      });
+    }
+    go('results');
+  }
+
   finishTest=async function(){
     hideSubmitModal();
     if(serverSubmitting)return;
@@ -256,12 +296,12 @@
     }
     serverSubmitting=true;
     const submittingOwner=owner(),submittingSession=serverSessionId;
-    if(draftConflict){draftStatus('ჯერ გახსენი სხვა ჩანართში შენახული ვერსია.',true);serverSubmitting=false;return;}
-    await saveDraft();
-    if(owner()!==submittingOwner||serverSessionId!==submittingSession){serverSubmitting=false;return;}
-    if(draftConflict){serverSubmitting=false;return;}
-    setTestLoading('პასუხები სერვერზე მოწმდება…');
     try{
+      if(draftConflict){draftStatus('ჯერ გახსენი სხვა ჩანართში შენახული ვერსია.',true);return;}
+      await saveDraft();
+      if(owner()!==submittingOwner||serverSessionId!==submittingSession)return;
+      if(draftConflict)return;
+      setTestLoading('პასუხები სერვერზე მოწმდება…');
       const response=await fetch('/api/assessments/submit',{
         method:'POST',credentials:'include',signal:AbortSignal.timeout(60000),headers:{'Content-Type':'application/json',Accept:'application/json'},
         body:JSON.stringify({sessionId:serverSessionId,answers:qAnswers,draftRevision})
@@ -275,6 +315,7 @@
         return;
       }
       if(!response.ok)throw new Error(data.error||'პასუხები ვერ ჩაიბარა სერვერმა');
+      if(!data.result||data.result.verified!==true||!Array.isArray(data.result.reviewed)||!Number.isFinite(data.result.pct))throw new Error('შედეგი სრულად ვერ ჩაიტვირთა. სცადეთ ხელახლა');
       if(timerInt)clearInterval(timerInt);
       const result=Object.assign({},data.result||{});
       result.reviewed=(result.reviewed||[]).map(adaptReviewed);
@@ -283,17 +324,21 @@
       result._serverAttemptId=submittingSession;
       Object.assign(result,resultBadge(Number(result.pct||0)));
       const grade=parseInt(CUR_USER&&CUR_USER.grade)||parseInt(result.grade)||1;
-      let xpEarned=typeof calcXP==='function'?calcXP(Number(result.pct||0),grade):0;
-      if(typeof _isDailyBonus!=='undefined'&&_isDailyBonus){xpEarned*=2;if(typeof markDailyDone==='function')markDailyDone(CUR_USER.email);_isDailyBonus=false;}
+      let xpEarned=0;
+      resultSideEffect(()=>{if(typeof calcXP==='function')xpEarned=calcXP(Number(result.pct||0),grade);});
+      if(typeof _isDailyBonus!=='undefined'&&_isDailyBonus){xpEarned*=2;if(typeof markDailyDone==='function')resultSideEffect(()=>markDailyDone(CUR_USER.email));_isDailyBonus=false;}
       result.xpEarned=xpEarned;
-      SESSION_RESULTS.unshift(result);saveResults();_lastResult=result;serverSessionId=null;
+      const previous=SESSION_RESULTS.findIndex(item=>item._serverAttemptId===submittingSession);
+      if(previous>=0)SESSION_RESULTS.splice(previous,1,result);else SESSION_RESULTS.unshift(result);
+      _lastResult=result;resultSideEffect(()=>saveResults());
+      showVerifiedResult(result);
+      serverSessionId=null;
       draftOwner='';lastDraft='';
-      if(typeof syncUserLearningState==='function')syncUserLearningState();
-      if(typeof showXpToast==='function'&&xpEarned)showXpToast(xpEarned,null);
-      if(typeof logAuditEvent==='function')logAuditEvent('TEST_DONE_VERIFIED',(CUR_USER&&CUR_USER.email||'')+' | '+result.testId+' | '+result.pct+'%');
-      renderResultsPage(result);go('results');
-      if(typeof refreshLearningPlan==='function')refreshLearningPlan(true);
-      if(typeof maybeAutoSpeakResult==='function')setTimeout(()=>maybeAutoSpeakResult(result),120);
+      if(typeof syncUserLearningState==='function')resultSideEffect(()=>syncUserLearningState());
+      if(typeof showXpToast==='function'&&xpEarned)resultSideEffect(()=>showXpToast(xpEarned,null));
+      if(typeof logAuditEvent==='function')resultSideEffect(()=>logAuditEvent('TEST_DONE_VERIFIED',(CUR_USER&&CUR_USER.email||'')+' | '+result.testId+' | '+result.pct+'%'));
+      if(typeof refreshLearningPlan==='function')resultSideEffect(()=>refreshLearningPlan(true));
+      if(typeof maybeAutoSpeakResult==='function')setTimeout(()=>{if(owner()===submittingOwner)resultSideEffect(()=>maybeAutoSpeakResult(result));},120);
     }catch(error){
       if(owner()!==submittingOwner||serverSessionId!==submittingSession)return;
       if(Date.now()+clockOffset<deadlineMs){renderQ();buildDots();}
