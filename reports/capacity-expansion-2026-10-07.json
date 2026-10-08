@@ -1,0 +1,919 @@
+{
+  "generatedAt": "2026-10-07T09:23:30.451Z",
+  "snapshotSha256": "93093292da68d5829e6b8ac87aa7d3c8485c5d55ed5f20350df15905d2d9ef9f",
+  "baselineActive": 23038,
+  "afterActive": 23433,
+  "authoredDrafts": 623,
+  "accepted": 395,
+  "excluded": 228,
+  "excludedReasons": {
+    "draft_global_prompt_duplicate": 224,
+    "prerequisite_hold_below_grade9": 4
+  },
+  "independentNumericalChecks": 97,
+  "curatedRuleChecks": 298,
+  "distinctAuthoredFamilies": 255,
+  "subjectCounts": {
+    "ქართული": 22,
+    "სამოქალაქო თავდაცვა და უსაფრთხოება": 35,
+    "ისტორია": 24,
+    "ჩვენი საქართველო": 9,
+    "ინგლისური": 48,
+    "რუსული": 74,
+    "მათემატიკა": 83,
+    "ბუნება": 11,
+    "მოქალაქეობა": 4,
+    "ბიოლოგია": 17,
+    "ქართული ენა და ლიტერატურა": 12,
+    "ქიმია": 14,
+    "ფიზიკა": 22,
+    "გეოგრაფია": 16,
+    "მე და საზოგადოება": 4
+  },
+  "changes": [
+    {
+      "bucket": "7|რუსული|1",
+      "before": 50,
+      "after": 55,
+      "gain": 5
+    },
+    {
+      "bucket": "7|რუსული|2",
+      "before": 50,
+      "after": 59,
+      "gain": 9
+    },
+    {
+      "bucket": "10|რუსული|1",
+      "before": 50,
+      "after": 55,
+      "gain": 5
+    },
+    {
+      "bucket": "10|რუსული|2",
+      "before": 50,
+      "after": 55,
+      "gain": 5
+    },
+    {
+      "bucket": "5|რუსული|1",
+      "before": 50,
+      "after": 55,
+      "gain": 5
+    },
+    {
+      "bucket": "5|რუსული|2",
+      "before": 50,
+      "after": 55,
+      "gain": 5
+    },
+    {
+      "bucket": "6|რუსული|1",
+      "before": 50,
+      "after": 55,
+      "gain": 5
+    },
+    {
+      "bucket": "6|რუსული|2",
+      "before": 50,
+      "after": 55,
+      "gain": 5
+    },
+    {
+      "bucket": "8|რუსული|1",
+      "before": 50,
+      "after": 55,
+      "gain": 5
+    },
+    {
+      "bucket": "8|რუსული|2",
+      "before": 50,
+      "after": 55,
+      "gain": 5
+    },
+    {
+      "bucket": "9|რუსული|1",
+      "before": 50,
+      "after": 55,
+      "gain": 5
+    },
+    {
+      "bucket": "9|რუსული|2",
+      "before": 50,
+      "after": 55,
+      "gain": 5
+    },
+    {
+      "bucket": "11|რუსული|1",
+      "before": 50,
+      "after": 55,
+      "gain": 5
+    },
+    {
+      "bucket": "11|რუსული|2",
+      "before": 50,
+      "after": 55,
+      "gain": 5
+    },
+    {
+      "bucket": "1|ქართული|1",
+      "before": 100,
+      "after": 110,
+      "gain": 10
+    },
+    {
+      "bucket": "1|მათემატიკა|1",
+      "before": 119,
+      "after": 123,
+      "gain": 4
+    },
+    {
+      "bucket": "1|მათემატიკა|2",
+      "before": 99,
+      "after": 103,
+      "gain": 4
+    },
+    {
+      "bucket": "1|ინგლისური|1",
+      "before": 100,
+      "after": 102,
+      "gain": 2
+    },
+    {
+      "bucket": "1|ინგლისური|2",
+      "before": 102,
+      "after": 104,
+      "gain": 2
+    },
+    {
+      "bucket": "1|ბუნება|2",
+      "before": 100,
+      "after": 102,
+      "gain": 2
+    },
+    {
+      "bucket": "2|ქართული|1",
+      "before": 99,
+      "after": 105,
+      "gain": 6
+    },
+    {
+      "bucket": "2|მათემატიკა|2",
+      "before": 99,
+      "after": 103,
+      "gain": 4
+    },
+    {
+      "bucket": "2|ინგლისური|1",
+      "before": 94,
+      "after": 96,
+      "gain": 2
+    },
+    {
+      "bucket": "2|ინგლისური|2",
+      "before": 104,
+      "after": 106,
+      "gain": 2
+    },
+    {
+      "bucket": "3|ქართული|2",
+      "before": 100,
+      "after": 106,
+      "gain": 6
+    },
+    {
+      "bucket": "3|მათემატიკა|1",
+      "before": 110,
+      "after": 114,
+      "gain": 4
+    },
+    {
+      "bucket": "3|მათემატიკა|2",
+      "before": 100,
+      "after": 104,
+      "gain": 4
+    },
+    {
+      "bucket": "3|ინგლისური|1",
+      "before": 93,
+      "after": 95,
+      "gain": 2
+    },
+    {
+      "bucket": "3|ინგლისური|2",
+      "before": 100,
+      "after": 102,
+      "gain": 2
+    },
+    {
+      "bucket": "3|ბუნება|1",
+      "before": 100,
+      "after": 101,
+      "gain": 1
+    },
+    {
+      "bucket": "3|ბუნება|2",
+      "before": 100,
+      "after": 101,
+      "gain": 1
+    },
+    {
+      "bucket": "3|მე და საზოგადოება|1",
+      "before": 100,
+      "after": 101,
+      "gain": 1
+    },
+    {
+      "bucket": "3|მე და საზოგადოება|2",
+      "before": 100,
+      "after": 101,
+      "gain": 1
+    },
+    {
+      "bucket": "4|მათემატიკა|1",
+      "before": 100,
+      "after": 104,
+      "gain": 4
+    },
+    {
+      "bucket": "4|მათემატიკა|2",
+      "before": 100,
+      "after": 104,
+      "gain": 4
+    },
+    {
+      "bucket": "4|ინგლისური|1",
+      "before": 81,
+      "after": 83,
+      "gain": 2
+    },
+    {
+      "bucket": "4|ინგლისური|2",
+      "before": 91,
+      "after": 93,
+      "gain": 2
+    },
+    {
+      "bucket": "4|ბუნება|1",
+      "before": 94,
+      "after": 95,
+      "gain": 1
+    },
+    {
+      "bucket": "4|ბუნება|2",
+      "before": 99,
+      "after": 100,
+      "gain": 1
+    },
+    {
+      "bucket": "4|მე და საზოგადოება|1",
+      "before": 100,
+      "after": 101,
+      "gain": 1
+    },
+    {
+      "bucket": "4|მე და საზოგადოება|2",
+      "before": 100,
+      "after": 101,
+      "gain": 1
+    },
+    {
+      "bucket": "5|მათემატიკა|1",
+      "before": 68,
+      "after": 72,
+      "gain": 4
+    },
+    {
+      "bucket": "5|მათემატიკა|2",
+      "before": 50,
+      "after": 54,
+      "gain": 4
+    },
+    {
+      "bucket": "5|ინგლისური|1",
+      "before": 50,
+      "after": 52,
+      "gain": 2
+    },
+    {
+      "bucket": "5|ინგლისური|2",
+      "before": 50,
+      "after": 52,
+      "gain": 2
+    },
+    {
+      "bucket": "5|ბუნება|1",
+      "before": 61,
+      "after": 62,
+      "gain": 1
+    },
+    {
+      "bucket": "5|ბუნება|2",
+      "before": 54,
+      "after": 55,
+      "gain": 1
+    },
+    {
+      "bucket": "5|ჩვენი საქართველო|1",
+      "before": 50,
+      "after": 54,
+      "gain": 4
+    },
+    {
+      "bucket": "5|ჩვენი საქართველო|2",
+      "before": 50,
+      "after": 52,
+      "gain": 2
+    },
+    {
+      "bucket": "6|მათემატიკა|1",
+      "before": 69,
+      "after": 73,
+      "gain": 4
+    },
+    {
+      "bucket": "6|მათემატიკა|2",
+      "before": 58,
+      "after": 62,
+      "gain": 4
+    },
+    {
+      "bucket": "6|ინგლისური|1",
+      "before": 50,
+      "after": 52,
+      "gain": 2
+    },
+    {
+      "bucket": "6|ინგლისური|2",
+      "before": 50,
+      "after": 52,
+      "gain": 2
+    },
+    {
+      "bucket": "6|ბუნება|1",
+      "before": 55,
+      "after": 56,
+      "gain": 1
+    },
+    {
+      "bucket": "6|ბუნება|2",
+      "before": 50,
+      "after": 52,
+      "gain": 2
+    },
+    {
+      "bucket": "6|ჩვენი საქართველო|1",
+      "before": 50,
+      "after": 51,
+      "gain": 1
+    },
+    {
+      "bucket": "6|ჩვენი საქართველო|2",
+      "before": 50,
+      "after": 52,
+      "gain": 2
+    },
+    {
+      "bucket": "7|ქართული ენა და ლიტერატურა|1",
+      "before": 65,
+      "after": 66,
+      "gain": 1
+    },
+    {
+      "bucket": "7|ქართული ენა და ლიტერატურა|2",
+      "before": 56,
+      "after": 57,
+      "gain": 1
+    },
+    {
+      "bucket": "7|მათემატიკა|1",
+      "before": 67,
+      "after": 70,
+      "gain": 3
+    },
+    {
+      "bucket": "7|მათემატიკა|2",
+      "before": 50,
+      "after": 53,
+      "gain": 3
+    },
+    {
+      "bucket": "7|ინგლისური|1",
+      "before": 50,
+      "after": 52,
+      "gain": 2
+    },
+    {
+      "bucket": "7|ინგლისური|2",
+      "before": 50,
+      "after": 52,
+      "gain": 2
+    },
+    {
+      "bucket": "7|ბიოლოგია|1",
+      "before": 63,
+      "after": 64,
+      "gain": 1
+    },
+    {
+      "bucket": "7|ფიზიკა|1",
+      "before": 159,
+      "after": 161,
+      "gain": 2
+    },
+    {
+      "bucket": "7|ბიოლოგია|2",
+      "before": 61,
+      "after": 63,
+      "gain": 2
+    },
+    {
+      "bucket": "7|ფიზიკა|2",
+      "before": 204,
+      "after": 206,
+      "gain": 2
+    },
+    {
+      "bucket": "7|მოქალაქეობა|1",
+      "before": 50,
+      "after": 54,
+      "gain": 4
+    },
+    {
+      "bucket": "7|გეოგრაფია|1",
+      "before": 211,
+      "after": 213,
+      "gain": 2
+    },
+    {
+      "bucket": "7|ისტორია|1",
+      "before": 120,
+      "after": 122,
+      "gain": 2
+    },
+    {
+      "bucket": "7|გეოგრაფია|2",
+      "before": 138,
+      "after": 139,
+      "gain": 1
+    },
+    {
+      "bucket": "7|ისტორია|2",
+      "before": 90,
+      "after": 92,
+      "gain": 2
+    },
+    {
+      "bucket": "8|ქართული ენა და ლიტერატურა|1",
+      "before": 51,
+      "after": 52,
+      "gain": 1
+    },
+    {
+      "bucket": "8|ქართული ენა და ლიტერატურა|2",
+      "before": 50,
+      "after": 51,
+      "gain": 1
+    },
+    {
+      "bucket": "8|მათემატიკა|1",
+      "before": 50,
+      "after": 52,
+      "gain": 2
+    },
+    {
+      "bucket": "8|მათემატიკა|2",
+      "before": 50,
+      "after": 53,
+      "gain": 3
+    },
+    {
+      "bucket": "8|ინგლისური|1",
+      "before": 50,
+      "after": 52,
+      "gain": 2
+    },
+    {
+      "bucket": "8|ინგლისური|2",
+      "before": 50,
+      "after": 52,
+      "gain": 2
+    },
+    {
+      "bucket": "8|ბიოლოგია|1",
+      "before": 50,
+      "after": 54,
+      "gain": 4
+    },
+    {
+      "bucket": "8|ქიმია|1",
+      "before": 212,
+      "after": 213,
+      "gain": 1
+    },
+    {
+      "bucket": "8|ფიზიკა|1",
+      "before": 183,
+      "after": 185,
+      "gain": 2
+    },
+    {
+      "bucket": "8|ბიოლოგია|2",
+      "before": 50,
+      "after": 51,
+      "gain": 1
+    },
+    {
+      "bucket": "8|ქიმია|2",
+      "before": 205,
+      "after": 207,
+      "gain": 2
+    },
+    {
+      "bucket": "8|ფიზიკა|2",
+      "before": 202,
+      "after": 204,
+      "gain": 2
+    },
+    {
+      "bucket": "8|გეოგრაფია|1",
+      "before": 112,
+      "after": 114,
+      "gain": 2
+    },
+    {
+      "bucket": "8|ისტორია|1",
+      "before": 90,
+      "after": 92,
+      "gain": 2
+    },
+    {
+      "bucket": "8|გეოგრაფია|2",
+      "before": 84,
+      "after": 85,
+      "gain": 1
+    },
+    {
+      "bucket": "8|ისტორია|2",
+      "before": 85,
+      "after": 87,
+      "gain": 2
+    },
+    {
+      "bucket": "9|ქართული ენა და ლიტერატურა|1",
+      "before": 59,
+      "after": 60,
+      "gain": 1
+    },
+    {
+      "bucket": "9|ქართული ენა და ლიტერატურა|2",
+      "before": 59,
+      "after": 60,
+      "gain": 1
+    },
+    {
+      "bucket": "9|მათემატიკა|1",
+      "before": 109,
+      "after": 112,
+      "gain": 3
+    },
+    {
+      "bucket": "9|მათემატიკა|2",
+      "before": 81,
+      "after": 84,
+      "gain": 3
+    },
+    {
+      "bucket": "9|ინგლისური|1",
+      "before": 53,
+      "after": 55,
+      "gain": 2
+    },
+    {
+      "bucket": "9|ინგლისური|2",
+      "before": 51,
+      "after": 53,
+      "gain": 2
+    },
+    {
+      "bucket": "9|ბიოლოგია|1",
+      "before": 50,
+      "after": 52,
+      "gain": 2
+    },
+    {
+      "bucket": "9|ქიმია|1",
+      "before": 50,
+      "after": 54,
+      "gain": 4
+    },
+    {
+      "bucket": "9|ფიზიკა|1",
+      "before": 50,
+      "after": 54,
+      "gain": 4
+    },
+    {
+      "bucket": "9|ბიოლოგია|2",
+      "before": 50,
+      "after": 51,
+      "gain": 1
+    },
+    {
+      "bucket": "9|ქიმია|2",
+      "before": 50,
+      "after": 51,
+      "gain": 1
+    },
+    {
+      "bucket": "9|ფიზიკა|2",
+      "before": 50,
+      "after": 52,
+      "gain": 2
+    },
+    {
+      "bucket": "9|გეოგრაფია|1",
+      "before": 50,
+      "after": 52,
+      "gain": 2
+    },
+    {
+      "bucket": "9|ისტორია|1",
+      "before": 49,
+      "after": 51,
+      "gain": 2
+    },
+    {
+      "bucket": "9|გეოგრაფია|2",
+      "before": 50,
+      "after": 52,
+      "gain": 2
+    },
+    {
+      "bucket": "9|ისტორია|2",
+      "before": 49,
+      "after": 51,
+      "gain": 2
+    },
+    {
+      "bucket": "10|ქართული ენა და ლიტერატურა|1",
+      "before": 62,
+      "after": 63,
+      "gain": 1
+    },
+    {
+      "bucket": "10|ქართული ენა და ლიტერატურა|2",
+      "before": 53,
+      "after": 54,
+      "gain": 1
+    },
+    {
+      "bucket": "10|მათემატიკა|1",
+      "before": 54,
+      "after": 58,
+      "gain": 4
+    },
+    {
+      "bucket": "10|მათემატიკა|2",
+      "before": 58,
+      "after": 61,
+      "gain": 3
+    },
+    {
+      "bucket": "10|ინგლისური|1",
+      "before": 50,
+      "after": 52,
+      "gain": 2
+    },
+    {
+      "bucket": "10|ინგლისური|2",
+      "before": 50,
+      "after": 52,
+      "gain": 2
+    },
+    {
+      "bucket": "10|ბიოლოგია|1",
+      "before": 50,
+      "after": 52,
+      "gain": 2
+    },
+    {
+      "bucket": "10|ქიმია|1",
+      "before": 50,
+      "after": 52,
+      "gain": 2
+    },
+    {
+      "bucket": "10|ფიზიკა|1",
+      "before": 50,
+      "after": 52,
+      "gain": 2
+    },
+    {
+      "bucket": "10|ბიოლოგია|2",
+      "before": 50,
+      "after": 51,
+      "gain": 1
+    },
+    {
+      "bucket": "10|ქიმია|2",
+      "before": 50,
+      "after": 51,
+      "gain": 1
+    },
+    {
+      "bucket": "10|ფიზიკა|2",
+      "before": 50,
+      "after": 52,
+      "gain": 2
+    },
+    {
+      "bucket": "10|გეოგრაფია|1",
+      "before": 50,
+      "after": 51,
+      "gain": 1
+    },
+    {
+      "bucket": "10|ისტორია|1",
+      "before": 49,
+      "after": 51,
+      "gain": 2
+    },
+    {
+      "bucket": "10|გეოგრაფია|2",
+      "before": 50,
+      "after": 52,
+      "gain": 2
+    },
+    {
+      "bucket": "10|ისტორია|2",
+      "before": 49,
+      "after": 51,
+      "gain": 2
+    },
+    {
+      "bucket": "11|ქართული ენა და ლიტერატურა|1",
+      "before": 61,
+      "after": 62,
+      "gain": 1
+    },
+    {
+      "bucket": "11|ქართული ენა და ლიტერატურა|2",
+      "before": 50,
+      "after": 51,
+      "gain": 1
+    },
+    {
+      "bucket": "11|მათემატიკა|1",
+      "before": 50,
+      "after": 54,
+      "gain": 4
+    },
+    {
+      "bucket": "11|მათემატიკა|2",
+      "before": 50,
+      "after": 54,
+      "gain": 4
+    },
+    {
+      "bucket": "11|ინგლისური|1",
+      "before": 50,
+      "after": 52,
+      "gain": 2
+    },
+    {
+      "bucket": "11|ინგლისური|2",
+      "before": 50,
+      "after": 52,
+      "gain": 2
+    },
+    {
+      "bucket": "11|ბიოლოგია|1",
+      "before": 50,
+      "after": 52,
+      "gain": 2
+    },
+    {
+      "bucket": "11|ქიმია|1",
+      "before": 50,
+      "after": 52,
+      "gain": 2
+    },
+    {
+      "bucket": "11|ფიზიკა|1",
+      "before": 50,
+      "after": 52,
+      "gain": 2
+    },
+    {
+      "bucket": "11|ბიოლოგია|2",
+      "before": 50,
+      "after": 51,
+      "gain": 1
+    },
+    {
+      "bucket": "11|ქიმია|2",
+      "before": 50,
+      "after": 51,
+      "gain": 1
+    },
+    {
+      "bucket": "11|ფიზიკა|2",
+      "before": 50,
+      "after": 52,
+      "gain": 2
+    },
+    {
+      "bucket": "11|გეოგრაფია|1",
+      "before": 50,
+      "after": 51,
+      "gain": 1
+    },
+    {
+      "bucket": "11|ისტორია|1",
+      "before": 49,
+      "after": 51,
+      "gain": 2
+    },
+    {
+      "bucket": "11|გეოგრაფია|2",
+      "before": 50,
+      "after": 52,
+      "gain": 2
+    },
+    {
+      "bucket": "11|ისტორია|2",
+      "before": 49,
+      "after": 51,
+      "gain": 2
+    },
+    {
+      "bucket": "12|ქართული ენა და ლიტერატურა|1",
+      "before": 55,
+      "after": 56,
+      "gain": 1
+    },
+    {
+      "bucket": "12|ქართული ენა და ლიტერატურა|2",
+      "before": 54,
+      "after": 55,
+      "gain": 1
+    },
+    {
+      "bucket": "12|მათემატიკა|1",
+      "before": 52,
+      "after": 55,
+      "gain": 3
+    },
+    {
+      "bucket": "12|მათემატიკა|2",
+      "before": 55,
+      "after": 59,
+      "gain": 4
+    },
+    {
+      "bucket": "12|ინგლისური|1",
+      "before": 50,
+      "after": 52,
+      "gain": 2
+    },
+    {
+      "bucket": "12|ინგლისური|2",
+      "before": 51,
+      "after": 53,
+      "gain": 2
+    },
+    {
+      "bucket": "12|ისტორია|1",
+      "before": 49,
+      "after": 51,
+      "gain": 2
+    },
+    {
+      "bucket": "12|სამოქალაქო თავდაცვა და უსაფრთხოება|1",
+      "before": 30,
+      "after": 50,
+      "gain": 20
+    },
+    {
+      "bucket": "12|ისტორია|2",
+      "before": 49,
+      "after": 51,
+      "gain": 2
+    },
+    {
+      "bucket": "12|სამოქალაქო თავდაცვა და უსაფრთხოება|2",
+      "before": 35,
+      "after": 50,
+      "gain": 15
+    }
+  ],
+  "semanticSimilarityCandidates": [],
+  "failures": [],
+  "limitations": [
+    "Assistant content review, not independent teacher certification.",
+    "Globally identical prompts are not copied to inflate coverage.",
+    "Numerical parameter variants remain one family per grade/subject/semester.",
+    "200 groups per bucket is a planning target, not achieved by this batch."
+  ]
+}

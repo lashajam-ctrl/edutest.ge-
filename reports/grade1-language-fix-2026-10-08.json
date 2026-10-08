@@ -1,0 +1,118 @@
+{
+  "generatedAt": "2026-10-08T05:26:33.971Z",
+  "scope": "Grade I Georgian, both semesters",
+  "rowsInspected": 449,
+  "deterministicLetterQuestions": 32,
+  "beforeIssues": [
+    {
+      "id": "v28-GE-G01-KA-S1-048",
+      "rule": "option-word-letter",
+      "validAnswerCount": 2,
+      "issue": "Multiple valid options in a single-answer question"
+    }
+  ],
+  "afterIssues": [],
+  "changedRows": 22,
+  "vocabularyRows": 20,
+  "vocabularyFamilies": 2,
+  "spellingRows": 1,
+  "answerIndicesPreserved": true,
+  "idsAndSelectionGroupsPreserved": true,
+  "priorResultsRegraded": false,
+  "curriculumSource": "https://www.mes.gov.ge/uploads/files/gzamkvlevi/ქართული-1-4.pdf",
+  "curriculumConclusion": "Practical vocabulary wording is an editorial age-accessibility decision, not a claimed ministry ban on synonyms in Grade I.",
+  "limitations": [
+    "Only recognized letter MCQ patterns receive computational exactly-one-answer proof.",
+    "This is not a complete pedagogical certification of all 449 questions."
+  ],
+  "changedIds": [
+    {
+      "id": "v28-GE-G01-KA-S1-048",
+      "reason": "two_valid_options"
+    },
+    {
+      "id": "v28-GE2-G01-KA-S1-004",
+      "reason": "age_appropriate_vocabulary_wording"
+    },
+    {
+      "id": "v28-GE2-G01-KA-S1-014",
+      "reason": "age_appropriate_vocabulary_wording"
+    },
+    {
+      "id": "v28-GE2-G01-KA-S1-044",
+      "reason": "age_appropriate_vocabulary_wording"
+    },
+    {
+      "id": "v28-GE2-G01-KA-S1-054",
+      "reason": "age_appropriate_vocabulary_wording"
+    },
+    {
+      "id": "v28-GE2-G01-KA-S1-064",
+      "reason": "age_appropriate_vocabulary_wording"
+    },
+    {
+      "id": "v28-GE2-G01-KA-S1-074",
+      "reason": "age_appropriate_vocabulary_wording"
+    },
+    {
+      "id": "v28-GE2-G01-KA-S1-084",
+      "reason": "age_appropriate_vocabulary_wording"
+    },
+    {
+      "id": "v28-GE2-G01-KA-S1-094",
+      "reason": "age_appropriate_vocabulary_wording"
+    },
+    {
+      "id": "v28-GE2-G01-KA-S1-104",
+      "reason": "age_appropriate_vocabulary_wording"
+    },
+    {
+      "id": "v28-GE2-G01-KA-S1-114",
+      "reason": "age_appropriate_vocabulary_wording"
+    },
+    {
+      "id": "v28-GE-G01-KA-S2-137",
+      "reason": "irrelevant_distractor_typo"
+    },
+    {
+      "id": "v28-GE2-G01-KA-S2-007",
+      "reason": "age_appropriate_vocabulary_wording"
+    },
+    {
+      "id": "v28-GE2-G01-KA-S2-017",
+      "reason": "age_appropriate_vocabulary_wording"
+    },
+    {
+      "id": "v28-GE2-G01-KA-S2-027",
+      "reason": "age_appropriate_vocabulary_wording"
+    },
+    {
+      "id": "v28-GE2-G01-KA-S2-037",
+      "reason": "age_appropriate_vocabulary_wording"
+    },
+    {
+      "id": "v28-GE2-G01-KA-S2-047",
+      "reason": "age_appropriate_vocabulary_wording"
+    },
+    {
+      "id": "v28-GE2-G01-KA-S2-057",
+      "reason": "age_appropriate_vocabulary_wording"
+    },
+    {
+      "id": "v28-GE2-G01-KA-S2-067",
+      "reason": "age_appropriate_vocabulary_wording"
+    },
+    {
+      "id": "v28-GE2-G01-KA-S2-077",
+      "reason": "age_appropriate_vocabulary_wording"
+    },
+    {
+      "id": "v28-GE2-G01-KA-S2-107",
+      "reason": "age_appropriate_vocabulary_wording"
+    },
+    {
+      "id": "v28-GE2-G01-KA-S2-117",
+      "reason": "age_appropriate_vocabulary_wording"
+    }
+  ]
+}

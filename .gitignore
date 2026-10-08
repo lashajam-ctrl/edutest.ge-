@@ -62,3 +62,4 @@ next-env.d.ts
 /data/v29-held-reviewed.json
 /scripts/v29-held-curation.mjs
 /.openai/v29-*.mjs
+/.openai/bank-expansion-20261007/

@@ -1,0 +1,3476 @@
+{
+  "generatedAt": "2026-10-07T09:29:32.980Z",
+  "production": {
+    "verifiedAt": "2026-10-07T09:28:39.089Z",
+    "baselineActive": 23038,
+    "afterActive": 23433,
+    "added": 395,
+    "allAddedPayloadsKeysAndMetadataMatch": true,
+    "backupSha256": "d3476e82ba7104dd15488297d1de23ad03159652e3d87282cdc54ba68fec134c",
+    "oldDataOperation": "INSERT ON CONFLICT DO NOTHING; no existing-row updates",
+    "learnerBrowserFlow": "not tested in this release"
+  },
+  "content": {
+    "added": 395,
+    "numericalOracle": 97,
+    "assistantReviewedNonNumerical": 298,
+    "distinctAuthoredFamilies": 255,
+    "heldOrExcludedDrafts": 228
+  },
+  "coverage": {
+    "buckets": 168,
+    "below50Before": 10,
+    "below50After": 0,
+    "firstPaperTenBlueprintDriftBefore": 10,
+    "firstPaperTenBlueprintDriftAfter": 0,
+    "gapTo200": 21349
+  },
+  "workloads": {
+    "catalogTests": 182,
+    "simulatedTwentyAndMixedPapers": 2016,
+    "simulatedTenPapers": 1680
+  },
+  "bySubject": [
+    {
+      "subject": "მათემატიკა",
+      "added": 83,
+      "buckets": 24,
+      "minimumGroups": 52,
+      "maximumGroups": 123,
+      "gapTo200": 2918
+    },
+    {
+      "subject": "ქართული",
+      "added": 22,
+      "buckets": 12,
+      "minimumGroups": 58,
+      "maximumGroups": 110,
+      "gapTo200": 1320
+    },
+    {
+      "subject": "ინგლისური",
+      "added": 48,
+      "buckets": 24,
+      "minimumGroups": 52,
+      "maximumGroups": 106,
+      "gapTo200": 3182
+    },
+    {
+      "subject": "ბუნება",
+      "added": 11,
+      "buckets": 12,
+      "minimumGroups": 52,
+      "maximumGroups": 108,
+      "gapTo200": 1368
+    },
+    {
+      "subject": "მე და საზოგადოება",
+      "added": 4,
+      "buckets": 4,
+      "minimumGroups": 101,
+      "maximumGroups": 101,
+      "gapTo200": 396
+    },
+    {
+      "subject": "რუსული",
+      "added": 74,
+      "buckets": 14,
+      "minimumGroups": 55,
+      "maximumGroups": 59,
+      "gapTo200": 2026
+    },
+    {
+      "subject": "ჩვენი საქართველო",
+      "added": 9,
+      "buckets": 4,
+      "minimumGroups": 51,
+      "maximumGroups": 54,
+      "gapTo200": 591
+    },
+    {
+      "subject": "ქართული ენა და ლიტერატურა",
+      "added": 12,
+      "buckets": 12,
+      "minimumGroups": 51,
+      "maximumGroups": 66,
+      "gapTo200": 1713
+    },
+    {
+      "subject": "ისტორია",
+      "added": 24,
+      "buckets": 12,
+      "minimumGroups": 51,
+      "maximumGroups": 122,
+      "gapTo200": 1599
+    },
+    {
+      "subject": "გეოგრაფია",
+      "added": 16,
+      "buckets": 10,
+      "minimumGroups": 51,
+      "maximumGroups": 213,
+      "gapTo200": 1152
+    },
+    {
+      "subject": "ბიოლოგია",
+      "added": 17,
+      "buckets": 10,
+      "minimumGroups": 51,
+      "maximumGroups": 64,
+      "gapTo200": 1459
+    },
+    {
+      "subject": "ფიზიკა",
+      "added": 22,
+      "buckets": 10,
+      "minimumGroups": 52,
+      "maximumGroups": 206,
+      "gapTo200": 940
+    },
+    {
+      "subject": "მოქალაქეობა",
+      "added": 4,
+      "buckets": 10,
+      "minimumGroups": 50,
+      "maximumGroups": 54,
+      "gapTo200": 1496
+    },
+    {
+      "subject": "ქიმია",
+      "added": 14,
+      "buckets": 8,
+      "minimumGroups": 51,
+      "maximumGroups": 213,
+      "gapTo200": 889
+    },
+    {
+      "subject": "სამოქალაქო თავდაცვა და უსაფრთხოება",
+      "added": 35,
+      "buckets": 2,
+      "minimumGroups": 50,
+      "maximumGroups": 50,
+      "gapTo200": 300
+    }
+  ],
+  "priority": [
+    {
+      "grade": 7,
+      "subject": "მოქალაქეობა",
+      "semester": 2,
+      "groups": 50,
+      "gapTo200": 150,
+      "components": {
+        "all": 50
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 150
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 8,
+      "subject": "მოქალაქეობა",
+      "semester": 1,
+      "groups": 50,
+      "gapTo200": 150,
+      "components": {
+        "all": 50
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 150
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 8,
+      "subject": "მოქალაქეობა",
+      "semester": 2,
+      "groups": 50,
+      "gapTo200": 150,
+      "components": {
+        "all": 50
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 150
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 9,
+      "subject": "მოქალაქეობა",
+      "semester": 1,
+      "groups": 50,
+      "gapTo200": 150,
+      "components": {
+        "all": 50
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 150
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 9,
+      "subject": "მოქალაქეობა",
+      "semester": 2,
+      "groups": 50,
+      "gapTo200": 150,
+      "components": {
+        "all": 50
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 150
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 10,
+      "subject": "მოქალაქეობა",
+      "semester": 1,
+      "groups": 50,
+      "gapTo200": 150,
+      "components": {
+        "all": 50
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 150
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 10,
+      "subject": "მოქალაქეობა",
+      "semester": 2,
+      "groups": 50,
+      "gapTo200": 150,
+      "components": {
+        "all": 50
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 150
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 11,
+      "subject": "მოქალაქეობა",
+      "semester": 1,
+      "groups": 50,
+      "gapTo200": 150,
+      "components": {
+        "all": 50
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 150
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 11,
+      "subject": "მოქალაქეობა",
+      "semester": 2,
+      "groups": 50,
+      "gapTo200": 150,
+      "components": {
+        "all": 50
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 150
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 12,
+      "subject": "სამოქალაქო თავდაცვა და უსაფრთხოება",
+      "semester": 1,
+      "groups": 50,
+      "gapTo200": 150,
+      "components": {
+        "all": 50
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 150
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 12,
+      "subject": "სამოქალაქო თავდაცვა და უსაფრთხოება",
+      "semester": 2,
+      "groups": 50,
+      "gapTo200": 150,
+      "components": {
+        "all": 50
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 150
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 6,
+      "subject": "ჩვენი საქართველო",
+      "semester": 1,
+      "groups": 51,
+      "gapTo200": 149,
+      "components": {
+        "all": 51
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 149
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 8,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "semester": 2,
+      "groups": 51,
+      "gapTo200": 149,
+      "components": {
+        "language": 31,
+        "literature": 20
+      },
+      "componentTargets": {
+        "language": 80,
+        "literature": 120
+      },
+      "componentDeficits": {
+        "language": 49,
+        "literature": 100
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 8,
+      "subject": "ბიოლოგია",
+      "semester": 2,
+      "groups": 51,
+      "gapTo200": 149,
+      "components": {
+        "all": 51
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 149
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 9,
+      "subject": "ისტორია",
+      "semester": 1,
+      "groups": 51,
+      "gapTo200": 149,
+      "components": {
+        "all": 51
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 149
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 9,
+      "subject": "ისტორია",
+      "semester": 2,
+      "groups": 51,
+      "gapTo200": 149,
+      "components": {
+        "all": 51
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 149
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 9,
+      "subject": "ბიოლოგია",
+      "semester": 2,
+      "groups": 51,
+      "gapTo200": 149,
+      "components": {
+        "all": 51
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 149
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 9,
+      "subject": "ქიმია",
+      "semester": 2,
+      "groups": 51,
+      "gapTo200": 149,
+      "components": {
+        "all": 51
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 149
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 10,
+      "subject": "ისტორია",
+      "semester": 1,
+      "groups": 51,
+      "gapTo200": 149,
+      "components": {
+        "all": 51
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 149
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 10,
+      "subject": "ისტორია",
+      "semester": 2,
+      "groups": 51,
+      "gapTo200": 149,
+      "components": {
+        "all": 51
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 149
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 10,
+      "subject": "გეოგრაფია",
+      "semester": 1,
+      "groups": 51,
+      "gapTo200": 149,
+      "components": {
+        "all": 51
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 149
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 10,
+      "subject": "ბიოლოგია",
+      "semester": 2,
+      "groups": 51,
+      "gapTo200": 149,
+      "components": {
+        "all": 51
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 149
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 10,
+      "subject": "ქიმია",
+      "semester": 2,
+      "groups": 51,
+      "gapTo200": 149,
+      "components": {
+        "all": 51
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 149
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 11,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "semester": 2,
+      "groups": 51,
+      "gapTo200": 149,
+      "components": {
+        "language": 8,
+        "literature": 43
+      },
+      "componentTargets": {
+        "language": 80,
+        "literature": 120
+      },
+      "componentDeficits": {
+        "language": 72,
+        "literature": 77
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 11,
+      "subject": "ისტორია",
+      "semester": 1,
+      "groups": 51,
+      "gapTo200": 149,
+      "components": {
+        "all": 51
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 149
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 11,
+      "subject": "ისტორია",
+      "semester": 2,
+      "groups": 51,
+      "gapTo200": 149,
+      "components": {
+        "all": 51
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 149
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 11,
+      "subject": "გეოგრაფია",
+      "semester": 1,
+      "groups": 51,
+      "gapTo200": 149,
+      "components": {
+        "all": 51
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 149
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 11,
+      "subject": "ბიოლოგია",
+      "semester": 2,
+      "groups": 51,
+      "gapTo200": 149,
+      "components": {
+        "all": 51
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 149
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 11,
+      "subject": "ქიმია",
+      "semester": 2,
+      "groups": 51,
+      "gapTo200": 149,
+      "components": {
+        "all": 51
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 149
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 12,
+      "subject": "ისტორია",
+      "semester": 1,
+      "groups": 51,
+      "gapTo200": 149,
+      "components": {
+        "all": 51
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 149
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 12,
+      "subject": "ისტორია",
+      "semester": 2,
+      "groups": 51,
+      "gapTo200": 149,
+      "components": {
+        "all": 51
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 149
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 5,
+      "subject": "ინგლისური",
+      "semester": 1,
+      "groups": 52,
+      "gapTo200": 148,
+      "components": {
+        "grammar": 17,
+        "vocabulary": 17,
+        "reading": 9,
+        "use_of_language": 15
+      },
+      "componentTargets": {
+        "grammar": 60,
+        "vocabulary": 50,
+        "reading": 50,
+        "use_of_language": 40
+      },
+      "componentDeficits": {
+        "grammar": 43,
+        "vocabulary": 33,
+        "reading": 41,
+        "use_of_language": 25
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 5,
+      "subject": "ინგლისური",
+      "semester": 2,
+      "groups": 52,
+      "gapTo200": 148,
+      "components": {
+        "grammar": 19,
+        "vocabulary": 8,
+        "reading": 4,
+        "use_of_language": 21
+      },
+      "componentTargets": {
+        "grammar": 60,
+        "vocabulary": 50,
+        "reading": 50,
+        "use_of_language": 40
+      },
+      "componentDeficits": {
+        "grammar": 41,
+        "vocabulary": 42,
+        "reading": 46,
+        "use_of_language": 19
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 5,
+      "subject": "ჩვენი საქართველო",
+      "semester": 2,
+      "groups": 52,
+      "gapTo200": 148,
+      "components": {
+        "all": 52
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 148
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 6,
+      "subject": "ინგლისური",
+      "semester": 1,
+      "groups": 52,
+      "gapTo200": 148,
+      "components": {
+        "grammar": 13,
+        "vocabulary": 17,
+        "reading": 15,
+        "use_of_language": 12
+      },
+      "componentTargets": {
+        "grammar": 60,
+        "vocabulary": 50,
+        "reading": 50,
+        "use_of_language": 40
+      },
+      "componentDeficits": {
+        "grammar": 47,
+        "vocabulary": 33,
+        "reading": 35,
+        "use_of_language": 28
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 6,
+      "subject": "ინგლისური",
+      "semester": 2,
+      "groups": 52,
+      "gapTo200": 148,
+      "components": {
+        "grammar": 17,
+        "vocabulary": 10,
+        "reading": 8,
+        "use_of_language": 17
+      },
+      "componentTargets": {
+        "grammar": 60,
+        "vocabulary": 50,
+        "reading": 50,
+        "use_of_language": 40
+      },
+      "componentDeficits": {
+        "grammar": 43,
+        "vocabulary": 40,
+        "reading": 42,
+        "use_of_language": 23
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 6,
+      "subject": "ბუნება",
+      "semester": 2,
+      "groups": 52,
+      "gapTo200": 148,
+      "components": {
+        "all": 52
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 148
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 6,
+      "subject": "ჩვენი საქართველო",
+      "semester": 2,
+      "groups": 52,
+      "gapTo200": 148,
+      "components": {
+        "all": 52
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 148
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 7,
+      "subject": "ინგლისური",
+      "semester": 1,
+      "groups": 52,
+      "gapTo200": 148,
+      "components": {
+        "grammar": 14,
+        "vocabulary": 14,
+        "reading": 15,
+        "use_of_language": 10
+      },
+      "componentTargets": {
+        "grammar": 60,
+        "vocabulary": 40,
+        "reading": 50,
+        "use_of_language": 50
+      },
+      "componentDeficits": {
+        "grammar": 46,
+        "vocabulary": 26,
+        "reading": 35,
+        "use_of_language": 40
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 7,
+      "subject": "ინგლისური",
+      "semester": 2,
+      "groups": 52,
+      "gapTo200": 148,
+      "components": {
+        "grammar": 19,
+        "vocabulary": 13,
+        "reading": 6,
+        "use_of_language": 14
+      },
+      "componentTargets": {
+        "grammar": 60,
+        "vocabulary": 40,
+        "reading": 50,
+        "use_of_language": 50
+      },
+      "componentDeficits": {
+        "grammar": 41,
+        "vocabulary": 27,
+        "reading": 44,
+        "use_of_language": 36
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 8,
+      "subject": "მათემატიკა",
+      "semester": 1,
+      "groups": 52,
+      "gapTo200": 148,
+      "components": {
+        "algebra": 45,
+        "geometry": 7
+      },
+      "componentTargets": {
+        "algebra": 120,
+        "geometry": 80
+      },
+      "componentDeficits": {
+        "algebra": 75,
+        "geometry": 73
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 8,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "semester": 1,
+      "groups": 52,
+      "gapTo200": 148,
+      "components": {
+        "language": 30,
+        "literature": 22
+      },
+      "componentTargets": {
+        "language": 80,
+        "literature": 120
+      },
+      "componentDeficits": {
+        "language": 50,
+        "literature": 98
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 8,
+      "subject": "ინგლისური",
+      "semester": 1,
+      "groups": 52,
+      "gapTo200": 148,
+      "components": {
+        "grammar": 18,
+        "vocabulary": 13,
+        "reading": 12,
+        "use_of_language": 10
+      },
+      "componentTargets": {
+        "grammar": 60,
+        "vocabulary": 40,
+        "reading": 50,
+        "use_of_language": 50
+      },
+      "componentDeficits": {
+        "grammar": 42,
+        "vocabulary": 27,
+        "reading": 38,
+        "use_of_language": 40
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 8,
+      "subject": "ინგლისური",
+      "semester": 2,
+      "groups": 52,
+      "gapTo200": 148,
+      "components": {
+        "grammar": 14,
+        "vocabulary": 15,
+        "reading": 13,
+        "use_of_language": 10
+      },
+      "componentTargets": {
+        "grammar": 60,
+        "vocabulary": 40,
+        "reading": 50,
+        "use_of_language": 50
+      },
+      "componentDeficits": {
+        "grammar": 46,
+        "vocabulary": 25,
+        "reading": 37,
+        "use_of_language": 40
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 9,
+      "subject": "გეოგრაფია",
+      "semester": 1,
+      "groups": 52,
+      "gapTo200": 148,
+      "components": {
+        "all": 52
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 148
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 9,
+      "subject": "გეოგრაფია",
+      "semester": 2,
+      "groups": 52,
+      "gapTo200": 148,
+      "components": {
+        "all": 52
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 148
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 9,
+      "subject": "ბიოლოგია",
+      "semester": 1,
+      "groups": 52,
+      "gapTo200": 148,
+      "components": {
+        "all": 52
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 148
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 9,
+      "subject": "ფიზიკა",
+      "semester": 2,
+      "groups": 52,
+      "gapTo200": 148,
+      "components": {
+        "all": 52
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 148
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 10,
+      "subject": "ინგლისური",
+      "semester": 1,
+      "groups": 52,
+      "gapTo200": 148,
+      "components": {
+        "grammar": 19,
+        "vocabulary": 14,
+        "reading": 11,
+        "use_of_language": 9
+      },
+      "componentTargets": {
+        "grammar": 60,
+        "vocabulary": 30,
+        "reading": 50,
+        "use_of_language": 60
+      },
+      "componentDeficits": {
+        "grammar": 41,
+        "vocabulary": 16,
+        "reading": 39,
+        "use_of_language": 51
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 10,
+      "subject": "ინგლისური",
+      "semester": 2,
+      "groups": 52,
+      "gapTo200": 148,
+      "components": {
+        "grammar": 16,
+        "vocabulary": 10,
+        "reading": 12,
+        "use_of_language": 14
+      },
+      "componentTargets": {
+        "grammar": 60,
+        "vocabulary": 30,
+        "reading": 50,
+        "use_of_language": 60
+      },
+      "componentDeficits": {
+        "grammar": 44,
+        "vocabulary": 20,
+        "reading": 38,
+        "use_of_language": 46
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 10,
+      "subject": "გეოგრაფია",
+      "semester": 2,
+      "groups": 52,
+      "gapTo200": 148,
+      "components": {
+        "all": 52
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 148
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 10,
+      "subject": "ბიოლოგია",
+      "semester": 1,
+      "groups": 52,
+      "gapTo200": 148,
+      "components": {
+        "all": 52
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 148
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 10,
+      "subject": "ფიზიკა",
+      "semester": 1,
+      "groups": 52,
+      "gapTo200": 148,
+      "components": {
+        "all": 52
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 148
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 10,
+      "subject": "ფიზიკა",
+      "semester": 2,
+      "groups": 52,
+      "gapTo200": 148,
+      "components": {
+        "all": 52
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 148
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 10,
+      "subject": "ქიმია",
+      "semester": 1,
+      "groups": 52,
+      "gapTo200": 148,
+      "components": {
+        "all": 52
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 148
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 11,
+      "subject": "ინგლისური",
+      "semester": 1,
+      "groups": 52,
+      "gapTo200": 148,
+      "components": {
+        "grammar": 24,
+        "vocabulary": 9,
+        "reading": 9,
+        "use_of_language": 11
+      },
+      "componentTargets": {
+        "grammar": 60,
+        "vocabulary": 30,
+        "reading": 50,
+        "use_of_language": 60
+      },
+      "componentDeficits": {
+        "grammar": 36,
+        "vocabulary": 21,
+        "reading": 41,
+        "use_of_language": 49
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 11,
+      "subject": "ინგლისური",
+      "semester": 2,
+      "groups": 52,
+      "gapTo200": 148,
+      "components": {
+        "grammar": 15,
+        "vocabulary": 9,
+        "reading": 12,
+        "use_of_language": 16
+      },
+      "componentTargets": {
+        "grammar": 60,
+        "vocabulary": 30,
+        "reading": 50,
+        "use_of_language": 60
+      },
+      "componentDeficits": {
+        "grammar": 45,
+        "vocabulary": 21,
+        "reading": 38,
+        "use_of_language": 44
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 11,
+      "subject": "გეოგრაფია",
+      "semester": 2,
+      "groups": 52,
+      "gapTo200": 148,
+      "components": {
+        "all": 52
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 148
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 11,
+      "subject": "ბიოლოგია",
+      "semester": 1,
+      "groups": 52,
+      "gapTo200": 148,
+      "components": {
+        "all": 52
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 148
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 11,
+      "subject": "ფიზიკა",
+      "semester": 1,
+      "groups": 52,
+      "gapTo200": 148,
+      "components": {
+        "all": 52
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 148
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 11,
+      "subject": "ფიზიკა",
+      "semester": 2,
+      "groups": 52,
+      "gapTo200": 148,
+      "components": {
+        "all": 52
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 148
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 11,
+      "subject": "ქიმია",
+      "semester": 1,
+      "groups": 52,
+      "gapTo200": 148,
+      "components": {
+        "all": 52
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 148
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 12,
+      "subject": "ინგლისური",
+      "semester": 1,
+      "groups": 52,
+      "gapTo200": 148,
+      "components": {
+        "grammar": 9,
+        "vocabulary": 19,
+        "reading": 11,
+        "use_of_language": 13
+      },
+      "componentTargets": {
+        "grammar": 60,
+        "vocabulary": 30,
+        "reading": 50,
+        "use_of_language": 60
+      },
+      "componentDeficits": {
+        "grammar": 51,
+        "vocabulary": 11,
+        "reading": 39,
+        "use_of_language": 47
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 7,
+      "subject": "მათემატიკა",
+      "semester": 2,
+      "groups": 53,
+      "gapTo200": 147,
+      "components": {
+        "algebra": 36,
+        "geometry": 17
+      },
+      "componentTargets": {
+        "algebra": 120,
+        "geometry": 80
+      },
+      "componentDeficits": {
+        "algebra": 84,
+        "geometry": 63
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 8,
+      "subject": "მათემატიკა",
+      "semester": 2,
+      "groups": 53,
+      "gapTo200": 147,
+      "components": {
+        "algebra": 37,
+        "geometry": 16
+      },
+      "componentTargets": {
+        "algebra": 120,
+        "geometry": 80
+      },
+      "componentDeficits": {
+        "algebra": 83,
+        "geometry": 64
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 9,
+      "subject": "ინგლისური",
+      "semester": 2,
+      "groups": 53,
+      "gapTo200": 147,
+      "components": {
+        "grammar": 18,
+        "vocabulary": 12,
+        "reading": 10,
+        "use_of_language": 13
+      },
+      "componentTargets": {
+        "grammar": 60,
+        "vocabulary": 40,
+        "reading": 50,
+        "use_of_language": 50
+      },
+      "componentDeficits": {
+        "grammar": 42,
+        "vocabulary": 28,
+        "reading": 40,
+        "use_of_language": 37
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 12,
+      "subject": "ინგლისური",
+      "semester": 2,
+      "groups": 53,
+      "gapTo200": 147,
+      "components": {
+        "grammar": 16,
+        "vocabulary": 11,
+        "reading": 9,
+        "use_of_language": 17
+      },
+      "componentTargets": {
+        "grammar": 60,
+        "vocabulary": 30,
+        "reading": 50,
+        "use_of_language": 60
+      },
+      "componentDeficits": {
+        "grammar": 44,
+        "vocabulary": 19,
+        "reading": 41,
+        "use_of_language": 43
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 5,
+      "subject": "მათემატიკა",
+      "semester": 2,
+      "groups": 54,
+      "gapTo200": 146,
+      "components": {
+        "all": 54
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 146
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 5,
+      "subject": "ჩვენი საქართველო",
+      "semester": 1,
+      "groups": 54,
+      "gapTo200": 146,
+      "components": {
+        "all": 54
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 146
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 7,
+      "subject": "მოქალაქეობა",
+      "semester": 1,
+      "groups": 54,
+      "gapTo200": 146,
+      "components": {
+        "all": 54
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 146
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 8,
+      "subject": "ბიოლოგია",
+      "semester": 1,
+      "groups": 54,
+      "gapTo200": 146,
+      "components": {
+        "all": 54
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 146
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 9,
+      "subject": "ფიზიკა",
+      "semester": 1,
+      "groups": 54,
+      "gapTo200": 146,
+      "components": {
+        "all": 54
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 146
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 9,
+      "subject": "ქიმია",
+      "semester": 1,
+      "groups": 54,
+      "gapTo200": 146,
+      "components": {
+        "all": 54
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 146
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 10,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "semester": 2,
+      "groups": 54,
+      "gapTo200": 146,
+      "components": {
+        "language": 14,
+        "literature": 40
+      },
+      "componentTargets": {
+        "language": 80,
+        "literature": 120
+      },
+      "componentDeficits": {
+        "language": 66,
+        "literature": 80
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 11,
+      "subject": "მათემატიკა",
+      "semester": 1,
+      "groups": 54,
+      "gapTo200": 146,
+      "components": {
+        "algebra": 42,
+        "geometry": 12
+      },
+      "componentTargets": {
+        "algebra": 120,
+        "geometry": 80
+      },
+      "componentDeficits": {
+        "algebra": 78,
+        "geometry": 68
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 11,
+      "subject": "მათემატიკა",
+      "semester": 2,
+      "groups": 54,
+      "gapTo200": 146,
+      "components": {
+        "algebra": 38,
+        "geometry": 16
+      },
+      "componentTargets": {
+        "algebra": 120,
+        "geometry": 80
+      },
+      "componentDeficits": {
+        "algebra": 82,
+        "geometry": 64
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 5,
+      "subject": "რუსული",
+      "semester": 1,
+      "groups": 55,
+      "gapTo200": 145,
+      "components": {
+        "grammar": 5,
+        "vocabulary": 4,
+        "reading": 1,
+        "use_of_language": 45
+      },
+      "componentTargets": {
+        "grammar": 60,
+        "vocabulary": 50,
+        "reading": 50,
+        "use_of_language": 40
+      },
+      "componentDeficits": {
+        "grammar": 55,
+        "vocabulary": 46,
+        "reading": 49,
+        "use_of_language": 0
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 5,
+      "subject": "რუსული",
+      "semester": 2,
+      "groups": 55,
+      "gapTo200": 145,
+      "components": {
+        "grammar": 10,
+        "vocabulary": 4,
+        "reading": 6,
+        "use_of_language": 35
+      },
+      "componentTargets": {
+        "grammar": 60,
+        "vocabulary": 50,
+        "reading": 50,
+        "use_of_language": 40
+      },
+      "componentDeficits": {
+        "grammar": 50,
+        "vocabulary": 46,
+        "reading": 44,
+        "use_of_language": 5
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 5,
+      "subject": "ბუნება",
+      "semester": 2,
+      "groups": 55,
+      "gapTo200": 145,
+      "components": {
+        "all": 55
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 145
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 6,
+      "subject": "რუსული",
+      "semester": 1,
+      "groups": 55,
+      "gapTo200": 145,
+      "components": {
+        "grammar": 20,
+        "vocabulary": 9,
+        "reading": 11,
+        "use_of_language": 15
+      },
+      "componentTargets": {
+        "grammar": 60,
+        "vocabulary": 50,
+        "reading": 50,
+        "use_of_language": 40
+      },
+      "componentDeficits": {
+        "grammar": 40,
+        "vocabulary": 41,
+        "reading": 39,
+        "use_of_language": 25
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 6,
+      "subject": "რუსული",
+      "semester": 2,
+      "groups": 55,
+      "gapTo200": 145,
+      "components": {
+        "grammar": 15,
+        "vocabulary": 4,
+        "reading": 6,
+        "use_of_language": 30
+      },
+      "componentTargets": {
+        "grammar": 60,
+        "vocabulary": 50,
+        "reading": 50,
+        "use_of_language": 40
+      },
+      "componentDeficits": {
+        "grammar": 45,
+        "vocabulary": 46,
+        "reading": 44,
+        "use_of_language": 10
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 7,
+      "subject": "რუსული",
+      "semester": 1,
+      "groups": 55,
+      "gapTo200": 145,
+      "components": {
+        "grammar": 10,
+        "vocabulary": 9,
+        "reading": 11,
+        "use_of_language": 25
+      },
+      "componentTargets": {
+        "grammar": 60,
+        "vocabulary": 40,
+        "reading": 50,
+        "use_of_language": 50
+      },
+      "componentDeficits": {
+        "grammar": 50,
+        "vocabulary": 31,
+        "reading": 39,
+        "use_of_language": 25
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 8,
+      "subject": "რუსული",
+      "semester": 1,
+      "groups": 55,
+      "gapTo200": 145,
+      "components": {
+        "grammar": 11,
+        "vocabulary": 3,
+        "reading": 11,
+        "use_of_language": 30
+      },
+      "componentTargets": {
+        "grammar": 60,
+        "vocabulary": 40,
+        "reading": 50,
+        "use_of_language": 50
+      },
+      "componentDeficits": {
+        "grammar": 49,
+        "vocabulary": 37,
+        "reading": 39,
+        "use_of_language": 20
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 8,
+      "subject": "რუსული",
+      "semester": 2,
+      "groups": 55,
+      "gapTo200": 145,
+      "components": {
+        "grammar": 10,
+        "vocabulary": 4,
+        "reading": 17,
+        "use_of_language": 24
+      },
+      "componentTargets": {
+        "grammar": 60,
+        "vocabulary": 40,
+        "reading": 50,
+        "use_of_language": 50
+      },
+      "componentDeficits": {
+        "grammar": 50,
+        "vocabulary": 36,
+        "reading": 33,
+        "use_of_language": 26
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 9,
+      "subject": "ინგლისური",
+      "semester": 1,
+      "groups": 55,
+      "gapTo200": 145,
+      "components": {
+        "grammar": 16,
+        "vocabulary": 14,
+        "reading": 15,
+        "use_of_language": 11
+      },
+      "componentTargets": {
+        "grammar": 60,
+        "vocabulary": 40,
+        "reading": 50,
+        "use_of_language": 50
+      },
+      "componentDeficits": {
+        "grammar": 44,
+        "vocabulary": 26,
+        "reading": 35,
+        "use_of_language": 39
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 9,
+      "subject": "რუსული",
+      "semester": 1,
+      "groups": 55,
+      "gapTo200": 145,
+      "components": {
+        "grammar": 15,
+        "vocabulary": 9,
+        "reading": 7,
+        "use_of_language": 25
+      },
+      "componentTargets": {
+        "grammar": 60,
+        "vocabulary": 40,
+        "reading": 50,
+        "use_of_language": 50
+      },
+      "componentDeficits": {
+        "grammar": 45,
+        "vocabulary": 31,
+        "reading": 43,
+        "use_of_language": 25
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 9,
+      "subject": "რუსული",
+      "semester": 2,
+      "groups": 55,
+      "gapTo200": 145,
+      "components": {
+        "grammar": 15,
+        "vocabulary": 9,
+        "reading": 10,
+        "use_of_language": 25
+      },
+      "componentTargets": {
+        "grammar": 60,
+        "vocabulary": 40,
+        "reading": 50,
+        "use_of_language": 50
+      },
+      "componentDeficits": {
+        "grammar": 45,
+        "vocabulary": 31,
+        "reading": 40,
+        "use_of_language": 25
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 10,
+      "subject": "რუსული",
+      "semester": 1,
+      "groups": 55,
+      "gapTo200": 145,
+      "components": {
+        "grammar": 10,
+        "vocabulary": 9,
+        "reading": 11,
+        "use_of_language": 25
+      },
+      "componentTargets": {
+        "grammar": 60,
+        "vocabulary": 30,
+        "reading": 50,
+        "use_of_language": 60
+      },
+      "componentDeficits": {
+        "grammar": 50,
+        "vocabulary": 21,
+        "reading": 39,
+        "use_of_language": 35
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 10,
+      "subject": "რუსული",
+      "semester": 2,
+      "groups": 55,
+      "gapTo200": 145,
+      "components": {
+        "grammar": 10,
+        "vocabulary": 9,
+        "reading": 11,
+        "use_of_language": 30
+      },
+      "componentTargets": {
+        "grammar": 60,
+        "vocabulary": 30,
+        "reading": 50,
+        "use_of_language": 60
+      },
+      "componentDeficits": {
+        "grammar": 50,
+        "vocabulary": 21,
+        "reading": 39,
+        "use_of_language": 30
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 11,
+      "subject": "რუსული",
+      "semester": 1,
+      "groups": 55,
+      "gapTo200": 145,
+      "components": {
+        "grammar": 25,
+        "vocabulary": 4,
+        "reading": 17,
+        "use_of_language": 10
+      },
+      "componentTargets": {
+        "grammar": 60,
+        "vocabulary": 30,
+        "reading": 50,
+        "use_of_language": 60
+      },
+      "componentDeficits": {
+        "grammar": 35,
+        "vocabulary": 26,
+        "reading": 33,
+        "use_of_language": 50
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 11,
+      "subject": "რუსული",
+      "semester": 2,
+      "groups": 55,
+      "gapTo200": 145,
+      "components": {
+        "grammar": 5,
+        "vocabulary": 9,
+        "reading": 19,
+        "use_of_language": 25
+      },
+      "componentTargets": {
+        "grammar": 60,
+        "vocabulary": 30,
+        "reading": 50,
+        "use_of_language": 60
+      },
+      "componentDeficits": {
+        "grammar": 55,
+        "vocabulary": 21,
+        "reading": 31,
+        "use_of_language": 35
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 12,
+      "subject": "მათემატიკა",
+      "semester": 1,
+      "groups": 55,
+      "gapTo200": 145,
+      "components": {
+        "algebra": 42,
+        "geometry": 13
+      },
+      "componentTargets": {
+        "algebra": 120,
+        "geometry": 80
+      },
+      "componentDeficits": {
+        "algebra": 78,
+        "geometry": 67
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 12,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "semester": 2,
+      "groups": 55,
+      "gapTo200": 145,
+      "components": {
+        "language": 8,
+        "literature": 47
+      },
+      "componentTargets": {
+        "language": 80,
+        "literature": 120
+      },
+      "componentDeficits": {
+        "language": 72,
+        "literature": 73
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 6,
+      "subject": "ბუნება",
+      "semester": 1,
+      "groups": 56,
+      "gapTo200": 144,
+      "components": {
+        "all": 56
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 144
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 12,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "semester": 1,
+      "groups": 56,
+      "gapTo200": 144,
+      "components": {
+        "language": 20,
+        "literature": 36
+      },
+      "componentTargets": {
+        "language": 80,
+        "literature": 120
+      },
+      "componentDeficits": {
+        "language": 60,
+        "literature": 84
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 7,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "semester": 2,
+      "groups": 57,
+      "gapTo200": 143,
+      "components": {
+        "language": 37,
+        "literature": 20
+      },
+      "componentTargets": {
+        "language": 80,
+        "literature": 120
+      },
+      "componentDeficits": {
+        "language": 43,
+        "literature": 100
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 6,
+      "subject": "ქართული",
+      "semester": 2,
+      "groups": 58,
+      "gapTo200": 142,
+      "components": {
+        "language": 49,
+        "literature": 9
+      },
+      "componentTargets": {
+        "language": 80,
+        "literature": 120
+      },
+      "componentDeficits": {
+        "language": 31,
+        "literature": 111
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 10,
+      "subject": "მათემატიკა",
+      "semester": 1,
+      "groups": 58,
+      "gapTo200": 142,
+      "components": {
+        "algebra": 48,
+        "geometry": 10
+      },
+      "componentTargets": {
+        "algebra": 120,
+        "geometry": 80
+      },
+      "componentDeficits": {
+        "algebra": 72,
+        "geometry": 70
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 7,
+      "subject": "რუსული",
+      "semester": 2,
+      "groups": 59,
+      "gapTo200": 141,
+      "components": {
+        "grammar": 15,
+        "vocabulary": 4,
+        "reading": 5,
+        "use_of_language": 35
+      },
+      "componentTargets": {
+        "grammar": 60,
+        "vocabulary": 40,
+        "reading": 50,
+        "use_of_language": 50
+      },
+      "componentDeficits": {
+        "grammar": 45,
+        "vocabulary": 36,
+        "reading": 45,
+        "use_of_language": 15
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 12,
+      "subject": "მათემატიკა",
+      "semester": 2,
+      "groups": 59,
+      "gapTo200": 141,
+      "components": {
+        "algebra": 48,
+        "geometry": 11
+      },
+      "componentTargets": {
+        "algebra": 120,
+        "geometry": 80
+      },
+      "componentDeficits": {
+        "algebra": 72,
+        "geometry": 69
+      },
+      "freshTenPapers": 5
+    },
+    {
+      "grade": 9,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "semester": 1,
+      "groups": 60,
+      "gapTo200": 140,
+      "components": {
+        "language": 22,
+        "literature": 38
+      },
+      "componentTargets": {
+        "language": 80,
+        "literature": 120
+      },
+      "componentDeficits": {
+        "language": 58,
+        "literature": 82
+      },
+      "freshTenPapers": 6
+    },
+    {
+      "grade": 9,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "semester": 2,
+      "groups": 60,
+      "gapTo200": 140,
+      "components": {
+        "language": 32,
+        "literature": 28
+      },
+      "componentTargets": {
+        "language": 80,
+        "literature": 120
+      },
+      "componentDeficits": {
+        "language": 48,
+        "literature": 92
+      },
+      "freshTenPapers": 6
+    },
+    {
+      "grade": 10,
+      "subject": "მათემატიკა",
+      "semester": 2,
+      "groups": 61,
+      "gapTo200": 139,
+      "components": {
+        "algebra": 46,
+        "geometry": 15
+      },
+      "componentTargets": {
+        "algebra": 120,
+        "geometry": 80
+      },
+      "componentDeficits": {
+        "algebra": 74,
+        "geometry": 65
+      },
+      "freshTenPapers": 6
+    },
+    {
+      "grade": 5,
+      "subject": "ბუნება",
+      "semester": 1,
+      "groups": 62,
+      "gapTo200": 138,
+      "components": {
+        "all": 62
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 138
+      },
+      "freshTenPapers": 6
+    },
+    {
+      "grade": 6,
+      "subject": "მათემატიკა",
+      "semester": 2,
+      "groups": 62,
+      "gapTo200": 138,
+      "components": {
+        "all": 62
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 138
+      },
+      "freshTenPapers": 6
+    },
+    {
+      "grade": 11,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "semester": 1,
+      "groups": 62,
+      "gapTo200": 138,
+      "components": {
+        "language": 19,
+        "literature": 43
+      },
+      "componentTargets": {
+        "language": 80,
+        "literature": 120
+      },
+      "componentDeficits": {
+        "language": 61,
+        "literature": 77
+      },
+      "freshTenPapers": 6
+    },
+    {
+      "grade": 7,
+      "subject": "ბიოლოგია",
+      "semester": 2,
+      "groups": 63,
+      "gapTo200": 137,
+      "components": {
+        "all": 63
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 137
+      },
+      "freshTenPapers": 6
+    },
+    {
+      "grade": 10,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "semester": 1,
+      "groups": 63,
+      "gapTo200": 137,
+      "components": {
+        "language": 23,
+        "literature": 40
+      },
+      "componentTargets": {
+        "language": 80,
+        "literature": 120
+      },
+      "componentDeficits": {
+        "language": 57,
+        "literature": 80
+      },
+      "freshTenPapers": 6
+    },
+    {
+      "grade": 7,
+      "subject": "ბიოლოგია",
+      "semester": 1,
+      "groups": 64,
+      "gapTo200": 136,
+      "components": {
+        "all": 64
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 136
+      },
+      "freshTenPapers": 6
+    },
+    {
+      "grade": 7,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "semester": 1,
+      "groups": 66,
+      "gapTo200": 134,
+      "components": {
+        "language": 46,
+        "literature": 20
+      },
+      "componentTargets": {
+        "language": 80,
+        "literature": 120
+      },
+      "componentDeficits": {
+        "language": 34,
+        "literature": 100
+      },
+      "freshTenPapers": 6
+    },
+    {
+      "grade": 5,
+      "subject": "ქართული",
+      "semester": 2,
+      "groups": 68,
+      "gapTo200": 132,
+      "components": {
+        "language": 59,
+        "literature": 9
+      },
+      "componentTargets": {
+        "language": 80,
+        "literature": 120
+      },
+      "componentDeficits": {
+        "language": 21,
+        "literature": 111
+      },
+      "freshTenPapers": 6
+    },
+    {
+      "grade": 7,
+      "subject": "მათემატიკა",
+      "semester": 1,
+      "groups": 70,
+      "gapTo200": 130,
+      "components": {
+        "algebra": 49,
+        "geometry": 21
+      },
+      "componentTargets": {
+        "algebra": 120,
+        "geometry": 80
+      },
+      "componentDeficits": {
+        "algebra": 71,
+        "geometry": 59
+      },
+      "freshTenPapers": 7
+    },
+    {
+      "grade": 5,
+      "subject": "მათემატიკა",
+      "semester": 1,
+      "groups": 72,
+      "gapTo200": 128,
+      "components": {
+        "all": 72
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 128
+      },
+      "freshTenPapers": 7
+    },
+    {
+      "grade": 6,
+      "subject": "მათემატიკა",
+      "semester": 1,
+      "groups": 73,
+      "gapTo200": 127,
+      "components": {
+        "all": 73
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 127
+      },
+      "freshTenPapers": 7
+    },
+    {
+      "grade": 5,
+      "subject": "ქართული",
+      "semester": 1,
+      "groups": 74,
+      "gapTo200": 126,
+      "components": {
+        "language": 65,
+        "literature": 9
+      },
+      "componentTargets": {
+        "language": 80,
+        "literature": 120
+      },
+      "componentDeficits": {
+        "language": 15,
+        "literature": 111
+      },
+      "freshTenPapers": 7
+    },
+    {
+      "grade": 6,
+      "subject": "ქართული",
+      "semester": 1,
+      "groups": 74,
+      "gapTo200": 126,
+      "components": {
+        "language": 64,
+        "literature": 10
+      },
+      "componentTargets": {
+        "language": 80,
+        "literature": 120
+      },
+      "componentDeficits": {
+        "language": 16,
+        "literature": 110
+      },
+      "freshTenPapers": 7
+    },
+    {
+      "grade": 4,
+      "subject": "ინგლისური",
+      "semester": 1,
+      "groups": 83,
+      "gapTo200": 117,
+      "components": {
+        "grammar": 20,
+        "vocabulary": 27,
+        "reading": 21,
+        "use_of_language": 20
+      },
+      "componentTargets": {
+        "grammar": 50,
+        "vocabulary": 60,
+        "reading": 50,
+        "use_of_language": 40
+      },
+      "componentDeficits": {
+        "grammar": 30,
+        "vocabulary": 33,
+        "reading": 29,
+        "use_of_language": 20
+      },
+      "freshTenPapers": 8
+    },
+    {
+      "grade": 9,
+      "subject": "მათემატიკა",
+      "semester": 2,
+      "groups": 84,
+      "gapTo200": 116,
+      "components": {
+        "algebra": 59,
+        "geometry": 25
+      },
+      "componentTargets": {
+        "algebra": 120,
+        "geometry": 80
+      },
+      "componentDeficits": {
+        "algebra": 61,
+        "geometry": 55
+      },
+      "freshTenPapers": 8
+    },
+    {
+      "grade": 8,
+      "subject": "გეოგრაფია",
+      "semester": 2,
+      "groups": 85,
+      "gapTo200": 115,
+      "components": {
+        "all": 85
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 115
+      },
+      "freshTenPapers": 8
+    },
+    {
+      "grade": 8,
+      "subject": "ისტორია",
+      "semester": 2,
+      "groups": 87,
+      "gapTo200": 113,
+      "components": {
+        "all": 87
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 113
+      },
+      "freshTenPapers": 8
+    },
+    {
+      "grade": 4,
+      "subject": "ქართული",
+      "semester": 1,
+      "groups": 92,
+      "gapTo200": 108,
+      "components": {
+        "language": 77,
+        "literature": 15
+      },
+      "componentTargets": {
+        "language": 80,
+        "literature": 120
+      },
+      "componentDeficits": {
+        "language": 3,
+        "literature": 105
+      },
+      "freshTenPapers": 9
+    },
+    {
+      "grade": 4,
+      "subject": "ქართული",
+      "semester": 2,
+      "groups": 92,
+      "gapTo200": 108,
+      "components": {
+        "language": 80,
+        "literature": 12
+      },
+      "componentTargets": {
+        "language": 80,
+        "literature": 120
+      },
+      "componentDeficits": {
+        "language": 0,
+        "literature": 108
+      },
+      "freshTenPapers": 9
+    },
+    {
+      "grade": 7,
+      "subject": "ისტორია",
+      "semester": 2,
+      "groups": 92,
+      "gapTo200": 108,
+      "components": {
+        "all": 92
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 108
+      },
+      "freshTenPapers": 9
+    },
+    {
+      "grade": 8,
+      "subject": "ისტორია",
+      "semester": 1,
+      "groups": 92,
+      "gapTo200": 108,
+      "components": {
+        "all": 92
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 108
+      },
+      "freshTenPapers": 9
+    },
+    {
+      "grade": 4,
+      "subject": "ინგლისური",
+      "semester": 2,
+      "groups": 93,
+      "gapTo200": 107,
+      "components": {
+        "grammar": 22,
+        "vocabulary": 32,
+        "reading": 19,
+        "use_of_language": 20
+      },
+      "componentTargets": {
+        "grammar": 50,
+        "vocabulary": 60,
+        "reading": 50,
+        "use_of_language": 40
+      },
+      "componentDeficits": {
+        "grammar": 28,
+        "vocabulary": 28,
+        "reading": 31,
+        "use_of_language": 20
+      },
+      "freshTenPapers": 9
+    },
+    {
+      "grade": 3,
+      "subject": "ინგლისური",
+      "semester": 1,
+      "groups": 95,
+      "gapTo200": 105,
+      "components": {
+        "grammar": 10,
+        "vocabulary": 51,
+        "reading": 11,
+        "use_of_language": 30
+      },
+      "componentTargets": {
+        "grammar": 50,
+        "vocabulary": 60,
+        "reading": 50,
+        "use_of_language": 40
+      },
+      "componentDeficits": {
+        "grammar": 40,
+        "vocabulary": 9,
+        "reading": 39,
+        "use_of_language": 10
+      },
+      "freshTenPapers": 9
+    },
+    {
+      "grade": 4,
+      "subject": "ბუნება",
+      "semester": 1,
+      "groups": 95,
+      "gapTo200": 105,
+      "components": {
+        "all": 95
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 105
+      },
+      "freshTenPapers": 9
+    },
+    {
+      "grade": 2,
+      "subject": "ინგლისური",
+      "semester": 1,
+      "groups": 96,
+      "gapTo200": 104,
+      "components": {
+        "grammar": 4,
+        "vocabulary": 59,
+        "reading": 11,
+        "use_of_language": 30
+      },
+      "componentTargets": {
+        "grammar": 40,
+        "vocabulary": 70,
+        "reading": 60,
+        "use_of_language": 30
+      },
+      "componentDeficits": {
+        "grammar": 36,
+        "vocabulary": 11,
+        "reading": 49,
+        "use_of_language": 0
+      },
+      "freshTenPapers": 9
+    },
+    {
+      "grade": 1,
+      "subject": "ქართული",
+      "semester": 2,
+      "groups": 100,
+      "gapTo200": 100,
+      "components": {
+        "language": 92,
+        "literature": 8
+      },
+      "componentTargets": {
+        "language": 80,
+        "literature": 120
+      },
+      "componentDeficits": {
+        "language": 0,
+        "literature": 112
+      },
+      "freshTenPapers": 10
+    },
+    {
+      "grade": 2,
+      "subject": "ქართული",
+      "semester": 2,
+      "groups": 100,
+      "gapTo200": 100,
+      "components": {
+        "language": 93,
+        "literature": 7
+      },
+      "componentTargets": {
+        "language": 80,
+        "literature": 120
+      },
+      "componentDeficits": {
+        "language": 0,
+        "literature": 113
+      },
+      "freshTenPapers": 10
+    },
+    {
+      "grade": 2,
+      "subject": "ბუნება",
+      "semester": 1,
+      "groups": 100,
+      "gapTo200": 100,
+      "components": {
+        "all": 100
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 100
+      },
+      "freshTenPapers": 10
+    },
+    {
+      "grade": 2,
+      "subject": "ბუნება",
+      "semester": 2,
+      "groups": 100,
+      "gapTo200": 100,
+      "components": {
+        "all": 100
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 100
+      },
+      "freshTenPapers": 10
+    },
+    {
+      "grade": 4,
+      "subject": "ბუნება",
+      "semester": 2,
+      "groups": 100,
+      "gapTo200": 100,
+      "components": {
+        "all": 100
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 100
+      },
+      "freshTenPapers": 10
+    },
+    {
+      "grade": 2,
+      "subject": "მათემატიკა",
+      "semester": 1,
+      "groups": 101,
+      "gapTo200": 99,
+      "components": {
+        "all": 101
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 99
+      },
+      "freshTenPapers": 10
+    },
+    {
+      "grade": 3,
+      "subject": "ქართული",
+      "semester": 1,
+      "groups": 101,
+      "gapTo200": 99,
+      "components": {
+        "language": 96,
+        "literature": 5
+      },
+      "componentTargets": {
+        "language": 80,
+        "literature": 120
+      },
+      "componentDeficits": {
+        "language": 0,
+        "literature": 115
+      },
+      "freshTenPapers": 10
+    },
+    {
+      "grade": 3,
+      "subject": "ბუნება",
+      "semester": 1,
+      "groups": 101,
+      "gapTo200": 99,
+      "components": {
+        "all": 101
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 99
+      },
+      "freshTenPapers": 10
+    },
+    {
+      "grade": 3,
+      "subject": "ბუნება",
+      "semester": 2,
+      "groups": 101,
+      "gapTo200": 99,
+      "components": {
+        "all": 101
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 99
+      },
+      "freshTenPapers": 10
+    },
+    {
+      "grade": 3,
+      "subject": "მე და საზოგადოება",
+      "semester": 1,
+      "groups": 101,
+      "gapTo200": 99,
+      "components": {
+        "all": 101
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 99
+      },
+      "freshTenPapers": 10
+    },
+    {
+      "grade": 3,
+      "subject": "მე და საზოგადოება",
+      "semester": 2,
+      "groups": 101,
+      "gapTo200": 99,
+      "components": {
+        "all": 101
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 99
+      },
+      "freshTenPapers": 10
+    },
+    {
+      "grade": 4,
+      "subject": "მე და საზოგადოება",
+      "semester": 1,
+      "groups": 101,
+      "gapTo200": 99,
+      "components": {
+        "all": 101
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 99
+      },
+      "freshTenPapers": 10
+    },
+    {
+      "grade": 4,
+      "subject": "მე და საზოგადოება",
+      "semester": 2,
+      "groups": 101,
+      "gapTo200": 99,
+      "components": {
+        "all": 101
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 99
+      },
+      "freshTenPapers": 10
+    },
+    {
+      "grade": 1,
+      "subject": "ინგლისური",
+      "semester": 1,
+      "groups": 102,
+      "gapTo200": 98,
+      "components": {
+        "grammar": 1,
+        "vocabulary": 67,
+        "reading": 11,
+        "use_of_language": 30
+      },
+      "componentTargets": {
+        "grammar": 40,
+        "vocabulary": 70,
+        "reading": 60,
+        "use_of_language": 30
+      },
+      "componentDeficits": {
+        "grammar": 39,
+        "vocabulary": 3,
+        "reading": 49,
+        "use_of_language": 0
+      },
+      "freshTenPapers": 10
+    },
+    {
+      "grade": 1,
+      "subject": "ბუნება",
+      "semester": 2,
+      "groups": 102,
+      "gapTo200": 98,
+      "components": {
+        "all": 102
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 98
+      },
+      "freshTenPapers": 10
+    },
+    {
+      "grade": 3,
+      "subject": "ინგლისური",
+      "semester": 2,
+      "groups": 102,
+      "gapTo200": 98,
+      "components": {
+        "grammar": 12,
+        "vocabulary": 50,
+        "reading": 9,
+        "use_of_language": 31
+      },
+      "componentTargets": {
+        "grammar": 50,
+        "vocabulary": 60,
+        "reading": 50,
+        "use_of_language": 40
+      },
+      "componentDeficits": {
+        "grammar": 38,
+        "vocabulary": 10,
+        "reading": 41,
+        "use_of_language": 9
+      },
+      "freshTenPapers": 10
+    },
+    {
+      "grade": 1,
+      "subject": "მათემატიკა",
+      "semester": 2,
+      "groups": 103,
+      "gapTo200": 97,
+      "components": {
+        "all": 103
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 97
+      },
+      "freshTenPapers": 10
+    },
+    {
+      "grade": 2,
+      "subject": "მათემატიკა",
+      "semester": 2,
+      "groups": 103,
+      "gapTo200": 97,
+      "components": {
+        "all": 103
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 97
+      },
+      "freshTenPapers": 10
+    },
+    {
+      "grade": 1,
+      "subject": "ინგლისური",
+      "semester": 2,
+      "groups": 104,
+      "gapTo200": 96,
+      "components": {
+        "grammar": 3,
+        "vocabulary": 60,
+        "reading": 10,
+        "use_of_language": 31
+      },
+      "componentTargets": {
+        "grammar": 40,
+        "vocabulary": 70,
+        "reading": 60,
+        "use_of_language": 30
+      },
+      "componentDeficits": {
+        "grammar": 37,
+        "vocabulary": 10,
+        "reading": 50,
+        "use_of_language": 0
+      },
+      "freshTenPapers": 10
+    },
+    {
+      "grade": 3,
+      "subject": "მათემატიკა",
+      "semester": 2,
+      "groups": 104,
+      "gapTo200": 96,
+      "components": {
+        "all": 104
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 96
+      },
+      "freshTenPapers": 10
+    },
+    {
+      "grade": 4,
+      "subject": "მათემატიკა",
+      "semester": 1,
+      "groups": 104,
+      "gapTo200": 96,
+      "components": {
+        "all": 104
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 96
+      },
+      "freshTenPapers": 10
+    },
+    {
+      "grade": 4,
+      "subject": "მათემატიკა",
+      "semester": 2,
+      "groups": 104,
+      "gapTo200": 96,
+      "components": {
+        "all": 104
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 96
+      },
+      "freshTenPapers": 10
+    },
+    {
+      "grade": 2,
+      "subject": "ქართული",
+      "semester": 1,
+      "groups": 105,
+      "gapTo200": 95,
+      "components": {
+        "language": 98,
+        "literature": 7
+      },
+      "componentTargets": {
+        "language": 80,
+        "literature": 120
+      },
+      "componentDeficits": {
+        "language": 0,
+        "literature": 113
+      },
+      "freshTenPapers": 10
+    },
+    {
+      "grade": 2,
+      "subject": "ინგლისური",
+      "semester": 2,
+      "groups": 106,
+      "gapTo200": 94,
+      "components": {
+        "grammar": 8,
+        "vocabulary": 59,
+        "reading": 11,
+        "use_of_language": 29
+      },
+      "componentTargets": {
+        "grammar": 40,
+        "vocabulary": 70,
+        "reading": 60,
+        "use_of_language": 30
+      },
+      "componentDeficits": {
+        "grammar": 32,
+        "vocabulary": 11,
+        "reading": 49,
+        "use_of_language": 1
+      },
+      "freshTenPapers": 10
+    },
+    {
+      "grade": 3,
+      "subject": "ქართული",
+      "semester": 2,
+      "groups": 106,
+      "gapTo200": 94,
+      "components": {
+        "language": 96,
+        "literature": 10
+      },
+      "componentTargets": {
+        "language": 80,
+        "literature": 120
+      },
+      "componentDeficits": {
+        "language": 0,
+        "literature": 110
+      },
+      "freshTenPapers": 10
+    },
+    {
+      "grade": 1,
+      "subject": "ბუნება",
+      "semester": 1,
+      "groups": 108,
+      "gapTo200": 92,
+      "components": {
+        "all": 108
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 92
+      },
+      "freshTenPapers": 10
+    },
+    {
+      "grade": 1,
+      "subject": "ქართული",
+      "semester": 1,
+      "groups": 110,
+      "gapTo200": 90,
+      "components": {
+        "language": 98,
+        "literature": 12
+      },
+      "componentTargets": {
+        "language": 80,
+        "literature": 120
+      },
+      "componentDeficits": {
+        "language": 0,
+        "literature": 108
+      },
+      "freshTenPapers": 10
+    },
+    {
+      "grade": 9,
+      "subject": "მათემატიკა",
+      "semester": 1,
+      "groups": 112,
+      "gapTo200": 88,
+      "components": {
+        "algebra": 87,
+        "geometry": 25
+      },
+      "componentTargets": {
+        "algebra": 120,
+        "geometry": 80
+      },
+      "componentDeficits": {
+        "algebra": 33,
+        "geometry": 55
+      },
+      "freshTenPapers": 10
+    },
+    {
+      "grade": 3,
+      "subject": "მათემატიკა",
+      "semester": 1,
+      "groups": 114,
+      "gapTo200": 86,
+      "components": {
+        "all": 114
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 86
+      },
+      "freshTenPapers": 10
+    },
+    {
+      "grade": 8,
+      "subject": "გეოგრაფია",
+      "semester": 1,
+      "groups": 114,
+      "gapTo200": 86,
+      "components": {
+        "all": 114
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 86
+      },
+      "freshTenPapers": 10
+    },
+    {
+      "grade": 7,
+      "subject": "ისტორია",
+      "semester": 1,
+      "groups": 122,
+      "gapTo200": 78,
+      "components": {
+        "all": 122
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 78
+      },
+      "freshTenPapers": 10
+    },
+    {
+      "grade": 1,
+      "subject": "მათემატიკა",
+      "semester": 1,
+      "groups": 123,
+      "gapTo200": 77,
+      "components": {
+        "all": 123
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 77
+      },
+      "freshTenPapers": 10
+    },
+    {
+      "grade": 7,
+      "subject": "გეოგრაფია",
+      "semester": 2,
+      "groups": 139,
+      "gapTo200": 61,
+      "components": {
+        "all": 139
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 61
+      },
+      "freshTenPapers": 10
+    },
+    {
+      "grade": 7,
+      "subject": "ფიზიკა",
+      "semester": 1,
+      "groups": 161,
+      "gapTo200": 39,
+      "components": {
+        "all": 161
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 39
+      },
+      "freshTenPapers": 10
+    },
+    {
+      "grade": 8,
+      "subject": "ფიზიკა",
+      "semester": 1,
+      "groups": 185,
+      "gapTo200": 15,
+      "components": {
+        "all": 185
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 15
+      },
+      "freshTenPapers": 10
+    },
+    {
+      "grade": 7,
+      "subject": "გეოგრაფია",
+      "semester": 1,
+      "groups": 213,
+      "gapTo200": 0,
+      "components": {
+        "all": 213
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 0
+      },
+      "freshTenPapers": 10
+    },
+    {
+      "grade": 7,
+      "subject": "ფიზიკა",
+      "semester": 2,
+      "groups": 206,
+      "gapTo200": 0,
+      "components": {
+        "all": 206
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 0
+      },
+      "freshTenPapers": 10
+    },
+    {
+      "grade": 8,
+      "subject": "ფიზიკა",
+      "semester": 2,
+      "groups": 204,
+      "gapTo200": 0,
+      "components": {
+        "all": 204
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 0
+      },
+      "freshTenPapers": 10
+    },
+    {
+      "grade": 8,
+      "subject": "ქიმია",
+      "semester": 1,
+      "groups": 213,
+      "gapTo200": 0,
+      "components": {
+        "all": 213
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 0
+      },
+      "freshTenPapers": 10
+    },
+    {
+      "grade": 8,
+      "subject": "ქიმია",
+      "semester": 2,
+      "groups": 207,
+      "gapTo200": 0,
+      "components": {
+        "all": 207
+      },
+      "componentTargets": {
+        "all": 200
+      },
+      "componentDeficits": {
+        "all": 0
+      },
+      "freshTenPapers": 10
+    }
+  ],
+  "planning": {
+    "targetGroupsPerGradeSubjectSemester": 200,
+    "meaning": "10 fresh twenty-question papers OR 20 fresh ten-question papers, not both independently; mixed modes share history.",
+    "workloadAssumption": "Capacity-planning target only, not measured returning-user behavior or an official educational standard.",
+    "finiteBank": "When unseen eligible groups run out, recycle transparently. Reordering does not create new content.",
+    "quotaWarning": "Total groups alone do not guarantee quota-balanced papers; component deficits must be filled too."
+  },
+  "limitations": [
+    "This release is a first expansion, not completion of the all-subject 200-group target.",
+    "Assistant review is not independent teacher certification.",
+    "Lexical similarity screening is not a semantic proof.",
+    "Published catalog and selector were simulated locally; no signed-in learner test was submitted."
+  ]
+}

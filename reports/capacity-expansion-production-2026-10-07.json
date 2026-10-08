@@ -1,0 +1,10 @@
+{
+  "verifiedAt": "2026-10-07T09:28:39.089Z",
+  "baselineActive": 23038,
+  "afterActive": 23433,
+  "added": 395,
+  "allAddedPayloadsKeysAndMetadataMatch": true,
+  "backupSha256": "d3476e82ba7104dd15488297d1de23ad03159652e3d87282cdc54ba68fec134c",
+  "oldDataOperation": "INSERT ON CONFLICT DO NOTHING; no existing-row updates",
+  "learnerBrowserFlow": "not tested in this release"
+}
