@@ -1,0 +1,383 @@
+{
+  "generatedAt": "2026-10-09T13:27:46.369Z",
+  "snapshotSha256": "3b7d70e0043cdc8edf059cecdd5329ce6c93521fec8601338c8664ccdc1d903e",
+  "baselineActive": 23493,
+  "afterActive": 23513,
+  "added": 20,
+  "authoredFamilies": 20,
+  "semanticReview": {
+    "method": "Assistant option-by-option review plus nearest-neighbor inspection; lexical screening alone was not treated as semantic proof.",
+    "initialDraftsReplaced": 2,
+    "replacements": ["Repeated first-source corroboration scenario replaced with sponsor-disclosure limits.", "Repeated accessible-instructions scenario replaced with advance notice of assessment criteria."],
+    "limitation": "Not an independent teacher review or proof of complete semantic uniqueness."
+  },
+  "optionRationalesChecked": 80,
+  "computationalEvidenceChecks": 3,
+  "assistantJudgementOnly": 17,
+  "exactDuplicateAdditions": 0,
+  "canonicalDuplicateAdditions": 0,
+  "lexicalReviewThreshold": 0.45,
+  "unresolvedSimilarityCandidates": [],
+  "buckets": [
+    {
+      "grade": 10,
+      "semester": 1,
+      "beforeRows": 56,
+      "afterRows": 66,
+      "beforeGroups": 50,
+      "afterGroups": 60,
+      "added": 10,
+      "freshTenQuestionPapers": 6,
+      "freshTwentyQuestionPapers": 3
+    },
+    {
+      "grade": 10,
+      "semester": 2,
+      "beforeRows": 58,
+      "afterRows": 68,
+      "beforeGroups": 50,
+      "afterGroups": 60,
+      "added": 10,
+      "freshTenQuestionPapers": 6,
+      "freshTwentyQuestionPapers": 3
+    }
+  ],
+  "simulatedPapers": 42,
+  "workloads": [
+    {
+      "label": "10|1|ten",
+      "distinct": 60,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        }
+      ]
+    },
+    {
+      "label": "10|1|twenty",
+      "distinct": 60,
+      "papers": [
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        }
+      ]
+    },
+    {
+      "label": "10|1|mixed",
+      "distinct": 60,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        }
+      ]
+    },
+    {
+      "label": "10|2|ten",
+      "distinct": 60,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        }
+      ]
+    },
+    {
+      "label": "10|2|twenty",
+      "distinct": 60,
+      "papers": [
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        }
+      ]
+    },
+    {
+      "label": "10|2|mixed",
+      "distinct": 60,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        }
+      ]
+    }
+  ],
+  "catalog": [
+    {
+      "label": "v28-g10-s1-1d104a5e0a",
+      "distinct": 60,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        }
+      ]
+    },
+    {
+      "label": "v28-g10-s2-1d104a5e0a",
+      "distinct": 60,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        }
+      ]
+    }
+  ],
+  "failures": [],
+  "sources": [
+    {
+      "title": "Epigraphi: Citizenship X teacher guide, pages 11–12, global citizenship and legal culture",
+      "url": "https://epigraphi.ge/my_img/10_masw_1sem.pdf",
+      "accessed": "2026-10-09",
+      "scope": "Grade-theme guidance only, not a claim of a freshly certified statutory curriculum or independent review of these original questions."
+    }
+  ],
+  "limitations": [
+    "Assistant-authored and option-by-option reviewed; not independently teacher-certified.",
+    "Semester placement is a configurable editorial allocation, not a ministry-mandated calendar.",
+    "Similarity thresholds and selector families do not prove absence of every semantic overlap.",
+    "Fresh-paper counts assume no previous attempts in that grade/subject/semester; 10/20 modes share history.",
+    "The 200-group planning target remains unmet in these buckets.",
+    "No authenticated learner submission is performed by this bank-only release.",
+    "3 prompts have computational checks; 17 rely on assistant semantic judgement."
+  ],
+  "privateDraftSha256": "a0fb6c9a94bb8f87569a7f8d09d84b9aafcb1fbe76bbba7704eba49756fefb36",
+  "patchSha256": "90990f7fadd0930a168f737c2db266cd5db9ea0369f0acb7b0788d6b61f07f26",
+  "scopedBackupSha256": "95805a57f6dcea487d4d1b7b41b7151fc1ba9f88a10bfbb46b350fef058377de"
+}

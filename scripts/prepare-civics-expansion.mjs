@@ -98,6 +98,7 @@ const report={generatedAt:new Date().toISOString(),snapshotSha256:sha256,baselin
 report.limitations=report.limitations.filter(x=>!x.startsWith('Eight prompts'));
 report.limitations.push(`${report.computationalEvidenceChecks} prompts have computational checks; ${report.assistantJudgementOnly} rely on assistant semantic judgement.`);
 report.sources[0].title='Ministry citizenship guide, page 5: grade themes';report.sources[0].accessed=cfg.date;
+if(cfg.sources)report.sources=cfg.sources;
 report.privateDraftSha256=hash(fs.readFileSync(root+`/${name}-questions.json`));
 report.patchSha256=hash(statements.join('\n')+'\n');
 if(cfg.liveBefore)report.scopedBackupSha256=hash(fs.readFileSync(root+'/'+cfg.liveBefore));

@@ -6,7 +6,7 @@ import {validateExpansionQuestion,normalizedPrompt} from './bank-expansion-quali
 export function validateCivicsReview(q){
  validateExpansionQuestion(q);
  assert.equal(q.subject,'მოქალაქეობა');
- assert.ok([7,8,9].includes(q.grade),'This release is scoped to VII–IX');
+ assert.ok([7,8,9,10].includes(q.grade),'This release is scoped to VII–X');
  assert.ok(q.curriculumTheme?.trim());
  assert.equal(q.optionReview?.length,4,'Every distractor needs its own rationale');
  assert.ok(q.optionReview.every(x=>typeof x==='string'&&x.trim().length>=25));
@@ -17,6 +17,8 @@ export function validateCivicsReview(q){
 export function verifyCivicsEvidence(q){
  const nums=[...q.text.matchAll(/\d+/gu)].map(x=>Number(x[0]));
  const numeric={
+  'unique-campaign-reach':()=>{assert.equal(nums.length,3);assert.ok(nums[2]<=Math.min(nums[0],nums[1]));return nums[0]+nums[1]-nums[2];},
+  'explicit-deadline-count':()=>{assert.equal(nums.length,2);assert.ok(q.text.includes('მომდევნო დღიდან'));assert.ok(q.text.includes('უქმეებიც ითვლება'));assert.ok(nums[0]+nums[1]<=31);return nums[0]+nums[1];},
   'budget-shortfall':()=>{assert.equal(nums.length,2);return nums[1]-nums[0];},
   'fixed-variable-program-cost':()=>{assert.equal(nums.length,3);return nums[0]+nums[1]*nums[2];},
   'speaking-time-calculation':()=>{assert.equal(nums.length,1);assert.ok(q.text.includes('ექვსივე'));return nums[0]/6;},
@@ -30,6 +32,16 @@ export function verifyCivicsEvidence(q){
   assert.equal(q.options.filter(x=>x===expected).length,1,'Exactly one recomputed numeric option');
   assert.equal(q.options[q.correct],expected,'Prompt numbers disagree with the key');
   return 'prompt_number_recomputation';
+ }
+ if(q.family==='conjunctive-eligibility'){
+  const threshold=Number(q.text.match(/არანაკლებ (\d+)/u)?.[1]);assert.ok(Number.isFinite(threshold));
+  const candidates=[...q.text.matchAll(/([ABCD]): (\d+)(?: ქულა)?, (არასრული|სრული)/gu)];
+  assert.equal(candidates.length,4);assert.equal(new Set(candidates.map(x=>x[1])).size,4);
+  const eligible=candidates.filter(x=>Number(x[2])>=threshold&&x[3]==='სრული');
+  assert.equal(eligible.length,1,'Exactly one eligible candidate required');
+  assert.equal(q.options[q.correct],eligible[0][1]);
+  assert.equal(q.options.filter(o=>o===eligible[0][1]).length,1);
+  return 'conjunctive_rule_recomputation';
  }
  if(q.family==='emissions-boundary'){
   assert.equal(nums.length,2);assert.equal(nums[1]-nums[0],0);

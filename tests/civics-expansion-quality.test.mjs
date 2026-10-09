@@ -2,6 +2,22 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {validateCivicsReview,validateCivicsBatch,verifyCivicsEvidence} from '../scripts/civics-expansion-quality.mjs';
 const fixture=()=>({id:'synthetic',family:'synthetic-scenario',topic:'მონაწილეობა',subject:'მოქალაქეობა',grade:7,semester:1,text:'Synthetic review fixture, not published content.',options:['A','B','C','D'],correct:0,optionReview:['The correct option follows the stated premise.','Distractor B contradicts the first condition.','Distractor C is unsupported by the supplied evidence.','Distractor D fails the second stated condition.'],explanation:'The correct option follows the stated premise.',review:'assistant_content_reviewed',curriculumTheme:'თემი',prerequisiteMinGrade:7});
+test('grade-ten evidence distinguishes people from visits and follows explicit deadline rules',()=>{
+ const q={family:'unique-campaign-reach',text:'28 22 9',options:['41','50','59','19'],correct:0};
+ assert.equal(verifyCivicsEvidence(q),'prompt_number_recomputation');
+ assert.throws(()=>verifyCivicsEvidence({...q,correct:1}));
+ assert.throws(()=>verifyCivicsEvidence({...q,text:'28 22 30'}));
+ const d={family:'explicit-deadline-count',text:'5 12 მომდევნო დღიდან უქმეებიც ითვლება',options:['17','16','18','19'],correct:0};
+ assert.equal(verifyCivicsEvidence(d),'prompt_number_recomputation');
+ assert.throws(()=>verifyCivicsEvidence({...d,text:'5 12 მიღების დღიდან'}));
+});
+test('conjunctive eligibility recomputes each candidate and rejects ambiguity',()=>{
+ const q={family:'conjunctive-eligibility',text:'არანაკლებ 70 A: 75, არასრული; B: 68, სრული; C: 70, სრული; D: 65, არასრული',options:['C','A','B','D'],correct:0};
+ assert.equal(verifyCivicsEvidence(q),'conjunctive_rule_recomputation');
+ assert.throws(()=>verifyCivicsEvidence({...q,text:q.text.replace('B: 68','B: 71')}),/Exactly one/);
+ assert.throws(()=>verifyCivicsEvidence({...q,text:q.text.replace('C: 70','C: 69')}),/Exactly one/);
+ assert.throws(()=>verifyCivicsEvidence({...q,correct:1}));
+});
 test('review records are not falsely labelled computational proof',()=>{
  const q=fixture();assert.equal(validateCivicsReview(q),true);assert.equal(verifyCivicsEvidence(q),'assistant_option_by_option_review_only');
 });

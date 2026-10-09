@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {validateCivicsBatch} from './civics-expansion-quality.mjs';
 const root='.openai/bank-expansion-20261007';
-const name=process.argv.includes('--grade9')?'civics9':'civics',date=name==='civics9'?'2026-10-09':'2026-10-08';
+const name=process.argv.includes('--grade10')?'civics10':process.argv.includes('--grade9')?'civics9':'civics',date=name==='civics'?'2026-10-08':'2026-10-09';
 const report=JSON.parse(fs.readFileSync(`reports/${name}-expansion-${date}.json`));
 const review=JSON.parse(fs.readFileSync(root+`/${name}-reviewed.json`));
 const draft=fs.readFileSync(root+`/${name}-questions.json`);
