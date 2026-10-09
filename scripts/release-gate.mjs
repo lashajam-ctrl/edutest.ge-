@@ -15,5 +15,6 @@ if(process.argv.includes('--capacity-expansion')){
  run(['scripts/verify-bank-workloads.mjs']);
 }
 if(process.argv.includes('--civics-expansion'))run(['scripts/verify-civics-expansion-local.mjs']);
+if(process.argv.includes('--civics9-expansion'))run(['scripts/verify-civics-expansion-local.mjs','--grade9']);
 if(!process.argv.includes('--no-build'))run(['node_modules/vinext/dist/cli.js','build']);
 console.log('Release gate passed'+(process.argv.includes('--no-build')?' (tests only; build still required).':'.'));

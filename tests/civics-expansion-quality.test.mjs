@@ -36,3 +36,11 @@ test('rates use both denominators rather than absolute counts',()=>{
  assert.equal(verifyCivicsEvidence(q),'rate_recomputation');
  assert.throws(()=>verifyCivicsEvidence({...q,text:'100 80 120 120'}));
 });
+test('grade-nine models recompute fixed cost, deficit, boundary and per-person totals',()=>{
+ assert.equal(verifyCivicsEvidence({family:'fixed-variable-program-cost',text:'60 4 10',options:['100','40','64','640'],correct:0}),'prompt_number_recomputation');
+ assert.throws(()=>verifyCivicsEvidence({family:'fixed-variable-program-cost',text:'60 4 10',options:['100','40','64','640'],correct:3}));
+ assert.equal(verifyCivicsEvidence({family:'budget-shortfall',text:'240 275',options:['35','240','275','515'],correct:0}),'prompt_number_recomputation');
+ assert.equal(verifyCivicsEvidence({family:'emissions-boundary',text:'80 80',options:['უცვლელი დარჩა','A','B','C'],correct:0}),'boundary_recomputation');
+ assert.throws(()=>verifyCivicsEvidence({family:'emissions-boundary',text:'80 90',options:['უცვლელი დარჩა','A','B','C'],correct:0}));
+ assert.equal(verifyCivicsEvidence({family:'absolute-per-person-water',text:'20 200 30 240',options:['10-დან 8 ლიტრამდე შემცირდა','A','B','C'],correct:0}),'per_person_recomputation');
+});

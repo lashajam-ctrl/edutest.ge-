@@ -1,0 +1,376 @@
+{
+  "generatedAt": "2026-10-09T08:26:28.961Z",
+  "snapshotSha256": "3b7d70e0043cdc8edf059cecdd5329ce6c93521fec8601338c8664ccdc1d903e",
+  "baselineActive": 23473,
+  "afterActive": 23493,
+  "added": 20,
+  "authoredFamilies": 20,
+  "optionRationalesChecked": 80,
+  "computationalEvidenceChecks": 4,
+  "assistantJudgementOnly": 16,
+  "exactDuplicateAdditions": 0,
+  "canonicalDuplicateAdditions": 0,
+  "lexicalReviewThreshold": 0.45,
+  "unresolvedSimilarityCandidates": [],
+  "buckets": [
+    {
+      "grade": 9,
+      "semester": 1,
+      "beforeRows": 58,
+      "afterRows": 68,
+      "beforeGroups": 50,
+      "afterGroups": 60,
+      "added": 10,
+      "freshTenQuestionPapers": 6,
+      "freshTwentyQuestionPapers": 3
+    },
+    {
+      "grade": 9,
+      "semester": 2,
+      "beforeRows": 57,
+      "afterRows": 67,
+      "beforeGroups": 50,
+      "afterGroups": 60,
+      "added": 10,
+      "freshTenQuestionPapers": 6,
+      "freshTwentyQuestionPapers": 3
+    }
+  ],
+  "simulatedPapers": 42,
+  "workloads": [
+    {
+      "label": "9|1|ten",
+      "distinct": 60,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        }
+      ]
+    },
+    {
+      "label": "9|1|twenty",
+      "distinct": 60,
+      "papers": [
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        }
+      ]
+    },
+    {
+      "label": "9|1|mixed",
+      "distinct": 60,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        }
+      ]
+    },
+    {
+      "label": "9|2|ten",
+      "distinct": 60,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        }
+      ]
+    },
+    {
+      "label": "9|2|twenty",
+      "distinct": 60,
+      "papers": [
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        }
+      ]
+    },
+    {
+      "label": "9|2|mixed",
+      "distinct": 60,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        }
+      ]
+    }
+  ],
+  "catalog": [
+    {
+      "label": "v28-g9-s1-1d104a5e0a",
+      "distinct": 60,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        }
+      ]
+    },
+    {
+      "label": "v28-g9-s2-1d104a5e0a",
+      "distinct": 60,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        }
+      ]
+    }
+  ],
+  "failures": [],
+  "sources": [
+    {
+      "title": "Ministry citizenship guide, page 5: grade themes",
+      "url": "https://www.mes.gov.ge/uploads/files/gzamkvlevi/მოქალაქეობა.pdf",
+      "accessed": "2026-10-09"
+    }
+  ],
+  "limitations": [
+    "Assistant-authored and option-by-option reviewed; not independently teacher-certified.",
+    "Semester placement is a configurable editorial allocation, not a ministry-mandated calendar.",
+    "Similarity thresholds and selector families do not prove absence of every semantic overlap.",
+    "Fresh-paper counts assume no previous attempts in that grade/subject/semester; 10/20 modes share history.",
+    "The 200-group planning target remains unmet in these buckets.",
+    "No authenticated learner submission is performed by this bank-only release.",
+    "4 prompts have computational checks; 16 rely on assistant semantic judgement."
+  ],
+  "privateDraftSha256": "7b713adb89c4980c8c09eea07f6b4564825438cfbfcd93f4ef02123928d92b70",
+  "patchSha256": "62cfb7d5e1a7f7a2820cb7de148df93777eb2664f5f1703ef5e0419c0303b82b",
+  "scopedBackupSha256": "a9565ba2489ce55f826cc08cb95e107b19831553d054d46567933d8a1cb0a672"
+}

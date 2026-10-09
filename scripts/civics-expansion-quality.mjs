@@ -6,7 +6,7 @@ import {validateExpansionQuestion,normalizedPrompt} from './bank-expansion-quali
 export function validateCivicsReview(q){
  validateExpansionQuestion(q);
  assert.equal(q.subject,'მოქალაქეობა');
- assert.ok([7,8].includes(q.grade),'This release is scoped to VII–VIII');
+ assert.ok([7,8,9].includes(q.grade),'This release is scoped to VII–IX');
  assert.ok(q.curriculumTheme?.trim());
  assert.equal(q.optionReview?.length,4,'Every distractor needs its own rationale');
  assert.ok(q.optionReview.every(x=>typeof x==='string'&&x.trim().length>=25));
@@ -17,6 +17,8 @@ export function validateCivicsReview(q){
 export function verifyCivicsEvidence(q){
  const nums=[...q.text.matchAll(/\d+/gu)].map(x=>Number(x[0]));
  const numeric={
+  'budget-shortfall':()=>{assert.equal(nums.length,2);return nums[1]-nums[0];},
+  'fixed-variable-program-cost':()=>{assert.equal(nums.length,3);return nums[0]+nums[1]*nums[2];},
   'speaking-time-calculation':()=>{assert.equal(nums.length,1);assert.ok(q.text.includes('ექვსივე'));return nums[0]/6;},
   'repair-versus-replace-cost':()=>{assert.equal(nums.length,2);return nums[1]-nums[0];},
   'deposit-refund-net':()=>{assert.equal(nums.length,3);return nums[0]+nums[1]-nums[2];},
@@ -28,6 +30,18 @@ export function verifyCivicsEvidence(q){
   assert.equal(q.options.filter(x=>x===expected).length,1,'Exactly one recomputed numeric option');
   assert.equal(q.options[q.correct],expected,'Prompt numbers disagree with the key');
   return 'prompt_number_recomputation';
+ }
+ if(q.family==='emissions-boundary'){
+  assert.equal(nums.length,2);assert.equal(nums[1]-nums[0],0);
+  assert.equal(q.options[q.correct],'უცვლელი დარჩა');
+  assert.equal(q.options.filter(o=>o==='უცვლელი დარჩა').length,1);
+  return 'boundary_recomputation';
+ }
+ if(q.family==='absolute-per-person-water'){
+  assert.equal(nums.length,4);const first=nums[1]/nums[0],second=nums[3]/nums[2];
+  assert.ok(first>second);const answer=`${first}-დან ${second} ლიტრამდე შემცირდა`;
+  assert.equal(q.options[q.correct],answer);assert.equal(q.options.filter(o=>o===answer).length,1);
+  return 'per_person_recomputation';
  }
  if(q.family==='budget-feasible-set'){
   assert.equal(nums.length,4);
