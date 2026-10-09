@@ -5,7 +5,7 @@ function run(args){const result=spawnSync(process.execPath,args,{stdio:'inherit'
 run(['scripts/assemble-app.mjs','--check']);
 run(['scripts/check-browser-syntax.mjs']);
 run(['--max-old-space-size=512','node_modules/typescript/bin/tsc','--noEmit','--pretty','false','--incremental','false']);
-run(['--test','--test-concurrency=1',...tests.map(name=>'tests/'+name+'.test.mjs')]);
+run(['--test','--test-concurrency=1','tests/ci-workflow.test.mjs',...tests.map(name=>'tests/'+name+'.test.mjs')]);
 if(process.argv.includes('--bank-review')){
  if(!fs.existsSync('data/v29-held-reviewed.json'))throw Error('Private bank review artifact is required');
  run(['--test','.openai/v29-held-review.test.mjs']);

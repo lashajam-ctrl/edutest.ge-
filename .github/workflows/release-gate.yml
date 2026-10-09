@@ -13,7 +13,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
-          cache: npm
-      - run: npm ci
-      - run: npm test
-      - run: npm run build:cloudflare
+      # Read the exact pnpm version from package.json; use its committed lockfile.
+      - uses: pnpm/action-setup@v6
+        with:
+          run_install: false
+          cache: true
+      - run: pnpm install --frozen-lockfile
+      - run: node scripts/release-gate.mjs --no-build
+      - run: pnpm run build:cloudflare
