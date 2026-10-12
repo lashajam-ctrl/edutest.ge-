@@ -5,6 +5,7 @@ import {readSnapshot} from './audit-bank-capacity.mjs';
 import {validateCivicsBatch} from './civics-expansion-quality.mjs';
 import {validateSafetyBatch} from './safety-expansion-quality.mjs';
 import {validateGeorgiaBatch} from './georgia-expansion-quality.mjs';
+import {validateGrade8Batch} from './grade8-expansion-quality.mjs';
 import {normalizedPrompt,lexicalSimilarity} from './bank-expansion-quality.mjs';
 import {canonicalPublicTaskCore} from '../lib/assessment-selection-core.mjs';
 import {coalesceSelectionGroups,assessmentSelectionKey,distinctSelectionGroupCount,selectAssessmentCandidates} from '../lib/assessment-selection.ts';
@@ -13,7 +14,7 @@ const cfg=process.argv[2]?JSON.parse(fs.readFileSync(process.argv[2])):{name:'ci
 const name=cfg.name,reportPath=`reports/${name}-expansion-${cfg.date}.json`;
 const questions=JSON.parse(fs.readFileSync(root+`/${name}-questions.json`,'utf8'));
 const subject=cfg.subject??'მოქალაქეობა';
-const checks=(cfg.reviewKind==='georgia'?validateGeorgiaBatch:cfg.reviewKind==='safety'?validateSafetyBatch:validateCivicsBatch)(questions);
+const checks=(cfg.reviewKind==='grade8'?validateGrade8Batch:cfg.reviewKind==='georgia'?validateGeorgiaBatch:cfg.reviewKind==='safety'?validateSafetyBatch:validateCivicsBatch)(questions);
 assert.equal(questions.length,cfg.count);
 const {db,sha256}=readSnapshot(root+'/civics-before-production.sql');
 for(const patch of cfg.patches)db.exec(fs.readFileSync(root+'/'+patch,'utf8'));
@@ -83,7 +84,7 @@ function simulate(pool,sizes,label){
  }
  return {label,distinct,papers};
 }
-for(const grade of cfg.grades)for(const semester of [1,2]){
+for(const grade of cfg.grades)for(const semester of (cfg.semesters??[1,2])){
  const scope=q=>q.grade===grade&&q.semester===semester&&q.subject===subject&&q.active===1;
  const b=active.filter(scope),a=after.filter(scope);
  const beforeGroups=distinctSelectionGroupCount(coalesceSelectionGroups(b)),afterGroups=distinctSelectionGroupCount(coalesceSelectionGroups(a));
@@ -93,12 +94,12 @@ for(const grade of cfg.grades)for(const semester of [1,2]){
  buckets.push({grade,semester,beforeRows:b.length,afterRows:a.length,beforeGroups,afterGroups,added,freshTenQuestionPapers:Math.floor(afterGroups/10),freshTwentyQuestionPapers:Math.floor(afterGroups/20)});
  for(const [mode,sizes]of [['ten',Array(9).fill(10)],['twenty',Array(5).fill(20)],['mixed',[10,20,10,20,10,20,10]]])workloads.push(simulate(a,sizes,`${grade}|${semester}|${mode}`));
 }
-const tests=db.prepare("SELECT * FROM assessment_tests WHERE published=1 AND is_custom=0 AND subject=?").all(subject).filter(t=>cfg.grades.includes(t.grade));
+const tests=db.prepare("SELECT * FROM assessment_tests WHERE published=1 AND is_custom=0 AND subject=?").all(subject).filter(t=>cfg.grades.includes(t.grade)&&(!cfg.semesters||t.semester==null||cfg.semesters.includes(t.semester)));
 const catalog=tests.map(t=>{
  const pool=after.filter(q=>q.active===1&&q.grade===t.grade&&q.subject===t.subject&&(t.semester==null||q.semester===t.semester)&&(!['v8','v11','v23','v28'].includes(t.source_pool)||q.pool_prefix===t.source_pool)&&(!t.difficulty||q.difficulty===t.difficulty));
  return simulate(pool,[Number(t.question_count)],t.id);
 });
-assert.ok(catalog.length>=cfg.grades.length*2,'Expected live catalog routes');
+assert.ok(catalog.length>=cfg.grades.length*(cfg.semesters?.length??2),'Expected live catalog routes');
 const report={generatedAt:new Date().toISOString(),snapshotSha256:sha256,baselineActive:active.length,afterActive:active.length+questions.length,added:questions.length,authoredFamilies:questions.length,optionRationalesChecked:questions.length*4,computationalEvidenceChecks:checks.filter(x=>x.check!=='assistant_option_by_option_review_only').length,assistantJudgementOnly:checks.filter(x=>x.check==='assistant_option_by_option_review_only').length,exactDuplicateAdditions:0,canonicalDuplicateAdditions:0,lexicalReviewThreshold:.45,unresolvedSimilarityCandidates:flags,buckets,simulatedPapers:workloads.reduce((n,w)=>n+w.papers.length,0),workloads,catalog,failures:[],sources:[{title:'Ministry citizenship guide, page 5: VII–VIII themes',url:'https://www.mes.gov.ge/uploads/files/gzamkvlevi/მოქალაქეობა.pdf',accessed:'2026-10-08'}],limitations:['Assistant-authored and option-by-option reviewed; not independently teacher-certified.','Eight prompts have computational evidence checks; 32 depend on assistant semantic judgement.','Semester placement is a configurable editorial allocation, not a ministry-mandated calendar.','Similarity thresholds and selector families do not prove absence of every semantic overlap.','Fresh-paper counts assume no previous attempts in that grade/subject/semester; 10/20 modes share history.','The 200-group planning target remains unmet in these buckets.','No authenticated learner submission is performed by this bank-only release.']};
 report.limitations=report.limitations.filter(x=>!x.startsWith('Eight prompts'));
 report.limitations.push(`${report.computationalEvidenceChecks} prompts have computational checks; ${report.assistantJudgementOnly} rely on assistant semantic judgement.`);
