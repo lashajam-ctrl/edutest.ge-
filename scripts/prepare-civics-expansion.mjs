@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {readSnapshot} from './audit-bank-capacity.mjs';
 import {validateCivicsBatch} from './civics-expansion-quality.mjs';
+import {validateSafetyBatch} from './safety-expansion-quality.mjs';
 import {normalizedPrompt,lexicalSimilarity} from './bank-expansion-quality.mjs';
 import {canonicalPublicTaskCore} from '../lib/assessment-selection-core.mjs';
 import {coalesceSelectionGroups,assessmentSelectionKey,distinctSelectionGroupCount,selectAssessmentCandidates} from '../lib/assessment-selection.ts';
@@ -10,14 +11,15 @@ const root='.openai/bank-expansion-20261007';
 const cfg=process.argv[2]?JSON.parse(fs.readFileSync(process.argv[2])):{name:'civics',count:40,baseline:23433,grades:[7,8],date:'2026-10-08',marker:'civics_expansion_20261008',familyPrefix:'qe5',patches:[]};
 const name=cfg.name,reportPath=`reports/${name}-expansion-${cfg.date}.json`;
 const questions=JSON.parse(fs.readFileSync(root+`/${name}-questions.json`,'utf8'));
-const checks=validateCivicsBatch(questions);
+const subject=cfg.subject??'მოქალაქეობა';
+const checks=(cfg.reviewKind==='safety'?validateSafetyBatch:validateCivicsBatch)(questions);
 assert.equal(questions.length,cfg.count);
 const {db,sha256}=readSnapshot(root+'/civics-before-production.sql');
 for(const patch of cfg.patches)db.exec(fs.readFileSync(root+'/'+patch,'utf8'));
 if(cfg.liveBefore){
  const live=JSON.parse(fs.readFileSync(root+'/'+cfg.liveBefore));
  assert.equal(live.activeTotal,cfg.baseline);
- const local=db.prepare("SELECT q.*,a.answer_key_json,a.explanation FROM assessment_questions q JOIN assessment_answer_keys a ON a.question_id=q.id WHERE q.active=1 AND q.subject='მოქალაქეობა'").all();
+ const local=db.prepare("SELECT q.*,a.answer_key_json,a.explanation FROM assessment_questions q JOIN assessment_answer_keys a ON a.question_id=q.id WHERE q.active=1 AND q.subject=?").all(subject);
  const byId=new Map(local.map(q=>[q.id,q]));assert.equal(local.length,live.rows.length);
  for(const row of live.rows)assert.deepEqual({...byId.get(row.id)},row,'Scoped live-bank drift');
 }
@@ -51,7 +53,7 @@ for(const q of questions){
  const payload={id:q.id,text:q.text,type:'multiple_choice',pts:2,grade:q.grade,subject:q.subject,semester:q.semester,topic:q.topic,opts:q.options,difficulty:'core'};
  assert.ok(!['correct','answer','answerKey','explanation','model','optionReview'].some(k=>k in payload));
  const key={correct:q.correct};
- const row={id:q.id,source_id:`${cfg.marker}:${q.id}`,pool_key:`G${q.grade}|${q.subject}|${q.semester}`,pool_prefix:'v28',grade:q.grade,subject:q.subject,source_subject:'Original assistant-reviewed civics practice; not teacher-certified',semester:q.semester,topic:q.topic,strand:q.curriculumTheme,question_type:'multiple_choice',public_payload_json:JSON.stringify(payload),points:2,difficulty:'core',review_status:'algorithmically_validated',mapping_status:cfg.marker,semantic_group_id:`${cfg.familyPrefix}-family:${q.family}`,content_hash:hash(JSON.stringify([payload,key,q.explanation])),active:1,imported_at:now,updated_at:now};
+ const row={id:q.id,source_id:`${cfg.marker}:${q.id}`,pool_key:`G${q.grade}|${q.subject}|${q.semester}`,pool_prefix:'v28',grade:q.grade,subject:q.subject,source_subject:'Original assistant-reviewed educational practice; not teacher-certified',semester:q.semester,topic:q.topic,strand:q.curriculumTheme,question_type:'multiple_choice',public_payload_json:JSON.stringify(payload),points:2,difficulty:'core',review_status:'algorithmically_validated',mapping_status:cfg.marker,semantic_group_id:`${cfg.familyPrefix}-family:${q.family}`,content_hash:hash(JSON.stringify([payload,key,q.explanation])),active:1,imported_at:now,updated_at:now};
  statements.push(`INSERT INTO assessment_questions(${cols.join(',')}) VALUES(${cols.map(c=>sql(row[c])).join(',')}) ON CONFLICT(id) DO NOTHING;`);
  statements.push(`INSERT INTO assessment_answer_keys(question_id,answer_key_json,explanation,updated_at) SELECT ${sql(q.id)},${sql(JSON.stringify(key))},${sql(q.explanation)},${now} WHERE EXISTS(SELECT 1 FROM assessment_questions WHERE id=${sql(q.id)} AND content_hash=${sql(row.content_hash)}) ON CONFLICT(question_id) DO NOTHING;`);
  records.push({row,key,explanation:q.explanation});
@@ -68,7 +70,7 @@ function simulate(pool,sizes,label){
  const distinct=distinctSelectionGroupCount(working),papers=[];
  assert.ok(pool.length<=1000,'Production candidate cap');
  for(const [i,count]of sizes.entries()){
-  const now=1800000000000+i*3600000,r=selectAssessmentCandidates(working,'მოქალაქეობა',pool[0].grade,count,now);
+  const now=1800000000000+i*3600000,r=selectAssessmentCandidates(working,subject,pool[0].grade,count,now);
   const keys=r.selected.map(assessmentSelectionKey),fresh=keys.filter(k=>!seen.has(k)).length;
   assert.equal(keys.length,count,label+': incomplete paper');
   assert.equal(new Set(keys).size,count,label+': repeated family within paper');
@@ -81,7 +83,7 @@ function simulate(pool,sizes,label){
  return {label,distinct,papers};
 }
 for(const grade of cfg.grades)for(const semester of [1,2]){
- const scope=q=>q.grade===grade&&q.semester===semester&&q.subject==='მოქალაქეობა'&&q.active===1;
+ const scope=q=>q.grade===grade&&q.semester===semester&&q.subject===subject&&q.active===1;
  const b=active.filter(scope),a=after.filter(scope);
  const beforeGroups=distinctSelectionGroupCount(coalesceSelectionGroups(b)),afterGroups=distinctSelectionGroupCount(coalesceSelectionGroups(a));
  const added=questions.filter(q=>q.grade===grade&&q.semester===semester).length;
@@ -90,7 +92,7 @@ for(const grade of cfg.grades)for(const semester of [1,2]){
  buckets.push({grade,semester,beforeRows:b.length,afterRows:a.length,beforeGroups,afterGroups,added,freshTenQuestionPapers:Math.floor(afterGroups/10),freshTwentyQuestionPapers:Math.floor(afterGroups/20)});
  for(const [mode,sizes]of [['ten',Array(9).fill(10)],['twenty',Array(5).fill(20)],['mixed',[10,20,10,20,10,20,10]]])workloads.push(simulate(a,sizes,`${grade}|${semester}|${mode}`));
 }
-const tests=db.prepare("SELECT * FROM assessment_tests WHERE published=1 AND is_custom=0 AND subject='მოქალაქეობა'").all().filter(t=>cfg.grades.includes(t.grade));
+const tests=db.prepare("SELECT * FROM assessment_tests WHERE published=1 AND is_custom=0 AND subject=?").all(subject).filter(t=>cfg.grades.includes(t.grade));
 const catalog=tests.map(t=>{
  const pool=after.filter(q=>q.active===1&&q.grade===t.grade&&q.subject===t.subject&&(t.semester==null||q.semester===t.semester)&&(!['v8','v11','v23','v28'].includes(t.source_pool)||q.pool_prefix===t.source_pool)&&(!t.difficulty||q.difficulty===t.difficulty));
  return simulate(pool,[Number(t.question_count)],t.id);

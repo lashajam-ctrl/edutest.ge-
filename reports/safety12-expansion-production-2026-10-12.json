@@ -1,0 +1,12 @@
+{
+  "verifiedAt": "2026-10-12T07:32:09.680Z",
+  "baselineActive": 23553,
+  "afterActive": 23573,
+  "added": 20,
+  "allAddedPayloadsKeysAndMetadataMatch": true,
+  "existingSubjectRowsUnchanged": 135,
+  "scopedBackupSha256": "b555526244753c63cec314dabcbeae0c428ccc6966d17132d8e1e511d77de872",
+  "patchSha256": "af309cfef4f84f40567325f212dadc5ccc8bc5e98c5c2b05ede799b774108044",
+  "oldDataOperation": "Additive INSERT ON CONFLICT DO NOTHING; no existing rows updated or deleted",
+  "learnerBrowserFlow": "not tested in this bank-only release"
+}
