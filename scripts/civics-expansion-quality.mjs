@@ -6,7 +6,7 @@ import {validateExpansionQuestion,normalizedPrompt} from './bank-expansion-quali
 export function validateCivicsReview(q){
  validateExpansionQuestion(q);
  assert.equal(q.subject,'მოქალაქეობა');
- assert.ok([7,8,9,10].includes(q.grade),'This release is scoped to VII–X');
+ assert.ok([7,8,9,10,11].includes(q.grade),'This release is scoped to VII–XI');
  assert.ok(q.curriculumTheme?.trim());
  assert.equal(q.optionReview?.length,4,'Every distractor needs its own rationale');
  assert.ok(q.optionReview.every(x=>typeof x==='string'&&x.trim().length>=25));
@@ -17,6 +17,11 @@ export function validateCivicsReview(q){
 export function verifyCivicsEvidence(q){
  const nums=[...q.text.matchAll(/\d+/gu)].map(x=>Number(x[0]));
  const numeric={
+  'profit-after-all-costs':()=>{assert.equal(nums.length,2);return nums[0]-nums[1];},
+  'contribution-not-net-profit':()=>{assert.equal(nums.length,2);return nums[0]-nums[1];},
+  'break-even-units':()=>{assert.equal(nums.length,3);assert.ok(nums[1]>nums[2]);const n=nums[0]/(nums[1]-nums[2]);assert.ok(Number.isInteger(n));return n;},
+  'production-bottleneck':()=>{assert.equal(nums.length,3);return Math.min(...nums);},
+  'weighted-turnout-combined':()=>{assert.equal(nums.length,4);const [a,x,b,y]=nums;assert.ok(a>0&&b>0&&x<=a&&y<=b);return (x+y)/(a+b)*100;},
   'unique-campaign-reach':()=>{assert.equal(nums.length,3);assert.ok(nums[2]<=Math.min(nums[0],nums[1]));return nums[0]+nums[1]-nums[2];},
   'explicit-deadline-count':()=>{assert.equal(nums.length,2);assert.ok(q.text.includes('მომდევნო დღიდან'));assert.ok(q.text.includes('უქმეებიც ითვლება'));assert.ok(nums[0]+nums[1]<=31);return nums[0]+nums[1];},
   'budget-shortfall':()=>{assert.equal(nums.length,2);return nums[1]-nums[0];},
@@ -32,6 +37,39 @@ export function verifyCivicsEvidence(q){
   assert.equal(q.options.filter(x=>x===expected).length,1,'Exactly one recomputed numeric option');
   assert.equal(q.options[q.correct],expected,'Prompt numbers disagree with the key');
   return 'prompt_number_recomputation';
+ }
+ if(q.family==='lifetime-cost-tie'){
+  assert.equal(nums.length,4);assert.ok(q.text.includes('ორი წელი'));
+  const a=nums[0]+2*nums[1],b=nums[2]+2*nums[3];assert.equal(a,b,'Costs must tie');
+  assert.equal(q.options[q.correct],`ორი წლის სრული ხარჯი ორივესთვის ${a} ლარია`);
+  return 'lifetime_cost_recomputation';
+ }
+ if(q.family==='subscription-total-price'){
+  assert.equal(nums.length,3);assert.ok(q.text.includes('ოთხი თვისთვის'));
+  const a=4*nums[0]+nums[1],b=4*nums[2];assert.ok(b<a);
+  assert.equal(q.options[q.correct],`B — ${b} ლარი`);return 'subscription_cost_recomputation';
+ }
+ if(q.family==='margin-versus-markup'){
+  assert.equal(nums.length,2);assert.ok(nums[0]>0);
+  const margin=(nums[0]-nums[1])*100/nums[0];
+  assert.equal(q.options[q.correct],`${margin}%`);return 'margin_recomputation';
+ }
+ if(q.family==='plurality-not-majority'){
+  assert.equal(nums.length,3);assert.equal(nums.reduce((a,b)=>a+b),100);
+  assert.ok(nums[0]>nums[1]&&nums[0]>nums[2]&&nums[0]<50);
+  assert.equal(q.options[q.correct],'ყველაზე მეტი ხმა აქვს ცალკეულ ვარიანტებს შორის, მაგრამ ნახევარზე მეტი არა');
+  return 'plurality_recomputation';
+ }
+ if(q.family==='quorum-before-vote'){
+  assert.equal(nums.length,2);assert.ok(q.text.includes('ორი მესამედის'));
+  const required=Math.ceil(nums[0]*2/3);assert.ok(nums[1]<required);
+  assert.equal(q.options[q.correct],`საჭირო ${required} დამსწრე არ არის; დამსწრეთა ერთსულოვნება ამ წინაპირობას ვერ ცვლის`);
+  return 'quorum_recomputation';
+ }
+ if(q.family==='coalition-stated-threshold'){
+  assert.equal(nums.length,4);const [a,b,c,threshold]=nums;
+  assert.ok(a+c>=threshold&&[a,b,c].every(x=>x<threshold));
+  assert.equal(q.options[q.correct],'A და C ერთად');return 'coalition_recomputation';
  }
  if(q.family==='conjunctive-eligibility'){
   const threshold=Number(q.text.match(/არანაკლებ (\d+)/u)?.[1]);assert.ok(Number.isFinite(threshold));

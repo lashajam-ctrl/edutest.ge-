@@ -84,8 +84,10 @@ for(const grade of cfg.grades)for(const semester of [1,2]){
  const scope=q=>q.grade===grade&&q.semester===semester&&q.subject==='მოქალაქეობა'&&q.active===1;
  const b=active.filter(scope),a=after.filter(scope);
  const beforeGroups=distinctSelectionGroupCount(coalesceSelectionGroups(b)),afterGroups=distinctSelectionGroupCount(coalesceSelectionGroups(a));
- assert.equal(afterGroups-beforeGroups,10,'A variant must not inflate claimed diversity');
- buckets.push({grade,semester,beforeRows:b.length,afterRows:a.length,beforeGroups,afterGroups,added:10,freshTenQuestionPapers:Math.floor(afterGroups/10),freshTwentyQuestionPapers:Math.floor(afterGroups/20)});
+ const added=questions.filter(q=>q.grade===grade&&q.semester===semester).length;
+ assert.equal(added,cfg.perBucket??10,'Unexpected grade/semester allocation');
+ assert.equal(afterGroups-beforeGroups,added,'A variant must not inflate claimed diversity');
+ buckets.push({grade,semester,beforeRows:b.length,afterRows:a.length,beforeGroups,afterGroups,added,freshTenQuestionPapers:Math.floor(afterGroups/10),freshTwentyQuestionPapers:Math.floor(afterGroups/20)});
  for(const [mode,sizes]of [['ten',Array(9).fill(10)],['twenty',Array(5).fill(20)],['mixed',[10,20,10,20,10,20,10]]])workloads.push(simulate(a,sizes,`${grade}|${semester}|${mode}`));
 }
 const tests=db.prepare("SELECT * FROM assessment_tests WHERE published=1 AND is_custom=0 AND subject='მოქალაქეობა'").all().filter(t=>cfg.grades.includes(t.grade));

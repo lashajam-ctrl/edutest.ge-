@@ -2,6 +2,33 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {validateCivicsReview,validateCivicsBatch,verifyCivicsEvidence} from '../scripts/civics-expansion-quality.mjs';
 const fixture=()=>({id:'synthetic',family:'synthetic-scenario',topic:'მონაწილეობა',subject:'მოქალაქეობა',grade:7,semester:1,text:'Synthetic review fixture, not published content.',options:['A','B','C','D'],correct:0,optionReview:['The correct option follows the stated premise.','Distractor B contradicts the first condition.','Distractor C is unsupported by the supplied evidence.','Distractor D fails the second stated condition.'],explanation:'The correct option follows the stated premise.',review:'assistant_content_reviewed',curriculumTheme:'თემი',prerequisiteMinGrade:7});
+test('grade-eleven numeric evidence independently recomputes all five plain-number families',()=>{
+ for(const [family,text,answer]of [['profit-after-all-costs','900 720','180'],['contribution-not-net-profit','12 8','4'],['break-even-units','120 9 5','30'],['production-bottleneck','12 8 5','5'],['weighted-turnout-combined','100 80 300 120','50']]){
+  const q={family,text,options:[answer,'wrong','other','none'],correct:0};
+  assert.equal(verifyCivicsEvidence(q),'prompt_number_recomputation');
+  assert.throws(()=>verifyCivicsEvidence({...q,correct:1}));
+ }
+ assert.throws(()=>verifyCivicsEvidence({family:'break-even-units',text:'120 5 9',options:['30','0','1','2'],correct:0}));
+});
+test('grade-eleven cost comparisons and margin use the stated period and denominator',()=>{
+ const cases=[
+  {family:'lifetime-cost-tie',text:'60 20 90 5 ორი წელი',options:['ორი წლის სრული ხარჯი ორივესთვის 100 ლარია','A','B','C'],correct:0},
+  {family:'subscription-total-price',text:'15 20 18 ოთხი თვისთვის',options:['B — 72 ლარი','A','C','D'],correct:0},
+  {family:'margin-versus-markup',text:'100 80',options:['20%','25%','80%','100%'],correct:0}
+ ];
+ for(const q of cases){assert.notEqual(verifyCivicsEvidence(q),'assistant_option_by_option_review_only');assert.throws(()=>verifyCivicsEvidence({...q,correct:1}));}
+ assert.throws(()=>verifyCivicsEvidence({...cases[0],text:'60 20 95 5 ორი წელი'}));
+ assert.throws(()=>verifyCivicsEvidence({...cases[1],text:'15 20 18 ექვსი თვისთვის'}));
+});
+test('grade-eleven voting models check shares, quorum and coalition thresholds',()=>{
+ const p={family:'plurality-not-majority',text:'40 35 25',options:['ყველაზე მეტი ხმა აქვს ცალკეულ ვარიანტებს შორის, მაგრამ ნახევარზე მეტი არა','B','C','D'],correct:0};
+ const q={family:'quorum-before-vote',text:'15 ორი მესამედის 9',options:['საჭირო 10 დამსწრე არ არის; დამსწრეთა ერთსულოვნება ამ წინაპირობას ვერ ცვლის','B','C','D'],correct:0};
+ const c={family:'coalition-stated-threshold',text:'45 35 20 51',options:['A და C ერთად','მხოლოდ A','მხოლოდ B','მხოლოდ C'],correct:0};
+ for(const item of [p,q,c]){assert.notEqual(verifyCivicsEvidence(item),'assistant_option_by_option_review_only');assert.throws(()=>verifyCivicsEvidence({...item,correct:1}));}
+ assert.throws(()=>verifyCivicsEvidence({...p,text:'60 25 15'}));
+ assert.throws(()=>verifyCivicsEvidence({...q,text:'15 ორი მესამედის 10'}));
+ assert.throws(()=>verifyCivicsEvidence({...c,text:'45 35 20 40'}));
+});
 test('grade-ten evidence distinguishes people from visits and follows explicit deadline rules',()=>{
  const q={family:'unique-campaign-reach',text:'28 22 9',options:['41','50','59','19'],correct:0};
  assert.equal(verifyCivicsEvidence(q),'prompt_number_recomputation');
