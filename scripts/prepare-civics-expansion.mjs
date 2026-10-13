@@ -14,7 +14,8 @@ const cfg=process.argv[2]?JSON.parse(fs.readFileSync(process.argv[2])):{name:'ci
 const name=cfg.name,reportPath=`reports/${name}-expansion-${cfg.date}.json`;
 const questions=JSON.parse(fs.readFileSync(root+`/${name}-questions.json`,'utf8'));
 const subject=cfg.subject??'მოქალაქეობა';
-const checks=(cfg.reviewKind==='grade8'?validateGrade8Batch:cfg.reviewKind==='georgia'?validateGeorgiaBatch:cfg.reviewKind==='safety'?validateSafetyBatch:validateCivicsBatch)(questions);
+const reviewOptions=cfg.reviewOptions??{};
+const checks=(cfg.reviewKind==='grade8'?validateGrade8Batch:cfg.reviewKind==='georgia'?validateGeorgiaBatch:cfg.reviewKind==='safety'?validateSafetyBatch:validateCivicsBatch)(questions,reviewOptions);
 assert.equal(questions.length,cfg.count);
 const {db,sha256}=readSnapshot(root+'/civics-before-production.sql');
 for(const patch of cfg.patches)db.exec(fs.readFileSync(root+'/'+patch,'utf8'));
@@ -106,9 +107,10 @@ report.limitations.push(`${report.computationalEvidenceChecks} prompts have comp
 report.sources[0].title='Ministry citizenship guide, page 5: grade themes';report.sources[0].accessed=cfg.date;
 if(cfg.sources)report.sources=cfg.sources;
 report.privateDraftSha256=hash(fs.readFileSync(root+`/${name}-questions.json`));
+report.reviewOptions=reviewOptions;
 report.patchSha256=hash(statements.join('\n')+'\n');
 if(cfg.liveBefore)report.scopedBackupSha256=hash(fs.readFileSync(root+'/'+cfg.liveBefore));
-fs.writeFileSync(root+`/${name}-reviewed.json`,JSON.stringify({records,questions,checks},null,2));
+fs.writeFileSync(root+`/${name}-reviewed.json`,JSON.stringify({records,questions,checks,reviewOptions},null,2));
 fs.writeFileSync(root+`/${name}-patch.sql`,statements.join('\n')+'\n');
 fs.writeFileSync(reportPath,JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify({added:report.added,buckets,simulatedPapers:report.simulatedPapers,catalogTests:catalog.length,computationalEvidenceChecks:report.computationalEvidenceChecks,failures:report.failures},null,2));

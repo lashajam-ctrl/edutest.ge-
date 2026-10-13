@@ -1,0 +1,169 @@
+{
+  "verifiedAt": "2026-10-13T12:52:44.696Z",
+  "beforeActive": 23609,
+  "afterActive": 23613,
+  "added": 4,
+  "grade": 8,
+  "semester": 2,
+  "subject": "ქართული ენა და ლიტერატურა",
+  "oldScopedRowsAndAnswerKeysUnchanged": 1177,
+  "previousFourteenQualityHoldsPreserved": true,
+  "allFourAddedRecordsMatch": true,
+  "balancedFreshTenPapers": 6,
+  "balancedFreshTwentyPapers": 3,
+  "productionRowSimulations": [
+    [
+      {
+        "requested": 10,
+        "delivered": 10,
+        "fresh": 10,
+        "reused": 0,
+        "language": 4,
+        "literature": 6,
+        "expectedLanguage": 4,
+        "balanced": true,
+        "fullyFresh": true
+      },
+      {
+        "requested": 10,
+        "delivered": 10,
+        "fresh": 10,
+        "reused": 0,
+        "language": 4,
+        "literature": 6,
+        "expectedLanguage": 4,
+        "balanced": true,
+        "fullyFresh": true
+      },
+      {
+        "requested": 10,
+        "delivered": 10,
+        "fresh": 10,
+        "reused": 0,
+        "language": 4,
+        "literature": 6,
+        "expectedLanguage": 4,
+        "balanced": true,
+        "fullyFresh": true
+      },
+      {
+        "requested": 10,
+        "delivered": 10,
+        "fresh": 10,
+        "reused": 0,
+        "language": 4,
+        "literature": 6,
+        "expectedLanguage": 4,
+        "balanced": true,
+        "fullyFresh": true
+      },
+      {
+        "requested": 10,
+        "delivered": 10,
+        "fresh": 10,
+        "reused": 0,
+        "language": 4,
+        "literature": 6,
+        "expectedLanguage": 4,
+        "balanced": true,
+        "fullyFresh": true
+      },
+      {
+        "requested": 10,
+        "delivered": 10,
+        "fresh": 10,
+        "reused": 0,
+        "language": 4,
+        "literature": 6,
+        "expectedLanguage": 4,
+        "balanced": true,
+        "fullyFresh": true
+      }
+    ],
+    [
+      {
+        "requested": 20,
+        "delivered": 20,
+        "fresh": 20,
+        "reused": 0,
+        "language": 8,
+        "literature": 12,
+        "expectedLanguage": 8,
+        "balanced": true,
+        "fullyFresh": true
+      },
+      {
+        "requested": 20,
+        "delivered": 20,
+        "fresh": 20,
+        "reused": 0,
+        "language": 8,
+        "literature": 12,
+        "expectedLanguage": 8,
+        "balanced": true,
+        "fullyFresh": true
+      },
+      {
+        "requested": 20,
+        "delivered": 20,
+        "fresh": 20,
+        "reused": 0,
+        "language": 8,
+        "literature": 12,
+        "expectedLanguage": 8,
+        "balanced": true,
+        "fullyFresh": true
+      }
+    ],
+    [
+      {
+        "requested": 10,
+        "delivered": 10,
+        "fresh": 10,
+        "reused": 0,
+        "language": 4,
+        "literature": 6,
+        "expectedLanguage": 4,
+        "balanced": true,
+        "fullyFresh": true
+      },
+      {
+        "requested": 20,
+        "delivered": 20,
+        "fresh": 20,
+        "reused": 0,
+        "language": 8,
+        "literature": 12,
+        "expectedLanguage": 8,
+        "balanced": true,
+        "fullyFresh": true
+      },
+      {
+        "requested": 10,
+        "delivered": 10,
+        "fresh": 10,
+        "reused": 0,
+        "language": 4,
+        "literature": 6,
+        "expectedLanguage": 4,
+        "balanced": true,
+        "fullyFresh": true
+      },
+      {
+        "requested": 20,
+        "delivered": 20,
+        "fresh": 20,
+        "reused": 0,
+        "language": 8,
+        "literature": 12,
+        "expectedLanguage": 8,
+        "balanced": true,
+        "fullyFresh": true
+      }
+    ]
+  ],
+  "scopedBackupSha256": "68b579d0fecbeb52627036c4392672684e805bf661dbc7fe52d2b3d5dadb9822",
+  "patchSha256": "845f9c3d8ffb253de56e1e60ce3163d14bd05b5914b001d2ccddf7a7386c62b6",
+  "learnerBrowserFlow": "Not tested in this bank-only release",
+  "limits": "Finite supply; fresh capacity assumes no previous attempts, both paper sizes share history. Assistant content review, not independent teacher certification."
+}

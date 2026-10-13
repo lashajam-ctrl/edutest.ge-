@@ -1,0 +1,799 @@
+{
+  "generatedAt": "2026-10-13T06:46:28.257Z",
+  "scope": {
+    "grade": 8,
+    "semester": 2,
+    "subject": "ქართული ენა და ლიტერატურა"
+  },
+  "localReplayedActiveTotal": 23613,
+  "activeRows": 107,
+  "selectionGroups": 66,
+  "languageGroups": 30,
+  "literatureGroups": 36,
+  "balancedFreshTenPapers": 6,
+  "balancedFreshTwentyPapers": 3,
+  "workloads": [
+    {
+      "mode": "ten",
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0,
+          "language": 4,
+          "literature": 6,
+          "expectedLanguage": 4,
+          "balanced": true,
+          "fullyFresh": true
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0,
+          "language": 4,
+          "literature": 6,
+          "expectedLanguage": 4,
+          "balanced": true,
+          "fullyFresh": true
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0,
+          "language": 4,
+          "literature": 6,
+          "expectedLanguage": 4,
+          "balanced": true,
+          "fullyFresh": true
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0,
+          "language": 4,
+          "literature": 6,
+          "expectedLanguage": 4,
+          "balanced": true,
+          "fullyFresh": true
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0,
+          "language": 4,
+          "literature": 6,
+          "expectedLanguage": 4,
+          "balanced": true,
+          "fullyFresh": true
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0,
+          "language": 4,
+          "literature": 6,
+          "expectedLanguage": 4,
+          "balanced": true,
+          "fullyFresh": true
+        }
+      ]
+    },
+    {
+      "mode": "twenty",
+      "papers": [
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0,
+          "language": 8,
+          "literature": 12,
+          "expectedLanguage": 8,
+          "balanced": true,
+          "fullyFresh": true
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0,
+          "language": 8,
+          "literature": 12,
+          "expectedLanguage": 8,
+          "balanced": true,
+          "fullyFresh": true
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0,
+          "language": 8,
+          "literature": 12,
+          "expectedLanguage": 8,
+          "balanced": true,
+          "fullyFresh": true
+        }
+      ]
+    },
+    {
+      "mode": "mixed",
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0,
+          "language": 4,
+          "literature": 6,
+          "expectedLanguage": 4,
+          "balanced": true,
+          "fullyFresh": true
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0,
+          "language": 8,
+          "literature": 12,
+          "expectedLanguage": 8,
+          "balanced": true,
+          "fullyFresh": true
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0,
+          "language": 4,
+          "literature": 6,
+          "expectedLanguage": 4,
+          "balanced": true,
+          "fullyFresh": true
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0,
+          "language": 8,
+          "literature": 12,
+          "expectedLanguage": 8,
+          "balanced": true,
+          "fullyFresh": true
+        }
+      ]
+    }
+  ],
+  "seventhTenPaper": {
+    "requested": 10,
+    "delivered": 10,
+    "fresh": 6,
+    "reused": 4,
+    "language": 6,
+    "literature": 4,
+    "expectedLanguage": 4,
+    "balanced": false,
+    "fullyFresh": false
+  },
+  "manualReview": {
+    "newQuestions": 4,
+    "optionRationales": 16,
+    "rejectedDrafts": 1,
+    "rejection": "Narrative-time-compression draft overlapped an existing scenario and skill despite lexical score below threshold; replaced before publication.",
+    "independentTeacherCertification": false
+  },
+  "remainingCapacitySummary": {
+    "buckets": 168,
+    "below50": 0,
+    "below60": 84,
+    "below100": 128,
+    "belowTarget": 163,
+    "shortfallToTarget": 21164,
+    "firstPaperBlueprintDrift": 0
+  },
+  "belowSixtyGroupBuckets": [
+    {
+      "grade": 9,
+      "subject": "ისტორია",
+      "semester": 1,
+      "rows": 56,
+      "groups": 51
+    },
+    {
+      "grade": 9,
+      "subject": "ისტორია",
+      "semester": 2,
+      "rows": 54,
+      "groups": 51
+    },
+    {
+      "grade": 9,
+      "subject": "ბიოლოგია",
+      "semester": 2,
+      "rows": 69,
+      "groups": 51
+    },
+    {
+      "grade": 9,
+      "subject": "ქიმია",
+      "semester": 2,
+      "rows": 63,
+      "groups": 51
+    },
+    {
+      "grade": 10,
+      "subject": "ისტორია",
+      "semester": 1,
+      "rows": 56,
+      "groups": 51
+    },
+    {
+      "grade": 10,
+      "subject": "ისტორია",
+      "semester": 2,
+      "rows": 54,
+      "groups": 51
+    },
+    {
+      "grade": 10,
+      "subject": "გეოგრაფია",
+      "semester": 1,
+      "rows": 54,
+      "groups": 51
+    },
+    {
+      "grade": 10,
+      "subject": "ბიოლოგია",
+      "semester": 2,
+      "rows": 67,
+      "groups": 51
+    },
+    {
+      "grade": 10,
+      "subject": "ქიმია",
+      "semester": 2,
+      "rows": 63,
+      "groups": 51
+    },
+    {
+      "grade": 11,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "semester": 2,
+      "rows": 86,
+      "groups": 51
+    },
+    {
+      "grade": 11,
+      "subject": "ისტორია",
+      "semester": 1,
+      "rows": 56,
+      "groups": 51
+    },
+    {
+      "grade": 11,
+      "subject": "ისტორია",
+      "semester": 2,
+      "rows": 51,
+      "groups": 51
+    },
+    {
+      "grade": 11,
+      "subject": "გეოგრაფია",
+      "semester": 1,
+      "rows": 55,
+      "groups": 51
+    },
+    {
+      "grade": 11,
+      "subject": "ბიოლოგია",
+      "semester": 2,
+      "rows": 57,
+      "groups": 51
+    },
+    {
+      "grade": 11,
+      "subject": "ქიმია",
+      "semester": 2,
+      "rows": 54,
+      "groups": 51
+    },
+    {
+      "grade": 12,
+      "subject": "ისტორია",
+      "semester": 1,
+      "rows": 56,
+      "groups": 51
+    },
+    {
+      "grade": 12,
+      "subject": "ისტორია",
+      "semester": 2,
+      "rows": 57,
+      "groups": 51
+    },
+    {
+      "grade": 5,
+      "subject": "ინგლისური",
+      "semester": 1,
+      "rows": 174,
+      "groups": 52
+    },
+    {
+      "grade": 5,
+      "subject": "ინგლისური",
+      "semester": 2,
+      "rows": 177,
+      "groups": 52
+    },
+    {
+      "grade": 5,
+      "subject": "ჩვენი საქართველო",
+      "semester": 2,
+      "rows": 167,
+      "groups": 52
+    },
+    {
+      "grade": 6,
+      "subject": "ინგლისური",
+      "semester": 1,
+      "rows": 167,
+      "groups": 52
+    },
+    {
+      "grade": 6,
+      "subject": "ინგლისური",
+      "semester": 2,
+      "rows": 174,
+      "groups": 52
+    },
+    {
+      "grade": 6,
+      "subject": "ბუნება",
+      "semester": 2,
+      "rows": 165,
+      "groups": 52
+    },
+    {
+      "grade": 7,
+      "subject": "ინგლისური",
+      "semester": 1,
+      "rows": 101,
+      "groups": 52
+    },
+    {
+      "grade": 7,
+      "subject": "ინგლისური",
+      "semester": 2,
+      "rows": 104,
+      "groups": 52
+    },
+    {
+      "grade": 8,
+      "subject": "მათემატიკა",
+      "semester": 1,
+      "rows": 254,
+      "groups": 52
+    },
+    {
+      "grade": 8,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "semester": 1,
+      "rows": 96,
+      "groups": 52
+    },
+    {
+      "grade": 8,
+      "subject": "ინგლისური",
+      "semester": 1,
+      "rows": 91,
+      "groups": 52
+    },
+    {
+      "grade": 8,
+      "subject": "ინგლისური",
+      "semester": 2,
+      "rows": 95,
+      "groups": 52
+    },
+    {
+      "grade": 9,
+      "subject": "გეოგრაფია",
+      "semester": 1,
+      "rows": 58,
+      "groups": 52
+    },
+    {
+      "grade": 9,
+      "subject": "გეოგრაფია",
+      "semester": 2,
+      "rows": 57,
+      "groups": 52
+    },
+    {
+      "grade": 9,
+      "subject": "ბიოლოგია",
+      "semester": 1,
+      "rows": 73,
+      "groups": 52
+    },
+    {
+      "grade": 9,
+      "subject": "ფიზიკა",
+      "semester": 2,
+      "rows": 74,
+      "groups": 52
+    },
+    {
+      "grade": 10,
+      "subject": "ინგლისური",
+      "semester": 1,
+      "rows": 87,
+      "groups": 52
+    },
+    {
+      "grade": 10,
+      "subject": "ინგლისური",
+      "semester": 2,
+      "rows": 83,
+      "groups": 52
+    },
+    {
+      "grade": 10,
+      "subject": "გეოგრაფია",
+      "semester": 2,
+      "rows": 57,
+      "groups": 52
+    },
+    {
+      "grade": 10,
+      "subject": "ბიოლოგია",
+      "semester": 1,
+      "rows": 69,
+      "groups": 52
+    },
+    {
+      "grade": 10,
+      "subject": "ფიზიკა",
+      "semester": 1,
+      "rows": 71,
+      "groups": 52
+    },
+    {
+      "grade": 10,
+      "subject": "ფიზიკა",
+      "semester": 2,
+      "rows": 69,
+      "groups": 52
+    },
+    {
+      "grade": 10,
+      "subject": "ქიმია",
+      "semester": 1,
+      "rows": 66,
+      "groups": 52
+    },
+    {
+      "grade": 11,
+      "subject": "ინგლისური",
+      "semester": 1,
+      "rows": 87,
+      "groups": 52
+    },
+    {
+      "grade": 11,
+      "subject": "ინგლისური",
+      "semester": 2,
+      "rows": 81,
+      "groups": 52
+    },
+    {
+      "grade": 11,
+      "subject": "გეოგრაფია",
+      "semester": 2,
+      "rows": 57,
+      "groups": 52
+    },
+    {
+      "grade": 11,
+      "subject": "ბიოლოგია",
+      "semester": 1,
+      "rows": 59,
+      "groups": 52
+    },
+    {
+      "grade": 11,
+      "subject": "ფიზიკა",
+      "semester": 1,
+      "rows": 65,
+      "groups": 52
+    },
+    {
+      "grade": 11,
+      "subject": "ფიზიკა",
+      "semester": 2,
+      "rows": 69,
+      "groups": 52
+    },
+    {
+      "grade": 11,
+      "subject": "ქიმია",
+      "semester": 1,
+      "rows": 57,
+      "groups": 52
+    },
+    {
+      "grade": 12,
+      "subject": "ინგლისური",
+      "semester": 1,
+      "rows": 81,
+      "groups": 52
+    },
+    {
+      "grade": 7,
+      "subject": "მათემატიკა",
+      "semester": 2,
+      "rows": 275,
+      "groups": 53
+    },
+    {
+      "grade": 8,
+      "subject": "მათემატიკა",
+      "semester": 2,
+      "rows": 255,
+      "groups": 53
+    },
+    {
+      "grade": 9,
+      "subject": "ინგლისური",
+      "semester": 2,
+      "rows": 84,
+      "groups": 53
+    },
+    {
+      "grade": 12,
+      "subject": "ინგლისური",
+      "semester": 2,
+      "rows": 81,
+      "groups": 53
+    },
+    {
+      "grade": 5,
+      "subject": "მათემატიკა",
+      "semester": 2,
+      "rows": 261,
+      "groups": 54
+    },
+    {
+      "grade": 5,
+      "subject": "ჩვენი საქართველო",
+      "semester": 1,
+      "rows": 171,
+      "groups": 54
+    },
+    {
+      "grade": 8,
+      "subject": "ბიოლოგია",
+      "semester": 1,
+      "rows": 84,
+      "groups": 54
+    },
+    {
+      "grade": 9,
+      "subject": "ფიზიკა",
+      "semester": 1,
+      "rows": 75,
+      "groups": 54
+    },
+    {
+      "grade": 9,
+      "subject": "ქიმია",
+      "semester": 1,
+      "rows": 68,
+      "groups": 54
+    },
+    {
+      "grade": 10,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "semester": 2,
+      "rows": 87,
+      "groups": 54
+    },
+    {
+      "grade": 11,
+      "subject": "მათემატიკა",
+      "semester": 1,
+      "rows": 114,
+      "groups": 54
+    },
+    {
+      "grade": 11,
+      "subject": "მათემატიკა",
+      "semester": 2,
+      "rows": 120,
+      "groups": 54
+    },
+    {
+      "grade": 5,
+      "subject": "რუსული",
+      "semester": 1,
+      "rows": 80,
+      "groups": 55
+    },
+    {
+      "grade": 5,
+      "subject": "რუსული",
+      "semester": 2,
+      "rows": 80,
+      "groups": 55
+    },
+    {
+      "grade": 5,
+      "subject": "ბუნება",
+      "semester": 2,
+      "rows": 174,
+      "groups": 55
+    },
+    {
+      "grade": 6,
+      "subject": "რუსული",
+      "semester": 1,
+      "rows": 80,
+      "groups": 55
+    },
+    {
+      "grade": 6,
+      "subject": "რუსული",
+      "semester": 2,
+      "rows": 80,
+      "groups": 55
+    },
+    {
+      "grade": 7,
+      "subject": "რუსული",
+      "semester": 1,
+      "rows": 80,
+      "groups": 55
+    },
+    {
+      "grade": 8,
+      "subject": "რუსული",
+      "semester": 1,
+      "rows": 80,
+      "groups": 55
+    },
+    {
+      "grade": 8,
+      "subject": "რუსული",
+      "semester": 2,
+      "rows": 80,
+      "groups": 55
+    },
+    {
+      "grade": 9,
+      "subject": "ინგლისური",
+      "semester": 1,
+      "rows": 88,
+      "groups": 55
+    },
+    {
+      "grade": 9,
+      "subject": "რუსული",
+      "semester": 1,
+      "rows": 80,
+      "groups": 55
+    },
+    {
+      "grade": 9,
+      "subject": "რუსული",
+      "semester": 2,
+      "rows": 80,
+      "groups": 55
+    },
+    {
+      "grade": 10,
+      "subject": "რუსული",
+      "semester": 1,
+      "rows": 80,
+      "groups": 55
+    },
+    {
+      "grade": 10,
+      "subject": "რუსული",
+      "semester": 2,
+      "rows": 80,
+      "groups": 55
+    },
+    {
+      "grade": 11,
+      "subject": "რუსული",
+      "semester": 1,
+      "rows": 80,
+      "groups": 55
+    },
+    {
+      "grade": 11,
+      "subject": "რუსული",
+      "semester": 2,
+      "rows": 80,
+      "groups": 55
+    },
+    {
+      "grade": 12,
+      "subject": "მათემატიკა",
+      "semester": 1,
+      "rows": 125,
+      "groups": 55
+    },
+    {
+      "grade": 12,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "semester": 2,
+      "rows": 89,
+      "groups": 55
+    },
+    {
+      "grade": 6,
+      "subject": "ბუნება",
+      "semester": 1,
+      "rows": 161,
+      "groups": 56
+    },
+    {
+      "grade": 12,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "semester": 1,
+      "rows": 91,
+      "groups": 56
+    },
+    {
+      "grade": 7,
+      "subject": "ქართული ენა და ლიტერატურა",
+      "semester": 2,
+      "rows": 108,
+      "groups": 57
+    },
+    {
+      "grade": 6,
+      "subject": "ქართული",
+      "semester": 2,
+      "rows": 173,
+      "groups": 58
+    },
+    {
+      "grade": 10,
+      "subject": "მათემატიკა",
+      "semester": 1,
+      "rows": 109,
+      "groups": 58
+    },
+    {
+      "grade": 7,
+      "subject": "რუსული",
+      "semester": 2,
+      "rows": 84,
+      "groups": 59
+    },
+    {
+      "grade": 12,
+      "subject": "მათემატიკა",
+      "semester": 2,
+      "rows": 116,
+      "groups": 59
+    }
+  ],
+  "scopeLimit": "All-bank counts are a replay-based capacity calculation, not a live full-bank content audit. First-paper feasibility does not establish semantic correctness.",
+  "remainingWork": [
+    "Grade IX history semesters I and II remain in the saved expansion queue.",
+    "Old-bank semantic and age-appropriateness review is not complete.",
+    "Authenticated learner submit/result recovery is not rerun in this bank-only release.",
+    "The 200-group target is a planning target, not a completed requirement."
+  ]
+}

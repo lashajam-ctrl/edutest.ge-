@@ -26,3 +26,10 @@ test('Georgian expansion preserves explicit 40/60 language and reading mix',()=>
  assert.throws(()=>validateGrade8Batch(qs.map((q,i)=>i===4?{...q,languageBucket:'language',topic:'ქართული · test'}:q)),/share/);
  assert.throws(()=>validateGrade8Batch(qs.map((q,i)=>i===0?{...q,topic:'ლიტერატურა · test'}:q)),/drift/);
 });
+test('A declared reading-only repair does not silently relax default mixed-batch checks',()=>{
+ const qs=Array.from({length:4},(_,i)=>sample(i,'ქართული ენა და ლიტერატურა','literature'));
+ assert.throws(()=>validateGrade8Batch(qs),/share/);
+ assert.equal(validateGrade8Batch(qs,{expectedLanguageShare:0}).length,4);
+ assert.throws(()=>validateGrade8Batch(qs,{expectedLanguageShare:NaN}),/Invalid/);
+ assert.throws(()=>validateGrade8Batch(qs.map((q,i)=>i===0?{...q,languageBucket:'language',topic:'ქართული · test'}:q),{expectedLanguageShare:0}),/share/);
+});

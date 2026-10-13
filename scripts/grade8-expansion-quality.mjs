@@ -2,7 +2,8 @@ import assert from 'node:assert/strict';
 import {validateExpansionQuestion, normalizedPrompt} from './bank-expansion-quality.mjs';
 import {languageBucketFor} from '../lib/assessment-selection.ts';
 
-export function validateGrade8Batch(questions){
+export function validateGrade8Batch(questions, {expectedLanguageShare = .4} = {}){
+ assert.ok(Number.isFinite(expectedLanguageShare)&&expectedLanguageShare>=0&&expectedLanguageShare<=1,'Invalid declared language share');
  assert.ok(questions.length>0);
  for(const field of ['id','family'])assert.equal(new Set(questions.map(q=>q[field])).size,questions.length,`Repeated ${field}`);
  assert.equal(new Set(questions.map(q=>normalizedPrompt(q.text))).size,questions.length,'Repeated prompt');
@@ -17,8 +18,8 @@ export function validateGrade8Batch(questions){
   return {id:q.id,check:verifyGrade8Evidence(q)};
  });
  if(subject==='ქართული ენა და ლიტერატურა'){
-  assert.equal(questions.filter(q=>q.languageBucket==='language').length/ questions.length,.4,'Editorial language share');
-  assert.equal(questions.filter(q=>q.languageBucket==='literature').length/ questions.length,.6,'Editorial reading share');
+  assert.equal(questions.filter(q=>q.languageBucket==='language').length/ questions.length,expectedLanguageShare,'Editorial language share');
+  assert.ok(Math.abs(questions.filter(q=>q.languageBucket==='literature').length/questions.length-(1-expectedLanguageShare))<1e-10,'Editorial reading share');
  }
  return checks;
 }
