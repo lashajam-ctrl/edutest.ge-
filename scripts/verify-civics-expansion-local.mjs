@@ -6,7 +6,7 @@ import {validateSafetyBatch} from './safety-expansion-quality.mjs';
 import {validateGeorgiaBatch} from './georgia-expansion-quality.mjs';
 import {validateGrade8Batch} from './grade8-expansion-quality.mjs';
 const root='.openai/bank-expansion-20261007';
-const name=process.argv.includes('--biology8')?'biology8':process.argv.includes('--georgian8')?'georgian8':process.argv.includes('--georgia6')?'georgia6':process.argv.includes('--safety12')?'safety12':process.argv.includes('--grade11')?'civics11':process.argv.includes('--grade10')?'civics10':process.argv.includes('--grade9')?'civics9':'civics',date=['biology8','georgian8','georgia6','safety12'].includes(name)?'2026-10-12':name==='civics'?'2026-10-08':'2026-10-09';
+const name=process.argv.includes('--georgian8repair')?'georgian8repair':process.argv.includes('--biology8')?'biology8':process.argv.includes('--georgian8')?'georgian8':process.argv.includes('--georgia6')?'georgia6':process.argv.includes('--safety12')?'safety12':process.argv.includes('--grade11')?'civics11':process.argv.includes('--grade10')?'civics10':process.argv.includes('--grade9')?'civics9':'civics',date=name==='georgian8repair'?'2026-10-13':['biology8','georgian8','georgia6','safety12'].includes(name)?'2026-10-12':name==='civics'?'2026-10-08':'2026-10-09';
 const report=JSON.parse(fs.readFileSync(`reports/${name}-expansion-${date}.json`));
 const review=JSON.parse(fs.readFileSync(root+`/${name}-reviewed.json`));
 const draft=fs.readFileSync(root+`/${name}-questions.json`);
@@ -14,7 +14,7 @@ const hash=x=>createHash('sha256').update(x).digest('hex');
 assert.equal(hash(draft),report.privateDraftSha256,'Draft changed after review');
 assert.equal(hash(fs.readFileSync(root+`/${name}-patch.sql`)),report.patchSha256,'Patch changed after review');
 assert.deepEqual(review.questions,JSON.parse(draft));
-assert.deepEqual((['biology8','georgian8'].includes(name)?validateGrade8Batch:name==='georgia6'?validateGeorgiaBatch:name==='safety12'?validateSafetyBatch:validateCivicsBatch)(review.questions),review.checks);
+assert.deepEqual((['biology8','georgian8','georgian8repair'].includes(name)?validateGrade8Batch:name==='georgia6'?validateGeorgiaBatch:name==='safety12'?validateSafetyBatch:validateCivicsBatch)(review.questions),review.checks);
 assert.equal(review.records.length,report.added);
 for(const q of review.questions){
  const r=review.records.find(r=>r.row.id===q.id);assert.ok(r);

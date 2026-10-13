@@ -1,0 +1,231 @@
+{
+  "generatedAt": "2026-10-13T05:43:20.448Z",
+  "scope": {
+    "grade": 8,
+    "semester": 2,
+    "subject": "ქართული ენა და ლიტერატურა"
+  },
+  "baselineActive": 23613,
+  "afterActive": 23609,
+  "added": 10,
+  "held": 14,
+  "holdReasons": {
+    "elementaryAntonyms": 5,
+    "ambiguousSingleKeyWordOrdering": 5,
+    "wordListMislabeledSentence": 4
+  },
+  "beforeRows": 107,
+  "afterRows": 103,
+  "beforeGroups": 61,
+  "afterGroups": 62,
+  "newFamilies": 10,
+  "newOptionsReviewed": 40,
+  "computationalAnswerProofs": 0,
+  "assistantReviewedNewQuestions": 10,
+  "previousPayloadsAndAnswerKeysUnchanged": true,
+  "simulatedPapers": 21,
+  "catalogRoutes": 1,
+  "workloads": [
+    {
+      "mode": "ten",
+      "papers": [
+        {
+          "count": 10,
+          "fresh": 10,
+          "reused": 0,
+          "language": 4,
+          "literature": 6,
+          "withinOneOfFortyPercentLanguage": true
+        },
+        {
+          "count": 10,
+          "fresh": 10,
+          "reused": 0,
+          "language": 4,
+          "literature": 6,
+          "withinOneOfFortyPercentLanguage": true
+        },
+        {
+          "count": 10,
+          "fresh": 10,
+          "reused": 0,
+          "language": 4,
+          "literature": 6,
+          "withinOneOfFortyPercentLanguage": true
+        },
+        {
+          "count": 10,
+          "fresh": 10,
+          "reused": 0,
+          "language": 4,
+          "literature": 6,
+          "withinOneOfFortyPercentLanguage": true
+        },
+        {
+          "count": 10,
+          "fresh": 10,
+          "reused": 0,
+          "language": 4,
+          "literature": 6,
+          "withinOneOfFortyPercentLanguage": true
+        },
+        {
+          "count": 10,
+          "fresh": 10,
+          "reused": 0,
+          "language": 8,
+          "literature": 2,
+          "withinOneOfFortyPercentLanguage": false
+        },
+        {
+          "count": 10,
+          "fresh": 2,
+          "reused": 8,
+          "language": 4,
+          "literature": 6,
+          "withinOneOfFortyPercentLanguage": true
+        },
+        {
+          "count": 10,
+          "fresh": 0,
+          "reused": 10,
+          "language": 4,
+          "literature": 6,
+          "withinOneOfFortyPercentLanguage": true
+        },
+        {
+          "count": 10,
+          "fresh": 0,
+          "reused": 10,
+          "language": 4,
+          "literature": 6,
+          "withinOneOfFortyPercentLanguage": true
+        }
+      ]
+    },
+    {
+      "mode": "twenty",
+      "papers": [
+        {
+          "count": 20,
+          "fresh": 20,
+          "reused": 0,
+          "language": 8,
+          "literature": 12,
+          "withinOneOfFortyPercentLanguage": true
+        },
+        {
+          "count": 20,
+          "fresh": 20,
+          "reused": 0,
+          "language": 8,
+          "literature": 12,
+          "withinOneOfFortyPercentLanguage": true
+        },
+        {
+          "count": 20,
+          "fresh": 20,
+          "reused": 0,
+          "language": 12,
+          "literature": 8,
+          "withinOneOfFortyPercentLanguage": false
+        },
+        {
+          "count": 20,
+          "fresh": 2,
+          "reused": 18,
+          "language": 8,
+          "literature": 12,
+          "withinOneOfFortyPercentLanguage": true
+        },
+        {
+          "count": 20,
+          "fresh": 0,
+          "reused": 20,
+          "language": 8,
+          "literature": 12,
+          "withinOneOfFortyPercentLanguage": true
+        }
+      ]
+    },
+    {
+      "mode": "mixed",
+      "papers": [
+        {
+          "count": 10,
+          "fresh": 10,
+          "reused": 0,
+          "language": 4,
+          "literature": 6,
+          "withinOneOfFortyPercentLanguage": true
+        },
+        {
+          "count": 20,
+          "fresh": 20,
+          "reused": 0,
+          "language": 8,
+          "literature": 12,
+          "withinOneOfFortyPercentLanguage": true
+        },
+        {
+          "count": 10,
+          "fresh": 10,
+          "reused": 0,
+          "language": 4,
+          "literature": 6,
+          "withinOneOfFortyPercentLanguage": true
+        },
+        {
+          "count": 20,
+          "fresh": 20,
+          "reused": 0,
+          "language": 12,
+          "literature": 8,
+          "withinOneOfFortyPercentLanguage": false
+        },
+        {
+          "count": 10,
+          "fresh": 2,
+          "reused": 8,
+          "language": 4,
+          "literature": 6,
+          "withinOneOfFortyPercentLanguage": true
+        },
+        {
+          "count": 20,
+          "fresh": 0,
+          "reused": 20,
+          "language": 8,
+          "literature": 12,
+          "withinOneOfFortyPercentLanguage": true
+        },
+        {
+          "count": 10,
+          "fresh": 0,
+          "reused": 10,
+          "language": 4,
+          "literature": 6,
+          "withinOneOfFortyPercentLanguage": true
+        }
+      ]
+    }
+  ],
+  "scopedBackupSha256": "6a936c024be682735a4fe215093706a4ac43d78d52a92d74f14fc773f8637752",
+  "holdPatchSha256": "a9ac6768b513a96b0025648a7e601e6f601fbddd58c85a08d29792105d8c929b",
+  "limitations": [
+    "Not an independent teacher certification or full-bank semantic audit.",
+    "Freshness takes priority when a component becomes exhausted; fresh paper counts do not guarantee a constant grammar/literature ratio.",
+    "Grouping and lexical checks cannot prove that every conceptual overlap is absent.",
+    "Old completed results are preserved, not retroactively regraded.",
+    "No authenticated learner submission tested in this bank-only release.",
+    "The 200-group planning target is not met."
+  ],
+  "sources": [
+    {
+      "title": "MES Georgian basic-level guide, language use and interpretation",
+      "url": "https://mes.gov.ge/uploads/files/gzamkvlevi/ქართული-საბაზო.pdf",
+      "accessed": "2026-10-13",
+      "scope": "Broad skill context, not certification of exact semester allocation. Original passages; assistant reviewed, not teacher certified."
+    }
+  ]
+}

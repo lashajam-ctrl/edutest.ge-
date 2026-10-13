@@ -1,0 +1,26 @@
+{
+  "verifiedAt": "2026-10-13T05:44:18.958Z",
+  "beforeActive": 23613,
+  "afterActive": 23609,
+  "added": 10,
+  "held": 14,
+  "scope": {
+    "grade": 8,
+    "semester": 2,
+    "subject": "ქართული ენა და ლიტერატურა"
+  },
+  "beforeScopedRows": 107,
+  "afterScopedRows": 103,
+  "beforeSelectionGroups": 61,
+  "afterSelectionGroups": 62,
+  "allNewPayloadsKeysAndMetadataMatch": true,
+  "allPreviousScopedPayloadsAndKeysPreserved": 1181,
+  "previousScopedRowsFullyUnchanged": 1167,
+  "oldInactiveRowsAlsoVerified": true,
+  "changedFieldOnHeldRows": "active only",
+  "existingResults": "No result/session records changed; old keys remain available by ID. No retroactive regrading.",
+  "scopedBackupSha256": "6a936c024be682735a4fe215093706a4ac43d78d52a92d74f14fc773f8637752",
+  "holdPatchSha256": "a9ac6768b513a96b0025648a7e601e6f601fbddd58c85a08d29792105d8c929b",
+  "additionPatchSha256": "5760e23cae9a9c88fddd3805d6710fcd830ef7ba769b58be95c8815099f591db",
+  "learnerBrowserFlow": "Not tested in this bank-only release"
+}

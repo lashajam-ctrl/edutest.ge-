@@ -1,0 +1,212 @@
+{
+  "generatedAt": "2026-10-13T05:38:35.916Z",
+  "snapshotSha256": "3b7d70e0043cdc8edf059cecdd5329ce6c93521fec8601338c8664ccdc1d903e",
+  "stage": "Addition-only intermediate check; not the final active bank state",
+  "finalStateReport": "georgian8-quality-repair-2026-10-13.json",
+  "baselineActive": 23613,
+  "afterActive": 23623,
+  "added": 10,
+  "authoredFamilies": 10,
+  "optionRationalesChecked": 40,
+  "computationalEvidenceChecks": 0,
+  "assistantJudgementOnly": 10,
+  "exactDuplicateAdditions": 0,
+  "canonicalDuplicateAdditions": 0,
+  "lexicalReviewThreshold": 0.45,
+  "unresolvedSimilarityCandidates": [],
+  "buckets": [
+    {
+      "grade": 8,
+      "semester": 2,
+      "beforeRows": 107,
+      "afterRows": 117,
+      "beforeGroups": 61,
+      "afterGroups": 71,
+      "added": 10,
+      "freshTenQuestionPapers": 7,
+      "freshTwentyQuestionPapers": 3
+    }
+  ],
+  "simulatedPapers": 21,
+  "workloads": [
+    {
+      "label": "8|2|ten",
+      "distinct": 71,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 1,
+          "reused": 9
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        }
+      ]
+    },
+    {
+      "label": "8|2|twenty",
+      "distinct": 71,
+      "papers": [
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 11,
+          "reused": 9
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        }
+      ]
+    },
+    {
+      "label": "8|2|mixed",
+      "distinct": 71,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 1,
+          "reused": 19
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        }
+      ]
+    }
+  ],
+  "catalog": [
+    {
+      "label": "v28-g8-s2-20039a7112",
+      "distinct": 71,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        }
+      ]
+    }
+  ],
+  "failures": [],
+  "sources": [
+    {
+      "title": "MES Georgian basic-level guide, language use and interpretation",
+      "url": "https://mes.gov.ge/uploads/files/gzamkvlevi/ქართული-საბაზო.pdf",
+      "accessed": "2026-10-13",
+      "scope": "Broad skill context, not certification of exact semester allocation. Original passages; assistant reviewed, not teacher certified."
+    }
+  ],
+  "limitations": [
+    "Assistant-authored and option-by-option reviewed; not independently teacher-certified.",
+    "Semester placement is a configurable editorial allocation, not a ministry-mandated calendar.",
+    "Similarity thresholds and selector families do not prove absence of every semantic overlap.",
+    "Fresh-paper counts assume no previous attempts in that grade/subject/semester; 10/20 modes share history.",
+    "The 200-group planning target remains unmet in these buckets.",
+    "No authenticated learner submission is performed by this bank-only release.",
+    "0 prompts have computational checks; 10 rely on assistant semantic judgement."
+  ],
+  "privateDraftSha256": "4a20312e21f6ecf52f4f6894ba05ebf147fe184a0ce30dd2ead175630cf6ab38",
+  "patchSha256": "5760e23cae9a9c88fddd3805d6710fcd830ef7ba769b58be95c8815099f591db",
+  "scopedBackupSha256": "6a936c024be682735a4fe215093706a4ac43d78d52a92d74f14fc773f8637752"
+}
