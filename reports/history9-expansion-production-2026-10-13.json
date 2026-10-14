@@ -1,0 +1,45 @@
+{
+  "verifiedAt": "2026-10-14T10:49:59.848Z",
+  "beforeActive": 23613,
+  "afterActive": 23633,
+  "added": 20,
+  "oldScopedRowsAndAnswerKeysUnchanged": 892,
+  "allAddedRecordsMatch": true,
+  "buckets": [
+    {
+      "grade": 9,
+      "semester": 1,
+      "activeRows": 66,
+      "selectionGroups": 61,
+      "freshTenPapers": 6,
+      "freshTwentyPapers": 3
+    },
+    {
+      "grade": 9,
+      "semester": 2,
+      "activeRows": 64,
+      "selectionGroups": 61,
+      "freshTenPapers": 6,
+      "freshTwentyPapers": 3
+    }
+  ],
+  "scopedBackupSha256": "4540285ab4196b6cb9321f10171d2627064a200ccd83f84ba6ac6d2ac3d4f599",
+  "patchSha256": "b9d0190bad09aad4241191c47e81817689ed0d47156af9705a418faac3078534",
+  "manualSemanticReview": {
+    "questions": 20,
+    "optionRationales": 80,
+    "rejectedBeforePublication": [
+      "parliamentary-tax-consent",
+      "school-budget-implementation"
+    ],
+    "reason": "Existing bank already tests the same source/operation despite low lexical similarity.",
+    "remainingOverlapLimit": "Shared broad historical skills remain across grades; unique family counts are selector capacity, not proof of unique curriculum concepts."
+  },
+  "limitations": [
+    "Assistant review, not independent teacher certification.",
+    "18 contextual teaching scenarios, 2 attributed institutional paraphrases; scenario data is not historical measurement.",
+    "Semester placement is editorial.",
+    "Fresh counts assume unused history; both sizes share supply.",
+    "Authenticated learner flow and full legacy bank review deferred."
+  ]
+}

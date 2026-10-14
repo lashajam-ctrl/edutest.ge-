@@ -3,6 +3,7 @@ import fs from 'node:fs';
 const tests=['assessment-selection','bank-expansion-quality','civics-expansion-quality','safety-expansion-quality','georgia-expansion-quality','grade8-expansion-quality','early-georgian-quality','question-policy','security-regression','secure-assessment','claude-audit-regression','v8-question-bank','v11-platform-import','v29-corrections','v29-held-review','open-response-grading','seo-logo','totp','email-mfa','language-blueprint-bank','rendered-html','senior-math-bank','learning-hub','release-lifecycle','learning-reliability','result-delivery'];
 tests.push('bank-quality-hold');
 tests.push('balanced-bank-capacity');
+tests.push('history-expansion-quality');
 function run(args){const result=spawnSync(process.execPath,args,{stdio:'inherit',env:process.env});if(result.error)throw result.error;if(result.status!==0)process.exit(result.status||1);}
 run(['scripts/assemble-app.mjs','--check']);
 run(['scripts/check-browser-syntax.mjs']);
@@ -28,5 +29,6 @@ if(process.argv.includes('--georgian8repair-expansion')){
  run(['scripts/verify-civics-expansion-local.mjs','--georgian8repair']);
 }
 if(process.argv.includes('--georgian8reading-expansion'))run(['scripts/verify-civics-expansion-local.mjs','--georgian8reading']);
+if(process.argv.includes('--history9-expansion'))run(['scripts/verify-civics-expansion-local.mjs','--history9']);
 if(!process.argv.includes('--no-build'))run(['node_modules/vinext/dist/cli.js','build']);
 console.log('Release gate passed'+(process.argv.includes('--no-build')?' (tests only; build still required).':'.'));
