@@ -4,6 +4,7 @@ const tests=['assessment-selection','bank-expansion-quality','civics-expansion-q
 tests.push('bank-quality-hold');
 tests.push('balanced-bank-capacity');
 tests.push('history-expansion-quality');
+tests.push('biology9-expansion-quality');
 function run(args){const result=spawnSync(process.execPath,args,{stdio:'inherit',env:process.env});if(result.error)throw result.error;if(result.status!==0)process.exit(result.status||1);}
 run(['scripts/assemble-app.mjs','--check']);
 run(['scripts/check-browser-syntax.mjs']);
@@ -30,5 +31,6 @@ if(process.argv.includes('--georgian8repair-expansion')){
 }
 if(process.argv.includes('--georgian8reading-expansion'))run(['scripts/verify-civics-expansion-local.mjs','--georgian8reading']);
 if(process.argv.includes('--history9-expansion'))run(['scripts/verify-civics-expansion-local.mjs','--history9']);
+if(process.argv.includes('--biology9-expansion'))run(['scripts/verify-civics-expansion-local.mjs','--biology9']);
 if(!process.argv.includes('--no-build'))run(['node_modules/vinext/dist/cli.js','build']);
 console.log('Release gate passed'+(process.argv.includes('--no-build')?' (tests only; build still required).':'.'));

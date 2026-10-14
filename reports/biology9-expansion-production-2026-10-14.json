@@ -1,0 +1,39 @@
+{
+  "verifiedAt": "2026-10-14T17:48:01.932Z",
+  "beforeActive": 23633,
+  "afterActive": 23643,
+  "added": 10,
+  "oldScopedRowsAndAnswerKeysUnchanged": 787,
+  "allAddedRecordsMatch": true,
+  "buckets": [
+    {
+      "grade": 9,
+      "semester": 2,
+      "activeRows": 79,
+      "selectionGroups": 61,
+      "freshTenPapers": 6,
+      "freshTwentyPapers": 3
+    }
+  ],
+  "scopedBackupSha256": "b30cc76ec70cae776014b7bf53c40a57142d7583c0d4a34b012af76e1be80dd0",
+  "patchSha256": "e016dbd937986a6ec176c488d6e9153b870cab091b3b6854295b9599edc67675",
+  "manualSemanticReview": {
+    "questions": 10,
+    "optionRationales": 40,
+    "computationalChecks": 4,
+    "assistantJudgementOnly": 6,
+    "clarifications": [
+      "Chromosome model explicitly non-human animal.",
+      "Seed experiment explicitly dark to remove photosynthesis confounding.",
+      "Mitosis and cytokinesis named without strict sequential timing claim."
+    ],
+    "remainingOverlapLimit": "Shared broad biological skills remain across grades; selector groups do not certify unique curriculum concepts."
+  },
+  "limitations": [
+    "Assistant review, not independent teacher certification.",
+    "Numerical and experimental scenarios are educational models, not empirical measurements.",
+    "Semester placement is editorial.",
+    "Fresh counts assume unused history; both sizes share supply.",
+    "Authenticated learner flow and full legacy bank review deferred."
+  ]
+}

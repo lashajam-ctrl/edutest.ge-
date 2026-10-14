@@ -1,0 +1,253 @@
+{
+  "generatedAt": "2026-10-14T17:45:32.734Z",
+  "snapshotSha256": "3b7d70e0043cdc8edf059cecdd5329ce6c93521fec8601338c8664ccdc1d903e",
+  "baselineActive": 23633,
+  "afterActive": 23643,
+  "added": 10,
+  "authoredFamilies": 10,
+  "optionRationalesChecked": 40,
+  "computationalEvidenceChecks": 4,
+  "assistantJudgementOnly": 6,
+  "exactDuplicateAdditions": 0,
+  "canonicalDuplicateAdditions": 0,
+  "lexicalReviewThreshold": 0.45,
+  "unresolvedSimilarityCandidates": [],
+  "buckets": [
+    {
+      "grade": 9,
+      "semester": 2,
+      "beforeRows": 69,
+      "afterRows": 79,
+      "beforeGroups": 51,
+      "afterGroups": 61,
+      "added": 10,
+      "freshTenQuestionPapers": 6,
+      "freshTwentyQuestionPapers": 3
+    }
+  ],
+  "simulatedPapers": 21,
+  "workloads": [
+    {
+      "label": "9|2|ten",
+      "distinct": 61,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 1,
+          "reused": 9
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        }
+      ]
+    },
+    {
+      "label": "9|2|twenty",
+      "distinct": 61,
+      "papers": [
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 1,
+          "reused": 19
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        }
+      ]
+    },
+    {
+      "label": "9|2|mixed",
+      "distinct": 61,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 1,
+          "reused": 9
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        }
+      ]
+    }
+  ],
+  "catalog": [
+    {
+      "label": "v28-g9-s2-35b7d59c6e",
+      "distinct": 61,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        }
+      ]
+    }
+  ],
+  "failures": [],
+  "sources": [
+    {
+      "title": "MES Biology guide (2022), grade IX themes",
+      "url": "https://www.mes.gov.ge/uploads/files/gzamkvlevi/ბიოლოგია-მეთოდოლოგიური.pdf",
+      "accessed": "2026-10-14",
+      "scope": "Grade themes; semester allocation editorial. No independent teacher certification."
+    },
+    {
+      "title": "OpenStax Biology 2e: scientific reference",
+      "url": "https://openstax.org/books/biology-2e/pages/45-1-population-demography",
+      "accessed": "2026-10-14",
+      "scope": "Factual cross-check; original questions and explicitly educational numerical scenarios, not copied exercises."
+    },
+    {
+      "title": "OpenStax Biology 2e: scientific reference",
+      "url": "https://openstax.org/books/biology-2e/pages/36-5-vision",
+      "accessed": "2026-10-14",
+      "scope": "Factual cross-check; original questions and explicitly educational numerical scenarios, not copied exercises."
+    },
+    {
+      "title": "OpenStax Biology 2e: scientific reference",
+      "url": "https://openstax.org/books/biology-2e/pages/11-1-the-process-of-meiosis",
+      "accessed": "2026-10-14",
+      "scope": "Factual cross-check; original questions and explicitly educational numerical scenarios, not copied exercises."
+    },
+    {
+      "title": "OpenStax Biology 2e: scientific reference",
+      "url": "https://openstax.org/books/biology-2e/pages/10-2-the-cell-cycle",
+      "accessed": "2026-10-14",
+      "scope": "Factual cross-check; original questions and explicitly educational numerical scenarios, not copied exercises."
+    },
+    {
+      "title": "OpenStax Biology 2e: scientific reference",
+      "url": "https://openstax.org/books/biology-2e/pages/8-1-overview-of-photosynthesis",
+      "accessed": "2026-10-14",
+      "scope": "Factual cross-check; original questions and explicitly educational numerical scenarios, not copied exercises."
+    },
+    {
+      "title": "OpenStax Biology 2e: scientific reference",
+      "url": "https://openstax.org/books/biology-2e/pages/7-1-energy-in-living-systems",
+      "accessed": "2026-10-14",
+      "scope": "Factual cross-check; original questions and explicitly educational numerical scenarios, not copied exercises."
+    },
+    {
+      "title": "OpenStax Biology 2e: scientific reference",
+      "url": "https://openstax.org/books/biology-2e/pages/6-5-enzymes",
+      "accessed": "2026-10-14",
+      "scope": "Factual cross-check; original questions and explicitly educational numerical scenarios, not copied exercises."
+    }
+  ],
+  "limitations": [
+    "Assistant-authored and option-by-option reviewed; not independently teacher-certified.",
+    "Semester placement is a configurable editorial allocation, not a ministry-mandated calendar.",
+    "Similarity thresholds and selector families do not prove absence of every semantic overlap.",
+    "Fresh-paper counts assume no previous attempts in that grade/subject/semester; 10/20 modes share history.",
+    "The 200-group planning target remains unmet in these buckets.",
+    "No authenticated learner submission is performed by this bank-only release.",
+    "4 prompts have computational checks; 6 rely on assistant semantic judgement."
+  ],
+  "privateDraftSha256": "1abb80bc1f0e6cfca2955401dd9a7a62b6d36d5ee13519c7d217ff286320d6c0",
+  "reviewOptions": {},
+  "patchSha256": "e016dbd937986a6ec176c488d6e9153b870cab091b3b6854295b9599edc67675",
+  "scopedBackupSha256": "b30cc76ec70cae776014b7bf53c40a57142d7583c0d4a34b012af76e1be80dd0"
+}
