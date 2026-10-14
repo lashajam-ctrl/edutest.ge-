@@ -1,0 +1,253 @@
+{
+  "generatedAt": "2026-10-14T18:20:36.662Z",
+  "snapshotSha256": "3b7d70e0043cdc8edf059cecdd5329ce6c93521fec8601338c8664ccdc1d903e",
+  "baselineActive": 23643,
+  "afterActive": 23653,
+  "added": 10,
+  "authoredFamilies": 10,
+  "optionRationalesChecked": 40,
+  "computationalEvidenceChecks": 7,
+  "assistantJudgementOnly": 3,
+  "exactDuplicateAdditions": 0,
+  "canonicalDuplicateAdditions": 0,
+  "lexicalReviewThreshold": 0.45,
+  "unresolvedSimilarityCandidates": [],
+  "buckets": [
+    {
+      "grade": 9,
+      "semester": 2,
+      "beforeRows": 63,
+      "afterRows": 73,
+      "beforeGroups": 51,
+      "afterGroups": 61,
+      "added": 10,
+      "freshTenQuestionPapers": 6,
+      "freshTwentyQuestionPapers": 3
+    }
+  ],
+  "simulatedPapers": 21,
+  "workloads": [
+    {
+      "label": "9|2|ten",
+      "distinct": 61,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 1,
+          "reused": 9
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        }
+      ]
+    },
+    {
+      "label": "9|2|twenty",
+      "distinct": 61,
+      "papers": [
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 1,
+          "reused": 19
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        }
+      ]
+    },
+    {
+      "label": "9|2|mixed",
+      "distinct": 61,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 1,
+          "reused": 9
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        }
+      ]
+    }
+  ],
+  "catalog": [
+    {
+      "label": "v28-g9-s2-5ea073328f",
+      "distinct": 61,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        }
+      ]
+    }
+  ],
+  "failures": [],
+  "sources": [
+    {
+      "title": "MES Chemistry guide, page 5: IX grade themes",
+      "url": "https://www.mes.gov.ge/uploads/files/gzamkvlevi/ქიმია.pdf",
+      "accessed": "2026-10-14",
+      "scope": "Grade themes, not mandated semester allocation."
+    },
+    {
+      "title": "Scientific reference for original questions",
+      "url": "https://www.eia.gov/energyexplained/oil-and-petroleum-products/refining-crude-oil-the-refining-process.php",
+      "accessed": "2026-10-14",
+      "scope": "Scientific cross-check; numerical examples are educational models, not measured fuel specifications."
+    },
+    {
+      "title": "Scientific reference for original questions",
+      "url": "https://openstax.org/books/chemistry-2e/pages/20-1-hydrocarbons",
+      "accessed": "2026-10-14",
+      "scope": "Scientific cross-check; numerical examples are educational models, not measured fuel specifications."
+    },
+    {
+      "title": "Scientific reference for original questions",
+      "url": "https://openstax.org/books/chemistry-2e/pages/4-4-reaction-yields",
+      "accessed": "2026-10-14",
+      "scope": "Scientific cross-check; numerical examples are educational models, not measured fuel specifications."
+    },
+    {
+      "title": "Scientific reference for original questions",
+      "url": "https://openstax.org/books/chemistry-2e/pages/5-2-calorimetry",
+      "accessed": "2026-10-14",
+      "scope": "Scientific cross-check; numerical examples are educational models, not measured fuel specifications."
+    },
+    {
+      "title": "Scientific reference for original questions",
+      "url": "https://openstax.org/books/chemistry-2e/pages/4-2-classifying-chemical-reactions",
+      "accessed": "2026-10-14",
+      "scope": "Scientific cross-check; numerical examples are educational models, not measured fuel specifications."
+    },
+    {
+      "title": "Scientific reference for original questions",
+      "url": "https://openstax.org/books/chemistry-2e/pages/4-5-quantitative-chemical-analysis",
+      "accessed": "2026-10-14",
+      "scope": "Scientific cross-check; numerical examples are educational models, not measured fuel specifications."
+    },
+    {
+      "title": "Scientific reference for original questions",
+      "url": "https://openstax.org/books/chemistry-2e/pages/2-7-chemical-nomenclature",
+      "accessed": "2026-10-14",
+      "scope": "Scientific cross-check; numerical examples are educational models, not measured fuel specifications."
+    }
+  ],
+  "limitations": [
+    "Assistant-authored and option-by-option reviewed; not independently teacher-certified.",
+    "Semester placement is a configurable editorial allocation, not a ministry-mandated calendar.",
+    "Similarity thresholds and selector families do not prove absence of every semantic overlap.",
+    "Fresh-paper counts assume no previous attempts in that grade/subject/semester; 10/20 modes share history.",
+    "The 200-group planning target remains unmet in these buckets.",
+    "No authenticated learner submission is performed by this bank-only release.",
+    "7 prompts have computational checks; 3 rely on assistant semantic judgement."
+  ],
+  "privateDraftSha256": "aba857fd6e16a1e32ff334a727db3b1f40e3cdf854460c0952cdde2ca6b1fea8",
+  "reviewOptions": {},
+  "patchSha256": "9b137587a9cfef54079e842069910d4c53bcfa8e6846b12245a7fae82325f236",
+  "scopedBackupSha256": "8c7f4c5e66c07cd0297dcab1e4a9e2da45a8a7b5036e1c39ccaf522c67a28f78"
+}
