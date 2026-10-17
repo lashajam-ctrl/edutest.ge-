@@ -1,0 +1,416 @@
+{
+  "generatedAt": "2026-10-17T12:09:47.551Z",
+  "snapshotSha256": "3b7d70e0043cdc8edf059cecdd5329ce6c93521fec8601338c8664ccdc1d903e",
+  "baselineActive": 23653,
+  "afterActive": 23673,
+  "added": 20,
+  "authoredFamilies": 20,
+  "optionRationalesChecked": 80,
+  "computationalEvidenceChecks": 6,
+  "assistantJudgementOnly": 14,
+  "exactDuplicateAdditions": 0,
+  "canonicalDuplicateAdditions": 0,
+  "lexicalReviewThreshold": 0.45,
+  "unresolvedSimilarityCandidates": [],
+  "buckets": [
+    {
+      "grade": 10,
+      "semester": 1,
+      "beforeRows": 56,
+      "afterRows": 66,
+      "beforeGroups": 51,
+      "afterGroups": 61,
+      "added": 10,
+      "freshTenQuestionPapers": 6,
+      "freshTwentyQuestionPapers": 3
+    },
+    {
+      "grade": 10,
+      "semester": 2,
+      "beforeRows": 54,
+      "afterRows": 64,
+      "beforeGroups": 51,
+      "afterGroups": 61,
+      "added": 10,
+      "freshTenQuestionPapers": 6,
+      "freshTwentyQuestionPapers": 3
+    }
+  ],
+  "simulatedPapers": 42,
+  "workloads": [
+    {
+      "label": "10|1|ten",
+      "distinct": 61,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 1,
+          "reused": 9
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        }
+      ]
+    },
+    {
+      "label": "10|1|twenty",
+      "distinct": 61,
+      "papers": [
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 1,
+          "reused": 19
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        }
+      ]
+    },
+    {
+      "label": "10|1|mixed",
+      "distinct": 61,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 1,
+          "reused": 9
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        }
+      ]
+    },
+    {
+      "label": "10|2|ten",
+      "distinct": 61,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 1,
+          "reused": 9
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        }
+      ]
+    },
+    {
+      "label": "10|2|twenty",
+      "distinct": 61,
+      "papers": [
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 1,
+          "reused": 19
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        }
+      ]
+    },
+    {
+      "label": "10|2|mixed",
+      "distinct": 61,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 1,
+          "reused": 9
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        }
+      ]
+    }
+  ],
+  "catalog": [
+    {
+      "label": "v28-g10-s1-6cc0b8c9e1",
+      "distinct": 61,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        }
+      ]
+    },
+    {
+      "label": "v28-g10-s2-6cc0b8c9e1",
+      "distinct": 61,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        }
+      ]
+    }
+  ],
+  "failures": [],
+  "sources": [
+    {
+      "title": "MES 2022 upper-secondary guide, page 11: grade X history themes",
+      "url": "https://www.mes.gov.ge/uploads/files/2022/gzamkvlevi.pdf",
+      "accessed": "2026-10-15",
+      "scope": "Grade-level reference; semester split is editorial. Existing grade X modern-era items remain a separately identified mapping problem."
+    },
+    {
+      "title": "Institutional source for attributed historical paraphrase",
+      "url": "https://www.metmuseum.org/art/collection/search/327283",
+      "accessed": "2026-10-15"
+    },
+    {
+      "title": "Institutional source for attributed historical paraphrase",
+      "url": "https://www.britishmuseum.org/collection/object/Y_EA24",
+      "accessed": "2026-10-15"
+    },
+    {
+      "title": "Institutional source for attributed historical paraphrase",
+      "url": "https://www.philology.uoc.gr/en/print/1811",
+      "accessed": "2026-10-15"
+    },
+    {
+      "title": "Institutional source for attributed historical paraphrase",
+      "url": "https://resources.metmuseum.org/resources/metpublications/pdf/Roman_Art_A_Resource_for_Educators.pdf",
+      "accessed": "2026-10-15"
+    },
+    {
+      "title": "Institutional source for attributed historical paraphrase",
+      "url": "https://www.metmuseum.org/de/essays/byzantium-ca-330-1453",
+      "accessed": "2026-10-15"
+    },
+    {
+      "title": "Institutional source for attributed historical paraphrase",
+      "url": "https://www.metmuseum.org/art/collection/search/330153",
+      "accessed": "2026-10-15"
+    },
+    {
+      "title": "British Library: palimpsests and reuse of writing material",
+      "url": "https://www.bl.uk/stories/blogs/posts/palimpsests-the-art-of-medieval-recycling",
+      "accessed": "2026-10-15",
+      "scope": "Background for original teaching scenario, not a quoted manuscript."
+    }
+  ],
+  "limitations": [
+    "Assistant-authored and option-by-option reviewed; not independently teacher-certified.",
+    "Semester placement is a configurable editorial allocation, not a ministry-mandated calendar.",
+    "Similarity thresholds and selector families do not prove absence of every semantic overlap.",
+    "Fresh-paper counts assume no previous attempts in that grade/subject/semester; 10/20 modes share history.",
+    "The 200-group planning target remains unmet in these buckets.",
+    "No authenticated learner submission is performed by this bank-only release.",
+    "6 prompts have computational checks; 14 rely on assistant semantic judgement.",
+    "Legacy grade X history includes modern-era topics outside the ancient/early-medieval themes in the consulted MES 2022 guide. Existing rows are preserved pending a separate curriculum-mapping repair; this release does not certify the whole mixed pool.",
+    "61 selector groups per semester is technical selection capacity, not 61 independently certified curriculum concepts. Legacy cosmetic wrappers may still overstate semantic diversity."
+  ],
+  "privateDraftSha256": "623694e294150d2f86cfc7ca9a0b5c35df573d595c261ba1f6bea281e1280dcb",
+  "reviewOptions": {},
+  "patchSha256": "2606f84325c22de4faa79636f9964d395d7d22309f392f50429e1038281aa732",
+  "scopedBackupSha256": "f4a828a3258a4a11aa45fc73fe1076477c038d2096563899f0ad3901cb8ea8fd"
+}

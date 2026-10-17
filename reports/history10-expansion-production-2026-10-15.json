@@ -1,0 +1,46 @@
+{
+  "verifiedAt": "2026-10-17T12:11:09.372Z",
+  "beforeActive": 23653,
+  "afterActive": 23673,
+  "added": 20,
+  "oldScopedRowsAndAnswerKeysUnchanged": 912,
+  "allAddedRecordsMatch": true,
+  "buckets": [
+    {
+      "grade": 10,
+      "semester": 1,
+      "activeRows": 66,
+      "selectionGroups": 61,
+      "freshTenPapers": 6,
+      "freshTwentyPapers": 3
+    },
+    {
+      "grade": 10,
+      "semester": 2,
+      "activeRows": 64,
+      "selectionGroups": 61,
+      "freshTenPapers": 6,
+      "freshTwentyPapers": 3
+    }
+  ],
+  "scopedBackupSha256": "f4a828a3258a4a11aa45fc73fe1076477c038d2096563899f0ad3901cb8ea8fd",
+  "patchSha256": "2606f84325c22de4faa79636f9964d395d7d22309f392f50429e1038281aa732",
+  "manualSemanticReview": {
+    "questions": 20,
+    "optionRationales": 80,
+    "rejectedBeforePublication": [
+      "aqueduct-gradient",
+      "law-versus-case-record"
+    ],
+    "reason": "Existing bank tests the same principle despite low lexical similarity.",
+    "remainingOverlapLimit": "Shared broad historical skills remain across grades; selector capacity is not proof of unique curriculum concepts."
+  },
+  "limitations": [
+    "Assistant review, not independent teacher certification.",
+    "14 explicit teaching scenarios and 6 institutional paraphrases; model data is not historical measurement.",
+    "Semester placement is editorial.",
+    "Fresh counts assume unused history; both sizes share supply.",
+    "Authenticated learner flow and full legacy bank review deferred.",
+    "Legacy grade X modern-era topics remain inconsistent with the consulted MES 2022 ancient/early-medieval scope; their remapping is a separate unresolved issue."
+  ]
+}
