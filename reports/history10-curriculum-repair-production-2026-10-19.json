@@ -1,0 +1,1219 @@
+{
+  "verifiedAt": "2026-10-19T06:05:05.216Z",
+  "beforeActive": 23673,
+  "afterActive": 23587,
+  "reviewedRows": 130,
+  "held": 92,
+  "added": 6,
+  "existingHistoryRowsPreservedApartFromActivation": 3994,
+  "existingHistoryAnswerKeysUnchanged": 3994,
+  "exactNewRecordReadback": true,
+  "backupSha256": "6964d0d2afdc205437a32b727e3c3e24c29cfea9d3a83e2cb150728550b1913c",
+  "patchSha256": "a543beb31b63a4dde67483afe3071d7b0e9cdd30bf941a0fb29a7f05eeaa0e91",
+  "buckets": [
+    {
+      "semester": 1,
+      "beforeRows": 66,
+      "held": 48,
+      "added": 4,
+      "afterRows": 22,
+      "selectionGroups": 22,
+      "freshTenPapers": 2,
+      "freshTwentyPapers": 1
+    },
+    {
+      "semester": 2,
+      "beforeRows": 64,
+      "held": 44,
+      "added": 2,
+      "afterRows": 22,
+      "selectionGroups": 22,
+      "freshTenPapers": 2,
+      "freshTwentyPapers": 1
+    }
+  ],
+  "workloads": [
+    {
+      "label": "1/10/6",
+      "distinct": 22,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 2,
+          "reused": 8
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        }
+      ]
+    },
+    {
+      "label": "1/20/4",
+      "distinct": 22,
+      "papers": [
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 2,
+          "reused": 18
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        }
+      ]
+    },
+    {
+      "label": "1/10/4",
+      "distinct": 22,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 12,
+          "reused": 8
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        }
+      ]
+    },
+    {
+      "label": "2/10/6",
+      "distinct": 22,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 2,
+          "reused": 8
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        }
+      ]
+    },
+    {
+      "label": "2/20/4",
+      "distinct": 22,
+      "papers": [
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 2,
+          "reused": 18
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        }
+      ]
+    },
+    {
+      "label": "2/10/4",
+      "distinct": 22,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 12,
+          "reused": 8
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        }
+      ]
+    }
+  ],
+  "catalog": [
+    {
+      "label": "v28-g10-s1-6cc0b8c9e1",
+      "distinct": 22,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        }
+      ]
+    },
+    {
+      "label": "v28-g10-s2-6cc0b8c9e1",
+      "distinct": 22,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        }
+      ]
+    }
+  ],
+  "simulatedPapers": 30,
+  "decisions": [
+    {
+      "id": "v28-GE-G10-SO-S1-101",
+      "semester": 1,
+      "content_hash": "b0385f7d3c476ee2876d07691225663dde5663b8cd2a735c97fd2b013dd538f0",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE-G10-SO-S1-102",
+      "semester": 1,
+      "content_hash": "39bfb39bf1363e4f5d854aec365a1ba23743486717f74a8bf95d8374a4a5777a",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE-G10-SO-S1-104",
+      "semester": 1,
+      "content_hash": "1311172f8070bea8a76628a33fb19abf3f5115b366ccff96106bd32e7c1a0404",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE-G10-SO-S1-105",
+      "semester": 1,
+      "content_hash": "e4e81acde5df2bc8dd17eece9aea9912e8a790438304cca6d6b5973ab6a7570c",
+      "decision": "keep",
+      "reason": "Retain reviewed transferable historical method; semester allocation is editorial."
+    },
+    {
+      "id": "v28-GE-G10-SO-S1-106",
+      "semester": 1,
+      "content_hash": "74fab51a38077e282c29506aab5496ca7a6dec1588a2e4e33f3ac739a9947711",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE-G10-SO-S1-107",
+      "semester": 1,
+      "content_hash": "ab0d512ccbed81a8652ed02b02a91e6eaf4cab08279ac4ebd7af87a0173cbd63",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE-G10-SO-S1-109",
+      "semester": 1,
+      "content_hash": "00ecc6e8db005c098fe86933cdf11f96e7d7a35749ad196f4f39178409293805",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE-G10-SO-S1-110",
+      "semester": 1,
+      "content_hash": "99f9b3597c3a53e43bdba97b230ee2fcc16fe6f0710ce22da8b35057572b48e9",
+      "decision": "keep",
+      "reason": "Retain reviewed transferable historical method; semester allocation is editorial."
+    },
+    {
+      "id": "v28-GE-G10-SO-S1-112",
+      "semester": 1,
+      "content_hash": "d54a8031e9c436d98d9fabd742f34c2b59cf99e646126fe6ca5a9780b626d71e",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE-G10-SO-S1-114",
+      "semester": 1,
+      "content_hash": "f352923c8f07fea92eff6699298f0f843fc24d24babaa7f88073d2e6b8db55f4",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE-G10-SO-S1-115",
+      "semester": 1,
+      "content_hash": "d62bc48552621805e41a1f47a27c6ccb3efbe8cd36ec602c28e6765c7fddb065",
+      "decision": "duplicate_task",
+      "reason": "Same prompt/operation survives as a retained representative; cosmetic prefix, option rotation or generic source wrapper does not create a fresh historical problem."
+    },
+    {
+      "id": "v28-GE-G10-SO-S1-117",
+      "semester": 1,
+      "content_hash": "ac0e2666c373645c6850dd58daf87f81b073963bf63e4f59c949a65e6fa934d9",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE-G10-SO-S1-118",
+      "semester": 1,
+      "content_hash": "0a4a1c40779eddd674fe55e0c49d4a3f6ad325bfe2fd1e361dc9c1f6405f885b",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE-G10-SO-S1-120",
+      "semester": 1,
+      "content_hash": "8c976fbb627357d2613eeddf7dbd5d35edf889dd5546ae75eff75f4a4fac038c",
+      "decision": "duplicate_task",
+      "reason": "Same prompt/operation survives as a retained representative; cosmetic prefix, option rotation or generic source wrapper does not create a fresh historical problem."
+    },
+    {
+      "id": "v28-GE-G10-SO-S2-221",
+      "semester": 2,
+      "content_hash": "3d2f8715bf046eddb09d5466a3f4873fdfc7047f16a2f0dd4a9540104077c21b",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE-G10-SO-S2-222",
+      "semester": 2,
+      "content_hash": "7684e48facdce6a82e9b64677bb9c8840e11640cdd11f3feaf360f1836602c2f",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE-G10-SO-S2-224",
+      "semester": 2,
+      "content_hash": "84265506db94897bf879ea5a9057d983a72104872adeca6cba22b9c88caf4065",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE-G10-SO-S2-225",
+      "semester": 2,
+      "content_hash": "83cdaf84cb50b625b723d2d5549590070601e794783944c643c180c52dc8fb91",
+      "decision": "keep",
+      "reason": "Retain reviewed transferable historical method; semester allocation is editorial."
+    },
+    {
+      "id": "v28-GE-G10-SO-S2-226",
+      "semester": 2,
+      "content_hash": "68d69a46b5bfc22c846c62bf5fc6b24e1807cc8eb9eb1eb82ecbfa7de9fd3d7b",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE-G10-SO-S2-227",
+      "semester": 2,
+      "content_hash": "83f46c2a588bf8c1008bfe6461308f46d14508df691cf953f5e48fbbd2296a63",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE-G10-SO-S2-229",
+      "semester": 2,
+      "content_hash": "b2c83f4980eb427d15b3c5241cb96c729bbe6782654238f509ca46a6e5189baf",
+      "decision": "keep",
+      "reason": "Retain reviewed transferable historical method; semester allocation is editorial."
+    },
+    {
+      "id": "v28-GE-G10-SO-S2-230",
+      "semester": 2,
+      "content_hash": "3d324dee46a0d9ebfd8448f1625a7e66e8ec41c02d23566c779f504931590fea",
+      "decision": "keep",
+      "reason": "Retain reviewed transferable historical method; semester allocation is editorial."
+    },
+    {
+      "id": "v28-GE-G10-SO-S2-232",
+      "semester": 2,
+      "content_hash": "7f9ae86995dbf339bc29b990d3312b5660228b4bdc8af58fff6939478b89193b",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE-G10-SO-S2-233",
+      "semester": 2,
+      "content_hash": "d63f9e48a4c77112e9e8d3225436ea513c23a53e5fc74ea582ba431713510d62",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE-G10-SO-S2-234",
+      "semester": 2,
+      "content_hash": "2bb9db6097b419a4db1f87ac121366b014f984e26528978c2a8c6bb942e2f9c9",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE-G10-SO-S2-235",
+      "semester": 2,
+      "content_hash": "4d67f04e5acdf1ce5768ba0bb100270645471548ed3888d24dd0d2d3dcfc41ce",
+      "decision": "duplicate_task",
+      "reason": "Same prompt/operation survives as a retained representative; cosmetic prefix, option rotation or generic source wrapper does not create a fresh historical problem."
+    },
+    {
+      "id": "v28-GE-G10-SO-S2-237",
+      "semester": 2,
+      "content_hash": "583889484e9c8b3fd4c2e0fbea45bf698d4a78745b01c969f2625714078f9c77",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE-G10-SO-S2-238",
+      "semester": 2,
+      "content_hash": "872674c6b50631bb817d6259d7629ddc1751cca9a144cbc0f501389e3b841fcf",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE-G10-SO-S2-240",
+      "semester": 2,
+      "content_hash": "ed83bc22791d4dec3bae9735c30e3b5b4f55fa23e12d484e8acf2bdadedd13b8",
+      "decision": "duplicate_task",
+      "reason": "Same prompt/operation survives as a retained representative; cosmetic prefix, option rotation or generic source wrapper does not create a fresh historical problem."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S1-001",
+      "semester": 1,
+      "content_hash": "bf4eaea53ff76e6b896f40dc343b5c08a01afa2881bdc1274a6383785ef65264",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S1-004",
+      "semester": 1,
+      "content_hash": "c41e8adaa854a7918aa6717f40fd45da8c5cb57c7a995dcee394b31120f41238",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S1-005",
+      "semester": 1,
+      "content_hash": "29e293b2e19588d514ff5cbb16730c58be7af9a7d2ea536f4b821162be94efc2",
+      "decision": "duplicate_task",
+      "reason": "Same prompt/operation survives as a retained representative; cosmetic prefix, option rotation or generic source wrapper does not create a fresh historical problem."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S1-006",
+      "semester": 1,
+      "content_hash": "8a541f6cd33770fcf5757c7a395a17042a5ff62dbb2a37a50abec0472e41db21",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S1-008",
+      "semester": 1,
+      "content_hash": "519de733eeacd7bec92c5f48066d6a157ba24e008f1677484b1750674076568a",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S1-009",
+      "semester": 1,
+      "content_hash": "17f50e431f0822eef70dcef802ad75f17aee1484d467beacb28e28e42c4275e4",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S1-011",
+      "semester": 1,
+      "content_hash": "2822d4fc9dc7a1ac24a2fb3fdeef895d5644beec846a567cb7933b2d81c39166",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S1-012",
+      "semester": 1,
+      "content_hash": "f8b80fa415eb5d80789a5956ca57f0eeffe59747de93a509be9557d717f91b88",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S1-014",
+      "semester": 1,
+      "content_hash": "d994afd4baa504ad5808f4c2690248c4120d6206e84140ef96ba5c7816564dfe",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S1-016",
+      "semester": 1,
+      "content_hash": "aa9c5ab1536d8db2fb3e136b2bfaea4a9f3640e41872fe12eddbf436420ebb57",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S1-017",
+      "semester": 1,
+      "content_hash": "adc6a970042ad7c3595dc2e6d08b5ff9dbc46f10fa2d7166f2a619d97527e31a",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S1-019",
+      "semester": 1,
+      "content_hash": "490d9c60d8724a171f84df6728d869ff33f6136a01f8b6514cdcd537126520e6",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S1-020",
+      "semester": 1,
+      "content_hash": "691914ccc0fdac90c3f3288fe732b2fa2561756a612a6502555891ea94a81d62",
+      "decision": "duplicate_task",
+      "reason": "Same prompt/operation survives as a retained representative; cosmetic prefix, option rotation or generic source wrapper does not create a fresh historical problem."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S1-021",
+      "semester": 1,
+      "content_hash": "34a9b764fe1cc036efd08a56ac7e460ebd4e58795d245488108b159de5ec02cc",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S1-022",
+      "semester": 1,
+      "content_hash": "dfcb28c1bda24c474b447a46617aff47781199dcd1187d3776e9f9567896f30c",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S1-024",
+      "semester": 1,
+      "content_hash": "b63b973e6c2c4abae6ee0acc9ece56a1c02d8ad9feffea73698f45ec61dcee62",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S1-025",
+      "semester": 1,
+      "content_hash": "e6355045c723d8b23e1a0056ca9e315aa93e0beb2644ee83c1b3403b1e1d0863",
+      "decision": "duplicate_task",
+      "reason": "Same prompt/operation survives as a retained representative; cosmetic prefix, option rotation or generic source wrapper does not create a fresh historical problem."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S1-027",
+      "semester": 1,
+      "content_hash": "6462712c98a388dc41521c9528e82fc1a646cc0949a5fb81e294b13398ddc76d",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S1-028",
+      "semester": 1,
+      "content_hash": "679d31662428bb0605592f2fe7b59cadc8d6107c2af929cb7be34cffd2005c19",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S1-029",
+      "semester": 1,
+      "content_hash": "10eb6da6b0b8496ae1725fc65468f9024029dad1572c59aa2c7e665d1f2f468a",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S1-030",
+      "semester": 1,
+      "content_hash": "25de152d4c132e8ed2846c2b3ba4fc223f4a3ae3b2281d061dce8f95502f4646",
+      "decision": "duplicate_task",
+      "reason": "Same prompt/operation survives as a retained representative; cosmetic prefix, option rotation or generic source wrapper does not create a fresh historical problem."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S1-037",
+      "semester": 1,
+      "content_hash": "3489c7fcd28211505a2832908ed7c264e255c6a41e344a961fb062cfa9450504",
+      "decision": "duplicate_task",
+      "reason": "Same prompt/operation survives as a retained representative; cosmetic prefix, option rotation or generic source wrapper does not create a fresh historical problem."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S1-040",
+      "semester": 1,
+      "content_hash": "99b53c9fbca23853d0055e4863279314ee8da3c6d012804093c041b2a5a0573b",
+      "decision": "ambiguous_answer",
+      "reason": "Both the census-frequency statement and the all-citizens-liked-it statement are empirically testable claims; the prompt does not uniquely distinguish fact from opinion."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S1-067",
+      "semester": 1,
+      "content_hash": "5947c25a41832acc66e3045a0a40f1263ef17c4481080d993b69597af830e879",
+      "decision": "duplicate_task",
+      "reason": "Same prompt/operation survives as a retained representative; cosmetic prefix, option rotation or generic source wrapper does not create a fresh historical problem."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S1-070",
+      "semester": 1,
+      "content_hash": "25dfb30f80d48c7c3109b539823e2c1376071654a6bac7c595dc0986029090a3",
+      "decision": "ambiguous_answer",
+      "reason": "Both the census-frequency statement and the all-citizens-liked-it statement are empirically testable claims; the prompt does not uniquely distinguish fact from opinion."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S1-073",
+      "semester": 1,
+      "content_hash": "3e617cd77075afc8dde76c147ce0a6d9bd3c652d384a44d9453726daf032496a",
+      "decision": "subject_mismatch",
+      "reason": "Generic contemporary council participation task without historical context belongs in a separately reviewed civics scope, not this history pool."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S1-097",
+      "semester": 1,
+      "content_hash": "99d31d9b4d5eb5527a9f5ce397edd3045b074448251d8c10802b3d0833125365",
+      "decision": "duplicate_task",
+      "reason": "Same prompt/operation survives as a retained representative; cosmetic prefix, option rotation or generic source wrapper does not create a fresh historical problem."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S1-100",
+      "semester": 1,
+      "content_hash": "483d47a449e832695256a045b7518186a6df03a5dcf3cab728bc0da2839cfa99",
+      "decision": "ambiguous_answer",
+      "reason": "Both the census-frequency statement and the all-citizens-liked-it statement are empirically testable claims; the prompt does not uniquely distinguish fact from opinion."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S1-103",
+      "semester": 1,
+      "content_hash": "084eacc6c2f49e64f97ece3a638c31a89a69c0164253048e8b0310d8025f7797",
+      "decision": "subject_mismatch",
+      "reason": "Generic contemporary council participation task without historical context belongs in a separately reviewed civics scope, not this history pool."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S2-001",
+      "semester": 2,
+      "content_hash": "4efb4391634b088a810b24f8516f4fb1d528390208a3c4c88eca15e9e0ff9fef",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S2-003",
+      "semester": 2,
+      "content_hash": "8658347e5c611b9bff5b071c2bea7f2ae653526adb0a42c5e890ae66231a26bf",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S2-004",
+      "semester": 2,
+      "content_hash": "f4555d5d8eed79c879a750e8df132fb360b5e7c79ac2775f31a9acd331973518",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S2-005",
+      "semester": 2,
+      "content_hash": "bfb6e5b4935a9a7b2ac6027988144c06ce19324fcf49c2822a5b490d7f15d281",
+      "decision": "duplicate_task",
+      "reason": "Same prompt/operation survives as a retained representative; cosmetic prefix, option rotation or generic source wrapper does not create a fresh historical problem."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S2-006",
+      "semester": 2,
+      "content_hash": "ebd44ca0adafd6b6a38cd4117c2fc2d0a9222706bd5c2e480deb677e246a5098",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S2-008",
+      "semester": 2,
+      "content_hash": "8122db6a223e1c86d63df2d297bcd71eda36438b60d5fac48514ad5546421e4f",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S2-009",
+      "semester": 2,
+      "content_hash": "9584ac57ad56bf4c4d499bfeb29ff368488d23a066d9bacb4365ef4fc962d675",
+      "decision": "duplicate_task",
+      "reason": "Same prompt/operation survives as a retained representative; cosmetic prefix, option rotation or generic source wrapper does not create a fresh historical problem."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S2-011",
+      "semester": 2,
+      "content_hash": "d535767e1a6cc8d2eb1386075de44ea0c5245169d686bb7f91f3f81dad33c349",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S2-012",
+      "semester": 2,
+      "content_hash": "377f0e9892c69820c78528542c08d37b3ae7de44c130b887c6de105373981b70",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S2-013",
+      "semester": 2,
+      "content_hash": "90c4987e168b7970cfa165bd16bb0f05a7a9d3ff17c7aff2d183b3966b14b5c8",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S2-014",
+      "semester": 2,
+      "content_hash": "f390ac94b6c87e96c1ba8a4c8db11220db8c7c708cb56549cba1cf349dbd40c6",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S2-016",
+      "semester": 2,
+      "content_hash": "449090bd4fa129011b346a47e9dd7f5e0ad6d7e508b0197761b6bf77bec75cc5",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S2-017",
+      "semester": 2,
+      "content_hash": "39a8c65e94669238aed45825fc0368280a006289e357a457517d6b57d1950f5b",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S2-019",
+      "semester": 2,
+      "content_hash": "e8070b31ac9600a4e19f9b2b58222683e0221fcd654a8a0b110973a8bdd411ab",
+      "decision": "duplicate_task",
+      "reason": "Same prompt/operation survives as a retained representative; cosmetic prefix, option rotation or generic source wrapper does not create a fresh historical problem."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S2-020",
+      "semester": 2,
+      "content_hash": "3f67ca0b2a0ca21aa799f85dabb453a97cee1980845c74098cb4167a296d9828",
+      "decision": "duplicate_task",
+      "reason": "Same prompt/operation survives as a retained representative; cosmetic prefix, option rotation or generic source wrapper does not create a fresh historical problem."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S2-021",
+      "semester": 2,
+      "content_hash": "206cd46e2e8ed1586e0e9f523bd44314322e3e10839b1ae24b1f4e5197bad71f",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S2-022",
+      "semester": 2,
+      "content_hash": "e8d6ac429ffbf614595238d1d59764a922e8f919975aecae2a3b042d19194fa4",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S2-024",
+      "semester": 2,
+      "content_hash": "538a712112b48fcc463e62174f073b557e82225d2ffd0d215723c008ab4a2917",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S2-025",
+      "semester": 2,
+      "content_hash": "ad96e7b49dd2d0897fae3884bc1b69d35a6eb61ed0e3e8b0570abadfe0af61e1",
+      "decision": "duplicate_task",
+      "reason": "Same prompt/operation survives as a retained representative; cosmetic prefix, option rotation or generic source wrapper does not create a fresh historical problem."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S2-027",
+      "semester": 2,
+      "content_hash": "e14269038df4661f17e0e0a03cf7b707d462b74967dad5f84d6688a94cc324bc",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S2-028",
+      "semester": 2,
+      "content_hash": "2d9e245622516f93f034edd072827500e88425fc17c2f58fc9582ce59903baab",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S2-029",
+      "semester": 2,
+      "content_hash": "08adb8560f243db3da40616ce592a6f41208aa92c60b2b3a1d53a82dc6b7ae4d",
+      "decision": "duplicate_task",
+      "reason": "Same prompt/operation survives as a retained representative; cosmetic prefix, option rotation or generic source wrapper does not create a fresh historical problem."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S2-030",
+      "semester": 2,
+      "content_hash": "d5d77c7415030b5ead8db9e6bdeac7afb442f7eb72baa780346a352b1c944d3e",
+      "decision": "duplicate_task",
+      "reason": "Same prompt/operation survives as a retained representative; cosmetic prefix, option rotation or generic source wrapper does not create a fresh historical problem."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S2-053",
+      "semester": 2,
+      "content_hash": "bfcfffedc9ab916c8c9fd3552d62b4c2bbaddd3a27957d68b509172c5e4a34ca",
+      "decision": "ambiguous_answer",
+      "reason": "Both the census-frequency statement and the all-citizens-liked-it statement are empirically testable claims; the prompt does not uniquely distinguish fact from opinion."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S2-056",
+      "semester": 2,
+      "content_hash": "81a8d52a53c69666bb85f56915294dd5b5d1282a71d31b0e9a0d8ceee87b5bd4",
+      "decision": "subject_mismatch",
+      "reason": "Generic contemporary council participation task without historical context belongs in a separately reviewed civics scope, not this history pool."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S2-080",
+      "semester": 2,
+      "content_hash": "3d126403cda34fbdb08effdf957dbcc770c2234433940eb41730110fa1c6f734",
+      "decision": "duplicate_task",
+      "reason": "Same prompt/operation survives as a retained representative; cosmetic prefix, option rotation or generic source wrapper does not create a fresh historical problem."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S2-083",
+      "semester": 2,
+      "content_hash": "9d672f187e5622eebb1552da1900cae8914a959250695c275aafa2fc924001a2",
+      "decision": "ambiguous_answer",
+      "reason": "Both the census-frequency statement and the all-citizens-liked-it statement are empirically testable claims; the prompt does not uniquely distinguish fact from opinion."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S2-086",
+      "semester": 2,
+      "content_hash": "13de42bf032edfaaef64ad71221fba849d28fc46ecbe5c392a944416447d17c3",
+      "decision": "subject_mismatch",
+      "reason": "Generic contemporary council participation task without historical context belongs in a separately reviewed civics scope, not this history pool."
+    },
+    {
+      "id": "v28-GE2-G10-SO-S2-110",
+      "semester": 2,
+      "content_hash": "1c9279d780fcace0d6c00c226f820349edf0e349b5073b885682f3086b3b2c32",
+      "decision": "duplicate_task",
+      "reason": "Same prompt/operation survives as a retained representative; cosmetic prefix, option rotation or generic source wrapper does not create a fresh historical problem."
+    },
+    {
+      "id": "v28q-hi-g10-s1-001",
+      "semester": 1,
+      "content_hash": "070bd349df933ff995d3e6b7a310abe1e735555b5500dceef452caf79d6d4050",
+      "decision": "duplicate_task",
+      "reason": "Same prompt/operation survives as a retained representative; cosmetic prefix, option rotation or generic source wrapper does not create a fresh historical problem."
+    },
+    {
+      "id": "v28f-10-1-ისტორია-01",
+      "semester": 1,
+      "content_hash": "c8a01accca80ecd3df99846d7eeaca9b3f78672cd3a97a2c1d37fa41697d5403",
+      "decision": "keep",
+      "reason": "Retain reviewed transferable historical method; semester allocation is editorial."
+    },
+    {
+      "id": "v28f-10-1-ისტორია-02",
+      "semester": 1,
+      "content_hash": "fe8424c252fbb9bc46392fd3eeef82bd0349fae060ad6d50920ab9087489d8ab",
+      "decision": "duplicate_task",
+      "reason": "Same prompt/operation survives as a retained representative; cosmetic prefix, option rotation or generic source wrapper does not create a fresh historical problem."
+    },
+    {
+      "id": "v28f-10-1-ისტორია-03",
+      "semester": 1,
+      "content_hash": "d85f491190e9cf4e0ba11a4fa0a852c30ef1aa6146f1789e309010ccd7c280e8",
+      "decision": "keep",
+      "reason": "Retain reviewed transferable historical method; semester allocation is editorial."
+    },
+    {
+      "id": "v28f-10-1-ისტორია-04",
+      "semester": 1,
+      "content_hash": "3bc4dd7060ea66a98156b2176a56e206aeb55595691171d48fc144cd7a380e5b",
+      "decision": "keep",
+      "reason": "Retain reviewed transferable historical method; semester allocation is editorial."
+    },
+    {
+      "id": "v28f-10-1-ისტორია-05",
+      "semester": 1,
+      "content_hash": "9f5e25c85deedc56d348fa378c7789ea7657bd5e0fc10fdc976d9b427aaa6f1e",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28f-10-1-ისტორია-06",
+      "semester": 1,
+      "content_hash": "67b9da6f67f7dd16b0cdc3079c569c4159a2b3a7268043addd9166392260539a",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28f-10-1-ისტორია-07",
+      "semester": 1,
+      "content_hash": "912d9efde0098e4526e67cb6315466fcaada9b26a9c9fb9bad1a4ce08f696236",
+      "decision": "keep",
+      "reason": "Retain reviewed transferable historical method; semester allocation is editorial."
+    },
+    {
+      "id": "v28f-10-1-ისტორია-08",
+      "semester": 1,
+      "content_hash": "75e5fd8cfb149224b0623a877469985eafa4084257da74eedf3c043c3c552f75",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28f-10-1-ისტორია-09",
+      "semester": 1,
+      "content_hash": "20eae012a3c38db8929a7766691bb706f587a54ace471e1d81e59d4966e27909",
+      "decision": "keep",
+      "reason": "Retain reviewed transferable historical method; semester allocation is editorial."
+    },
+    {
+      "id": "v28f-10-1-ისტორია-10",
+      "semester": 1,
+      "content_hash": "4d2a6f99a2b500e25fc3f9cf2ddc792d10d66c7aadff92c85b65e29ff15fc229",
+      "decision": "keep",
+      "reason": "Retain reviewed transferable historical method; semester allocation is editorial."
+    },
+    {
+      "id": "v28f-10-2-ისტორია-01",
+      "semester": 2,
+      "content_hash": "fead34e3fbced6dbc17730160dc0f8b8d89a9db0c8edfceb32241186459dbb10",
+      "decision": "keep",
+      "reason": "Retain reviewed transferable historical method; semester allocation is editorial."
+    },
+    {
+      "id": "v28f-10-2-ისტორია-02",
+      "semester": 2,
+      "content_hash": "90d906548836ffbd0b9ade89dec48b725edbfd06ba70b3f74aa966de0c575b6e",
+      "decision": "keep",
+      "reason": "Retain reviewed transferable historical method; semester allocation is editorial."
+    },
+    {
+      "id": "v28f-10-2-ისტორია-03",
+      "semester": 2,
+      "content_hash": "cb3377183ffa90db9fdd51e7df721a4fb5a75e37e824c46aa54824ba52d00717",
+      "decision": "keep",
+      "reason": "Retain reviewed transferable historical method; semester allocation is editorial."
+    },
+    {
+      "id": "v28f-10-2-ისტორია-04",
+      "semester": 2,
+      "content_hash": "13b1ece94132ab07c55499c3293b8678306a9cec6076672b0a18aadf1df08432",
+      "decision": "keep",
+      "reason": "Retain reviewed transferable historical method; semester allocation is editorial."
+    },
+    {
+      "id": "v28f-10-2-ისტორია-05",
+      "semester": 2,
+      "content_hash": "af88dd440a9f7fdc1efcd21e38bf3c54c558eb4fefbbc174b8e7b6620d65f10e",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28f-10-2-ისტორია-06",
+      "semester": 2,
+      "content_hash": "1125189d0e80386009558fc216a0a187420f1f9df5d168d30d9e12bdeae05030",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "v28f-10-2-ისტორია-07",
+      "semester": 2,
+      "content_hash": "7cedea4332848e7c83c16073e5fc8f9d52b4f82321ed35f26b95c694223aaef3",
+      "decision": "keep",
+      "reason": "Retain reviewed transferable historical method; semester allocation is editorial."
+    },
+    {
+      "id": "v28f-10-2-ისტორია-08",
+      "semester": 2,
+      "content_hash": "429f9f8e4886797e55af70402bf53652932b349c8935dd8a02da20a72c749074",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "qe4-10-1-history-specific-10-1",
+      "semester": 1,
+      "content_hash": "f60110f15c107a23f51913316aa94cad9a3aa5b1af42e5f6af3bd053139a8d1d",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "qe4-10-1-history-specific-10-2",
+      "semester": 1,
+      "content_hash": "5e8bde2bcd6c91e0921a08015c03d0ecaeda0281f87624cddb1631aed59b5d2f",
+      "decision": "period_mismatch",
+      "reason": "Reviewed modern-era event, sequence, factory or modern constitutional context is outside the consulted MES 2022 grade-X ancient/early-medieval framing; not a claim that the answer is historically false."
+    },
+    {
+      "id": "qe4-10-2-history-specific-10-3",
+      "semester": 2,
+      "content_hash": "4ecd5347223fa72ff352d8623b530ef7a4006eaf84c5a6e6462936e030479bae",
+      "decision": "keep",
+      "reason": "Retain reviewed transferable historical method; semester allocation is editorial."
+    },
+    {
+      "id": "qe4-10-2-history-specific-10-4",
+      "semester": 2,
+      "content_hash": "d5215c536ba4131ecb0145ad816b18d76978d216c84fe8fa1637432bbd114194",
+      "decision": "keep",
+      "reason": "Retain reviewed transferable historical method; semester allocation is editorial."
+    },
+    {
+      "id": "qe17-10-1-intrusive-pit-context",
+      "semester": 1,
+      "content_hash": "baab6c613102c7c6cf937d7070d90f9eddf45c7d770390a67be4d41b373523c5",
+      "decision": "keep",
+      "reason": "Retain previously reviewed ancient/early-medieval original family."
+    },
+    {
+      "id": "qe17-10-1-dating-range-overlap",
+      "semester": 1,
+      "content_hash": "ab8b8e6e6f615f7182c40c74be64e0452379342b1578a9fdab3fdbe5134f0905",
+      "decision": "keep",
+      "reason": "Retain previously reviewed ancient/early-medieval original family."
+    },
+    {
+      "id": "qe17-10-1-seed-selection-evidence",
+      "semester": 1,
+      "content_hash": "1ca9f7ad250e299ea00e9ca2495e6e443f82a583b643ff95046cca45aaf9cada",
+      "decision": "keep",
+      "reason": "Retain previously reviewed ancient/early-medieval original family."
+    },
+    {
+      "id": "qe17-10-1-granary-account-balance",
+      "semester": 1,
+      "content_hash": "af52bf771a91ca6d1824a7dd1e8abb4c2ab52e1573449eb755cd1fd8104286e7",
+      "decision": "keep",
+      "reason": "Retain previously reviewed ancient/early-medieval original family."
+    },
+    {
+      "id": "qe17-10-1-recovery-method-bias",
+      "semester": 1,
+      "content_hash": "621ddebaebe776dec767e1c17fd5e5a248207a97dcfa5500ffbba2fcc410fed8",
+      "decision": "keep",
+      "reason": "Retain previously reviewed ancient/early-medieval original family."
+    },
+    {
+      "id": "qe17-10-1-cylinder-seal-identification",
+      "semester": 1,
+      "content_hash": "28d48a87368c4843082e5a0844836c90453c99e5dc845a77574442f192df70ed",
+      "decision": "keep",
+      "reason": "Retain previously reviewed ancient/early-medieval original family."
+    },
+    {
+      "id": "qe17-10-1-debt-pledge-versus-sale",
+      "semester": 1,
+      "content_hash": "4fdc72b01fd6b6d9e632c4a790affbb0c8ea3c3bf4f501e5a31d5e07db72809b",
+      "decision": "keep",
+      "reason": "Retain previously reviewed ancient/early-medieval original family."
+    },
+    {
+      "id": "qe17-10-1-trade-measure-conversion",
+      "semester": 1,
+      "content_hash": "624b53567fe6b4fa54797b8baa5b13df4f9a2d6c60faf0e43eaeba747bbf43a6",
+      "decision": "keep",
+      "reason": "Retain previously reviewed ancient/early-medieval original family."
+    },
+    {
+      "id": "qe17-10-1-regnal-synchronism",
+      "semester": 1,
+      "content_hash": "795ecdbbfab7ea6314306bce261c33630017b5299dd2799a7d3339468d649b26",
+      "decision": "keep",
+      "reason": "Retain previously reviewed ancient/early-medieval original family."
+    },
+    {
+      "id": "qe17-10-1-rosetta-language-script",
+      "semester": 1,
+      "content_hash": "86d43c34850f59f793790b119b435faf69a83d98dd9a03c055911bae3a07a0bb",
+      "decision": "keep",
+      "reason": "Retain previously reviewed ancient/early-medieval original family."
+    },
+    {
+      "id": "qe17-10-2-ostracism-political-exclusion",
+      "semester": 2,
+      "content_hash": "691be76a4f17eeac9e0679446d3559098c6950381436b084ea3ea5e6d33cb3f8",
+      "decision": "keep",
+      "reason": "Retain previously reviewed ancient/early-medieval original family."
+    },
+    {
+      "id": "qe17-10-2-citizenship-not-ethnicity",
+      "semester": 2,
+      "content_hash": "6d9d8a98310738b8557690ce311a5e58fae60a34984980a23b71f5e77817c73d",
+      "decision": "keep",
+      "reason": "Retain previously reviewed ancient/early-medieval original family."
+    },
+    {
+      "id": "qe17-10-2-voting-group-versus-person",
+      "semester": 2,
+      "content_hash": "1ccd4d972338bde399088dae72afc8f12c4a39a67d25ed8f8e438015f5a1e6b1",
+      "decision": "keep",
+      "reason": "Retain previously reviewed ancient/early-medieval original family."
+    },
+    {
+      "id": "qe17-10-2-byzantine-self-designation",
+      "semester": 2,
+      "content_hash": "e04a0c1608522d24150ebf10857203cd25c9299256e0b100d56a6833fafdf6e8",
+      "decision": "keep",
+      "reason": "Retain previously reviewed ancient/early-medieval original family."
+    },
+    {
+      "id": "qe17-10-2-codification-conflicting-rules",
+      "semester": 2,
+      "content_hash": "0421dc32ac0e3fe848f95981f36b90e68182040b01995915df9cfd4214e55b88",
+      "decision": "keep",
+      "reason": "Retain previously reviewed ancient/early-medieval original family."
+    },
+    {
+      "id": "qe17-10-2-palimpsest-text-layers",
+      "semester": 2,
+      "content_hash": "55232d5ec5299c760b4a5746cc211dea018ebd2035d9b3f303ca5c27c7a7711b",
+      "decision": "keep",
+      "reason": "Retain previously reviewed ancient/early-medieval original family."
+    },
+    {
+      "id": "qe17-10-2-coin-deposit-lower-bound",
+      "semester": 2,
+      "content_hash": "5e6c6e063e786d02da53cbda929407a56e6d2dd1cd35736467fab96017deedc5",
+      "decision": "keep",
+      "reason": "Retain previously reviewed ancient/early-medieval original family."
+    },
+    {
+      "id": "qe17-10-2-relay-trade-network",
+      "semester": 2,
+      "content_hash": "9e0a92f4b05c855986d6922f80ac8049d7120ae42ca3383b60c87e074905bcbd",
+      "decision": "keep",
+      "reason": "Retain previously reviewed ancient/early-medieval original family."
+    },
+    {
+      "id": "qe17-10-2-iconoclasm-object-versus-policy",
+      "semester": 2,
+      "content_hash": "611956cd37d365496a01c7e35f4ec391b6a399d70ef72b3129fee2aef7ee40a1",
+      "decision": "keep",
+      "reason": "Retain previously reviewed ancient/early-medieval original family."
+    },
+    {
+      "id": "qe17-10-2-charter-moving-river",
+      "semester": 2,
+      "content_hash": "58d799622a4ed2e85f9363bc01e70ac390667ed891962279dfcdb4754490e8a9",
+      "decision": "keep",
+      "reason": "Retain previously reviewed ancient/early-medieval original family."
+    }
+  ],
+  "newContentApprovals": [
+    {
+      "id": "qe18-10-1-pottery-refit-provenance",
+      "digest": "c9109cd3a64831afb4591c4d0956f772f2c443341f352f7da684a290f6fdc7a1",
+      "review": "assistant_option_by_option_review; not independent teacher certification"
+    },
+    {
+      "id": "qe18-10-1-grave-goods-inference",
+      "digest": "01b523140da2d41156b0f12b94c3970e89030899967d02acf78d3adf31a53279",
+      "review": "assistant_option_by_option_review; not independent teacher certification"
+    },
+    {
+      "id": "qe18-10-1-earliest-surviving-record",
+      "digest": "400516b52d8d7deec6b52aa76937f8eea90fbecadc6981df665316b1b2963071",
+      "review": "assistant_option_by_option_review; not independent teacher certification"
+    },
+    {
+      "id": "qe18-10-1-settlement-seasonality",
+      "digest": "131c2012bdd7f7cebc343c5d23482ab6b9696a1e64a26d75ef4bc3e6350624ed",
+      "review": "assistant_option_by_option_review; not independent teacher certification"
+    },
+    {
+      "id": "qe18-10-2-jurisdiction-division",
+      "digest": "e658f3d10199df764e0702733ca3d63d3bf1a8863f1450718be5de6b9f792b14",
+      "review": "assistant_option_by_option_review; not independent teacher certification"
+    },
+    {
+      "id": "qe18-10-2-succession-rule-comparison",
+      "digest": "87c052ba9d482cc5439334d7684fb0d45dd76e0130498facb10e37fbf8199313",
+      "review": "assistant_option_by_option_review; not independent teacher certification"
+    }
+  ],
+  "limitations": [
+    "Only grade X History was repaired. Other grades were not remapped or certified.",
+    "Review is assistant editorial review, not independent teacher approval.",
+    "The consulted curriculum guide is from 2022; semester placement is editorial.",
+    "Shared historical methods across semesters remain; 22 groups per semester is not an unlimited fresh-question guarantee.",
+    "No authenticated learner E2E claim."
+  ]
+}

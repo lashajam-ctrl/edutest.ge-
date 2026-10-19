@@ -7,6 +7,7 @@ tests.push('history-expansion-quality');
 tests.push('biology9-expansion-quality');
 tests.push('chemistry9-expansion-quality');
 tests.push('history10-expansion-quality');
+tests.push('history10-curriculum-repair');
 function run(args){const result=spawnSync(process.execPath,args,{stdio:'inherit',env:process.env});if(result.error)throw result.error;if(result.status!==0)process.exit(result.status||1);}
 run(['scripts/assemble-app.mjs','--check']);
 run(['scripts/check-browser-syntax.mjs']);
@@ -36,5 +37,6 @@ if(process.argv.includes('--history9-expansion'))run(['scripts/verify-civics-exp
 if(process.argv.includes('--biology9-expansion'))run(['scripts/verify-civics-expansion-local.mjs','--biology9']);
 if(process.argv.includes('--chemistry9-expansion'))run(['scripts/verify-civics-expansion-local.mjs','--chemistry9']);
 if(process.argv.includes('--history10-expansion'))run(['scripts/verify-civics-expansion-local.mjs','--history10']);
+if(process.argv.includes('--history10-repair'))run(['.openai/bank-expansion-20261007/history10-repair-verify.mjs']);
 if(!process.argv.includes('--no-build'))run(['node_modules/vinext/dist/cli.js','build']);
 console.log('Release gate passed'+(process.argv.includes('--no-build')?' (tests only; build still required).':'.'));
