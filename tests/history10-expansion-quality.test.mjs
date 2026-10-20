@@ -2,6 +2,20 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {verifyHistory10Evidence as check,validateHistory10Batch as batch} from '../scripts/history10-expansion-quality.mjs';
 function q(family,text,options,explanation=options[0]){return {family,text,options,correct:0,explanation};}
+test('co-regency counts the shared interval once and requires explicit ordering',()=>{
+ const a=q('co-regency-overlap','24 18 6; ჯერ A გამეფდა; B A-ს შემდეგაც განაგრძო მართვა; წყვეტა არ ყოფილა',['36 წელი','42 წელი','48 წელი','30 წელი']);
+ assert.doesNotThrow(()=>check(a));
+ for(const c of [{correct:1},{text:a.text.replace('ჯერ A გამეფდა','უცნობია')},{text:a.text.replace('24 18 6','24 18 19')},{options:['36 წელი','036 წელი','48 წელი','30 წელი']}])assert.throws(()=>check({...a,...c}));
+});
+test('ration entitlement weights worked days instead of splitting equally',()=>{
+ const a=q('ration-labor-days','თითო ნამუშევარ დღეზე 2 საზომი; A 3 დღე; B 5 დღე; სხვა დანამატი არ არსებობს',['A — 6 საზომი; B — 10 საზომი','A — 8 საზომი; B — 8 საზომი','A — 3 საზომი; B — 5 საზომი','A — 10 საზომი; B — 6 საზომი']);
+ assert.doesNotThrow(()=>check(a));assert.throws(()=>check({...a,correct:1}));assert.throws(()=>check({...a,text:a.text.replace('2 საზომი','3 საზომი')}));
+});
+test('historical BCE/CE interval excludes a fictitious year zero',()=>{
+ const a=q('calendar-no-year-zero','ძვ. წ. 4 წლის დასაწყისში და ახ. წ. 3 წლის დასაწყისში; ნულოვანი წელი არ არის',['6 წელი','7 წელი','8 წელი','1 წელი']);
+ assert.doesNotThrow(()=>check(a));assert.throws(()=>check({...a,correct:1}));assert.throws(()=>check({...a,text:a.text.replace('ნულოვანი წელი არ არის','ასტრონომიული აღრიცხვა')}));
+ const edge=q('calendar-no-year-zero','ძვ. წ. 1 წლის დასაწყისში და ახ. წ. 1 წლის დასაწყისში; ნულოვანი წელი არ არის',['1 წელი','2 წელი','0 წელი','3 წელი']);assert.doesNotThrow(()=>check(edge));
+});
 test('BCE dating ranges intersect rather than form a union',()=>{
  const a=q('dating-range-overlap','3200 3000 3100 2900',['ძვ. წ. 3100–3000 წლებში','ძვ. წ. 3200–3100 წლებში','ძვ. წ. 3000–2900 წლებში','ძვ. წ. 3200–2900 წლებში']);
  assert.equal(check(a),'prompt_evidence_recomputation');

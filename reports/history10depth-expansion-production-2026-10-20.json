@@ -1,0 +1,346 @@
+{
+  "verifiedAt": "2026-10-20T05:48:58.711Z",
+  "beforeActive": 23587,
+  "afterActive": 23595,
+  "added": 8,
+  "existingHistoryRowsAndKeysUnchanged": 4000,
+  "priorQualityHoldsPreserved": 92,
+  "buckets": [
+    {
+      "semester": 1,
+      "before": 22,
+      "after": 26,
+      "added": 4,
+      "selectionGroups": 26,
+      "freshTenPapers": 2,
+      "freshTwentyPapers": 1
+    },
+    {
+      "semester": 2,
+      "before": 22,
+      "after": 26,
+      "added": 4,
+      "selectionGroups": 26,
+      "freshTenPapers": 2,
+      "freshTwentyPapers": 1
+    }
+  ],
+  "workloads": [
+    {
+      "semester": 1,
+      "groups": 26,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 6,
+          "reused": 4
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        }
+      ]
+    },
+    {
+      "semester": 1,
+      "groups": 26,
+      "papers": [
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 6,
+          "reused": 14
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        }
+      ]
+    },
+    {
+      "semester": 1,
+      "groups": 26,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 16,
+          "reused": 4
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        }
+      ]
+    },
+    {
+      "semester": 2,
+      "groups": 26,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 6,
+          "reused": 4
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        }
+      ]
+    },
+    {
+      "semester": 2,
+      "groups": 26,
+      "papers": [
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 6,
+          "reused": 14
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        }
+      ]
+    },
+    {
+      "semester": 2,
+      "groups": 26,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 16,
+          "reused": 4
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        }
+      ]
+    }
+  ],
+  "catalogRoutes": 2,
+  "localSimulatedPapers": 42,
+  "productionReadbackSimulatedPapers": 42,
+  "optionRationales": 32,
+  "computedAnswers": 3,
+  "assistantJudgementOnly": 5,
+  "explicitTeachingScenarios": 6,
+  "sourcedParaphrases": 2,
+  "allAddedRecordsMatch": true,
+  "scopedBackupSha256": "e16013eae82e38f49d1fbf3b3980b175f94093653a46e0b60f335c5c536f243a",
+  "patchSha256": "057b32bc3fa89fe8d754a2ac782abb14935f77a1efe5861378598b77177ced5a",
+  "rejectedConcepts": [
+    {
+      "family": "copied-testimony",
+      "existing": "qe4-9-2-history-specific-9-3"
+    },
+    {
+      "family": "royal-propaganda-credibility",
+      "existing": "v28-GE3-7501CAC32595"
+    }
+  ],
+  "limitations": [
+    "Assistant content review, not independent teacher certification.",
+    "Eight original fixed questions, not a claimed unlimited generator.",
+    "Curriculum reference MES2022; semester allocation editorial.",
+    "Two fresh ten-question papers OR one fresh twenty-question paper per semester; these share supply.",
+    "Full active bank and authenticated student end-to-end flow not re-audited."
+  ]
+}

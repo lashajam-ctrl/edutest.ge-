@@ -1,0 +1,395 @@
+{
+  "generatedAt": "2026-10-20T05:47:04.897Z",
+  "snapshotSha256": "3b7d70e0043cdc8edf059cecdd5329ce6c93521fec8601338c8664ccdc1d903e",
+  "baselineActive": 23587,
+  "afterActive": 23595,
+  "added": 8,
+  "authoredFamilies": 8,
+  "optionRationalesChecked": 32,
+  "computationalEvidenceChecks": 3,
+  "assistantJudgementOnly": 5,
+  "exactDuplicateAdditions": 0,
+  "canonicalDuplicateAdditions": 0,
+  "lexicalReviewThreshold": 0.45,
+  "unresolvedSimilarityCandidates": [],
+  "buckets": [
+    {
+      "grade": 10,
+      "semester": 1,
+      "beforeRows": 22,
+      "afterRows": 26,
+      "beforeGroups": 22,
+      "afterGroups": 26,
+      "added": 4,
+      "freshTenQuestionPapers": 2,
+      "freshTwentyQuestionPapers": 1
+    },
+    {
+      "grade": 10,
+      "semester": 2,
+      "beforeRows": 22,
+      "afterRows": 26,
+      "beforeGroups": 22,
+      "afterGroups": 26,
+      "added": 4,
+      "freshTenQuestionPapers": 2,
+      "freshTwentyQuestionPapers": 1
+    }
+  ],
+  "simulatedPapers": 42,
+  "workloads": [
+    {
+      "label": "10|1|ten",
+      "distinct": 26,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 6,
+          "reused": 4
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        }
+      ]
+    },
+    {
+      "label": "10|1|twenty",
+      "distinct": 26,
+      "papers": [
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 6,
+          "reused": 14
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        }
+      ]
+    },
+    {
+      "label": "10|1|mixed",
+      "distinct": 26,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 16,
+          "reused": 4
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        }
+      ]
+    },
+    {
+      "label": "10|2|ten",
+      "distinct": 26,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 6,
+          "reused": 4
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        }
+      ]
+    },
+    {
+      "label": "10|2|twenty",
+      "distinct": 26,
+      "papers": [
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 6,
+          "reused": 14
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        }
+      ]
+    },
+    {
+      "label": "10|2|mixed",
+      "distinct": 26,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 16,
+          "reused": 4
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        }
+      ]
+    }
+  ],
+  "catalog": [
+    {
+      "label": "v28-g10-s1-6cc0b8c9e1",
+      "distinct": 26,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        }
+      ]
+    },
+    {
+      "label": "v28-g10-s2-6cc0b8c9e1",
+      "distinct": 26,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        }
+      ]
+    }
+  ],
+  "failures": [],
+  "sources": [
+    {
+      "title": "MES 2022 grade-X thematic reference, page 11; editorial semester placement",
+      "url": "https://www.mes.gov.ge/uploads/files/2022/gzamkvlevi.pdf",
+      "accessed": "2026-10-19"
+    },
+    {
+      "title": "Lactantius, 313 toleration text, university-hosted translation; original Georgian paraphrase",
+      "url": "https://sourcebooks.web.fordham.edu/source/edict-milan.asp",
+      "accessed": "2026-10-20"
+    },
+    {
+      "title": "Metropolitan Museum: Carolingian Art",
+      "url": "https://www.metmuseum.org/essays/carolingian-art",
+      "accessed": "2026-10-20"
+    },
+    {
+      "title": "Metropolitan Museum: Byzantine imperial continuity",
+      "url": "https://www.metmuseum.org/essays/byzantium-ca-330-1453",
+      "accessed": "2026-10-20"
+    }
+  ],
+  "limitations": [
+    "Assistant-authored and option-by-option reviewed; not independently teacher-certified.",
+    "Semester placement is a configurable editorial allocation, not a ministry-mandated calendar.",
+    "Similarity thresholds and selector families do not prove absence of every semantic overlap.",
+    "Fresh-paper counts assume no previous attempts in that grade/subject/semester; 10/20 modes share history.",
+    "The 200-group planning target remains unmet in these buckets.",
+    "No authenticated learner submission is performed by this bank-only release.",
+    "3 prompts have computational checks; 5 rely on assistant semantic judgement.",
+    "Six explicit teaching scenarios and two sourced paraphrases; no independent teacher certification.",
+    "Shared broad skills can recur across grades; nearest-neighbor review is not an exhaustive semantic proof.",
+    "26 groups per semester is below the 200-group planning target."
+  ],
+  "privateDraftSha256": "90a845c0e60ec2ee3fc369a1897c0aff40717cb46620983c1fa68b1e3d16de0b",
+  "reviewOptions": {},
+  "patchSha256": "057b32bc3fa89fe8d754a2ac782abb14935f77a1efe5861378598b77177ced5a",
+  "scopedBackupSha256": "e16013eae82e38f49d1fbf3b3980b175f94093653a46e0b60f335c5c536f243a"
+}

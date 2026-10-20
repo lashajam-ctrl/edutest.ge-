@@ -9,10 +9,28 @@ export const history10Families={
  'ostracism-political-exclusion':2,'citizenship-not-ethnicity':2,'voting-group-versus-person':2,
  'byzantine-self-designation':2,'codification-conflicting-rules':2,'palimpsest-text-layers':2,
  'coin-deposit-lower-bound':2,'relay-trade-network':2,'iconoclasm-object-versus-policy':2,'charter-moving-river':2,
+ 'co-regency-overlap':1,'tribute-versus-gift':1,'canal-negligence-condition':1,'ration-labor-days':1,
+ 'calendar-no-year-zero':2,'religious-toleration-scope':2,'imperial-title-not-unification':2,'oath-versus-property-grant':2,
 };
 export function verifyHistory10Evidence(q){
  const n=[...q.text.matchAll(/\d+/gu)].map(x=>Number(x[0]));let expected,parse;
  switch(q.family){
+  case 'co-regency-overlap':{
+   assert.equal(n.length,3);const [a,b,overlap]=n;assert.ok(overlap>0&&overlap<Math.min(a,b));
+   assert.match(q.text,/ჯერ A გამეფდა/);assert.match(q.text,/A-ს შემდეგაც განაგრძო მართვა/);assert.match(q.text,/წყვეტა არ ყოფილა/);
+   expected=a+b-overlap;parse=x=>unit(x,'წელი');break;
+  }
+  case 'ration-labor-days':{
+   assert.equal(n.length,3);const [rate,a,b]=n;assert.ok(n.every(x=>Number.isInteger(x)&&x>0));
+   assert.match(q.text,/თითო ნამუშევარ დღეზე/);assert.match(q.text,/სხვა დანამატი არ არსებობს/);
+   expected=`A — ${rate*a} საზომი; B — ${rate*b} საზომი`;
+   parse=x=>{const m=x.match(/^A — (\d+) საზომი; B — (\d+) საზომი$/u);assert.ok(m);return `A — ${Number(m[1])} საზომი; B — ${Number(m[2])} საზომი`;};break;
+  }
+  case 'calendar-no-year-zero':{
+   assert.equal(n.length,2);assert.ok(n.every(x=>Number.isInteger(x)&&x>0));
+   assert.match(q.text,/ძვ\. წ\. \d+ წლის დასაწყისში და ახ\. წ\. \d+ წლის დასაწყისში/);
+   assert.match(q.text,/ნულოვანი წელი არ არის/);expected=n[0]+n[1]-1;parse=x=>unit(x,'წელი');break;
+  }
   case 'dating-range-overlap':{
    assert.equal(n.length,4);const [a,b,c,d]=n;assert.ok(a>b&&c>d);
    const early=Math.min(a,c),late=Math.max(b,d);assert.ok(early>late,'Ranges must genuinely overlap');

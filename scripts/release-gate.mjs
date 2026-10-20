@@ -37,6 +37,7 @@ if(process.argv.includes('--history9-expansion'))run(['scripts/verify-civics-exp
 if(process.argv.includes('--biology9-expansion'))run(['scripts/verify-civics-expansion-local.mjs','--biology9']);
 if(process.argv.includes('--chemistry9-expansion'))run(['scripts/verify-civics-expansion-local.mjs','--chemistry9']);
 if(process.argv.includes('--history10-expansion'))run(['scripts/verify-civics-expansion-local.mjs','--history10']);
+if(process.argv.includes('--history10depth-expansion'))run(['scripts/verify-civics-expansion-local.mjs','--history10depth']);
 if(process.argv.includes('--history10-repair'))run(['.openai/bank-expansion-20261007/history10-repair-verify.mjs']);
 if(!process.argv.includes('--no-build'))run(['node_modules/vinext/dist/cli.js','build']);
 console.log('Release gate passed'+(process.argv.includes('--no-build')?' (tests only; build still required).':'.'));
