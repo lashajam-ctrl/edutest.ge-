@@ -1,7 +1,21 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {verifyHistory10Evidence as check,validateHistory10Batch as batch} from '../scripts/history10-expansion-quality.mjs';
+import {verifyHistory10Evidence as check,validateHistory10Batch as batch,history10EditorialFingerprint as fingerprint,history10EditorialDigests as digests,history10Families} from '../scripts/history10-expansion-quality.mjs';
 function q(family,text,options,explanation=options[0]){return {family,text,options,correct:0,explanation};}
+test('bronze supply is limited by both ingredients, not their summed stock',()=>{
+ const a=q('bronze-limiting-supply','9 სპილენძი, 1 კალა; 45 სპილენძი, 3 კალა; ნედლეულის დამატება და ძველი ნივთების გადადნობა გამორიცხულია; დანაკარგი არ არის და შემადგენლობა უცვლელია',['3 პარტია','5 პარტია','6 პარტია','48 პარტია'],'3 პარტია: წარმოებას კალას მარაგი ზღუდავს.');
+ assert.doesNotThrow(()=>check(a));
+ for(const change of [{correct:1},{text:a.text.replace('3 კალა','6 კალა')},{text:a.text.replace('დანაკარგი არ არის და შემადგენლობა უცვლელია','შემადგენლობა ცვალებადია')},{options:['3 პარტია','03 პარტია','6 პარტია','48 პარტია']},{explanation:'ხუთი პარტია'}])assert.throws(()=>check({...a,...change}));
+ const fraction={...a,text:a.text.replace('1 კალა','2 კალა'),options:['1 პარტია','2 პარტია','3 პარტია','5 პარტია'],explanation:'1 პარტია: წარმოებას კალას მარაგი ზღუდავს.'};assert.doesNotThrow(()=>check(fraction));
+});
+test('editorial fingerprint binds meaning, key, rationales and provenance but tolerates consistent option rotation',()=>{
+ const a={text:'Reviewed fixture',options:['A','B','C','D'],correct:0,optionReview:['why A','why not B','why not C','why not D'],explanation:'why A',evidenceKind:'sourced_paraphrase',sourceUrl:'https://example.org/source'};
+ const rotate=xs=>xs.slice(1).concat(xs[0]);
+ assert.equal(fingerprint(a),fingerprint({...a,options:rotate(a.options),optionReview:rotate(a.optionReview),correct:3}));
+ for(const change of [{text:'Different meaning'},{correct:1},{sourceUrl:'https://example.org/other'},{evidenceKind:'explicit_teaching_scenario'},{options:['A','B','C','new option']},{optionReview:['new rationale','why not B','why not C','why not D']},{explanation:'New claim'}])assert.notEqual(fingerprint(a),fingerprint({...a,...change}));
+ assert.equal(Object.keys(digests).length,7);
+ for(const [family,digest]of Object.entries(digests)){assert.match(digest,/^[a-f0-9]{64}$/);assert.ok(history10Families[family]);assert.throws(()=>check({...a,family}),/Editorial content changed/);}
+});
 test('co-regency counts the shared interval once and requires explicit ordering',()=>{
  const a=q('co-regency-overlap','24 18 6; ჯერ A გამეფდა; B A-ს შემდეგაც განაგრძო მართვა; წყვეტა არ ყოფილა',['36 წელი','42 წელი','48 წელი','30 წელი']);
  assert.doesNotThrow(()=>check(a));

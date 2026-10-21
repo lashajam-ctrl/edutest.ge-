@@ -1,0 +1,382 @@
+{
+  "verifiedAt": "2026-10-21T05:47:01.241Z",
+  "beforeActive": 23595,
+  "afterActive": 23603,
+  "added": 8,
+  "existingHistoryRowsAndKeysUnchanged": 4008,
+  "priorQualityHoldsPreserved": 92,
+  "buckets": [
+    {
+      "semester": 1,
+      "before": 26,
+      "after": 30,
+      "added": 4,
+      "selectionGroups": 30,
+      "freshTenPapers": 3,
+      "freshTwentyPapers": 1
+    },
+    {
+      "semester": 2,
+      "before": 26,
+      "after": 30,
+      "added": 4,
+      "selectionGroups": 30,
+      "freshTenPapers": 3,
+      "freshTwentyPapers": 1
+    }
+  ],
+  "workloads": [
+    {
+      "semester": 1,
+      "groups": 30,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        }
+      ]
+    },
+    {
+      "semester": 1,
+      "groups": 30,
+      "papers": [
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 10,
+          "reused": 10
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        }
+      ]
+    },
+    {
+      "semester": 1,
+      "groups": 30,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        }
+      ]
+    },
+    {
+      "semester": 2,
+      "groups": 30,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        }
+      ]
+    },
+    {
+      "semester": 2,
+      "groups": 30,
+      "papers": [
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 10,
+          "reused": 10
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        }
+      ]
+    },
+    {
+      "semester": 2,
+      "groups": 30,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        }
+      ]
+    }
+  ],
+  "catalogRoutes": 2,
+  "localSimulatedPapers": 42,
+  "productionReadbackSimulatedPapers": 42,
+  "optionRationales": 32,
+  "computedAnswers": 1,
+  "assistantJudgementOnly": 7,
+  "explicitTeachingScenarios": 3,
+  "sourcedTasks": 5,
+  "allAddedRecordsMatch": true,
+  "scopedBackupSha256": "e669084a84a7f06f47f6e4f2836516a8fcd1d543bb59ff92780c7370625bc004",
+  "patchSha256": "8ae67670ddb87fef3ccb4b719044cd4bd2ee1171b3904b06ebb90ab1a4d0ad29",
+  "rejectedConcepts": [
+    {
+      "family": "hammurabi-status-penalties",
+      "reason": "Already covered by v28-GE3-BF0691781D27 and v28-GE3-D57E3CE571FE."
+    },
+    {
+      "family": "carolingian-script-not-translation",
+      "reason": "Same language-versus-script distinction already covered by qe17-10-1-rosetta-language-script."
+    }
+  ],
+  "semanticReview": [
+    {
+      "family": "amarna-diplomatic-language",
+      "distinction": "Shared diplomatic language versus political dependence, not Rosetta language/script counting or Byzantine self-designation."
+    },
+    {
+      "family": "law-prescription-versus-practice",
+      "distinction": "Prescriptive text versus case-level implementation; not the existing social-status penalty comparison."
+    },
+    {
+      "family": "bronze-limiting-supply",
+      "distinction": "Two-resource production bottleneck; not one-factor unit conversion, stock subtraction, or the existing general tin-trade question v28-GE3-29CEC3F5029E."
+    },
+    {
+      "family": "sealed-envelope-not-truth",
+      "distinction": "Document integrity versus truth, not seal identity or authorship."
+    },
+    {
+      "family": "boule-proposal-versus-approval",
+      "distinction": "Preparation and approval within one decision process, not citizen eligibility or division of judicial subject jurisdictions."
+    },
+    {
+      "family": "tribune-veto-not-substitution",
+      "distinction": "Negative blocking power does not enact an alternative; not preparation versus approval."
+    },
+    {
+      "family": "carolingian-art-synthesis",
+      "distinction": "Selective combination of two artistic traditions, not iconoclasm or imperial title."
+    },
+    {
+      "family": "copyist-eye-skip-hypothesis",
+      "distinction": "Accidental omission as a hypothesis, not physical palimpsest layers or independent witness counting."
+    }
+  ],
+  "limitations": [
+    "Assistant content review, not independent teacher certification.",
+    "Eight original fixed questions, not an unlimited generator.",
+    "One independent arithmetic recomputation; seven editorial judgements are pinned against unreviewed changes, not proven by hashes.",
+    "Curriculum reference MES2022; semester allocation editorial.",
+    "Three fresh ten-question papers OR one fresh twenty-question paper per semester; all modes share the same 30-group supply.",
+    "Full active bank and authenticated student end-to-end flow not re-audited.",
+    "Broad historical skills can recur across grades; absence of all semantic overlap is not proven."
+  ]
+}

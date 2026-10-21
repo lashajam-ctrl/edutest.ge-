@@ -1,0 +1,405 @@
+{
+  "generatedAt": "2026-10-20T14:14:21.761Z",
+  "snapshotSha256": "3b7d70e0043cdc8edf059cecdd5329ce6c93521fec8601338c8664ccdc1d903e",
+  "baselineActive": 23595,
+  "afterActive": 23603,
+  "added": 8,
+  "authoredFamilies": 8,
+  "optionRationalesChecked": 32,
+  "computationalEvidenceChecks": 1,
+  "assistantJudgementOnly": 7,
+  "exactDuplicateAdditions": 0,
+  "canonicalDuplicateAdditions": 0,
+  "lexicalReviewThreshold": 0.45,
+  "unresolvedSimilarityCandidates": [],
+  "buckets": [
+    {
+      "grade": 10,
+      "semester": 1,
+      "beforeRows": 26,
+      "afterRows": 30,
+      "beforeGroups": 26,
+      "afterGroups": 30,
+      "added": 4,
+      "freshTenQuestionPapers": 3,
+      "freshTwentyQuestionPapers": 1
+    },
+    {
+      "grade": 10,
+      "semester": 2,
+      "beforeRows": 26,
+      "afterRows": 30,
+      "beforeGroups": 26,
+      "afterGroups": 30,
+      "added": 4,
+      "freshTenQuestionPapers": 3,
+      "freshTwentyQuestionPapers": 1
+    }
+  ],
+  "simulatedPapers": 42,
+  "workloads": [
+    {
+      "label": "10|1|ten",
+      "distinct": 30,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        }
+      ]
+    },
+    {
+      "label": "10|1|twenty",
+      "distinct": 30,
+      "papers": [
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 10,
+          "reused": 10
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        }
+      ]
+    },
+    {
+      "label": "10|1|mixed",
+      "distinct": 30,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        }
+      ]
+    },
+    {
+      "label": "10|2|ten",
+      "distinct": 30,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        }
+      ]
+    },
+    {
+      "label": "10|2|twenty",
+      "distinct": 30,
+      "papers": [
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 10,
+          "reused": 10
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        }
+      ]
+    },
+    {
+      "label": "10|2|mixed",
+      "distinct": 30,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        }
+      ]
+    }
+  ],
+  "catalog": [
+    {
+      "label": "v28-g10-s1-6cc0b8c9e1",
+      "distinct": 30,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        }
+      ]
+    },
+    {
+      "label": "v28-g10-s2-6cc0b8c9e1",
+      "distinct": 30,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        }
+      ]
+    }
+  ],
+  "failures": [],
+  "sources": [
+    {
+      "title": "MES 2022 grade-X thematic reference, page 11; editorial semester placement",
+      "url": "https://www.mes.gov.ge/uploads/files/2022/gzamkvlevi.pdf",
+      "accessed": "2026-10-19"
+    },
+    {
+      "title": "ძველი აღმოსავლეთის დიპლომატია",
+      "url": "https://www.metmuseum.org/essays/the-amarna-letters",
+      "accessed": "2026-10-20"
+    },
+    {
+      "title": "ძველი ბაბილონის სამართლის წყაროები",
+      "url": "https://avalon.law.yale.edu/ancient/hamcode.asp",
+      "accessed": "2026-10-20"
+    },
+    {
+      "title": "ათენური გადაწყვეტილების მიღება",
+      "url": "https://www.ime.gr/chronos/05/en/politics/325boule.html",
+      "accessed": "2026-10-20"
+    },
+    {
+      "title": "რომის რესპუბლიკის პოლიტიკური მექანიზმები",
+      "url": "https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Polybius/6%2A.html",
+      "accessed": "2026-10-20"
+    },
+    {
+      "title": "კაროლინგების ეპოქის ხელოვნება",
+      "url": "https://www.metmuseum.org/essays/carolingian-art",
+      "accessed": "2026-10-20"
+    }
+  ],
+  "limitations": [
+    "Assistant-authored and option-by-option reviewed; not independently teacher-certified.",
+    "Semester placement is a configurable editorial allocation, not a ministry-mandated calendar.",
+    "Similarity thresholds and selector families do not prove absence of every semantic overlap.",
+    "Fresh-paper counts assume no previous attempts in that grade/subject/semester; 10/20 modes share history.",
+    "The 200-group planning target remains unmet in these buckets.",
+    "No authenticated learner submission is performed by this bank-only release.",
+    "1 prompts have computational checks; 7 rely on assistant semantic judgement.",
+    "Three explicit teaching scenarios and five source-based tasks; no independent teacher certification.",
+    "One quantitative answer is independently recomputed; seven answers require editorial judgement and reviewed rule-table matching is not historical proof.",
+    "30 groups per semester is below the 200-group planning target."
+  ],
+  "privateDraftSha256": "ee61f6ea41bf45b7d75ea20025676281536e49ecae1c27e42f434e66d6a9d9eb",
+  "reviewOptions": {},
+  "patchSha256": "8ae67670ddb87fef3ccb4b719044cd4bd2ee1171b3904b06ebb90ab1a4d0ad29",
+  "scopedBackupSha256": "e669084a84a7f06f47f6e4f2836516a8fcd1d543bb59ff92780c7370625bc004"
+}
