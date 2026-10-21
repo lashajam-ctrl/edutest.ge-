@@ -244,9 +244,22 @@ function applyTestAgeMode(test){
   const mascot=document.getElementById('q-grade-mascot'),title=document.getElementById('q-grade-title'),hint=document.getElementById('q-grade-hint');
   if(mascot)mascot.textContent=theme.mascot;if(title)title.textContent=theme.title;if(hint)hint.textContent=theme.hint;
 }
+function questionInstructionFor(type,grade){
+  const instructions={
+    short_answer:'წაიკითხე პირობა და პასუხი შენი სიტყვებით ჩაწერე.',
+    calc:'წაიკითხე პირობა, გამოთვალე და რიცხვითი პასუხი ჩაწერე.',
+    fill:'წაიკითხე წინადადება და შეავსე გამოტოვებული ადგილი.',
+    order:'წაიკითხე პირობა და ელემენტები სწორი თანმიმდევრობით დაალაგე.',
+    match:'წაიკითხე პირობა და შესაბამისი წყვილები დააკავშირე.',
+    true_false:'წაიკითხე მტკიცება და მონიშნე, სწორია თუ მცდარი.'
+  };
+  return instructions[type]||(type==='multiple_choice'?gradeThemeFor(grade)?.hint:null)||'ყურადღებით წაიკითხე პირობა და შეასრულე დავალება.';
+}
 
 function renderQ(){
   const qs=curTestQs;const q=qs[qIdx];if(!q)return;
+  const gradeHint=document.getElementById('q-grade-hint');
+  if(gradeHint)gradeHint.textContent=questionInstructionFor(q.type,curTest?.grade??CUR_USER?.grade);
   document.getElementById('q-num').textContent=qIdx+1;
   const ofSep=LANG==='ka'?' '+t('of'):' '+t('of')+' ';document.getElementById('q-counter').textContent=t('question')+' '+(qIdx+1)+ofSep+qs.length;
   document.getElementById('q-prog').style.width=(((qIdx+1)/qs.length)*100)+'%';

@@ -117,6 +117,19 @@ test("grade 1 car-order prompt states every count unambiguously and keeps the ve
   assert.match(text, /ყველაზე ცოტადან ყველაზე მეტისკენ/);
 });
 
+test("grade 4-6 plant experiments retain the context needed to identify the changed condition", () => {
+  for (const grade of [4, 5, 6]) {
+    const text = CURATED_PROMPT_CORRECTIONS.get(`GE2-G0${grade}-SC-S1-020`);
+    assert.match(text, /ერთნაირად მორწყეს/);
+    assert.match(text, /A მცენარე სინათლეზე/);
+    assert.match(text, /B — სიბნელეში/);
+    assert.match(text, /სხვა პირობები უცვლელი იყო/);
+    assert.match(text, /რომელი პირობა შეცვალა მკვლევარმა/);
+    assert.doesNotMatch(text, /^არა\./);
+  }
+  assert.equal(CURATED_PROMPT_CORRECTIONS.has('GE2-G07-SC-S1-020'), false);
+});
+
 test("curated civics supplement raises every weak grade 7-8 semester to four fresh papers", () => {
   const rows = curatedCivicsRows("v28", 1, []);
   assert.equal(rows.length, 97);

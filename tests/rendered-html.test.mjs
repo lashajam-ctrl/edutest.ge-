@@ -6,6 +6,25 @@ import { runInNewContext } from "node:vm";
 const root = new URL("../", import.meta.url);
 const source = path => readFile(new URL(path, root), "utf8");
 
+test("question instructions follow the current answer type, including after navigation", async () => {
+  const js = await source('src/legacy-app/60-catalog-assessments.js');
+  const functions = js.slice(js.indexOf('function gradeThemeFor('), js.indexOf('function renderQ('));
+  const context = {};
+  runInNewContext(functions, context);
+  for (const grade of [1, 4, 6, 9, 12]) {
+    assert.match(context.questionInstructionFor('short_answer', grade), /ჩაწერე/);
+    assert.doesNotMatch(context.questionInstructionFor('short_answer', grade), /აირჩიე|მონიშნე/);
+    assert.match(context.questionInstructionFor('order', grade), /თანმიმდევრობით/);
+    assert.match(context.questionInstructionFor('match', grade), /წყვილები/);
+    assert.match(context.questionInstructionFor('fill', grade), /შეავსე/);
+    assert.match(context.questionInstructionFor('calc', grade), /რიცხვითი/);
+    assert.match(context.questionInstructionFor('true_false', grade), /სწორია თუ მცდარი/);
+    assert.equal(context.questionInstructionFor('multiple_choice', grade), context.gradeThemeFor(grade).hint);
+  }
+  assert.match(context.questionInstructionFor('unknown', null), /შეასრულე დავალება/);
+  assert.match(js.slice(js.indexOf('function renderQ('), js.indexOf('function qNav(')), /gradeHint\.textContent=questionInstructionFor\(q\.type/);
+});
+
 test("ships one cookie-authenticated client for login, registration and durable learning", async () => {
   const html = await source("public/app.html");
   assert.match(html, /\/api\/auth\/login/);

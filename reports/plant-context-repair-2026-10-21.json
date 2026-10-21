@@ -1,0 +1,12 @@
+{
+  "verifiedAt": "2026-10-21T12:04:53.402Z",
+  "repairedIds": [
+    "v28-GE2-G04-SC-S1-020",
+    "v28-GE2-G05-SC-S1-020",
+    "v28-GE2-G06-SC-S1-020"
+  ],
+  "activeTotal": 23603,
+  "answerKeysUnchanged": true,
+  "otherRowFieldsUnchanged": true,
+  "scope": "Restored explicit experiment context only; no learner results modified."
+}
