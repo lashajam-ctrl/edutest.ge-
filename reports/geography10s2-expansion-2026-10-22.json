@@ -1,0 +1,224 @@
+{
+  "generatedAt": "2026-10-22T10:22:49.243Z",
+  "snapshotSha256": "3b7d70e0043cdc8edf059cecdd5329ce6c93521fec8601338c8664ccdc1d903e",
+  "baselineActive": 23607,
+  "afterActive": 23617,
+  "added": 10,
+  "authoredFamilies": 10,
+  "optionRationalesChecked": 40,
+  "computationalEvidenceChecks": 10,
+  "assistantJudgementOnly": 0,
+  "exactDuplicateAdditions": 0,
+  "canonicalDuplicateAdditions": 0,
+  "lexicalReviewThreshold": 0.45,
+  "unresolvedSimilarityCandidates": [],
+  "buckets": [
+    {
+      "grade": 10,
+      "semester": 2,
+      "beforeRows": 54,
+      "afterRows": 64,
+      "beforeGroups": 22,
+      "afterGroups": 32,
+      "added": 10,
+      "freshTenQuestionPapers": 3,
+      "freshTwentyQuestionPapers": 1
+    }
+  ],
+  "simulatedPapers": 21,
+  "workloads": [
+    {
+      "label": "10|2|ten",
+      "distinct": 32,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 2,
+          "reused": 8
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        }
+      ]
+    },
+    {
+      "label": "10|2|twenty",
+      "distinct": 32,
+      "papers": [
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 12,
+          "reused": 8
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        }
+      ]
+    },
+    {
+      "label": "10|2|mixed",
+      "distinct": 32,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 2,
+          "reused": 8
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        }
+      ]
+    }
+  ],
+  "catalog": [
+    {
+      "label": "v28-g10-s2-bc42cf5c24",
+      "distinct": 32,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        }
+      ]
+    }
+  ],
+  "failures": [],
+  "sources": [
+    {
+      "title": "Eurostat freight transport methodology: tonne-kilometres; task data are invented",
+      "url": "https://ec.europa.eu/eurostat/cache/metadata/Annexes/road_go_esms_an_Road_freight_transport_methodo.pdf",
+      "accessed": "2026-10-22"
+    },
+    {
+      "title": "EIA renewable energy sources; task data are invented",
+      "url": "https://www.eia.gov/energyexplained/renewable-sources/",
+      "accessed": "2026-10-22"
+    }
+  ],
+  "limitations": [
+    "Assistant-authored and option-by-option reviewed; not independently teacher-certified.",
+    "Semester placement is a configurable editorial allocation, not a ministry-mandated calendar.",
+    "Similarity thresholds and selector families do not prove absence of every semantic overlap.",
+    "Fresh-paper counts assume no previous attempts in that grade/subject/semester; 10/20 modes share history.",
+    "The 200-group planning target remains unmet in these buckets.",
+    "No authenticated learner submission is performed by this bank-only release.",
+    "10 prompts have computational checks; 0 rely solely on assistant semantic judgement. Computational checks do not certify wording or curriculum alignment.",
+    "Grade X semester 2 is an editorial allocation, not verified against a current prescribed semester calendar.",
+    "Ten fixed application questions, not unlimited real-time generation.",
+    "One ambiguous distractor repaired; three off-subject civic prompts held. Existing answer keys and results preserved."
+  ],
+  "preparation": {
+    "baselineActiveBeforeRepair": 23610,
+    "held": 3,
+    "patch": "geography10s2-repair.sql",
+    "patchSha256": "6c4701b7f47ca62e72de7bf5cb3c657811f6178957e4b366caabbfd34bce98fb"
+  },
+  "privateDraftSha256": "bfb516a5fdb709fb6ccfd28607950aa8624ae78af9915f94e6185dfacea731e0",
+  "reviewOptions": {},
+  "patchSha256": "0f9f5c1378cce543a75cfc86bb1cb9a5e6e7390cb31e55d2275d1937779aaa04",
+  "scopedBackupSha256": "9a839caf75f5a159535f2f578601482f8c85aaba5bb54f0dd9d7beccd41f3f40"
+}
