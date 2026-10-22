@@ -1,0 +1,160 @@
+{
+  "verifiedAt": "2026-10-22T08:21:53.082Z",
+  "beforeActive": 23603,
+  "afterActive": 23610,
+  "added": 9,
+  "held": [
+    "v28-GE2-G10-SO-S1-053",
+    "v28-GE2-G10-SO-S1-083"
+  ],
+  "regrouped": 39,
+  "existingKeysPreserved": 3802,
+  "oldPayloadsUnchanged": true,
+  "oldResultsUntouched": true,
+  "scopedBackupSha256": "1bb28aa94e08567bf9782d7945514f193784a540c57c60d289ddbd03b81660bf",
+  "patchSha256": "eb6adb4134697878923061e3c19d39139bec68b4ec46d63d9226c67b0fe29f72",
+  "combinedPatchSha256": "9eeb6b75ef2e981c8d455e88b0e752f1ced7b4c5845888f5ee524b21185bd3ea",
+  "bucket": {
+    "grade": 10,
+    "semester": 1,
+    "subject": "გეოგრაფია",
+    "beforeRows": 54,
+    "afterRows": 61,
+    "legacySelectorGroups": 51,
+    "reviewedBeforeGroups": 21,
+    "afterGroups": 30,
+    "freshTenQuestionPapers": 3,
+    "freshTwentyQuestionPapers": 1
+  },
+  "computedAnswers": 8,
+  "assistantJudgementOnly": 1,
+  "optionRationales": 36,
+  "simulatedPapers": 21,
+  "catalogRoutes": 1,
+  "existingHistoryContinuity": "pass",
+  "workloads": [
+    [
+      {
+        "requested": 10,
+        "fresh": 10,
+        "reused": 0
+      },
+      {
+        "requested": 10,
+        "fresh": 10,
+        "reused": 0
+      },
+      {
+        "requested": 10,
+        "fresh": 10,
+        "reused": 0
+      },
+      {
+        "requested": 10,
+        "fresh": 0,
+        "reused": 10
+      },
+      {
+        "requested": 10,
+        "fresh": 0,
+        "reused": 10
+      },
+      {
+        "requested": 10,
+        "fresh": 0,
+        "reused": 10
+      },
+      {
+        "requested": 10,
+        "fresh": 0,
+        "reused": 10
+      },
+      {
+        "requested": 10,
+        "fresh": 0,
+        "reused": 10
+      },
+      {
+        "requested": 10,
+        "fresh": 0,
+        "reused": 10
+      }
+    ],
+    [
+      {
+        "requested": 20,
+        "fresh": 20,
+        "reused": 0
+      },
+      {
+        "requested": 20,
+        "fresh": 10,
+        "reused": 10
+      },
+      {
+        "requested": 20,
+        "fresh": 0,
+        "reused": 20
+      },
+      {
+        "requested": 20,
+        "fresh": 0,
+        "reused": 20
+      },
+      {
+        "requested": 20,
+        "fresh": 0,
+        "reused": 20
+      }
+    ],
+    [
+      {
+        "requested": 10,
+        "fresh": 10,
+        "reused": 0
+      },
+      {
+        "requested": 20,
+        "fresh": 20,
+        "reused": 0
+      },
+      {
+        "requested": 10,
+        "fresh": 0,
+        "reused": 10
+      },
+      {
+        "requested": 20,
+        "fresh": 0,
+        "reused": 20
+      },
+      {
+        "requested": 10,
+        "fresh": 0,
+        "reused": 10
+      },
+      {
+        "requested": 20,
+        "fresh": 0,
+        "reused": 20
+      },
+      {
+        "requested": 10,
+        "fresh": 0,
+        "reused": 10
+      }
+    ]
+  ],
+  "limitations": [
+    "Assistant-authored and option-by-option reviewed; not independently teacher-certified.",
+    "Semester placement is a configurable editorial allocation, not a ministry-mandated calendar.",
+    "Similarity thresholds and selector families do not prove absence of every semantic overlap.",
+    "Fresh-paper counts assume no previous attempts in that grade/subject/semester; 10/20 modes share history.",
+    "The 200-group planning target remains unmet in these buckets.",
+    "No authenticated learner submission is performed by this bank-only release.",
+    "8 prompts have computational checks; 1 rely on assistant semantic judgement.",
+    "Grade X semester 1 is an editorial allocation; current ministry semester prescription not verified.",
+    "Nine fixed new tasks, not unlimited real-time generation.",
+    "39 rows regrouped using a closed reviewed list; two off-subject civic prompts held. Existing keys and result records preserved."
+  ]
+}

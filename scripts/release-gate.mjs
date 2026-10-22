@@ -9,6 +9,7 @@ tests.push('chemistry9-expansion-quality');
 tests.push('history10-expansion-quality');
 tests.push('expansion-evidence-summary');
 tests.push('history10-curriculum-repair');
+tests.push('geography10-expansion-quality');
 function run(args){const result=spawnSync(process.execPath,args,{stdio:'inherit',env:process.env});if(result.error)throw result.error;if(result.status!==0)process.exit(result.status||1);}
 run(['scripts/assemble-app.mjs','--check']);
 run(['scripts/check-browser-syntax.mjs']);

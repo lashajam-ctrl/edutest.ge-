@@ -1,0 +1,224 @@
+{
+  "generatedAt": "2026-10-22T08:20:13.432Z",
+  "snapshotSha256": "3b7d70e0043cdc8edf059cecdd5329ce6c93521fec8601338c8664ccdc1d903e",
+  "baselineActive": 23601,
+  "afterActive": 23610,
+  "added": 9,
+  "authoredFamilies": 9,
+  "optionRationalesChecked": 36,
+  "computationalEvidenceChecks": 8,
+  "assistantJudgementOnly": 1,
+  "exactDuplicateAdditions": 0,
+  "canonicalDuplicateAdditions": 0,
+  "lexicalReviewThreshold": 0.45,
+  "unresolvedSimilarityCandidates": [],
+  "buckets": [
+    {
+      "grade": 10,
+      "semester": 1,
+      "beforeRows": 52,
+      "afterRows": 61,
+      "beforeGroups": 21,
+      "afterGroups": 30,
+      "added": 9,
+      "freshTenQuestionPapers": 3,
+      "freshTwentyQuestionPapers": 1
+    }
+  ],
+  "simulatedPapers": 21,
+  "workloads": [
+    {
+      "label": "10|1|ten",
+      "distinct": 30,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        }
+      ]
+    },
+    {
+      "label": "10|1|twenty",
+      "distinct": 30,
+      "papers": [
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 10,
+          "reused": 10
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        }
+      ]
+    },
+    {
+      "label": "10|1|mixed",
+      "distinct": 30,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 20,
+          "reused": 0
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        },
+        {
+          "requested": 20,
+          "delivered": 20,
+          "fresh": 0,
+          "reused": 20
+        },
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 0,
+          "reused": 10
+        }
+      ]
+    }
+  ],
+  "catalog": [
+    {
+      "label": "v28-g10-s1-bc42cf5c24",
+      "distinct": 30,
+      "papers": [
+        {
+          "requested": 10,
+          "delivered": 10,
+          "fresh": 10,
+          "reused": 0
+        }
+      ]
+    }
+  ],
+  "failures": [],
+  "sources": [
+    {
+      "title": "GeoStat demographic definitions; original tasks use invented teaching data",
+      "url": "https://www.geostat.ge/media/80061/mosaxleoba-demografia.html",
+      "accessed": "2026-10-22"
+    },
+    {
+      "title": "World Bank age-dependency definition; not actual employment dependency",
+      "url": "https://databank.worldbank.org/metadataglossary/population-estimates-and-projections/series/SP.POP.DPND",
+      "accessed": "2026-10-22"
+    }
+  ],
+  "limitations": [
+    "Assistant-authored and option-by-option reviewed; not independently teacher-certified.",
+    "Semester placement is a configurable editorial allocation, not a ministry-mandated calendar.",
+    "Similarity thresholds and selector families do not prove absence of every semantic overlap.",
+    "Fresh-paper counts assume no previous attempts in that grade/subject/semester; 10/20 modes share history.",
+    "The 200-group planning target remains unmet in these buckets.",
+    "No authenticated learner submission is performed by this bank-only release.",
+    "8 prompts have computational checks; 1 rely on assistant semantic judgement.",
+    "Grade X semester 1 is an editorial allocation; current ministry semester prescription not verified.",
+    "Nine fixed new tasks, not unlimited real-time generation.",
+    "39 rows regrouped using a closed reviewed list; two off-subject civic prompts held. Existing keys and result records preserved."
+  ],
+  "preparation": {
+    "baselineActiveBeforeRepair": 23603,
+    "held": 2,
+    "patch": "geography10-repair.sql",
+    "patchSha256": "5f7757327f016d148845e3bcba775cf0e9047bd59abfc04554e0b07e1936d4bb"
+  },
+  "privateDraftSha256": "eda024b1bad58d05ade7292865f81a5f3536cde7d3c4026ec87403073af2fbf3",
+  "reviewOptions": {},
+  "patchSha256": "eb6adb4134697878923061e3c19d39139bec68b4ec46d63d9226c67b0fe29f72",
+  "scopedBackupSha256": "1bb28aa94e08567bf9782d7945514f193784a540c57c60d289ddbd03b81660bf"
+}

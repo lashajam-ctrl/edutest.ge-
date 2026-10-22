@@ -10,6 +10,7 @@ import {validateHistoryBatch} from './history-expansion-quality.mjs';
 import {validateBiology9Batch} from './biology9-expansion-quality.mjs';
 import {validateChemistry9Batch} from './chemistry9-expansion-quality.mjs';
 import {validateHistory10Batch} from './history10-expansion-quality.mjs';
+import {validateGeography10Batch} from './geography10-expansion-quality.mjs';
 import {summarizeExpansionEvidence} from './expansion-evidence-summary.mjs';
 import {normalizedPrompt,lexicalSimilarity} from './bank-expansion-quality.mjs';
 import {canonicalPublicTaskCore} from '../lib/assessment-selection-core.mjs';
@@ -20,7 +21,7 @@ const name=cfg.name,reportPath=`reports/${name}-expansion-${cfg.date}.json`;
 const questions=JSON.parse(fs.readFileSync(root+`/${name}-questions.json`,'utf8'));
 const subject=cfg.subject??'მოქალაქეობა';
 const reviewOptions=cfg.reviewOptions??{};
-const checks=(cfg.reviewKind==='history10'?validateHistory10Batch:cfg.reviewKind==='chemistry9'?validateChemistry9Batch:cfg.reviewKind==='biology9'?validateBiology9Batch:cfg.reviewKind==='history'?validateHistoryBatch:cfg.reviewKind==='grade8'?validateGrade8Batch:cfg.reviewKind==='georgia'?validateGeorgiaBatch:cfg.reviewKind==='safety'?validateSafetyBatch:validateCivicsBatch)(questions,reviewOptions);
+const checks=(cfg.reviewKind==='geography10'?validateGeography10Batch:cfg.reviewKind==='history10'?validateHistory10Batch:cfg.reviewKind==='chemistry9'?validateChemistry9Batch:cfg.reviewKind==='biology9'?validateBiology9Batch:cfg.reviewKind==='history'?validateHistoryBatch:cfg.reviewKind==='grade8'?validateGrade8Batch:cfg.reviewKind==='georgia'?validateGeorgiaBatch:cfg.reviewKind==='safety'?validateSafetyBatch:validateCivicsBatch)(questions,reviewOptions);
 assert.equal(questions.length,cfg.count);
 const {db,sha256}=readSnapshot(root+'/civics-before-production.sql');
 for(const patch of cfg.patches)db.exec(fs.readFileSync(root+'/'+patch,'utf8'));
@@ -31,10 +32,11 @@ if(cfg.liveBefore){
  const byId=new Map(local.map(q=>[q.id,q]));assert.equal(local.length,live.rows.length);
  for(const row of live.rows)assert.deepEqual({...byId.get(row.id)},row,'Scoped live-bank drift');
 }
+if(cfg.preparationPatch)db.exec(fs.readFileSync(root+'/'+cfg.preparationPatch,'utf8'));
 const before=db.prepare('SELECT * FROM assessment_questions').all();
 const active=before.filter(q=>q.active===1);
 const oldKeys=db.prepare('SELECT * FROM assessment_answer_keys ORDER BY question_id').all();
-assert.equal(active.length,cfg.baseline,'Production baseline changed; inspect before proceeding');
+assert.equal(active.length,cfg.baseline-(cfg.preparationHeldCount??0),'Production baseline changed; inspect before proceeding');
 const normalized=active.map(q=>({id:q.id,text:JSON.parse(q.public_payload_json).text,payload:JSON.parse(q.public_payload_json),grade:q.grade,subject:q.subject,semester:q.semester}));
 const exact=new Set(normalized.map(q=>normalizedPrompt(q.text)));
 const cores=new Set(normalized.map(q=>canonicalPublicTaskCore(q.payload)));
@@ -112,6 +114,7 @@ report.limitations.push(`${report.computationalEvidenceChecks} prompts have comp
 report.sources[0].title='Ministry citizenship guide, page 5: grade themes';report.sources[0].accessed=cfg.date;
 if(cfg.sources)report.sources=cfg.sources;
 if(cfg.additionalLimitations)report.limitations.push(...cfg.additionalLimitations);
+if(cfg.preparationPatch)report.preparation={baselineActiveBeforeRepair:cfg.baseline,held:cfg.preparationHeldCount??0,patch:cfg.preparationPatch,patchSha256:hash(fs.readFileSync(root+'/'+cfg.preparationPatch))};
 report.privateDraftSha256=hash(fs.readFileSync(root+`/${name}-questions.json`));
 report.reviewOptions=reviewOptions;
 report.patchSha256=hash(statements.join('\n')+'\n');
